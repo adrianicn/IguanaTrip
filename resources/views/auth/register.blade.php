@@ -23,14 +23,12 @@
 
     <input type="text" id="email" name="username" placeholder="{{trans('front/register.pseudo')}}">
 
-    <label id="icon" for="name"><i class="icon-envelope "></i></label>
-
-    <input type="Password" id="password_confirmation" name="password_confirmation" placeholder="Password confirmation">
-
-
     <label id="icon" for="name"><i class="icon-shield"></i></label>
 
-    <input type="password" id="email" name="password" placeholder="{{trans('front/register.password')}}">
+    <input type="password" id="password" name="password" placeholder="{{trans('front/register.password')}}">
+    
+
+    
     @if($errors->has())
     @foreach ($errors->all() as $error)
     <div>{{ $error }}</div>

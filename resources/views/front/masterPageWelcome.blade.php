@@ -43,8 +43,7 @@
 
                 <a href="eng"><img src="{!! ('img/index-logo.png')!!}" width="270" height="258" alt="IguanaTrip" /></a> 
             </div>
-            <div id="logo-construccion">
-                <img src="{!! ('img/index-rodelas.png')!!}" width="106" height="90" alt="IguanaTripconstruccion" /></div>
+            
         </div>
 
         <!-- Switch to full screen -->
@@ -70,14 +69,46 @@
         </nav>
 
         <!-- Slider Controls -->
-        <a href="" id="arrow_left"><img src="{!! ('images/arrow-left.png')!!}" alt="Slide Left" /></a>
-        <a href="" id="arrow_right"><img src="{!! ('images/arrow-right.png')!!}" alt="Slide Right" /></a>
+        
 
         <!-- Home Page -->
         
         
+        <div id='login'>
+				@if(session()->has('error'))
+					@include('partials/error', ['type' => 'danger', 'message' => session('error')])
+				@endif	
+	
+				
+				
+				
+				{!! Form::open(['url' => 'auth/login', 'method' => 'post', 'role' => 'form', 'id'=>'login'] ) !!}	
+				
+				
+
+					
+                                        <input type="text" id="log" name="log" placeholder="Email or username">
+					<input type="password" id="password" name="password" placeholder="{{trans('front/register.password')}}">
+					
+                                        <a href="#" class="button" onclick="$(this).closest('login').submit()">{!! (trans('front/form.send')) !!}</a>
+					{!! Form::check('memory', trans('front/login.remind')) !!}
+					
+					
+						{!! link_to('password/email', trans('front/login.forget')) !!}
+                                                
+				
+
+
+				
+				{!! Form::close() !!}
+
+        </div>	
+			</div>
+		</div>
+	</div>
+        
         <section class="content show" id="home">
-            @yield('contentLogin')
+            
             
             @yield('contentRegistro')
                 

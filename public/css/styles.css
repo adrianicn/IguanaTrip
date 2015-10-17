@@ -10,7 +10,7 @@ body {
 	-webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
 	color: white;
-	background: #000;
+	
 }
 
 
@@ -67,11 +67,11 @@ a:hover {text-decoration:underline;}
 /* Set Page Elements */
 .content { 
 	float:left;
-	margin:40px;
+	margin:90px;
 	position:absolute;
 	top:-10px;
 	//width:600px;
-        left:474px;
+        left:700px;
 	z-index:9999;
 	-webkit-font-smoothing:antialiased;
 }
@@ -159,10 +159,10 @@ select {
 h1 {
   font-size: 32px;
   font-weight: 300;
-  color: white;
+  color: black;
   text-align: center;
-  padding-top: 10px;
-  margin-bottom: 10px;
+  padding-top: 0px;
+  margin-bottom: 0px;
 }
 
 html{
@@ -171,8 +171,8 @@ html{
 
 .testbox {
   margin: 20px auto;
-  width: 612px; 
-  height: 400px; 
+  width: 332px; 
+  height: 420px; 
   -webkit-border-radius: 8px/7px; 
   -moz-border-radius: 8px/7px; 
   border-radius: 8px/7px; 
@@ -242,7 +242,7 @@ hr{
 
 input[type=text],input[type=password]{
   width: 200px; 
-  height: 39px; 
+  height: 19px; 
   -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
   -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px; 
   border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
@@ -263,8 +263,8 @@ input[type=password]{
 #icon {
   display: inline-block;
   width: 30px;
-  background-color: #3a57af;
-  padding: 8px 0px 8px 15px;
+  background-color: #ef620a;
+  padding: 0px 0 0px 10px;
   margin-left: 15px;
   -webkit-border-radius: 4px 0px 0px 4px; 
   -moz-border-radius: 4px 0px 0px 4px; 
