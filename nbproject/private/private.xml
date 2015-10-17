@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Welcome/welcome.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/Auth/AuthController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/BaseRepository.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/front/masterPageWelcome.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/HomeController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/User.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/database/migrations/2014_10_12_000000_create_users_table.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/register.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Services/Html/FormBuilder.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/UserRepository.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Requests/Auth/EmailPasswordLinkRequest.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/login.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/routes.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Requests/Auth/LoginRequest.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/vendor/laravel/framework/src/Illuminate/Contracts/Auth/Guard.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/css/styles.css</file>
+        </group>
+    </open-files>
+</project-private>
