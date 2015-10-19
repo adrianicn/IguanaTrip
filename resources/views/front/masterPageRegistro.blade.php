@@ -53,10 +53,10 @@ body {
 	border-radius: 15px;
 }
 </style>
-		{!! HTML::style('css/masterPagesRegistro.css') !!}
+	{!! HTML::style('css/masterPagesRegistro.css') !!}
 
-    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    {!! HTML::script('js/jquery.js') !!}
+    {!! HTML::script('js/bootstrap.min.js') !!}
 </head>
     
     
@@ -75,19 +75,19 @@ body {
       	<div class="stepwizard-row setup-panel">
       		<div class="stepwizard-step">
         		<a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
-        		<p>Servicios y Eventos</p>
+        		<p>{{ trans('registro/registrosteps.step1') }}</p>
       		</div>
       		<div class="stepwizard-step">
         		<a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-        		<p>Catalogos</p>
+        		<p>{{ trans('registro/registrosteps.step2') }}</p>
       		</div>
       		<div class="stepwizard-step">
         		<a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-        		<p>Resumen</p>
+        		<p>{{ trans('registro/registrosteps.step3') }}</p>
       		</div>
 	    	<div class="stepwizard-step">
         		<a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
-        		<p>Finalizar</p>
+        		<p>{{ trans('registro/registrosteps.step4') }}</p>
       		</div>
       	</div>
       </div>
@@ -96,47 +96,68 @@ body {
   <div class="row setup-content" id="step-1">
     	<div class="col-xs-6 col-md-offset-3">
         	<div class="col-md-12">
-            	<h3> Servicios y Eventos</h3>
+            	<h3> {{ trans('registro/registrosteps.step1') }}</h3>
             	<div class="form-group">
-            		<label class="control-label">First Name</label>
-            		<input  maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name"  />
+            		<label class="control-label">Nombre</label>
+            		<input  maxlength="100" type="text" required="required" class="form-control" placeholder="Ingrese Nombre"  />
           		</div>
-              <div class="form-group">
-            <label class="control-label">Last Name</label>
-            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" />
-          </div>
-              <div class="form-group">
-            <label class="control-label">Address</label>
-            <textarea required="required" class="form-control" placeholder="Enter your address" ></textarea>
-          </div>
-              <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+              	<div class="form-group">
+            		<label class="control-label">Apellido</label>
+            		<input maxlength="100" type="text" required="required" class="form-control" placeholder="Ingrese Apellido" />
+          		</div>
+              	<div class="form-group">
+            		<label class="control-label">Direcci&oacute;n</label>
+            		<textarea required="required" class="form-control" placeholder="Ingrese Direcci&oacute;n" ></textarea>
+          		</div>
+              	<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
             </div>
-      </div>
-        </div>
-    <div class="row setup-content" id="step-2">
-          <div class="col-xs-6 col-md-offset-3">
-        <div class="col-md-12">
-              <h3> Step 2</h3>
-              <div class="form-group">
-            <label class="control-label">Company Name</label>
-            <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-          </div>
-              <div class="form-group">
-            <label class="control-label">Company Address</label>
-            <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-          </div>
-              <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-      </div>
-        </div>
-    <div class="row setup-content" id="step-3">
-          <div class="col-xs-6 col-md-offset-3">
-        <div class="col-md-12">
-              <h3> Step 3</h3>
+      	</div>
+  </div>
+  <div class="row setup-content" id="step-2">
+  		<div class="col-xs-6 col-md-offset-3">
+        	<div class="col-md-12">
+            	<h3> {{ trans('registro/registrosteps.step2') }}</h3>
+              	<div class="form-group">
+            		<div id="servicios-col">
+            		<img alt="Eventos" src="img/eventos.png">
+            		<p>Eventos</p>
+            		</div>
+          		</div>
+            	<div class="form-group">
+            		<div id="servicios-col">
+            		<img alt="Servicios" src="img/servicios.png">
+            		<p>Servicios</p>
+            		</div>
+          		</div>
+          		<input type="hidden" value="0" name="servicio_evento" id="servicio_evento">
+            	<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+        	</div>
+  		</div>
+  </div>
+  <div class="row setup-content" id="step-2">
+  		<div class="col-xs-6 col-md-offset-3">
+        	<div class="col-md-12">
+            	<h3> {{ trans('registro/registrosteps.step3') }}</h3>
+              	<div class="form-group">
+            		<label class="control-label">Company Name</label>
+            		<input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
+          		</div>
+            	<div class="form-group">
+            		<label class="control-label">Company Address</label>
+            		<input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
+          		</div>
+            	<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+        	</div>
+  		</div>
+  </div>
+  <div class="row setup-content" id="step-3">
+  		<div class="col-xs-6 col-md-offset-3">
+        	<div class="col-md-12">
+              <h3> {{ trans('registro/registrosteps.step4') }}</h3>
               <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
             </div>
-      </div>
-        </div>
+      	</div>
+  </div>
   {!! Form::close() !!}
   </div>
 
@@ -183,7 +204,9 @@ body {
   });
 
   $('div.setup-panel div a.btn-primary').trigger('click');
-});
+  });
+
+  
   </script>
 </body>
 </html>
