@@ -54,19 +54,46 @@
 		@yield('main')
 	</main>
 		<div class="container">
-			<div id="steps-bar">
+			<div id="menu"></div>
+			<div class="contenido">
 				{!! Form::open(['url' => 'auth/login', 'method' => 'post', 'role' => 'form', 'id'=>'registro'] ) !!}
 				<div>
         			<h3>Servicios y Eventos</h3>
+			        <section>
+			            <label for="userName">User name *</label>
+			            <input id="userName" name="userName" type="text" class="required">
+			            <label for="password">Password *</label>
+			            <input id="password" name="password" type="text" class="required">
+			            <label for="confirm">Confirm Password *</label>
+			            <input id="confirm" name="confirm" type="text" class="required">
+			            <p>(*) Mandatory</p>
+			        </section>        			
         			<h3>Catalogos</h3>
+			        <section>
+			            <label for="name">First name *</label>
+			            <input id="name" name="name" type="text" class="required">
+			            <label for="surname">Last name *</label>
+			            <input id="surname" name="surname" type="text" class="required">
+			            <label for="email">Email *</label>
+			            <input id="email" name="email" type="text" class="required email">
+			            <label for="address">Address</label>
+			            <input id="address" name="address" type="text">
+			            <p>(*) Mandatory</p>
+			        </section>        			
         			<h3>Resumen</h3>
+			        <section>
+			            <ul>
+			                <li>Foo</li>
+			                <li>Bar</li>
+			                <li>Foobar</li>
+			            </ul>
+			        </section>
         			<h3>Finalizar</h3>
+			        <section>
+			            <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+			        </section>
         		</div>
     			{!! Form::close() !!}    			
-			</div>
-			<div class="contenido">
-				<div class="address-bar">colm 1</div>
-				<div class="address-bar">colm 2</div>
 			</div>
 		</div>
 	
