@@ -11,5 +11,8 @@ return [
 	'warning-name' => '30 characters maximum',
 	'warning-password' => 'At least 8 characters',
 	'ok' => 'You have been registered !',
-	'error'=> 'These credentials do not match our records.'
+	'error'=> 'These credentials do not match our records.',
+    'usertypepersona'=> 'Personal',
+    'usertypecompany'=> 'Company'
+    
 ];

@@ -71,7 +71,7 @@ a:hover {text-decoration:underline;}
 	position:absolute;
 	top:-10px;
 	//width:600px;
-        left:700px;
+        left:833px;
 	z-index:9999;
 	-webkit-font-smoothing:antialiased;
 }
@@ -159,7 +159,7 @@ select {
 h1 {
   font-size: 32px;
   font-weight: 300;
-  color: black;
+  color: white;
   text-align: center;
   padding-top: 0px;
   margin-bottom: 0px;
@@ -201,7 +201,7 @@ label.radio {
 }
 
 label.radio:before {
-  background: #3a57af;
+  background: #ef620a;
   content:'';
   position: absolute;
   top:2px;
@@ -257,7 +257,8 @@ input[type=text],input[type=password]{
 }
 
 input[type=password]{
-  margin-bottom: 25px;
+  //margin-bottom: 25px;
+  margin-bottom: 0px;
 }
 
 #icon {
@@ -299,10 +300,10 @@ a.button {
   -webkit-border-radius: 5px; 
   -moz-border-radius: 5px; 
   border-radius: 5px; 
-  background-color: #3a57af; 
-  -webkit-box-shadow: 0 3px rgba(58,87,175,.75); 
-  -moz-box-shadow: 0 3px rgba(58,87,175,.75); 
-  box-shadow: 0 3px rgba(58,87,175,.75);
+  background-color: #ef620a; 
+  //-webkit-box-shadow: 0 3px rgba(58,87,175,.75); 
+  //-moz-box-shadow: 0 3px rgba(58,87,175,.75); 
+  //box-shadow: 0 3px rgba(58,87,175,.75);
   transition: all 0.1s linear 0s; 
   top: 0px;
   position: relative;
@@ -310,9 +311,88 @@ a.button {
 
 a.button:hover {
   top: 3px;
-  background-color:#2e458b;
+  background-color:#ef620a;
   -webkit-box-shadow: none; 
   -moz-box-shadow: none; 
   box-shadow: none;
   
+}
+
+
+#inputpassword {
+    border-color: #1d2a5b;
+    margin: 0;
+    width: 142px;
+    padding:25px;
+}
+
+#tablelogin {
+border-color: #1d2a5b;
+    margin-left: -417px;
+    margin-top: -11px;
+    position: fixed;
+}
+#btnlogin{
+ float: right;
+    margin-top: 27px;
+    padding: 0 47px 6px 50px;
+    
+}
+#logindiv{
+    margin-top: -20px;
+    float: right;
+    margin-right: 115px;
+    
+}
+#usern {
+    border-color: #1d2a5b;
+    margin: 0;
+    width: 142px;
+}
+.logininput{
+    
+    
+     color: #4c4c4c;
+    font-family: "Open Sans",sans-serif;
+    font-size: 12px;
+}
+#remember {
+    border-color: #1d2a5b;
+    margin-top: -20px;
+    width: 142px;
+}
+
+#forgotp {
+    border-color: #1d2a5b;
+margin-top: -20px;
+    width: 142px;
+}
+
+
+a.buttonlogin {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  padding: 6px 25px 0px 20px;
+  margin: 10px 8px 20px 0px;
+  display: inline-block;
+  float: right;
+  text-decoration: none;
+  width: 50px; height: 27px; 
+  -webkit-border-radius: 5px; 
+  -moz-border-radius: 5px; 
+  border-radius: 5px; 
+  background-color: #ef620a; 
+  //-webkit-box-shadow: 0 3px rgba(58,87,175,.75); 
+  //-moz-box-shadow: 0 3px rgba(58,87,175,.75); 
+  //box-shadow: 0 3px rgba(58,87,175,.75);
+  transition: all 0.1s linear 0s; 
+  top: 0px;
+  position: relative;
+}
+
+
+.rowerror{
+    
+     color: #ef620a;
 }

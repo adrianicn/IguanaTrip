@@ -1,62 +1,94 @@
 @extends('front.masterPageWelcome')
 
 @section('contentLogin')
-	<div class="row">
-		<div class="box">
-			<div class="col-lg-12">
+	
+		{{session('statut')}}
+			
 				@if(session()->has('error'))
 					@include('partials/error', ['type' => 'danger', 'message' => session('error')])
 				@endif	
-				<hr>	
-				<h2 class="intro-text text-center">{{ trans('front/login.connection') }}</h2>
-				<hr>
-				<p>{{ trans('front/login.text') }}</p>				
-				
 				{!! Form::open(['url' => 'auth/login', 'method' => 'post', 'role' => 'form', 'id' => 'loginform']) !!}	
 				
-				<div class="row">
-
-					{!! Form::control('text', 6, 'log', $errors, trans('front/login.log')) !!}
-					{!! Form::control('password', 6, 'passwords', $errors, trans('front/login.password')) !!}
-					{!! Form::check('memory', trans('front/login.remind')) !!}
-					
+                                <table cellspacing="0" role="presentation" id='tablelogin'>
+                                    <tr>
+                                        <td>
+                                            <div id=usern''>
+                                        <input type="text" class='logininput' id="email" name="log" placeholder="{{trans('front/login.log')}}">
+                                        </div>
+                                        </td>
+                                        <td>
+                                            <div id='inputpassword'>
+                                        <input type="password" class='logininput' id="password" name="password" placeholder="{{trans('front/login.password')}}">
+                                        </div>
+                                        </td>
+                                        <td>
+                                            <div id='btnlogin'>
+                                            <a href="#" class="buttonlogin" onclick="$(this).closest('form').submit()">{!! (trans('front/login.logbtn')) !!}</a>
+                                            </div>
+                                        </td>
                                         
-                                         <input class="submitButton" type="button" value="submit" id='loginbtn'/>
-					<div class="col-lg-12">					
-						{!! link_to('password/email', trans('front/login.forget')) !!}
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div id='remember'>
+                                            {!! Form::check('memory', trans('front/login.remind'),array('class' => 'logininput')) !!}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            
+                                        <div class="col-lg-12" id ='forgotp'>	
+                                            
+						{!! link_to('password/email', trans('front/login.forget'),array('class' => 'logininput')) !!}
 					</div>
+    
+                                        </td>
+                                        
+                                    </tr>
+                                    
+                                </table>
 
-				</div>
-                            
-				{!! Form::close() !!}
+                                
+                                {!! Form::close() !!}
 
-				<div class="text-center">
-					<hr>
-						<h2 class="intro-text text-center">{{ trans('front/login.register') }}</h2>
-					<hr>	
-					<p>{{ trans('front/login.register-info') }}</p>
-					{!! link_to('auth/register', trans('front/login.registering'), ['class' => 'btn btn-default']) !!}
-				</div>
-
-			</div>
-		</div>
-	</div>
+				
+	
 @stop
 
 
 @section('contentRegistro')
+<div class="rowerror">
+
+    <br>
+    
+    
+    @if($errors->has())
+    
+    <div>
+        
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+    </div>
+    
+    @endif
+
+
+</div>
 
 <div class="testbox">
     <h1>Registration </h1>
 
+    
 
     {!! Form::open(['url' => 'auth/register', 'method' => 'post', 'role' => 'form','id' => 'registro']) !!}	
     <hr>
     <div class="accounttype">
         <input type="radio" value="None" id="radioOne" name="account" checked/>
-        <label for="radioOne" class="radio" chec>Personal</label>
+        <label for="radioOne" class="radio" chec>{{trans('front/register.usertypepersona')}}</label>
         <input type="radio" value="None" id="radioTwo" name="account" />
-        <label for="radioTwo" class="radio">Company</label>
+        <label for="radioTwo" class="radio">{{trans('front/register.usertypecompany')}}</label>
     </div>
     <hr>
     <label id="icon" for="name"><i class="icon-envelope "></i></label>
@@ -71,14 +103,12 @@
 
     <input type="password" id="password" name="password" placeholder="{{trans('front/register.password')}}">
     
+    <label id="icon" for="name"><i class="icon-shield"></i></label>
+
+    <input type="password" id="password" required="required" name="password_confirmation" placeholder="{{trans('front/register.confirm-password')}}">
+    
 
     
-    @if($errors->has())
-    @foreach ($errors->all() as $error)
-    <div>{{ $error }}</div>
-    @endforeach
-    @endif
-
     <p>By clicking Register, you agree on our <a href="#">terms and condition</a>.</p>
 
     <a href="#" class="button" onclick="$(this).closest('form').submit()">{!! (trans('front/form.send')) !!}</a>
@@ -89,11 +119,6 @@
 
 
 
-<div class="row">
-
-    <br>
-
-</div>
 <br>
 <div class="row">	
 

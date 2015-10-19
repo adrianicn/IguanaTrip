@@ -110,7 +110,7 @@ class AuthController extends Controller
 		$this->dispatch(new SendMail($user));
 
 		
-                return redirect('/#about')->with('ok', trans('front/verify.message'));
+                return redirect('/#about')->with('email', trans('front/verify.message'));
                 //return redirect('/auth/confirmation/'.$confirmation_code);
 	}
 

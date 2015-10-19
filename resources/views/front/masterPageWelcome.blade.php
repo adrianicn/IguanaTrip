@@ -47,7 +47,7 @@
         </div>
 
         <!-- Switch to full screen -->
-        <button class="full-screen" onclick="$(document).toggleFullScreen()"></button>
+        
 
         <!-- Site Logo <div id="logo">Iguna Trip</div> -->
         <div id="lang">
@@ -72,10 +72,12 @@
         
 
         <!-- Home Page -->
-        
+        <div id="logindiv">
+        @yield('contentLogin')
+        </div>
         <section class="content show" id="home">
             
-            @yield('contentLogin')
+            
             @yield('contentRegistro')
                 
         </section>
@@ -105,23 +107,7 @@
 
                 <img class="gradient" src="{!! ('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
             </div>
-            <div>
-                <img src="{!! ('img/cotopaxi.jpg')!!}" alt="" />
-                <img class="gradient" src="{!! ('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
-            </div>
-
-            <div>
-                <img src="{!! ('img/galapagos2.jpg')!!}" alt="" />
-                <img class="gradient" src="{!! ('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
-            </div>
-            <div>
-                <img src="{!! ('img/quito.jpg')!!}" alt="" />
-                <img class="gradient" src="{!! ('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
-            </div>
-            <div>
-                <img src="{!! ('img/ecuador2.jpg')!!}" alt="" />
-                <img class="gradient" src="{!! ('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
-            </div>
+            
         </div>
 
         {!!HTML::script('js/jquery.js') !!}
