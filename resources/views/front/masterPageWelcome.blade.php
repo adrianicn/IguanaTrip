@@ -73,43 +73,9 @@
 
         <!-- Home Page -->
         
-        
-        <div id='login'>
-				@if(session()->has('error'))
-					@include('partials/error', ['type' => 'danger', 'message' => session('error')])
-				@endif	
-	
-				
-				
-				
-				{!! Form::open(['url' => 'auth/login', 'method' => 'post', 'role' => 'form', 'id'=>'login'] ) !!}	
-				
-				
-
-					
-                                        <input type="text" id="log" name="log" placeholder="Email or username">
-					<input type="password" id="password" name="password" placeholder="{{trans('front/register.password')}}">
-					
-                                        <a href="#" class="button" onclick="$(this).closest('login').submit()">{!! (trans('front/form.send')) !!}</a>
-					{!! Form::check('memory', trans('front/login.remind')) !!}
-					
-					
-						{!! link_to('password/email', trans('front/login.forget')) !!}
-                                                
-				
-
-
-				
-				{!! Form::close() !!}
-
-        </div>	
-			</div>
-		</div>
-	</div>
-        
         <section class="content show" id="home">
             
-            
+            @yield('contentLogin')
             @yield('contentRegistro')
                 
         </section>
@@ -167,6 +133,17 @@
         {!!HTML::script('js/main.js') !!}
 
         <script type="text/javascript" charset="utf-8">
+
+
+
+$(".submitButton").click(function() {
+alert('ptm');
+  //Select the parent form and submit
+  
+  $("#loginform").submit();
+
+});
+           
             $(function () {
                 $('#maximage').maximage({
                     cycleOptions: {
