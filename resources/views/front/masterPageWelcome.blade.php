@@ -115,8 +115,8 @@
         {!!HTML::script('js/jquery.cycle.all.js') !!}
         {!!HTML::script('js/jquery.maximage.js') !!}
         {!!HTML::script('js/jquery.fullscreen.js') !!}
-        {!!HTML::script('js/jquery.ba-hashchange.js') !!}
-        {!!HTML::script('js/main.js') !!}
+        
+        
 
         <script type="text/javascript" charset="utf-8">
 
