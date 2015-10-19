@@ -1,4 +1,6 @@
 <?php
+//Registro
+Route::get('seleccion', 'RegistroController@index');
 
 // Home
 Route::get('/', [

@@ -15,5 +15,6 @@ return array(
     $vendorDir . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
     $vendorDir . '/laravel/framework/src/Illuminate/Support/helpers.php',
     $vendorDir . '/laravelcollective/html/src/helpers.php',
+    $vendorDir . '/illuminate/html/helpers.php',
     $baseDir . '/app/helpers.php',
 );
