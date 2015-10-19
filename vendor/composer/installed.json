@@ -2869,6 +2869,7 @@
             "generators",
             "laravel"
         ]
+<<<<<<< HEAD
     },
     {
         "name": "paragonie/random_compat",
@@ -3253,5 +3254,7 @@
             "testing",
             "xunit"
         ]
+=======
+>>>>>>> d08258a9fde0f9d386f0e1811771efd12f4dc53c
     }
 ]

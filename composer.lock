@@ -4,8 +4,13 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "71afcb7f0e6f3ee9a810d6875bcac2c1",
     "content-hash": "1035917b2365f63bce4be4c005605813",
+=======
+    "hash": "0ef21699b60a6442a4075cd5c99a6f46",
+    "content-hash": "d59a447602111f26834332163f445723",
+>>>>>>> d08258a9fde0f9d386f0e1811771efd12f4dc53c
     "packages": [
         {
             "name": "bestmomo/filemanager",
@@ -2540,6 +2545,53 @@
         {
             "name": "laracasts/generators",
             "version": "dev-master",
+<<<<<<< HEAD
+=======
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/Laravel-5-Generators-Extended.git",
+                "reference": "eb58b86f49d69eff4db4cc6f2ec94480a57c4358"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracasts/Laravel-5-Generators-Extended/zipball/eb58b86f49d69eff4db4cc6f2ec94480a57c4358",
+                "reference": "eb58b86f49d69eff4db4cc6f2ec94480a57c4358",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laracasts\\Generators\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                }
+            ],
+            "description": "Extend Laravel 5's generators.",
+            "keywords": [
+                "generators",
+                "laravel"
+            ],
+            "time": "2015-08-19 14:29:06"
+        },
+        {
+            "name": "mockery/mockery",
+            "version": "0.9.4",
+>>>>>>> d08258a9fde0f9d386f0e1811771efd12f4dc53c
             "source": {
                 "type": "git",
                 "url": "https://github.com/laracasts/Laravel-5-Generators-Extended.git",
@@ -3154,7 +3206,10 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+<<<<<<< HEAD
         "phpspec/phpspec": 20,
+=======
+>>>>>>> d08258a9fde0f9d386f0e1811771efd12f4dc53c
         "laracasts/generators": 20
     },
     "prefer-stable": true,
