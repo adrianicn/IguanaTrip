@@ -49,7 +49,7 @@ class AuthController extends Controller
         );
 
         if ($throttles && $this->hasTooManyLoginAttempts($request)) {
-			return redirect('/auth/login')
+			return redirect('/')
 				->with('error', trans('front/login.maxattempt'))
 				->withInput($request->only('log'));
         }
@@ -64,7 +64,7 @@ class AuthController extends Controller
 	            $this->incrementLoginAttempts($request);
 	        }
 
-			return redirect('/auth/login')
+			return redirect('/')
 				->with('error', trans('front/login.credentials'))
 				->withInput($request->only('log'));
 		}
@@ -82,12 +82,12 @@ class AuthController extends Controller
 				$request->session()->forget('user_id');
 			}
 
-			return redirect('/');
+			return redirect('/seleccion');
 		}
 		
 		$request->session()->put('user_id', $user->id);	
 
-		return redirect('/auth/login')->with('error', trans('front/verify.again'));			
+		return redirect('/')->with('error', trans('front/verify.again'));			
 	}
 
 
@@ -110,7 +110,7 @@ class AuthController extends Controller
 		$this->dispatch(new SendMail($user));
 
 		
-                return redirect('/#about')->with('email', trans('front/verify.message'));
+                return redirect('/')->with('ok', trans('front/verify.message'));
                 //return redirect('/auth/confirmation/'.$confirmation_code);
 	}
 

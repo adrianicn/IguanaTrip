@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Contracts\Auth\Guard;
 use App\Jobs\ChangeLocale;
 
 class HomeController extends Controller
@@ -12,10 +12,17 @@ class HomeController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Guard $auth)
 	{
-		return view('auth.completeRegister');
-            //return view('front.index');
+	//	
+            
+            
+            
+            if($auth->check())
+            {return view('front.masterPageRegistro');
+            }
+            else
+            {return view('auth.completeRegister');}
 	}
 
 	/**

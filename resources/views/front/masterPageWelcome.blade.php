@@ -65,6 +65,9 @@
                 <li><a href="#home" class="active">{{ trans('welcome/index.labelRegister') }}</a></li>
                 <li><a href="#about">{{ trans('welcome/index.labelAbout') }}</a></li>
                 <li><a href="#contact">{{ trans('welcome/index.labelContact') }}</a></li>
+                <li><a href="#contact">{!! link_to('auth/logout', trans('front/site.logout')) !!}</a></li>
+                
+
             </ul>
         </nav>
 
@@ -96,6 +99,7 @@
 			  <h1>{{ trans('welcome/index.labelContact') }}</h1>
             <h5>{{ trans('welcome/index.labelContact') }}</h5>
 			<p>Email: <a href="#">info@iguanatrip.com</a><br />
+                            {!! link_to('contact/create', trans('front/site.contact')) !!}
 				<br /></p>
 			<p><br />
 				</p>

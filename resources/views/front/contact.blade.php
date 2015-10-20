@@ -1,6 +1,6 @@
-@extends('front.template')
+@extends('front.masterPageWelcome')
 
-@section('main')
+@section('contentLogin')
 	<div class="row">
 		<div class="box">
 			<div class="col-lg-12">
