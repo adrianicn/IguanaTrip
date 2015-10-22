@@ -53,17 +53,17 @@
 
 
 @section('contentRegistro')
+
 <div class="rowerror">
 
     <br>
-    @if(session()->has('error'))
+     @if(session()->has('error'))
     @include('partials/error', ['type' => 'danger', 'message' => session('error')])
-    @endif	
-
-        @if(session()->has('ok'))
+    @endif
+       
+@if(session()->has('ok'))
     @include('partials/message', ['type' => 'message', 'message' => session('ok')])
     @endif	
-
     @if($errors->has())
 
     <div>
@@ -98,19 +98,19 @@
     <hr>  -->
 
 
-    <label id="icon" for="name"><i class="icon-user"></i></label>
+    <label id="icon" for="username"><i class="icon-user"></i></label>
 
-    <input type="text" id="email" name="username" placeholder="{{trans('front/register.pseudo')}}">
+    <input type="text" id="username" name="username" placeholder="{{trans('front/register.pseudo')}}">
 
-    <label id="icon" for="name"><i class="icon-envelope "></i></label>
+    <label id="icon" for="email"><i class="icon-envelope "></i></label>
 
     <input type="text" id="email" name="email" placeholder="Email">
 
-    <label id="icon" for="name"><i class="icon-shield"></i></label>
+    <label id="icon" for="password"><i class="icon-shield"></i></label>
 
     <input type="password" id="password" name="password" placeholder="{{trans('front/register.password')}}">
 
-    <label id="icon" for="name"><i class="icon-shield"></i></label>
+    <label id="icon" for="password_confirmation"><i class="icon-shield"></i></label>
 
     <input type="password" id="password" required="required" name="password_confirmation" placeholder="{{trans('front/register.confirm-password')}}">
 
@@ -124,31 +124,63 @@
 
 
 
-
-
-<br>
-<div class="row">	
-
-</div>
-
-<div class="row">	
-
-</div>
-
-
-
-</div>
-</div>
-</div>
 @stop
+@section('scripts')
+<script type="text/javascript">
+    $('.error').html('');
+    
+      $.ajaxSetup({
+                    headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+                });
 
+                $("#registro").submit(function (event) {
+
+                    $('#target').loadingOverlay();
+
+                    event.preventDefault();
+                    var $form = $(this),
+                            data = $form.serialize(),
+                            url = $form.attr("action");
+                    var posting = $.post(url, {formData: data});
+                    posting.done(function (data) {
+                        if (data.fail) {
+
+                            
+
+                            var errorString = '<ul>';
+                            $.each(data.errors, function (key, value) {
+                                errorString += '<li>' + value + '</li>';
+                            });
+                            errorString += '</ul>';
+                            $('#target').loadingOverlay('remove');
+                            //$('#error').html(errorString);
+                             $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'"+errorString+"'])");
+
+                        }
+                        if (data.success) {
+                            $('#target').loadingOverlay('remove');
+                            $('.register').fadeOut(); //hiding Reg form
+                                                        var successContent = '' + data.message + '';
+$('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'"+successContent+"'])");
+
+                             
+
+
+                        } //success
+                    }); //done
+                });
+</script>
+@stop
 @section('scripts')
 
 <script>
     $(function () {
         $('.badge').popover();
     });
-</script>
 
+              
+</script>
+    
+    
 @stop
 

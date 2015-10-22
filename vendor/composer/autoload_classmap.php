@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AddVotesToUsersTable' => $baseDir . '/database/migrations/2015_10_19_075607_add_votes_to_users_table.php',
     'App\\Console\\Commands\\Inspire' => $baseDir . '/app/Console/Commands/Inspire.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Events\\Event' => $baseDir . '/app/Events/Event.php',
@@ -87,6 +86,7 @@ return array(
     'Collective\\Html\\HtmlBuilder' => $vendorDir . '/laravelcollective/html/src/HtmlBuilder.php',
     'Collective\\Html\\HtmlFacade' => $vendorDir . '/laravelcollective/html/src/HtmlFacade.php',
     'Collective\\Html\\HtmlServiceProvider' => $vendorDir . '/laravelcollective/html/src/HtmlServiceProvider.php',
+    'CreateCatalogoServiciosTable' => $baseDir . '/database/migrations/2015_10_05_075256_create_catalogo_servicios_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2014_10_26_222018_create_comments_table.php',
     'CreateContactTable' => $baseDir . '/database/migrations/2014_10_24_205441_create_contact_table.php',
     'CreateForeignKeys' => $baseDir . '/database/migrations/2014_10_21_110325_create_foreign_keys.php',
@@ -107,6 +107,7 @@ return array(
     'Cron\\MonthField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/MonthField.php',
     'Cron\\YearField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/YearField.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'Detection\\MobileDetect' => $vendorDir . '/mobiledetect/mobiledetectlib/namespaced/Detection/MobileDetect.php',
     'Diff' => $vendorDir . '/phpspec/php-diff/lib/Diff.php',
     'Diff_Renderer_Abstract' => $vendorDir . '/phpspec/php-diff/lib/Diff/Renderer/Abstract.php',
     'Diff_Renderer_Html_Array' => $vendorDir . '/phpspec/php-diff/lib/Diff/Renderer/Html/Array.php',
@@ -1028,6 +1029,9 @@ return array(
     'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => $vendorDir . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/ConsoleColor.php',
     'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => $vendorDir . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/InvalidStyleException.php',
     'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => $vendorDir . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
+    'Jenssegers\\Agent\\Agent' => $vendorDir . '/jenssegers/agent/src/Agent.php',
+    'Jenssegers\\Agent\\AgentServiceProvider' => $vendorDir . '/jenssegers/agent/src/AgentServiceProvider.php',
+    'Jenssegers\\Agent\\Facades\\Agent' => $vendorDir . '/jenssegers/agent/src/Facades/Agent.php',
     'Laracasts\\Generators\\Commands\\MigrationMakeCommand' => $vendorDir . '/laracasts/generators/src/Commands/MigrationMakeCommand.php',
     'Laracasts\\Generators\\Commands\\PivotMigrationMakeCommand' => $vendorDir . '/laracasts/generators/src/Commands/PivotMigrationMakeCommand.php',
     'Laracasts\\Generators\\Commands\\SeedMakeCommand' => $vendorDir . '/laracasts/generators/src/Commands/SeedMakeCommand.php',
@@ -1075,6 +1079,7 @@ return array(
     'League\\Flysystem\\Util' => $vendorDir . '/league/flysystem/src/Util.php',
     'League\\Flysystem\\Util\\ContentListingFormatter' => $vendorDir . '/league/flysystem/src/Util/ContentListingFormatter.php',
     'League\\Flysystem\\Util\\MimeType' => $vendorDir . '/league/flysystem/src/Util/MimeType.php',
+    'Mobile_Detect' => $vendorDir . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
     'Mockery' => $vendorDir . '/mockery/mockery/library/Mockery.php',
     'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
     'Mockery\\Adapter\\Phpunit\\MockeryTestCase' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryTestCase.php',

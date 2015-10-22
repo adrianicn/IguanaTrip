@@ -1,12 +1,25 @@
-@extends('front.template')
+@extends('front.masterPageWelcome')
 
-@section('main')
+
+@section('contentRegistro')
+
+
 	<div class="row">
-		<div class="box">
+		
 			<div class="col-lg-12">
-				@if(session()->has('error'))
-					@include('partials/error', ['type' => 'danger', 'message' => session('error')])
-				@endif	
+			
+                                
+                                <div class="rowerror">
+
+    <br>
+    @if(session()->has('error'))
+    @include('partials/error', ['type' => 'danger', 'message' => session('error')])
+    @endif	
+
+
+
+
+</div>
 				<hr>	
 				<h2 class="intro-text text-center">{{ trans('front/password.title-reset') }}</h2>
 				<hr>
@@ -27,7 +40,7 @@
 				{!! Form::close() !!}
 
 			</div>
-		</div>
+		
 	</div>
 @stop
 
