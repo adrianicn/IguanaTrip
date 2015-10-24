@@ -1,6 +1,7 @@
 <?php
 //Registro
 Route::get('seleccion', 'RegistroController@index');
+Route::get('catalogos', 'CatalogoServicioController@index');
 
 // Home
 Route::get('/', [
