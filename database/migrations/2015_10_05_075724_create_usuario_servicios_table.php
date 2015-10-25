@@ -45,7 +45,11 @@ class CreateUsuarioServiciosTable extends Migration
             $table->text('tags_servicio');
             $table->integer('id_ciudad');
             
+            $table->foreign('id_usuario_operador')
+                    ->references('id_usuario_op')
+                    ->on('usuario_operadores');
             
+        
             
         });
     }
