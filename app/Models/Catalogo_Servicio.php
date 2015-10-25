@@ -14,4 +14,11 @@ class Catalogo_Servicio extends Model
 	 * @var string
 	 */
 	protected $table = 'catalogo_servicios';
+        
+         /* Representacion de Eloquent de que un usuario operador tiene varios usuario servicios */
+    public function catalogo_usuario_servicios(){
+        
+        return $this->hasMany('App\Models\Usuario_Servicio');
+        
+    }
 }

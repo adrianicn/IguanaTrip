@@ -17,7 +17,12 @@ class CatalogoServicioController extends Controller
     public function index()
     {
         //
-        $leng = Catalogo_Servicio::all();
-        return $leng;
+       
+        
+         $catalogos = Catalogo_Servicio::All();
+
+        $html = View::make('countries.list', compact('countries'))->render();
+
+        return Response::json(['html' => $html]);
     }
 }
