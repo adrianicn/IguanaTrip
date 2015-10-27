@@ -105,7 +105,6 @@ class AuthController extends Controller {
     public function postRegister(Request $request, UserRepository $user_gestion) {
 
 
-        sleep(5);
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);

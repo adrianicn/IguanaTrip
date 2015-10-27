@@ -81,7 +81,6 @@
                 @yield('contentLogin')
             </div>
 
-            
 
             <section class="content show" id="home">
                 @yield('contentRegistro')
