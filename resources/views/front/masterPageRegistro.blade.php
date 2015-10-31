@@ -6,7 +6,7 @@
 
  <head>
     <meta charset="utf-8">
-    <title>Step by step tab style form validation Wizard using Bootstrap</title>
+    <title>Registro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <style type="text/css">
@@ -61,6 +61,9 @@ body {
     
     
 <body>
+
+{!!session('statut')!!}
+
 	<header role="banner">
 		<div id="banner-principal">
 			<div id="logo"></div>
@@ -92,6 +95,7 @@ body {
       	</div>
       </div>
   </div>
+<<<<<<< HEAD
     
         <!-- Home Page -->
             <div id="logindiv">
@@ -165,6 +169,27 @@ body {
   </div>
   {!! Form::close() !!}
   </div>
+=======
+  
+  <section class="content show" id="registro-step1">
+  	@yield('step1')
+  </section>	
+
+  <section class="content show" id="registro-step2">
+  	@yield('step2')
+  </section>	
+
+  <section class="content show" id="registro-step3">
+  	@yield('step3')
+  </section>	
+
+  <section class="content show" id="registro-step4">
+  	@yield('step4')
+  </section>	
+
+
+</div>
+>>>>>>> 21e3423f176afeefd89cef847eef7281853ea0fd
 
 
 <script type="text/javascript">
@@ -211,7 +236,9 @@ body {
   $('div.setup-panel div a.btn-primary').trigger('click');
   });
 
+  $( "#eventos-img" ).click(function() {$("#servicio_evento").val('1');alert($("#servicio_evento").val());});
+  $( "#servicios-img" ).click(function() {$("#servicio_evento").val('2');alert($("#servicio_evento").val());});
   
-  </script>
+    </script>
 </body>
 </html>

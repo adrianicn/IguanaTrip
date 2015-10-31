@@ -11,10 +11,14 @@
         "bestmomo/filemanager": "1.*",
         "illuminate/html": "5.0.*",
         "phpspec/phpspec": "^2.2@dev",
+<<<<<<< HEAD
          "mobiledetect/mobiledetectlib": "^2.8",
         "jenssegers/agent": "^3.0@dev",
         "intervention/image": "^2.3"
         
+=======
+      
+>>>>>>> 21e3423f176afeefd89cef847eef7281853ea0fd
         
     },
     "require-dev": {
