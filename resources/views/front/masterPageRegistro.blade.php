@@ -92,6 +92,11 @@ body {
       	</div>
       </div>
   </div>
+    
+        <!-- Home Page -->
+            <div id="logindiv">
+                @yield('image')
+            </div>
   {!! Form::open(['url' => 'auth/login', 'method' => 'post', 'role' => 'form', 'id'=>'registro'] ) !!}
   <div class="row setup-content" id="step-1">
     	<div class="col-xs-6 col-md-offset-3">

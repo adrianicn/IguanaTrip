@@ -137,6 +137,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+            Intervention\Image\ImageServiceProvider::class,
 'Jenssegers\Agent\AgentServiceProvider',
 		/*
 		 * Application Service Providers...
@@ -203,6 +204,7 @@ return [
 		'HTML'		=> Collective\Html\HtmlFacade::class,
              
             'Agent' => 'Jenssegers\Agent\Facades\Agent',
+            'Image'     => Intervention\Image\Facades\Image::class
 
 	],
 
