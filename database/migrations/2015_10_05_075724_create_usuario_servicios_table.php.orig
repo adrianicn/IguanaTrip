@@ -15,12 +15,11 @@ class CreateUsuarioServiciosTable extends Migration
         Schema::create('usuario_servicios', function(Blueprint $table) {
             
             $table->increments('id_usuario_servicio')->unique();
-<<<<<<< HEAD
             $table->integer('id_usuario_operador');
-=======
+
             //significa que el campo debe ser positivo
             $table->integer('id_usuario_operador')->unsigned();
->>>>>>> 42559f4762ae7037e80bf1a85614a2317559808e
+
             $table->integer('id_catalogo_servicio');
             $table->text('detalle_servicio');
             $table->float('precio_desde');
@@ -49,15 +48,14 @@ class CreateUsuarioServiciosTable extends Migration
             $table->text('tags_servicio');
             $table->integer('id_ciudad');
             
-<<<<<<< HEAD
-=======
+
             $table->foreign('id_usuario_operador')
                     ->references('id_usuario_op')
                     ->on('usuario_operadores');
             
         
             
->>>>>>> 42559f4762ae7037e80bf1a85614a2317559808e
+
         });
     }
 
