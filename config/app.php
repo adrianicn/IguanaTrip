@@ -137,17 +137,10 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-<<<<<<< HEAD
+
             Intervention\Image\ImageServiceProvider::class,
-'Jenssegers\Agent\AgentServiceProvider',
-		/*
-=======
-			
-		/*		
-		
->>>>>>> 21e3423f176afeefd89cef847eef7281853ea0fd
-		 * Application Service Providers...
-		 */
+            'Jenssegers\Agent\AgentServiceProvider',
+	
 		App\Providers\AppServiceProvider::class,
 		App\Providers\AuthServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
@@ -209,11 +202,8 @@ return [
 		'Form'		=> Collective\Html\FormFacade::class,
 		'HTML'		=> Collective\Html\HtmlFacade::class,
              
-<<<<<<< HEAD
             'Agent' => 'Jenssegers\Agent\Facades\Agent',
             'Image'     => Intervention\Image\Facades\Image::class
-=======
->>>>>>> 21e3423f176afeefd89cef847eef7281853ea0fd
 
 	],
 

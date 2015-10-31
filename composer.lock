@@ -4,13 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "hash": "d08a9a95aaea2d3aed21011edc1be8c1",
+    "hash": "1ee32d66e878e388779b22d63d83512e",
     "content-hash": "6fa928be2203cda8c7ba8b660e4a012b",
-=======
-    "hash": "c58fd96af6bb8a65ec8bfc796b19dadb",
-    "content-hash": "04b8271fc95c4832190f4cb2e4424a5f",
->>>>>>> 21e3423f176afeefd89cef847eef7281853ea0fd
     "packages": [
         {
             "name": "bestmomo/filemanager",
