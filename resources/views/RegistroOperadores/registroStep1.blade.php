@@ -4,7 +4,6 @@
 
 	{!! Form::open(['url' => 'servicios/operador', 'method' => 'post', 'role' => 'form', 'id'=>'registro_step1'] ) !!}
 
-	
 	<div class="row setup-content" id="step-1">
 		<div class="col-xs-6 col-md-offset-3">
 			<div class="col-md-12">
@@ -21,7 +20,8 @@
 					<label class="control-label">Telefono</label>
 					<input id="telf_contacto_operador_1" maxlength="100" type="text" required="required" class="form-control" placeholder="Ingrese telefono contacto" />
 				</div>
-				<button class="btn btn-primary nextBtn btn-lg pull-right" type="button"  onclick="$(this).closest('form').submit()">Siguiente</button>
+<!--  				<button class="btn btn-primary nextBtn btn-lg pull-right" type="button"  onclick="$(this).closest('form').submit()">Siguiente</button>-->
+				<a href="#" class="button" onclick="$(this).closest('form').submit()">siguiente</a>
 			</div>
 		</div>
 	</div>
@@ -35,9 +35,6 @@
 <script type="text/javascript">
     $('.error').html('');
     
-      $.ajaxSetup({
-                    headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
-                });
 
                 $("#registro_step1").submit(function (event) {
 
@@ -68,11 +65,6 @@
                         } //success
                     }); //done
                 });
-</script>
-@stop
-@section('scripts')
-
-<script>
     $(function () {
         $('.badge').popover();
     });

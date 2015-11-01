@@ -111,9 +111,11 @@ class ServicioController extends Controller
     public function postOperadores(Request $request, OperadorRepository $operador_gestion) {
     
     
-    	sleep(5);
+    
+    
     
     	$inputData = Input::get('formData');
+    return 'ptm'. $inputData;
     	parse_str($inputData, $formFields);
     	$operadorData = array(
     			'nombre_empresa_operador' => $formFields['nombre_empresa_operador'],

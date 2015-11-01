@@ -141,7 +141,10 @@ body {
 
 
 </div>
+            {!!HTML::script('js/loading-overlay.min.js') !!}
 
+ 	@yield('scripts')
+ 
 
 <script type="text/javascript">
   $(document).ready(function () {
