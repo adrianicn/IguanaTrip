@@ -3,17 +3,18 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
+class CreateUsersTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('users', function(Blueprint $table)
+		{
+			$table->increments('id');
 			$table->string('username', 30)->unique();
 			$table->string('email')->unique();
 			$table->string('password', 60);
@@ -23,17 +24,19 @@ class CreateUsersTable extends Migration
 			$table->boolean('confirmed')->default(false);
 			$table->string('confirmation_code')->nullable();
 			$table->timestamps();
-			$table->rememberToken();		
-        });
-    }
+			$table->rememberToken();
+                        
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('users');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('users');
+	}
+
 }

@@ -116,6 +116,7 @@ class AuthController extends Controller {
         );
         $validator = Validator::make($userData, $this->validationRules);
 
+        
 
 
         if ($validator->fails()) {
