@@ -139,7 +139,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
             Intervention\Image\ImageServiceProvider::class,
-            'Jenssegers\Agent\AgentServiceProvider',
+			'Jenssegers\Agent\AgentServiceProvider',
 	
 		App\Providers\AppServiceProvider::class,
 		App\Providers\AuthServiceProvider::class,

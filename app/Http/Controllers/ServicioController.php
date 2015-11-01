@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Catalogo_Servicio;
+use App\Repositories\OperadorRepository;
+use Validator;
+use Illuminate\Support\Facades\Hash;
+use Input;
 
-class RegistroController extends Controller
+//use App\Models\Catalogo_Servicio;
+
+class ServicioController extends Controller
 {
     
 	protected $validationRules = [
@@ -26,7 +31,7 @@ class RegistroController extends Controller
     {
         //
     	//$catalogos = DB::table('catalogo_servicios')->get();
-    	$catalogos = Catalogo_Servicio::all();
+    	//$catalogos = Catalogo_Servicio::all();
     	return view('RegistroOperadores.registroStep1');
 //        return view('front.masterPageRegistro')->with(['catalogos' => $catalogos]);
     }
@@ -103,20 +108,20 @@ class RegistroController extends Controller
      * @param  App\Repositories\UserRepository $user_gestion
      * @return Response
      */
-    public function postRegister(Request $request, UserRepository $user_gestion) {
+    public function postOperadores(Request $request, OperadorRepository $operador_gestion) {
     
     
     	sleep(5);
     
     	$inputData = Input::get('formData');
     	parse_str($inputData, $formFields);
-    	$userData = array(
+    	$operadorData = array(
     			'nombre_empresa_operador' => $formFields['nombre_empresa_operador'],
     			'nombre_contacto_operador_1' => $formFields['nombre_contacto_operador_1'],
     			'telf_contacto_operador_1' => $formFields['telf_contacto_operador_1'],
     			'ip_registro_operador' => $this->getIp()
     	);
-    	$validator = Validator::make($userData, $this->validationRules);
+    	$validator = Validator::make($operadorData, $this->validationRules);
     
     
     
@@ -134,7 +139,7 @@ class RegistroController extends Controller
     
     
     
-    		$this->dispatch(new SendMail($user));
+//    		$this->dispatch(new SendMail($user));
     		//    return redirect('/')->with('ok', trans('front/verify.message'));
     		//return redirect('/auth/confirmation/'.$confirmation_code);*/
     
