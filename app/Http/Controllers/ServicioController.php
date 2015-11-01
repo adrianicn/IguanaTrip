@@ -113,9 +113,9 @@ class ServicioController extends Controller
     
     
     
-    
+    return "ptm";
     	$inputData = Input::get('formData');
-    return 'ptm'. $inputData;
+    
     	parse_str($inputData, $formFields);
     	$operadorData = array(
     			'nombre_empresa_operador' => $formFields['nombre_empresa_operador'],
