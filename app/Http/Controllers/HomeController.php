@@ -50,5 +50,14 @@ class HomeController extends Controller {
 
         return redirect()->back();
     }
+    
+      public function index1()
+    {
+        //
+       
+        
+
+        return view('Registro.catalogoServicio');
+    }
 
 }
