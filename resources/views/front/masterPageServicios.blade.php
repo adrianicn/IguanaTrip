@@ -72,7 +72,7 @@ body {
 	</header>
 
 
-<div class="container">
+<div class="container" id="target">
 
       <div class="stepwizard col-md-offset-3">
       	<div class="stepwizard-row setup-panel">
@@ -95,81 +95,33 @@ body {
       	</div>
       </div>
   </div>
-<<<<<<< HEAD
+<div class="rowerror">
+
+    <br>
+     @if(session()->has('error'))
+    @include('partials/error', ['type' => 'danger', 'message' => session('error')])
+    @endif
+	@if(session()->has('ok'))
+    	@include('partials/message', ['type' => 'message', 'message' => session('ok')])
+    @endif	
+    @if($errors->has())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+
+    @endif
+</div>
     
         <!-- Home Page -->
             <div id="logindiv">
                 @yield('image')
             </div>
-  {!! Form::open(['url' => 'auth/login', 'method' => 'post', 'role' => 'form', 'id'=>'registro'] ) !!}
-  <div class="row setup-content" id="step-1">
-    	<div class="col-xs-6 col-md-offset-3">
-        	<div class="col-md-12">
-            	<h3> {{ trans('registro/registrosteps.step1') }}</h3>
-            	<div class="form-group">
-            		<label class="control-label">Nombre</label>
-            		<input  maxlength="100" type="text" required="required" class="form-control" placeholder="Ingrese Nombre"  />
-          		</div>
-              	<div class="form-group">
-            		<label class="control-label">Apellido</label>
-            		<input maxlength="100" type="text" required="required" class="form-control" placeholder="Ingrese Apellido" />
-          		</div>
-              	<div class="form-group">
-            		<label class="control-label">Direcci&oacute;n</label>
-            		<textarea required="required" class="form-control" placeholder="Ingrese Direcci&oacute;n" ></textarea>
-          		</div>
-              	<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-            </div>
-      	</div>
-  </div>
-  <div class="row setup-content" id="step-2">
-  		<div class="col-xs-6 col-md-offset-3">
-        	<div class="col-md-12">
-            	<h3> {{ trans('registro/registrosteps.step2') }}</h3>
-              	<div class="form-group">
-            		<div id="servicios-col">
-            		<img alt="Eventos" src="img/eventos.png">
-            		<p>Eventos</p>
-            		</div>
-          		</div>
-            	<div class="form-group">
-            		<div id="servicios-col">
-            		<img alt="Servicios" src="img/servicios.png">
-            		<p>Servicios</p>
-            		</div>
-          		</div>
-          		<input type="hidden" value="0" name="servicio_evento" id="servicio_evento">
-            	<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-        	</div>
-  		</div>
-  </div>
-  <div class="row setup-content" id="step-2">
-  		<div class="col-xs-6 col-md-offset-3">
-        	<div class="col-md-12">
-            	<h3> {{ trans('registro/registrosteps.step3') }}</h3>
-              	<div class="form-group">
-            		<label class="control-label">Company Name</label>
-            		<input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-          		</div>
-            	<div class="form-group">
-            		<label class="control-label">Company Address</label>
-            		<input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-          		</div>
-            	<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-        	</div>
-  		</div>
-  </div>
-  <div class="row setup-content" id="step-3">
-  		<div class="col-xs-6 col-md-offset-3">
-        	<div class="col-md-12">
-              <h3> {{ trans('registro/registrosteps.step4') }}</h3>
-              <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
-            </div>
-      	</div>
-  </div>
-  {!! Form::close() !!}
-  </div>
-=======
+  
+            
   
   <section class="content show" id="registro-step1">
   	@yield('step1')
@@ -189,7 +141,6 @@ body {
 
 
 </div>
->>>>>>> 21e3423f176afeefd89cef847eef7281853ea0fd
 
 
 <script type="text/javascript">
