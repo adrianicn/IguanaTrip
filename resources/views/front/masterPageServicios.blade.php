@@ -8,6 +8,7 @@
     <meta charset="utf-8">
     <title>Registro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_token" content="{!! csrf_token() !!}"/>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <style type="text/css">
 body {

@@ -74,4 +74,7 @@ Route::post('upload/delete', ['as' => 'upload-remove', 'uses' =>'ImageController
 
 //servicios
 Route::get('servicios', 'ServicioController@index');
-Route::post('servicios/operador', 'ServicioController@postOperadores');
+
+
+Route::post('servicios/operador', ['as' => 'upload-postservicios', 'uses' =>'ServicioController@postOperadores']);
+
