@@ -35,7 +35,16 @@ class ServicioController extends Controller
     	return view('RegistroOperadores.registroStep1');
 //        return view('front.masterPageRegistro')->with(['catalogos' => $catalogos]);
     }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function step2()
+    {
+    	return view('RegistroOperadores.registroStep2')->with(['catalogos' => $catalogos]);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -118,7 +127,8 @@ class ServicioController extends Controller
     			'nombre_empresa_operador' => $formFields['nombre_empresa_operador'],
     			'nombre_contacto_operador_1' => $formFields['nombre_contacto_operador_1'],
     			'telf_contacto_operador_1' => $formFields['telf_contacto_operador_1'],
-    			'ip_registro_operador' => $this->getIp()
+    			'ip_registro_operador' => $this->getIp(),
+    			'id_tipo_operador' => $formFields['id_tipo_operador']
     	);
     	$validator = Validator::make($operadorData, $this->validationRules);
     
@@ -148,7 +158,6 @@ class ServicioController extends Controller
 
     public function postTipoOperadores(Request $request, OperadorRepository $operador_gestion) {
     	 
-    	sleep(5);
     	$inputData = Input::get('formData');
     
     	parse_str($inputData, $formFields);
@@ -156,8 +165,8 @@ class ServicioController extends Controller
     			'id_tipo_operador' => $formFields['id_tipo_operador'],
     	);
     
-    		$operador = $operador_gestion->store( $operadorData	);
-   
+    	//return $operadorData;
+    	return view('RegistroOperadores.registroStep2')->with(['id_tipo_operador' => $operadorData['id_tipo_operador']]);
     }
     
     private function getIp(){

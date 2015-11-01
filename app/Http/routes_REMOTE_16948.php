@@ -74,11 +74,7 @@ Route::post('upload/delete', ['as' => 'upload-remove', 'uses' =>'ImageController
 
 //servicios
 Route::get('servicios', 'ServicioController@index');
-<<<<<<< HEAD
-Route::get('userservice', 'HomeController@index1');
-=======
 //Route::get('servicios/tipoOperador', 'ServicioController@step2');
->>>>>>> f2b246b8ffebf9ed4e0c988913b7a2a2ec6ee3d7
 
 Route::post('servicios/tipoOperador', ['as' => 'upload-postTipoOperador', 'uses' =>'ServicioController@postTipoOperadores']);
 Route::post('servicios/operador', ['as' => 'upload-postservicios', 'uses' =>'ServicioController@postOperadores']);

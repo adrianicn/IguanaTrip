@@ -28,17 +28,17 @@
 					<div id="seleccionTipo">
 						<h2>I'm an Agency</h2>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec est risus, ultrices a porta quis, tristique nec orci. Nulla tincidunt fermentum facilisis. Vivamus accumsan enim tincidunt, sodales ante nec, dictum tortor. Mauris id posuere nibh, a porttitor dui. </p>
-						<a onclick="$(id_tipo_operador).val(1);" href="#">Seleccionar</a>
+						<a onclick="$(id_tipo_operador).val(1);$(this).closest('form').submit()" href="#">Seleccionar</a>
 					</div>
 					<div id="seleccionTipo">
 						<h2>I'm an Enterprise</h2>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec est risus, ultrices a porta quis, tristique nec orci. Nulla tincidunt fermentum facilisis. Vivamus accumsan enim tincidunt, sodales ante nec, dictum tortor. Mauris id posuere nibh, a porttitor dui. </p>
-						<a onclick="$(id_tipo_operador).val(2);" href="#">Seleccionar</a>
+						<a onclick="$(id_tipo_operador).val(2);$(this).closest('form').submit()" href="#">Seleccionar</a>
 					</div>
 					<div id="seleccionTipo">
 						<h2>I'm just Me</h2>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec est risus, ultrices a porta quis, tristique nec orci. Nulla tincidunt fermentum facilisis. Vivamus accumsan enim tincidunt, sodales ante nec, dictum tortor. Mauris id posuere nibh, a porttitor dui. </p>
-						<a onclick="$(id_tipo_operador).val(3);" href="#">Seleccionar</a>
+						<a onclick="$(id_tipo_operador).val(3);$(this).closest('form').submit()" href="#">Seleccionar</a>
 					</div>
                 </div>
             </div>
