@@ -6,10 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-<<<<<<< HEAD
-=======
+
     'CreateCatalogoServiciosTable' => $baseDir . '/database/migrations/2015_10_05_075256_create_catalogo_servicios_table.php',
->>>>>>> 65c18b16ac19f3ad53d92cffda44a13604abd92c
+
     'CreateCommentsTable' => $baseDir . '/database/migrations/2014_10_26_222018_create_comments_table.php',
     'CreateContactTable' => $baseDir . '/database/migrations/2014_10_24_205441_create_contact_table.php',
     'CreateForeignKeys' => $baseDir . '/database/migrations/2014_10_21_110325_create_foreign_keys.php',
@@ -18,12 +17,12 @@ return array(
     'CreatePostsTable' => $baseDir . '/database/migrations/2014_10_26_172107_create_posts_table.php',
     'CreateRolesTable' => $baseDir . '/database/migrations/2014_10_21_105844_create_roles_table.php',
     'CreateTagsTable' => $baseDir . '/database/migrations/2014_10_26_172631_create_tags_table.php',
-<<<<<<< HEAD
+
     'CreateUsersTable' => $baseDir . '/database/migrations/2015_11_01_013527_create_users_table.php',
-=======
+
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'CreateUsuarioOperadoresTable' => $baseDir . '/database/migrations/2015_10_05_075711_create_usuario_operadores_table.php',
->>>>>>> 65c18b16ac19f3ad53d92cffda44a13604abd92c
+
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
