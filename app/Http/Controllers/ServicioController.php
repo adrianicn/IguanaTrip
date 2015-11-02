@@ -18,7 +18,7 @@ class ServicioController extends Controller
 	protected $validationRules = [
 			'nombre_empresa_operador' => 'required|max:255|alpha',
 			'nombre_contacto_operador_1' => 'required|max:255|alpha',
-			'telf_contacto_operador_1' => 'required|max:255|alpha',
+			'telf_contacto_operador_1' => 'required|max:255',
 	];
 	
     
@@ -109,11 +109,8 @@ class ServicioController extends Controller
      * @return Response
      */
     public function postOperadores(Request $request, OperadorRepository $operador_gestion) {
-    
-    
-    
-    
-    return "ptm";
+    	
+    	sleep(5);
     	$inputData = Input::get('formData');
     
     	parse_str($inputData, $formFields);
@@ -128,16 +125,12 @@ class ServicioController extends Controller
     
     
     	if ($validator->fails()) {
-    
-    
-    		return response()->json(array(
+            		return response()->json(array(
     				'fail' => true,
     				'errors' => $validator->getMessageBag()->toArray()
     		));
     	} else {
-    		$user = $user_gestion->store(
-    				$userData, $confirmation_code = str_random(30)
-    		);
+    		$operador = $operador_gestion->store( $operadorData	);
     
     
     
@@ -152,6 +145,21 @@ class ServicioController extends Controller
     		//}
     	}
     }
+
+    public function postTipoOperadores(Request $request, OperadorRepository $operador_gestion) {
+    	 
+    	sleep(5);
+    	$inputData = Input::get('formData');
+    
+    	parse_str($inputData, $formFields);
+    	$operadorData = array(
+    			'id_tipo_operador' => $formFields['id_tipo_operador'],
+    	);
+    
+    		$operador = $operador_gestion->store( $operadorData	);
+   
+    }
+    
     private function getIp(){
     	if (isset($_SERVER["HTTP_CLIENT_IP"]))
     	{

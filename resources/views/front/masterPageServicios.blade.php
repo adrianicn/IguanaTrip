@@ -10,6 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="_token" content="{!! csrf_token() !!}"/>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+       <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+
+        {!! HTML::style('css/demo.css') !!} 
+    
     <style type="text/css">
 body {
 	margin-top:0px;
@@ -58,6 +62,7 @@ body {
 
     {!! HTML::script('js/jquery.js') !!}
     {!! HTML::script('js/bootstrap.min.js') !!}
+    
 </head>
     
     
@@ -93,29 +98,13 @@ body {
         		<a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
         		<p>{{ trans('registro/registrosteps.step4') }}</p>
       		</div>
+	    	<div class="stepwizard-step">
+        		<a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
+        		<p>{{ trans('registro/registrosteps.step5') }}</p>
+      		</div>
       	</div>
       </div>
-  </div>
-<div class="rowerror">
-
-    <br>
-     @if(session()->has('error'))
-    @include('partials/error', ['type' => 'danger', 'message' => session('error')])
-    @endif
-	@if(session()->has('ok'))
-    	@include('partials/message', ['type' => 'message', 'message' => session('ok')])
-    @endif	
-    @if($errors->has())
-    <div>
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-
-    @endif
-</div>
+  
     
         <!-- Home Page -->
             <div id="logindiv">
@@ -140,8 +129,9 @@ body {
   	@yield('step4')
   </section>	
 
-
 </div>
+</div>
+    
             {!!HTML::script('js/loading-overlay.min.js') !!}
 
  	@yield('scripts')

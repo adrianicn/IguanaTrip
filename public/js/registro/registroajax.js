@@ -25,8 +25,8 @@
                             });
                             errorString += '</ul>';
                             $('#target').loadingOverlay('remove');
-                            //$('#error').html(errorString);
-                             $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'"+errorString+"'])");
+                            //$('.rowerror').html(errorString);
+                            $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'"+errorString+"'])");
 
                         }
                         if (data.success) {
@@ -34,6 +34,8 @@
                             $('.register').fadeOut(); //hiding Reg form
                             var successContent = '' + data.message + '';
        $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'"+successContent+"'])");
+       
+       
                         } //success
                     }); //done
                 });

@@ -37,10 +37,7 @@ class OperadorRepository extends BaseRepository
 	 */
 	private function save($operador, $inputs)
 	{
-		$operador->nombre_empresa_operador = $inputs['nombre_empresa_operador'];
-		$operador->nombre_contacto_opreador_1 = $inputs['nombre_contacto_opreador_1'];
-		$operador->telf_contacto_operador_1 = $inputs['telf_contacto_operador_1'];
-		$operador->ip_registro_operador = $inputs['ip_registro_operador'];
+		$operador->id_tipo_operador = $inputs['id_tipo_operador'];
 		$operador->save();
 	}
 
@@ -62,8 +59,14 @@ class OperadorRepository extends BaseRepository
 	 * @param  int    $confirmation_code
 	 * @return App\Models\User
 	 */
-	public function store()
+	public function store($inputs)
 	{
+		$operador = new $this->model;
+		
+		$this->save($operador, $inputs);
+		
+		return $operador;
+		
 	}
 
 	/**
@@ -75,7 +78,13 @@ class OperadorRepository extends BaseRepository
 	 */
 	public function update($inputs, $user)
 	{
-
+		$operador->nombre_empresa_operador = $inputs['nombre_empresa_operador'];
+		$operador->nombre_contacto_operador_1 = $inputs['nombre_contacto_operador_1'];
+		$operador->telf_contacto_operador_1 = $inputs['telf_contacto_operador_1'];
+		$operador->ip_registro_operador = $inputs['ip_registro_operador'];
+		$operador->estado_contacto_operador = 1;
+		$operador->save();
+		
 	}
 
 	/**

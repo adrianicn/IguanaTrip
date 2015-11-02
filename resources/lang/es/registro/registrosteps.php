@@ -1,10 +1,11 @@
 <?php
 
 return [
-	'step1' => 'Informacion General',
-	'step2' => 'Eventos y Servicios',
-	'step3' => 'Catalogos',
-	'step4' => 'Resumen',
+	'step1' => 'Selecciona',
+	'step2' => 'Informacion General',
+	'step3' => 'Eventos y Servicios',
+	'step4' => 'Catalogos',
+	'step5' => 'Resumen',
 	'step1-field1' => 'Nombre Empresa',
 	'step1-field2' => 'Contacto Empresa',
 	'step1-field3' => 'Telefono contacto',
