@@ -124,18 +124,8 @@ class ServicioController extends Controller
      */
     public function postOperadores(Request $request, OperadorRepository $operador_gestion) {
     
-    	//echo $request;
-    	
     	$inputData = Input::get('formData');
-    
-    	
-    	
     	parse_str($inputData, $formFields);
-    
-    	
-//     	return response()->json(array(
-//     			'fail' => true,
-//     			'errors' => $inputData));
     	
     	$operadorData = array(
     			'nombre_empresa_operador' => $formFields['nombre_empresa_operador'],
@@ -145,9 +135,6 @@ class ServicioController extends Controller
     			'id_tipo_operador' => $formFields['id_tipo_operador']
     	);
     	$validator = Validator::make($operadorData, $this->validationRules);
-    
-    
-    
     	if ($validator->fails()) {
             		return response()->json(array(
     				'fail' => true,
@@ -159,8 +146,6 @@ class ServicioController extends Controller
     		$returnHTML = ('servicios/operadorServicios');
     		return response()->json(array('success' => true, 'redirectto'=>$returnHTML));    
     
-//    		$returnHTML = view('RegistroOperadores.registroStep3')->with(['tipo_operador' => $operadorData['tipo_operador']])->render();
-//    		return response()->json(array('success' => true, 'html'=>$returnHTML));
     	}
     	 
     }
@@ -177,30 +162,11 @@ class ServicioController extends Controller
     }
     
     private function getIp(){
-    	if (isset($_SERVER["HTTP_CLIENT_IP"]))
-    	{
-    		return $_SERVER["HTTP_CLIENT_IP"];
-    	}
-    	elseif (isset($_SERVER["HTTP_X_FORWARDED_FOR"]))
-    	{
-    		return $_SERVER["HTTP_X_FORWARDED_FOR"];
-    	}
-    	elseif (isset($_SERVER["HTTP_X_FORWARDED"]))
-    	{
-    		return $_SERVER["HTTP_X_FORWARDED"];
-    	}
-    	elseif (isset($_SERVER["HTTP_FORWARDED_FOR"]))
-    	{
-    		return $_SERVER["HTTP_FORWARDED_FOR"];
-    	}
-    	elseif (isset($_SERVER["HTTP_FORWARDED"]))
-    	{
-    		return $_SERVER["HTTP_FORWARDED"];
-    	}
-    	else
-    	{
-    		return $_SERVER["REMOTE_ADDR"];
-    	}    	 
+		if (!empty($_SERVER['HTTP_CLIENT_IP']))
+			return $_SERVER['HTTP_CLIENT_IP'];
+		if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+			return $_SERVER['HTTP_X_FORWARDED_FOR'];
+		return $_SERVER['REMOTE_ADDR'];
     }
     
 }
