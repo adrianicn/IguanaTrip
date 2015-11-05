@@ -66,13 +66,18 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-
+//Adrian----------------------------------------------------------------------------
 
 Route::get('/image', ['as' => 'upload', 'uses' => 'ImageController@getUpload']);
 Route::post('upload', ['as' => 'upload-post', 'uses' =>'ImageController@postUpload']);
 Route::post('upload/delete', ['as' => 'upload-remove', 'uses' =>'ImageController@deleteUpload']);
+Route::get('userservice', 'HomeController@index1');
+Route::post('servicios/servicioOprador', ['as' => 'upload-postServicioOperador', 'uses' =>'UsuarioServiciosController@postServicioOperadores']);
+//////////////////////////
+
 
 //servicios
+
 Route::get('servicios', 'ServicioController@index');
 
 Route::post('servicios/tipoOperador', ['as' => 'upload-postTipoOperador', 'uses' =>'ServicioController@postTipoOperadores']);
