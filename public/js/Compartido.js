@@ -28,7 +28,7 @@ $('.error').html('');
                         }
                         if (data.success) {
                             $('#target').loadingOverlay('remove');
-                             window.location.replace(data.redirectto);
+                             window.location.href=data.redirectto;
 
                 //  $('#containerbase').empty();
                 // $('#containerbase').html(data.html);
