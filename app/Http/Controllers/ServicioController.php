@@ -143,7 +143,7 @@ class ServicioController extends Controller
     	} else {
     		$operador = $operador_gestion->store( $operadorData	);
     
-    		$returnHTML = ('servicios/operadorServicios');
+    		$returnHTML = ('/IguanaTrip/public/servicios/operadorServicios');
     		return response()->json(array('success' => true, 'redirectto'=>$returnHTML));    
     
     	}
