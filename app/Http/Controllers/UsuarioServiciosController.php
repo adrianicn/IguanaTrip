@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use App\Models\Usuario_Servicio;
+
 
 class UsuarioServiciosController extends Controller {
 
@@ -27,6 +29,24 @@ class UsuarioServiciosController extends Controller {
         //
     }
 
+    
+      /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function tablaServicios() {
+        //
+        
+        
+        $usuarioServicios = Usuario_Servicio::where('id_usuario_operador', '=', 6)->get();
+        
+      
+        
+        return view('Registro.listaServiciosUsuario', compact('usuarioServicios'));
+        
+        
+    }
     /**
      * Show the form for creating a new resource.
      *
