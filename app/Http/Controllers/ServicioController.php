@@ -9,6 +9,7 @@ use App\Repositories\OperadorRepository;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 use Input;
+use Illuminate\Support\Facades\Redirect;
 
 //use App\Models\Catalogo_Servicio;
 
@@ -158,16 +159,22 @@ class ServicioController extends Controller
 
     public function postTipoOperadores(Request $request, OperadorRepository $operador_gestion) {
     	 
-    	$inputData = Input::get('formData');
+    	
+    $id_tipo_operador = $request->input('id_tipo_operador');
     
-    	parse_str($inputData, $formFields);
-    	$operadorData = array(
-    			'id_tipo_operador' => $formFields['id_tipo_operador'],
-    	);
     
     	//return $operadorData;
-    	return view('RegistroOperadores.registroStep2')->with(['id_tipo_operador' => $operadorData['id_tipo_operador']]);
+    	//sreturn view('RegistroOperadores.registroStep2')->with(['id_tipo_operador' => $operadorData['id_tipo_operador']]);
+        
+        return Redirect::action('ServicioController@stepnum2')->with(['id_tipo_operador' => $id_tipo_operador]);
     }
+    
+      public function stepnum2()
+    {
+        //
+          return view('RegistroOperadores.registroStep2');
+    }
+    
     
     private function getIp(){
     	if (isset($_SERVER["HTTP_CLIENT_IP"]))

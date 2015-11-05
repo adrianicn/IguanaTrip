@@ -14,6 +14,7 @@ class EventServiceProvider extends ServiceProvider {
 		'auth.login' => ['App\Services\Statut@setLoginStatut'],
 		'auth.logout' => ['App\Services\Statut@setVisitorStatut'],
 		'user.access' => ['App\Services\Statut@setStatut']
+                
 	];
 
 	/**

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
 
+use Illuminate\Http\Request;
+
 class ImageRepository
 {
     public function upload( $form_data )
@@ -45,7 +47,7 @@ class ImageRepository
         
 
         $uploadSuccess1 = $this->original( $photo, $filenameExt );
-        return $uploadSuccess1;
+        
 
         $uploadSuccess2 = $this->icon( $photo, $filenameExt );
         
@@ -63,7 +65,8 @@ class ImageRepository
         $sessionImage = new Image;
         $sessionImage->filename      = $allowed_filename;
         $sessionImage->original_name = $originalName;
-        $sessionImage->user_id = 11234;
+        $sessionImage->user_id = session('user_id');
+        
         
         $sessionImage->save();
 

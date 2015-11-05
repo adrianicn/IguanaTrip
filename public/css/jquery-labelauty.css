@@ -20,27 +20,27 @@ input.labelauty { display: none !important; }
  */
 input.labelauty + label
 {
-	display: table;
-	font-size: 11px;
-	padding: 10px;
-	background-color: #efefef;
-	color: #b3b3b3;
-	cursor: pointer;
+    display: table;
+    font-size: 11px;
+    padding: 10px;
+    background-color: #efefef;
+    color: #b3b3b3;
+    cursor: pointer;
 
-	border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-webkit-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
 
 
-	transition: background-color 0.25s;
-	-moz-transition: background-color 0.25s;
-	-webkit-transition: background-color 0.25s;
-	-o-transition: background-color 0.25s;
+    transition: background-color 0.25s;
+    -moz-transition: background-color 0.25s;
+    -webkit-transition: background-color 0.25s;
+    -o-transition: background-color 0.25s;
 
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-o-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }
 
 /* Stylish text inside label */
@@ -48,9 +48,9 @@ input.labelauty + label
 input.labelauty + label > span.labelauty-unchecked,
 input.labelauty + label > span.labelauty-checked
 {
-	display: inline-block;
-	line-height: 16px;
-	vertical-align: bottom;
+    display: inline-block;
+    line-height: 16px;
+    vertical-align: bottom;
 }
 
 /* Stylish icons inside label */
@@ -58,95 +58,271 @@ input.labelauty + label > span.labelauty-checked
 input.labelauty + label > span.labelauty-unchecked-image,
 input.labelauty + label > span.labelauty-checked-image
 {
-	display: inline-block;
-	width: 16px;
-	height: 16px;
-	vertical-align: bottom;
-	background-repeat: no-repeat;
-	background-position: left center;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: bottom;
+    background-repeat: no-repeat;
+    background-position: left center;
 
-	transition: background-image 0.5s linear;
-	-moz-transition: background-image 0.5s linear;
-	-webkit-transition: background-image 0.5s linear;
-	-o-transition: background-image 0.5s linear;
+    transition: background-image 0.5s linear;
+    -moz-transition: background-image 0.5s linear;
+    -webkit-transition: background-image 0.5s linear;
+    -o-transition: background-image 0.5s linear;
 }
 
 /* When there's a label, add a little margin to the left */
 input.labelauty + label > span.labelauty-unchecked-image + span.labelauty-unchecked,
 input.labelauty + label > span.labelauty-checked-image + span.labelauty-checked
 {
-	margin-left: 7px;
+    margin-left: 7px;
 }
 
 /* When not Checked */
 input.labelauty:not(:checked):not([disabled]) + label:hover
 {
-	background-color: #eaeaea;
-	color: #a7a7a7;
+    background-color: #eaeaea;
+    color: #a7a7a7;
 }
 input.labelauty:not(:checked) + label > span.labelauty-checked-image
 {
-	display: none;
+    display: none;
 }
 
 input.labelauty:not(:checked) + label > span.labelauty-checked
 {
-	display: none;
+    display: none;
 }
 
 /* When Checked */
 input.labelauty:checked + label
 {
-	background-color: #3498db;
-	color: #ffffff;
+    background-color: #3498db;
+    color: #ffffff;
 }
 
 input.labelauty:checked:not([disabled]) + label:hover
 {
-	background-color: #72c5fd;
+    background-color: #72c5fd;
 }
 input.labelauty:checked + label > span.labelauty-unchecked-image
 {
-	display: none;
+    display: none;
 }
 
 input.labelauty:checked + label > span.labelauty-unchecked
 {
-	display: none;
+    display: none;
 }
 
 input.labelauty:checked + label > span.labelauty-checked
 {
-	display: inline-block;
+    display: inline-block;
 }
 
 input.labelauty.no-label:checked + label > span.labelauty-checked
 {
-	display: block;
+    display: block;
 }
 
 /* When Disabled */
 input.labelauty[disabled] + label
 {
-	opacity: 0.5;
+    opacity: 0.5;
 }
 
 /* Add a background to (un)checked images */
 input.labelauty + label > span.labelauty-unchecked-image
 {
-	background-image: url( ../images/input-unchecked.png );
+    background-image: url( ../images/input-unchecked.png );
 }
 
 input.labelauty + label > span.labelauty-checked-image
 {
-	background-image: url( ../images/input-checked.png );
+    background-image: url( ../images/input-checked.png );
 }
 
-input.labelauty.synch-icon + label > span.labelauty-unchecked-image {
+input.labelauty.synch-icon1 + label > span.labelauty-unchecked-image {
     background-image: url("../images/synch-unchecked.png");
 }
-input.labelauty.synch-icon + label > span.labelauty-checked-image {
+input.labelauty.synch-icon1 + label > span.labelauty-checked-image {
     background-image: url("../images/synch-checked.png");
 }
 
-.datagrid table { border-collapse: collapse; text-align: left; width: 100%; } .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #006699; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }.datagrid table td, .datagrid table th { padding: 3px 10px; }.datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #0070A8; } .datagrid table thead th:first-child { border: none; }.datagrid table tbody td { color: #00496B; border-left: 1px solid #E1EEF4;font-size: 12px;font-weight: normal; }.datagrid table tbody .alt td { background: #E1EEF4; color: #00496B; }.datagrid table tbody td:first-child { border-left: none; }.datagrid table tbody tr:last-child td { border-bottom: none; }.datagrid table tfoot td div { border-top: 1px solid #006699;background: #E1EEF4;} .datagrid table tfoot td { padding: 0; font-size: 12px } .datagrid table tfoot td div{ padding: 2px; }.datagrid table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }.datagrid table tfoot  li { display: inline; }.datagrid table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #FFFFFF;border: 1px solid #006699;-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; }.datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #006699; color: #FFFFFF; background: none; background-color:#00557F;}div.dhtmlx_window_active, div.dhx_modal_cover_dv { position: fixed !important; }
+.datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
+.datagrid {
+    font: normal 12px/150% Arial, Helvetica, sans-serif; 
+    background: #fff;
+    overflow: hidden; 
+    border: 1px solid #006699; 
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px; 
+    border-radius: 3px; 
+    width: 60%;
+     margin-left: 266px;
+}
+
+.datagrid table td, .datagrid table th { padding: 3px 10px; }.datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #0070A8; } .datagrid table thead th:first-child { border: none; }.datagrid table tbody td { color: #00496B; border-left: 1px solid #E1EEF4;font-size: 12px;font-weight: normal; }.datagrid table tbody .alt td { background: #E1EEF4; color: #00496B; }.datagrid table tbody td:first-child { border-left: none; }.datagrid table tbody tr:last-child td { border-bottom: none; }.datagrid table tfoot td div { border-top: 1px solid #006699;background: #E1EEF4;} .datagrid table tfoot td { padding: 0; font-size: 12px } .datagrid table tfoot td div{ padding: 2px; }.datagrid table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }.datagrid table tfoot  li { display: inline; }.datagrid table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #FFFFFF;border: 1px solid #006699;-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; }.datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #006699; color: #FFFFFF; background: none; background-color:#00557F;}div.dhtmlx_window_active, div.dhx_modal_cover_dv { position: fixed !important; }
+
+/* Variable declaration */
+/* General styling */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+}
+
+
+.button {
+  float: left;
+  height: 64px;
+  width: 64px;
+  margin: 0 8px;
+  background-color: #777;
+  cursor: pointer;
+  box-shadow: 3px 3px #2E2E2E;
+}
+.button [class^="icon-"] {
+  display: inline-block;
+  width: 100%;
+  line-height: 64px;
+  text-align: center;
+  height: 64px;
+  font-size: 38px;
+  background: -webkit-linear-gradient(#fff, #ccc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.button [class^="icon-"]:before {
+  display: initial;
+}
+
+#star {
+  
+}
+
+#anchor {
+  background-color: #52A3CC;
+}
+
+#beaker {
+  background-color: #52CC52;
+}
+
+#bug {
+  background-color: #CC5252;
+}
+
+/* Modal overlay styling */
+#overlay {
+  display: none;
+  z-index: 5;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+#overlay #screen {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.5;
+}
+#overlay .dialog {
+  z-index: 10;
+  display: none;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100px;
+  width: 500px;
+  background-color: #777;
+}
+#overlay .dialog .label-dialog {
+  float: left;
+  height: 100px;
+  width: 100px;
+  background-color: #444;
+  text-align: center;
+  vertical-align: top;
+}
+#overlay .dialog .label-dialog [class^="icon-"] {
+  line-height: 100px;
+  font-size: 60px;
+  color: #333;
+}
+#overlay .dialog .body-dialog {
+  float: left;
+  height: 100px;
+  line-height: 100px;
+  width: 350px;
+}
+#overlay .dialog .body-dialog p {
+  display: inline-block;
+  text-align: center;
+  padding: 10px;
+  font: 14px roboto;
+  color: #EEE;
+  vertical-align: middle;
+}
+#overlay .dialog .body-dialog p span {
+  font-weight: 700;
+}
+#overlay .dialog .ok-dialog {
+  float: left;
+  height: 100px;
+  width: 50px;
+  background-color: #333;
+  text-align: center;
+  vertical-align: top;
+}
+#overlay .dialog .ok-dialog [class^="icon-"] {
+  line-height: 100px;
+  font-size: 30px;
+  color: #EEE;
+}
+#overlay .dialog .ok-dialog:hover {
+  background-color: #555;
+  cursor: pointer;
+}
+#overlay #dialog-star .label-dialog [class^="icon-"] {
+  color: #CCCC52;
+}
+#overlay #dialog-star .ok-dialog {
+  background-color: #CCCC52;
+}
+#overlay #dialog-star .ok-dialog:hover {
+  background-color: #dddd41;
+}
+#overlay #dialog-anchor .label-dialog [class^="icon-"] {
+  color: #52A3CC;
+}
+#overlay #dialog-anchor .ok-dialog {
+  background-color: #52A3CC;
+}
+#overlay #dialog-anchor .ok-dialog:hover {
+  background-color: #41a9dd;
+}
+#overlay #dialog-beaker .label-dialog [class^="icon-"] {
+  color: #52CC52;
+}
+#overlay #dialog-beaker .ok-dialog {
+  background-color: #52CC52;
+}
+#overlay #dialog-beaker .ok-dialog:hover {
+  background-color: #41dd41;
+}
+#overlay .dialog:nth-of-type(5) .label-dialog [class^="icon-"] {
+  color: #CC5252;
+}
+#overlay .dialog:nth-of-type(5) .ok-dialog {
+  background-color: #CC5252;
+}
+#overlay .dialog:nth-of-type(5) .ok-dialog:hover {
+  background-color: #dd4141;
+}
