@@ -1,4 +1,11 @@
-   $('.error').html('');
+
+$.ajaxSetup({
+    headers: {
+            'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+    });
+ 
+
+$('.error').html('');
         function AjaxContainerRegistro($formulario) {
         $('#target').loadingOverlay();
         //event.preventDefault();

@@ -1,5 +1,4 @@
 @extends('front.masterPageServicios')
-
 @section('step1')
 
 {!! HTML::style('/packages/bootstrap/css/bootstrap.min.css') !!}

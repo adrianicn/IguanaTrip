@@ -1,4 +1,3 @@
-
 {!! HTML::style('css/jquery-labelauty.css') !!} 
 {!!HTML::script('js/jquery-labelauty.js') !!}
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,700|Electrolize' rel='stylesheet' type='text/css' />
