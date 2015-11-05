@@ -11,7 +11,10 @@ class Statut  {
 	public function setLoginStatut($user)
 	{
 		session()->put('statut', $user->role->slug);
+            
 	}
+        
+        
 
 	/**
 	 * Set the visitor user statut

@@ -1,20 +1,15 @@
-@extends('front.masterPageRegistro')
+@extends('front.masterPageServicios')
 
-@section('image')
+@section('step1')
 
 {!! HTML::style('/packages/bootstrap/css/bootstrap.min.css') !!}
 {!! HTML::style('/assets/css/style.css') !!}
 {!! HTML::style('/packages/dropzone/dropzone.css') !!}
-
-
-
+ 
 <div class="row">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="col-md-offset-1 col-md-10">
             <div class="jumbotron how-to-create" >
-
-
-
 
                 {!! Form::open(['url' => route('upload-post'), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}
 
@@ -84,8 +79,15 @@
 
     </div>
 </div>
+
+<script>
+  $.ajaxSetup({
+                    headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+                });</script>
 <!-- End Dropzone Preview Template -->
 {!! HTML::script('/packages/dropzone/dropzone.js') !!}
 {!! HTML::script('/assets/js/dropzone-config.js') !!}
+
+
 
 @stop

@@ -8,7 +8,6 @@
                 $("#registro_step1").submit(function (event) {
                 
                     $('#container').loadingOverlay();
-
                     event.preventDefault();
                     var $form = $(this),
                             data = $form.serialize(),
@@ -18,6 +17,7 @@
                     var posting = $.post(url, {formData: data});
                     posting.done(function (data) {
                         if (data.fail) {
+
                             var errorString = '<ul>';
                             $.each(data.errors, function (key, value) {
                                 errorString += '<li>' + value + '</li>';

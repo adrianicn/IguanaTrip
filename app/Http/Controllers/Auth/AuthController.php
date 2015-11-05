@@ -86,11 +86,12 @@ class AuthController extends Controller {
             if ($request->session()->has('user_id')) {
                 $request->session()->forget('user_id');
             }
+            $request->session()->put('user_id', $user->id);
 
-            return redirect('/seleccion');
+            return redirect('/userservice')->with('user', $user->id);
         }
 
-        $request->session()->put('user_id', $user->id);
+        
 
         return redirect('/')->with('error', trans('front/verify.again'));
     }

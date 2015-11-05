@@ -96,6 +96,7 @@ class OperadorRepository extends BaseRepository
 	{
 		return session('statut');
 	}
+        
 
 	/**
 	 * Valid user.

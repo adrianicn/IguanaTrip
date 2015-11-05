@@ -30,7 +30,7 @@ class HomeController extends Controller {
         Session::put('device',$desk);
 
         if ($auth->check()) {
-            $view = view('front.masterPageRegistro');
+            $view = view('auth.completeRegister'); // revisar debe redirecccionar a otro lado
         } else {
 
             $view = view('auth.completeRegister');
@@ -49,6 +49,15 @@ class HomeController extends Controller {
         $this->dispatch($changeLocale);
 
         return redirect()->back();
+    }
+    
+      public function index1()
+    {
+        //
+       
+        
+
+        return view('Registro.base');
     }
 
 }

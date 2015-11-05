@@ -141,7 +141,7 @@
                     var $form = $(this),
                             data = $form.serialize(),
                             url = $form.attr("action");
-                            alert(url);
+                            
                     var posting = $.post(url, {formData: data});
                     posting.done(function (data) {
                         if (data.fail) {
