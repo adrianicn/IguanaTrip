@@ -2,9 +2,9 @@
 
 #banner-principal{
 	float:left;
-	background-image:url("../img/registro-fondo.png");
+	background-image:url("../img/pag3-imag1.png");
 	background-repeat:no-repeat;
-	height:342px;
+	height:233px;
 	width:100%;
 }
 #logo{
@@ -22,6 +22,39 @@
 	height: 30px;
 	margin-bottom: 20px;
 }
+#menu-ul{
+	width:383px;
+	margin-left:234px;
+	float:left;
+	padding: 0px;
+	margin-top:5px;
+	margin-bottom:5px;
+	height:37px;
+}
+#seleccionitem{
+	padding:0px;
+}
+#seleccionitem li{
+	display:inline;
+	color:#FFF;
+	border-right:1px #FFF solid;
+}
+#seleccionitem li a{
+	font-family: Arial;
+	font-size:10px;
+	font-weight:bold;
+	text-decoration: none;
+	color:#FFF;
+	padding-left:15px;
+	padding-right:15px;
+	padding-top:4px;
+	padding-bottom:6px;
+}
+#seleccionitem li a:hover {
+	color: #F15B41;
+	background-color:#FFF;
+}
+
 #servicios-col{
 	float: left;
 	margin-left: 100px;

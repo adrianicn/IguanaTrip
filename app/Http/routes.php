@@ -83,7 +83,6 @@ Route::get('/detalleServicios', ['as' => 'detail', 'uses' => 'UsuarioServiciosCo
 Route::get('servicios', 'ServicioController@index');
 
 Route::post('servicios/tipoOperador', ['as' => 'upload-postTipoOperador', 'uses' =>'ServicioController@postTipoOperadores']);
-
 Route::post('servicios/operador', ['as' => 'upload-postoperador', 'uses' =>'ServicioController@postOperadores']);
 Route::get('servicios/operadorServicios', 'ServicioController@step3');
 Route::get('servicios/operador/{tipoOperador}', 'ServicioController@step2');

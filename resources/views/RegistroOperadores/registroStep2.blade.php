@@ -1,14 +1,14 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
+{!! HTML::style('css/serviciosOperadores.css') !!} 
 
 <div class="rowerror">
 </div>
 
 <div class="row">
     {!! Form::open(['url' => route('upload-postoperador'),  'id'=>'registro_step1']) !!}
-<!--     <div class="row setup-content" id="step-2">
-        <div class="col-xs-6 col-md-offset-3">-->
+        <div class="wrapper uwa-font-aa">
             <div class="col-md-121">
                 <h3> {{ trans('registro/registrosteps.step2') }}</h3>
                 <div class="form-group">
@@ -31,8 +31,7 @@
                       <button class="btn1 btn-primary1 nextBtn1 btn-lg1 pull-right1" type="button"  onclick="AjaxContainerRegistro('registro_step1')">Siguiente</button>
                 <!--<a href="#" class="button" onclick="$(this).closest('form').submit()">siguiente</a>-->
             </div>
-<!--         </div>
-    </div>-->
+    </div>
 
     {!! Form::close() !!}
 
