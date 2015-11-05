@@ -25,7 +25,7 @@ class CreateUsuarioOperadoresTable extends Migration
             $table->string('email_contacto_operador');
             $table->boolean('estado_contacto_operador');
             $table->string('ip_registro_operador');
-            $table->int('id_tipo_operador');
+            $table->integer('id_tipo_operador');
             $table->timestamps();
             
         });
