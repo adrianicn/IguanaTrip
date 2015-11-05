@@ -1,50 +1,48 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
-<style type="text/css">
-#seleccionTipo{
-	float: left;
-	width: 180px;
-	padding-right: 20px;
-	border-color: 1px solid #000000;
-}
-#seleccionTipo h2{
-	padding-bottom: 3px;
-	border-bottom: 1px solid #CCCCCC; 
-}
-</style>
-
+{!! HTML::style('css/serviciosOperadores.css') !!} 
 
 <div class="rowerror">
 </div>
 <div class="row">
     {!! Form::open(['url' => route('upload-postTipoOperador'),  'id'=>'registro_step1']) !!}
     	<input type="hidden" value="0" name="tipo_operador" id="tipo_operador">
-<!--      <div class="row setup-content" id="step-1">
-        <div class="col-xs-6 col-md-offset-3">-->
-            <div class="col-md-121">
-                <h3> {{ trans('registro/registrosteps.step1') }}</h3>
-                <div class="form-group1">
-					<div id="seleccionTipo">
-						<h2>I'm an Agency</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec est risus, ultrices a porta quis, tristique nec orci. Nulla tincidunt fermentum facilisis. Vivamus accumsan enim tincidunt, sodales ante nec, dictum tortor. Mauris id posuere nibh, a porttitor dui. </p>
-						<a class="btn1 btn-primary1 nextBtn1 btn-lg1 pull-right1" onclick="$(tipo_operador).val(1);AjaxContainerRegistro('registro_step1')" href="#">Seleccionar</a>
-					</div>
-					<div id="seleccionTipo">
-						<h2>I'm an Enterprise</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec est risus, ultrices a porta quis, tristique nec orci. Nulla tincidunt fermentum facilisis. Vivamus accumsan enim tincidunt, sodales ante nec, dictum tortor. Mauris id posuere nibh, a porttitor dui. </p>
-						<a class="btn1 btn-primary1 nextBtn1 btn-lg1 pull-right1" onclick="$(tipo_operador).val(2);AjaxContainerRegistro('registro_step1')" href="#">Seleccionar</a>
-					</div>
-					<div id="seleccionTipo">
-						<h2>I'm just Me</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec est risus, ultrices a porta quis, tristique nec orci. Nulla tincidunt fermentum facilisis. Vivamus accumsan enim tincidunt, sodales ante nec, dictum tortor. Mauris id posuere nibh, a porttitor dui. </p>
-						<a  class="btn1 btn-primary1 nextBtn1 btn-lg1 pull-right1" onclick="$(tipo_operador).val(3);AjaxContainerRegistro('registro_step1')" href="#">Seleccionar</a>
-					</div>
+<div class="wrapper uwa-font-aa">
+        <div class="box-content box-content-team left">
+            <h2 class="box-content-title">
+                I'm an                <strong>Agency</strong>
+            </h2>
+            <div class="box-content-text">
+                <p>Design and offer your own real-time social dashboards to clients.</p>
+                <div class="box-content-button">
+                    <a class="button" onclick="$(tipo_operador).val(1);AjaxContainerRegistro('registro_step1')" href="#">Get started</a>
                 </div>
             </div>
-<!--        </div>
-    </div>-->
-
+        </div>
+        <div class="box-content box-content-team middle">
+            <h2 class="box-content-title">
+                I'm an                <strong>Enterprise</strong>
+            </h2>
+            <div class="box-content-text">
+                <p>Connect and compare all your internal and external data, all in one place.</p>
+                <div class="box-content-button">
+                    <a class="button" onclick="$(tipo_operador).val(2);AjaxContainerRegistro('registro_step1')" href="#">Get started</a>
+                </div>
+            </div>
+        </div>
+        <div class="box-content box-content-individual right">
+            <h2 class="box-content-title">
+                I'm just                <strong>Me</strong>
+            </h2>
+            <div class="box-content-text">
+                <p>Start with the award-winning, free personal dashboard and reader used by millions.</p>
+                <div class="box-content-button">
+                    <a class="button" onclick="$(tipo_operador).val(3);AjaxContainerRegistro('registro_step1')" href="#">Sign up for free</a>
+                </div>
+            </div>
+        </div>
+     </div>
     {!! Form::close() !!}
 
 </div>
