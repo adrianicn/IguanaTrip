@@ -28,17 +28,17 @@
 					<div id="seleccionTipo">
 						<h2>I'm an Agency</h2>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec est risus, ultrices a porta quis, tristique nec orci. Nulla tincidunt fermentum facilisis. Vivamus accumsan enim tincidunt, sodales ante nec, dictum tortor. Mauris id posuere nibh, a porttitor dui. </p>
-						<a class="btn1 btn-primary1 nextBtn1 btn-lg1 pull-right1" onclick="$(tipo_operador).val(1);$(this).closest('form').submit()" href="#">Seleccionar</a>
+						<a class="btn1 btn-primary1 nextBtn1 btn-lg1 pull-right1" onclick="$(tipo_operador).val(1);AjaxContainerRegistro('registro_step1')" href="#">Seleccionar</a>
 					</div>
 					<div id="seleccionTipo">
 						<h2>I'm an Enterprise</h2>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec est risus, ultrices a porta quis, tristique nec orci. Nulla tincidunt fermentum facilisis. Vivamus accumsan enim tincidunt, sodales ante nec, dictum tortor. Mauris id posuere nibh, a porttitor dui. </p>
-						<a class="btn1 btn-primary1 nextBtn1 btn-lg1 pull-right1" onclick="$(tipo_operador).val(2);$(this).closest('form').submit()" href="#">Seleccionar</a>
+						<a class="btn1 btn-primary1 nextBtn1 btn-lg1 pull-right1" onclick="$(tipo_operador).val(2);AjaxContainerRegistro('registro_step1')" href="#">Seleccionar</a>
 					</div>
 					<div id="seleccionTipo">
 						<h2>I'm just Me</h2>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec est risus, ultrices a porta quis, tristique nec orci. Nulla tincidunt fermentum facilisis. Vivamus accumsan enim tincidunt, sodales ante nec, dictum tortor. Mauris id posuere nibh, a porttitor dui. </p>
-						<a  class="btn1 btn-primary1 nextBtn1 btn-lg1 pull-right1" onclick="$(tipo_operador).val(3);$(this).closest('form').submit()" href="#">Seleccionar</a>
+						<a  class="btn1 btn-primary1 nextBtn1 btn-lg1 pull-right1" onclick="$(tipo_operador).val(3);AjaxContainerRegistro('registro_step1')" href="#">Seleccionar</a>
 					</div>
                 </div>
             </div>
@@ -48,11 +48,5 @@
     {!! Form::close() !!}
 
 </div>
-
-@section('scripts')
-
-<!-- End Dropzone Preview Template -->
-{!! HTML::script('/js/registro/registroajax.js') !!}
-@stop
 
 @stop

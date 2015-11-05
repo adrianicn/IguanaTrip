@@ -25,7 +25,7 @@ class ServicioController extends Controller
     
     /**
      * Display a listing of the resource.
-     *
+     *	
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -157,7 +157,7 @@ class ServicioController extends Controller
     		$operador = $operador_gestion->store( $operadorData	);
     
     		$returnHTML = ('servicios/operadorServicios');
-    		return response()->json(array('success' => true, 'html'=>$returnHTML));    
+    		return response()->json(array('success' => true, 'redirectto'=>$returnHTML));    
     
 //    		$returnHTML = view('RegistroOperadores.registroStep3')->with(['tipo_operador' => $operadorData['tipo_operador']])->render();
 //    		return response()->json(array('success' => true, 'html'=>$returnHTML));
@@ -173,7 +173,7 @@ class ServicioController extends Controller
     			'tipo_operador' => $formFields['tipo_operador'],
     	);
     	$returnHTML = ('servicios/operador/'. $operadorData['tipo_operador']);
-    	return response()->json(array('success' => true, 'html'=>$returnHTML));
+    	return response()->json(array('success' => true, 'redirectto'=>$returnHTML));
     }
     
     private function getIp(){
