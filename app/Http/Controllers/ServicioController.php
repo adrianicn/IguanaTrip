@@ -166,7 +166,6 @@ class ServicioController extends Controller
     }
 
     public function postTipoOperadores(Request $request, OperadorRepository $operador_gestion) {
-<<<<<<< HEAD
     	$inputData = Input::get('formData');
     	parse_str($inputData, $formFields);
     	 
@@ -175,25 +174,7 @@ class ServicioController extends Controller
     	);
     	$returnHTML = ('servicios/operador/'. $operadorData['tipo_operador']);
     	return response()->json(array('success' => true, 'html'=>$returnHTML));
-=======
-    	 
-    	
-    $id_tipo_operador = $request->input('id_tipo_operador');
-    
-    
-    	//return $operadorData;
-    	//sreturn view('RegistroOperadores.registroStep2')->with(['id_tipo_operador' => $operadorData['id_tipo_operador']]);
-        
-        return Redirect::action('ServicioController@stepnum2')->with(['id_tipo_operador' => $id_tipo_operador]);
->>>>>>> 2b2485fd2e840ba6cc54134b4a06e834f9d53884
     }
-    
-      public function stepnum2()
-    {
-        //
-          return view('RegistroOperadores.registroStep2');
-    }
-    
     
     private function getIp(){
     	if (isset($_SERVER["HTTP_CLIENT_IP"]))
