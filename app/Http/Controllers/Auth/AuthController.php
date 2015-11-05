@@ -88,7 +88,7 @@ class AuthController extends Controller {
             }
             $request->session()->put('user_id', $user->id);
 
-            return redirect('/userservice')->with('user', $user->id);
+            return redirect('/servicios')->with('user', $user->id);
         }
 
         
