@@ -79,7 +79,7 @@ body {
 
 
 <div class="container" id="target">
-
+<!--  
       <div class="stepwizard col-md-offset-3">
       	<div class="stepwizard-row setup-panel">
       		<div class="stepwizard-step">
@@ -104,7 +104,7 @@ body {
       		</div>
       	</div>
       </div>
-  
+  -->
     
         <!-- Home Page -->
             <div id="logindiv">
@@ -112,11 +112,11 @@ body {
             </div>
   
             
-  
+    
   <section class="content show" id="registro-step1">
   	@yield('step1')
   </section>	
-
+<!--
   <section class="content show" id="registro-step2">
   	@yield('step2')
   </section>	
@@ -128,7 +128,7 @@ body {
   <section class="content show" id="registro-step4">
   	@yield('step4')
   </section>	
-
+-->
 </div>
 </div>
     
@@ -138,7 +138,8 @@ body {
  
 
 <script type="text/javascript">
-  $(document).ready(function () {
+<!--
+ 	$(document).ready(function () {
   var navListItems = $('div.setup-panel div a'),
 		  allWells = $('.setup-content'),
 		  allNextBtn = $('.nextBtn');
@@ -181,9 +182,7 @@ body {
   $('div.setup-panel div a.btn-primary').trigger('click');
   });
 
-  $( "#eventos-img" ).click(function() {$("#servicio_evento").val('1');alert($("#servicio_evento").val());});
-  $( "#servicios-img" ).click(function() {$("#servicio_evento").val('2');alert($("#servicio_evento").val());});
-  
+-->  
     </script>
 </body>
 </html>

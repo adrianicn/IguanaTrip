@@ -6,8 +6,7 @@
     
 
                 $("#registro_step1").submit(function (event) {
-              
-
+                
                     $('#container').loadingOverlay();
 
                     event.preventDefault();
@@ -30,6 +29,9 @@
 
                         }
                         if (data.success) {
+                        	alert(data.html);
+                        	window.location.replace(data.html);
+                            $('#registro-step1').html(data.html);
                             $('#container').loadingOverlay('remove');
                             $('.register').fadeOut(); //hiding Reg form
                             var successContent = '' + data.message + '';

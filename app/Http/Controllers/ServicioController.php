@@ -9,6 +9,7 @@ use App\Repositories\OperadorRepository;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 use Input;
+use Illuminate\Support\Facades\Redirect;
 
 //use App\Models\Catalogo_Servicio;
 
@@ -35,14 +36,18 @@ class ServicioController extends Controller
     	return view('RegistroOperadores.registroStep1');
 //        return view('front.masterPageRegistro')->with(['catalogos' => $catalogos]);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function step2()
+    public function step2($tipoOperador)
     {
-    	return view('RegistroOperadores.registroStep2')->with(['catalogos' => $catalogos]);
+    	//
+    	//$catalogos = DB::table('catalogo_servicios')->get();
+    	//$catalogos = Catalogo_Servicio::all();
+    	$data['tipoOperador'] = $tipoOperador;
+    	return view('RegistroOperadores.registroStep2',$data);
+    	//        return view('front.masterPageRegistro')->with(['catalogos' => $catalogos]);
+    }
+    public function step3()
+    {
+    	return view('RegistroOperadores.registroStep3');
     }
     
     /**
@@ -118,11 +123,20 @@ class ServicioController extends Controller
      * @return Response
      */
     public function postOperadores(Request $request, OperadorRepository $operador_gestion) {
+    
+    	//echo $request;
     	
-    	sleep(5);
     	$inputData = Input::get('formData');
     
+    	
+    	
     	parse_str($inputData, $formFields);
+    
+    	
+//     	return response()->json(array(
+//     			'fail' => true,
+//     			'errors' => $inputData));
+    	
     	$operadorData = array(
     			'nombre_empresa_operador' => $formFields['nombre_empresa_operador'],
     			'nombre_contacto_operador_1' => $formFields['nombre_contacto_operador_1'],
@@ -142,31 +156,24 @@ class ServicioController extends Controller
     	} else {
     		$operador = $operador_gestion->store( $operadorData	);
     
+    		$returnHTML = ('servicios/operadorServicios');
+    		return response()->json(array('success' => true, 'html'=>$returnHTML));    
     
-    
-//    		$this->dispatch(new SendMail($user));
-    		//    return redirect('/')->with('ok', trans('front/verify.message'));
-    		//return redirect('/auth/confirmation/'.$confirmation_code);*/
-    
-    		return response()->json(array(
-    				'success' => true,
-    				'message' => trans('front/verify.message')
-    		));
-    		//}
+//    		$returnHTML = view('RegistroOperadores.registroStep3')->with(['tipo_operador' => $operadorData['tipo_operador']])->render();
+//    		return response()->json(array('success' => true, 'html'=>$returnHTML));
     	}
+    	 
     }
 
     public function postTipoOperadores(Request $request, OperadorRepository $operador_gestion) {
-    	 
     	$inputData = Input::get('formData');
-    
     	parse_str($inputData, $formFields);
+    	 
     	$operadorData = array(
-    			'id_tipo_operador' => $formFields['id_tipo_operador'],
+    			'tipo_operador' => $formFields['tipo_operador'],
     	);
-    
-    	//return $operadorData;
-    	return view('RegistroOperadores.registroStep2')->with(['id_tipo_operador' => $operadorData['id_tipo_operador']]);
+    	$returnHTML = ('servicios/operador/'. $operadorData['tipo_operador']);
+    	return response()->json(array('success' => true, 'html'=>$returnHTML));
     }
     
     private function getIp(){
