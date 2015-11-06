@@ -194,5 +194,12 @@ class ServiciosOperadorRepository extends BaseRepository
 		$user->confirmation_code = null;
 		$user->save();
 	}
+	
+	public function getServiciosOperador($id_usuario_operador)
+	{
+		$user_servicios = new $this->model;
+		return $user_servicios::where('id_usuario_operador',$id_usuario_operador)->get();
+	}
+	
 
 }

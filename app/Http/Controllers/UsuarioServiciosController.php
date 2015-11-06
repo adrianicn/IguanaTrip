@@ -68,14 +68,15 @@ class UsuarioServiciosController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function getServiciosOperador($id_usuario_op) {
+     public function getServiciosOperador($id_usuario_op, ServiciosOperadorRepository $gestion) {
         //
         $data['id_usuario_op'] = $id_usuario_op;
         
+        $listServicios = $gestion->getServiciosOperador($id_usuario_op);
         //Aqui deberia ir la logica que comprueba si el usuario tiene servicios para ser modificados
         //caso contrario ingresa nuevos serviciosS
         
-        $view = view('Registro.catalogoServicio',compact('data'));
+        $view = view('Registro.catalogoServicio',compact('data','listServicios'));
         return ($view);
     }
     

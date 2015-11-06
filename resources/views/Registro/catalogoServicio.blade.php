@@ -1,7 +1,7 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
-
+{!! HTML::style('css/serviciosOperadores.css') !!} 
 {!! HTML::style('css/jquery-labelauty.css') !!} 
 {!!HTML::script('js/jquery-labelauty.js') !!}
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,700|Electrolize' rel='stylesheet' type='text/css' />
@@ -9,7 +9,50 @@
 <div class="rowerror">
 
 </div>
-<div class="row">
+
+<?php 
+	if (count($listServicios) == 0 ){
+		$servicio_1 = 'checked';
+		$servicio_2 = 'checked';
+		$servicio_3 = 'checked';
+		$servicio_4 = 'checked';
+		$servicio_5 = 'checked';
+		$servicio_6 = 'checked';
+	} else {
+		$servicio_1 = '';
+		$servicio_2 = '';
+		$servicio_3 = '';
+		$servicio_4 = '';
+		$servicio_5 = '';
+		$servicio_6 = '';		
+	}
+?>
+@foreach ($listServicios as $servicio)
+<?php
+	switch ($servicio->id_catalogo_servicio){
+		case 1:
+			$servicio_1 = 'checked';
+			break;
+		case 2:
+			$servicio_2 = 'checked';
+			break;
+		case 3:
+			$servicio_3 = 'checked';
+			break;
+		case 4:
+			$servicio_4 = 'checked';
+			break;
+		case 5:
+			$servicio_5 = 'checked';
+			break;
+		case 6:
+			$servicio_6 = 'checked';
+			break;
+	}
+?>
+@endforeach     
+
+<div class="wrapper uwa-font-aa">
     {!! Form::open(['url' => route('upload-postServicioOperador'),  'id'=>'registro_stepoperador']) !!}
 
     <input type="hidden" value="{!!$data['id_usuario_op']!!}" name="id_usuario_op" id="id_usuario_op">
@@ -51,31 +94,31 @@
             <tbody><tr>
                     <td> <img src="{!! asset('images/eat.png')!!}" alt="" /></td>
                     <td>ejemplo(Restaurante,pizzeria)</td>
-                    <td><input class="demo labelauty" name="id_catalogo_servicio1" id="checkbox-1" value="1" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" checked/></td>
+                    <td><input class="demo labelauty" name="id_catalogo_servicio1" id="checkbox-1" value="1" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_1!!}/></td>
                 </tr>
                 <tr class="alt">  <td> <img src="{!! asset('images/hotel.png')!!}" alt="" /></td>
                     <td>ejemplo(Hotel,hostal, home state)</td>
-                    <td><input class="demo labelauty" name="id_catalogo_servicio2" id="checkbox-2" value="2" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" checked/></td>
+                    <td><input class="demo labelauty" name="id_catalogo_servicio2" id="checkbox-2" value="2" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_2!!}/></td>
                 </tr>
                 <tr>  <td> <img src="{!! asset('images/trip.png')!!}" alt="" /></td>
                     <td>ejemplo(Agencia de viajes,guía independiente, exploración)</td>
-                    <td><input class="demo labelauty" name="id_catalogo_servicio3" id="checkbox-3" value="3" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" checked/></td></tr>
+                    <td><input class="demo labelauty" name="id_catalogo_servicio3" id="checkbox-3" value="3" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_3!!}/></td></tr>
                 <tr class="alt"><td> 
                         <div id="star" class="dialog-open">
                             <img src="{!! asset('images/foto.png')!!}" alt="" />
                         </div>
                     </td>
                     <td>ejemplo(Museo,parque nacional, zoologico)</td>
-                    <td><input class="demo labelauty" name="id_catalogo_servicio4" id="checkbox-4" value="4" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" checked/></td></tr>
+                    <td><input class="demo labelauty" name="id_catalogo_servicio4" id="checkbox-4" value="4" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_4!!}/></td></tr>
                 <tr><td> <img src="{!! asset('images/dance.png')!!}" alt="" /></td>
                     <td>ejemplo(Discoteca,bar,casino)</td>
-                    <td><input class="demo labelauty" name="id_catalogo_servicio5" id="checkbox-5" value="5" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" checked/></td></tr>
+                    <td><input class="demo labelauty" name="id_catalogo_servicio5" id="checkbox-5" value="5" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_5!!}/></td></tr>
             
                 <tr class="alt"><td> <div id="anchor" class="button dialog-open">
             <i class="icon-anchor"></i>
         </div></td>
                     <td>ejemplo(otros)</td>
-                    <td><input class="demo labelauty" name="id_catalogo_servicio6" id="checkbox-6" value="6" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" checked/></td></tr>
+                    <td><input class="demo labelauty" name="id_catalogo_servicio6" id="checkbox-6" value="6" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_6!!}/></td></tr>
             
             </tbody>
         </table>
