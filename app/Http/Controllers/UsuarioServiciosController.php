@@ -14,6 +14,7 @@ class UsuarioServiciosController extends Controller {
     protected $validationRules = [
 
         'id_usuario_op' => 'required'
+            //,'id_catalogo_servicio' => 'required'
     ];
 
     /**
@@ -28,58 +29,26 @@ class UsuarioServiciosController extends Controller {
         return view('Registro.listaServiciosUsuario', compact('usuarioServicios'));
     }
 
-   
+ 
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id) {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id) {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id) {
-        //
-    }
-
-    
-     /**
      * Despliega los servicios por operador
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function getServiciosOperador($id_usuario_op, ServiciosOperadorRepository $gestion) {
+    public function getServiciosOperador($id_usuario_op, ServiciosOperadorRepository $gestion) {
         //
         $data['id_usuario_op'] = $id_usuario_op;
-        
-        $listServicios = $gestion->getServiciosOperador($id_usuario_op);
-        //Aqui deberia ir la logica que comprueba si el usuario tiene servicios para ser modificados
+
+        //logica que comprueba si el usuario tiene servicios para ser modificados
         //caso contrario ingresa nuevos serviciosS
-        
-        $view = view('Registro.catalogoServicio',compact('data','listServicios'));
+        $listServicios = $gestion->getServiciosOperador($id_usuario_op);
+
+        $view = view('Registro.catalogoServicio', compact('data', 'listServicios'));
         return ($view);
     }
-    
+
     /**
      * Guarda los servicios que presta un usuario o un operador.
      *
@@ -91,6 +60,7 @@ class UsuarioServiciosController extends Controller {
         parse_str($inputData, $formFields);
         $root_array1['id_usuario_op'] = $formFields['id_usuario_op'];
         $validator = Validator::make($root_array1, $this->validationRules);
+        $serviciosBase = array();
 
         if ($validator->fails()) {
             return response()->json(array(
@@ -99,8 +69,11 @@ class UsuarioServiciosController extends Controller {
             ));
         }
 
+        //obtengo los servicios ya almacenados de la bdd
 
-        //Arreglo de servicios prestados
+        $ServiciosOperador = $gestion->getServiciosOperador($formFields['id_usuario_op']);
+
+        //Arreglo de servicios prestados que vienen del formulario
         foreach ($formFields as $key => $value) {
             //verifica si el arreglo de parametros es un catalogo
             if (strpos($key, 'id_catalogo_servicio') !== false) {
@@ -108,27 +81,65 @@ class UsuarioServiciosController extends Controller {
             }
         }
 
-        //Si hay servicios corre la logica de save
-        if (count($root_array) > 0) {
+        //pongo en formato el arreglo que viene de la bdd
+        $ix = 0;
+        foreach ($ServiciosOperador as $servicioBase) {
 
-            foreach ($root_array as $key1 => $value1) {
+            $ix = $ix + 1;
+            $serviciosBase[$ix] = $servicioBase->id_catalogo_servicio;
+        }
+
+        $local = $root_array;
+        $base = $serviciosBase;
+
+        //es lo nuevo que viene del formulario
+        $resultlocalbase = array_diff($local, $base);
+
+        //es lo que tengo q eliminar o cabiar de estado
+        $resultbaselocal = array_diff($base, $local);
+
+
+        //Guarda los nuevos catalogos
+        if (count($resultlocalbase) > 0) {
+
+
+            foreach ($resultlocalbase as $key1 => $value1) {
                 $save_array = array();
-                $save_array['id_usuario'] = $formFields['id_usuario_op'];
+                $save_array['id_usuario_op'] = $formFields['id_usuario_op'];
                 $save_array['id_catalogo_servicio'] = $value1;
 
-                $gestion->store($save_array);
+                $Servicio = $gestion->getServiciosOperadorporIdServicio($formFields['id_usuario_op'], $value1);
+                //significa que ya existia y que hay que cambiarle el estado a 1 para volver a activarlo
+                if (count($Servicio) > 0) {
+
+                    $save_array['estado_servicio'] = 1;
+                    $gestion->storeUpdate($save_array, $Servicio);
+
+                    } 
+                    //significa que es un nuevo servicio y se agrega como insert
+                    else {
+
+                    $gestion->storeNew($save_array);
+                }
             }
-
-            //$returnHTML = view('Registro.uploadImage')->render();
-            $returnHTML = ('/IguanaTrip/public/image');
-
-            return response()->json(array('success' => true, 'redirectto' => $returnHTML));
-        } else {
-            return response()->json(array(
-                        'fail' => true,
-                        'errors' => 'No hay servicios'
-            ));
         }
+
+
+        //actualiza estado 0 los que ya estaba guardados
+        if (count($resultbaselocal) > 0) {
+
+            foreach ($resultbaselocal as $key1 => $value1) {
+                $save_array = array();
+
+                $Servicio = $gestion->getServiciosOperadorporIdServicio($formFields['id_usuario_op'], $value1);
+                $save_array['estado_servicio'] = 0;
+                $gestion->storeUpdate($save_array, $Servicio);
+            }
+        }
+
+        
+        $returnHTML = ('/IguanaTrip/public/image');
+        return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
 
 }

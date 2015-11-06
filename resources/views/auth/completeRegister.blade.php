@@ -3,7 +3,6 @@
 @section('contentLogin')
 
 
-
 {!! Form::open(['url' => 'auth/login', 'method' => 'post', 'role' => 'form', 'id' => 'loginform']) !!}	
 
 <table cellspacing="0" role="presentation" id='tablelogin'>
@@ -44,6 +43,7 @@
 
 </table>
 
+
 {!! Form::close() !!}
 
 @stop
@@ -52,7 +52,19 @@
 @section('contentRegistro')
 
 <div class="rowerror">
+<?php
+$local=array("a"=>"1","b"=>"5","c"=>"6");
+$base=array("e"=>"","f"=>"","g"=>"");
 
+$resultlocalbase=array_diff($local,$base);
+$resultbaselocal=array_diff($base,$local);
+
+print_r($resultlocalbase);
+
+print_r($resultbaselocal);
+
+
+?> 
     <br>
     @if(session()->has('error'))
     @include('partials/error', ['type' => 'danger', 'message' => session('error')])

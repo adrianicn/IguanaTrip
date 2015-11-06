@@ -87,6 +87,7 @@
             <div class="ok-dialog"><i class="icon-ok-sign"></i></div>
         </div>
     </div>
+    
 
     <div class="datagrid"><table>
             <thead><tr><th>Tipo</th><th>Descripcion</th><th>Seleccion</th></tr></thead>
@@ -94,7 +95,7 @@
             <tbody><tr>
                     <td> <img src="{!! asset('images/eat.png')!!}" alt="" /></td>
                     <td>ejemplo(Restaurante,pizzeria)</td>
-                    <td><input class="demo labelauty" name="id_catalogo_servicio1" id="checkbox-1" value="1" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_1!!}/></td>
+                    <td><input class="demo labelauty" name="id_catalogo_servicio1" id="checkbox-1" value="1" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio"{!!$servicio_1!!}/></td>
                 </tr>
                 <tr class="alt">  <td> <img src="{!! asset('images/hotel.png')!!}" alt="" /></td>
                     <td>ejemplo(Hotel,hostal, home state)</td>

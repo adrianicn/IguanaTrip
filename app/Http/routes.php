@@ -75,6 +75,10 @@ Route::get('userservice/{id_usuario_op}', 'UsuarioServiciosController@getServici
 Route::post('servicios/servicioOprador', ['as' => 'upload-postServicioOperador', 'uses' =>'UsuarioServiciosController@postServicioOperadores']);
 Route::get('/detalleServicios', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios']);
 
+//Event::listen('illuminate.query', function($query)
+//{
+  //  var_dump($query);
+//});
 //////////////////////////
 
 

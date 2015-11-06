@@ -30,7 +30,9 @@ class HomeController extends Controller {
         Session::put('device', $desk);
 
         if ($auth->check()) {
-            $view = view('RegistroOperadores.registroStep1'); // revisar debe redirecccionar a otro lado
+            $user = $auth->user();
+           // $view = view('RegistroOperadores.registroStep1'); // revisar debe redirecccionar a otro lado
+            return redirect('/servicios')->with('user', $user->id);
         } else {
 
             $view = view('auth.completeRegister');
