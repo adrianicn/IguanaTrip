@@ -83,10 +83,16 @@ class OperadorRepository extends BaseRepository
 	 * @param  App\Models\User $user
 	 * @return void
 	 */
-	public function update($inputs, $user)
+	public function update($inputs)
 	{
-		$operador->save();
-		
+		$operador = new $this->model;
+		$operadorData = $operador::where('id_usuario_op',$inputs['id_usuario_op'])
+									->update(['nombre_empresa_operador'=>$inputs['nombre_empresa_operador'],
+											'nombre_contacto_operador_1'=>$inputs['nombre_contacto_operador_1'],
+											'telf_contacto_operador_1'=>$inputs['telf_contacto_operador_1'],
+											'email_contacto_operador'=>$inputs['email_contacto_operador'],
+											'direccion_empresa_operador'=>$inputs['direccion_empresa_operador']
+									]);
 	}
 
 	/**
@@ -99,7 +105,13 @@ class OperadorRepository extends BaseRepository
 		$operador = new $this->model;
 		return $operador::where('id_usuario',$id_usuario)->get();
 	}
-        
+	
+	public function getOperadorTipo($id_usuario,$id_tipo_operador)
+	{
+		$operador = new $this->model;
+		return $operador::where('id_usuario',$id_usuario)->orWhere('id_tipo_operador',$id_tipo_operador,'and')->get();
+	}
+	
 
 	/**
 	 * Valid user.

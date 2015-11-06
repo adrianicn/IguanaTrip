@@ -49,23 +49,22 @@ class ServicioController extends Controller
     		$listOperadores = $operador_gestion->getOperador(Session::get('user_id'));
     		$view = view('RegistroOperadores.registroStep1',compact('listOperadores')); // revisar debe redirecccionar a otro lado
 		} else {
-			 
 			$view = view('auth.completeRegister');
 		}
-    	//
-    	//$catalogos = DB::table('catalogo_servicios')->get();
-    	//$catalogos = Catalogo_Servicio::all();
     	return $view;
-//        return view('front.masterPageRegistro')->with(['catalogos' => $catalogos]);
     }
-    public function step2($tipoOperador)
+    public function step2(Guard $auth, $tipoOperador, OperadorRepository $operador_gestion)
     {
-    	//
-    	//$catalogos = DB::table('catalogo_servicios')->get();
-    	//$catalogos = Catalogo_Servicio::all();
-    	$data['tipoOperador'] = $tipoOperador;
-    	return view('RegistroOperadores.registroStep2',$data);
-    	//        return view('front.masterPageRegistro')->with(['catalogos' => $catalogos]);
+    	if ($auth->check()) {
+    		$operador = $operador_gestion->getOperadorTipo(Session::get('user_id'),$tipoOperador);
+    		$data['tipoOperador'] = $tipoOperador;
+    		$view = view('RegistroOperadores.registroStep2',compact('data','operador')); // revisar debe redirecccionar a otro lado
+    	} else {
+    		$view = view('auth.completeRegister');
+    	}
+    	 
+    	
+    	return $view;
     }
     public function step3()
     {
@@ -157,7 +156,8 @@ class ServicioController extends Controller
     			'direccion_empresa_operador' => $formFields['direccion_empresa_operador'],
     			'id_usuario' => $formFields['id_usuario'],
     			'id_tipo_operador' => $formFields['id_tipo_operador'],
-    			'estado_contacto_operador' => 1    			
+    			'estado_contacto_operador' => 1,
+    			'id_usuario_op' => $formFields['id_usuario_op']
     	);
     	$validator = Validator::make($operadorData, $this->validationRules);
     	if ($validator->fails()) {
@@ -166,13 +166,16 @@ class ServicioController extends Controller
     				'errors' => $validator->getMessageBag()->toArray()
     		));
     	} else {
-    		$operador = $operador_gestion->store( $operadorData	);
-    
+    		
+    		if($formFields['id_usuario_op'] > 0){
+    			$operador = $operador_gestion->update( $operadorData );
+    		} else {
+    			$operador = $operador_gestion->store( $operadorData	);
+    		}
+    	}
     		$returnHTML = ('/IguanaTrip/public/servicios/operadorServicios');
     		return response()->json(array('success' => true, 'redirectto'=>$returnHTML));    
     
-    	}
-    	 
     }
 
     public function postTipoOperadores(Request $request, OperadorRepository $operador_gestion) {
