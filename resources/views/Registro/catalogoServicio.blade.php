@@ -1,6 +1,7 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
+
 {!! HTML::style('css/jquery-labelauty.css') !!} 
 {!!HTML::script('js/jquery-labelauty.js') !!}
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,700|Electrolize' rel='stylesheet' type='text/css' />
@@ -11,10 +12,8 @@
 <div class="row">
     {!! Form::open(['url' => route('upload-postServicioOperador'),  'id'=>'registro_stepoperador']) !!}
 
- @if(session()->has('user'))
-    <input type="hidden" name="id_usuario" value=  "{!!Session::get('user')!!}">
- @endif 
-    
+ 
+    <input type="hidden" value="{!!Session::get('user_id')!!}" name="id_usuario" id="id_usuario">
     <div id="overlay">
         <div id="screen"></div>
         <div id="dialog-star" class="dialog">
@@ -90,8 +89,6 @@
 </div>
 @section('scripts')
 {!! HTML::script('/js/registro/registroajax_serviciooperador.js') !!}
-{!! HTML::script('/packages/dropzone/dropzone.js') !!}
+
 @stop
-
-
 @stop

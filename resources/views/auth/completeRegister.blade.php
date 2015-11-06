@@ -44,10 +44,7 @@
 
 </table>
 
-
 {!! Form::close() !!}
-
-
 
 @stop
 
@@ -57,11 +54,11 @@
 <div class="rowerror">
 
     <br>
-     @if(session()->has('error'))
+    @if(session()->has('error'))
     @include('partials/error', ['type' => 'danger', 'message' => session('error')])
     @endif
-       
-@if(session()->has('ok'))
+
+    @if(session()->has('ok'))
     @include('partials/message', ['type' => 'message', 'message' => session('ok')])
     @endif	
     @if($errors->has())
@@ -128,48 +125,48 @@
 @section('scripts')
 <script type="text/javascript">
     $('.error').html('');
-    
-      $.ajaxSetup({
-                    headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+
+    $.ajaxSetup({
+        headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+    });
+
+    $("#registro").submit(function (event) {
+
+        $('#target').loadingOverlay();
+
+        event.preventDefault();
+        var $form = $(this),
+                data = $form.serialize(),
+                url = $form.attr("action");
+
+        var posting = $.post(url, {formData: data});
+        posting.done(function (data) {
+            if (data.fail) {
+
+
+
+                var errorString = '<ul>';
+                $.each(data.errors, function (key, value) {
+                    errorString += '<li>' + value + '</li>';
                 });
+                errorString += '</ul>';
+                $('#target').loadingOverlay('remove');
+                //$('#error').html(errorString);
+                $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + errorString + "'])");
 
-                $("#registro").submit(function (event) {
-
-                    $('#target').loadingOverlay();
-
-                    event.preventDefault();
-                    var $form = $(this),
-                            data = $form.serialize(),
-                            url = $form.attr("action");
-                            
-                    var posting = $.post(url, {formData: data});
-                    posting.done(function (data) {
-                        if (data.fail) {
-
-                            
-
-                            var errorString = '<ul>';
-                            $.each(data.errors, function (key, value) {
-                                errorString += '<li>' + value + '</li>';
-                            });
-                            errorString += '</ul>';
-                            $('#target').loadingOverlay('remove');
-                            //$('#error').html(errorString);
-                             $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'"+errorString+"'])");
-
-                        }
-                        if (data.success) {
-                            $('#target').loadingOverlay('remove');
-                            $('.register').fadeOut(); //hiding Reg form
-                                                        var successContent = '' + data.message + '';
-$('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'"+successContent+"'])");
-
-                             
+            }
+            if (data.success) {
+                $('#target').loadingOverlay('remove');
+                $('.register').fadeOut(); //hiding Reg form
+                var successContent = '' + data.message + '';
+                $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + successContent + "'])");
 
 
-                        } //success
-                    }); //done
-                });
+
+
+            } //success
+        }); //done
+    });
 </script>
 @stop
 @section('scripts')
@@ -179,9 +176,9 @@ $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'
         $('.badge').popover();
     });
 
-              
+
 </script>
-    
-    
+
+
 @stop
 

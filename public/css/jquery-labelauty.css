@@ -159,6 +159,7 @@ input.labelauty.synch-icon1 + label > span.labelauty-checked-image {
     -moz-border-radius: 3px; 
     border-radius: 3px; 
     width: 60%;
+    float:left;
      margin-left: 266px;
 }
 

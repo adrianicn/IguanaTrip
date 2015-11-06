@@ -16,8 +16,16 @@ use App\Models\Usuario_Servicio;
 
 class UsuarioServiciosController extends Controller {
 
-    protected $validationRules = [
-        'id_usuario' => 'required'
+  
+        
+   protected $validationRules = [
+        
+        'id_usuario'=>'required'
+    ];
+
+    protected $messages = [
+        
+        'id_catalogo_servicio.required' => 'Debe sekeccuionar al menos un servicio'
     ];
 
     /**
@@ -38,20 +46,14 @@ class UsuarioServiciosController extends Controller {
     public function tablaServicios() {
         //
         
-        
         $usuarioServicios = Usuario_Servicio::where('id_usuario_operador', '=', 6)->get();
-        
-      
-        
         return view('Registro.listaServiciosUsuario', compact('usuarioServicios'));
-        
-        
     }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function create() {
         //
     }
@@ -117,14 +119,16 @@ class UsuarioServiciosController extends Controller {
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
         $root_array1['id_usuario'] = $formFields['id_usuario'];
+        
+       
         $validator = Validator::make($root_array1, $this->validationRules);
 
 
         if ($validator->fails()) {
-            return response()->json(array(
-                        'fail' => true,
-                        'errors' => $validator->getMessageBag()->toArray()
-            ));
+          return response()->json(array(
+                    'fail' => true,
+                  'errors' => $validator->getMessageBag()->toArray()
+        ));
         }
 
 

@@ -27,7 +27,7 @@ class HomeController extends Controller {
             $desk = "desk";
         }
 
-        Session::put('device',$desk);
+        Session::put('device', $desk);
 
         if ($auth->check()) {
             $view = view('RegistroOperadores.registroStep1'); // revisar debe redirecccionar a otro lado
@@ -50,14 +50,12 @@ class HomeController extends Controller {
 
         return redirect()->back();
     }
-    
-      public function index1()
-    {
-        //
-       
-        
 
-        return view('Registro.catalogoServicio');
+    public function getServiciosOperador() {
+        //
+        $data['tipoOperador'] = $tipoOperador;
+        $view = view('Registro.catalogoServicio', compact('data', 'operador')); // revisar debe redirecccionar a otro lado
+        return view($view);
     }
 
 }

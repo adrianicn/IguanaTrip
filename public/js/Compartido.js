@@ -23,8 +23,8 @@ $('.error').html('');
                         errorString += '</ul>';
                         $('#target').loadingOverlay('remove');
                         //$('.rowerror').html(errorString);
-                        $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + errorString + "'])");
-
+                        $('.rowerror').html( errorString );
+                        
                         }
                         if (data.success) {
                             $('#target').loadingOverlay('remove');
