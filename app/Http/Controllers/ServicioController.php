@@ -168,12 +168,16 @@ class ServicioController extends Controller
     	} else {
     		
     		if($formFields['id_usuario_op'] > 0){
+    			$id_usuario_op = $formFields['id_usuario_op'];
     			$operador = $operador_gestion->update( $operadorData );
     		} else {
     			$operador = $operador_gestion->store( $operadorData	);
+    			$operadores = $operador_gestion->getLastIdInsert( $operadorData );
+    			foreach ($operadores as $operador)
+    				$id_usuario_op = $operador->id_usuario_op;
     		}
     	}
-    		$returnHTML = ('/IguanaTrip/public/servicios/operadorServicios');
+    		$returnHTML = ('/IguanaTrip/public/servicios/operadorServicios/'. $id_usuario_op);
     		return response()->json(array('success' => true, 'redirectto'=>$returnHTML));    
     
     }

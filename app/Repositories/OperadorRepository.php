@@ -112,7 +112,16 @@ class OperadorRepository extends BaseRepository
 		return $operador::where('id_usuario',$id_usuario)->where('id_tipo_operador',$id_tipo_operador)->get();
 	}
 	
-
+	public function getLastIdInsert($inputs)
+	{
+		$operador = new $this->model;
+		return $operador::where('nombre_empresa_operador',$inputs['nombre_empresa_operador'])
+							->where('nombre_contacto_operador_1',$inputs['nombre_contacto_operador_1'])
+							->where('telf_contacto_operador_1',$inputs['telf_contacto_operador_1'])
+							->where('email_contacto_operador',$inputs['email_contacto_operador'])
+							->where('direccion_empresa_operador',$inputs['direccion_empresa_operador'])->get();
+	}
+	
 	/**
 	 * Valid user.
 	 *
