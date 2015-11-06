@@ -54,16 +54,15 @@
 	color: #F15B41;
 	background-color:#FFF;
 }
-
-#servicios-col{
+#footers{
 	float: left;
-	margin-left: 100px;
-	margin-top: 10px;
+	background-image:url("../img/fondo-menu.png");
+	width: 100%;
+	height: 30px;
+	margin-bottom: 20px;
+}
+.container{
+	height: 100%;
+	margin-bottom: 100px;
 }
 
-#servicios-col p{
-	text-align: center;
-	font-size: 1em;
-	font-weight: bold;
-	margin-top: 10px;
-}

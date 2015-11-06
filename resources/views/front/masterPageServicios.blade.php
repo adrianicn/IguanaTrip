@@ -39,7 +39,7 @@
 	                    <li><a href=”#”>Home</a></li>
 	                    <li><a href=”#”>Gallery</a></li>
 	                    <li><a href=”#”>Contact</a></li>
-	                    <li><a href=”#contact”>{!! link_to('auth/logout', trans('front/site.logout')) !!}</a></li>
+	                    <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
 	              </ul>
 	            </div>
             </div>
@@ -80,7 +80,16 @@
 
         </div>
     </div>
-	<div id="footer"></div>
+	<div id="footers">
+	        	<div id="menu-ul">
+	              <ul id="seleccionitem">
+	                    <li><a href=”#”>Home</a></li>
+	                    <li><a href=”#”>Gallery</a></li>
+	                    <li><a href=”#”>Contact</a></li>
+	                    <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
+	              </ul>
+	            </div>	
+	</div>
     {!!HTML::script('js/loading-overlay.min.js') !!}
     {!!HTML::script('js/Compartido.js') !!}
     @yield('scripts')

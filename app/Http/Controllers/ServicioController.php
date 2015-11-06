@@ -10,6 +10,7 @@ use Validator;
 use Illuminate\Support\Facades\Hash;
 use Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Contracts\Auth\Guard;
 
 //use App\Models\Catalogo_Servicio;
 
@@ -22,18 +23,35 @@ class ServicioController extends Controller
 			'telf_contacto_operador_1' => 'required|max:255',
 	];
 	
+	public function Auth(Guard $auth, $view)
+	{
+		
+		if ($auth->check()) {
+			$view = view('RegistroOperadores.registroStep1'); // revisar debe redirecccionar a otro lado
+		} else {
+			 
+			$view = view('auth.completeRegister');
+		}
+		 
+	}
     
     /**
      * Display a listing of the resource.
      *	
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Guard $auth)
     {
-        //
+    	if ($auth->check()) {
+			$view = view('RegistroOperadores.registroStep1'); // revisar debe redirecccionar a otro lado
+		} else {
+			 
+			$view = view('auth.completeRegister');
+		}
+    	//
     	//$catalogos = DB::table('catalogo_servicios')->get();
     	//$catalogos = Catalogo_Servicio::all();
-    	return view('RegistroOperadores.registroStep1');
+    	return $view;
 //        return view('front.masterPageRegistro')->with(['catalogos' => $catalogos]);
     }
     public function step2($tipoOperador)
@@ -57,7 +75,6 @@ class ServicioController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
