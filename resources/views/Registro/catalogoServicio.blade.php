@@ -12,8 +12,7 @@
 <div class="row">
     {!! Form::open(['url' => route('upload-postServicioOperador'),  'id'=>'registro_stepoperador']) !!}
 
- 
-    <input type="hidden" value="{!!Session::get('user_id')!!}" name="id_usuario" id="id_usuario">
+    <input type="hidden" value="{!!$data['id_usuario_op']!!}" name="id_usuario_op" id="id_usuario_op">
     <div id="overlay">
         <div id="screen"></div>
         <div id="dialog-star" class="dialog">

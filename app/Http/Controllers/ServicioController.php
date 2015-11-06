@@ -177,7 +177,7 @@ class ServicioController extends Controller
     				$id_usuario_op = $operador->id_usuario_op;
     		}
     	}
-    		$returnHTML = ('/IguanaTrip/public/servicios/operadorServicios/'. $id_usuario_op);
+    		$returnHTML = ('/IguanaTrip/public/userservice/'. $id_usuario_op);
     		return response()->json(array('success' => true, 'redirectto'=>$returnHTML));    
     
     }

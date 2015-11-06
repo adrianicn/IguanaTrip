@@ -51,11 +51,6 @@ class HomeController extends Controller {
         return redirect()->back();
     }
 
-    public function getServiciosOperador() {
-        //
-        $data['tipoOperador'] = $tipoOperador;
-        $view = view('Registro.catalogoServicio', compact('data', 'operador')); // revisar debe redirecccionar a otro lado
-        return view($view);
-    }
+   
 
 }

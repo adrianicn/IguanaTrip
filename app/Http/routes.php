@@ -71,7 +71,7 @@ Route::controllers([
 Route::get('/image', ['as' => 'upload', 'uses' => 'ImageController@getUpload']);
 Route::post('upload', ['as' => 'upload-post', 'uses' =>'ImageController@postUpload']);
 Route::post('upload/delete', ['as' => 'upload-remove', 'uses' =>'ImageController@deleteUpload']);
-Route::get('userservice/{tipoOperador}', 'HomeController@getServiciosOperador');
+Route::get('userservice/{id_usuario_op}', 'UsuarioServiciosController@getServiciosOperador');
 Route::post('servicios/servicioOprador', ['as' => 'upload-postServicioOperador', 'uses' =>'UsuarioServiciosController@postServicioOperadores']);
 Route::get('/detalleServicios', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios']);
 
