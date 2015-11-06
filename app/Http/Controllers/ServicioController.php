@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Session;
 
 //use App\Models\Catalogo_Servicio;
 
@@ -42,10 +43,11 @@ class ServicioController extends Controller
      *	
      * @return \Illuminate\Http\Response
      */
-    public function index(Guard $auth)
+    public function index(Guard $auth, OperadorRepository $operador_gestion)
     {
     	if ($auth->check()) {
-			$view = view('RegistroOperadores.registroStep1'); // revisar debe redirecccionar a otro lado
+    		$listOperadores = $operador_gestion->getOperador(Session::get('user_id'));
+    		$view = view('RegistroOperadores.registroStep1',compact('listOperadores')); // revisar debe redirecccionar a otro lado
 		} else {
 			 
 			$view = view('auth.completeRegister');

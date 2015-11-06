@@ -22,8 +22,7 @@ class OperadorRepository extends BaseRepository
 	 * @param  App\Models\Role $role
 	 * @return void
 	 */
-	public function __construct(
-			Usuario_Operador $operador )
+	public function __construct( Usuario_Operador $operador )
 	{
 		$this->model = $operador;
 	}
@@ -95,9 +94,10 @@ class OperadorRepository extends BaseRepository
 	 *
 	 * @return string
 	 */
-	public function getStatut()
+	public function getOperador($id_usuario)
 	{
-		return session('statut');
+		$operador = new $this->model;
+		return $operador::where('id_usuario',$id_usuario)->get();
 	}
         
 

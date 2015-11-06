@@ -3,6 +3,13 @@
 @section('step1')
 {!! HTML::style('css/serviciosOperadores.css') !!} 
 
+@foreach ($listOperadores as $operadores)
+    <tr>
+        <td>{{$operadores->id_tipo_operador}}</td>
+    </tr>
+@endforeach
+
+
 <div class="rowerror">
 </div>
 <div class="row">
