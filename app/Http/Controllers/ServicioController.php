@@ -20,7 +20,9 @@ class ServicioController extends Controller
 	protected $validationRules = [
 			'nombre_empresa_operador' => 'required|max:255|alpha',
 			'nombre_contacto_operador_1' => 'required|max:255|alpha',
-			'telf_contacto_operador_1' => 'required|max:255',
+			'direccion_empresa_operador' => 'required|max:255',
+			'email_contacto_operador' => 'required|max:255',
+			'telf_contacto_operador_1' => 'required|max:255'
 	];
 	
 	public function Auth(Guard $auth, $view)
@@ -149,7 +151,11 @@ class ServicioController extends Controller
     			'nombre_contacto_operador_1' => $formFields['nombre_contacto_operador_1'],
     			'telf_contacto_operador_1' => $formFields['telf_contacto_operador_1'],
     			'ip_registro_operador' => $this->getIp(),
-    			'id_tipo_operador' => $formFields['id_tipo_operador']
+    			'email_contacto_operador' => $formFields['email_contacto_operador'],
+    			'direccion_empresa_operador' => $formFields['direccion_empresa_operador'],
+    			'id_usuario' => $formFields['id_usuario'],
+    			'id_tipo_operador' => $formFields['id_tipo_operador'],
+    			'estado_contacto_operador' => 1    			
     	);
     	$validator = Validator::make($operadorData, $this->validationRules);
     	if ($validator->fails()) {

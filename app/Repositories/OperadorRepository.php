@@ -41,7 +41,10 @@ class OperadorRepository extends BaseRepository
 		$operador->nombre_contacto_operador_1 = $inputs['nombre_contacto_operador_1'];
 		$operador->telf_contacto_operador_1 = $inputs['telf_contacto_operador_1'];
 		$operador->ip_registro_operador = $inputs['ip_registro_operador'];
-		$operador->estado_contacto_operador = 1;
+		$operador->email_contacto_operador = $inputs['email_contacto_operador'];
+		$operador->direccion_empresa_operador = $inputs['direccion_empresa_operador'];
+		$operador->id_usuario = $inputs['id_usuario'];
+		$operador->estado_contacto_operador = $inputs['estado_contacto_operador'];
 		$operador->id_tipo_operador = $inputs['id_tipo_operador'];
 		$operador->save();
 	}

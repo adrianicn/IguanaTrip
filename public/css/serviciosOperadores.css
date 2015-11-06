@@ -1771,6 +1771,24 @@ blockquote > cite::before {
     margin: 7px;
     padding: 5px 15px;
 }
+.box-content-button-1 {
+    bottom: 0;
+    left: 0;
+    padding-bottom: 15px;
+    right: 0;
+    text-align: center;
+    float: left;
+}
+.box-content-button-1 .button {
+    background: #4c91c6 none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+    margin: 7px;
+    padding: 5px 15px;
+}
 .box-content-individual .box-content-title {
     border-color: #3a5d77;
 }
