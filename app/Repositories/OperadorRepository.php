@@ -109,7 +109,7 @@ class OperadorRepository extends BaseRepository
 	public function getOperadorTipo($id_usuario,$id_tipo_operador)
 	{
 		$operador = new $this->model;
-		return $operador::where('id_usuario',$id_usuario)->orWhere('id_tipo_operador',$id_tipo_operador,'and')->get();
+		return $operador::where('id_usuario',$id_usuario)->where('id_tipo_operador',$id_tipo_operador)->get();
 	}
 	
 
