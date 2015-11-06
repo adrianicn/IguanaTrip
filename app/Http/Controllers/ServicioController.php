@@ -68,7 +68,7 @@ class ServicioController extends Controller
     }
     public function step3()
     {
-    	return view('RegistroOperadores.registroStep3');
+    	return view('Registro.catalogoServicio');
     }
     
     /**
