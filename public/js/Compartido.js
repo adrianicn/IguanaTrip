@@ -44,7 +44,7 @@ $('.error').html('');
 
     function AjaxContainerRegistroParametro($formulario,$parametro) {
         
-        alert('ptm');
+        
         $('#target').loadingOverlay();
         //event.preventDefault();
 

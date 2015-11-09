@@ -5,7 +5,7 @@
 
 
 <div class="container">
-    
+
     <h1>HTML5 Editable Table</h1>
     <p>Through the powers of <strong>contenteditable</strong> and some simple jQuery you can easily create a custom editable table. No need for a robust JavaScript library anymore these days.</p>
 
@@ -16,14 +16,14 @@
 
     @foreach ($listServiciosUnicos as $servicios)
 
-    
-{!! Form::open(['url' => route('upload-postTipoOperador'),  'id'=>$servicios -> id_usuario_servicio]) !!}
+
+    {!! Form::open(['url' => route('upload-postTipoOperador'),  'id'=>$servicios -> id_usuario_servicio]) !!}
 
     <div id="table_{!!$servicios->id_usuario_servicio!!}" class="table-editable">
 
         <h2>{!!$servicios->nombre_servicio!!}</h2>
 
-        <span  class="table-add glyphicon glyphicon-plus" onclick="add({!!$servicios -> id_usuario_servicio!!})"></span>
+        <span  class="table-add glyphicon glyphicon-plus" onclick="add({!!$servicios - > id_usuario_servicio!!})"></span>
         <table class="table">
             <tr>
                 <th>Nombre</th>
@@ -44,15 +44,15 @@
                 <td contenteditable="true">Activo</td>
                 @endif
 
-<input type="hidden" value="{!!$servicios->id_usuario_servicio!!}" name="usuario_servicio">
+            <input type="hidden" value="{!!$servicios->id_usuario_servicio!!}" name="usuario_servicio">
 
-                <td>
-                    <span class="table-remove glyphicon glyphicon-remove"></span>
-                </td>
-                <td>
-                    <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios -> id_usuario_servicio!!},{!!$servicio->id_usuario_servicio!!})" href="#">Details</a>
-                    
-                </td>
+            <td>
+                <span class="table-remove glyphicon glyphicon-remove"></span>
+            </td>
+            <td>
+                <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios - > id_usuario_servicio!!}, {!!$servicio - > id_usuario_servicio!!})" href="#">Details</a>
+
+            </td>
             </tr
             @endif
             @endforeach 
@@ -65,13 +65,13 @@
                     <span class="table-remove glyphicon glyphicon-remove"></span>
                 </td>
                 <td>
-                    <button id="export-btn" class="btn btn-primary">Details</button>
+                    <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios - > id_usuario_servicio!!}, {!!$servicio - > id_usuario_servicio!!})" href="#">Details</a>
                 </td>
             </tr>
         </table>
         <br>
     </div>
-  {!! Form::close() !!}
+    {!! Form::close() !!}
     @endforeach 
 
 
@@ -79,7 +79,7 @@
 
 
 
-  
+
 </div>
 @section('scripts')
 {!! HTML::script('/js/tabla_dinamica.js') !!}
