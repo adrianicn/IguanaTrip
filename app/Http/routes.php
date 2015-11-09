@@ -73,13 +73,14 @@ Route::post('upload', ['as' => 'upload-post', 'uses' =>'ImageController@postUplo
 Route::post('upload/delete', ['as' => 'upload-remove', 'uses' =>'ImageController@deleteUpload']);
 Route::get('userservice/{id_usuario_op}', 'UsuarioServiciosController@getServiciosOperador');
 Route::post('servicios/servicioOprador', ['as' => 'upload-postServicioOperador', 'uses' =>'UsuarioServiciosController@postServicioOperadores']);
-Route::get('/detalleServicios', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios']);
+Route::get('/detalleServicios/{id_usuario_op}', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios']);
+Route::get('/editServicios/{id_usuario_op}', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios']);
 
 //Event::listen('illuminate.query', function($query)
 //{
-  //  var_dump($query);
+ // var_dump($query);
 //});
-//////////////////////////
+////////////////////////
 
 
 //servicios

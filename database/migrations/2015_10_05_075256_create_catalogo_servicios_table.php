@@ -17,6 +17,11 @@ class CreateCatalogoServiciosTable extends Migration
             $table->increments('id_catalogo_servicios')->unique();
             $table->boolean('estado_catalogo_servicios');
             $table->string('nombre_servicio');
+            $table->string('descripcion_catalogo');
+            $table->string('ejemplo_catalogo');
+            $table->string('img_url_catalogo');
+            
+            
             $table->datetime('fecha_creacion_servicio');
             $table->datetime('fecha_fin_servicio');
             

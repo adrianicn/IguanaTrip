@@ -22,11 +22,14 @@ class UsuarioServiciosController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function tablaServicios() {
+    public function tablaServicios($id_usuario_op, ServiciosOperadorRepository $gestion) {
         //
 
-        $usuarioServicios = Usuario_Servicio::where('id_usuario_operador', '=', 6)->get();
-        return view('Registro.listaServiciosUsuario', compact('usuarioServicios'));
+        
+        $listServiciosUnicos = $gestion->getServiciosOperadorUnicos($id_usuario_op);
+        $listServiciosAll = $gestion->getServiciosOperadorAll($id_usuario_op);
+        
+        return view('Registro.listaServiciosUsuario', compact('listServiciosUnicos','listServiciosAll'));
     }
 
  
@@ -98,7 +101,7 @@ class UsuarioServiciosController extends Controller {
         //es lo que tengo q eliminar o cabiar de estado
         $resultbaselocal = array_diff($base, $local);
 
-
+//return $resultbaselocal;
         //Guarda los nuevos catalogos
         if (count($resultlocalbase) > 0) {
 
@@ -138,7 +141,7 @@ class UsuarioServiciosController extends Controller {
         }
 
         
-        $returnHTML = ('/IguanaTrip/public/image');
+        $returnHTML = ('/IguanaTrip/public/detalleServicios/'.$formFields['id_usuario_op']);
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
 

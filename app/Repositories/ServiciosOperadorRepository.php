@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Usuario_Servicio;
+use Illuminate\Support\Facades\DB;
 
 class ServiciosOperadorRepository extends BaseRepository {
 
@@ -66,8 +67,10 @@ class ServiciosOperadorRepository extends BaseRepository {
         //Transformo el arreglo en un solo objeto
         foreach ($usuario_servicio as $servicioBase) {
             $inputs['id_usuario_servicio'] = $servicioBase->id_usuario_servicio;
+            $this->updateServ($inputs);
         }
-        return $this->updateServ($inputs);
+         
+        return true;
     }
 
     //Realiza la logica del update
@@ -84,8 +87,28 @@ class ServiciosOperadorRepository extends BaseRepository {
                         ->where('estado_servicio', '=', 1)->get();
     }
 
+    //Entrega el arreglo de Servicios por operador completo incluyendo los nuevos ingresados por la 
+    //pantalla de +
+    public function getServiciosOperadorUnicos($id_usuario_operador) {
+        return DB::table('usuario_servicios')
+                        ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
+                        ->where('id_usuario_operador', $id_usuario_operador)
+                        ->where('estado_servicio', '=', 1)
+                        ->groupby('usuario_servicios.id_catalogo_servicio')->distinct()
+                        ->select('catalogo_servicios.nombre_servicio','catalogo_servicios.id_catalogo_servicios','usuario_servicios.id_usuario_servicio')
+                        ->get();
+    }
     
-    
+    public function getServiciosOperadorAll($id_usuario_operador) {
+        return DB::table('usuario_servicios')
+                        ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
+                        ->where('id_usuario_operador', $id_usuario_operador)
+                        ->where('estado_servicio', '=', 1)
+                        ->select('usuario_servicios.nombre_servicio','catalogo_servicios.id_catalogo_servicios','usuario_servicios.id_usuario_servicio')
+                        ->get();
+    }
+
+
     //entrega el registro que corresponde al usuario
     public function getServiciosOperadorporIdServicio($id_usuario_operador, $id_catalogo) {
 

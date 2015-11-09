@@ -1,13 +1,17 @@
-var $TABLE = $('#table');
+var $TABLE = $('#table_24');
 var $BTN = $('#export-btn');
 var $EXPORT = $('#export');
 
-$('.table-add').click(function () {
-  var $clone = $TABLE.find('tr.hide').clone(true).removeClass('hide table-line');
-  $TABLE.find('table').append($clone);
-});
 
-$('.table-remove').click(function () {
+function add($id_table)
+{
+    
+    var tabla='#table_'+$id_table;
+    var $clone =  $(tabla).find('tr.hide').clone(true).removeClass('hide table-line');
+   $(tabla).find('table').append($clone);
+    
+}
+$('.table-remove').click(function () {  
   $(this).parents('tr').detach();
 });
 
