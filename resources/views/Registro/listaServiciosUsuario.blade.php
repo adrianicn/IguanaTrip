@@ -17,13 +17,13 @@
     @foreach ($listServiciosUnicos as $servicios)
 
 
-    {!! Form::open(['url' => route('upload-postTipoOperador'),  'id'=>$servicios -> id_usuario_servicio]) !!}
+    {!! Form::open(['url' => route('upload-postTipoOperador'),  'id'=>$servicios->id_usuario_servicio]) !!}
 
     <div id="table_{!!$servicios->id_usuario_servicio!!}" class="table-editable">
 
         <h2>{!!$servicios->nombre_servicio!!}</h2>
 
-        <span  class="table-add glyphicon glyphicon-plus" onclick="add({!!$servicios - > id_usuario_servicio!!})"></span>
+        <span  class="table-add glyphicon glyphicon-plus" onclick="add({!!$servicios->id_usuario_servicio!!})"></span>
         <table class="table">
             <tr>
                 <th>Nombre</th>
@@ -50,7 +50,7 @@
                 <span class="table-remove glyphicon glyphicon-remove"></span>
             </td>
             <td>
-                <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios - > id_usuario_servicio!!}, {!!$servicio - > id_usuario_servicio!!})" href="#">Details</a>
+                <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios->id_usuario_servicio!!}, {!!$servicio->id_usuario_servicio!!})" href="#">Details</a>
 
             </td>
             </tr
@@ -65,7 +65,7 @@
                     <span class="table-remove glyphicon glyphicon-remove"></span>
                 </td>
                 <td>
-                    <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios - > id_usuario_servicio!!}, {!!$servicio - > id_usuario_servicio!!})" href="#">Details</a>
+                    <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios -> id_usuario_servicio!!}, {!!$servicio -> id_usuario_servicio!!})" href="#">Details</a>
                 </td>
             </tr>
         </table>
