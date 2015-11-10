@@ -1,4 +1,4 @@
-@extends('front.masterPageRegistro')
+@extends('front.masterPageServicios')
 
 @section('step1')
 {!! HTML::style('css/serviciosOperadores.css') !!} 

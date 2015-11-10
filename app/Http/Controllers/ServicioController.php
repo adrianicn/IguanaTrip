@@ -73,6 +73,7 @@ class ServicioController extends Controller
     
     public function step4()
     {
+        
     	return view('RegistroOperadores.registroStep4');
     }
     
