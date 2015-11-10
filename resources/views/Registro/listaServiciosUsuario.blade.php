@@ -17,7 +17,7 @@
     @foreach ($listServiciosUnicos as $servicios)
 
 
-    {!! Form::open(['url' => route('upload-postTipoOperador'),  'id'=>$servicios->id_usuario_servicio]) !!}
+    {!! Form::open(['url' => route('upload-postDetalleOperador'),  'id'=>$servicios->id_usuario_servicio]) !!}
 
     <div id="table_{!!$servicios->id_usuario_servicio!!}" class="table-editable">
 
