@@ -71,6 +71,11 @@ class ServicioController extends Controller
     	return view('Registro.catalogoServicio');
     }
     
+    public function step4()
+    {
+    	return view('RegistroOperadores.registroStep4');
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
