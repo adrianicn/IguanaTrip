@@ -49,7 +49,7 @@ class CreateUsuarioServiciosTable extends Migration
             $table->string('nombre_servicio');
             $table->text('tags_servicio');
             $table->integer('id_ciudad');
-            
+            $table->boolean('estado_servicio_usuario'); //define el estado del servicio que el usuario ha establecido
 
             $table->foreign('id_usuario_operador')
                     ->references('id_usuario_op')
