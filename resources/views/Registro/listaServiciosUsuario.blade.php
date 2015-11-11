@@ -87,8 +87,7 @@
                 <span class="table-remove glyphicon glyphicon-remove"></span>
             </td>
             <td>
-                <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios->id!!}, {!!$servicio->id!!})" href="#">Details</a>
-
+                {!! link_to_route('details.show', 'Details', [$servicio->id]) !!}
             </td>
 
             </tr>

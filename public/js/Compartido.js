@@ -86,6 +86,11 @@ $('.error').html('');
         $('#target').loadingOverlay();
         //event.preventDefault();
 
+
+            var $form = $('#'+$formulario),
+                data = $form.serialize()+ '&ids=' + $id;
+                url = $form.attr("action");
+        var posting = $.post(url, {formData: data});
             var $form = $('#'+$formulario),
                 data = $form.serialize(),
                 url = $form.attr("action");
