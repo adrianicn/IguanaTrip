@@ -30,6 +30,7 @@
                 <th>Estado</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
 
             @foreach ($listServiciosAll as $servicio)
@@ -38,22 +39,32 @@
                 @if($servicio->nombre_servicio=="")
                 <td contenteditable="true">Ingresar Nombre</td>
                 <td contenteditable="true">Ingresar</td>
-
+              
                 @else
                 <td contenteditable="true">{!!$servicio->nombre_servicio!!}</td>
                 <td contenteditable="true">Activo</td>
+              
                 @endif
 
-            <input type="hidden" value="{!!$servicios->id_usuario_servicio!!}" name="usuario_servicio">
+                  <td> 
+                    
+                        <label class="switch switch-green">
+                            <input type="checkbox" name ='estado_servicio_usuario_{!!$servicio->id_usuario_servicio!!}' class="switch-input" checked>
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    
+                </td>
+            <input type="hidden" value="{!!$servicio->id_usuario_servicio!!}" name="usuario_servicio">
 
             <td>
                 <span class="table-remove glyphicon glyphicon-remove"></span>
             </td>
             <td>
-                <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios->id_usuario_servicio!!}, {!!$servicio->id_usuario_servicio!!})" href="#">Details</a>
+                <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios-> id_usuario_servicio!!}, {!!$servicio->id_usuario_servicio!!})" href="#">Details</a>
 
             </td>
-            </tr
+        </tr>
             @endif
             @endforeach 
 
@@ -65,7 +76,7 @@
                     <span class="table-remove glyphicon glyphicon-remove"></span>
                 </td>
                 <td>
-                    <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios -> id_usuario_servicio!!}, {!!$servicio -> id_usuario_servicio!!})" href="#">Details</a>
+                    <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios->id_usuario_servicio!!}, {!!$servicio->id_usuario_servicio!!})" href="#">Details</a>
                 </td>
             </tr>
         </table>
