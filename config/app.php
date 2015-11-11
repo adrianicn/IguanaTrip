@@ -150,7 +150,9 @@ return [
 		App\Providers\RouteServiceProvider::class,
 		App\Services\Html\HtmlServiceProvider::class,
             
-		Bestmomo\Filemanager\FilemanagerServiceProvider::class,
+		Bestmomo\Filemanager\FilemanagerServiceProvider::class
+             
+            
 
 	],
 
@@ -204,6 +206,7 @@ return [
              
             'Agent' => 'Jenssegers\Agent\Facades\Agent',
             'Image'     => Intervention\Image\Facades\Image::class
+             
 
 	],
 

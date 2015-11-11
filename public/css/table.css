@@ -4,7 +4,11 @@
 .table-editable .glyphicon {
   font-size: 20px;
 }
-
+.table {
+    margin-bottom: 20px;
+    max-width: 100%;
+    width: 50%;
+}
 .table-remove {
   color: #700;
   cursor: pointer;
@@ -26,7 +30,7 @@
   cursor: pointer;
   position: absolute;
   top: 8px;
-  right: 0;
+  right: 570px;
 }
 .table-add:hover {
   color: #0b0;

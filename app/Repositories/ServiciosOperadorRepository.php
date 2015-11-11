@@ -55,6 +55,16 @@ class ServiciosOperadorRepository extends BaseRepository {
         return $user_servicios;
     }
 
+    public function storeUpdateEstado($inputs, $usuario_servicio) {
+
+        //Transformo el arreglo en un solo objeto
+        foreach ($usuario_servicio as $servicioBase) {
+            $inputs['id_usuario_servicio'] = $servicioBase->id;
+            $this->updateServ($inputs,'estado_servicio_usuario');
+        }
+         
+        return true;
+    }
     /**
      * Create a user.
      *
@@ -66,18 +76,18 @@ class ServiciosOperadorRepository extends BaseRepository {
 
         //Transformo el arreglo en un solo objeto
         foreach ($usuario_servicio as $servicioBase) {
-            $inputs['id_usuario_servicio'] = $servicioBase->id_usuario_servicio;
-            $this->updateServ($inputs);
+            $inputs['id_usuario_servicio'] = $servicioBase->id;
+            $this->updateServ($inputs,'estado_servicio');
         }
          
         return true;
     }
 
     //Realiza la logica del update
-    public function updateServ($input) {
+    public function updateServ($input,$campo) {
         $operador = new $this->model;
-        $operadorData = $operador::where('id_usuario_servicio', $input['id_usuario_servicio'])
-                ->update(['estado_servicio' => $input['estado_servicio']]);
+        $operadorData = $operador::where('id', $input['id_usuario_servicio'])
+                ->update([$campo => $input[$campo]]);
     }
 
 //Entrega el arreglo de Servicios por operador
@@ -95,7 +105,7 @@ class ServiciosOperadorRepository extends BaseRepository {
                         ->where('id_usuario_operador', $id_usuario_operador)
                         ->where('estado_servicio', '=', 1)
                         ->groupby('usuario_servicios.id_catalogo_servicio')->distinct()
-                        ->select('catalogo_servicios.nombre_servicio','catalogo_servicios.id_catalogo_servicios','usuario_servicios.id_usuario_servicio')
+                        ->select('catalogo_servicios.nombre_servicio','catalogo_servicios.id_catalogo_servicios','usuario_servicios.id','usuario_servicios.observaciones')
                         ->get();
     }
     
@@ -104,7 +114,7 @@ class ServiciosOperadorRepository extends BaseRepository {
                         ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
                         ->where('id_usuario_operador', $id_usuario_operador)
                         ->where('estado_servicio', '=', 1)
-                        ->select('usuario_servicios.nombre_servicio','catalogo_servicios.id_catalogo_servicios','usuario_servicios.id_usuario_servicio')
+                        ->select('usuario_servicios.nombre_servicio','catalogo_servicios.id_catalogo_servicios','usuario_servicios.id')
                         ->get();
     }
 
@@ -114,6 +124,14 @@ class ServiciosOperadorRepository extends BaseRepository {
 
         $user_servicio = Usuario_Servicio::where('id_usuario_operador', '=', $id_usuario_operador)
                         ->where('id_catalogo_servicio', '=', $id_catalogo)->get();
+        return $user_servicio;
+    }
+    
+     //entrega el registro que corresponde al id usuario servicio
+    public function getServiciosOperadorporIdUsuarioServicio($id_usuario_servicio) {
+
+        $user_servicio = Usuario_Servicio::where('id', '=', $id_usuario_servicio)->get();
+                        
         return $user_servicio;
     }
 

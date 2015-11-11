@@ -11,21 +11,14 @@
 </div>
 
 <?php 
-	if (count($listServicios) == 0 ){
-		$servicio_1 = 'checked';
-		$servicio_2 = 'checked';
-		$servicio_3 = 'checked';
-		$servicio_4 = 'checked';
-		$servicio_5 = 'checked';
-		$servicio_6 = 'checked';
-	} else {
+	
 		$servicio_1 = '';
 		$servicio_2 = '';
 		$servicio_3 = '';
 		$servicio_4 = '';
 		$servicio_5 = '';
 		$servicio_6 = '';		
-	}
+	
 ?>
 @foreach ($listServicios as $servicio)
 <?php

@@ -1,22 +1,15 @@
+
   <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+      
       #map {
-        height: 100%;
+      
+width:481px;height:344px
         
       }
     </style>
   
           {!! Form::open(array('url'=>'maps','files'=>true)) !!}
           
-        <div class='form-group'>
-            <label for=''>Title</label>
-            <input type="text" class='form-control input-sm' name='title'/>
-            
-        </div>
         <div class='form-group'>
             <label for=''>map</label>
             <input type="text" id='searchmap'>
@@ -34,13 +27,14 @@
             <input type="text" class='form-control input-sm' name='lng' id='lng'/>
             
         </div>
-        <button class="btn btn-sm ">Save</button>
+        
           {!! Form::close() !!}
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDor7F0iN5YavbFiLRA7pY7L8-Rgl89GT8&signed_in=true&libraries=places&callback=initMap" async defer></script>
   
         
      <script>
+         
 var map;
 var infowindow;
 
@@ -49,8 +43,8 @@ function initMap() {
 
   map = new google.maps.Map(document.getElementById('map'), {
     center: {
-         lat:22.7,
-         lng:85.36
+         lat:-0.0972178,
+         lng:-78.49366320000001
         
     },
     zoom: 15
@@ -59,8 +53,8 @@ function initMap() {
   var marker= new google.maps.Marker({
       
      position:{
-         lat:22.7,
-         lng:85.36
+         lat:-0.0972178,
+         lng:-78.49366320000001
      },
      map:map,
      draggable:true
@@ -87,6 +81,7 @@ function initMap() {
       $('#lng').val(lng);
   })
   }
+  
   
     </script>
   </head>
