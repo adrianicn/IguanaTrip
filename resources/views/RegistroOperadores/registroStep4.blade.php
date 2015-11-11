@@ -79,7 +79,25 @@
             {!!Form::text('tags_servicio', NULL, array('class'=>'form-control','placeholder'=>'Tags del Servicio'))!!}
 
         </div>
-        
+        <div class="datagrid">
+        	<table>
+            	<thead>
+            		<tr>
+            			<th>Tipo</th><th>Descripcion</th><th>Seleccion</th>
+            		</tr>
+            	</thead>
+            	<tbody>
+            	@foreach ($servicioEstablecimiento as $catalogo)	
+            		
+            		<tr>
+                    	<td> <img src="{!! asset('images/eat.png')!!}" alt="" /></td>
+                    	<td>{!!$catalogo->nombre_servicio_est!!}</td>
+                    	<td><input class="demo labelauty" name="id_catalogo_servicio1" id="checkbox-1" value="{!!$catalogo->id_servicio_est!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio"{!!$catalogo->nombre_servicio_est!!}/></td>
+                	</tr>
+                @endforeach 	
+                </tbody>
+        	</table>
+        </div>
 	{!! Form::close() !!}
 
 </div>

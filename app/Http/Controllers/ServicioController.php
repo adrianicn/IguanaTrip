@@ -71,10 +71,10 @@ class ServicioController extends Controller
     	return view('Registro.catalogoServicio');
     }
     
-    public function step4()
+    public function step4(OperadorRepository $operador_gestion)
     {
-        
-    	return view('RegistroOperadores.registroStep4');
+    	$servicioEstablecimiento = $operador_gestion->getServicioEstablecimiento(1);
+    	return view('RegistroOperadores.registroStep4', compact('servicioEstablecimiento'));
     }
     
     /**

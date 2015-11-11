@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Usuario_Operador;
 use Illuminate\Http\Request;
+use App\Models\Catalogo_Servicio_Establecimiento;
 
 class OperadorRepository extends BaseRepository
 {
@@ -14,6 +15,8 @@ class OperadorRepository extends BaseRepository
 	 * @var App\Models\Usuario_Operador
 	 */
 	protected $operador;
+	protected $ServicioEstablecimiento;
+	
 
 	/**
 	 * Create a new UserRepository instance.
@@ -22,9 +25,10 @@ class OperadorRepository extends BaseRepository
 	 * @param  App\Models\Role $role
 	 * @return void
 	 */
-	public function __construct( Usuario_Operador $operador )
+	public function __construct( Usuario_Operador $operador, Catalogo_Servicio_Establecimiento $servicioEstablecimiento )
 	{
 		$this->model = $operador;
+		$this->ServicioEstablecimiento = $servicioEstablecimiento;
 	}
 
 	/**
@@ -164,6 +168,13 @@ class OperadorRepository extends BaseRepository
 		$user->confirmed = true;
 		$user->confirmation_code = null;
 		$user->save();
+	}
+	
+	public function getServicioEstablecimiento($id_catalogo_servicio)
+	{
+		$servicioEstablecimiento = new $this->ServicioEstablecimiento;
+		return $servicioEstablecimiento::where('id_catalogo_servicio',$id_catalogo_servicio)->get();
+		
 	}
 
 }
