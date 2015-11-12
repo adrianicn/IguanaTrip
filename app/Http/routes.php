@@ -90,11 +90,11 @@ Route::post('maps',function()
 });
 
 
-//Event::listen('illuminate.query', function($query)
-//{
- // var_dump($query);
-//});
-////////////////////////
+// Event::listen('illuminate.query', function($query)
+// {
+//  var_dump($query);
+// });
+// ////////////////////////
 
 
 //servicios
@@ -106,3 +106,4 @@ Route::post('servicios/operador', ['as' => 'upload-postoperador', 'uses' =>'Serv
 Route::get('servicios/operadorServicios', 'ServicioController@step3');
 Route::get('servicios/operador/{tipoOperador}', 'ServicioController@step2');
 Route::get('servicios/serviciooperador', 'ServicioController@step4');
+Route::post('servicios/serviciosoperador', ['as' => 'upload-postusuarioservicios', 'uses' =>'ServicioController@postUsuarioServicios']);

@@ -6,9 +6,11 @@
 </div>
 <div class="row">
 
-	{!! Form::open(['url' => 'registro/step1', 'method' => 'post', 'role' => 'form', 'id'=>'registro_step1'] ) !!}
-	<div class="wrapper uwa-font-aa">
+	{!! Form::open(['url' => route('upload-postusuarioservicios'), 'method' => 'post', 'role' => 'form', 'id'=>'registro_step1'] ) !!}
 
+	<div class="wrapper uwa-font-aa">
+		<input type="hidden" value="1" name="id_usuario_servicio" id="id_usuario_servicio">
+	
 		<div class="form-group">
         	{!!Form::label('nombre_servicio_1', 'Nombre Servicio', array('class'=>'control-label'))!!}
             {!!Form::text('nombre_servicio', NULL, array('class'=>'form-control','placeholder'=>'Nombre del Servicio'))!!}
@@ -70,8 +72,8 @@
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('descuento_servicio_1', 'Descuento del Servicio', array('class'=>'control-label'))!!}
-            {!!Form::text('descuento_clientes', NULL, array('class'=>'form-control','placeholder'=>'Descuento del Servicio'))!!}
+        	{!!Form::label('descuento_clientes_1', 'Descuento del Cliente', array('class'=>'control-label'))!!}
+            {!!Form::text('descuento_clientes', NULL, array('class'=>'form-control','placeholder'=>'Descuento del Cliente'))!!}
 
         </div>
 		<div class="form-group">
@@ -92,11 +94,14 @@
             		<tr>
                     	<td> <img src="{!! asset('images/eat.png')!!}" alt="" /></td>
                     	<td>{!!$catalogo->nombre_servicio_est!!}</td>
-                    	<td><input class="demo labelauty" name="id_catalogo_servicio1" id="checkbox-1" value="{!!$catalogo->id_servicio_est!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio"{!!$catalogo->nombre_servicio_est!!}/></td>
+                    	<td><input class="demo labelauty" name="id_servicio_est[]" id="checkbox-1" value="{!!$catalogo->id!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio"{!!$catalogo->nombre_servicio_est!!}/></td>
                 	</tr>
                 @endforeach 	
                 </tbody>
         	</table>
+        </div>
+        <div class="box-content-button-1">
+			<a class="button" onclick="AjaxContainerRegistro('registro_step1')" href="#">Siguiente</a>
         </div>
 	{!! Form::close() !!}
 

@@ -26,6 +26,23 @@ class ServicioController extends Controller
 			'telf_contacto_operador_1' => 'required|max:255'
 	];
 	
+	protected $validationUsuarioServicios = [
+			'nombre_servicio' => 'required|max:255|',
+			'detalle_servicio' => 'required|max:255|',
+			'precio_desde' => 'required|max:255',
+			'precio_hasta' => 'required|max:255',
+			'precio_anterior' => 'required|max:255',
+			'precio_actual' => 'required|max:255',
+			'descuento_servico' => 'required|max:255',
+			'direccion_servicio' => 'required|max:255',
+			'correo_contacto' => 'required|max:255',
+			'pagina_web' => 'required|max:255',
+			'nombre_comercial' => 'required|max:255',
+			'tags' => 'required|max:255',
+			'descuento_clientes' => 'required|max:255',
+			'tags_servicio' => 'required|max:255'
+	];
+	
 	public function Auth(Guard $auth, $view)
 	{
 		
@@ -74,6 +91,7 @@ class ServicioController extends Controller
     public function step4(OperadorRepository $operador_gestion)
     {
     	$servicioEstablecimiento = $operador_gestion->getServicioEstablecimiento(1);
+    	$catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimiento(1);
     	return view('RegistroOperadores.registroStep4', compact('servicioEstablecimiento'));
     }
     
@@ -205,6 +223,50 @@ class ServicioController extends Controller
 		if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
 			return $_SERVER['HTTP_X_FORWARDED_FOR'];
 		return $_SERVER['REMOTE_ADDR'];
+    }
+   
+    public function postUsuarioServicios(Request $request, OperadorRepository $usuarioSevicio_gestion)
+    {
+    	$inputData = Input::get('formData');
+    	parse_str($inputData, $formFields);
+    	
+    	foreach ($formFields['id_servicio_est'] as $catalogo)
+    		$servicio_establecimiento_usuario[] = $catalogo;
+    	
+//     	var_dump($servicio_establecimiento_usuario);
+//     	exit;
+    	
+    	$usuarioServicioData = array(
+    			'nombre_servicio' => $formFields['nombre_servicio'],
+    			'detalle_servicio' => $formFields['detalle_servicio'],
+    			'precio_desde' => $formFields['precio_desde'],
+    			'precio_hasta' => $formFields['precio_hasta'],
+    			'precio_anterior' => $formFields['precio_anterior'],
+    			'precio_actual' => $formFields['precio_actual'],
+    			'descuento_servico' => $formFields['descuento_servico'],
+    			'direccion_servicio' => $formFields['direccion_servicio'],
+    			'correo_contacto' => $formFields['correo_contacto'],
+    			'pagina_web' => $formFields['pagina_web'],
+    			'nombre_comercial' => $formFields['nombre_comercial'],
+    			'tags' => $formFields['tags'],
+    			'descuento_clientes' => $formFields['descuento_clientes'],
+    			'tags_servicio' => $formFields['tags_servicio'],
+    			'id_usuario_servicio' => $formFields['id_usuario_servicio']
+    	);
+    	$validator = Validator::make($usuarioServicioData, $this->validationUsuarioServicios);
+    	if ($validator->fails()) {
+    		return response()->json(array(
+    				'fail' => true,
+    				'errors' => $validator->getMessageBag()->toArray()
+    		));
+    	} else {
+    	
+    		//return $servicio_establecimiento_usuario;
+    			$usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServicios( $usuarioServicioData, $servicio_establecimiento_usuario, $formFields['id_usuario_servicio'] );
+    	}
+    	$returnHTML = ('/IguanaTrip/public');
+   	return response()->json(array('success' => true, 'redirectto'=>$returnHTML));
+    	 
     }
     
 }
