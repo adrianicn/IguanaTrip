@@ -25,10 +25,8 @@ class UsuarioServiciosController extends Controller {
     public function tablaServicios($id_usuario_op, ServiciosOperadorRepository $gestion) {
         //
 
-
         $listServiciosUnicos = $gestion->getServiciosOperadorUnicos($id_usuario_op);
         $listServiciosAll = $gestion->getServiciosOperadorAll($id_usuario_op);
-
         return view('Registro.listaServiciosUsuario', compact('listServiciosUnicos', 'listServiciosAll'));
     }
 

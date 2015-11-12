@@ -244,7 +244,7 @@ body #footer {
 }
 .nv-green-button, .button {
     -moz-user-select: none;
-    background: transparent url("img/buttons/button.png?v=1043") no-repeat scroll right top;
+    
     border: 0 none;
     cursor: pointer;
     display: inline-block;
@@ -255,7 +255,7 @@ body #footer {
     vertical-align: middle;
 }
 .nv-green-button .button-inner, .button .button-inner {
-    background: transparent url("img/buttons/button.png?v=1043") no-repeat scroll left top;
+    
     border: 0 none;
     color: #fff;
     display: inline-block;
@@ -382,7 +382,7 @@ a.nv-button:link, a.nv-button:visited, .nv-button {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    background: #ddd url("img/nv-button.png?v=1043") repeat-x scroll left top;
+    
     border-color: #ddd #bbb #bbb #ddd;
     border-image: none;
     border-radius: 3px;
@@ -410,7 +410,7 @@ a.nv-button-pressed:link, a.nv-button-pressed:visited, .nv-button-pressed {
     padding: 0.2em 6px;
 }
 a.nv-button:hover, .nv-button:hover {
-    background: #e2e2e2 url("img/nv-button.png?v=1043") repeat-x scroll left -115px;
+    
     color: #000;
 }
 .nv-flat-button {
@@ -2480,7 +2480,7 @@ blockquote > cite::before {
     width: 100%;
 }
 #solutions .get-started a, #solutions #push_insights a {
-    background: transparent url("img/home/button.png?v=1043") no-repeat scroll right 0;
+    
     color: #fff;
     float: right;
     font-weight: bold;
@@ -2489,7 +2489,7 @@ blockquote > cite::before {
     white-space: nowrap;
 }
 #solutions .get-started a span, #solutions #push_insights a span {
-    background: transparent url("img/home/button.png?v=1043") no-repeat scroll left 0;
+    
     display: block;
     line-height: 35px;
     padding: 0 5px 0 15px;

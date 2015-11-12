@@ -26,36 +26,46 @@
     </ul>
 
 
-
+ <?php $counter = 0;?>
     @foreach ($listServiciosUnicos as $servicios)
-
+ <?php $counter = $counter+1;?>
 
     {!! Form::open(['url' => route('upload-postDetalleOperador'),  'id'=>$servicios->id_catalogo_servicios]) !!}
 
     <div id="table_{!!$servicios->id!!}" class="table-editable">
 
-        <h2>{!!$servicios->nombre_servicio!!}</h2>
+        
+        <div class="section"><span>{!!$counter!!}</span>{!!$servicios->nombre_servicio!!}</div>
 
         <span  class="table-add glyphicon glyphicon-plus" onclick="add({!!$servicios->id!!})"></span>
+        <div class="inner-wrap">
+        
+    
         <table class="table">
             <tr>
                 <th>Nombre</th>
-
-                <th></th>
+                <th>Estado</th>
                 <th></th>
                 <th></th>
             </tr>
 
             @foreach ($listServiciosAll as $servicio)
             @if($servicio->id_catalogo_servicios==$servicios->id_catalogo_servicios)
-
-
+            <?php $check = '';?>
+            @if($servicio->estado_servicio_usuario==1)
+              <?php $check = 'checked';
+              
+              ?>
+            @endif
             <!-- modal content -->
             <div id="basic-modal-content" class="cls_{!!$servicio->id!!}">
+                
+                <form id="modal" accept-charset="UTF-8" action="http://localhost:8080/IguanaTrip/public/servicios/DetalleOperador" method="POST"/>
                 <h3>Detalles</h3>
                 <p>{!!$servicio->id!!}</p>
 
                 <p><a href='http://www.ericmmartin.com/projects/simplemodal/'>Details</a></p>
+                </form>
             </div>
 
             <!-- preload the images -->
@@ -66,16 +76,16 @@
             <tr>
 
                 @if($servicio->nombre_servicio=="")
-                <td id='basic-modal' contenteditable="true"><a href='#' onclick='callModal({!!$servicio->id!!})' class='basic'>Ingresar Nombre</a></td>
+                <td id='basic-modal' contenteditable="true"><a style="cursor: pointer;" href='#' onclick='callModal({!!$servicio->id!!})' class='basic'>Ingresar Nombre</a></td>
 
                 @else
-                <td contenteditable="true"><a href='#' class='basic'>{!!$servicio->nombre_servicio!!}</a></td>
-
+                
+                <td id='basic-modal' contenteditable="true"><a style="cursor: pointer;" href='#' onclick='callModal({!!$servicio->id!!})' class='basic'>{!!$servicio->nombre_servicio!!}</a></td>
                 @endif
 
                 <td> 
                     <label class="switch switch-green">
-                        <input type="checkbox" id='estado_servicio_usuario_{!!$servicio->id!!}' name ='estado_servicio_usuario_{!!$servicio->id!!}' class="switch-input" onchange="AjaxContainerRetrunMessage({!!$servicios->id_catalogo_servicios!!},{!!$servicio->id!!})">
+                        <input type="checkbox" id='estado_servicio_usuario_{!!$servicio->id!!}' {!!$check!!} name ='estado_servicio_usuario_{!!$servicio->id!!}' class="switch-input" onchange="AjaxContainerRetrunMessage({!!$servicios->id_catalogo_servicios!!},{!!$servicio->id!!})">
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                         
@@ -106,8 +116,13 @@
                 </td>
             </tr>
         </table>
+          
+    </div>
         <br>
     </div>
+    
+    
+    
     {!! Form::close() !!}
     @endforeach 
 
