@@ -1,47 +1,42 @@
 @extends('front.masterPageServicios')
-
 @section('step1')
 {!! HTML::style('css/serviciosOperadores.css') !!} 
 {!! HTML::style('css/jquery-labelauty.css') !!} 
-{!!HTML::script('js/jquery-labelauty.js') !!}
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,700|Electrolize' rel='stylesheet' type='text/css' />
 
 <div class="rowerror">
 
 </div>
 
-<?php 
-	
-		$servicio_1 = '';
-		$servicio_2 = '';
-		$servicio_3 = '';
-		$servicio_4 = '';
-		$servicio_5 = '';
-		$servicio_6 = '';		
-	
+<?php
+$servicio_1 = '';
+$servicio_2 = '';
+$servicio_3 = '';
+$servicio_4 = '';
+$servicio_5 = '';
+$servicio_6 = '';
 ?>
 @foreach ($listServicios as $servicio)
 <?php
-	switch ($servicio->id_catalogo_servicio){
-		case 1:
-			$servicio_1 = 'checked';
-			break;
-		case 2:
-			$servicio_2 = 'checked';
-			break;
-		case 3:
-			$servicio_3 = 'checked';
-			break;
-		case 4:
-			$servicio_4 = 'checked';
-			break;
-		case 5:
-			$servicio_5 = 'checked';
-			break;
-		case 6:
-			$servicio_6 = 'checked';
-			break;
-	}
+switch ($servicio->id_catalogo_servicio) {
+    case 1:
+        $servicio_1 = 'checked';
+        break;
+    case 2:
+        $servicio_2 = 'checked';
+        break;
+    case 3:
+        $servicio_3 = 'checked';
+        break;
+    case 4:
+        $servicio_4 = 'checked';
+        break;
+    case 5:
+        $servicio_5 = 'checked';
+        break;
+    case 6:
+        $servicio_6 = 'checked';
+        break;
+}
 ?>
 @endforeach     
 
@@ -80,7 +75,7 @@
             <div class="ok-dialog"><i class="icon-ok-sign"></i></div>
         </div>
     </div>
-    
+
 
     <div class="datagrid"><table>
             <thead><tr><th>Tipo</th><th>Descripcion</th><th>Seleccion</th></tr></thead>
@@ -107,13 +102,13 @@
                 <tr><td> <img src="{!! asset('images/dance.png')!!}" alt="" /></td>
                     <td>ejemplo(Discoteca,bar,casino)</td>
                     <td><input class="demo labelauty" name="id_catalogo_servicio5" id="checkbox-5" value="5" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_5!!}/></td></tr>
-            
+
                 <tr class="alt"><td> <div id="anchor" class="button dialog-open">
-            <i class="icon-anchor"></i>
-        </div></td>
+                            <i class="icon-anchor"></i>
+                        </div></td>
                     <td>ejemplo(otros)</td>
                     <td><input class="demo labelauty" name="id_catalogo_servicio6" id="checkbox-6" value="6" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_6!!}/></td></tr>
-            
+
             </tbody>
         </table>
 
@@ -125,6 +120,6 @@
 </div>
 @section('scripts')
 {!! HTML::script('/js/registro/registroajax_serviciooperador.js') !!}
-
+{!!HTML::script('js/jquery-labelauty.js') !!}
 @stop
 @stop

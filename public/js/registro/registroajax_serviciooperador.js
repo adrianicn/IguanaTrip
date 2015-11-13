@@ -35,7 +35,7 @@ $(document).ready(function () {
     });
     // Prevent dialog closure when clicking the body of the dialog (overrides closing on clicking overlay)
     $('.dialog').click(function () {
-        event.stopPropagation();
+       // event.stopPropagation();
     });
 });
 

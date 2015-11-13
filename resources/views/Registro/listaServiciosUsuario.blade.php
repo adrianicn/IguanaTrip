@@ -59,7 +59,7 @@
  <?php $counter = $counter+1;?>
 
     {!! Form::open(['url' => route('upload-postDetalleOperador'),  'id'=>$servicios->id_catalogo_servicios]) !!}
-
+<div class="wrapper uwa-font-aa">
     <div id="table_{!!$servicios->id!!}" class="table-editable">
 
         
@@ -89,14 +89,11 @@
            
 
             <tr>
-
                 @if($servicio->nombre_servicio=="")
                 <td>
                 {!! link_to_route('details.show', 'Ingresar Nombre', [$servicio->id]) !!}
                 </td>
-
                 @else
-                
                 <td>
                 {!! link_to_route('details.show',$servicio->nombre_servicio, [$servicio->id]) !!}
                 </td>
@@ -139,6 +136,7 @@
     </div>
         <br>
     </div>
+    </div>
     
     
     
@@ -156,10 +154,6 @@
 {!! HTML::script('/js/tabla_dinamica.js') !!}
 {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
 {!! HTML::script('/js/jsModal/basic.js') !!}
-
-<script>
- 
-</script>
 
 @stop
 

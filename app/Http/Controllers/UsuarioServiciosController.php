@@ -60,6 +60,7 @@ class UsuarioServiciosController extends Controller {
         $root_array1['id_usuario_op'] = $formFields['id_usuario_op'];
         $validator = Validator::make($root_array1, $this->validationRules);
         $serviciosBase = array();
+         $root_array = array();
 
         if ($validator->fails()) {
             return response()->json(array(
