@@ -5,15 +5,43 @@
 {!! HTML::style('css/table.css') !!} 
 {!! HTML::style('css/popupModal/demo.css') !!} 
 {!! HTML::style('css/popupModal/basic.css') !!} 
+  
 
 <!-- Contact Form CSS files -->
+
+<!--
+ <div id="basic-modal-content" class="cls">
+                
+                
+        {!! Form::open(['url' => route('upload-postDetalleOperador'),  'id'=>'modal']) !!}
+        <fieldset class="textbox">
+        <label class="username">
+        <span>Username or email</span>
+        <input id="username" name="username" value="" type="text" autocomplete="on" placeholder="Username">
+        </label>
+        <label class="password">
+        <span>Password</span>
+        <input id="password" name="password" value="" type="password" placeholder="Password">
+        </label>
+        <button class="submit button" type="button">Sign in</button>
+        <p>
+        <a class="forgot" href="#">Forgot your password?</a>
+        </p>        
+        </fieldset>
+  {!! Form::close() !!}
+            </div>
+
+             preload the images 
+            <div style='display:none'>
+                <img src="{!! asset('img/x.png')!!}" alt='' />
+            </div>
 
 <style>
 
     #simplemodal-container a.modalCloseImg {
         background:url("{!! asset('img/x.png')!!}") no-repeat;
         width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
-    </style>
+    </style>-->
 
     <div class="container">
 
@@ -58,29 +86,20 @@
               ?>
             @endif
             <!-- modal content -->
-            <div id="basic-modal-content" class="cls_{!!$servicio->id!!}">
-                
-                <form id="modal" accept-charset="UTF-8" action="http://localhost:8080/IguanaTrip/public/servicios/DetalleOperador" method="POST"/>
-                <h3>Detalles</h3>
-                <p>{!!$servicio->id!!}</p>
-
-                <p><a href='http://www.ericmmartin.com/projects/simplemodal/'>Details</a></p>
-                </form>
-            </div>
-
-            <!-- preload the images -->
-            <div style='display:none'>
-                <img src="{!! asset('img/x.png')!!}" alt='' />
-            </div>
+           
 
             <tr>
 
                 @if($servicio->nombre_servicio=="")
-                <td id='basic-modal' contenteditable="true"><a style="cursor: pointer;" href='#' onclick='callModal({!!$servicio->id!!})' class='basic'>Ingresar Nombre</a></td>
+                <td>
+                {!! link_to_route('details.show', 'Ingresar Nombre', [$servicio->id]) !!}
+                </td>
 
                 @else
                 
-                <td id='basic-modal' contenteditable="true"><a style="cursor: pointer;" href='#' onclick='callModal({!!$servicio->id!!})' class='basic'>{!!$servicio->nombre_servicio!!}</a></td>
+                <td>
+                {!! link_to_route('details.show',$servicio->nombre_servicio, [$servicio->id]) !!}
+                </td>
                 @endif
 
                 <td> 
@@ -112,7 +131,7 @@
                     <span class="table-remove glyphicon glyphicon-remove"></span>
                 </td>
                 <td>
-                    <a class="button" onclick="AjaxContainerRegistroParametro({!!$servicios->id!!}, {!!$servicio->id!!})" href="#">Details</a>
+                    {!! link_to_route('details.show', 'Details', [0]) !!}
                 </td>
             </tr>
         </table>
@@ -138,6 +157,9 @@
 {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
 {!! HTML::script('/js/jsModal/basic.js') !!}
 
+<script>
+ 
+</script>
 
 @stop
 

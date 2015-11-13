@@ -9,9 +9,13 @@
  */
 
 
-function callModal($id_usuario_servicio){
+function callModal($servicio){
 
-var $id='.cls_'+$id_usuario_servicio;
+var $id='.cls';
+
+ 
+ 
+
 		$($id).modal();
 
 		return false;
