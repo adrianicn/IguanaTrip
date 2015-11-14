@@ -240,6 +240,6 @@ class OperadorRepository extends BaseRepository
 	public function getCatalogoServicioEstablecimiento($id_usuario_servicio)
 	{
 		$catalogoServicioEstablecimiento = new $this->servicioEstablecimiento;
-		return $catalogoServicioEstablecimiento::where('id_usuario_servicio',$id_usuario_servicio)->get();
+		return $catalogoServicioEstablecimiento::where('id',$id_usuario_servicio)->get();
 	}
 }
