@@ -1,5 +1,4 @@
-@extends('front.masterPageServicios')
-@section('step1')
+
 
 {!! HTML::style('/packages/bootstrap/css/bootstrap.min.css') !!}
 {!! HTML::style('/assets/css/style.css') !!}
@@ -27,13 +26,7 @@
                 {!! Form::close() !!}
 
             </div>
-            <div class="jumbotron how-to-create">
-                <ul>
-                    <li>Images are uploaded as soon as you drop them</li>
-                    <li>Maximum allowed size of image is 8MB</li>
-                </ul>
-
-            </div>
+            
         </div>
 </div>
 
@@ -89,4 +82,3 @@
 
 
 
-@stop

@@ -9,29 +9,14 @@
 
 <!-- Contact Form CSS files -->
 
-<!--
+
  <div id="basic-modal-content" class="cls">
                 
                 
-        {!! Form::open(['url' => route('upload-postDetalleOperador'),  'id'=>'modal']) !!}
-        <fieldset class="textbox">
-        <label class="username">
-        <span>Username or email</span>
-        <input id="username" name="username" value="" type="text" autocomplete="on" placeholder="Username">
-        </label>
-        <label class="password">
-        <span>Password</span>
-        <input id="password" name="password" value="" type="password" placeholder="Password">
-        </label>
-        <button class="submit button" type="button">Sign in</button>
-        <p>
-        <a class="forgot" href="#">Forgot your password?</a>
-        </p>        
-        </fieldset>
-  {!! Form::close() !!}
+  @include('reusable.promocion')
+  
             </div>
 
-             preload the images 
             <div style='display:none'>
                 <img src="{!! asset('img/x.png')!!}" alt='' />
             </div>
@@ -41,7 +26,7 @@
     #simplemodal-container a.modalCloseImg {
         background:url("{!! asset('img/x.png')!!}") no-repeat;
         width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
-    </style>-->
+    </style>
 
     <div class="container">
 
@@ -91,11 +76,11 @@
             <tr>
                 @if($servicio->nombre_servicio=="")
                 <td>
-                {!! link_to_route('details.show', 'Ingresar Nombre', [$servicio->id]) !!}
+                {!! link_to_route('details.show', 'Ingresar Nombre', [$servicio->id,$servicio->id_catalogo_servicios]) !!}
                 </td>
                 @else
                 <td>
-                {!! link_to_route('details.show',$servicio->nombre_servicio, [$servicio->id]) !!}
+                {!! link_to_route('details.show',$servicio->nombre_servicio, [$servicio->id,$servicio->id_catalogo_servicios]) !!}
                 </td>
                 @endif
 
@@ -113,7 +98,10 @@
                 <span class="table-remove glyphicon glyphicon-remove"></span>
             </td>
             <td>
-                {!! link_to_route('details.show', 'Details', [$servicio->id]) !!}
+                {!! link_to_route('details.show','Detalle', [$servicio->id,$servicio->id_catalogo_servicios]) !!}
+
+                  <td id='basic-modal' contenteditable="true"><a href='#' onclick='callModal({!!$servicio->id!!})' class='basic'>Agregar Promocion</a></td>
+
             </td>
 
             </tr>

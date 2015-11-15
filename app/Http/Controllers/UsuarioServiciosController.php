@@ -9,7 +9,16 @@ use Validator;
 use Input;
 use App\Models\Usuario_Servicio;
 
+
 class UsuarioServiciosController extends Controller {
+    
+       /**
+     * Create a new AdminController instance.
+     *
+     * @param  App\Repositories\UserRepository $user_gestion
+     * @return void
+     */
+    
 
     protected $validationRules = [
 
@@ -38,6 +47,7 @@ class UsuarioServiciosController extends Controller {
      */
     public function getServiciosOperador($id_usuario_op, ServiciosOperadorRepository $gestion) {
         //
+   
         $data['id_usuario_op'] = $id_usuario_op;
 
         //logica que comprueba si el usuario tiene servicios para ser modificados

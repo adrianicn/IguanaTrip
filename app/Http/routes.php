@@ -71,7 +71,11 @@ Route::controllers([
 Route::get('/image', ['as' => 'upload', 'uses' => 'ImageController@getUpload']);
 Route::post('upload', ['as' => 'upload-post', 'uses' =>'ImageController@postUpload']);
 Route::post('upload/delete', ['as' => 'upload-remove', 'uses' =>'ImageController@deleteUpload']);
-Route::get('userservice/{id_usuario_op}', 'UsuarioServiciosController@getServiciosOperador');
+Route::get('userservice/{id_usuario_op}',
+    ['uses'=>'UsuarioServiciosController@getServiciosOperador','as'=>'userservice'
+    ,'middleware' => 'notAuth']);
+
+
 Route::post('servicios/servicioOprador', ['as' => 'upload-postServicioOperador', 'uses' =>'UsuarioServiciosController@postServicioOperadores']);
 Route::get('/detalleServicios/{id_usuario_op}', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios']);
 Route::get('/editServicios/{id_usuario_op}', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios']);
@@ -80,7 +84,7 @@ Route::get('/editServicios/{id_usuario_servicio}', ['as' => 'detailServicio', 'u
 Route::get('maps',function()
 {
     
-    return view('maps.maps');
+    return view('reusable.maps');
 });
 
 Route::post('maps',function()
