@@ -42,6 +42,14 @@ class ServicioController extends Controller
 			'descuento_clientes' => 'required|max:255',
 			'tags_servicio' => 'required|max:255'
 	];
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create()
+	{
+	}
 	
 	public function Auth(Guard $auth, $view)
 	{
@@ -83,27 +91,23 @@ class ServicioController extends Controller
     	
     	return $view;
     }
+
     public function step3()
     {
     	return view('Registro.catalogoServicio');
     }
     
-    public function step4(OperadorRepository $operador_gestion)
+
+    public function step4( $id, $id_catalogo )
     {
-    	$servicioEstablecimiento = $operador_gestion->getServicioEstablecimiento(1);
-    	$catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimiento(1);
-    	return view('RegistroOperadores.registroStep4', compact('servicioEstablecimiento','catalogoServicioEstablecimiento'));
+    	$operador_gestion = new OperadorRepository() ;
+    	
+    	$usuarioServicio = $operador_gestion->getUsuarioServicio($id);
+		$catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimiento($id_catalogo);
+    	
+    	return view('RegistroOperadores.registroStep4', compact('usuarioServicio','catalogoServicioEstablecimiento'));
     }
     
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -251,6 +255,8 @@ class ServicioController extends Controller
     			'tags' => $formFields['tags'],
     			'descuento_clientes' => $formFields['descuento_clientes'],
     			'tags_servicio' => $formFields['tags_servicio'],
+    			'observaciones' => $formFields['observaciones'],
+    			'telefono' => $formFields['telefono'],
     			'id_usuario_servicio' => $formFields['id_usuario_servicio']
     	);
     	$validator = Validator::make($usuarioServicioData, $this->validationUsuarioServicios);
