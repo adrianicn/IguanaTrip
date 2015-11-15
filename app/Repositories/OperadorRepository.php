@@ -31,7 +31,7 @@ class OperadorRepository extends BaseRepository
 	public function __construct(  )
 	{
 		$this->model = new Usuario_Operador();
-		$this->servicioEstablecimiento = new Catalogo_Servicio_Establecimiento();
+		$this->catalogoServicioEstablecimiento = new Catalogo_Servicio_Establecimiento();
 		$this->usuarioServicio = new Usuario_Servicio();
 		$this->servicioEstablecimientoUsuario = new Servicio_Establecimiento_Usuario();
 	}
@@ -207,7 +207,9 @@ class OperadorRepository extends BaseRepository
 											'nombre_comercial'=>$inputs['nombre_comercial'],
 											'tags'=>$inputs['tags'],
 											'descuento_clientes'=>$inputs['descuento_clientes'],
-											'tags_servicio'=>$inputs['tags_servicio']
+											'tags_servicio'=>$inputs['tags_servicio'],
+											'observaciones'=>$inputs['observaciones'],
+											'telefono'=>$inputs['telefono']
 									]);
 	}
 
@@ -239,7 +241,24 @@ class OperadorRepository extends BaseRepository
 	
 	public function getCatalogoServicioEstablecimiento($id_usuario_servicio)
 	{
-		$catalogoServicioEstablecimiento = new $this->servicioEstablecimiento;
-		return $catalogoServicioEstablecimiento::where('id',$id_usuario_servicio)->get();
+		$servicio_establecimiento_usuario = new $this->servicioEstablecimientoUsuario;
+
+		return $servicio_establecimiento_usuario::rightJoin('catalogo_servicio_establecimiento', function($join){
+					$join->on('catalogo_servicio_establecimiento.id', '=', 'servicio_establecimiento_usuario.id_servicio_est');
+				})->where('catalogo_servicio_establecimiento.id_catalogo_servicio',$id_usuario_servicio)
+				->orderBy('catalogo_servicio_establecimiento.id', 'ASC')
+				->get(['catalogo_servicio_establecimiento.id',
+						'catalogo_servicio_establecimiento.nombre_servicio_est',
+						'servicio_establecimiento_usuario.estado_servicio_est_us'
+				]);
+				
+				
+				
+	}
+	
+	public function getUsuarioServicio($id)
+	{
+		$usuarioServicio = new Usuario_Servicio();
+		return $usuarioServicio::where('id',$id)->get();
 	}
 }
