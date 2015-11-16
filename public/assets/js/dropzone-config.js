@@ -17,7 +17,7 @@ Dropzone.options.realDropzone = {
 
             $.ajax({
                 type: 'POST',
-                url: 'upload/delete',
+                url: '/IguanaTrip/public/upload/delete',
                 data: {id: file.name},
                 dataType: 'html',
                 success: function(data){

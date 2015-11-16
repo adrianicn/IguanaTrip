@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -65,7 +66,9 @@ class ImageRepository
         $sessionImage = new Image;
         $sessionImage->filename      = $allowed_filename;
         $sessionImage->original_name = $originalName;
-        $sessionImage->user_id = session('user_id');
+        $sessionImage->id_catalogo_fotografia = $form_data['id_catalogo_fotografia'];
+        $sessionImage->id_usuario_servicio = $form_data['id_usuario_servicio'];
+        
         
         
         $sessionImage->save();
@@ -91,6 +94,25 @@ class ImageRepository
 
         return $filename;
     }
+    
+     
+    public function storeUpdateEstado($inputs, $usuario_servicio) {
+
+        
+DB::table('images')
+                        ->where('id', '=', $inputs['ids'])
+         ->update(['estado_fotografia' => 0]);
+        
+
+        return true;
+    }
+      //Entrega el arreglo de Servicios por operador
+    public function getServiciosImageporId($id_image) {
+
+        return DB::table('images')
+                        ->where('id', '=', $id_image)->get();
+    }
+
 
     /**
      * Optimize Original Image

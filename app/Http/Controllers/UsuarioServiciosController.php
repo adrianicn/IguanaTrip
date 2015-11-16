@@ -8,18 +8,16 @@ use App\Repositories\ServiciosOperadorRepository;
 use Validator;
 use Input;
 use App\Models\Usuario_Servicio;
-
+use App\Models\Promocion_Usuario_Servicio;
 
 class UsuarioServiciosController extends Controller {
-    
-       /**
+
+    /**
      * Create a new AdminController instance.
      *
      * @param  App\Repositories\UserRepository $user_gestion
      * @return void
      */
-    
-
     protected $validationRules = [
 
         'id_usuario_op' => 'required'
@@ -47,7 +45,7 @@ class UsuarioServiciosController extends Controller {
      */
     public function getServiciosOperador($id_usuario_op, ServiciosOperadorRepository $gestion) {
         //
-   
+
         $data['id_usuario_op'] = $id_usuario_op;
 
         //logica que comprueba si el usuario tiene servicios para ser modificados
@@ -70,7 +68,7 @@ class UsuarioServiciosController extends Controller {
         $root_array1['id_usuario_op'] = $formFields['id_usuario_op'];
         $validator = Validator::make($root_array1, $this->validationRules);
         $serviciosBase = array();
-         $root_array = array();
+        $root_array = array();
 
         if ($validator->fails()) {
             return response()->json(array(
@@ -181,7 +179,7 @@ class UsuarioServiciosController extends Controller {
         } else
             $save_array['estado_servicio_usuario'] = 0;
 
-        
+
         $gestion->storeUpdateEstado($save_array, $Servicio);
 
 
@@ -195,5 +193,69 @@ class UsuarioServiciosController extends Controller {
         ));
         //}
     }
+
+    /**
+     * Guarda los servicios que presta un usuario o un operador.
+     *
+     * @return Response
+     */
+    public function postPromocion(ServiciosOperadorRepository $gestion) {
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        $validator = Validator::make($formFields, Promocion_Usuario_Servicio::$rulesP);
+        if ($validator->fails()) {
+            return response()->json(array(
+                        'fail' => true,
+                        'errors' => $validator->getMessageBag()->toArray()
+            ));
+        }
+
+        //obtengo llas promociones por id
+        if (isset($formFields['id'])) {
+            $Promocion = $gestion->getPromocion($formFields['id']);
+            
+        }
+//si ya existe el objeto se hace el update
+        if (isset($Promocion)) {
+            //logica update
+
+            $gestion->storeUpdatePromocion($formFields, $Promocion);
+        } else { //logica de insert
+
+            //Arreglo de inputs prestados que vienen del formulario
+            $object=$gestion->storeNewPromocion($formFields);
+            $returnHTML = ('/IguanaTrip/public/promocion/' . $object->id);
+        }
+
+
+        
+        
+        return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+    }
+    
+    
+    /**
+     * Despliega las promociones por operador
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getPromociones($id_promocion, ServiciosOperadorRepository $gestion) {
+        //
+
+        $data['id'] = $id_promocion;
+
+        //logica que comprueba si el usuario tiene promociones para ser modificados
+        
+        $listPromociones = $gestion->getPromocionesOperador($id_promocion);
+        
+        //imagenes de la promocion
+        $ImgPromociones = $gestion->getImagePromocionesOperador($id_promocion);
+
+        $view = view('Registro.editPromocion', compact('ImgPromociones', 'listPromociones'));
+        return ($view);
+    }
+
 
 }

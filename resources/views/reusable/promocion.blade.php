@@ -2,18 +2,19 @@
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
 
 <div class="testboxForm">
-    <h1>Add Event </h1>
+    <h1>Agregar Promoción </h1>
 
 
 
-    {!! Form::open(['url' => 'auth/register', 'method' => 'post', 'role' => 'form','id' => 'registro']) !!}	
+    
+    {!! Form::open(['url' => route('postPromocion'),  'id'=>'promocion']) !!}
     <hr>
 
     <table>
         <tr>
             <td><label class='labelmodal' for="username">Nombre:</label></td>
 
-            <td><input class="text" id="username" name="nombre_servcio" placeholder="{{trans('front/register.pseudo')}}"></td>
+            <td><input class="text" id="nombre_promocion" name="nombre_promocion" placeholder="{{trans('front/register.pseudo')}}"></td>
         </tr>
         <tr><td>
                 <label class="labelmodal" for="fecha">Inicio: </label>
@@ -46,16 +47,17 @@
         
         
         <tr>
-            <td><label class='labelmodal' for="username">Descripcion:</label></td>
+            <td><label class='labelmodal' for="username">Detalle:</label></td>
 
-            <td><textarea name="textarea" rows="4" cols="29">Descripción</textarea></td>
+            <td><textarea name="descripcion" rows="4" cols="29">Descripción</textarea></td>
         </tr>
         
 
 
     </table>
     
-
-    <a href="#" class="button" onclick="$(this).closest('form').submit()">{!! (trans('front/form.send')) !!}</a>
+<input type="hidden" value="22" name="id_usuario_servicio">
+    
+        <button class="button" type="button"  onclick="AjaxContainerRegistro('promocion')">Siguiente</button>
 </form>{!! Form::close() !!}
 </div>

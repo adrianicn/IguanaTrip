@@ -11,6 +11,10 @@
 
                 {!! Form::open(['url' => route('upload-post'), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}
 
+                
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="id_catalogo_fotografia" value="{{ $tipo }}">
+                        <input type="hidden" name="id_usuario_servicio" value="{{ $id_usuario_servicio }}">
                 <div class="dz-message">
 
                 </div>

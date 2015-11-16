@@ -92,7 +92,12 @@ Route::post('maps',function()
     
     return Input::all();
 });
+Route::post('promocion', ['as' => 'postPromocion', 'uses' =>'UsuarioServiciosController@postPromocion']);
+Route::get('promocion/{id_promocion}',
+    ['uses'=>'UsuarioServiciosController@getPromociones','as'=>'getPromocion'
+    ,'middleware' => 'notAuth']);
 
+Route::post('/delete/image/{id}', ['as' => 'delete-image', 'uses' =>'ImageController@postDeleteImage']);
 
 // Event::listen('illuminate.query', function($query)
 // {

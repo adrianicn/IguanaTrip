@@ -100,7 +100,8 @@
             <td>
                 {!! link_to_route('details.show','Detalle', [$servicio->id,$servicio->id_catalogo_servicios]) !!}
 
-                  <td id='basic-modal' contenteditable="true"><a href='#' onclick='callModal({!!$servicio->id!!})' class='basic'>Agregar Promocion</a></td>
+                  <td id='basic-modal' contenteditable="true">
+                      <a href='#' onclick='callModal({!!$servicio->id!!})' class='basic'>Agregar Promocion</a></td>
 
             </td>
 
