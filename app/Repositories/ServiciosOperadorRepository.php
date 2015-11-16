@@ -122,7 +122,7 @@ class ServiciosOperadorRepository extends BaseRepository {
     }
 
     public function storeUpdatePromocion($inputs, $promo) {
-unset($inputs['_token']);
+
         
             foreach ($promo as $servicioBase) {
         
@@ -133,8 +133,8 @@ unset($inputs['_token']);
         //$inputs['id'] =  $promo->id;
         
         $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
-        $X=$pro->fill($inputs)->save();
-        dd($X);
+        $pro->fill($inputs)->save();
+        
         }
         return true;
     }
