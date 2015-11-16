@@ -190,8 +190,30 @@ class OperadorRepository extends BaseRepository
 		return $operador;
 		
 	}
-	
+
 	public function saveUsuarioServicios($usuarioServicio, $inputs)
+	{
+		$usuarioServicio->nombre_servicio = $inputs['nombre_servicio'];
+		$usuarioServicio->detalle_servicio = $inputs['detalle_servicio'];
+		$usuarioServicio->precio_desde = $inputs['precio_desde'];
+		$usuarioServicio->precio_hasta = $inputs['precio_hasta'];
+		$usuarioServicio->precio_anterior = $inputs['precio_anterior'];
+		$usuarioServicio->precio_actual = $inputs['precio_actual'];
+		$usuarioServicio->descuento_servico = $inputs['descuento_servico'];
+		$usuarioServicio->direccion_servicio = $inputs['direccion_servicio'];
+		$usuarioServicio->correo_contacto = $inputs['correo_contacto'];
+		$usuarioServicio->pagina_web = $inputs['pagina_web'];
+		$usuarioServicio->nombre_comercial = $inputs['nombre_comercial'];
+		$usuarioServicio->tags = $inputs['tags'];
+		$usuarioServicio->descuento_clientes = $inputs['descuento_clientes'];
+		$usuarioServicio->tags_servicio = $inputs['tags_servicio'];
+		$usuarioServicio->observaciones = $inputs['observaciones'];
+		$usuarioServicio->telefono = $inputs['telefono'];
+		$usuarioServicio->save();
+		
+	}
+	
+	public function updateUsuarioServicios($usuarioServicio, $inputs)
 	{
 		return  $usuarioServicio::where('id',$inputs['id_usuario_servicio'])
 									->update(['nombre_servicio'=>$inputs['nombre_servicio'],
@@ -213,47 +235,88 @@ class OperadorRepository extends BaseRepository
 									]);
 	}
 
-	public function saveServicioEstablecimientoUsuario( $servicio_establecimiento_usuario, $id_usuario_servicio )
+	public function saveServicioEstablecimientoUsuario( $servicio_establecimiento_usuario, $id_usuario_servicio, $id_catalogo )
 	{
-			
-		foreach ($servicio_establecimiento_usuario as $value) {
-			$serEstablecimientoUsuario = new $this->servicioEstablecimientoUsuario;
-			
-			$serEstablecimientoUsuario->id_usuario_servicio = $id_usuario_servicio;
-			$serEstablecimientoUsuario->id_servicio_est = $value;
-			$serEstablecimientoUsuario->estado_servicio_est_us = 1;
-			$serEstablecimientoUsuario->save();
+		$catalogoServiciosAdicionalesOperador = $this->getCatalogoServicioEstablecimientoExistente($id_catalogo,$id_usuario_servicio);
+// print 	$catalogoServiciosAdicionalesOperador;
+// var_dump( 	$servicio_establecimiento_usuario);
+// exit;	
+		if(count($catalogoServiciosAdicionalesOperador) > 0 )
+		{
+			foreach ($catalogoServiciosAdicionalesOperador as $catalogo)
+			{
+				$serEstablecimientoUsuario = new $this->servicioEstablecimientoUsuario;
+				//$servicio_establecimiento_usuario  as $value
+				if (in_array($catalogo->id,$servicio_establecimiento_usuario) && ($catalogo->id_servicio_est == NULL) && ($catalogo->estado_servicio_est_us == NULL))
+				{
+					$serEstablecimientoUsuario->id_usuario_servicio = $id_usuario_servicio;
+					$serEstablecimientoUsuario->id_servicio_est = $catalogo->id;
+					$serEstablecimientoUsuario->estado_servicio_est_us = 1;
+					$serEstablecimientoUsuario->save();
+				} else {
+					if(in_array($catalogo->id,$servicio_establecimiento_usuario))
+					{
+						$serEstablecimientoUsuario::where('id',$catalogo->id_servicio_establecimiento_usuario)
+						->update(['estado_servicio_est_us'=>1]);
+					} else {
+						$serEstablecimientoUsuario::where('id',$catalogo->id_servicio_establecimiento_usuario)
+						->update(['estado_servicio_est_us'=>0]);
+							
+					}
+					
+				}
+			}
+		} else {
+			foreach ($servicio_establecimiento_usuario as $value)
+			{
+				$serEstablecimientoUsuario = new $this->servicioEstablecimientoUsuario;
+				$serEstablecimientoUsuario->id_usuario_servicio = $id_usuario_servicio;
+				$serEstablecimientoUsuario->id_servicio_est = $value;
+				$serEstablecimientoUsuario->estado_servicio_est_us = 1;
+				$serEstablecimientoUsuario->save();
+			}
 		}
-		
 	}
 	
-	public function storageUsuarioServicios( $inputs, $servicio_establecimiento_usuario, $id_usuario_servicio )
+	public function storageUsuarioServicios( $inputs, $servicio_establecimiento_usuario, $id_usuario_servicio, $id_catalogo )
 	{
 		$usuarioServicio = new $this->usuarioServicio;
-		
-		$this->saveUsuarioServicios($usuarioServicio, $inputs);
-		$this->saveServicioEstablecimientoUsuario( $servicio_establecimiento_usuario, $id_usuario_servicio );
+		if ($id_usuario_servicio == 0)
+		{
+			$this->saveUsuarioServicios($usuarioServicio, $inputs);
+			$this->saveServicioEstablecimientoUsuario( $servicio_establecimiento_usuario, $id_usuario_servicio, $id_catalogo );
+		} else {
+			$this->updateUsuarioServicios($usuarioServicio, $inputs);
+			$this->saveServicioEstablecimientoUsuario( $servicio_establecimiento_usuario, $id_usuario_servicio, $id_catalogo );
+		}
 		
 		return $usuarioServicio;
 		
 	
 	}
 	
-	public function getCatalogoServicioEstablecimiento($id_usuario_servicio)
+	public function getCatalogoServicioEstablecimientoExistente($id_catalogo,$id_usuario_servicio)
 	{
 		$servicio_establecimiento_usuario = new $this->servicioEstablecimientoUsuario;
 
-		return $servicio_establecimiento_usuario::rightJoin('catalogo_servicio_establecimiento', function($join){
-					$join->on('catalogo_servicio_establecimiento.id', '=', 'servicio_establecimiento_usuario.id_servicio_est');
-				})->where('catalogo_servicio_establecimiento.id_catalogo_servicio',$id_usuario_servicio)
+		return $servicio_establecimiento_usuario::rightJoin('catalogo_servicio_establecimiento', function($join) use($id_usuario_servicio){
+					$join->on('catalogo_servicio_establecimiento.id', '=', 'servicio_establecimiento_usuario.id_servicio_est')
+					->where('servicio_establecimiento_usuario.id_usuario_servicio', '=', $id_usuario_servicio);
+				})->where('catalogo_servicio_establecimiento.id_catalogo_servicio',$id_catalogo)
 				->orderBy('catalogo_servicio_establecimiento.id', 'ASC')
 				->get(['catalogo_servicio_establecimiento.id',
 						'catalogo_servicio_establecimiento.nombre_servicio_est',
-						'servicio_establecimiento_usuario.estado_servicio_est_us'
+						'servicio_establecimiento_usuario.estado_servicio_est_us',
+						'servicio_establecimiento_usuario.id_servicio_est',
+						'servicio_establecimiento_usuario.id AS id_servicio_establecimiento_usuario'
 				]);
 				
-				
-				
+	}
+	
+	public function getCatalogoServicioEstablecimiento($id_catalogo){
+		$catalogoServicioEstablecimiento = new $this->catalogoServicioEstablecimiento;
+		
+		return $catalogoServicioEstablecimiento::where('id_catalogo_servicio',$id_catalogo)->get();
 	}
 	
 	public function getUsuarioServicio($id)

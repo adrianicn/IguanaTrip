@@ -103,9 +103,11 @@ class ServicioController extends Controller
     	$operador_gestion = new OperadorRepository() ;
     	
     	$usuarioServicio = $operador_gestion->getUsuarioServicio($id);
-		$catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimiento($id_catalogo);
-    	
-    	return view('RegistroOperadores.registroStep4', compact('usuarioServicio','catalogoServicioEstablecimiento'));
+		$catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimientoExistente($id_catalogo,$id);
+		if(count($catalogoServicioEstablecimiento) == 0 )
+			$catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimiento($id_catalogo);
+		
+    	return view('RegistroOperadores.registroStep4', compact('usuarioServicio','catalogoServicioEstablecimiento','id_catalogo'));
     }
     
     /**
@@ -257,7 +259,7 @@ class ServicioController extends Controller
     			'tags_servicio' => $formFields['tags_servicio'],
     			'observaciones' => $formFields['observaciones'],
     			'telefono' => $formFields['telefono'],
-    			'id_usuario_servicio' => $formFields['id_usuario_servicio']
+    			'id_usuario_servicio' => $formFields['id']
     	);
     	$validator = Validator::make($usuarioServicioData, $this->validationUsuarioServicios);
     	if ($validator->fails()) {
@@ -268,7 +270,7 @@ class ServicioController extends Controller
     	} else {
     	
     		//return $servicio_establecimiento_usuario;
-    			$usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServicios( $usuarioServicioData, $servicio_establecimiento_usuario, $formFields['id_usuario_servicio'] );
+    			$usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServicios( $usuarioServicioData, $servicio_establecimiento_usuario, $formFields['id'], $formFields['id_catalogo'] );
     	}
     	$returnHTML = ('/IguanaTrip/public');
    	return response()->json(array('success' => true, 'redirectto'=>$returnHTML));

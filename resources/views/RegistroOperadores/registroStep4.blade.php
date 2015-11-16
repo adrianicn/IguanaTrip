@@ -50,6 +50,7 @@ $usuarioServicio->telefono = '';
 
 	<div class="wrapper uwa-font-aa">
 		<input type="hidden" value="{!!$usuarioServicio->id!!}" name="id" id="id">
+		<input type="hidden" value="{!!$id_catalogo!!}" name="id_catalogo" id="id_catalogo">
 	
 		<div class="form-group">
         	{!!Form::label('nombre_servicio_1', 'Nombre Servicio', array('class'=>'control-label'))!!}
