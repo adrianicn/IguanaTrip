@@ -117,7 +117,7 @@
                     <span class="table-remove glyphicon glyphicon-remove"></span>
                 </td>
                 <td>
-                    {!! link_to_route('details.show', 'Details', [0,$servicio->id_catalogo_servicios]) !!}
+                    {!! link_to_route('details.show', 'Details', [0,$servicios->id_catalogo_servicios]) !!}
                 </td>
             </tr>
         </table>

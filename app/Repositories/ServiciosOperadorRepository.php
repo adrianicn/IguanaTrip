@@ -123,19 +123,14 @@ class ServiciosOperadorRepository extends BaseRepository {
 
     public function storeUpdatePromocion($inputs, $promo) {
 
-        
-            foreach ($promo as $servicioBase) {
-        
-                
-               $pro=$this->promocion->find($servicioBase->id);
-        
+    foreach ($promo as $servicioBase) {
+        $pro=$this->promocion->find($servicioBase->id);
         //Transformo el arreglo en un solo objeto
         //$inputs['id'] =  $promo->id;
-        
         $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
         $pro->fill($inputs)->save();
-        
         }
+
         return true;
     }
 
