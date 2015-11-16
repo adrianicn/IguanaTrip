@@ -64,10 +64,12 @@ class ImageRepository
         }
 
         $sessionImage = new Image;
-        $sessionImage->filename      = $allowed_filename;
+        $sessionImage->filename      = $allowed_filename.'.jpg';
         $sessionImage->original_name = $originalName;
         $sessionImage->id_catalogo_fotografia = $form_data['id_catalogo_fotografia'];
         $sessionImage->id_usuario_servicio = $form_data['id_usuario_servicio'];
+        $sessionImage->id_auxiliar = $form_data['id_auxiliar'];
+        $sessionImage->estado_fotografia = 1;
         
         
         

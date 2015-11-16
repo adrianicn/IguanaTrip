@@ -7,20 +7,14 @@
 {!! HTML::style('css/popupModal/basic.css') !!} 
   
 
-<!-- Contact Form CSS files -->
+<!-- Contact Form CSS files //@include('reusable.promocion')-->
 
 
- <div id="basic-modal-content" class="cls">
-                
-                
-  @include('reusable.promocion')
-  
-            </div>
+ 
 
             <div style='display:none'>
                 <img src="{!! asset('img/x.png')!!}" alt='' />
             </div>
-
 <style>
 
     #simplemodal-container a.modalCloseImg {
@@ -38,7 +32,12 @@
         <li>Simple / powerful features such as add row, remove row, move row up/down.</li>
     </ul>
 
-
+      <div id="basic-modal-content" class="cls">
+  
+  
+  @include('reusable.createNewServicio', ['operador' =>2,'catalogo' =>1])  
+    
+</div>
  <?php $counter = 0;?>
     @foreach ($listServiciosUnicos as $servicios)
  <?php $counter = $counter+1;?>
@@ -47,7 +46,7 @@
 <div class="wrapper uwa-font-aa">
     <div id="table_{!!$servicios->id!!}" class="table-editable">
 
-        
+  
         <div class="section"><span>{!!$counter!!}</span>{!!$servicios->nombre_servicio!!}</div>
 
         <span  class="table-add glyphicon glyphicon-plus" onclick="add({!!$servicios->id!!})"></span>

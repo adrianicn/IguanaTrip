@@ -6,9 +6,10 @@
 </div>
 
 @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
+@include('Registro.uploadImage', ['tipo' => '2','objeto'=>$listPromociones])  
 @foreach ($listPromociones as $promo)
 
-@include('Registro.uploadImage', ['tipo' => '2','id_usuario_servicio'=>$promo->id_usuario_servicio])  
+
 
 <div class="row">
 

@@ -49,7 +49,7 @@
             @foreach ($ImgPromociones as $imagen)
           <div class="item">
               <?php
-              $url="images/icon/".$imagen->original_name
+              $url="images/icon/".$imagen->filename
               ?>
               
               <img src="{{asset($url)}}">

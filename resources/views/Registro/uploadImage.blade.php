@@ -8,13 +8,17 @@
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="col-md-offset-1 col-md-10">
             <div class="jumbotron how-to-create" >
+@foreach ($objeto as $promounic)
+
+
 
                 {!! Form::open(['url' => route('upload-post'), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}
 
                 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="id_catalogo_fotografia" value="{{ $tipo }}">
-                        <input type="hidden" name="id_usuario_servicio" value="{{ $id_usuario_servicio }}">
+                        <input type="hidden" name="id_usuario_servicio" value="{{$promounic->id_usuario_servicio }}">
+                            <input type="hidden" name="id_auxiliar" value="{{$promounic->id}}">
                 <div class="dz-message">
 
                 </div>
@@ -28,6 +32,7 @@
                 <h4 style="text-align: center;color:#428bca;">Drop images in this area  <span class="glyphicon glyphicon-hand-down"></span></h4>
 
                 {!! Form::close() !!}
+                @endforeach
 
             </div>
             
