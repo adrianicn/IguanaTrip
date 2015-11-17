@@ -16,7 +16,7 @@ class ImageController extends Controller
 
     public function getUpload()
     {
-        return view('Registro.uploadImage');
+        return view('reusable.uploadImage');
     }
 
     public function postUpload()
