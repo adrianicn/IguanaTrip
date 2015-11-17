@@ -40,6 +40,34 @@ $('.error').html('');
     });
 }
 
+
+function RenderPartial($idPartial,$id_catalogo_servicio,$id_usuario_operador) {
+
+$('#target').loadingOverlay();
+    var url = "/IguanaTrip/public/render/"+$idPartial;
+    
+    $.ajax({
+     type:   "GET",
+     url:    url,
+     data:   {
+       
+     }}).done(function(newHtml) {
+    
+    /* output the javascript object to HTML */
+    $('#basic-modal-content').html(newHtml.newHtml);
+    $('#basic-modal-content').find('.id_catalogo_servicio').val($id_catalogo_servicio);
+    $('#basic-modal-content').find('.id_usuario_operador').val($id_usuario_operador);
+    
+     });
+ $('#target').loadingOverlay('remove');
+callModal('cls');        
+                
+
+        
+    }
+
+
+
 function AjaxContainerRetrunMessage($formulario,$id) {
 $('.error').html('');
     $('#target').loadingOverlay();

@@ -9,9 +9,6 @@
 
 <!-- Contact Form CSS files //@include('reusable.promocion')-->
 
-
- 
-
             <div style='display:none'>
                 <img src="{!! asset('img/x.png')!!}" alt='' />
             </div>
@@ -19,7 +16,7 @@
 
     #simplemodal-container a.modalCloseImg {
         background:url("{!! asset('img/x.png')!!}") no-repeat;
-        width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+        width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
     </style>
 
     <div class="container">
@@ -35,9 +32,7 @@
       <div id="basic-modal-content" class="cls">
   
   
-  @include('reusable.createNewServicio', ['operador' =>2,'catalogo' =>1])  
-    
-</div>
+       </div>
  <?php $counter = 0;?>
     @foreach ($listServiciosUnicos as $servicios)
  <?php $counter = $counter+1;?>
@@ -49,7 +44,8 @@
   
         <div class="section"><span>{!!$counter!!}</span>{!!$servicios->nombre_servicio!!}</div>
 
-        <span  class="table-add glyphicon glyphicon-plus" onclick="add({!!$servicios->id!!})"></span>
+        <span  class="table-add glyphicon glyphicon-plus" onclick="RenderPartial('reusable.createNewServicio',{!!$servicios->id_catalogo_servicios!!},{!!$servicios->id_usuario_operador!!})"></span>
+                              
         <div class="inner-wrap">
         
     
@@ -98,11 +94,11 @@
             </td>
             <td>
                 {!! link_to_route('details.show','Detalle', [$servicio->id,$servicio->id_catalogo_servicios]) !!}
-
+ </td>
                   <td id='basic-modal' contenteditable="true">
-                      <a href='#' onclick='callModal({!!$servicio->id!!})' class='basic'>Agregar Promocion</a></td>
+</td>
 
-            </td>
+           
 
             </tr>
             @endif

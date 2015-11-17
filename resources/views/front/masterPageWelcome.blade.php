@@ -20,11 +20,10 @@
 
 
         {!! HTML::style('css/maximage.css') !!} 
-
         {!! HTML::style('css/styles.css') !!} 
+        {!! HTML::style('css/registerForm.css') !!} 
 
-{!! HTML::style('css/registerForm.css') !!} 
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
 
         {!! HTML::style('css/demo.css') !!} 
 
