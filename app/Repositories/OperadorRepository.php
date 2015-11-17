@@ -208,7 +208,7 @@ class OperadorRepository extends BaseRepository
 // 		$usuarioServicio->descuento_clientes = $inputs['descuento_clientes'];
 // 		$usuarioServicio->tags_servicio = $inputs['tags_servicio'];
 // 		$usuarioServicio->observaciones = $inputs['observaciones'];
-// 		$usuarioServicio->telefono = $inputs['telefono'];
+ 		$usuarioServicio->id_catalogo_servicio = $inputs['id_catalogo_servicio'];
 		$usuarioServicio->id_usuario_operador = $inputs['id_usuario_operador'];
 	
 		$usuarioServicio->save();
