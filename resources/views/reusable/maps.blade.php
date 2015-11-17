@@ -8,7 +8,6 @@ width:481px;height:344px
       }
     </style>
   
-                    
         <div class='form-group'>
             <label for=''>map</label>
             <input type="text" id='searchmap'>
@@ -16,14 +15,14 @@ width:481px;height:344px
             
         </div>
         <div class="form-group">
-            <label for=''>lat</label>
-            <input type="text" class='form-control input-sm' name='lat' id='lat'/>
+            <label for=''>Latitud</label>
+            <input type="text" class='form-control input-sm' name='latitud_servicio' value="{!!$latitud_servicio!!}" id='latitud_servicio'/>
             
             
         </div>
         <div class="form-group">
-            <label for=''>lng</label>
-            <input type="text" class='form-control input-sm' name='lng' id='lng'/>
+            <label for=''>Longitud</label>
+            <input type="text" class='form-control input-sm' name='longitud_servicio' value="{!!$longitud_servicio!!}" id='longitud_servicio'/>
             
         </div>
         
@@ -76,8 +75,8 @@ function initMap() {
       
       var lat=marker.getPosition().lat();
       var lng=marker.getPosition().lng;
-      $('#lat').val(lat);
-      $('#lng').val(lng);
+      $('#latitud_servicio').val(lat);
+      $('#longitud_servicio').val(lng);
   })
   }
   

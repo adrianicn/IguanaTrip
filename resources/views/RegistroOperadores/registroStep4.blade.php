@@ -22,6 +22,8 @@ $usuarioServicio->descuento_clientes = '';
 $usuarioServicio->tags_servicio = '';
 $usuarioServicio->observaciones = '';
 $usuarioServicio->telefono = '';
+$usuarioServicio->latitud_servicio = 0;
+$usuarioServicio->longitud_servicio = 0;
 ?>
 @foreach ($usuarioServicio as $detalles)
 <?php
@@ -42,6 +44,8 @@ $usuarioServicio->telefono = '';
 	$usuarioServicio->tags_servicio = $detalles->tags_servicio;
 	$usuarioServicio->observaciones = $detalles->observaciones;
 	$usuarioServicio->telefono = $detalles->telefono;
+	$usuarioServicio->latitud_servicio = $detalles->latitud_servicio;
+	$usuarioServicio->longitud_servicio = $detalles->longitud_servicio;
 ?>
 @endforeach
 <div class="row">
@@ -92,6 +96,8 @@ $usuarioServicio->telefono = '';
             {!!Form::text('direccion_servicio', $usuarioServicio->direccion_servicio, array('class'=>'form-control','placeholder'=>'Direccion del Servicio'))!!}
 
         </div>
+        @include('reusable.maps', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
+        <!-- , ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio] -->
 		<div class="form-group">
         	{!!Form::label('correo_contacto_1', 'Correo del contacto', array('class'=>'control-label'))!!}
             {!!Form::text('correo_contacto', $usuarioServicio->correo_contacto, array('class'=>'form-control','placeholder'=>'Correo Contacto'))!!}
