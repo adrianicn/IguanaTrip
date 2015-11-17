@@ -8,7 +8,6 @@ width:481px;height:344px
       }
     </style>
   
-          {!! Form::open(array('url'=>'maps','files'=>true)) !!}
           
         <div class='form-group'>
             <label for=''>map</label>
@@ -17,19 +16,18 @@ width:481px;height:344px
             
         </div>
         <div class="form-group">
-            <label for=''>lat</label>
-            <input type="text" class='form-control input-sm' name='lat' id='lat'/>
+            <label for=''>Latitud</label>
+            <input type="text" class='form-control input-sm' name='latitud_servicio' value="{!!$latitud_servicio!!}" id='latitud_servicio'/>
             
             
         </div>
         <div class="form-group">
-            <label for=''>lng</label>
-            <input type="text" class='form-control input-sm' name='lng' id='lng'/>
+            <label for=''>Longitud</label>
+            <input type="text" class='form-control input-sm' name='longitud_servicio' value="{!!$longitud_servicio!!}" id='longitud_servicio'/>
             
         </div>
         
-          {!! Form::close() !!}
-
+          
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDor7F0iN5YavbFiLRA7pY7L8-Rgl89GT8&signed_in=true&libraries=places&callback=initMap" async defer></script>
   
         
@@ -77,8 +75,8 @@ function initMap() {
       
       var lat=marker.getPosition().lat();
       var lng=marker.getPosition().lng;
-      $('#lat').val(lat);
-      $('#lng').val(lng);
+      $('#latitud_servicio').val(lat);
+      $('#longitud_servicio').val(lng);
   })
   }
   
