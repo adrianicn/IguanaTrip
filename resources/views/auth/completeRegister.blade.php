@@ -132,7 +132,8 @@
 
     $("#registro").submit(function (event) {
 
-        $('#target').loadingOverlay();
+        
+        $(".testbox").LoadingOverlay("show");
 
         event.preventDefault();
         var $form = $(this),
@@ -150,13 +151,13 @@
                     errorString += '<li>' + value + '</li>';
                 });
                 errorString += '</ul>';
-                $('#target').loadingOverlay('remove');
+                 $(".testbox").LoadingOverlay("hide", true);
                 //$('#error').html(errorString);
                 $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + errorString + "'])");
 
             }
             if (data.success) {
-                $('#target').loadingOverlay('remove');
+                 $(".testbox").LoadingOverlay("hide", true);
                 $('.register').fadeOut(); //hiding Reg form
                 var successContent = '' + data.message + '';
                 $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + successContent + "'])");

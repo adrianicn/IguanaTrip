@@ -45,6 +45,8 @@ class AuthController extends Controller {
      */
     public function postLogin(
     LoginRequest $request, Guard $auth) {
+        
+        
         $logValue = $request->input('log');
 
         $logAccess = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';

@@ -311,11 +311,6 @@ body {
     min-width: 960px;
     text-align: center;
 }
-body a {
-    color: #fff;
-    outline: medium none;
-    text-decoration: none;
-}
 
 .wrapper {
     clear: left;
@@ -323,7 +318,7 @@ body a {
     position: relative;
     text-align: left;
     width: 960px;
-    z-index: 1;
+    
 }
 .home .wrapper {
     width: 930px;

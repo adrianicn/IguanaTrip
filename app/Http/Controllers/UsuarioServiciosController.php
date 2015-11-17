@@ -92,6 +92,8 @@ $data=1;
      * @return Response
      */
     public function postServicioOperadores(ServiciosOperadorRepository $gestion) {
+        
+        
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);

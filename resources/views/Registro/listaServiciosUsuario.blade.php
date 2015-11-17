@@ -29,7 +29,7 @@
         <li>Simple / powerful features such as add row, remove row, move row up/down.</li>
     </ul>
 
-      <div id="basic-modal-content" class="cls">
+      <div id="basic-modal-content" class="cls loadModal">
   
   
        </div>
