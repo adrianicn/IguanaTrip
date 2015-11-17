@@ -277,4 +277,30 @@ class ServicioController extends Controller
     	 
     }
     
+    public function postUsuarioServiciosMini(Request $request, OperadorRepository $usuarioSevicio_gestion)
+    {
+    	$inputData = Input::get('formData');
+    	parse_str($inputData, $formFields);
+    	 
+    	$usuarioServicioData = array(
+    			'nombre_servicio' => $formFields['nombre_servicio'],
+    			'detalle_servicio' => $formFields['detalle_servicio'],
+    			'id_usuario_operador' => $formFields['id_usuario_operador']
+    	);
+    	$validator = Validator::make($usuarioServicioData, $this->validationUsuarioServicios);
+    	if ($validator->fails()) {
+    		return response()->json(array(
+    				'fail' => true,
+    				'errors' => $validator->getMessageBag()->toArray()
+    		));
+    	} else {
+    		 
+    		//return $servicio_establecimiento_usuario;
+    		$usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServiciosMini( $usuarioServicioData );
+    	}
+    	$returnHTML = ('servicios/serviciooperador/'.$usuarioServicio.'/'.$formFields['id_catalogo']);
+    	return response()->json(array('success' => true, 'redirectto'=>$returnHTML));
+    	 
+    }
+    
 }
