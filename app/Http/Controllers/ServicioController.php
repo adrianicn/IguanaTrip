@@ -279,7 +279,7 @@ class ServicioController extends Controller
     
     public function postUsuarioServiciosMini(Request $request, OperadorRepository $usuarioSevicio_gestion)
     {
-        sleep(30);
+        
     	$inputData = Input::get('formData');
     	parse_str($inputData, $formFields);
     	 

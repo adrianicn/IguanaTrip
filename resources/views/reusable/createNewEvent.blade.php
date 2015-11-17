@@ -2,16 +2,13 @@
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
 
 <div id="testboxForm" class="testboxForm">
-    <h1>Agregar Servicio </h1>
+    <h1>Agregar Evento </h1>
 
 
 
     
     {!! Form::open(['url' => route('upload-postusuarioserviciosmini'),  'id'=>'newServicio']) !!}
-    
-
-
-    
+ 
     <hr>
 
     <table>
