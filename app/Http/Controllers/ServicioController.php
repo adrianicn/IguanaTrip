@@ -288,7 +288,7 @@ class ServicioController extends Controller
     			'id_usuario_operador' => $formFields['id_usuario_operador']
     	);
    		$usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServiciosMini( $usuarioServicioData );
-    	$returnHTML = ('servicios/serviciooperador/'.$usuarioServicio.'/'.$formFields['id_catalogo']);
+    	$returnHTML = ('servicios/serviciooperador/'.$usuarioServicio.'/'.$formFields['id_catalogo_servicio']);
     	return response()->json(array('success' => true, 'redirectto'=>$returnHTML));
     	 
     }
