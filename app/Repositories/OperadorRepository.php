@@ -210,9 +210,11 @@ class OperadorRepository extends BaseRepository
 // 		$usuarioServicio->observaciones = $inputs['observaciones'];
 // 		$usuarioServicio->telefono = $inputs['telefono'];
 		$usuarioServicio->id_usuario_operador = $inputs['id_usuario_operador'];
-		$objeto=$usuarioServicio->save();
+	
+		$usuarioServicio->save();
+		//$objeto=$usuarioServicio->save();
 		
-		return $objeto->id;
+		return $usuarioServicio->id;
 	}
 	
 	public function updateUsuarioServicios($usuarioServicio, $inputs)
