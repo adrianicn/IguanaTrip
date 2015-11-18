@@ -1,39 +1,41 @@
 
 $.ajaxSetup({
     headers: {
-            'X-CSRF-Token': $('meta[name=_token]').attr('content')}
-    });
- 
+        'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+});
 
-$('.error').html('');
-        function AjaxContainerRegistro($formulario) {
-        $('#target').loadingOverlay();
-        //event.preventDefault();
 
-            var $form = $('#'+$formulario),
-                data = $form.serialize(),
-                url = $form.attr("action");
-                    var posting = $.post(url, {formData: data});
-                    posting.done(function (data) {
-                        if (data.fail) {
-                            var errorString = '<ul>';
-                          $.each(data.errors, function (key, value) {
-                            errorString += '<li>' + value + '</li>';
-                          });
-                        errorString += '</ul>';
-                        $('#target').loadingOverlay('remove');
-                        //$('.rowerror').html(errorString);
-                        $('.rowerror').html( errorString );
-                        
-                        }
-                        if (data.success) {
-                            $('#target').loadingOverlay('remove');
-                             window.location.href=data.redirectto;
 
-                //  $('#containerbase').empty();
-                // $('#containerbase').html(data.html);
+function AjaxContainerRegistro($formulario) {
+    $("#loadingScreen").LoadingOverlay("show");
 
-                        } //success
+    //event.preventDefault();
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize(),
+            url = $form.attr("action");
+    var posting = $.post(url, {formData: data});
+    posting.done(function (data) {
+        if (data.fail) {
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+
+            $("#loadingScreen").LoadingOverlay("hide", true);
+            //$('.rowerror').html(errorString);
+            $('.rowerror').html(errorString);
+
+        }
+        if (data.success) {
+            $("#loadingScreen").LoadingOverlay("hide", true);
+            window.location.href = data.redirectto;
+
+            //  $('#containerbase').empty();
+            // $('#containerbase').html(data.html);
+
+        } //success
 
 
 
@@ -41,108 +43,143 @@ $('.error').html('');
 }
 
 
-function RenderPartial($idPartial,$id_catalogo_servicio,$id_usuario_operador) {
+function AjaxContainerRegistroWithLoad($formulario,$loadScreen) {
+    $(".loadModal").LoadingOverlay("show");
 
-$('#target').loadingOverlay();
-    var url = "/IguanaTrip/public/render/"+$idPartial;
+    //event.preventDefault();
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize(),
+            url = $form.attr("action");
+    var posting = $.post(url, {formData: data});
+    posting.done(function (data) {
+        if (data.fail) {
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+
+            $(".loadModal").LoadingOverlay("hide", true);
+            //$('.rowerror').html(errorString);
+            $('.rowerror').html(errorString);
+
+        }
+        if (data.success) {
+            $(".loadModal").LoadingOverlay("hide", true);
+            window.location.href = data.redirectto;
+
+            //  $('#containerbase').empty();
+            // $('#containerbase').html(data.html);
+
+        } //success
+
+
+
+    });
+}
+
+
+function RenderPartial($idPartial, $id_catalogo_servicio, $id_usuario_operador) {
+
     
+    $("#loadingScreen").LoadingOverlay("show");
+    var url = "/IguanaTrip/public/render/" + $idPartial;
+
     $.ajax({
-     type:   "GET",
-     url:    url,
-     data:   {
-       
-     }}).done(function(newHtml) {
-    
-    /* output the javascript object to HTML */
-    $('#basic-modal-content').html(newHtml.newHtml);
-    $('#basic-modal-content').find('.id_catalogo_servicio').val($id_catalogo_servicio);
-    $('#basic-modal-content').find('.id_usuario_operador').val($id_usuario_operador);
-    
-     });
- $('#target').loadingOverlay('remove');
-callModal('cls');        
-                
+        type: "GET",
+        url: url,
+        data: {
+        }}).done(function (newHtml) {
 
-        
-    }
+        /* output the javascript object to HTML */
+        $('#basic-modal-content').html(newHtml.newHtml);
+        $('#basic-modal-content').find('.id_catalogo_servicio').val($id_catalogo_servicio);
+        $('#basic-modal-content').find('.id_usuario_operador').val($id_usuario_operador);
+
+    });
+    $("#loadingScreen").LoadingOverlay("hide", true);
+    callModal('cls');
 
 
 
-function AjaxContainerRetrunMessage($formulario,$id) {
-$('.error').html('');
-    $('#target').loadingOverlay();
-
-      
-        
-            var $form = $('#'+$formulario),
-                data = $form.serialize()+ '&ids=' + $id;
-                url = $form.attr("action");
-        var posting = $.post(url, {formData: data});
-        posting.done(function (data) {
-            if (data.fail) {
+}
 
 
 
-                var errorString = '<ul>';
-                $.each(data.errors, function (key, value) {
-                    errorString += '<li>' + value + '</li>';
-                });
-                errorString += '</ul>';
-                $('#target').loadingOverlay('remove');
-                //$('#error').html(errorString);
-                $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + errorString + "'])");
+function AjaxContainerRetrunMessage($formulario, $id) {
+    $('.error').html('');
 
-            }
-            if (data.success) {
-                $('#target').loadingOverlay('remove');
-                $('.register').fadeOut(); //hiding Reg form
-                var successContent = '' + data.message + '';
-                $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + successContent + "'])");
+    $("#loadingScreen").LoadingOverlay("show");
 
 
 
-
-            } //success
-        }); //done
-    
-    }
-
-
-    function AjaxContainerRegistroParametro($formulario,$parametro) {
-        
-        
-        $('#target').loadingOverlay();
-        //event.preventDefault();
+    var $form = $('#' + $formulario),
+            data = $form.serialize() + '&ids=' + $id;
+    url = $form.attr("action");
+    var posting = $.post(url, {formData: data});
+    posting.done(function (data) {
+        if (data.fail) {
 
 
-            var $form = $('#'+$formulario),
-                data = $form.serialize()+ '&ids=' + $id;
-                url = $form.attr("action");
-        var posting = $.post(url, {formData: data});
-            var $form = $('#'+$formulario),
-                data = $form.serialize(),
-                url = $form.attr("action");
-                    var posting = $.post(url, {formData: data});
-                    posting.done(function (data) {
-                        if (data.fail) {
-                            var errorString = '<ul>';
-                          $.each(data.errors, function (key, value) {
-                            errorString += '<li>' + value + '</li>';
-                          });
-                        errorString += '</ul>';
-                        $('#target').loadingOverlay('remove');
-                        //$('.rowerror').html(errorString);
-                        $('.rowerror').html( errorString );
-                        
-                        }
-                        if (data.success) {
-                            $('#target').loadingOverlay('remove');
-                             window.location.href=data.redirectto;
 
-                //  $('#containerbase').empty();
-                // $('#containerbase').html(data.html);
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#" + $formulario).LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+            $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + errorString + "'])");
 
-                        } //success
+        }
+        if (data.success) {
+            $("#loadingScreen").LoadingOverlay("hide", true);
+            $('.register').fadeOut(); //hiding Reg form
+            var successContent = '' + data.message + '';
+            $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + successContent + "'])");
+
+
+
+
+        } //success
+    }); //done
+
+}
+
+
+function AjaxContainerRegistroParametro($formulario, $parametro) {
+
+
+    $("#loadingScreen").LoadingOverlay("show");
+    var $form = $('#' + $formulario),
+            data = $form.serialize() + '&ids=' + $id;
+    url = $form.attr("action");
+    var posting = $.post(url, {formData: data});
+    var $form = $('#' + $formulario),
+            data = $form.serialize(),
+            url = $form.attr("action");
+    var posting = $.post(url, {formData: data});
+    posting.done(function (data) {
+        if (data.fail) {
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#" + $formulario).LoadingOverlay("hide", true);
+            //$('.rowerror').html(errorString);
+            $('.rowerror').html(errorString);
+
+        }
+        if (data.success) {
+            $("#loadingScreen").LoadingOverlay("hide", true);
+            window.location.href = data.redirectto;
+
+            //  $('#containerbase').empty();
+            // $('#containerbase').html(data.html);
+
+        } //success
 
 
 

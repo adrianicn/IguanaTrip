@@ -27,6 +27,7 @@
 
         {!! HTML::style('css/demo.css') !!} 
 
+        
 <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
         <!--[if IE 6]>
@@ -123,7 +124,9 @@
             {!!HTML::script('js/jquery.fullscreen.js') !!}
             {!!HTML::script('js/jquery.ba-hashchange.js') !!}
             {!!HTML::script('js/main.js') !!}
-            {!!HTML::script('js/loading-overlay.min.js') !!}
+        {!!HTML::script('js/loadingScreen/loadingoverlay.js') !!}
+
+    {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
             
             @yield('scripts')
             
