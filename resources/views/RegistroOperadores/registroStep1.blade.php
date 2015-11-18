@@ -3,6 +3,7 @@
 @section('step1')
 
 
+
 <?php  
 $label_tipo_operador_agencia = 'Get started';
 $label_tipo_operador_empresa = 'Get started';
