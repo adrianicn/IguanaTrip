@@ -259,6 +259,8 @@ class ServicioController extends Controller
     			'tags_servicio' => $formFields['tags_servicio'],
     			'observaciones' => $formFields['observaciones'],
     			'telefono' => $formFields['telefono'],
+    			'latitud_servicio' => $formFields['latitud_servicio'],
+    			'longitud_servicio' => $formFields['longitud_servicio'],
     			'id_usuario_servicio' => $formFields['id']
     	);
     	$validator = Validator::make($usuarioServicioData, $this->validationUsuarioServicios);

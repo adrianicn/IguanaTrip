@@ -235,7 +235,9 @@ class OperadorRepository extends BaseRepository
 											'descuento_clientes'=>$inputs['descuento_clientes'],
 											'tags_servicio'=>$inputs['tags_servicio'],
 											'observaciones'=>$inputs['observaciones'],
-											'telefono'=>$inputs['telefono']
+											'telefono'=>$inputs['telefono'],
+											'latitud_servicio'=>$inputs['latitud_servicio'],
+											'longitud_servicio'=>$inputs['longitud_servicio']
 									]);
 	}
 	

@@ -35,14 +35,15 @@ width:481px;height:344px
          
 var map;
 var infowindow;
-
+var latitud = {{$latitud_servicio}}
+var longitud = {{$longitud_servicio}}
 function initMap() {
   
-
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-         lat:-0.0972178,
-         lng:-78.49366320000001
+
+	  center: {
+        lat:latitud,
+         lng:longitud
         
     },
     zoom: 15
@@ -51,8 +52,8 @@ function initMap() {
   var marker= new google.maps.Marker({
       
      position:{
-         lat:-0.0972178,
-         lng:-78.49366320000001
+         lat:latitud,
+         lng:longitud
      },
      map:map,
      draggable:true
