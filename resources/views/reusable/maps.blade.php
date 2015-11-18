@@ -35,8 +35,8 @@ width:481px;height:344px
          
 var map;
 var infowindow;
-var latitud = {{$latitud_servicio}}
-var longitud = {{$longitud_servicio}}
+var latitud = {!!$latitud_servicio!!}
+var longitud = {!!$longitud_servicio!!}
 function initMap() {
   
   map = new google.maps.Map(document.getElementById('map'), {

@@ -22,8 +22,8 @@ $usuarioServicio->descuento_clientes = '';
 $usuarioServicio->tags_servicio = '';
 $usuarioServicio->observaciones = '';
 $usuarioServicio->telefono = '';
-$usuarioServicio->latitud_servicio = 0;
-$usuarioServicio->longitud_servicio = 0;
+$usuarioServicio->latitud_servicio = -0.1806532;
+$usuarioServicio->longitud_servicio = -78.46783820000002;
 ?>
 @foreach ($usuarioServicio as $detalles)
 <?php
@@ -44,8 +44,8 @@ $usuarioServicio->longitud_servicio = 0;
 	$usuarioServicio->tags_servicio = $detalles->tags_servicio;
 	$usuarioServicio->observaciones = $detalles->observaciones;
 	$usuarioServicio->telefono = $detalles->telefono;
-	$usuarioServicio->latitud_servicio = $detalles->latitud_servicio;
-	$usuarioServicio->longitud_servicio = $detalles->longitud_servicio;
+	$usuarioServicio->latitud_servicio = ($detalles->latitud_servicio == '')?-0.1806532:$detalles->latitud_servicio;
+	$usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '')?-78.46783820000002:$detalles->longitud_servicio;
 ?>
 @endforeach
 <div class="row">
