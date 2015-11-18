@@ -1,7 +1,7 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
-{!! HTML::style('css/serviciosOperadores.css') !!} 
+
 <?php  
 $id_usuario_op = NULL;
 $nombre_empresa_operador = NULL;
@@ -24,11 +24,26 @@ $email_contacto_operador = NULL;
 <div class="rowerror">
 </div>
 
-<div class="row">
+
     {!! Form::open(['url' => route('upload-postoperador'),  'id'=>'registro_step1']) !!}
 
+    
         <div class="wrapper uwa-font-aa">
-            <div class="col-md-121">
+            
+            <div class="box-content box-content-team left">
+            <h2 class="box-content-title">
+                I'm an                <strong>Agency</strong>
+            </h2>
+            
+        </div>
+            <div class="box-content box-content-team left">
+            
+            <div class="box-content-text">
+                <p>Design and offer your own real-time social dashboards to clients.</p>
+                
+            </div>
+        </div>
+            <div class="box-content box-content-team left">
                 <h3> {{ trans('registro/registrosteps.step2') }}</h3>
                 <div class="form-group">
 					<input type="hidden" value="{!!$data['tipoOperador']!!}" name="id_tipo_operador" id="id_tipo_operador">
@@ -66,6 +81,6 @@ $email_contacto_operador = NULL;
 
     {!! Form::close() !!}
 
-</div>
+
 
 @stop

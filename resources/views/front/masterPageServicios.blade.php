@@ -23,7 +23,7 @@
         
         {!! HTML::style('css/demo.css') !!} 
         {!! HTML::style('css/masterPagesRegistro.css') !!}
-        
+        {!! HTML::style('css/base/layoutBase.css') !!} 
     
     </head>
     <div id='loadingScreen'>

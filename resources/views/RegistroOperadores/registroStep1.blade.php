@@ -1,7 +1,7 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
-{!! HTML::style('css/serviciosOperadores.css') !!} 
+
 
 <?php  
 $label_tipo_operador_agencia = 'Get started';
@@ -22,7 +22,7 @@ $label_tipo_operador_persona = 'Sign up for free';
 
 <div class="rowerror">
 </div>
-<div class="row">
+
     {!! Form::open(['url' => route('upload-postTipoOperador'),  'id'=>'registro_step1']) !!}
     	<input type="hidden" value="0" name="tipo_operador" id="tipo_operador">
 <div class="wrapper uwa-font-aa">
@@ -62,6 +62,6 @@ $label_tipo_operador_persona = 'Sign up for free';
      </div>
     {!! Form::close() !!}
 
-</div>
+
 
 @stop

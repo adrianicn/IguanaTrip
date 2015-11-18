@@ -9,6 +9,8 @@
 
 <!-- Contact Form CSS files //@include('reusable.promocion')-->
 
+@include('reusable.promocion')
+
             <div style='display:none'>
                 <img src="{!! asset('img/x.png')!!}" alt='' />
             </div>
