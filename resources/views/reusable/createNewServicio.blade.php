@@ -9,8 +9,6 @@
     
     {!! Form::open(['url' => route('upload-postusuarioserviciosmini'),  'id'=>'newServicio']) !!}
     
-{{$operador}}    
-{{$catalogo}}    
 
 
     
@@ -33,8 +31,8 @@
 
 
     </table>
-    <input type="hidden" value="2" name="id_usuario_operador">
-    <input type="hidden" value="1" name="id_catalogo_servicio">
+    <input type="hidden"  class="id_usuario_operador" name="id_usuario_operador">
+    <input type="hidden" class='id_catalogo_servicio' name="id_catalogo_servicio">
         <button class="button" type="button"  onclick="AjaxContainerRegistro('newServicio')">Siguiente</button>
 </form>{!! Form::close() !!}
 </div>

@@ -9,6 +9,7 @@ use Validator;
 use Input;
 use App\Models\Usuario_Servicio;
 use App\Models\Promocion_Usuario_Servicio;
+use Illuminate\Support\Facades\View;
 
 class UsuarioServiciosController extends Controller {
 
@@ -56,6 +57,35 @@ class UsuarioServiciosController extends Controller {
         return ($view);
     }
 
+    
+    
+    /**
+     * Despliega los servicios por operador
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function RenderPartial($id_partial) {
+        //
+
+        
+$data=1;
+        
+        
+        //$html = View::make($id_partial, compact('data'))->render();
+        
+        $html= (String) view($id_partial);
+
+        
+        
+        
+        return response()->json(['newHtml' => $html]);
+        
+        
+    }
+
+    
+    
     /**
      * Guarda los servicios que presta un usuario o un operador.
      *

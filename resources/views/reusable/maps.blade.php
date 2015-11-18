@@ -8,7 +8,6 @@ width:481px;height:344px
       }
     </style>
   
-          
         <div class='form-group'>
             <label for=''>map</label>
             <input type="text" id='searchmap'>
@@ -28,6 +27,7 @@ width:481px;height:344px
         </div>
         
           
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDor7F0iN5YavbFiLRA7pY7L8-Rgl89GT8&signed_in=true&libraries=places&callback=initMap" async defer></script>
   
         
