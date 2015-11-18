@@ -161,6 +161,8 @@ $usuarioServicio->longitud_servicio = -78.46783820000002;
 			<a class="button" onclick="AjaxContainerRegistro('registro_step1')" href="#">Siguiente</a>
         </div>
 	{!! Form::close() !!}
+    @include('reusable.uploadImage', ['tipo' => '1','objeto'=>$usuarioServicio])
+<!-- , ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio] -->        
 
 </div>
 @stop
