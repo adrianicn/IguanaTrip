@@ -6,13 +6,16 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CreateCatalogoDificultadTable' => $baseDir . '/database/migrations/2015_11_19_042230_create_catalogo_dificultad_table.php',
     'CreateCatalogoServicioEstablecimientoTable' => $baseDir . '/database/migrations/2015_11_09_104838_create_catalogo_servicio_establecimiento_table.php',
     'CreateCatalogoServiciosTable' => $baseDir . '/database/migrations/2015_10_05_075256_create_catalogo_servicios_table.php',
     'CreateCatalogoTipoFotografiaTable' => $baseDir . '/database/migrations/2015_11_14_060524_create_catalogo_tipo_fotografia_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2014_10_26_222018_create_comments_table.php',
     'CreateContactTable' => $baseDir . '/database/migrations/2014_10_24_205441_create_contact_table.php',
+    'CreateDetallesItinerarioTable' => $baseDir . '/database/migrations/2015_11_19_045309_create_detalles_itinerario_table.php',
     'CreateForeignKeys' => $baseDir . '/database/migrations/2014_10_21_110325_create_foreign_keys.php',
     'CreateImagesTable' => $baseDir . '/database/migrations/2015_11_01_011047_create_images_table.php',
+    'CreateItinerariosUsuarioServiciosTable' => $baseDir . '/database/migrations/2015_11_19_045229_create_itinerarios_usuario_servicios_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePostTagTable' => $baseDir . '/database/migrations/2014_10_26_172904_create_post_tag_table.php',
     'CreatePostsTable' => $baseDir . '/database/migrations/2014_10_26_172107_create_posts_table.php',

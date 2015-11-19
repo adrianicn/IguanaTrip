@@ -3,13 +3,13 @@
 @section('step1')
 
 {!! HTML::style('css/table.css') !!} 
-{!! HTML::style('css/popupModal/demo.css') !!} 
-{!! HTML::style('css/popupModal/basic.css') !!} 
+
+
   
 
 <!-- Contact Form CSS files //@include('reusable.promocion')-->
 
-@include('reusable.promocion')
+
 
             <div style='display:none'>
                 <img src="{!! asset('img/x.png')!!}" alt='' />
@@ -21,33 +21,46 @@
         width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
     </style>
 
-    <div class="container">
-
-    <h1>HTML5 Editable Table</h1>
-    <p>Through the powers of <strong>contenteditable</strong> and some simple jQuery you can easily create a custom editable table. No need for a robust JavaScript library anymore these days.</p>
-
-    <ul>
-        <li>An editable table that exports a hash array. Dynamically compiles rows from headers</li> 
-        <li>Simple / powerful features such as add row, remove row, move row up/down.</li>
-    </ul>
-
+    
+    
       <div id="basic-modal-content" class="cls loadModal">
   
   
        </div>
+    
+    <div class="wrapper uwa-font-aa">
+
+    <div class="left-head box-content box-content-team ">
+        <h2 class="head-title box-content-title ">
+            I'm an                <strong>Agency</strong>
+        </h2>
+
+    </div>
+    <div class="box-content-individual-head box-content  right">
+        <h3 class="box-content-head"> {{ trans('registro/registrosteps.step2') }}
+            Explicacion de que es lo que hace todo este proceso para que pueda ver el usuario que hacer
+            sin necesidad de llamar a nadie
+        </h3>
+
+    </div>
+</div>
  <?php $counter = 0;?>
     @foreach ($listServiciosUnicos as $servicios)
  <?php $counter = $counter+1;?>
 
     {!! Form::open(['url' => route('upload-postDetalleOperador'),  'id'=>$servicios->id_catalogo_servicios]) !!}
-<div class="wrapper uwa-font-aa">
+    
+
+<div class="testboxFormulario">
     <div id="table_{!!$servicios->id!!}" class="table-editable">
 
   
         <div class="section"><span>{!!$counter!!}</span>{!!$servicios->nombre_servicio!!}</div>
 
         <span  class="table-add glyphicon glyphicon-plus" onclick="RenderPartial('reusable.createNewServicio',{!!$servicios->id_catalogo_servicios!!},{!!$servicios->id_usuario_operador!!})"></span>
-                              
+
+
+<a class="button" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$servicios->id_usuario_operador!!})" href="#">Siguiente</a>
         <div class="inner-wrap">
         
     
@@ -78,6 +91,7 @@
                 @else
                 <td>
                 {!! link_to_route('details.show',$servicio->nombre_servicio, [$servicio->id,$servicio->id_catalogo_servicios]) !!}
+                
                 </td>
                 @endif
 
@@ -96,6 +110,7 @@
             </td>
             <td>
                 {!! link_to_route('details.show','Detalle', [$servicio->id,$servicio->id_catalogo_servicios]) !!}
+                
  </td>
                   <td id='basic-modal' contenteditable="true">
 </td>
@@ -135,7 +150,8 @@
 
 
 
-</div>
+
+    
 @section('scripts')
 {!! HTML::script('/js/tabla_dinamica.js') !!}
 {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}

@@ -10,6 +10,7 @@ use Input;
 use App\Models\Usuario_Servicio;
 use App\Models\Promocion_Usuario_Servicio;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Response;
 
 class UsuarioServiciosController extends Controller {
 
@@ -56,7 +57,32 @@ class UsuarioServiciosController extends Controller {
         $view = view('Registro.catalogoServicio', compact('data', 'listServicios'));
         return ($view);
     }
+    
+    public function getTipoDificultad(Request $request,ServiciosOperadorRepository $gestion) {
+        //
 
+        
+sleep(50);
+        //logica que comprueba si el usuario tiene servicios para ser modificados
+        //caso contrario ingresa nuevos serviciosS
+        $listServicios = $gestion->getCatalogoDificultad();
+        $view = View::make('reusable.catalogo_dificultades')->with('diffic', $listServicios);
+        if($request->ajax()){
+            $sections = $view->rendersections();
+            
+    
+     return Response::json($sections); 
+            //return  Response::json($sections['contentPanel']); 
+        }else return $view;
+        
+        
+
+    
+    }
+    
+
+    
+    
     
     
     /**
@@ -69,8 +95,7 @@ class UsuarioServiciosController extends Controller {
         //
 
         
-$data=1;
-        
+   
         
         //$html = View::make($id_partial, compact('data'))->render();
         
