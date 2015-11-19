@@ -2,6 +2,8 @@
 
 @section('step1')
 {!! HTML::style('css/serviciosOperadores.css') !!} 
+{!! HTML::style('css/base/step4.css') !!} 
+
 <div class="rowerror">
 </div>
 <?php 
