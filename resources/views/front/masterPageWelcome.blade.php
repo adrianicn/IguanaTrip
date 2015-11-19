@@ -1,3 +1,5 @@
+
+
 @if(session('device')=='desk')
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html lang="en" class="no-js ie6"> <![endif]-->

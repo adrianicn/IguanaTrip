@@ -1,3 +1,5 @@
+
+
 #viewType-1 #footer {
     bottom: 0;
     position: fixed;
@@ -483,36 +485,72 @@ body {
 .box-content-individual .box-content-title {
     border-color: #3a5d77;
 }
+/*Inserted*/
+.box-content-individual-head  {
+    border-color: #3a5d77;
+    width: 79%;
+     text-indent: 1px;
+}
+
+.left-head  {
+    
+    width: 20%;
+}
+
+.box-content-head {
+    border-bottom: 1px solid;
+    color: #999;
+    font-size: 17px;
+    font-weight: normal;
+    height: 70px;
+    line-height: 30px;
+    text-indent: 1px;
+}
+
+
+.head-title  {
+    height: 70px;
+    line-height: 28px;
+    text-indent: 34px;
+    
+        color: #999;
+    font-size: 1.9em;
+    font-weight: normal;
+    
+}
+
+.form-btn {
+  
+   bottom: -80px;
+}
+
+/**/
 .box-content-individual .box-content-title strong {
-    color: #a6ce39;
+    color: #7caf20;
 }
 .box-content-individual .button {
-    background: #a6ce39 none repeat scroll 0 0;
+    background: #7caf20 none repeat scroll 0 0;
 }
 .box-content-individual .button:hover {
-    background: #f05a22  none repeat scroll 0 0;
+    background: #8fc232 none repeat scroll 0 0;
 }
 .box-content-individual .button:active {
-    background: #a6ce39 none repeat scroll 0 0;
+    background: #72a515 none repeat scroll 0 0;
 }
-.box-content-team .box-content-title {
+.box-content-team .box-content-title .head-title {
     border-color: #526c24;
 }
-
-//
-
-
 .box-content-team .box-content-title strong {
-    color: #f05a22;
+    color: #f05a22
 }
 .box-content-team .button {
-    background: #f05a22 none repeat scroll 0 0;
-}
-.box-content-team .button:hover {
     background: #f15b40 none repeat scroll 0 0;
 }
-.box-content-team .button:active {
+.box-content-team .button:hover {
     background: #f05a22 none repeat scroll 0 0;
+}
+.box-content-team .button:active {
+    background: #f15b40 none repeat scroll 0 0;
 }
 #customers {
     height: 60px;
@@ -758,3 +796,57 @@ body {
     clear: both;
 }
 
+
+.testboxFormulario {
+  margin: 20px auto;
+
+  width: 80%;
+  -webkit-border-radius: 8px/7px; 
+  -moz-border-radius: 8px/7px; 
+  border-radius: 8px/7px; 
+  //background-color: #ebebeb; 
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  color: #4c4c4c;
+}
+
+
+#iconFormulario {
+  height: 31px;
+  width: 250px;
+  background-color: #ef620a;
+  -webkit-border-radius: 4px 0px 0px 4px; 
+  -moz-border-radius: 4px 0px 0px 4px; 
+  border-radius: 4px 0px 0px 4px;
+  color: white;
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  border: solid 0px #cbc9c9;
+  display: inline-block;
+}
+
+
+input[type=text],
+input[type=password]{
+  width: 450px; 
+  height: 31px; 
+  -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px; 
+  border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  background-color: #fff; 
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  border: solid 1px #cbc9c9;
+  margin-left: -5px;
+  margin-top: 13px; 
+  padding: 0 0 10px 10px;
+
+
+
+
+}

@@ -24,7 +24,11 @@
         {!! HTML::style('css/demo.css') !!} 
         {!! HTML::style('css/masterPagesRegistro.css') !!}
         {!! HTML::style('css/base/layoutBase.css') !!} 
+<<<<<<< HEAD
         {!! HTML::style('css/base/step4.css') !!} 
+=======
+        
+>>>>>>> 2d9933fdab91f1bc7cbad2f7f03c255f2f2b0020
     
     </head>
     <div id='loadingScreen'>
@@ -79,6 +83,8 @@
 
     {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
     {!!HTML::script('js/Compartido.js') !!}
+    
+    
     
     @yield('scripts')
 
