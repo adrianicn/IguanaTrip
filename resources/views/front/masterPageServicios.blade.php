@@ -24,6 +24,7 @@
         {!! HTML::style('css/demo.css') !!} 
         {!! HTML::style('css/masterPagesRegistro.css') !!}
         {!! HTML::style('css/base/layoutBase.css') !!} 
+        {!! HTML::style('css/base/step4.css') !!} 
     
     </head>
     <div id='loadingScreen'>
