@@ -9,6 +9,7 @@ use Validator;
 use Input;
 use App\Models\Usuario_Servicio;
 use App\Models\Promocion_Usuario_Servicio;
+use App\Models\Itinerario_Usuario_Servicio;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
 
@@ -324,7 +325,7 @@ class UsuarioServiciosController extends Controller {
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-        $validator = Validator::make($formFields, Promocion_Usuario_Servicio::$rulesP);
+        $validator = Validator::make($formFields, Itinerario_Usuario_Servicio::$rulesP);
         if ($validator->fails()) {
             return response()->json(array(
                         'fail' => true,
@@ -334,11 +335,11 @@ class UsuarioServiciosController extends Controller {
 
         //obtengo llas promociones por id
         if (isset($formFields['id'])) {
-            $Promocion = $gestion->getPromocion($formFields['id']);
+            $Itinerario = $gestion->getItinerario($formFields['id']);
             
         }
 //si ya existe el objeto se hace el update
-        if (isset($Promocion)) {
+        if (isset($Itinerario)) {
             //logica update
 
             $gestion->storeUpdatePromocion($formFields, $Promocion);

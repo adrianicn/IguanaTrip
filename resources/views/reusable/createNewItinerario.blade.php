@@ -11,7 +11,7 @@
         <tr>
             <td><label class='labelmodal' for="username">Nombre:</label></td>
 
-            <td><input class="text" id="nombre_promocion" name="nombre_itinerario" placeholder="{{trans('front/register.pseudo')}}"></td>
+            <td><input class="text" id="nombre_itinerario" name="nombre_itinerario" placeholder="{{trans('front/register.pseudo')}}"></td>
         </tr>
         
         

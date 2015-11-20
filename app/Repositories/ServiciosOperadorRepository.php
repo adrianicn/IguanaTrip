@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Usuario_Servicio;
 use App\Models\Promocion_Usuario_Servicio;
 use App\Models\Catalogo_Dificultad;
+use App\Models\Itinerario_Usuario_Servicio;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 
@@ -26,6 +27,8 @@ class ServiciosOperadorRepository extends BaseRepository {
     protected $promocion;
     protected $catalogo_dificultad;
     protected $image;
+    protected $itinerarios_u;
+    
     /**
      * Create a new ServiciosOperadorRepository instance.
      *
@@ -38,6 +41,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->promocion = new Promocion_Usuario_Servicio();
         $this->image = new Image();
         $this->catalogo_dificultad = new Catalogo_Dificultad();
+                $this->itinerarios_u = new Catalogo_Dificultad();
     }
 
     /**
@@ -73,6 +77,30 @@ class ServiciosOperadorRepository extends BaseRepository {
     public function storeNewPromocion($inputs) {
 
         $promocionU = new $this->promocion;
+
+
+        $promocionU->id_usuario_servicio = $inputs['id_usuario_servicio'];
+        $promocionU->id_catalogo_tipo_fotografia = 2;
+        $promocionU->descripcion_promocion = $inputs['descripcion'];
+
+        $promocionU->nombre_promocion = $inputs['nombre_promocion'];
+        $promocionU->estado_promocion = 1;
+        $promocionU->fecha_desde = $inputs['fecha_inicio'];
+        $promocionU->fecha_hasta = $inputs['fecha_fin'];
+        $promocionU->precio_normal = $inputs['precio_normal'];
+        $promocionU->descuento = $inputs['descuento'];
+        $promocionU->codigo_promocion = $inputs['codigo'];
+        $promocionU->created_at = \Carbon\Carbon::now()->toDateTimeString();
+        $promocionU->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+        $this->save($promocionU);
+        return $promocionU;
+    }
+    
+    
+    public function storeNewItinerario($inputs) {
+
+        $ItinerarioU = new $this->itinerarios_u;
 
 
         $promocionU->id_usuario_servicio = $inputs['id_usuario_servicio'];
@@ -180,6 +208,14 @@ class ServiciosOperadorRepository extends BaseRepository {
                 ->where('estado_fotografia','=',1)->get();
     }
     //Entrega el arreglo de Servicios por operador
+    public function getItinerario($id_itinerario) {
+
+        return DB::table('itinerarios_usuario_servicios')
+                        ->where('id', '=', $id_itinerario)->get();
+    }
+    
+    //Entrega el arreglo de Itinerarios por id
+    
     public function getPromocion($id_promocion) {
 
         return DB::table('promocion_usuario_servicio')
