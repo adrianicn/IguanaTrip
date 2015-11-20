@@ -100,6 +100,11 @@ Route::get('promocion/{id_promocion}',
     ['uses'=>'UsuarioServiciosController@getPromociones','as'=>'getPromocion'
     ,'middleware' => 'notAuth']);
 
+Route::get('itinerario/{id}',
+    ['uses'=>'UsuarioServiciosController@getItinerarios','as'=>'getItinerarios'
+    ,'middleware' => 'notAuth']);
+
+
 Route::post('/delete/image/{id}', ['as' => 'delete-image', 'uses' =>'ImageController@postDeleteImage']);
 Route::get('/getTipoDificultad', ['as' => 'tipoDificultad', 'uses' => 'UsuarioServiciosController@getTipoDificultad']);
 

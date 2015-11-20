@@ -1,49 +1,58 @@
+{!! HTML::style('css/table.css') !!} 
+<div id="testboxForm" class="testboxForm">
+    <h1>Agregar Punto para Itinerario </h1>
+    
+    {!! Form::open(['url' => route('postItinerario'),  'id'=>'puntoitinerario']) !!}
+    <hr>
+
+    <table>
+        <tr>
+            <td><label class='labelmodal' for="username">Nombre:</label></td>
+
+            <td><input class="text" id="nombre_itinerario" name="nombre_itinerario" placeholder="{{trans('front/register.pseudo')}}"></td>
+        </tr>
+        
+        
+        <tr>
+            <td><label class='labelmodal' for="username">Detalle:</label></td>
+
+            <td><textarea name="descripcion_itinerario" rows="4" cols="29">Descripción</textarea></td>
+        </tr>
+    </table>
+    <div id="renderPartial">
+         @section('contentPanel')
+        
+            @show
+        
+    </div>        
+    <input type="hidden"  class="id_usuario_servicio" name="id_usuario_servicio">
+    
+        <button class="button" type="button"  onclick="AjaxContainerRegistroWithLoad('itinerario','testboxForm')">Siguiente</button>
+{!! Form::close() !!}
+
+</div>
+
+    
+<script>
+$( document ).ready(function() {
+    
+    GetDataAjax("/IguanaTrip/public/getTipoDificultad");
+});
+</script>
+
+
+
+
+
 @extends('front.masterPageServicios')
 
 @section('step1')
 
-{!! HTML::style('css/table.css') !!} 
 
 
-  
-
-<!-- Contact Form CSS files //@include('reusable.promocion')-->
-
-
-
-            <div style='display:none'>
-                <img src="{!! asset('img/x.png')!!}" alt='' />
-            </div>
-<style>
-
-    #simplemodal-container a.modalCloseImg {
-        background:url("{!! asset('img/x.png')!!}") no-repeat;
-        width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
-    </style>
 
     
     
-      <div id="basic-modal-content" class="cls loadModal">
-  
-  
-       </div>
-    
-    <div class="wrapper uwa-font-aa">
-
-    <div class="left-head box-content box-content-team ">
-        <h2 class="head-title box-content-title ">
-            I'm an                <strong>Agency</strong>
-        </h2>
-
-    </div>
-    <div class="box-content-individual-head box-content  right">
-        <h3 class="box-content-head"> {{ trans('registro/registrosteps.step2') }}
-            Explicacion de que es lo que hace todo este proceso para que pueda ver el usuario que hacer
-            sin necesidad de llamar a nadie
-        </h3>
-
-    </div>
-</div>
  <?php $counter = 0;?>
     @foreach ($listServiciosUnicos as $servicios)
  <?php $counter = $counter+1;?>
@@ -51,7 +60,7 @@
     {!! Form::open(['url' => route('upload-postDetalleOperador'),  'id'=>$servicios->id_catalogo_servicios]) !!}
     
 
-<div class="testboxFormulario">
+<div class="testboxFormulario" class="testboxForm">
     <div id="table_{!!$servicios->id!!}" class="table-editable">
 
   

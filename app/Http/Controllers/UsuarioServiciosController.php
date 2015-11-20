@@ -316,6 +316,23 @@ class UsuarioServiciosController extends Controller {
     }
 
     
+    public function getItinerarios($id, ServiciosOperadorRepository $gestion) {
+        //
+
+        $data['id'] = $id;
+
+        //logica que comprueba si el usuario tiene promociones para ser modificados
+        
+        $listItinerarios = $gestion->getItinerariosUsuario($id);
+        
+        //imagenes de la promocion
+        $ImgItinerarios = $gestion->getImageItinerarioOperador($id);
+
+        $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios'));
+        return ($view);
+    }
+
+    
     /**
      * Guarda los itinerarios que presta un usuario o un operador.
      *
@@ -346,8 +363,8 @@ class UsuarioServiciosController extends Controller {
         } else { //logica de insert
 
             //Arreglo de inputs prestados que vienen del formulario
-            $object=$gestion->storeNewPromocion($formFields);
-            $returnHTML = ('/IguanaTrip/public/promocion/' . $object->id);
+            $object=$gestion->storeNewItinerario($formFields);
+            $returnHTML = ('/IguanaTrip/public/itinerario/' . $object->id);
         }
 
 
