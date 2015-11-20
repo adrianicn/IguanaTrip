@@ -24,6 +24,7 @@
         {!! HTML::style('css/demo.css') !!} 
         {!! HTML::style('css/masterPagesRegistro.css') !!}
         {!! HTML::style('css/base/layoutBase.css') !!} 
+        {!! HTML::style('css/popupModal/basic.css') !!} 
     
     </head>
     <div id='loadingScreen'>
@@ -72,6 +73,7 @@
         
            
         {!! HTML::script('js/jquery.js') !!}
+        
         {!! HTML::script('js/bootstrap.min.js') !!}
     
     {!!HTML::script('js/loadingScreen/loadingoverlay.js') !!}

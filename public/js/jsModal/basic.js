@@ -12,12 +12,8 @@
 function callModal($servicio){
 
 var $id='.cls';
-
- 
- 
-
-		$($id).modal();
-
+ 		$($id).modal();
+$(".simplemodal-wrap").LoadingOverlay("show");
 		return false;
 	
 }

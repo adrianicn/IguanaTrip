@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Usuario_Servicio;
 use App\Models\Promocion_Usuario_Servicio;
+use App\Models\Catalogo_Dificultad;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 
@@ -23,6 +24,7 @@ class ServiciosOperadorRepository extends BaseRepository {
      * @var App\Models\Role
      */
     protected $promocion;
+    protected $catalogo_dificultad;
     protected $image;
     /**
      * Create a new ServiciosOperadorRepository instance.
@@ -35,6 +37,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->model = $userservicios;
         $this->promocion = new Promocion_Usuario_Servicio();
         $this->image = new Image();
+        $this->catalogo_dificultad = new Catalogo_Dificultad();
     }
 
     /**
@@ -160,6 +163,13 @@ class ServiciosOperadorRepository extends BaseRepository {
     public function getPromocionesOperador($id_promocion) {
         $promociones = new $this->promocion;
         return $promociones::where('id', $id_promocion)->get();
+    }
+    
+    //Entrega el arreglo de Servicios por operador
+    public function getCatalogoDificultad() {
+        $dif = new $this->catalogo_dificultad;
+        return $dif::All();
+                        
     }
 
     //Entrega el arreglo de Imagenes por promocion por operador

@@ -80,10 +80,29 @@ function AjaxContainerRegistroWithLoad($formulario,$loadScreen) {
 }
 
 
+function RenderPartialGeneric($idPartial, $id_usuario_operador) {
+
+    callModal('cls');
+    
+    var url = "/IguanaTrip/public/render/" + $idPartial;
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: {
+        }}).done(function (newHtml) {
+
+        /* output the javascript object to HTML */
+        $('#basic-modal-content').html(newHtml.newHtml);
+        $('#basic-modal-content').find('.id_usuario_operador').val($id_usuario_operador);
+$(".simplemodal-wrap").LoadingOverlay("hide", true);
+    });
+}
+
 function RenderPartial($idPartial, $id_catalogo_servicio, $id_usuario_operador) {
 
+    callModal('cls');
     
-    $("#loadingScreen").LoadingOverlay("show");
     var url = "/IguanaTrip/public/render/" + $idPartial;
 
     $.ajax({
@@ -96,14 +115,34 @@ function RenderPartial($idPartial, $id_catalogo_servicio, $id_usuario_operador) 
         $('#basic-modal-content').html(newHtml.newHtml);
         $('#basic-modal-content').find('.id_catalogo_servicio').val($id_catalogo_servicio);
         $('#basic-modal-content').find('.id_usuario_operador').val($id_usuario_operador);
-
+$(".simplemodal-wrap").LoadingOverlay("hide", true);
     });
-    $("#loadingScreen").LoadingOverlay("hide", true);
-    callModal('cls');
-
-
-
+    
 }
+
+function GetDataAjax(url) {
+    
+        $.ajax({
+            
+            type: 'GET',
+            url: url,
+            dataType: 'json',
+            success: function (data) {
+            $("#renderPartial").LoadingOverlay("show");    
+                    $("#renderPartial").append(data.contentPanel); 
+                    $("#renderPartial").LoadingOverlay("hide", true);
+                    
+            },
+            error: function (data) {
+                var errors = data.responseJSON;
+                if (errors) {
+                    $.each(errors, function (i) {
+                        console.log(errors[i]);
+                    });
+                }
+            }
+        });
+    }
 
 
 
