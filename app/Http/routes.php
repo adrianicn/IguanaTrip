@@ -95,7 +95,7 @@ Route::post('maps',function()
     return Input::all();
 });
 Route::post('promocion', ['as' => 'postPromocion', 'uses' =>'UsuarioServiciosController@postPromocion']);
-Route::post('itinerario', ['as' => 'postItinerario', 'uses' =>'UsuarioServiciosController@postPromocion']);
+Route::post('itinerario', ['as' => 'postItinerario', 'uses' =>'UsuarioServiciosController@postItinerario']);
 Route::get('promocion/{id_promocion}',
     ['uses'=>'UsuarioServiciosController@getPromociones','as'=>'getPromocion'
     ,'middleware' => 'notAuth']);

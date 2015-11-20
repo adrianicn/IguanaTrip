@@ -1,39 +1,31 @@
 @section('contentPanel')	
-{!! HTML::style('css/jquery-labelauty.css') !!} 
-
- 
-<div class="datagrid">
-
-        <table>
-            <thead><tr><th>Tipo</th><th>Descripcion</th><th>Opcion</th></tr></thead>
-
-            <tbody>
-                
-                @foreach($diffic as $dificult)
-            <tr>
-                    <td> <img src="{!! asset('images/eat.png')!!}" alt="" /></td>
-                    <td>
+{!! HTML::style('css/checkBoxCss/stylesheet-pure-css.css') !!} 
 
 
                         <h2 class='titletable'>
-                            {!!$dificult->nombre_dificultad!!}
+                            Estado físico
                         </h2>
-                        </td>
-                    <td><input class="demo labelauty" name="id" id="checkbox-1" value="1" type="checkbox" data-labelauty="No|Si "checked/></td>
-                </tr>
-    @endforeach
-                
-                
 
-            </tbody>
-        </table>
-        
-      
-        
+
+<div class="example">
+    <?php
+    $i = 0;
+    ?>
+    @foreach($diffic as $dificult)
+    <?php
+    $i = $i + 1;
+    ?>
+    <div>
+        @if($i==1)
+        <input id="radio{!!$dificult->id!!}" type="radio" name="id_dificultad" value="{!!$dificult->id!!}" checked="checked"><label for="radio{!!$dificult->id!!}"><span><span></span></span>{!!$dificult->nombre_dificultad!!}</label>
+        @else
+        <input id="radio{!!$dificult->id!!}" type="radio" name="id_dificultad" value="{!!$dificult->id!!}" ><label for="radio{!!$dificult->id!!}"><span><span></span></span>{!!$dificult->nombre_dificultad!!}</label>
+        @endif
     </div>
-@section('scripts')
-{!! HTML::script('/js/registro/registroajax_serviciooperador.js') !!}
-{!!HTML::script('js/jquery-labelauty.js') !!}
-@stop
-    
+    @endforeach
+
+</div>
+
+
+
 @endsection

@@ -29,7 +29,7 @@
     </div>        
     <input type="hidden"  class="id_usuario_operador" name="id_usuario_operador">
     
-        <button class="button" type="button"  onclick="AjaxContainerRegistroWithLoad('newServicio','testboxForm')">Siguiente</button>
+        <button class="button" type="button"  onclick="AjaxContainerRegistroWithLoad('itinerario','testboxForm')">Siguiente</button>
 {!! Form::close() !!}
 
 </div>

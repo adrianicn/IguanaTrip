@@ -62,7 +62,7 @@ class UsuarioServiciosController extends Controller {
         //
 
         
-sleep(50);
+
         //logica que comprueba si el usuario tiene servicios para ser modificados
         //caso contrario ingresa nuevos serviciosS
         $listServicios = $gestion->getCatalogoDificultad();
@@ -252,7 +252,7 @@ sleep(50);
     }
 
     /**
-     * Guarda los servicios que presta un usuario o un operador.
+     * Guarda las promocionses que presta un usuario o un operador.
      *
      * @return Response
      */
@@ -314,5 +314,45 @@ sleep(50);
         return ($view);
     }
 
+    
+    /**
+     * Guarda los itinerarios que presta un usuario o un operador.
+     *
+     * @return Response
+     */
+    public function postItinerario(ServiciosOperadorRepository $gestion) {
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        $validator = Validator::make($formFields, Promocion_Usuario_Servicio::$rulesP);
+        if ($validator->fails()) {
+            return response()->json(array(
+                        'fail' => true,
+                        'errors' => $validator->getMessageBag()->toArray()
+            ));
+        }
+
+        //obtengo llas promociones por id
+        if (isset($formFields['id'])) {
+            $Promocion = $gestion->getPromocion($formFields['id']);
+            
+        }
+//si ya existe el objeto se hace el update
+        if (isset($Promocion)) {
+            //logica update
+
+            $gestion->storeUpdatePromocion($formFields, $Promocion);
+        } else { //logica de insert
+
+            //Arreglo de inputs prestados que vienen del formulario
+            $object=$gestion->storeNewPromocion($formFields);
+            $returnHTML = ('/IguanaTrip/public/promocion/' . $object->id);
+        }
+
+
+        
+        
+        return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+    }
 
 }

@@ -311,7 +311,7 @@ body {
     color: #c8c8c8;
     font: 12px/1.4 Tahoma,Helvetica,Arial,sans-serif;
     min-width: 960px;
-    text-align: center;
+   
 }
 
 .wrapper {
@@ -799,7 +799,7 @@ body {
 
 .testboxFormulario {
   margin: 20px auto;
-
+    text-align: center;
   width: 80%;
   -webkit-border-radius: 8px/7px; 
   -moz-border-radius: 8px/7px; 
