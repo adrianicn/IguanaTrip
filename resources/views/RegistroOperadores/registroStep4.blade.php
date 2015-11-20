@@ -92,21 +92,27 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             </div>
             <div>
                 <div class="form-group-1">
-                    {!!Form::label('detalle_servicio_1', 'Detalle Servicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
+                    {!!Form::label('detalle_servicio_1', 'Detalle Servicio', array('class'=>'control-label','id'=>'iconFormulario-step4-1'))!!}
+                    <textarea id="telefono" name="telefono" placeholder="Detalle Servicio">
+                        {!!$usuarioServicio->detalle_servicio!!}
+                    </textarea>
                     {!!Form::text('detalle_servicio', $usuarioServicio->detalle_servicio, array('placeholder'=>'Detalle Servicio'))!!}
+                </div>
+                <div class="form-group-1">
+                    {!!Form::label('telefono_1', 'Telefono', array('class'=>'control-label','id'=>'iconFormulario-step4-1'))!!}
+                    {!!Form::text('telefono', $usuarioServicio->telefono, array('class'=>'form-control-1','placeholder'=>'Telefono del Servicio'))!!}
                 </div>
                 <div class="datagrid">
                     <table>
                         <thead>
                             <tr>
-                                <th>Tipo</th><th>Descripcion</th><th>Seleccion</th>
+                                <th>Descripcion</th><th>Seleccion</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($catalogoServicioEstablecimiento as $catalogo)	
 
                             <tr>
-                                <td> <img src="{!! asset('images/eat.png')!!}" alt="" /></td>
                                 <td>{!!$catalogo->nombre_servicio_est!!}</td>
                                 <td><input class="demo labelauty" name="id_servicio_est[]" id="id_servicio_est[]" value="{!!$catalogo->id!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {{($catalogo->estado_servicio_est_us <> NULL)?'checked':''}}/></td>
                             </tr>
@@ -167,11 +173,6 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
         <div class="form-group-1">
             {!!Form::label('observaciones_1', 'Observaciones del Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('observaciones', $usuarioServicio->observaciones, array('class'=>'form-control','placeholder'=>'Observaciones del Servicio'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('telefono_1', 'Telefono del Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('telefono', $usuarioServicio->telefono, array('class'=>'form-control','placeholder'=>'Telefono del Servicio'))!!}
 
         </div>
         <div class="box-content-button-1">
