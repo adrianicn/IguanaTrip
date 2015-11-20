@@ -50,51 +50,62 @@ $usuarioServicio->longitud_servicio = -78.46783820000002;
 	$usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '')?-78.46783820000002:$detalles->longitud_servicio;
 ?>
 @endforeach
-<div class="row">
-
-	{!! Form::open(['url' => route('upload-postusuarioservicios'), 'method' => 'post', 'role' => 'form', 'id'=>'registro_step1'] ) !!}
+<div class="row-step4">
+	<div id="title-box-header">
+		<div id="title-box-type">
+			<h2 class="head-title box-content-title ">
+            I'm an                <strong>Agency</strong>
+        	</h2>
+		</div>
+		<div id="description-box-type">
+			Explicacion de que es lo que hace todo este proceso para que pueda ver el usuario que hacer
+            sin necesidad de llamar a nadie
+		</div>
+	</div>
 
 	<div class="wrapper uwa-font-aa">
+		{!! Form::open(['url' => route('upload-postusuarioservicios'), 'method' => 'post', 'role' => 'form', 'id'=>'registro_step1'] ) !!}
+
 		<input type="hidden" value="{!!$usuarioServicio->id!!}" name="id" id="id">
 		<input type="hidden" value="{!!$id_catalogo!!}" name="id_catalogo" id="id_catalogo">
 	
 		<div class="form-group">
-        	{!!Form::label('nombre_servicio_1', 'Nombre Servicio', array('class'=>'control-label'))!!}
+        	{!!Form::label('nombre_servicio_1', 'Nombre Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('nombre_servicio', $usuarioServicio->nombre_servicio, array('class'=>'form-control','placeholder'=>'Nombre del Servicio'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('detalle_servicio_1', 'Detalle Servicio', array('class'=>'control-label'))!!}
+        	{!!Form::label('detalle_servicio_1', 'Detalle Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('detalle_servicio', $usuarioServicio->detalle_servicio, array('class'=>'form-control','placeholder'=>'Detalle Servicio'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('precio_desde_1', 'Precio Desde', array('class'=>'control-label'))!!}
+        	{!!Form::label('precio_desde_1', 'Precio Desde', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('precio_desde', $usuarioServicio->precio_desde, array('class'=>'form-control','placeholder'=>'Precio Desde'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('precio_hasta_1', 'Precio Hasta', array('class'=>'control-label'))!!}
+        	{!!Form::label('precio_hasta_1', 'Precio Hasta', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('precio_hasta', $usuarioServicio->precio_hasta, array('class'=>'form-control','placeholder'=>'Precio Hasta'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('precio_anterior_1', 'Precio Anterior', array('class'=>'control-label'))!!}
+        	{!!Form::label('precio_anterior_1', 'Precio Anterior', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('precio_anterior', $usuarioServicio->precio_anterior, array('class'=>'form-control','placeholder'=>'Precio Anterior'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('precio_actual_1', 'Precio Actual', array('class'=>'control-label'))!!}
+        	{!!Form::label('precio_actual_1', 'Precio Actual', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('precio_actual', $usuarioServicio->precio_actual, array('class'=>'form-control','placeholder'=>'Precio actual'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('descuento_servicio_1', 'Desuento Servicio', array('class'=>'control-label'))!!}
+        	{!!Form::label('descuento_servicio_1', 'Desuento Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('descuento_servico', $usuarioServicio->descuento_servico, array('class'=>'form-control','placeholder'=>'Descuento del Servicio'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('direccion_servicio_1', 'Direccion Servicio', array('class'=>'control-label'))!!}
+        	{!!Form::label('direccion_servicio_1', 'Direccion Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('direccion_servicio', $usuarioServicio->direccion_servicio, array('class'=>'form-control','placeholder'=>'Direccion del Servicio'))!!}
 
         </div>
@@ -106,37 +117,37 @@ $usuarioServicio->longitud_servicio = -78.46783820000002;
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('pagina_web_1', 'Pagina Web', array('class'=>'control-label'))!!}
+        	{!!Form::label('pagina_web_1', 'Pagina Web', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('pagina_web', $usuarioServicio->pagina_web, array('class'=>'form-control','placeholder'=>'URL'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('nombre_comercial_servicio_1', 'Nombre Comercial', array('class'=>'control-label'))!!}
+        	{!!Form::label('nombre_comercial_servicio_1', 'Nombre Comercial', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('nombre_comercial', $usuarioServicio->nombre_comercial, array('class'=>'form-control','placeholder'=>'Nombre Comercial'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('tags_1', 'Tags', array('class'=>'control-label'))!!}
+        	{!!Form::label('tags_1', 'Tags', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('tags', $usuarioServicio->tags, array('class'=>'form-control','placeholder'=>'Tags'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('descuento_clientes_1', 'Descuento del Cliente', array('class'=>'control-label'))!!}
+        	{!!Form::label('descuento_clientes_1', 'Descuento del Cliente', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('descuento_clientes', $usuarioServicio->descuento_clientes, array('class'=>'form-control','placeholder'=>'Descuento del Cliente'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('tags_servicio_1', 'Tags del Servicio', array('class'=>'control-label'))!!}
+        	{!!Form::label('tags_servicio_1', 'Tags del Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('tags_servicio', $usuarioServicio->tags_servicio, array('class'=>'form-control','placeholder'=>'Tags del Servicio'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('observaciones_1', 'Observaciones del Servicio', array('class'=>'control-label'))!!}
+        	{!!Form::label('observaciones_1', 'Observaciones del Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('observaciones', $usuarioServicio->observaciones, array('class'=>'form-control','placeholder'=>'Observaciones del Servicio'))!!}
 
         </div>
 		<div class="form-group">
-        	{!!Form::label('telefono_1', 'Telefono del Servicio', array('class'=>'control-label'))!!}
+        	{!!Form::label('telefono_1', 'Telefono del Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('telefono', $usuarioServicio->telefono, array('class'=>'form-control','placeholder'=>'Telefono del Servicio'))!!}
 
         </div>
@@ -162,9 +173,8 @@ $usuarioServicio->longitud_servicio = -78.46783820000002;
         <div class="box-content-button-1">
 			<a class="button" onclick="AjaxContainerRegistro('registro_step1')" href="#">Siguiente</a>
         </div>
-	{!! Form::close() !!}
-    @include('reusable.uploadImage', ['tipo' => '1','objeto'=>$usuarioServicio]) 
-<!-- , ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio] -->        
-
+		{!! Form::close() !!}
+    	@include('reusable.uploadImage', ['tipo' => '1','objeto'=>$usuarioServicio]) 
+	</div>
 </div>
 @stop
