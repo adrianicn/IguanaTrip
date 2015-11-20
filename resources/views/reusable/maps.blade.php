@@ -15,15 +15,10 @@ width:481px;height:344px
             
         </div>
         <div class="form-group">
-            <label for=''>Latitud</label>
-            <input type="text" class='form-control input-sm' name='latitud_servicio' value="{!!$latitud_servicio!!}" id='latitud_servicio'/>
-            
-            
+            <input type="hidden" class='form-control input-sm' name='latitud_servicio' value="{!!$latitud_servicio!!}" id='latitud_servicio'/>
         </div>
         <div class="form-group">
-            <label for=''>Longitud</label>
-            <input type="text" class='form-control input-sm' name='longitud_servicio' value="{!!$longitud_servicio!!}" id='longitud_servicio'/>
-            
+            <input type="hidden" class='form-control input-sm' name='longitud_servicio' value="{!!$longitud_servicio!!}" id='longitud_servicio'/>
         </div>
         
           
