@@ -1,4 +1,4 @@
-#iconFormulario {
+#iconFormulario-step4 {
   height: 31px;
   width: 145px;
   background-color: #ef620a;
@@ -12,12 +12,13 @@
   border: solid 0px #cbc9c9;
   display: inline-block;
   padding-left: 5px;
-  padding-top: 5px
+  padding-top: 5px;
+  float: left;
 }
 
 input[type=text]
 {
-  width: 350px; 
+  width: 336px; 
   height: 31px; 
   -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
   -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px; 
@@ -27,10 +28,10 @@ input[type=text]
   -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
   box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
   border: solid 1px #cbc9c9;
-  margin-left: -5px;
-  margin-top: 13px; 
+  margin-left: 0px;
+  margin-top: 0px; 
   padding: 0 0 10px 10px;
-
+  
 }
 .row-step4{
 	width: 915px;
@@ -58,4 +59,18 @@ input[type=text]
 	padding-top: 28px;
 	border-left-color: 1px solid #FFFFFF;
 	color: #ffffff;
+}
+#part-1-form{
+    padding: 5px;
+    background-color: #282828;  
+    width: 915px;
+}
+#principal-data{
+    width: 500px;
+    background-color: #000;
+    float: left;
+}
+.form-group-1{
+    background-color: #282828;
+    padding-bottom: 10px;
 }
