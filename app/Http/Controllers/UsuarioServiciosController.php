@@ -9,6 +9,7 @@ use Validator;
 use Input;
 use App\Models\Usuario_Servicio;
 use App\Models\Promocion_Usuario_Servicio;
+use App\Models\Itinerario_Usuario_Servicio;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
 
@@ -62,7 +63,7 @@ class UsuarioServiciosController extends Controller {
         //
 
         
-sleep(50);
+
         //logica que comprueba si el usuario tiene servicios para ser modificados
         //caso contrario ingresa nuevos serviciosS
         $listServicios = $gestion->getCatalogoDificultad();
@@ -252,7 +253,7 @@ sleep(50);
     }
 
     /**
-     * Guarda los servicios que presta un usuario o un operador.
+     * Guarda las promocionses que presta un usuario o un operador.
      *
      * @return Response
      */
@@ -314,5 +315,62 @@ sleep(50);
         return ($view);
     }
 
+    
+    public function getItinerarios($id, ServiciosOperadorRepository $gestion) {
+        //
+
+        $data['id'] = $id;
+
+        //logica que comprueba si el usuario tiene promociones para ser modificados
+        
+        $listItinerarios = $gestion->getItinerariosUsuario($id);
+        
+        //imagenes de la promocion
+        $ImgItinerarios = $gestion->getImageItinerarioOperador($id);
+
+        $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios'));
+        return ($view);
+    }
+
+    
+    /**
+     * Guarda los itinerarios que presta un usuario o un operador.
+     *
+     * @return Response
+     */
+    public function postItinerario(ServiciosOperadorRepository $gestion) {
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        $validator = Validator::make($formFields, Itinerario_Usuario_Servicio::$rulesP);
+        if ($validator->fails()) {
+            return response()->json(array(
+                        'fail' => true,
+                        'errors' => $validator->getMessageBag()->toArray()
+            ));
+        }
+
+        //obtengo llas promociones por id
+        if (isset($formFields['id'])) {
+            $Itinerario = $gestion->getItinerario($formFields['id']);
+            
+        }
+//si ya existe el objeto se hace el update
+        if (isset($Itinerario)) {
+            //logica update
+
+            $gestion->storeUpdatePromocion($formFields, $Promocion);
+        } else { //logica de insert
+
+            //Arreglo de inputs prestados que vienen del formulario
+            $object=$gestion->storeNewItinerario($formFields);
+            $returnHTML = ('/IguanaTrip/public/itinerario/' . $object->id);
+        }
+
+
+        
+        
+        return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+    }
 
 }

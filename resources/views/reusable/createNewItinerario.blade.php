@@ -1,6 +1,5 @@
 {!! HTML::style('css/registerForm.css') !!} 
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
-{!! HTML::style('css/jquery-labelauty.css') !!} 
+
 <div id="testboxForm" class="testboxForm">
     <h1>Agregar Itinerario </h1>
     
@@ -11,7 +10,7 @@
         <tr>
             <td><label class='labelmodal' for="username">Nombre:</label></td>
 
-            <td><input class="text" id="nombre_promocion" name="nombre_itinerario" placeholder="{{trans('front/register.pseudo')}}"></td>
+            <td><input class="text" id="nombre_itinerario" name="nombre_itinerario" placeholder="{{trans('front/register.pseudo')}}"></td>
         </tr>
         
         
@@ -27,9 +26,9 @@
             @show
         
     </div>        
-    <input type="hidden"  class="id_usuario_operador" name="id_usuario_operador">
+    <input type="hidden"  class="id_usuario_servicio" name="id_usuario_servicio">
     
-        <button class="button" type="button"  onclick="AjaxContainerRegistroWithLoad('newServicio','testboxForm')">Siguiente</button>
+        <button class="button" type="button"  onclick="AjaxContainerRegistroWithLoad('itinerario','testboxForm')">Siguiente</button>
 {!! Form::close() !!}
 
 </div>

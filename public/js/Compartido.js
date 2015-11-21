@@ -80,7 +80,7 @@ function AjaxContainerRegistroWithLoad($formulario,$loadScreen) {
 }
 
 
-function RenderPartialGeneric($idPartial, $id_usuario_operador) {
+function RenderPartialGeneric($idPartial, $id_usuario_servicio) {
 
     callModal('cls');
     
@@ -94,7 +94,7 @@ function RenderPartialGeneric($idPartial, $id_usuario_operador) {
 
         /* output the javascript object to HTML */
         $('#basic-modal-content').html(newHtml.newHtml);
-        $('#basic-modal-content').find('.id_usuario_operador').val($id_usuario_operador);
+        $('#basic-modal-content').find('.id_usuario_servicio').val($id_usuario_servicio);
 $(".simplemodal-wrap").LoadingOverlay("hide", true);
     });
 }
