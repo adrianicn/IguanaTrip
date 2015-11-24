@@ -10,6 +10,7 @@ use Input;
 use App\Models\Usuario_Servicio;
 use App\Models\Promocion_Usuario_Servicio;
 use App\Models\Itinerario_Usuario_Servicio;
+use App\Models\Detalle_Itinerario;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
 
@@ -58,34 +59,23 @@ class UsuarioServiciosController extends Controller {
         $view = view('Registro.catalogoServicio', compact('data', 'listServicios'));
         return ($view);
     }
-    
-    public function getTipoDificultad(Request $request,ServiciosOperadorRepository $gestion) {
+
+    public function getTipoDificultad(Request $request, ServiciosOperadorRepository $gestion) {
         //
-
-        
-
         //logica que comprueba si el usuario tiene servicios para ser modificados
         //caso contrario ingresa nuevos serviciosS
         $listServicios = $gestion->getCatalogoDificultad();
         $view = View::make('reusable.catalogo_dificultades')->with('diffic', $listServicios);
-        if($request->ajax()){
+        if ($request->ajax()) {
             $sections = $view->rendersections();
-            
-    
-     return Response::json($sections); 
+
+
+            return Response::json($sections);
             //return  Response::json($sections['contentPanel']); 
-        }else return $view;
-        
-        
-
-    
+        } else
+            return $view;
     }
-    
 
-    
-    
-    
-    
     /**
      * Despliega los servicios por operador
      *
@@ -94,32 +84,24 @@ class UsuarioServiciosController extends Controller {
      */
     public function RenderPartial($id_partial) {
         //
-
-        
-   
-        
         //$html = View::make($id_partial, compact('data'))->render();
-        
-        $html= (String) view($id_partial);
 
-        
-        
-        
+        $html = (String) view($id_partial);
+
+
+
+
         return response()->json(['newHtml' => $html]);
-        
-        
     }
 
-    
-    
     /**
      * Guarda los servicios que presta un usuario o un operador.
      *
      * @return Response
      */
     public function postServicioOperadores(ServiciosOperadorRepository $gestion) {
-        
-        
+
+
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
@@ -272,7 +254,6 @@ class UsuarioServiciosController extends Controller {
         //obtengo llas promociones por id
         if (isset($formFields['id'])) {
             $Promocion = $gestion->getPromocion($formFields['id']);
-            
         }
 //si ya existe el objeto se hace el update
         if (isset($Promocion)) {
@@ -280,19 +261,17 @@ class UsuarioServiciosController extends Controller {
 
             $gestion->storeUpdatePromocion($formFields, $Promocion);
         } else { //logica de insert
-
             //Arreglo de inputs prestados que vienen del formulario
-            $object=$gestion->storeNewPromocion($formFields);
+            $object = $gestion->storeNewPromocion($formFields);
             $returnHTML = ('/IguanaTrip/public/promocion/' . $object->id);
         }
 
 
-        
-        
+
+
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
-    
-    
+
     /**
      * Despliega las promociones por operador
      *
@@ -305,9 +284,9 @@ class UsuarioServiciosController extends Controller {
         $data['id'] = $id_promocion;
 
         //logica que comprueba si el usuario tiene promociones para ser modificados
-        
+
         $listPromociones = $gestion->getPromocionesOperador($id_promocion);
-        
+
         //imagenes de la promocion
         $ImgPromociones = $gestion->getImagePromocionesOperador($id_promocion);
 
@@ -315,24 +294,49 @@ class UsuarioServiciosController extends Controller {
         return ($view);
     }
 
-    
     public function getItinerarios($id, ServiciosOperadorRepository $gestion) {
         //
 
         $data['id'] = $id;
 
         //logica que comprueba si el usuario tiene promociones para ser modificados
-        
+
         $listItinerarios = $gestion->getItinerariosUsuario($id);
-        
+
         //imagenes de la promocion
         $ImgItinerarios = $gestion->getImageItinerarioOperador($id);
 
         $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios'));
         return ($view);
     }
-
     
+    
+    
+    //Obtiene la lista de detalles de itinerarios por id itinerario
+    public function getListaItinerarios($id, Request $request,ServiciosOperadorRepository $gestion) {
+        //
+
+       //
+        //logica que comprueba si el usuario tiene servicios para ser modificados
+        //caso contrario ingresa nuevos serviciosS
+       $listItinerarios = $gestion->getItinerariosDetalle($id);
+       $id_itinerario=$id;
+
+        $view = View::make('reusable.listaItinerarios')->with('listItinerarios', $listItinerarios)->with('id_itinerario',$id_itinerario);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
+    }
+    
+    
+    
+    
+
     /**
      * Guarda los itinerarios que presta un usuario o un operador.
      *
@@ -353,7 +357,39 @@ class UsuarioServiciosController extends Controller {
         //obtengo llas promociones por id
         if (isset($formFields['id'])) {
             $Itinerario = $gestion->getItinerario($formFields['id']);
-            
+        }
+         //si ya existe el objeto se hace el update
+        if (isset($Itinerario)) {
+            //logica update
+
+            $gestion->storeUpdatePromocion($formFields, $Itinerario);
+        } else { //logica de insert
+            //Arreglo de inputs prestados que vienen del formulario
+            $object = $gestion->storeNewItinerario($formFields);
+            $returnHTML = ('/IguanaTrip/public/itinerario/' . $object->id);
+        }
+
+
+
+
+        return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+    }
+
+    public function postPuntoItinerario(ServiciosOperadorRepository $gestion) {
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        $validator = Validator::make($formFields, Detalle_Itinerario::$rulesP);
+        if ($validator->fails()) {
+            return response()->json(array(
+                        'fail' => true,
+                        'errors' => $validator->getMessageBag()->toArray()
+            ));
+        }
+
+        //obtengo llas promociones por id
+        if (isset($formFields['id'])) {
+            $Itinerario = $gestion->getItinerario($formFields['id']);
         }
 //si ya existe el objeto se hace el update
         if (isset($Itinerario)) {
@@ -361,16 +397,25 @@ class UsuarioServiciosController extends Controller {
 
             $gestion->storeUpdatePromocion($formFields, $Promocion);
         } else { //logica de insert
-
             //Arreglo de inputs prestados que vienen del formulario
-            $object=$gestion->storeNewItinerario($formFields);
-            $returnHTML = ('/IguanaTrip/public/itinerario/' . $object->id);
-        }
+            $object = $gestion->storeNewDetalleItinerario($formFields);
+            $returnHTML = ('/IguanaTrip/public/itinerario/' . $formFields['id_itinerario']);
+            
+      /*  $view = View::make('reusable.catalogo_dificultades')->with('diffic', $listServicios);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
 
 
-        
-        
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
+        }*/
+
+
+
+
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
-
+    }
 }

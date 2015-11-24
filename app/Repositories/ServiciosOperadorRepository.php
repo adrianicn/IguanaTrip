@@ -5,10 +5,10 @@ namespace App\Repositories;
 use App\Models\Usuario_Servicio;
 use App\Models\Promocion_Usuario_Servicio;
 use App\Models\Catalogo_Dificultad;
+use App\Models\Detalle_Itinerario;
 use App\Models\Itinerario_Usuario_Servicio;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
-
 
 class ServiciosOperadorRepository extends BaseRepository {
 
@@ -28,7 +28,8 @@ class ServiciosOperadorRepository extends BaseRepository {
     protected $catalogo_dificultad;
     protected $image;
     protected $itinerarios_u;
-    
+    protected $detalle_itinerarios_u;
+
     /**
      * Create a new ServiciosOperadorRepository instance.
      *
@@ -41,7 +42,8 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->promocion = new Promocion_Usuario_Servicio();
         $this->image = new Image();
         $this->catalogo_dificultad = new Catalogo_Dificultad();
-                $this->itinerarios_u = new Itinerario_Usuario_Servicio();
+        $this->itinerarios_u = new Itinerario_Usuario_Servicio();
+        $this->detalle_itinerarios_u = new Detalle_Itinerario();
     }
 
     /**
@@ -96,8 +98,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->save($promocionU);
         return $promocionU;
     }
-    
-    
+
     public function storeNewItinerario($inputs) {
 
         $ItinerarioU = new $this->itinerarios_u;
@@ -109,6 +110,26 @@ class ServiciosOperadorRepository extends BaseRepository {
         $ItinerarioU->nombre_itinerario = $inputs['nombre_itinerario'];
         $ItinerarioU->id_catalogo_dificultad = $inputs['id_dificultad'];
         $ItinerarioU->estado_itinerario = 1;
+        $ItinerarioU->created_at = \Carbon\Carbon::now()->toDateTimeString();
+        $ItinerarioU->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+        $this->save($ItinerarioU);
+        return $ItinerarioU;
+    }
+
+    public function storeNewDetalleItinerario($inputs) {
+
+        $ItinerarioU = new $this->detalle_itinerarios_u;
+
+
+        $ItinerarioU->id_itinerario = $inputs['id_itinerario'];
+        $ItinerarioU->lugar_punto = $inputs['lugar_punto'];
+        $ItinerarioU->longitud_punto = $inputs['longitud_servicio'];
+        $ItinerarioU->latitud_punto = $inputs['latitud_servicio'];
+        $ItinerarioU->estado_punto = 1;
+        $ItinerarioU->diahora_punto= $inputs['diahora_punto'];
+        $ItinerarioU->incluye_punto= $inputs['incluye_punto'];
+        $ItinerarioU->tags_punto= $inputs['tag'];
         $ItinerarioU->created_at = \Carbon\Carbon::now()->toDateTimeString();
         $ItinerarioU->updated_at = \Carbon\Carbon::now()->toDateTimeString();
 
@@ -149,19 +170,17 @@ class ServiciosOperadorRepository extends BaseRepository {
 
     public function storeUpdatePromocion($inputs, $promo) {
 
-    foreach ($promo as $servicioBase) {
-        $pro=$this->promocion->find($servicioBase->id);
-        //Transformo el arreglo en un solo objeto
-        //$inputs['id'] =  $promo->id;
-        $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
-        $pro->fill($inputs)->save();
+        foreach ($promo as $servicioBase) {
+            $pro = $this->promocion->find($servicioBase->id);
+            //Transformo el arreglo en un solo objeto
+            //$inputs['id'] =  $promo->id;
+            $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+            $pro->fill($inputs)->save();
         }
 
         return true;
     }
 
-    
-    
     public function updatePromo($promo) {
         $operador = new $this->promocion;
         $operadorData = $operador::where('id', $promo['id'])
@@ -187,45 +206,50 @@ class ServiciosOperadorRepository extends BaseRepository {
         $promociones = new $this->promocion;
         return $promociones::where('id', $id_promocion)->get();
     }
-    
-    
+
     //Entrega el arreglo de itinerarios por operador
     public function getItinerariosUsuario($id_itinerario) {
         $itiner = new $this->itinerarios_u;
         return $itiner::where('id', $id_itinerario)->get();
     }
     
+    //Entrega el arreglo de detalle itinerarios por id tinerario
+    public function getItinerariosDetalle($id_itinerario) {
+        $itiner = new $this->detalle_itinerarios_u;
+        return $itiner::where('id_itinerario', $id_itinerario)->get();
+    }
+
     //Entrega el arreglo de Servicios por operador
     public function getCatalogoDificultad() {
         $dif = new $this->catalogo_dificultad;
         return $dif::All();
-                        
     }
 
     //Entrega el arreglo de Imagenes por promocion por operador
     public function getImagePromocionesOperador($id_promocion) {
         $promociones = new $this->image;
         return $promociones::where('id_auxiliar', $id_promocion)
-                ->where('id_catalogo_fotografia','=',2)
-                ->where('estado_fotografia','=',1)->get();
+                        ->where('id_catalogo_fotografia', '=', 2)
+                        ->where('estado_fotografia', '=', 1)->get();
     }
+
     //lista de itinerarios imagenes
     public function getImageItinerarioOperador($id_itinerario) {
         $itiner = new $this->image;
         return $itiner::where('id_auxiliar', $id_itinerario)
-                ->where('id_catalogo_fotografia','=',3)
-                ->where('estado_fotografia','=',1)->get();
+                        ->where('id_catalogo_fotografia', '=', 3)
+                        ->where('estado_fotografia', '=', 1)->get();
     }
-    
+
     //Entrega el arreglo de Servicios por operador
     public function getItinerario($id_itinerario) {
 
         return DB::table('itinerarios_usuario_servicios')
                         ->where('id', '=', $id_itinerario)->get();
     }
-    
+
     //Entrega el arreglo de Itinerarios por id
-    
+
     public function getPromocion($id_promocion) {
 
         return DB::table('promocion_usuario_servicio')
@@ -240,7 +264,7 @@ class ServiciosOperadorRepository extends BaseRepository {
                         ->where('id_usuario_operador', $id_usuario_operador)
                         ->where('estado_servicio', '=', 1)
                         ->groupby('usuario_servicios.id_catalogo_servicio')->distinct()
-                        ->select('catalogo_servicios.nombre_servicio', 'catalogo_servicios.id_catalogo_servicios', 'usuario_servicios.id', 'usuario_servicios.observaciones', 'usuario_servicios.estado_servicio_usuario','usuario_servicios.id_usuario_operador')
+                        ->select('catalogo_servicios.nombre_servicio', 'catalogo_servicios.id_catalogo_servicios', 'usuario_servicios.id', 'usuario_servicios.observaciones', 'usuario_servicios.estado_servicio_usuario', 'usuario_servicios.id_usuario_operador')
                         ->get();
     }
 
@@ -249,7 +273,7 @@ class ServiciosOperadorRepository extends BaseRepository {
                         ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
                         ->where('id_usuario_operador', $id_usuario_operador)
                         ->where('estado_servicio', '=', 1)
-                        ->select('usuario_servicios.nombre_servicio', 'catalogo_servicios.id_catalogo_servicios', 'usuario_servicios.id', 'usuario_servicios.estado_servicio_usuario','usuario_servicios.id_usuario_operador')
+                        ->select('usuario_servicios.nombre_servicio', 'catalogo_servicios.id_catalogo_servicios', 'usuario_servicios.id', 'usuario_servicios.estado_servicio_usuario', 'usuario_servicios.id_usuario_operador')
                         ->get();
     }
 

@@ -44,6 +44,11 @@ function AjaxContainerRegistro($formulario) {
 
 
 function AjaxContainerRegistroWithLoad($formulario,$loadScreen) {
+    
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+});
     $(".loadModal").LoadingOverlay("show");
 
     //event.preventDefault();
@@ -96,6 +101,26 @@ function RenderPartialGeneric($idPartial, $id_usuario_servicio) {
         $('#basic-modal-content').html(newHtml.newHtml);
         $('#basic-modal-content').find('.id_usuario_servicio').val($id_usuario_servicio);
 $(".simplemodal-wrap").LoadingOverlay("hide", true);
+    });
+}
+
+
+function RenderPartialGenericMap($idPartial, $itiner) {
+
+    callModalMap('cls');
+    
+    var url = "/IguanaTrip/public/render/" + $idPartial;
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: {
+        }}).done(function (newHtml) {
+
+        /* output the javascript object to HTML */
+        $('#basic-modal-content').html(newHtml.newHtml);
+        $('#basic-modal-content').find('.id_itinerario').val($itiner);
+
     });
 }
 

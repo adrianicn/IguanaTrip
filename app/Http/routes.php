@@ -96,6 +96,9 @@ Route::post('maps',function()
 });
 Route::post('promocion', ['as' => 'postPromocion', 'uses' =>'UsuarioServiciosController@postPromocion']);
 Route::post('itinerario', ['as' => 'postItinerario', 'uses' =>'UsuarioServiciosController@postItinerario']);
+Route::post('itinerarioP', ['as' => 'postPuntoItinerario', 'uses' =>'UsuarioServiciosController@postPuntoItinerario']);
+
+
 Route::get('promocion/{id_promocion}',
     ['uses'=>'UsuarioServiciosController@getPromociones','as'=>'getPromocion'
     ,'middleware' => 'notAuth']);
@@ -107,6 +110,7 @@ Route::get('itinerario/{id}',
 
 Route::post('/delete/image/{id}', ['as' => 'delete-image', 'uses' =>'ImageController@postDeleteImage']);
 Route::get('/getTipoDificultad', ['as' => 'tipoDificultad', 'uses' => 'UsuarioServiciosController@getTipoDificultad']);
+Route::get('/getlistaItinerarios/{id}', ['as' => 'itinerariosList', 'uses' => 'UsuarioServiciosController@getListaItinerarios']);
 
 // Event::listen('illuminate.query', function($query)
 // {

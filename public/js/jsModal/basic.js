@@ -17,3 +17,12 @@ $(".simplemodal-wrap").LoadingOverlay("show");
 		return false;
 	
 }
+
+function callModalMap($servicio){
+
+var $id='.cls';
+ 		$($id).modal();
+
+		return false;
+	
+}

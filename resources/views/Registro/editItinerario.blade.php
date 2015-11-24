@@ -6,7 +6,10 @@
 </div>
 
 
-
+<div id="basic-modal-content" class="cls loadModal">
+  
+  
+       </div>
 @foreach ($listItinerarios as $itiner)
 
 
@@ -15,8 +18,17 @@
 
     
     {!! Form::open(['url' => route('postItinerario'), 'method' => 'post', 'role' => 'form', 'id'=>'Updatepromocion']) !!}
+    
+    
     <div class="wrapper uwa-font-aa">
 
+        
+         <div id="renderPartial">
+         @section('contentPanel')
+        
+            @show
+        
+    </div>    
 
         <div class="form-group">
             {!!Form::label('nombre_itinerario', 'Nombre Itinerario', array('class'=>'control-label'))!!}
@@ -81,4 +93,18 @@
 
 
 @endforeach 
+@section('scripts')
+
+{!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
+{!! HTML::script('/js/jsModal/basic.js') !!}
+<script>
+$(document).ready(function() {
+    GetDataAjax("/IguanaTrip/public/getlistaItinerarios/{!!$itiner->id!!}");
+});
+</script>
+
+
+
+@stop
+
 @stop
