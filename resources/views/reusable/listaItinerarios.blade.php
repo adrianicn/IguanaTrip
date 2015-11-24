@@ -35,7 +35,7 @@
                
                 <td>
                 
-                <a class="button" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$servicios->id!!})" href="#">$detalle->lugar_punto</a>
+                <a class="button" onclick="RenderPartialGenericMapUpdate('reusable.createNewPuntoItinerario',{!!$id_itinerario!!},{!!$detalle->id!!})" href="#">{!!$detalle->lugar_punto!!}</a>
                 </td>
                
 

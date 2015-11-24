@@ -168,6 +168,22 @@ class ServiciosOperadorRepository extends BaseRepository {
         return true;
     }
 
+    //actualiza los itinerarios
+    public function storeUpdateItinerario($inputs, $itiner) {
+
+        foreach ($itiner as $servicioBase) {
+            $pro = $this->itinerarios_u->find($servicioBase->id);
+            
+            //Transformo el arreglo en un solo objeto
+            $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+            $inputs['id_catalogo_dificultad'] = $inputs['id_dificultad'];
+            
+            $pro->fill($inputs)->save();
+        }
+
+        return true;
+    }
+    
     public function storeUpdatePromocion($inputs, $promo) {
 
         foreach ($promo as $servicioBase) {
@@ -175,6 +191,27 @@ class ServiciosOperadorRepository extends BaseRepository {
             //Transformo el arreglo en un solo objeto
             //$inputs['id'] =  $promo->id;
             $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+            $pro->fill($inputs)->save();
+        }
+
+        return true;
+    }
+
+    
+    
+    public function storeUpdateDetalleItinerario($inputs, $det_iti) {
+
+        foreach ($det_iti as $servicioBase) {
+            $pro = $this->detalle_itinerarios_u->find($servicioBase->id);
+            //Transformo el arreglo en un solo objeto
+            $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+            
+            $inputs['longitud_punto'] = $inputs['longitud_servicio'];
+            $inputs['latitud_punto'] = $inputs['latitud_servicio'];
+            $inputs['tags_punto'] = $inputs['tag'];
+              
+  
+  
             $pro->fill($inputs)->save();
         }
 
@@ -241,11 +278,19 @@ class ServiciosOperadorRepository extends BaseRepository {
                         ->where('estado_fotografia', '=', 1)->get();
     }
 
-    //Entrega el arreglo de Servicios por operador
+    //Entrega el arreglo de Itinerarios por operador
     public function getItinerario($id_itinerario) {
 
         return DB::table('itinerarios_usuario_servicios')
                         ->where('id', '=', $id_itinerario)->get();
+    }
+
+    
+    //Entrega el arreglo de Detalle Itinerarios por operador
+    public function getDetalleItinerario($id_detalle_itinerario) {
+
+        return DB::table('detalles_itinerario')
+                        ->where('id', '=', $id_detalle_itinerario)->get();
     }
 
     //Entrega el arreglo de Itinerarios por id

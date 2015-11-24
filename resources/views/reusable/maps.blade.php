@@ -39,7 +39,7 @@
 
     var map;
     var infowindow;
-            var latitud = {!!$latitud_servicio!!}
+    var latitud = {!!$latitud_servicio!!}
     var longitud = {!!$longitud_servicio!!}
     function initMap() {
 

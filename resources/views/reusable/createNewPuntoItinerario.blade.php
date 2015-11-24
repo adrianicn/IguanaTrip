@@ -1,4 +1,5 @@
 
+
 <div style='display:none'>
     <img src="{!! asset('img/x.png')!!}" alt='' />
 </div>
@@ -28,7 +29,19 @@
         <tr>
             <td><label class='labelmodal' for="username">Punto:</label></td>
 
-            <td>@include('reusable.maps', ['longitud_servicio' => '1','latitud_servicio'=>'1'])  </td>
+            <td>
+
+                @if(isset($listItinerarios))
+                @foreach ($listItinerarios as $itiner)
+                @include('reusable.maps', ['longitud_servicio' => $itiner->longitud_punto,'latitud_servicio'=>$itiner->latitud_punto])  
+                @endforeach
+                @else
+                @include('reusable.maps', ['longitud_servicio' => '-78.46783820000002','latitud_servicio'=>'-0.1806532'])   
+                @endif
+
+
+            </td>
+
         </tr>
 
         <tr>
@@ -48,6 +61,7 @@
 
     <input type="hidden"  class="id_itinerario" name="id_itinerario">
     <input type="hidden"  class="tag" name="tag">
+    <input type="hidden"  class="id_detalle" name="id">
 
     <button class="button" type="button" id="btnsubm" onclick="">Siguiente</button>
     {!! Form::close() !!}
@@ -60,20 +74,43 @@
     {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
 
 
+    
+
+    @if(isset($listItinerarios))
+    @foreach ($listItinerarios as $itiner)
+
+    <script>
+
+
+
+        $('#lugar_punto').val('{!!$itiner->lugar_punto!!}');
+        $('#diahora_punto').val('{!!$itiner->diahora_punto!!}');
+        $('#incluye_punto').val('{!!$itiner->incluye_punto!!}');
+        $('.id_itinerario').val('{!!$itiner->id_itinerario!!}');
+
+        $('.tag').val('{!!$itiner->tags_punto!!}');
+        $('.id_detalle').val('{!!$itiner->id!!}');
+        $('#latitud_servicio').val('{!!$itiner->latitud_punto!!}');
+        $('#longitud_servicio').val('{!!$itiner->longitud_punto!!}');
+        $('#searchmap').val('{!!$itiner->tags_punto!!}');
+
+    </script>
+    @endforeach
+    @endif
+
+    
     <script>
 
         $("#map").width(444);
         $("#map").height(175);
         $("#simplemodal-container").height(580);
-
-
         $("#simplemodal-container").css({top: '-1px'});
-
-
         $("#btnsubm").click(function () {
             var value = $("#searchmap").val();
-            $(".tag").val(value);
-            AjaxContainerRegistroWithLoad('puntoitinerario', 'testboxForm');
+            var itinerario=$(".id_itinerario").val();
+            var value = $("#searchmap").val();
+            AjaxContainerRegistroWithLoadCharge('puntoitinerario', 'testboxForm',itinerario);
+            
         });
 
 

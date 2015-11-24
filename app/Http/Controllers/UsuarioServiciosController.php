@@ -84,14 +84,28 @@ class UsuarioServiciosController extends Controller {
      */
     public function RenderPartial($id_partial) {
         //
-        //$html = View::make($id_partial, compact('data'))->render();
-
         $html = (String) view($id_partial);
-
-
-
-
         return response()->json(['newHtml' => $html]);
+    }
+    
+    
+    //Renderiza el parcial con datos si es necesario
+    public function RenderPartialWithData(Request $request,$id_partia,$id_datal, ServiciosOperadorRepository $gestion) {
+        //
+        
+        $listItinerarios = $gestion->getDetalleItinerario($id_datal);
+       
+$view= View::make($id_partia, array('listItinerarios' => $listItinerarios));
+
+      //  $view = View::make($id_partia)->with('listItinerarios', $listItinerarios);
+        if ($request->ajax()) {
+            $sections = $view->render();
+            return response()->json(['newHtml' => $sections]);
+
+            
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
     }
 
     /**
@@ -305,8 +319,9 @@ class UsuarioServiciosController extends Controller {
 
         //imagenes de la promocion
         $ImgItinerarios = $gestion->getImageItinerarioOperador($id);
+        $listDificultades = $gestion->getCatalogoDificultad();
 
-        $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios'));
+        $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios','listDificultades'));
         return ($view);
     }
     
@@ -362,8 +377,11 @@ class UsuarioServiciosController extends Controller {
         if (isset($Itinerario)) {
             //logica update
 
-            $gestion->storeUpdatePromocion($formFields, $Itinerario);
-        } else { //logica de insert
+            $gestion->storeUpdateItinerario($formFields, $Itinerario);
+            
+            $returnHTML = ('/IguanaTrip/public/itinerario/' . $formFields['id']);
+        } 
+        else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
             $object = $gestion->storeNewItinerario($formFields);
             $returnHTML = ('/IguanaTrip/public/itinerario/' . $object->id);
@@ -389,33 +407,23 @@ class UsuarioServiciosController extends Controller {
 
         //obtengo llas promociones por id
         if (isset($formFields['id'])) {
-            $Itinerario = $gestion->getItinerario($formFields['id']);
+            $Itinerario = $gestion->getDetalleItinerario($formFields['id']);
         }
 //si ya existe el objeto se hace el update
         if (isset($Itinerario)) {
             //logica update
 
-            $gestion->storeUpdatePromocion($formFields, $Promocion);
+            $gestion->storeUpdateDetalleItinerario($formFields, $Itinerario);
+            $returnHTML = ('/IguanaTrip/public/itinerario/' . $formFields['id_itinerario']);
         } else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
             $object = $gestion->storeNewDetalleItinerario($formFields);
             $returnHTML = ('/IguanaTrip/public/itinerario/' . $formFields['id_itinerario']);
             
-      /*  $view = View::make('reusable.catalogo_dificultades')->with('diffic', $listServicios);
-        if ($request->ajax()) {
-            $sections = $view->rendersections();
-
-
-            return Response::json($sections);
-            //return  Response::json($sections['contentPanel']); 
-        } else
-            return $view;
-        }*/
-
-
+        }
 
 
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
-    }
+    
     }
 }
