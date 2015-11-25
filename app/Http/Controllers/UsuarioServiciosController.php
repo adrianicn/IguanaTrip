@@ -87,22 +87,21 @@ class UsuarioServiciosController extends Controller {
         $html = (String) view($id_partial);
         return response()->json(['newHtml' => $html]);
     }
-    
-    
-    //Renderiza el parcial con datos si es necesario
-    public function RenderPartialWithData(Request $request,$id_partia,$id_datal, ServiciosOperadorRepository $gestion) {
-        //
-        
-        $listItinerarios = $gestion->getDetalleItinerario($id_datal);
-       
-$view= View::make($id_partia, array('listItinerarios' => $listItinerarios));
 
-      //  $view = View::make($id_partia)->with('listItinerarios', $listItinerarios);
+    //Renderiza el parcial con datos si es necesario
+    public function RenderPartialWithData(Request $request, $id_partia, $id_datal, ServiciosOperadorRepository $gestion) {
+        //
+
+        $listItinerarios = $gestion->getDetalleItinerario($id_datal);
+
+        $view = View::make($id_partia, array('listItinerarios' => $listItinerarios));
+
+        //  $view = View::make($id_partia)->with('listItinerarios', $listItinerarios);
         if ($request->ajax()) {
             $sections = $view->render();
             return response()->json(['newHtml' => $sections]);
 
-            
+
             //return  Response::json($sections['contentPanel']); 
         } else
             return $view;
@@ -321,23 +320,25 @@ $view= View::make($id_partia, array('listItinerarios' => $listItinerarios));
         $ImgItinerarios = $gestion->getImageItinerarioOperador($id);
         $listDificultades = $gestion->getCatalogoDificultad();
 
-        $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios','listDificultades'));
+        $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios', 'listDificultades'));
         return ($view);
     }
-    
-    
-    
-    //Obtiene la lista de detalles de itinerarios por id itinerario
-    public function getListaItinerarios($id, Request $request,ServiciosOperadorRepository $gestion) {
-        //
 
-       //
-        //logica que comprueba si el usuario tiene servicios para ser modificados
-        //caso contrario ingresa nuevos serviciosS
-       $listItinerarios = $gestion->getItinerariosDetalle($id);
-       $id_itinerario=$id;
+    
+    
+    
+    //Obtiene la lista de Servicios completos
+    //Eventos
+    //Promocioes
+    //Itinerarios por usuario
+    public function getAllServicios($id_usuario_servicio, Request $request, ServiciosOperadorRepository $gestion) {
+        
+        $itinerarios = $gestion->getItinerariosporUsuario($id_usuario_servicio);
+        $promociones = $gestion->getPromocionesUsuarioServicio($id_usuario_servicio);
+        //$listEvents = $gestion->getPromocionesUsuarioServicio($id);
+        
 
-        $view = View::make('reusable.listaItinerarios')->with('listItinerarios', $listItinerarios)->with('id_itinerario',$id_itinerario);
+        $view = View::make('reusable.modifyEventos_Promociones')->with('itinerarios', $itinerarios)->with('promociones', $promociones);
         if ($request->ajax()) {
             $sections = $view->rendersections();
 
@@ -347,10 +348,28 @@ $view= View::make($id_partia, array('listItinerarios' => $listItinerarios));
         } else
             return $view;
     }
+
     
     
-    
-    
+    //Obtiene la lista de detalles de itinerarios por id itinerario
+    public function getListaItinerarios($id, Request $request, ServiciosOperadorRepository $gestion) {
+        //
+        //
+        //logica que comprueba si el usuario tiene servicios para ser modificados
+        //caso contrario ingresa nuevos serviciosS
+        $listItinerarios = $gestion->getItinerariosDetalle($id);
+        $id_itinerario = $id;
+
+        $view = View::make('reusable.listaItinerarios')->with('listItinerarios', $listItinerarios)->with('id_itinerario', $id_itinerario);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
+    }
 
     /**
      * Guarda los itinerarios que presta un usuario o un operador.
@@ -373,15 +392,14 @@ $view= View::make($id_partia, array('listItinerarios' => $listItinerarios));
         if (isset($formFields['id'])) {
             $Itinerario = $gestion->getItinerario($formFields['id']);
         }
-         //si ya existe el objeto se hace el update
+        //si ya existe el objeto se hace el update
         if (isset($Itinerario)) {
             //logica update
 
             $gestion->storeUpdateItinerario($formFields, $Itinerario);
-            
+
             $returnHTML = ('/IguanaTrip/public/itinerario/' . $formFields['id']);
-        } 
-        else { //logica de insert
+        } else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
             $object = $gestion->storeNewItinerario($formFields);
             $returnHTML = ('/IguanaTrip/public/itinerario/' . $object->id);
@@ -419,11 +437,10 @@ $view= View::make($id_partia, array('listItinerarios' => $listItinerarios));
             //Arreglo de inputs prestados que vienen del formulario
             $object = $gestion->storeNewDetalleItinerario($formFields);
             $returnHTML = ('/IguanaTrip/public/itinerario/' . $formFields['id_itinerario']);
-            
         }
 
 
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
-    
     }
+
 }

@@ -220,8 +220,54 @@ function GetDataAjax(url) {
         dataType: 'json',
         success: function (data) {
             $("#renderPartial").LoadingOverlay("show");
+            $("#renderPartial").html(data.dificultades);
+            $("#renderPartial").LoadingOverlay("hide", true);
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+function GetDataAjaxSection(url) {
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            $("#renderPartial").LoadingOverlay("show");
             $("#renderPartial").html(data.contentPanel);
             $("#renderPartial").LoadingOverlay("hide", true);
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+function GetDataAjaxSectionEventos(url) {
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            $("#renderPartialListaServicios").LoadingOverlay("show");
+            $("#renderPartialListaServicios").html(data.contentPanelServicios);
+            $("#renderPartialListaServicios").LoadingOverlay("hide", true);
 
         },
         error: function (data) {

@@ -15,7 +15,7 @@
 
         <span  class="table-add glyphicon glyphicon-plus" onclick="RenderPartialGenericMap('reusable.createNewPuntoItinerario',{!!$id_itinerario!!})"></span>
 
-
+<a class="button" onclick="RenderPartialGenericMap('reusable.createNewPuntoItinerario',{!!$id_itinerario!!})" href="#">Agregar</a>
 
         <div class="inner-wrap">
         
@@ -71,18 +71,6 @@
     </div>
     </div>
     
-    
-    
-    
-    
-
-
-
-
-
-
-
-
     
 @section('scripts')
 {!! HTML::script('/js/tabla_dinamica.js') !!}

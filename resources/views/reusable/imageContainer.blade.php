@@ -10,14 +10,12 @@
 {!!HTML::script('js/imageContainer/src/plugins/jquery.silver_track.navigator.js') !!}
 {!!HTML::script('js/imageContainer/src/plugins/jquery.silver_track.bullet_navigator.js') !!}
 {!!HTML::script('js/imageContainer/src/plugins/jquery.silver_track.remote_content.js') !!}
-  {!!HTML::script('js/imageContainer/src/plugins/jquery.silver_track.responsive_hub_connector.js') !!}
-  {!!HTML::script('js/imageContainer/src/plugins/jquery.silver_track.css3_animation.js') !!}
-  {!!HTML::script('js/imageContainer/src/plugins/jquery.silver_track.circular_navigator.js') !!}
+{!!HTML::script('js/imageContainer/src/plugins/jquery.silver_track.responsive_hub_connector.js') !!}
+{!!HTML::script('js/imageContainer/src/plugins/jquery.silver_track.css3_animation.js') !!}
+{!!HTML::script('js/imageContainer/src/plugins/jquery.silver_track.circular_navigator.js') !!}
   
   
   {!!HTML::script('js/imageContainer/script.js') !!}
-  
-  
   {!!HTML::script('js/imageContainer/example7.js') !!}
   
   

@@ -103,8 +103,7 @@
 
         $("#map").width(444);
         $("#map").height(175);
-        $("#simplemodal-container").height(580);
-        $("#simplemodal-container").css({top: '-1px'});
+    
         $("#btnsubm").click(function () {
             var value = $("#searchmap").val();
             var itinerario=$(".id_itinerario").val();

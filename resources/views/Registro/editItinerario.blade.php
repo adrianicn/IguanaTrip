@@ -10,14 +10,21 @@
 
 
 @foreach ($listItinerarios as $itiner)
+
 <div class="row">
     {!! Form::open(['url' => route('postItinerario'), 'method' => 'post', 'role' => 'form', 'id'=>'Updatepromocion']) !!}
     <div class="wrapper uwa-font-aa">
         <div id="renderPartial">
-            @include('reusable.catalogo_dificultades',['diffic' => $listDificultades,'elegido'=>$itiner->id_catalogo_dificultad])
+            
             @section('contentPanel')
             @show
+            
+            
+         
+            
         </div>    
+        @include('reusable.modify_dificultades',['diffic' => $listDificultades,'elegido'=>$itiner->id_catalogo_dificultad])
+
         <div class="form-group">
             {!!Form::label('nombre_itinerario', 'Nombre Itinerario', array('class'=>'control-label'))!!}
             {!!Form::text('nombre_itinerario', $itiner->nombre_itinerario, array('class'=>'form-control','placeholder'=>'Nombre del Servicio'))!!}
@@ -62,6 +69,17 @@
 
 
     </div>
+    
+    
+    <div id="renderPartialListaServicios">
+            
+            @section('contentPanelServicios')
+            @show
+            
+            
+         
+            
+        </div>    
     {!! Form::close() !!}
 </div>
 
@@ -75,7 +93,9 @@
 {!! HTML::script('/js/jsModal/basic.js') !!}
 <script>
     $(document).ready(function () {
-        GetDataAjax("/IguanaTrip/public/getlistaItinerarios/{!!$itiner->id!!}");
+        GetDataAjaxSection("/IguanaTrip/public/getlistaItinerarios/{!!$itiner->id!!}");
+        GetDataAjaxSectionEventos("/IguanaTrip/public/getlistaServiciosComplete/22");
+        //usuario_servicio
 
     });
 </script>

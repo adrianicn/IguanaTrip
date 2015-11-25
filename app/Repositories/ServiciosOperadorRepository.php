@@ -67,8 +67,6 @@ class ServiciosOperadorRepository extends BaseRepository {
      */
     public function storeNew($inputs) {
         $user_servicios = new $this->model;
-
-
         $user_servicios->id_catalogo_servicio = $inputs['id_catalogo_servicio'];
         $user_servicios->id_usuario_operador = $inputs['id_usuario_op'];
         $user_servicios->estado_servicio = '1';
@@ -76,15 +74,14 @@ class ServiciosOperadorRepository extends BaseRepository {
         return $user_servicios;
     }
 
+    
+    //Guarda las promociones por usuario_servicio
     public function storeNewPromocion($inputs) {
 
         $promocionU = new $this->promocion;
-
-
         $promocionU->id_usuario_servicio = $inputs['id_usuario_servicio'];
         $promocionU->id_catalogo_tipo_fotografia = 2;
         $promocionU->descripcion_promocion = $inputs['descripcion'];
-
         $promocionU->nombre_promocion = $inputs['nombre_promocion'];
         $promocionU->estado_promocion = 1;
         $promocionU->fecha_desde = $inputs['fecha_inicio'];
@@ -99,11 +96,16 @@ class ServiciosOperadorRepository extends BaseRepository {
         return $promocionU;
     }
 
+    
+    
+    
+    /**/
+    
+    
+    
     public function storeNewItinerario($inputs) {
 
         $ItinerarioU = new $this->itinerarios_u;
-
-
         $ItinerarioU->id_usuario_servicio = $inputs['id_usuario_servicio'];
         $ItinerarioU->id_fotografia = 3;
         $ItinerarioU->descripcion_itinerario = $inputs['descripcion_itinerario'];
@@ -242,6 +244,24 @@ class ServiciosOperadorRepository extends BaseRepository {
     public function getPromocionesOperador($id_promocion) {
         $promociones = new $this->promocion;
         return $promociones::where('id', $id_promocion)->get();
+    }
+    
+    
+    
+        //Entrega el arreglo de promociones por usuario servicio
+    public function     getPromocionesUsuarioServicio($id_usuario_servicio) {
+        $promociones = new $this->promocion;
+        return $promociones::where('id_usuario_servicio','=', $id_usuario_servicio)->get();
+        
+          
+        return $promociones::All();
+    }
+    
+    
+    //Entrega el arreglo de itinerarios por usuario_servicio
+    public function getItinerariosporUsuario($id_usuario_servicio) {
+        $itiner = new $this->itinerarios_u;
+        return $itiner::where('id_usuario_servicio', $id_usuario_servicio)->get();
     }
 
     //Entrega el arreglo de itinerarios por operador

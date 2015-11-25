@@ -1,4 +1,4 @@
-@section('dificultades')	
+
 {!! HTML::style('css/checkBoxCss/stylesheet-pure-css.css') !!} 
 
 
@@ -53,4 +53,3 @@
 @endif
 
 
-@endsection

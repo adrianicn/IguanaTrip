@@ -112,11 +112,13 @@ Route::get('itinerario/{id}',
 Route::post('/delete/image/{id}', ['as' => 'delete-image', 'uses' =>'ImageController@postDeleteImage']);
 Route::get('/getTipoDificultad', ['as' => 'tipoDificultad', 'uses' => 'UsuarioServiciosController@getTipoDificultad']);
 Route::get('/getlistaItinerarios/{id}', ['as' => 'itinerariosList', 'uses' => 'UsuarioServiciosController@getListaItinerarios']);
+Route::get('/getlistaServiciosComplete/{id_usuario_servicio}', ['as' => 'completeServices', 'uses' => 'UsuarioServiciosController@getAllServicios']);
+
 
 // Event::listen('illuminate.query', function($query)
-// {
-//  var_dump($query);
-// });
+ //{
+  //var_dump($query);
+ //});
 // ////////////////////////
 
 

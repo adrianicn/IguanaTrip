@@ -21,7 +21,7 @@
         </tr>
     </table>
     <div id="renderPartial">
-         @section('contentPanel')
+         @section('dificultades')
         
             @show
         
