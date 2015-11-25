@@ -6,6 +6,7 @@
 <div class="rowerror">
 </div>
 <?php
+$ImgPromociones = null; 
 $usuarioServicio->id = 0;
 $usuarioServicio->nombre_servicio = '';
 $usuarioServicio->detalle_servicio = '';
@@ -122,12 +123,21 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 
             </div>
             <div id="secondary-data">
-                <div id="promocion"> <h1>+</h1> Agregar promocion</div>
-                <div id="evento"> <h1>+</h1> Agregar evento</div>
-                <div id="evento"> <h1>+</h1> Agregar evento</div>
+                <div id="promocion"> <h1 class="h1-agregar">+</h1> Agregar promocion</div>
+                <div id="evento"> <h1 class="h1-agregar">+</h1> Agregar evento</div>
+                <div id="evento"> <h1 class="h1-agregar">+</h1> Agregar evento</div>
             </div>
         </div>
+        <div id="part-1-form">
+            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])  
+        </div>
+        <div id="part-1-form">
+            <div class="box-content-button-1">
+                <a class="button" onclick="AjaxContainerRegistro('registro_step1')" href="#">Siguiente</a>
+            </div>              
+        </div>
 <!--        
+
         <div class="form-group-1">
             {!!Form::label('precio_anterior_1', 'Precio Anterior', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('precio_anterior', $usuarioServicio->precio_anterior, array('class'=>'inputtext','placeholder'=>'Precio Anterior'))!!}
@@ -169,10 +179,10 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 
         </div>
 -->
-        <div class="box-content-button-1">
-            <a class="button" onclick="AjaxContainerRegistro('registro_step1')" href="#">Siguiente</a>
-        </div>
         {!! Form::close() !!}
+
+        @include('reusable.uploadImage', ['tipo' => '1','objeto'=>$usuarioServicio])  
+
     </div>
 </div>
 @stop
