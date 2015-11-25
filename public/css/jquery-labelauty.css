@@ -180,15 +180,7 @@ input.labelauty.synch-icon1 + label > span.labelauty-checked-image {
 
 
 
-.button {
-  float: left;
-  height: 64px;
-  width: 64px;
-  margin: 0 8px;
-  background-color: #777;
-  cursor: pointer;
-  box-shadow: 3px 3px #2E2E2E;
-}
+
 .button [class^="icon-"] {
   display: inline-block;
   width: 100%;

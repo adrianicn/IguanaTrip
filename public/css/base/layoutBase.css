@@ -1,12 +1,8 @@
-
-
 #viewType-1 #footer {
     bottom: 0;
     position: fixed;
     right: 0;
 }
-
-
 .nv-green-button, .button {
     -moz-user-select: none;
     
@@ -798,9 +794,8 @@ body {
 
 
 .testboxFormulario {
-  margin: 20px auto;
-    text-align: center;
-  width: 80%;
+  text-align: center;
+  width: 915px;
   -webkit-border-radius: 8px/7px; 
   -moz-border-radius: 8px/7px; 
   border-radius: 8px/7px; 

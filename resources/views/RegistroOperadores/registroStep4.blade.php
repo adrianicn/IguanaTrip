@@ -102,7 +102,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::text('telefono', $usuarioServicio->telefono, array('class'=>'form-control-1','placeholder'=>'Telefono del Servicio'))!!}
                 </div>
                 <div class="datagrid">
-                    <table>
+                    <table border="2">
                         <thead>
                             <tr>
                                 <th>Descripcion</th><th>Seleccion</th>
@@ -112,8 +112,8 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                             @foreach ($catalogoServicioEstablecimiento as $catalogo)	
 
                             <tr>
-                                <td>{!!$catalogo->nombre_servicio_est!!}</td>
                                 <td><input class="circulo" name="id_servicio_est[]" id="id_servicio_est[]" value="{!!$catalogo->id!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {{($catalogo->estado_servicio_est_us <> NULL)?'checked':''}}/></td>
+                                <td>{!!$catalogo->nombre_servicio_est!!}</td>
                             </tr>
                             @endforeach 	
                         </tbody>
