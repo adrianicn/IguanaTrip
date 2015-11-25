@@ -140,8 +140,8 @@
 
 .inputtext
 {
-  width: 336px; 
-  height: 31px; 
+  width: 320px; 
+  height: 24px; 
   -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
   -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px; 
   border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
@@ -202,7 +202,7 @@
   float: left;
 }
 .ptm{
-  width: 405px;
+  width: 390px;
   height: 150px; 
   -webkit-border-radius: 0px 4px 4px 4px/5px 5px 4px 4px; 
   -moz-border-radius: 0px 4px 4px 4px/0px 0px 4px 4px; 
@@ -217,8 +217,8 @@
   padding: 0 0 10px 10px;
 }
 .form-control-1{
-  width: 280px; 
-  height: 31px; 
+  width: 258px; 
+  height: 24px; 
   -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
   -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px; 
   border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
@@ -297,7 +297,7 @@
 #part-1-form{
     padding: 5px;
     background-color: #282828;  
-    width: 915px;
+    width: 905px;
 }
 #principal-data{
     width: 500px;
@@ -314,13 +314,6 @@
     float: left;
     width: 900px;
     padding-left: 5px;
-}
-.circulo {
-     width: 20px;
-     height: 20px;
-     -moz-border-radius: 50%;
-     -webkit-border-radius: 50%;
-     border-radius: 50%;
 }
 #iconFormulario-step2 {
   height: 31px;
@@ -378,4 +371,64 @@
     padding: -2px 15px;
     height: 9px;
     float: left;
+}
+.datagrid-step4{
+    float: left;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    width: 400px;
+}
+#secondary-data{
+    width: 400px;
+    float: left;   
+}
+.form-group-2{
+    background-color: #282828;
+    padding-bottom: 10px;
+    width: 400px;
+    float: left;
+}
+#promocion{
+    border: 1px #fff solid;
+    padding: 20px;
+    color: #FFFFFF;
+    background-color: #EF620A;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    margin-left: 30px;
+    margin-bottom: 30px;
+    float: left;
+}
+#evento{
+    border: 1px #fff solid;
+    padding: 20px;
+    color: #FFFFFF;
+    background-color: #EF620A;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    float: left;
+}
+#itinerario{
+    border: 1px #fff solid;
+    padding: 20px;
+    color: #FFFFFF;
+    background-color: #EF620A;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    float: left;
+}
+.row-step41{
+	width: 915px;
+	float:left;
+	margin-left: 115px;
+}
+#promocion, #evento, #itinerario h1{
+    padding-top: 1px;
 }

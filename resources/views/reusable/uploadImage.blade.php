@@ -1,7 +1,7 @@
 
 
-{!! HTML::style('/packages/bootstrap/css/bootstrap.min.css') !!}
-{!! HTML::style('/assets/css/style.css') !!}
+<!--{!! HTML::style('/packages/bootstrap/css/bootstrap.min.css') !!}
+{!! HTML::style('/assets/css/style.css') !!}-->
 {!! HTML::style('/packages/dropzone/dropzone.css') !!}
  
 <div class="row">

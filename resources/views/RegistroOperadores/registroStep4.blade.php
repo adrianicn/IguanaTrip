@@ -1,8 +1,7 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
-{!! HTML::style('css/serviciosOperadores.css') !!} 
-{!! HTML::style('css/base/step4.css') !!} 
+<!--{!! HTML::style('css/serviciosOperadores.css') !!}--> 
 
 <div class="rowerror">
 </div>
@@ -53,7 +52,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 <div class="row-step4">
     <div id="title-box-header">
         <div id="title-box-type">
-            <h2 class="head-title box-content-title ">
+            <h2 class="head-title">
                 I'm an                <strong>Agency</strong>
             </h2>
         </div>
@@ -62,6 +61,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             sin necesidad de llamar a nadie
         </div>
     </div>
+    <div id="space"></div>
 
     <div class="wrapper uwa-font-aa">
         {!! Form::open(['url' => route('upload-postusuarioservicios'), 'method' => 'post', 'role' => 'form', 'id'=>'registro_step1'] ) !!}
@@ -90,39 +90,44 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     @include('reusable.maps', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
                 </div>    
             </div>
-            <div>
-                <div class="form-group-1">
+            <div id="secondary-data">
+                <div class="form-group-2">
                     {!!Form::label('detalle_servicio_1', 'Detalle Servicio', array('class'=>'control-label-1'))!!}
                     <textarea id="telefono" name="telefono" class="ptm" placeholder="Detalle Servicio">
                         {!!$usuarioServicio->detalle_servicio!!}
                     </textarea>
                 </div>
-                <div class="form-group-1">
+                <div class="form-group-2">
                     {!!Form::label('telefono_1', 'Telefono', array('class'=>'control-label-2'))!!}
                     {!!Form::text('telefono', $usuarioServicio->telefono, array('class'=>'form-control-1','placeholder'=>'Telefono del Servicio'))!!}
                 </div>
-                <div class="datagrid">
-                    <table border="2">
-                        <thead>
-                            <tr>
-                                <th>Descripcion</th><th>Seleccion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($catalogoServicioEstablecimiento as $catalogo)	
-
-                            <tr>
-                                <td><input class="circulo" name="id_servicio_est[]" id="id_servicio_est[]" value="{!!$catalogo->id!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {{($catalogo->estado_servicio_est_us <> NULL)?'checked':''}}/></td>
-                                <td>{!!$catalogo->nombre_servicio_est!!}</td>
-                            </tr>
-                            @endforeach 	
-                        </tbody>
-                    </table>
+                <div class="form-group-2">
+                    {!!Form::label('correo_contacto_1', 'Correo del contacto', array('class'=>'control-label-2'))!!}
+                    {!!Form::text('correo_contacto', $usuarioServicio->correo_contacto, array('class'=>'form-control-1','placeholder'=>'Correo Contacto'))!!}
                 </div>
-                
+                <div class="form-group-2">
+                    {!!Form::label('pagina_web_1', 'Pagina Web', array('class'=>'control-label-2'))!!}
+                    {!!Form::text('pagina_web', $usuarioServicio->pagina_web, array('class'=>'form-control-1','placeholder'=>'URL'))!!}
+                </div>
+                <div class="form-group-2">
+                    <ul style="list-style: none">
+                            @foreach ($catalogoServicioEstablecimiento as $catalogo)	
+                                <li>
+                                    <input class="circulo" name="id_servicio_est[]" id="id_servicio_est[]" value="{!!$catalogo->id!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {{($catalogo->estado_servicio_est_us <> NULL)?'checked':''}}/>
+                                    {!!$catalogo->nombre_servicio_est!!}
+                                </li>    
+                            @endforeach
+                    </ul>
+                </div>
+
             </div>
-            
+            <div id="secondary-data">
+                <div id="promocion"> <h1>+</h1> Agregar promocion</div>
+                <div id="evento"> <h1>+</h1> Agregar evento</div>
+                <div id="evento"> <h1>+</h1> Agregar evento</div>
+            </div>
         </div>
+<!--        
         <div class="form-group-1">
             {!!Form::label('precio_anterior_1', 'Precio Anterior', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('precio_anterior', $usuarioServicio->precio_anterior, array('class'=>'inputtext','placeholder'=>'Precio Anterior'))!!}
@@ -136,17 +141,6 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
         <div class="form-group-1">
             {!!Form::label('descuento_servicio_1', 'Desuento Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
             {!!Form::text('descuento_servico', $usuarioServicio->descuento_servico, array('class'=>'inputtext','placeholder'=>'Descuento del Servicio'))!!}
-
-        </div>
-        <!-- , ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio] -->
-        <div class="form-group-1">
-            {!!Form::label('correo_contacto_1', 'Correo del contacto', array('class'=>'control-label'))!!}
-            {!!Form::text('correo_contacto', $usuarioServicio->correo_contacto, array('class'=>'inputtext','placeholder'=>'Correo Contacto'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('pagina_web_1', 'Pagina Web', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('pagina_web', $usuarioServicio->pagina_web, array('class'=>'inputtext','placeholder'=>'URL'))!!}
 
         </div>
         <div class="form-group-1">
@@ -174,11 +168,11 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             {!!Form::text('observaciones', $usuarioServicio->observaciones, array('class'=>'inputtext','placeholder'=>'Observaciones del Servicio'))!!}
 
         </div>
+-->
         <div class="box-content-button-1">
             <a class="button" onclick="AjaxContainerRegistro('registro_step1')" href="#">Siguiente</a>
         </div>
         {!! Form::close() !!}
-        @include('reusable.uploadImage', ['tipo' => '1','objeto'=>$usuarioServicio]) 
     </div>
 </div>
 @stop

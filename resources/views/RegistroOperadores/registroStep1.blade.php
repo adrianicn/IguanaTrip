@@ -4,29 +4,30 @@
 
 
 
-<?php  
+<?php
 $label_tipo_operador_agencia = 'Get started';
 $label_tipo_operador_empresa = 'Get started';
 $label_tipo_operador_persona = 'Sign up for free';
 ?>
 @if(count($listOperadores) !=0 )
-	@foreach ($listOperadores as $operadores)
-	    @if ($operadores->id_tipo_operador === 1)
-	    	<?php $label_tipo_operador_agencia = 'Actualizar'?>
-		@elseif ($operadores->id_tipo_operador === 2)
-	    	<?php $label_tipo_operador_empresa = 'Actualizar'?>
-		@else (count($records) === 3)
-	    	<?php $label_tipo_operador_persona = 'Actualizar'?>
-		@endif
-	@endforeach
+@foreach ($listOperadores as $operadores)
+@if ($operadores->id_tipo_operador === 1)
+<?php $label_tipo_operador_agencia = 'Actualizar' ?>
+@elseif ($operadores->id_tipo_operador === 2)
+<?php $label_tipo_operador_empresa = 'Actualizar' ?>
+@else (count($records) === 3)
+<?php $label_tipo_operador_persona = 'Actualizar' ?>
+@endif
+@endforeach
 @endif
 
 <div class="rowerror">
 </div>
-
+<div class="row-step41">
+    <div id="space"></div>
     {!! Form::open(['url' => route('upload-postTipoOperador'),  'id'=>'registro_step1']) !!}
-    	<input type="hidden" value="0" name="tipo_operador" id="tipo_operador">
-<div class="wrapper uwa-font-aa">
+    <input type="hidden" value="0" name="tipo_operador" id="tipo_operador">
+    <div class="wrapper uwa-font-aa">
         <div class="box-content box-content-team left">
             <h2 class="box-content-title">
                 I'm an                <strong>Agency</strong>
@@ -60,9 +61,9 @@ $label_tipo_operador_persona = 'Sign up for free';
                 </div>
             </div>
         </div>
-     </div>
+    </div>
     {!! Form::close() !!}
-
+</div>
 
 
 @stop
