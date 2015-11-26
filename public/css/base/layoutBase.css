@@ -478,6 +478,17 @@ body {
     margin: 7px;
     padding: 5px 15px;
 }
+.box-content-button-1 .button-1 {
+    background: #EF620A none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+    margin: 7px;
+    padding: 5px 15px;
+    text-decoration:none;  
+}
 .box-content-individual .box-content-title {
     border-color: #3a5d77;
 }

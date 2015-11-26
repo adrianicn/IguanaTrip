@@ -14,23 +14,18 @@
 
 <div id="testboxForm" class="testboxForm">
     <h1>Agregar Punto para Itinerario </h1>
-
-    {!! Form::open(['url' => route('postPuntoItinerario'),  'id'=>'puntoitinerario']) !!}
     <hr>
 
+    {!! Form::open(['url' => route('postPuntoItinerario'),  'id'=>'puntoitinerario']) !!}
+    <input type="hidden"  class="id_itinerario" name="id_itinerario">
+    <input type="hidden"  class="tag" name="tag">
+    <input type="hidden"  class="id_detalle" name="id">
 
-    <table>
-        <tr>
-            <td><label class='labelmodal' for="username">Lugar:</label></td>
-
-            <td><input class="text" id="lugar_punto" name="lugar_punto" placeholder="Punto de encuentro, punto A, etc"></td>
-        </tr>
-
-        <tr>
-            <td><label class='labelmodal' for="username">Punto:</label></td>
-
-            <td>
-
+        <div class="form-group-step2-popup">
+            {!!Form::label('lugar_1', 'Lugar', array('id'=>'iconFormulario-step2-popup'))!!}
+            {!!Form::text('lugar_punto',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Punto de encuentro, punto A, etc'))!!}
+        </div>
+        <div class="form-group-step2-popup">
                 @if(isset($listItinerarios))
                 @foreach ($listItinerarios as $itiner)
                 @include('reusable.maps', ['longitud_servicio' => $itiner->longitud_punto,'latitud_servicio'=>$itiner->latitud_punto])  
@@ -38,32 +33,22 @@
                 @else
                 @include('reusable.maps', ['longitud_servicio' => '-78.46783820000002','latitud_servicio'=>'-0.1806532'])   
                 @endif
+        </div>
+        <div class="form-group-step2-popup">
+            {!!Form::label('dia_hora_1', 'Día / Hora', array('id'=>'iconFormulario-step2-popup'))!!}
+            {!!Form::text('diahora_punto',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Sabado 8AM, todos los días 11 Am, etc'))!!}
+        </div>
+        <div class="form-group-step2-popup">
+            {!!Form::label('incluye_1', 'Incluye', array('id'=>'iconFormulario-step2-popup'))!!}
+            {!!Form::textarea('incluye_punto',NULL, array('class'=>'inputtextarea-step2-popup-1','placeholder'=>'Incluye equipos, incluye almuerzo, no incluye bicicletas, etc'))!!}
+        </div>
 
+        <div id="form-group-step2-popup">
+            <div class="box-content-button-1">
+                <a class="button-1" onclick="AjaxContainerRegistroWithLoad('')" href="#">Siguiente</a>
+            </div>              
+        </div>
 
-            </td>
-
-        </tr>
-
-        <tr>
-            <td><label class='labelmodal' for="username">Día / Hora:</label></td>
-
-            <td><input class="text" id="diahora_punto" name="diahora_punto" placeholder="Sabado 8AM, todos los días 11 Am, etc"></td>
-        </tr>
-        <tr>
-            <td><label class='labelmodal' for="username">Incluye:</label></td>
-
-            <td><textarea name="incluye_punto" rows="4" cols="29">Incluye equipos, incluye almuerzo, no incluye bicicletas, etc</textarea></td>
-        </tr>
-
-
-
-    </table>
-
-    <input type="hidden"  class="id_itinerario" name="id_itinerario">
-    <input type="hidden"  class="tag" name="tag">
-    <input type="hidden"  class="id_detalle" name="id">
-
-    <button class="button" type="button" id="btnsubm" onclick="">Siguiente</button>
     {!! Form::close() !!}
 
 
@@ -101,7 +86,7 @@
     
     <script>
 
-        $("#map").width(444);
+        $("#map").width(550);
         $("#map").height(175);
     
         $("#btnsubm").click(function () {

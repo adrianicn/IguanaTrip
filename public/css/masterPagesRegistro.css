@@ -216,6 +216,22 @@
   margin-top: 0px; 
   padding: 0 0 10px 10px;
 }
+.ptm-popup{
+  width: 390px;
+  height: 150px; 
+  -webkit-border-radius: 0px 4px 4px 4px/5px 5px 4px 4px; 
+  -moz-border-radius: 0px 4px 4px 4px/0px 0px 4px 4px; 
+  -webkit-box-shadow: 1px 2px 0px rgba(0,0,0,.09); 
+  -moz-box-shadow: 1px 2px 0px rgba(0,0,0,.09); 
+  border-radius: 0px 4px 4px 4px/5px 5px 4px 4px; 
+  background-color: #fff; 
+  box-shadow: 1px 2px 0px rgba(0,0,0,.09); 
+  border: solid 1px #cbc9c9;
+  margin-left: 0px;
+  margin-top: 0px; 
+  padding: 0 0 10px 10px;
+}
+
 .form-control-1{
   width: 258px; 
   height: 24px; 
@@ -298,10 +314,10 @@
     padding: 5px;
     background-color: #282828;  
     width: 905px;
+    float: left;
 }
 #principal-data{
     width: 500px;
-    background-color: #000;
     float: left;
 }
 .form-group-1{
@@ -315,7 +331,31 @@
     width: 900px;
     padding-left: 5px;
 }
+.form-group-step2-popup{
+    padding-top: 10px;
+    float: left;
+    width: 585px;
+    padding-left: 5px;
+}
+
 #iconFormulario-step2 {
+  height: 31px;
+  width: 145px;
+  background-color: #ef620a;
+  -webkit-border-radius: 4px 0px 0px 4px; 
+  -moz-border-radius: 4px 0px 0px 4px; 
+  border-radius: 4px 0px 0px 4px;
+  color: white;
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  border: solid 0px #cbc9c9;
+  display: inline-block;
+  padding-left: 5px;
+  padding-top: 5px;
+  float: left;
+}
+#iconFormulario-step2-popup {
   height: 31px;
   width: 145px;
   background-color: #ef620a;
@@ -349,6 +389,75 @@
   padding: 0 0 10px 10px;
   
 }
+.inputtextarea-step2
+{
+  width: 336px; 
+  height: 100px; 
+  -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px; 
+  border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  background-color: #fff; 
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  border: solid 1px #cbc9c9;
+  margin-left: 0px;
+  margin-top: 0px; 
+  padding: 0 0 10px 10px;
+  
+}
+.inputtextarea-step2-popup
+{
+  width: 336px; 
+  height: 100px; 
+  -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px; 
+  border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  background-color: #fff; 
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  border: solid 1px #cbc9c9;
+  margin-left: 0px;
+  margin-top: 0px; 
+  padding: 0 0 10px 10px;
+  
+}
+.inputtextarea-step2-popup-1
+{
+  width: 336px; 
+  height: 50px; 
+  -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px; 
+  border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  background-color: #fff; 
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  border: solid 1px #cbc9c9;
+  margin-left: 0px;
+  margin-top: 0px; 
+  padding: 0 0 10px 10px;
+  
+}
+.inputtext-step2-popup
+{
+  width: 390px; 
+  height: 24px; 
+  -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px; 
+  border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  background-color: #fff; 
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  border: solid 1px #cbc9c9;
+  margin-left: 0px;
+  margin-top: 0px; 
+  padding: 0 0 10px 10px;
+  
+}
+
 .box-content-button-step2{
     background: #f15b40 none repeat scroll 0 0;
     border-radius: 3px;
@@ -437,4 +546,22 @@
     font-size: 43px;
     margin: 0;
     padding: 0
+}
+.button-step4 {
+    -moz-user-select: none;
+    border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 0 0 5px;
+    outline: 0 none;
+    padding: 0 10px 0 3px;
+    text-decoration: none !important;
+    vertical-align: middle;
+    text-decoration:none; 
+    color: #FFFFFF;
+}
+#itinerario-detalle{
+    padding-left: 10px;
+    width: 400px;
+    float: left;
 }

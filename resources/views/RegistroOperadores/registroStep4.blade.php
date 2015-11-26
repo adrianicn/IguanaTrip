@@ -94,7 +94,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             <div id="secondary-data">
                 <div class="form-group-2">
                     {!!Form::label('detalle_servicio_1', 'Detalle Servicio', array('class'=>'control-label-1'))!!}
-                    <textarea id="telefono" name="telefono" class="ptm" placeholder="Detalle Servicio">
+                    <textarea id="detalle_servicio" name="detalle_servicio" class="ptm" placeholder="Detalle Servicio">
                         {!!$usuarioServicio->detalle_servicio!!}
                     </textarea>
                 </div>
@@ -123,17 +123,17 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 
             </div>
             <div id="secondary-data">
-                <div id="promocion"> <h1 class="h1-agregar">+</h1> Agregar promocion</div>
-                <div id="evento"> <h1 class="h1-agregar">+</h1> Agregar evento</div>
-                <div id="evento"> <h1 class="h1-agregar">+</h1> Agregar evento</div>
+                <div id="promocion"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
+                <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
+                <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Itinerario</a></div>
             </div>
         </div>
         <div id="part-1-form">
-            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])  
+            wwwwwwwwwwwww
         </div>
         <div id="part-1-form">
             <div class="box-content-button-1">
-                <a class="button" onclick="AjaxContainerRegistro('registro_step1')" href="#">Siguiente</a>
+                <a class="button-1" onclick="AjaxContainerRegistro('registro_step1')" href="#">Siguiente</a>
             </div>              
         </div>
 <!--        
@@ -184,5 +184,13 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
         @include('reusable.uploadImage', ['tipo' => '1','objeto'=>$usuarioServicio])  
 
     </div>
+    <div id="basic-modal-content" class="cls loadModal">
+    </div>
 </div>
+@section('scripts')
+    {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
+    {!! HTML::script('/js/jsModal/basic.js') !!}
 @stop
+
+@stop
+
