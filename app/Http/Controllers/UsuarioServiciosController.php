@@ -10,6 +10,7 @@ use Input;
 use App\Models\Usuario_Servicio;
 use App\Models\Promocion_Usuario_Servicio;
 use App\Models\Itinerario_Usuario_Servicio;
+use App\Models\Eventos_usuario_Servicio;
 use App\Models\Detalle_Itinerario;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
@@ -324,6 +325,46 @@ class UsuarioServiciosController extends Controller {
         return ($view);
     }
 
+    /**
+     * Guarda los eventos que presta un usuario o un operador.
+     *
+     * @return Response
+     */
+    public function postEvento(ServiciosOperadorRepository $gestion) {
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        $validator = Validator::make($formFields, Eventos_usuario_Servicio::$rulesP);
+        if ($validator->fails()) {
+            return response()->json(array(
+                        'fail' => true,
+                        'errors' => $validator->getMessageBag()->toArray()
+            ));
+        }
+
+        //obtengo llas promociones por id
+        if (isset($formFields['id'])) {
+            $Evento = $gestion->getItinerario($formFields['id']);
+        }
+        //si ya existe el objeto se hace el update
+        if (isset($Evento)) {
+            //logica update
+
+            $gestion->storeUpdateEvento($formFields, $Evento);
+
+            $returnHTML = ('/IguanaTrip/public/itinerario/' . $formFields['id']);
+        } else { //logica de insert
+            //Arreglo de inputs prestados que vienen del formulario
+            $object = $gestion->storeNewEvento($formFields);
+            $returnHTML = ('/IguanaTrip/public/itinerario/' . $object->id);
+        }
+
+
+
+
+        return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+    }
+    
     
     
     
@@ -371,6 +412,10 @@ class UsuarioServiciosController extends Controller {
             return $view;
     }
 
+    
+    
+    
+    
     /**
      * Guarda los itinerarios que presta un usuario o un operador.
      *

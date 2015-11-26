@@ -61,6 +61,7 @@
 
 
 <a class="button" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$servicios->id!!})" href="#">Siguiente</a>
+
         <div class="inner-wrap">
         
     

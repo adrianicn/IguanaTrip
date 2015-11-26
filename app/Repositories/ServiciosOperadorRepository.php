@@ -7,6 +7,7 @@ use App\Models\Promocion_Usuario_Servicio;
 use App\Models\Catalogo_Dificultad;
 use App\Models\Detalle_Itinerario;
 use App\Models\Itinerario_Usuario_Servicio;
+use App\Models\Eventos_usuario_Servicio;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 
@@ -29,6 +30,7 @@ class ServiciosOperadorRepository extends BaseRepository {
     protected $image;
     protected $itinerarios_u;
     protected $detalle_itinerarios_u;
+    protected $eventos;
 
     /**
      * Create a new ServiciosOperadorRepository instance.
@@ -44,6 +46,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->catalogo_dificultad = new Catalogo_Dificultad();
         $this->itinerarios_u = new Itinerario_Usuario_Servicio();
         $this->detalle_itinerarios_u = new Detalle_Itinerario();
+        $this->eventos = new Eventos_usuario_Servicio();
     }
 
     /**
@@ -118,6 +121,23 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->save($ItinerarioU);
         return $ItinerarioU;
     }
+    
+    
+    
+    public function storeNewEvento($inputs) {
+
+        $evento = new $this->eventos;
+        $evento->id_usuario_servicio = $inputs['id_usuario_servicio'];
+        $evento->id_fotografia = 4;
+        $evento->descripcion_evento = $inputs['descripcion_evento'];
+        $evento->nombre_evento = $inputs['nombre_evento'];
+        $evento->estado_evento = 1;
+        $evento->created_at = \Carbon\Carbon::now()->toDateTimeString();
+        $evento->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+        $this->save($evento);
+        return $evento;
+    }
 
     public function storeNewDetalleItinerario($inputs) {
 
@@ -170,6 +190,22 @@ class ServiciosOperadorRepository extends BaseRepository {
         return true;
     }
 
+    
+    //actualiza los eventos
+    public function storeUpdateEvento($inputs, $evento) {
+
+        foreach ($evento as $servicioBase) {
+            $pro = $this->itinerarios_u->find($servicioBase->id);
+            
+            //Transformo el arreglo en un solo objeto
+            $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+            $pro->fill($inputs)->save();
+        }
+
+        return true;
+    }
+    
+    
     //actualiza los itinerarios
     public function storeUpdateItinerario($inputs, $itiner) {
 
