@@ -1,51 +1,3 @@
-.table-editable {
-  position: relative;
-}
-.table-editable .glyphicon {
-  font-size: 20px;
-}
-.table {
-    margin-bottom: 20px;
-    max-width: 100%;
-    width: 50%;
-}
-.table-remove {
-  color: #700;
-  cursor: pointer;
-}
-.table-remove:hover {
-  color: #f00;
-}
-
-.table-up, .table-down {
-  color: #007;
-  cursor: pointer;
-}
-.table-up:hover, .table-down:hover {
-  color: #00f;
-}
-
-.table-add {
-  color: #070;
-  cursor: pointer;
-  position: absolute;
-  top: 8px;
-  right: 570px;
-}
-.table-add:hover {
-  color: #0b0;
-}
-
-
-.container1 {
-  margin: 50px auto;
-  width: 280px;
-  text-align: center;
-}
-.container1 > .switch {
-  display: block;
-  margin: 12px auto;
-}
 
 .switch {
   position: relative;
@@ -164,32 +116,4 @@
 
 .switch-green > .switch-input:checked ~ .switch-label {
   background: #4fb845;
-}
-
-
-.inner-wrap{
-    padding: 30px;
-    background: #F8F8F8;
-    border-radius: 6px;
-    margin-bottom: 15px;
-}
-
- .section{
-    font: normal 20px 'Bitter', serif;
-    color: #2A88AD;
-    margin-bottom: 5px;
-}
-
-.section span {
-    background: #2A88AD;
-    padding: 5px 10px 5px 10px;
-    position: absolute;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border: 4px solid #fff;
-    font-size: 14px;
-    margin-left: -45px;
-    color: #fff;
-    margin-top: -3px;
 }
