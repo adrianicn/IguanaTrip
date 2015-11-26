@@ -565,3 +565,11 @@
     width: 400px;
     float: left;
 }
+.add-registro{
+    font-size: 36px;
+    color: #98BB2D;
+    cursor: pointer
+}
+.tabla-itinerario-detalle{
+    width: 100%;
+}

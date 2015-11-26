@@ -123,7 +123,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 
             </div>
             <div id="secondary-data">
-                <div id="promocion"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
+                <div id="promocion"><a class="button-step4" onclick="RenderPartialGeneric('reusable.promocion',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
                 <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
                 <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Itinerario</a></div>
             </div>
