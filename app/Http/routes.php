@@ -97,6 +97,7 @@ Route::post('maps',function()
 });
 Route::post('promocion', ['as' => 'postPromocion', 'uses' =>'UsuarioServiciosController@postPromocion']);
 Route::post('itinerario', ['as' => 'postItinerario', 'uses' =>'UsuarioServiciosController@postItinerario']);
+Route::post('evento', ['as' => 'postEvento', 'uses' =>'UsuarioServiciosController@postEvento']);
 Route::post('itinerarioP', ['as' => 'postPuntoItinerario', 'uses' =>'UsuarioServiciosController@postPuntoItinerario']);
 
 

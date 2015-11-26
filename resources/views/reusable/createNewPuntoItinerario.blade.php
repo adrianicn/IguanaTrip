@@ -45,7 +45,7 @@
 
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRegistroWithLoad('')" href="#">Siguiente</a>
+                <a class="button-1" id="btnsubm" href="#">Siguiente</a>
             </div>              
         </div>
 

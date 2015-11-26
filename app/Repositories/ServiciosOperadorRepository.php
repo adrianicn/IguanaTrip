@@ -107,7 +107,7 @@ class ServiciosOperadorRepository extends BaseRepository {
 
         $ItinerarioU = new $this->itinerarios_u;
         $ItinerarioU->id_usuario_servicio = $inputs['id_usuario_servicio'];
-        $ItinerarioU->id_fotografia = 5;
+        $ItinerarioU->id_fotografia = 3;
         $ItinerarioU->descripcion_itinerario = $inputs['descripcion_itinerario'];
         $ItinerarioU->nombre_itinerario = $inputs['nombre_itinerario'];
         $ItinerarioU->id_catalogo_dificultad = $inputs['id_dificultad'];
