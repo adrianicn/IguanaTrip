@@ -13,6 +13,7 @@ return array(
     'CreateCommentsTable' => $baseDir . '/database/migrations/2014_10_26_222018_create_comments_table.php',
     'CreateContactTable' => $baseDir . '/database/migrations/2014_10_24_205441_create_contact_table.php',
     'CreateDetallesItinerarioTable' => $baseDir . '/database/migrations/2015_11_19_045309_create_detalles_itinerario_table.php',
+    'CreateEventosUsuarioServicioTable' => $baseDir . '/database/migrations/2015_11_25_121637_create_eventos_usuario_servicio_table.php',
     'CreateForeignKeys' => $baseDir . '/database/migrations/2014_10_21_110325_create_foreign_keys.php',
     'CreateImagesTable' => $baseDir . '/database/migrations/2015_11_01_011047_create_images_table.php',
     'CreateItinerariosUsuarioServiciosTable' => $baseDir . '/database/migrations/2015_11_19_045229_create_itinerarios_usuario_servicios_table.php',
