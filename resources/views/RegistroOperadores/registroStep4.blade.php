@@ -1,7 +1,15 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
-<!--{!! HTML::style('css/serviciosOperadores.css') !!}--> 
+<div style='display:none'>
+    <img src="{!! asset('img/x.png')!!}" alt='' />
+</div>
+<style>
+    #simplemodal-container a.modalCloseImg {
+        background:url("{!! asset('img/x.png')!!}") no-repeat;
+        width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+</style>
+<div id="basic-modal-content" class="cls loadModal"></div>
 
 <div class="rowerror">
 </div>
@@ -184,9 +192,8 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
         @include('reusable.uploadImage', ['tipo' => '1','objeto'=>$usuarioServicio])  
 
     </div>
-    <div id="basic-modal-content" class="cls loadModal">
-    </div>
 </div>
+
 @section('scripts')
     {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
     {!! HTML::script('/js/jsModal/basic.js') !!}
