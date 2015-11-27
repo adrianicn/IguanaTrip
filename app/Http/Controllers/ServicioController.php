@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Contracts\Auth\Guard;
+use App\Repositories\ServiciosOperadorRepository;
+
 use Illuminate\Support\Facades\Session;
 
 //use App\Models\Catalogo_Servicio;
@@ -98,7 +100,7 @@ class ServicioController extends Controller
     }
     
 
-    public function step4( $id, $id_catalogo )
+    public function step4( $id, $id_catalogo,ServiciosOperadorRepository $gestion )
     {
     	$operador_gestion = new OperadorRepository() ;
     	
@@ -106,8 +108,9 @@ class ServicioController extends Controller
 		$catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimientoExistente($id_catalogo,$id);
 		if(count($catalogoServicioEstablecimiento) == 0 )
 			$catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimiento($id_catalogo);
-		
-    	return view('RegistroOperadores.registroStep4', compact('usuarioServicio','catalogoServicioEstablecimiento','id_catalogo'));
+	   $ImgPromociones = $gestion->getImageOperador($id,1);
+           
+    	return view('RegistroOperadores.registroStep4', compact('usuarioServicio','catalogoServicioEstablecimiento','id_catalogo','ImgPromociones'));
     }
     
     /**

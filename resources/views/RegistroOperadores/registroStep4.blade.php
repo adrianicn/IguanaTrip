@@ -129,7 +129,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             </div>
         </div>
         <div id="part-1-form">
-            wwwwwwwwwwwww
+            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
         </div>
         <div id="part-1-form">
             <div class="box-content-button-1">

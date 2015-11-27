@@ -285,11 +285,21 @@ class ServiciosOperadorRepository extends BaseRepository {
     //Entrega el arreglo de Imagenes por promocion por operador
     public function getImagePromocionesOperador($id_promocion) {
         $promociones = new $this->image;
-        return $promociones::where('id_auxiliar', $id_promocion)
+            return $promociones::where('id_auxiliar', $id_promocion)
                         ->where('id_catalogo_fotografia', '=', 2)
                         ->where('estado_fotografia', '=', 1)->get();
     }
 
+     //Entrega el arreglo de Imagenes por promocion por operador
+    public function getImageOperador($id_aux,$catalogo) {
+        $promociones = new $this->image;
+            return $promociones::where('id_auxiliar', $id_aux)
+                        ->where('id_catalogo_fotografia', '=', $catalogo)
+                        ->where('estado_fotografia', '=', 1)->get();
+    }
+
+    
+    
     //lista de itinerarios imagenes
     public function getImageItinerarioOperador($id_itinerario) {
         $itiner = new $this->image;

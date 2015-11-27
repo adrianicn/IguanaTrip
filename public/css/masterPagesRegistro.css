@@ -573,3 +573,25 @@
 .tabla-itinerario-detalle{
     width: 100%;
 }
+.servicio-usuario-detalle{
+    padding-left: 10px;
+    width: 700px;
+    float: left;
+    border-bottom: 1px #FFFFFF solid;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.tabla-servicio-usuario-detalle{
+    width: 50%;
+    margin: 0 auto;
+}
+.vinculo-servicio a{
+   color: #FFFFFF;
+   text-decoration: none;
+}
+.servicio-usuario-detalle h2{
+    color: #F05A22;
+}
+.text-add-registro{
+    color: #FFFFFF;
+}
