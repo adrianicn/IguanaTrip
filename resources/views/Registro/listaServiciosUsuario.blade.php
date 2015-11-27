@@ -28,53 +28,6 @@
             sin necesidad de llamar a nadie
         </div>
     </div>
-<<<<<<< HEAD
-</div>
- <?php $counter = 0;?>
-    @foreach ($listServiciosUnicos as $servicios)
- <?php $counter = $counter+1;?>
-
-    {!! Form::open(['url' => route('upload-postDetalleOperador'),  'id'=>$servicios->id_catalogo_servicios]) !!}
-    
-
-<div class="testboxFormulario">
-    <div id="table_{!!$servicios->id!!}" class="table-editable">
-
-  
-        <div class="section"><span>{!!$counter!!}</span>{!!$servicios->nombre_servicio!!}</div>
-
-        <span  class="table-add glyphicon glyphicon-plus" onclick="RenderPartial('reusable.createNewServicio',{!!$servicios->id_catalogo_servicios!!},{!!$servicios->id_usuario_operador!!})"></span>
-
-
-<a class="button" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$servicios->id!!})" href="#">Siguiente</a>
-
-        <div class="inner-wrap">
-        
-    
-        <table class="table">
-            <tr>
-                <th>Nombre</th>
-                <th>Estado</th>
-                <th></th>
-                <th></th>
-            </tr>
-
-            @foreach ($listServiciosAll as $servicio)
-            @if($servicio->id_catalogo_servicios==$servicios->id_catalogo_servicios)
-            <?php $check = '';?>
-            @if($servicio->estado_servicio_usuario==1)
-              <?php $check = 'checked';
-              
-              ?>
-            @endif
-            <!-- modal content -->
-           
-
-            <tr>
-                @if($servicio->nombre_servicio=="")
-                <td>
-                {!! link_to_route('details.show', 'Ingresar Nombre', [$servicio->id,$servicio->id_catalogo_servicios]) !!}
-=======
     <div id="space"></div>
 
 <div class="wrapper uwa-font-aa">
@@ -119,7 +72,6 @@
                     </td>
                     <input type="hidden" value="{!!$servicio->id!!}" name="usuario_servicio">
                 <td id='basic-modal' contenteditable="true">
->>>>>>> 4bef77bad1313d910a2f803b40789e6efcb35809
                 </td>
 
 
