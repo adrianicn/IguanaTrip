@@ -33,16 +33,16 @@ class ServicioController extends Controller
 			'detalle_servicio' => 'required|max:255|',
 			'precio_desde' => 'required|max:255',
 			'precio_hasta' => 'required|max:255',
-			'precio_anterior' => 'required|max:255',
-			'precio_actual' => 'required|max:255',
-			'descuento_servico' => 'required|max:255',
+//			'precio_anterior' => 'required|max:255',
+//			'precio_actual' => 'required|max:255',
+//			'descuento_servico' => 'required|max:255',
 			'direccion_servicio' => 'required|max:255',
 			'correo_contacto' => 'required|max:255',
 			'pagina_web' => 'required|max:255',
-			'nombre_comercial' => 'required|max:255',
-			'tags' => 'required|max:255',
-			'descuento_clientes' => 'required|max:255',
-			'tags_servicio' => 'required|max:255'
+//			'nombre_comercial' => 'required|max:255',
+//			'tags' => 'required|max:255',
+//			'descuento_clientes' => 'required|max:255',
+//			'tags_servicio' => 'required|max:255'
 	];
 	/**
 	 * Show the form for creating a new resource.
@@ -250,17 +250,17 @@ class ServicioController extends Controller
     			'detalle_servicio' => $formFields['detalle_servicio'],
     			'precio_desde' => $formFields['precio_desde'],
     			'precio_hasta' => $formFields['precio_hasta'],
-    			'precio_anterior' => $formFields['precio_anterior'],
-    			'precio_actual' => $formFields['precio_actual'],
-    			'descuento_servico' => $formFields['descuento_servico'],
+//    			'precio_anterior' => $formFields['precio_anterior'],
+//    			'precio_actual' => $formFields['precio_actual'],
+//    			'descuento_servico' => $formFields['descuento_servico'],
     			'direccion_servicio' => $formFields['direccion_servicio'],
     			'correo_contacto' => $formFields['correo_contacto'],
     			'pagina_web' => $formFields['pagina_web'],
-    			'nombre_comercial' => $formFields['nombre_comercial'],
-    			'tags' => $formFields['tags'],
-    			'descuento_clientes' => $formFields['descuento_clientes'],
-    			'tags_servicio' => $formFields['tags_servicio'],
-    			'observaciones' => $formFields['observaciones'],
+//    			'nombre_comercial' => $formFields['nombre_comercial'],
+//    			'tags' => $formFields['tags'],
+//    			'descuento_clientes' => $formFields['descuento_clientes'],
+//    			'tags_servicio' => $formFields['tags_servicio'],
+//    			'observaciones' => $formFields['observaciones'],
     			'telefono' => $formFields['telefono'],
     			'latitud_servicio' => $formFields['latitud_servicio'],
     			'longitud_servicio' => $formFields['longitud_servicio'],
@@ -277,7 +277,7 @@ class ServicioController extends Controller
     		//return $servicio_establecimiento_usuario;
     			$usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServicios( $usuarioServicioData, $servicio_establecimiento_usuario, $formFields['id'], $formFields['id_catalogo'] );
     	}
-    	$returnHTML = ('/IguanaTrip/public');
+    	$returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/'.$formFields['id'].'/'.$formFields['id_catalogo']);
    	return response()->json(array('success' => true, 'redirectto'=>$returnHTML));
     	 
     }
