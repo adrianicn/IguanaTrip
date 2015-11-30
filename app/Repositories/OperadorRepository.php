@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+
 use App\Models\Usuario_Operador;
 use Illuminate\Http\Request;
 use App\Models\Catalogo_Servicio_Establecimiento;
@@ -54,7 +55,9 @@ class OperadorRepository extends BaseRepository
 		$operador->id_usuario = $inputs['id_usuario'];
 		$operador->estado_contacto_operador = $inputs['estado_contacto_operador'];
 		$operador->id_tipo_operador = $inputs['id_tipo_operador'];
+                
 		$operador->save();
+                
 	}
 
 	/**
@@ -293,6 +296,7 @@ class OperadorRepository extends BaseRepository
 	
 	public function storageUsuarioServicios( $inputs, $servicio_establecimiento_usuario, $id_usuario_servicio, $id_catalogo )
 	{
+            
 		$usuarioServicio = new $this->usuarioServicio;
 		if ($id_usuario_servicio == 0)
 		{

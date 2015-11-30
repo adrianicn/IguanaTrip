@@ -1,6 +1,8 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
+{!! HTML::style('css/calendar/ui-jquery.css') !!}
+
 <div class="rowerror">
 </div>
 
@@ -18,7 +20,10 @@
     </div>
     <div id="space"></div>
 
-
+<div class="form-group-step2">
+            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
+            @include('reusable.uploadImage', ['tipo' => '2','objeto'=>$listPromociones])  
+        </div>
     {!! Form::open(['url' => route('postPromocion'), 'method' => 'post', 'role' => 'form', 'id'=>'Updatepromocion']) !!}
     @foreach ($listPromociones as $promo)
 
@@ -27,10 +32,7 @@
 
     <div class="wrapper uwa-font-aa">
 
-        <div class="form-group-step2">
-            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
-            @include('reusable.uploadImage', ['tipo' => '2','objeto'=>$listPromociones])  
-        </div>
+        
 
         <div class="form-group-step2">
             {!!Form::label('nombre_promocion', 'Nombre Promocion', array('id'=>'iconFormulario-step2'))!!}
@@ -39,12 +41,12 @@
 
         <div class="form-group-step2">
             {!!Form::label('Fecha_inicio', 'Fecha Inicio', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('fecha_desde', $promo->fecha_desde, array('class'=>'inputtext-step2'))!!}
+            {!!Form::text('fecha_desde', $promo->fecha_desde, array('class'=>'inputtext-step2 datepicker'))!!}
         </div>
 
         <div class="form-group-step2">
             {!!Form::label('Fecha_fin', 'Fecha Hasta', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('fecha_hasta', $promo->fecha_hasta, array('class'=>'inputtext-step2'))!!}
+            {!!Form::text('fecha_hasta', $promo->fecha_hasta, array('class'=>'inputtext-step2 datepicker'))!!}
         </div>
 
         <div class="form-group-step2">
@@ -91,5 +93,13 @@
     {!! Form::close() !!}
 </div>
 
+{!! HTML::script('js/jquery.js') !!}
+  
+  
 
+<script>
+  $(function() {
+     $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
+  });
+  </script>
 @stop

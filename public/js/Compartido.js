@@ -8,7 +8,7 @@ $.ajaxSetup({
 //hace la logica del controller, recibe los datos del formulario y hace un redirect a la pagina enviada desde
 //el controller
 function AjaxContainerRegistro($formulario) {
-    $("#loadingScreen").LoadingOverlay("show");
+    $("#target").LoadingOverlay("show");
 
     //event.preventDefault();
 
@@ -24,7 +24,7 @@ function AjaxContainerRegistro($formulario) {
             });
             errorString += '</ul>';
 
-            $("#loadingScreen").LoadingOverlay("hide", true);
+            $("#target").LoadingOverlay("hide", true);
             //$('.rowerror').html(errorString);
             $('.rowerror').html(errorString);
 
@@ -51,7 +51,7 @@ function AjaxContainerRegistroWithLoad($formulario, $loadScreen) {
         headers: {
             'X-CSRF-Token': $('meta[name=_token]').attr('content')}
     });
-    $(".loadModal").LoadingOverlay("show");
+    $("."+$loadScreen).LoadingOverlay("show");
 
     //event.preventDefault();
 
@@ -67,13 +67,13 @@ function AjaxContainerRegistroWithLoad($formulario, $loadScreen) {
             });
             errorString += '</ul>';
 
-            $(".loadModal").LoadingOverlay("hide", true);
+            $("."+$loadScreen).LoadingOverlay("hide", true);
             //$('.rowerror').html(errorString);
-            $('.rowerror').html(errorString);
+            $('.rowerrorM').html(errorString);
 
         }
         if (data.success) {
-            $(".loadModal").LoadingOverlay("hide", true);
+            $("."+$loadScreen).LoadingOverlay("hide", true);
             window.location.href = data.redirectto;
 
             //  $('#containerbase').empty();
@@ -98,7 +98,7 @@ function AjaxContainerRegistroWithLoadCharge($formulario, $loadScreen,$itinerari
         headers: {
             'X-CSRF-Token': $('meta[name=_token]').attr('content')}
     });
-    $(".loadModal").LoadingOverlay("show");
+    $("."+$loadScreen).LoadingOverlay("show");
 
     var $form = $('#' + $formulario),
             data = $form.serialize(),
@@ -112,14 +112,15 @@ function AjaxContainerRegistroWithLoadCharge($formulario, $loadScreen,$itinerari
             });
             errorString += '</ul>';
 
-            $(".loadModal").LoadingOverlay("hide", true);
-            $('.rowerror').html(errorString);
+            $("."+$loadScreen).LoadingOverlay("hide", true);
+            $('.rowerrorM').html(errorString);
 
         }
         if (data.success) {
-            $(".loadModal").LoadingOverlay("hide", true);
-            $.modal.close();
-            GetDataAjax("/IguanaTrip/public/getlistaItinerarios/"+$itinerario);
+            $("."+$loadScreen).LoadingOverlay("hide", true);
+            
+            
+            GetDataAjaxSectionItiner("/IguanaTrip/public/getlistaItinerarios/"+$itinerario);
         } 
     });
 }
@@ -130,10 +131,9 @@ function AjaxContainerRegistroWithLoadCharge($formulario, $loadScreen,$itinerari
 //lo materializa en el lugar indicado
 function RenderPartialGeneric($idPartial, $id_usuario_servicio) {
 
-    callModal('cls');
-
+    
+callModal('cls');
     var url = "/IguanaTrip/public/render/" + $idPartial;
-
     $.ajax({
         type: "GET",
         url: url,
@@ -219,9 +219,10 @@ function GetDataAjax(url) {
         url: url,
         dataType: 'json',
         success: function (data) {
-            $("#renderPartial").LoadingOverlay("show");
-            $("#renderPartial").html(data.dificultades);
-            $("#renderPartial").LoadingOverlay("hide", true);
+            
+            $('#renderPartial').LoadingOverlay("show");
+            $('#renderPartial').html(data.dificultades);
+            $('#renderPartial').LoadingOverlay("hide", true);
 
         },
         error: function (data) {
@@ -282,11 +283,35 @@ function GetDataAjaxSectionEventos(url) {
 }
 
 
+function GetDataAjaxSectionItiner(url) {
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            $("#renderPartialItinerarios").LoadingOverlay("show");
+            $("#renderPartialItinerarios").html(data.contentPanelItinerarios);
+            $("#renderPartialItinerarios").LoadingOverlay("hide", true);
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
 //retorna un mensaje despues de ejecutar la logica del controller
 function AjaxContainerRetrunMessage($formulario, $id) {
     $('.error').html('');
 
-    $("#loadingScreen").LoadingOverlay("show");
+    $("#target").LoadingOverlay("show");
 
 
 
@@ -310,10 +335,10 @@ function AjaxContainerRetrunMessage($formulario, $id) {
 
         }
         if (data.success) {
-            $("#loadingScreen").LoadingOverlay("hide", true);
+            $("#target").LoadingOverlay("hide", true);
             $('.register').fadeOut(); //hiding Reg form
             var successContent = '' + data.message + '';
-            $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + successContent + "'])");
+            
 
 
 
@@ -322,6 +347,50 @@ function AjaxContainerRetrunMessage($formulario, $id) {
     }); //done
 
 }
+
+
+
+
+//retorna un mensaje despues de ejecutar la logica del controller
+function AjaxContainerRetrunBurnURL($urlS,$formulario, $id, $load) {
+    $('.error').html('');
+
+    
+    $("#".$load).LoadingOverlay("show");
+
+
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize() + '&ids=' + $id;
+    
+    var url =$urlS + $id;
+    var posting = $.post(url, {formData: data});
+    posting.done(function (data) {
+        if (data.fail) {
+
+
+
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#" + $formulario).LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+            $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + errorString + "'])");
+
+        }
+        if (data.success) {
+            $("#".$load).LoadingOverlay("hide", true);
+        
+
+
+        } //success
+    }); //done
+
+}
+
+
 
 //agrega un parametro a la lista de objetos enviados al controller
 //hace la misma logica que las funciones anteriores

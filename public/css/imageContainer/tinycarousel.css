@@ -8,7 +8,7 @@
 }
 
 #slider1 .viewport {
-    height: 125px;
+    height: 205px;
     overflow: hidden;
     position: relative;
 }
@@ -59,7 +59,7 @@
     float: left;
     margin: 0 20px 0 0;
     padding: 1px;
-    height: 121px;
+    height: 200px;
     border: 1px solid #dcdcdc;
-    width: 236px;
+    width: 206px;
  }

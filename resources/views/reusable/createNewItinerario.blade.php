@@ -6,6 +6,8 @@
         background:url("{!! asset('img/x.png')!!}") no-repeat;
         width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
 </style>
+<div class="rowerrorM">
+</div>
 <div id="testboxForm" class="testboxForm">
     <h1>Agregar Itinerario </h1>
     
@@ -30,7 +32,7 @@
         </div>        
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRegistroWithLoad('itinerario-popup','testboxForm')" href="#">Siguiente</a>
+                <a class="button-1" onclick="AjaxContainerRegistroWithLoad('itinerario-popup','simplemodal-wrap')" href="#">Siguiente</a>
             </div>              
         </div>
 {!! Form::close() !!}

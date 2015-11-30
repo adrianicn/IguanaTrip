@@ -1,3 +1,5 @@
+
+{!! HTML::style('css/calendar/ui-jquery.css') !!}
 <div style='display:none'>
                 <img src="{!! asset('img/x.png')!!}" alt='' />
             </div>
@@ -6,11 +8,12 @@
         background:url("{!! asset('img/x.png')!!}") no-repeat;
         width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
 </style>
-
+<div class="rowerrorM">
+</div>
 <div class="testboxForm">
     <h1>Agregar Promoción </h1>
     {!! Form::open(['url' => route('postPromocion'),  'id'=>'promocion-popup']) !!}
-        <input type="hidden" value="1" name="id_usuario_servicio">
+<input type="hidden"  class="id_usuario_servicio" name="id_usuario_servicio">
 
     <hr>
 
@@ -20,11 +23,11 @@
        </div>
        <div class="form-group-step2-popup">
             {!!Form::label('inicio_1', 'Inicio', array('id'=>'iconFormulario-step2-popup'))!!}
-            {!!Form::text('fecha_inicio',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Fecha'))!!}
+            {!!Form::text('fecha_inicio',NULL, array('class'=>'inputtext-step2-popup datepicker','placeholder'=>'Fecha aaaa/mm/dd'))!!}
        </div>
        <div class="form-group-step2-popup">
             {!!Form::label('fin_1', 'Fin', array('id'=>'iconFormulario-step2-popup'))!!}
-            {!!Form::text('fecha_fin',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Fecha'))!!}
+            {!!Form::text('fecha_fin',NULL, array('class'=>'inputtext-step2-popup datepicker','placeholder'=>'Fecha aaaa/mm/dd'))!!}
        </div>
        <div class="form-group-step2-popup">
             {!!Form::label('precio_normal_1', 'Precio Normal', array('id'=>'iconFormulario-step2-popup'))!!}
@@ -45,8 +48,16 @@
     
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRegistro('promocion-popup')" href="#">Siguiente</a>
+                <a class="button-1" onclick="AjaxContainerRegistroWithLoad('promocion-popup','simplemodal-wrap')" href="#">Siguiente</a>
             </div>              
         </div>
 {!! Form::close() !!}
+
+<script>
+  $(function() {
+    
+      $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
+  });
+  </script>
+
 </div>

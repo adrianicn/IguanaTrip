@@ -6,6 +6,7 @@ use Closure;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Usuario_Operador;
 
 class ReturnIfnotAuth
 {
@@ -15,6 +16,7 @@ class ReturnIfnotAuth
 	 * @var Guard
 	 */
 	protected $auth;
+        protected $operador;
 
 	/**
 	 * Create a new filter instance.
@@ -25,6 +27,7 @@ class ReturnIfnotAuth
 	public function __construct(Guard $auth)
 	{
 		$this->auth = $auth;
+                $this->model = new Usuario_Operador();
 	}
 
 	/**
@@ -36,10 +39,20 @@ class ReturnIfnotAuth
 	 */
 	public function handle($request, Closure $next)
 	{
-		if (!$this->auth->check())
+            
+            if (!$this->auth->check())
 		{
+                     
 			return new RedirectResponse(url('/'));
 		}
+                /*$operador = new $this->model;
+		$operadorData = $operador::where('id_usuario_op',session('operador_id'))->first();
+                //return $operadorData;
+                if($operadorData->id_usuario!=session('user_id'))
+                {
+                    	return response('Unauthorized.', 401);
+                    
+                }*/
 
 		return $next($request);
 	}

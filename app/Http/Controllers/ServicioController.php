@@ -108,7 +108,7 @@ class ServicioController extends Controller
 		$catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimientoExistente($id_catalogo,$id);
 		if(count($catalogoServicioEstablecimiento) == 0 )
 			$catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimiento($id_catalogo);
-	   $ImgPromociones = $gestion->getImageOperador($id,1);
+	   $ImgPromociones = $gestion->getImageOperador($id ,1);
            
     	return view('RegistroOperadores.registroStep4', compact('usuarioServicio','catalogoServicioEstablecimiento','id_catalogo','ImgPromociones'));
     }
@@ -202,9 +202,11 @@ class ServicioController extends Controller
     		
     		if($formFields['id_usuario_op'] > 0){
     			$id_usuario_op = $formFields['id_usuario_op'];
+                        $request->session()->put('operador_id', $formFields['id_usuario_op']);
     			$operador = $operador_gestion->update( $operadorData );
     		} else {
     			$operador = $operador_gestion->store( $operadorData	);
+                        $request->session()->put('operador_id', $operador->id);
     			$operadores = $operador_gestion->getLastIdInsert( $operadorData );
     			foreach ($operadores as $operador)
     				$id_usuario_op = $operador->id_usuario_op;
@@ -216,9 +218,10 @@ class ServicioController extends Controller
     }
 
     public function postTipoOperadores(Request $request, OperadorRepository $operador_gestion) {
+        
     	$inputData = Input::get('formData');
     	parse_str($inputData, $formFields);
-    	 
+    	 $request->session()->put('tip_oper', $formFields['tipo_operador']);
     	$operadorData = array(
     			'tipo_operador' => $formFields['tipo_operador'],
     	);

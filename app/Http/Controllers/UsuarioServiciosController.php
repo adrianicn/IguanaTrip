@@ -90,10 +90,10 @@ class UsuarioServiciosController extends Controller {
     }
 
     //Renderiza el parcial con datos si es necesario
-    public function RenderPartialWithData(Request $request, $id_partia, $id_datal, ServiciosOperadorRepository $gestion) {
+    public function RenderPartialWithData(Request $request, $id_partia, $id_data, ServiciosOperadorRepository $gestion) {
         //
 
-        $listItinerarios = $gestion->getDetalleItinerario($id_datal);
+        $listItinerarios = $gestion->getDetalleItinerario($id_data);
 
         $view = View::make($id_partia, array('listItinerarios' => $listItinerarios));
 
@@ -102,12 +102,111 @@ class UsuarioServiciosController extends Controller {
             $sections = $view->render();
             return response()->json(['newHtml' => $sections]);
 
-
-            //return  Response::json($sections['contentPanel']); 
         } else
             return $view;
     }
+    
+    
 
+    
+    
+    //actualiza el estado de las promociones
+    public function postEstadoPromocion($id,ServiciosOperadorRepository $gestion) {
+
+
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        
+        $serviciosBase = array();
+        //obtengo los servicios ya almacenados de la bdd
+        $ServiciosOperador = $gestion->getEstadoPromocion($id);
+
+        foreach ($ServiciosOperador as $servicioBase) {
+
+            
+            if($servicioBase->estado_promocion==1)
+                $serviciosBase['estado_promocion']=0;
+            else
+                $serviciosBase['estado_promocion']=1;
+                
+            $serviciosBase['id'] = $servicioBase->id;
+        }
+
+
+                    $gestion->storeUpdateEstadoPromocion($serviciosBase, $ServiciosOperador);
+                    return response()->json(array('success' => true));
+            }
+            
+            
+            
+            
+    
+    
+    //actualiza el estado del itinerario
+    public function postEstadoItinerario($id,ServiciosOperadorRepository $gestion) {
+
+
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        
+        $serviciosBase = array();
+        //obtengo los servicios ya almacenados de la bdd
+        $ServiciosOperador = $gestion->getEstadoItiner($id);
+
+        foreach ($ServiciosOperador as $servicioBase) {
+
+            
+            if($servicioBase->estado_itinerario==1)
+                $serviciosBase['estado_itinerario']=0;
+            else
+                $serviciosBase['estado_itinerario']=1;
+                
+            $serviciosBase['id'] = $servicioBase->id;
+        }
+
+
+                    $gestion->storeUpdateEstadoItinerarioPrincipal($serviciosBase, $ServiciosOperador);
+                    return response()->json(array('success' => true));
+            }
+    
+    
+    
+    //actualiza el estado del detalleitinerario
+    public function postEstadoDetalleItinerario($id,ServiciosOperadorRepository $gestion) {
+
+
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        
+        $serviciosBase = array();
+        //obtengo los servicios ya almacenados de la bdd
+        $ServiciosOperador = $gestion->getEstadoDetalleItiner($id);
+
+        foreach ($ServiciosOperador as $servicioBase) {
+
+            
+            if($servicioBase->estado_punto==1)
+                $serviciosBase['estado_punto']=0;
+            else
+                $serviciosBase['estado_punto']=1;
+                
+            $serviciosBase['id'] = $servicioBase->id;
+        }
+
+
+                    $gestion->storeUpdateEstadoItinerario($serviciosBase, $ServiciosOperador);
+                    return response()->json(array('success' => true));
+            }
+        
+
+
+        
+    
+    
+    
     /**
      * Guarda los servicios que presta un usuario o un operador.
      *
@@ -276,7 +375,9 @@ class UsuarioServiciosController extends Controller {
             $gestion->storeUpdatePromocion($formFields, $Promocion);
         } else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
+            
             $object = $gestion->storeNewPromocion($formFields);
+            
             $returnHTML = ('/IguanaTrip/public/promocion/' . $object->id);
         }
 
@@ -318,7 +419,7 @@ class UsuarioServiciosController extends Controller {
         $listItinerarios = $gestion->getItinerariosUsuario($id);
 
         //imagenes de la promocion
-        $ImgItinerarios = $gestion->getImageItinerarioOperador($id);
+        $ImgItinerarios = $gestion->getImageOperador($id,3);
         $listDificultades = $gestion->getCatalogoDificultad();
 
         $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios', 'listDificultades'));
@@ -467,9 +568,11 @@ class UsuarioServiciosController extends Controller {
                         'errors' => $validator->getMessageBag()->toArray()
             ));
         }
+        
 
         //obtengo llas promociones por id
-        if (isset($formFields['id'])) {
+        if (isset($formFields['id']) && $formFields['id']!="" ) {
+            
             $Itinerario = $gestion->getDetalleItinerario($formFields['id']);
         }
 //si ya existe el objeto se hace el update
@@ -480,6 +583,7 @@ class UsuarioServiciosController extends Controller {
             $returnHTML = ('/IguanaTrip/public/itinerario/' . $formFields['id_itinerario']);
         } else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
+            
             $object = $gestion->storeNewDetalleItinerario($formFields);
             $returnHTML = ('/IguanaTrip/public/itinerario/' . $formFields['id_itinerario']);
         }

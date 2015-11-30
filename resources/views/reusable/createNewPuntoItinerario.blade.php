@@ -11,6 +11,8 @@
 
 
 </style>
+<div class="rowerrorM">
+</div>
 
 <div id="testboxForm" class="testboxForm">
     <h1>Agregar Punto para Itinerario </h1>
@@ -21,33 +23,33 @@
     <input type="hidden"  class="tag" name="tag">
     <input type="hidden"  class="id_detalle" name="id">
 
-        <div class="form-group-step2-popup">
-            {!!Form::label('lugar_1', 'Lugar', array('id'=>'iconFormulario-step2-popup'))!!}
-            {!!Form::text('lugar_punto',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Punto de encuentro, punto A, etc'))!!}
-        </div>
-        <div class="form-group-step2-popup">
-                @if(isset($listItinerarios))
-                @foreach ($listItinerarios as $itiner)
-                @include('reusable.maps', ['longitud_servicio' => $itiner->longitud_punto,'latitud_servicio'=>$itiner->latitud_punto])  
-                @endforeach
-                @else
-                @include('reusable.maps', ['longitud_servicio' => '-78.46783820000002','latitud_servicio'=>'-0.1806532'])   
-                @endif
-        </div>
-        <div class="form-group-step2-popup">
-            {!!Form::label('dia_hora_1', 'Día / Hora', array('id'=>'iconFormulario-step2-popup'))!!}
-            {!!Form::text('diahora_punto',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Sabado 8AM, todos los días 11 Am, etc'))!!}
-        </div>
-        <div class="form-group-step2-popup">
-            {!!Form::label('incluye_1', 'Incluye', array('id'=>'iconFormulario-step2-popup'))!!}
-            {!!Form::textarea('incluye_punto',NULL, array('class'=>'inputtextarea-step2-popup-1','placeholder'=>'Incluye equipos, incluye almuerzo, no incluye bicicletas, etc'))!!}
-        </div>
+    <div class="form-group-step2-popup">
+        {!!Form::label('lugar_1', 'Lugar', array('id'=>'iconFormulario-step2-popup'))!!}
+        {!!Form::text('lugar_punto',NULL, array('id'=>'lugar_punto','class'=>'inputtext-step2-popup','placeholder'=>'Punto de encuentro, punto A, etc'))!!}
+    </div>
+    <div class="form-group-step2-popup">
+        @if(isset($listItinerarios))
+        @foreach ($listItinerarios as $itiner)
+        @include('reusable.maps', ['longitud_servicio' => $itiner->longitud_punto,'latitud_servicio'=>$itiner->latitud_punto])  
+        @endforeach
+        @else
+        @include('reusable.maps', ['longitud_servicio' => '-78.46783820000002','latitud_servicio'=>'-0.1806532'])   
+        @endif
+    </div>
+    <div class="form-group-step2-popup">
+        {!!Form::label('dia_hora_1', 'Día / Hora', array('id'=>'iconFormulario-step2-popup'))!!}
+        {!!Form::text('diahora_punto',NULL, array('id'=>'diahora_punto','class'=>'inputtext-step2-popup','placeholder'=>'Sabado 8AM, todos los días 11 Am, etc'))!!}
+    </div>
+    <div class="form-group-step2-popup">
+        {!!Form::label('incluye_1', 'Incluye', array('id'=>'iconFormulario-step2-popup'))!!}
+        {!!Form::textarea('incluye_punto',NULL, array('id'=>'incluye_punto','class'=>'inputtextarea-step2-popup-1','placeholder'=>'Incluye equipos, incluye almuerzo, no incluye bicicletas, etc'))!!}
+    </div>
 
-        <div id="form-group-step2-popup">
-            <div class="box-content-button-1">
-                <a class="button-1" id="btnsubm" href="#">Siguiente</a>
-            </div>              
-        </div>
+    <div id="form-group-step2-popup">
+        <div class="box-content-button-1">
+            <a class="button-1" id="nextbtn"  href="#">Siguiente</a>
+        </div>              
+    </div>
 
     {!! Form::close() !!}
 
@@ -56,10 +58,9 @@
     {!! HTML::script('/js/jsModal/basic.js') !!}
     {!!HTML::script('js/loadingScreen/loadingoverlay.js') !!}
 
-    {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
 
 
-    
+
 
     @if(isset($listItinerarios))
     @foreach ($listItinerarios as $itiner)
@@ -83,21 +84,25 @@
     @endforeach
     @endif
 
-    
+
     <script>
 
         $("#map").width(550);
         $("#map").height(175);
-    
-        $("#btnsubm").click(function () {
+
+        $("#nextbtn").click(function () {
+
             var value = $("#searchmap").val();
-            var itinerario=$(".id_itinerario").val();
-            var value = $("#searchmap").val();
-            AjaxContainerRegistroWithLoadCharge('puntoitinerario', 'testboxForm',itinerario);
-            
+            var itinerario = $(".id_itinerario").val();
+            $('.tag').val(value);
+            AjaxContainerRegistroWithLoadCharge('puntoitinerario', 'simplemodal-wrap', itinerario);
+
+            $(".simplemodal-close").trigger("click");
+
         });
 
 
     </script>
+
 
 </div>

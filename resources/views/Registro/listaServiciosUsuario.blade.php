@@ -2,6 +2,7 @@
 
 @section('step1')
 
+
 {!! HTML::style('css/table.css') !!} 
 <div style='display:none'>
     <img src="{!! asset('img/x.png')!!}" alt='' />
@@ -37,7 +38,7 @@
 
         {!! Form::open(['url' => route('upload-postDetalleOperador'),  'id'=>$servicios->id_catalogo_servicios]) !!}
         <div id="table_{!!$servicios->id!!}" class="servicio-usuario-detalle">
-            <h2>{!!$servicios->nombre_servicio!!} <strong class="add-registro" onclick="RenderPartial('reusable.createNewServicio', {!!$servicios - > id_catalogo_servicios!!}, {!!$servicios - > id_usuario_operador!!})">+</strong> <strong class="text-add-registro">(agregar registro)</strong> </h2>
+            <h2>{!!$servicios->nombre_servicio!!} <strong class="add-registro" onclick="RenderPartial('reusable.createNewServicio', {!!$servicios -> id_catalogo_servicios!!}, {!!$servicios -> id_usuario_operador!!})">+</strong> <strong class="text-add-registro">(agregar registro)</strong> </h2>
             <table class="tabla-servicio-usuario-detalle">
                 <tr>
                     <th>Nombre del Servicio</th>
@@ -63,7 +64,7 @@
                     @endif
                     <td> 
                         <label class="switch switch-green">
-                            <input type="checkbox" id='estado_servicio_usuario_{!!$servicio->id!!}' {!!$check!!} name ='estado_servicio_usuario_{!!$servicio->id!!}' class="switch-input" onchange="AjaxContainerRetrunMessage({!!$servicios - > id_catalogo_servicios!!}, {!!$servicio - > id!!})">
+                            <input type="checkbox" id='estado_servicio_usuario_{!!$servicio->id!!}' {!!$check!!} name ='estado_servicio_usuario_{!!$servicio->id!!}' class="switch-input" onchange="AjaxContainerRetrunMessage({!!$servicios -> id_catalogo_servicios!!}, {!!$servicio -> id!!})">
                             <span class="switch-label" data-on="On" data-off="Off"></span>
                             <span class="switch-handle"></span>
 
@@ -79,17 +80,6 @@
                 @endif
                 @endforeach 
 
-                <!-- This is our clonable table line -->
-                <tr class="hide">
-                    <td contenteditable="true">Untitled</td>
-                    <td contenteditable="true">undefined</td>
-                    <td>
-                        <span class="table-remove glyphicon glyphicon-remove"></span>
-                    </td>
-                    <td>
-                        {!! link_to_route('details.show', 'Details', [0,$servicios->id_catalogo_servicios]) !!}
-                    </td>
-                </tr>
             </table>
 
         </div>

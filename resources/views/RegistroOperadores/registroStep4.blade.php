@@ -14,7 +14,7 @@
 <div class="rowerror">
 </div>
 <?php
-$ImgPromociones = null; 
+
 $usuarioServicio->id = 0;
 $usuarioServicio->nombre_servicio = '';
 $usuarioServicio->detalle_servicio = '';
@@ -137,67 +137,38 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             </div>
         </div>
         <div id="part-1-form">
-            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
-        </div>
-        <div id="part-1-form">
             <div class="box-content-button-1">
                 <a class="button-1" onclick="AjaxContainerRegistro('registro_step1')" href="#">Siguiente</a>
             </div>              
         </div>
-<!--        
-
-        <div class="form-group-1">
-            {!!Form::label('precio_anterior_1', 'Precio Anterior', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('precio_anterior', $usuarioServicio->precio_anterior, array('class'=>'inputtext','placeholder'=>'Precio Anterior'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('precio_actual_1', 'Precio Actual', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('precio_actual', $usuarioServicio->precio_actual, array('class'=>'inputtext','placeholder'=>'Precio actual'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('descuento_servicio_1', 'Desuento Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('descuento_servico', $usuarioServicio->descuento_servico, array('class'=>'inputtext','placeholder'=>'Descuento del Servicio'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('nombre_comercial_servicio_1', 'Nombre Comercial', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('nombre_comercial', $usuarioServicio->nombre_comercial, array('class'=>'inputtext','placeholder'=>'Nombre Comercial'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('tags_1', 'Tags', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('tags', $usuarioServicio->tags, array('class'=>'inputtext','placeholder'=>'Tags'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('descuento_clientes_1', 'Descuento del Cliente', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('descuento_clientes', $usuarioServicio->descuento_clientes, array('class'=>'inputtext','placeholder'=>'Descuento del Cliente'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('tags_servicio_1', 'Tags del Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('tags_servicio', $usuarioServicio->tags_servicio, array('class'=>'inputtext','placeholder'=>'Tags del Servicio'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('observaciones_1', 'Observaciones del Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('observaciones', $usuarioServicio->observaciones, array('class'=>'inputtext','placeholder'=>'Observaciones del Servicio'))!!}
-
-        </div>
--->
         {!! Form::close() !!}
-
+<div id="part-1-form">
+            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
+        </div>
+        
         @include('reusable.uploadImage', ['tipo' => '1','objeto'=>$usuarioServicio])  
 
+        
+            <div id="renderPartialListaServicios">
+                    @section('contentPanelServicios')
+                    @show
+                </div>    
     </div>
 </div>
 
 @section('scripts')
     {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
     {!! HTML::script('/js/jsModal/basic.js') !!}
+    
+    
 @stop
+
+<script>
+    $(document).ready(function () {
+        
+        GetDataAjaxSectionEventos("/IguanaTrip/public/getlistaServiciosComplete/62");
+    });
+</script>
 
 @stop
 

@@ -171,6 +171,49 @@ class ServiciosOperadorRepository extends BaseRepository {
 
         return true;
     }
+    
+    
+     public function storeUpdateEstadoItinerario($inputs, $Itinerario) {
+
+        //Transformo el arreglo en un solo objeto
+        foreach ($Itinerario as $servicioBase) {
+            $inputs['id'] = $servicioBase->id;
+            $this->updateServDetItiner($inputs, 'estado_punto');
+        }
+
+
+
+        return true;
+    }
+    
+      public function storeUpdateEstadoItinerarioPrincipal($inputs, $Itinerario) {
+
+        //Transformo el arreglo en un solo objeto
+        foreach ($Itinerario as $servicioBase) {
+            $inputs['id'] = $servicioBase->id;
+            $this->updateServItiner($inputs, 'estado_itinerario');
+        }
+
+
+
+        return true;
+    }
+    
+    
+    
+    //Actualiza el estado de la promocion
+      public function storeUpdateEstadoPromocion($inputs, $Promocion) {
+
+        //Transformo el arreglo en un solo objeto
+        foreach ($Promocion as $servicioBase) {
+            $inputs['id'] = $servicioBase->id;
+            $this->updateServPromo($inputs, 'estado_promocion');
+        }
+
+
+
+        return true;
+    }
 
     /**
      * Create a user.
@@ -262,6 +305,29 @@ class ServiciosOperadorRepository extends BaseRepository {
                 ->update([$campo => $input[$campo]]);
     }
 
+     //Realiza la logica del update
+    public function updateServDetItiner($input, $campo) {
+        $operador = new $this->detalle_itinerarios_u;
+        $operadorData = $operador::where('id', $input['id'])
+                ->update([$campo => $input[$campo]]);
+    }
+    
+    
+     //Realiza la logica del update
+    public function updateServItiner($input, $campo) {
+        $operador = new $this->itinerarios_u;
+        $operadorData = $operador::where('id', $input['id'])
+                ->update([$campo => $input[$campo]]);
+    }
+    
+    
+       //Realiza la logica del update
+    public function updateServPromo($input, $campo) {
+        $operador = new $this->promocion;
+        $operadorData = $operador::where('id', $input['id'])
+                ->update([$campo => $input[$campo]]);
+    }
+    
     //Realiza la logica del update
     public function updateServ($input, $campo) {
         $operador = new $this->model;
@@ -275,7 +341,29 @@ class ServiciosOperadorRepository extends BaseRepository {
         return $user_servicios::where('id_usuario_operador', $id_usuario_operador)
                         ->where('estado_servicio', '=', 1)->get();
     }
+    
+    
+    //detalle itinersrioo
+  public function getEstadoDetalleItiner($id_detalleItinerario) {
+        $itiner = new $this->detalle_itinerarios_u;
+        return $itiner::where('id', $id_detalleItinerario)->get();
+    }
+    
+    
+        //detalle itinersrioo
+  public function getEstadoItiner($id_Itinerario) {
+        $itiner = new $this->itinerarios_u;
+        return $itiner::where('id', $id_Itinerario)->get();
+    }
 
+    
+          //detalle itinersrioo
+  public function getEstadoPromocion($id_promocion) {
+        $promo = new $this->promocion;
+        return $promo::where('id', $id_promocion)->get();
+    }
+
+    
     //Entrega el arreglo de promociones por operador
     public function getPromocionesOperador($id_promocion) {
         $promociones = new $this->promocion;
@@ -336,14 +424,6 @@ class ServiciosOperadorRepository extends BaseRepository {
 
     
     
-    //lista de itinerarios imagenes
-    public function getImageItinerarioOperador($id_itinerario) {
-        $itiner = new $this->image;
-        return $itiner::where('id_auxiliar', $id_itinerario)
-                        ->where('id_catalogo_fotografia', '=', 3)
-                        ->where('estado_fotografia', '=', 1)->get();
-    }
-
     //Entrega el arreglo de Itinerarios por operador
     public function getItinerario($id_itinerario) {
 
