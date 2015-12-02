@@ -7,6 +7,7 @@ use App\Models\Promocion_Usuario_Servicio;
 use App\Models\Catalogo_Dificultad;
 use App\Models\Detalle_Itinerario;
 use App\Models\Itinerario_Usuario_Servicio;
+use App\Models\Usuario_Operador;
 use App\Models\Eventos_usuario_Servicio;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,8 @@ class ServiciosOperadorRepository extends BaseRepository {
     protected $itinerarios_u;
     protected $detalle_itinerarios_u;
     protected $eventos;
+    protected $operador;
+    
 
     /**
      * Create a new ServiciosOperadorRepository instance.
@@ -47,6 +50,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->itinerarios_u = new Itinerario_Usuario_Servicio();
         $this->detalle_itinerarios_u = new Detalle_Itinerario();
         $this->eventos = new Eventos_usuario_Servicio();
+        $this->operador = new Usuario_Operador();
     }
 
     /**
@@ -238,10 +242,12 @@ class ServiciosOperadorRepository extends BaseRepository {
     public function storeUpdateEvento($inputs, $evento) {
 
         foreach ($evento as $servicioBase) {
-            $pro = $this->itinerarios_u->find($servicioBase->id);
+            $pro = $this->eventos->find($servicioBase->id);
             
             //Transformo el arreglo en un solo objeto
             $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+            $inputs['longitud_evento'] = $inputs['longitud_servicio'];
+            $inputs['latitud_evento'] = $inputs['latitud_servicio'];
             $pro->fill($inputs)->save();
         }
 
@@ -430,6 +436,21 @@ class ServiciosOperadorRepository extends BaseRepository {
         return DB::table('itinerarios_usuario_servicios')
                         ->where('id', '=', $id_itinerario)->get();
     }
+    
+      //Entrega el arreglo de Itinerarios por operador
+    public function deleteItinerario($id_itinerario) {
+
+        $pro = $this->detalle_itinerarios_u->find($id_itinerario);
+            $pro->delete();
+    }
+    
+  
+    //Entrega el arreglo de eventos por operador
+    public function getEvento($id_evento) {
+
+        return DB::table('eventos_usuario_servicios')
+                        ->where('id', '=', $id_evento)->get();
+    }
 
     
     //Entrega el arreglo de Detalle Itinerarios por operador
@@ -468,6 +489,13 @@ class ServiciosOperadorRepository extends BaseRepository {
                         ->get();
     }
 
+    
+    public function getEventosporId($id) {
+        return DB::table('eventos_usuario_servicios')
+                        ->where('id', $id)->get();
+    }
+
+    
     //entrega el registro que corresponde al usuario
     public function getServiciosOperadorporIdServicio($id_usuario_operador, $id_catalogo) {
 
@@ -483,5 +511,49 @@ class ServiciosOperadorRepository extends BaseRepository {
 
         return $user_servicio;
     }
+    
+    public function getPermiso($id)
+	{
+	           
+                    return DB::table('usuario_servicios')
+                        ->join('usuario_operadores', 'usuario_servicios.id_usuario_operador', '=', 'usuario_operadores.id_usuario_op')
+                        ->where('usuario_servicios.id', $id)
+                        ->select('usuario_operadores.id_usuario_op', 'usuario_operadores.id_usuario')
+                        ->first();
+    
+	}
+        
+         public function getPermisoPromocion($id)
+	{
+	           
+                    return DB::table('usuario_servicios')
+                        ->join('promocion_usuario_servicio', 'usuario_servicios.id', '=', 'promocion_usuario_servicio.id_usuario_servicio')
+                        ->where('promocion_usuario_servicio.id', $id)
+                        ->select('promocion_usuario_servicio.id_usuario_servicio')
+                        ->first();
+    
+	}
+        
+          public function getPermisoEvento($id)
+	{
+	           
+                    return DB::table('usuario_servicios')
+                        ->join('eventos_usuario_servicios', 'usuario_servicios.id', '=', 'eventos_usuario_servicios.id_usuario_servicio')
+                        ->where('eventos_usuario_servicios.id', $id)
+                        ->select('eventos_usuario_servicios.id_usuario_servicio')
+                        ->first();
+    
+	}
+        
+        public function getPermisoItinerario($id)
+	{
+	           
+                    return DB::table('usuario_servicios')
+                        ->join('itinerarios_usuario_servicios', 'usuario_servicios.id', '=', 'itinerarios_usuario_servicios.id_usuario_servicio')
+                        ->where('itinerarios_usuario_servicios.id', $id)
+                        ->select('itinerarios_usuario_servicios.id_usuario_servicio')
+                        ->first();
+    
+	}
 
 }

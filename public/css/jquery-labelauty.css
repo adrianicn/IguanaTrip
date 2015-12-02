@@ -238,13 +238,13 @@ input.labelauty.synch-icon1 + label > span.labelauty-checked-image {
   bottom: 0;
   left: 0;
   height: 100px;
-  width: 500px;
+  width: 651px;
   background-color: #777;
 }
 #overlay .dialog .label-dialog {
   float: left;
   height: 100px;
-  width: 100px;
+  width: 173px;
   background-color: #444;
   text-align: center;
   vertical-align: top;
@@ -258,7 +258,7 @@ input.labelauty.synch-icon1 + label > span.labelauty-checked-image {
   float: left;
   height: 100px;
   line-height: 100px;
-  width: 350px;
+  width: 428px;
 }
 #overlay .dialog .body-dialog p {
   display: inline-block;
@@ -275,24 +275,24 @@ input.labelauty.synch-icon1 + label > span.labelauty-checked-image {
   float: left;
   height: 100px;
   width: 50px;
-  background-color: #333;
+  background-color: #52a3cc;
   text-align: center;
   vertical-align: top;
 }
-#overlay .dialog .ok-dialog [class^="icon-"] {
+#overlay .dialog .ok-dialog icon-ok-sign {
   line-height: 100px;
   font-size: 30px;
   color: #EEE;
 }
 #overlay .dialog .ok-dialog:hover {
-  background-color: #555;
+  background-color: #41a9dd;
   cursor: pointer;
 }
 #overlay #dialog-star .label-dialog [class^="icon-"] {
   color: #CCCC52;
 }
 #overlay #dialog-star .ok-dialog {
-  background-color: #CCCC52;
+  background-color: #f05a22;
 }
 #overlay #dialog-star .ok-dialog:hover {
   background-color: #dddd41;

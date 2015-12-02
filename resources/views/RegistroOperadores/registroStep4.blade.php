@@ -60,9 +60,28 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 @endforeach
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+            
+          <?php switch (session('tip_oper')) {
+    case 1:
+        $prefix="I'm an ";
+        $operadorName="Agency";
+        break;
+    case 2:
+        $prefix="I'm an ";
+        $operadorName="Enterprise";
+        break;
+    case 3:
+        $prefix="I'm just";
+        $operadorName="Me";
+        break;
+    
+}
+?>
+
+           
             <h2 class="head-title">
-                I'm an                <strong>Agency</strong>
+    {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
             </h2>
         </div>
         <div id="description-box-type">
@@ -73,6 +92,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
     <div id="space"></div>
 
     <div class="wrapper uwa-font-aa">
+        {!!$Servicio->nombre_servicio!!}
         {!! Form::open(['url' => route('upload-postusuarioservicios'), 'method' => 'post', 'role' => 'form', 'id'=>'registro_step1'] ) !!}
 
         <input type="hidden" value="{!!$usuarioServicio->id!!}" name="id" id="id">
@@ -132,13 +152,13 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             </div>
             <div id="secondary-data">
                 <div id="promocion"><a class="button-step4" onclick="RenderPartialGeneric('reusable.promocion',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
-                <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
+                <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewEvent',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
                 <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Itinerario</a></div>
             </div>
         </div>
         <div id="part-1-form">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRegistro('registro_step1')" href="#">Siguiente</a>
+                <a class="button-1" onclick="AjaxContainerRetrunMessage('registro_step1','optional')" href="#">Siguiente</a>
             </div>              
         </div>
         {!! Form::close() !!}
@@ -166,7 +186,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 <script>
     $(document).ready(function () {
         
-        GetDataAjaxSectionEventos("/IguanaTrip/public/getlistaServiciosComplete/62");
+        GetDataAjaxSectionEventos("/IguanaTrip/public/getlistaServiciosComplete/{!!$usuarioServicio->id!!}");
     });
 </script>
 

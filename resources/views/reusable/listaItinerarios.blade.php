@@ -29,14 +29,19 @@
                 @else
                 
                 <label class="switch switch-green">
-                        <input type="checkbox" id='estado_itinerario_{!!$detalle->id!!}'  name ='estado_itinerario_{!!$detalle->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL({!!$detalle->id!!},{!!$detalle->id!!})">
+                        <input type="checkbox" id='estado_itinerario_{!!$detalle->id!!}'  name ='estado_itinerario_{!!$detalle->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('/IguanaTrip/public/estadoItinerario/',{!!$detalle->id!!},{!!$detalle->id!!})">
                         <span class="switch-label" data-on="Si" data-off="No"></span>
                         <span class="switch-handle"></span>
                         
                     </label>
                 @endif
             </td>
+            <td>
+                <div id='delete'>
+                    <h2> <strong class="remove-registro" onclick="AjaxContainerRetrunBurnURL('/IguanaTrip/public/deleteItinerario/',{!!$detalle->id!!},{!!$detalle->id!!});GetDataAjaxSectionItiner('/IguanaTrip/public/getlistaItinerarios/{!!$detalle->id_itinerario!!}')" >X</strong></h2></div>
+            </td>
         </tr>
+        
         @endforeach 
 
     </table>

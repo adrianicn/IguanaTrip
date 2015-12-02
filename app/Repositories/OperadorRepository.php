@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Catalogo_Servicio_Establecimiento;
 use App\Models\Usuario_Servicio;
 use App\Models\Servicio_Establecimiento_Usuario;
+use App\Models\Catalogo_Servicio;
 
 class OperadorRepository extends BaseRepository
 {
@@ -20,6 +21,8 @@ class OperadorRepository extends BaseRepository
 	protected $operador;
 	protected $ServicioEstablecimiento;
 	protected $UsuarioServicio;
+        protected $Servicio;
+        
 	
 
 	/**
@@ -35,6 +38,7 @@ class OperadorRepository extends BaseRepository
 		$this->catalogoServicioEstablecimiento = new Catalogo_Servicio_Establecimiento();
 		$this->usuarioServicio = new Usuario_Servicio();
 		$this->servicioEstablecimientoUsuario = new Servicio_Establecimiento_Usuario();
+                $this->Servicio = new Catalogo_Servicio();
 	}
 
 	/**
@@ -341,4 +345,12 @@ class OperadorRepository extends BaseRepository
 		$usuarioServicio = new Usuario_Servicio();
 		return $usuarioServicio::where('id',$id)->get();
 	}
+        
+        public function getServicio($id)
+	{
+		$Servicio = new Catalogo_Servicio();
+		return $Servicio::where('id_catalogo_servicios',$id)->FirstorFail();
+	}
+        
+        
 }

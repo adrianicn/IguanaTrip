@@ -118,7 +118,7 @@ function AjaxContainerRegistroWithLoadCharge($formulario, $loadScreen,$itinerari
         }
         if (data.success) {
             $("."+$loadScreen).LoadingOverlay("hide", true);
-            
+            alert("El itinerario ha sido agregado. Puede modificar los campos para agregar un nuevo itinerario")
             
             GetDataAjaxSectionItiner("/IguanaTrip/public/getlistaItinerarios/"+$itinerario);
         } 
@@ -329,9 +329,9 @@ function AjaxContainerRetrunMessage($formulario, $id) {
                 errorString += '<li>' + value + '</li>';
             });
             errorString += '</ul>';
-            $("#" + $formulario).LoadingOverlay("hide", true);
+            $("#target").LoadingOverlay("hide", true);
             //$('#error').html(errorString);
-            $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + errorString + "'])");
+            $('.rowerror').html(errorString);
 
         }
         if (data.success) {
