@@ -116,6 +116,16 @@
 
                     <img class="gradient" src="{!! asset('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
                 </div>
+                
+                <div>
+				<img src="{!! asset('img/giveBack.jpg')!!}" alt="" />
+				<img class="gradient" src="{!! asset('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
+			</div>
+                
+                <div>
+				<img src="{!! asset('img/esperanza-1.png')!!}" alt="" />
+				<img class="gradient" src="{!! asset('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
+			</div>
 
             </div>
 
