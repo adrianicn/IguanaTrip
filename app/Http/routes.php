@@ -81,6 +81,7 @@ Route::post('estadoItinerario/{id}', ['as' => 'postEstadoItinerario', 'uses' =>'
 Route::post('deleteItinerario/{id}', ['as' => 'postEstadoItinerario', 'uses' =>'UsuarioServiciosController@postDeleteItinerario','middleware' => 'notAuth']);
 Route::post('estadoItinerarioPrincipal/{id}', ['as' => 'postEstadoItinerarioPrincipal', 'uses' =>'UsuarioServiciosController@postEstadoItinerario','middleware' => 'notAuth']);
 Route::post('estadoPromocion/{id}', ['as' => 'postEstadoPromocion', 'uses' =>'UsuarioServiciosController@postEstadoPromocion','middleware' => 'notAuth']);
+Route::post('estadoEvento/{id}', ['as' => 'postEstadoEvento', 'uses' =>'UsuarioServiciosController@postEstadoEvento','middleware' => 'notAuth']);
 
 Route::get('/detalleServicios', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios','middleware' => 'notAuth']);
 Route::get('/render/{id_partial}', ['as' => 'render', 'uses' => 'UsuarioServiciosController@RenderPartial']);

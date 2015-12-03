@@ -203,6 +203,21 @@ class ServiciosOperadorRepository extends BaseRepository {
         return true;
     }
     
+
+        //Actualiza el estado del evento
+      public function storeUpdateEstadoEvento($inputs, $Evento) {
+
+        //Transformo el arreglo en un solo objeto
+        foreach ($Evento as $servicioBase) {
+            $inputs['id'] = $servicioBase->id;
+            $this->updateServEvent($inputs, 'estado_evento');
+        }
+
+
+
+        return true;
+    }
+
     
     
     //Actualiza el estado de la promocion
@@ -334,6 +349,13 @@ class ServiciosOperadorRepository extends BaseRepository {
                 ->update([$campo => $input[$campo]]);
     }
     
+      //Realiza la logica del update
+    public function updateServEvent($input, $campo) {
+        $operador = new $this->eventos;
+        $operadorData = $operador::where('id', $input['id'])
+                ->update([$campo => $input[$campo]]);
+    }
+    
     //Realiza la logica del update
     public function updateServ($input, $campo) {
         $operador = new $this->model;
@@ -363,9 +385,16 @@ class ServiciosOperadorRepository extends BaseRepository {
     }
 
     
-          //detalle itinersrioo
+          //detalle estado promocion
   public function getEstadoPromocion($id_promocion) {
         $promo = new $this->promocion;
+        return $promo::where('id', $id_promocion)->get();
+    }
+
+    
+    //estado evento
+      public function getEstadoEvento($id_promocion) {
+        $promo = new $this->eventos;
         return $promo::where('id', $id_promocion)->get();
     }
 
@@ -385,6 +414,14 @@ class ServiciosOperadorRepository extends BaseRepository {
         
           
         return $promociones::All();
+    }
+         //Entrega el arreglo de eventos por usuario servicio
+    public function     getEventosUsuarioServicio($id_usuario_servicio) {
+        $eventos = new $this->eventos;
+        return $eventos::where('id_usuario_servicio','=', $id_usuario_servicio)->get();
+        
+          
+        return $eventos::All();
     }
     
     

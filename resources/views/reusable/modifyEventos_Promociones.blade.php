@@ -47,6 +47,36 @@
     <div id='eventos'>
         <h1>Eventos</h1>
         @foreach ($eventos as $evento)
+        
+        <li><div>
+                
+                
+                <a class="button-1 white" onclick="redirect('/IguanaTrip/public/eventos/'+{!!$evento->id!!})" href="#">{!!$evento->nombre_evento!!}</a>
+            </div> 
+            <div>
+                @if($evento->estado_evento==1)
+                  <label class="switch switch-green">
+                            
+                        <input type="checkbox" id='estado_evento_{!!$evento->id!!}' checked name ='estado_evento_{!!$evento->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('/IguanaTrip/public/estadoEvento/',{!!$evento->id!!},{!!$evento->id!!},'eventos')">
+                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                        <span class="switch-handle"></span>
+                        
+                    </label>
+                @else
+                
+                 <label class="switch switch-green">
+                            
+                        <input type="checkbox" id='estado_evento_{!!$evento->id!!}'  name ='estado_evento_{!!$evento->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('/IguanaTrip/public/estadoItinerarioPrincipal/',{!!$evento->id!!},{!!$evento->id!!},'eventos')">
+                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                        <span class="switch-handle"></span>
+                        
+                    </label>
+                @endif
+                
+            </div>
+         
+        </li>
+        
         @endforeach
 
     </div>

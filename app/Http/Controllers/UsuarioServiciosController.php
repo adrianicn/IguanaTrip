@@ -132,6 +132,36 @@ class UsuarioServiciosController extends Controller {
     }
 
     //actualiza el estado de las promociones
+    public function postEstadoEvento($id, ServiciosOperadorRepository $gestion) {
+
+
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+
+        $serviciosBase = array();
+        //obtengo los servicios ya almacenados de la bdd
+        $ServiciosOperador = $gestion->getEstadoEvento($id);
+
+        foreach ($ServiciosOperador as $servicioBase) {
+
+
+            if ($servicioBase->estado_evento == 1)
+                $serviciosBase['estado_evento'] = 0;
+            else
+                $serviciosBase['estado_evento'] = 1;
+
+            $serviciosBase['id'] = $servicioBase->id;
+        }
+
+
+        $gestion->storeUpdateEstadoEvento($serviciosBase, $ServiciosOperador);
+        return response()->json(array('success' => true));
+    }
+    
+    
+    
+    //actualiza el estado de las promociones
     public function postEstadoPromocion($id, ServiciosOperadorRepository $gestion) {
 
 
@@ -543,10 +573,10 @@ class UsuarioServiciosController extends Controller {
 
         $itinerarios = $gestion->getItinerariosporUsuario($id_usuario_servicio);
         $promociones = $gestion->getPromocionesUsuarioServicio($id_usuario_servicio);
-        //$listEvents = $gestion->getPromocionesUsuarioServicio($id);
+        $eventos = $gestion->getEventosUsuarioServicio($id_usuario_servicio);
 
 
-        $view = View::make('reusable.modifyEventos_Promociones')->with('itinerarios', $itinerarios)->with('promociones', $promociones);
+        $view = View::make('reusable.modifyEventos_Promociones')->with('itinerarios', $itinerarios)->with('promociones', $promociones)->with('eventos',$eventos);
         if ($request->ajax()) {
             $sections = $view->rendersections();
 
