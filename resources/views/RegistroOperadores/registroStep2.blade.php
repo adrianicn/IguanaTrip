@@ -1,6 +1,15 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
+<div style='display:none'>
+    <img src="{!! asset('img/x.png')!!}" alt='' />
+</div>
+<style>
+    #simplemodal-container a.modalCloseImg {
+        background:url("{!! asset('img/x.png')!!}") no-repeat;
+        width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+</style>
+<div id="basic-modal-content" class="cls loadModal"></div>
 
 <?php
 $id_usuario_op = NULL;
@@ -103,6 +112,20 @@ $email_contacto_operador = $operadorData->email_contacto_operador;
     </div>
     {!! Form::close() !!}
 
+    
+             <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.invitar_amigo')" href="#"> <h1 class="h1-agregar">+</h1> Invitar a un amigo</a></div>
+                
 </div>
+
+@section('scripts')
+
+
+{!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
+{!! HTML::script('/js/jsModal/basic.js') !!}
+
+
+    
+
+@stop
 
 @stop

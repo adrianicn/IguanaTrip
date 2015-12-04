@@ -89,7 +89,9 @@ class AuthController extends Controller {
                 $request->session()->forget('user_id');
             }
             $request->session()->put('user_id', $user->id);
-
+$request->session()->put('user_name', $user->username);
+$request->session()->put('user_email', $user->email);
+            
             return redirect('/servicios')->with('user', $user->id);
         }
 

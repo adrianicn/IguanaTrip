@@ -16,6 +16,7 @@ return array(
     'CreateEventosUsuarioServicioTable' => $baseDir . '/database/migrations/2015_11_25_121637_create_eventos_usuario_servicio_table.php',
     'CreateForeignKeys' => $baseDir . '/database/migrations/2014_10_21_110325_create_foreign_keys.php',
     'CreateImagesTable' => $baseDir . '/database/migrations/2015_11_01_011047_create_images_table.php',
+    'CreateInvitacionesAmigosTable' => $baseDir . '/database/migrations/2015_12_04_013319_create_invitaciones_amigos_table.php',
     'CreateItinerariosUsuarioServiciosTable' => $baseDir . '/database/migrations/2015_11_19_045229_create_itinerarios_usuario_servicios_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePostTagTable' => $baseDir . '/database/migrations/2014_10_26_172904_create_post_tag_table.php',
