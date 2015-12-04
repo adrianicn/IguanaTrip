@@ -177,10 +177,17 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 </div>
 
 @section('scripts')
+<<<<<<< HEAD
+{!! HTML::script('/js/tabla_dinamica.js') !!}
+{!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
+{!! HTML::script('/js/jsModal/basic.js') !!}
+
+=======
     {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
     {!! HTML::script('/js/jsModal/basic.js') !!}
     
     
+>>>>>>> f496af78b621633bbf143fff4b0ac6abc2aeafee
 @stop
 
 <script>
