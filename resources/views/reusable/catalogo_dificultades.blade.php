@@ -3,7 +3,8 @@
 
 
                         <h2 class='titletable'>
-                            Estado físico
+                            {{trans('registro/labels.label1')}}
+                            
                         </h2>
 
 

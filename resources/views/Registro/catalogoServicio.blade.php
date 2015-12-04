@@ -42,9 +42,28 @@ switch ($servicio->id_catalogo_servicio) {
 
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+            
+          <?php switch (session('tip_oper')) {
+    case 1:
+        $prefix="I'm an ";
+        $operadorName="Agency";
+        break;
+    case 2:
+        $prefix="I'm an ";
+        $operadorName="Enterprise";
+        break;
+    case 3:
+        $prefix="I'm just";
+        $operadorName="Me";
+        break;
+    
+}
+?>
+
+           
             <h2 class="head-title">
-                I'm an                <strong>Agency</strong>
+    {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
             </h2>
         </div>
         <div id="description-box-type">
@@ -52,6 +71,19 @@ switch ($servicio->id_catalogo_servicio) {
             sin necesidad de llamar a nadie
         </div>
     </div>
+    
+    <div id="space"></div>
+    <div id="title-box-header-navigation">
+        
+           <h2 class="head-title-navigation">
+   <a class="button-step4" href="/"> 
+               <strong> Datos Personales >>  </strong></a>
+               <a class="button-step4" href="/"> 
+               <strong> Catálogo de servicios >>  </strong></a>
+            </h2>
+    </div>
+    
+    
     <div id="space"></div>
 
 
@@ -62,13 +94,59 @@ switch ($servicio->id_catalogo_servicio) {
         <input type="hidden" value="{!!$data['id_usuario_op']!!}" name="id_usuario_op" id="id_usuario_op">
         <div id="overlay">
             <div id="screen"></div>
-            <div id="dialog-star" class="dialog">
-                <div class="label-dialog"><i ><img src="{!! asset('images/foto.png')!!}" alt="" /></i></div>
+            
+            
+            <div id="dialog-star1" class="dialog">
+                <div class="label-dialog"><i ><img src="{!! asset('images/register/registro1.jpg')!!}" alt="lugares de comida" /></i></div>
                 <div class="body-dialog">
-                    <p>The Star dialog is <span>modeless</span>. You can click on the check mark or anywhere outside of the dialog's body to clear it.</p>
+                    <p>Lugares de  <span>COMIDA</span>. Dentro de esta clasificación se encuentran restaurantes, comida rápida, kioskos, agachaditos, cualquier tipo de local cuya actividad principal sea la alimentación.</p>
                 </div>
                 <div class="ok-dialog"><i class="icon-ok-sign"></i></div>
             </div>
+            
+            <div id="dialog-star2" class="dialog">
+                <div class="label-dialog"><i ><img src="{!! asset('images/register/registro2.jpg')!!}" alt="Hospedaje" /></i></div>
+                <div class="body-dialog">
+                    <p>Lugares de  <span>HOSPEDAJE</span>. Dentro de esta clasificación se encuentran hoteles, hostels, home stays, hostales, villas , cualquier tipo de local cuya actividad principal sea la de hospedaje y descanso.</p>
+                </div>
+                <div class="ok-dialog"><i class="icon-ok-sign"></i></div>
+            </div>
+            
+            <div id="dialog-star3" class="dialog">
+                <div class="label-dialog"><i ><img src="{!! asset('images/register/registro3.jpg')!!}" alt="Agencia de viajes" /></i></div>
+                <div class="body-dialog">
+                    <p>Servicio de  <span>Viajes</span>.Dentro de esta clasificación se encuentran agencias de viajes, guías independientes, servicios de viajes planificados, cuya finalidad sea la de organizar viajes planeados donde se incluya por ejemplo transporte y seguro para el cliente.</p>
+                </div>
+                <div class="ok-dialog"><i class="icon-ok-sign"></i></div>
+            </div>
+            
+            
+            <div id="dialog-star4" class="dialog">
+                <div class="label-dialog"><i ><img src="{!! asset('images/register/registro4.jpg')!!}" alt="Centros turísticos" /></i></div>
+                <div class="body-dialog">
+                    <p>Para <span>visitar </span>.Dentro de esta clasificación se encuentran museos, parques nacionales, cascadas, caminatas, cualquier lugar que se considere bueno para visitar, pasear y fotografiar.</p>
+                </div>
+                <div class="ok-dialog"><i class="icon-ok-sign"></i></div>
+            </div>
+            
+            <div id="dialog-star5" class="dialog">
+                <div class="label-dialog"><i ><img src="{!! asset('images/register/registro5.jpg')!!}" alt="Centros turísticos" /></i></div>
+                <div class="body-dialog">
+                    <p>Lugares para <span>diversión nocturna </span>.Dentro de esta clasificación se encuentran bares, casinos, discotecas, cobachas, cualquier lugar que se considere bueno farrear o pasar una simplemente diversión adulta.</p>
+                </div>
+                <div class="ok-dialog"><i class="icon-ok-sign"></i></div>
+            </div>
+            
+             <div id="dialog-star6" class="dialog">
+                <div class="label-dialog"><i ><img src="{!! asset('images/register/registro6.jpg')!!}" alt="Centros turísticos" /></i></div>
+                <div class="body-dialog">
+                    <p>Reuniones  <span>sociales </span>.Dentro de esta clasificación se encuentran parrilladas, paseos en bicileta, caídas, cualquier tipo de actividad donde se quiera invitar al público en general a unirse sean nacionales o extranjeros.</p>
+                </div>
+                <div class="ok-dialog"><i class="icon-ok-sign"></i></div>
+            </div>
+            
+            
+            
             <div id="dialog-anchor" class="dialog modal">
                 <div class="label-dialog"><i class="icon-anchor"></i></div>
                 <div class="body-dialog">
@@ -76,6 +154,7 @@ switch ($servicio->id_catalogo_servicio) {
                 </div>
                 <div class="ok-dialog"><i class="icon-ok-sign"></i></div>
             </div>
+            
             <div id="dialog-beaker" class="dialog">
                 <div class="label-dialog"><i class="icon-beaker"></i></div>
                 <div class="body-dialog">
@@ -83,6 +162,7 @@ switch ($servicio->id_catalogo_servicio) {
                 </div>
                 <div class="ok-dialog"><i class="icon-ok-sign"></i></div>
             </div>
+            
             <div id="dialog-bug" class="dialog modal">
                 <div class="label-dialog"><i class="icon-bug"></i></div>
                 <div class="body-dialog">
@@ -97,57 +177,102 @@ switch ($servicio->id_catalogo_servicio) {
                 <table>
                     <thead><tr><th>Tipo</th><th>Descripcion</th><th>Seleccion</th></tr></thead>
                     <tbody><tr>
-                            <td> <img src="{!! asset('images/register/registro1.jpg')!!}" alt="" /></td>
+                            <td> 
+                                    <div id="star1" class="dialog-open">
+                                    <img src="{!! asset('images/register/registro1.jpg')!!}" alt="" />
+                                </div></td>
                             <td>
+                                <div id="star1" class="dialog-open">
+                                    
                                 <h2 class='titletable'>
                                     Lugares de comida
                                 </h2>
-                                Restaurante, pizzeria, kioscos de comida, comida rápida, etc</td>
+                                      
+                                
+                                Restaurante, pizzeria, kioscos de comida, comida rápida, etc
+                                </div>
+                                </td>
                             <td><input class="demo labelauty" name="id_catalogo_servicio1" id="checkbox-1" value="1" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio"{!!$servicio_1!!}/></td>
                         </tr>
-                        <tr class="alt">  <td> <img src="{!! asset('images/register/registro2.jpg')!!}" alt="" /></td>
+                        <tr class="alt">  <td> 
+                                <div id="star2" class="dialog-open">
+                                    <img src="{!! asset('images/register/registro2.jpg')!!}" alt="" />
+                                </div>
+                                </td>
                             <td>
+                                <div id="star2" class="dialog-open">
                                 <h2 class='titletable'>
                                     Hospedajes
                                 </h2>
-                                Hotel, hostal, home state, coachsurfing, etc</td>
+                                
+                                Hotel, hostal, home state, coachsurfing, etc
+                                </div>
+                                </td>
                             <td><input class="demo labelauty" name="id_catalogo_servicio2" id="checkbox-2" value="2" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_2!!}/></td>
                         </tr>
-                        <tr>  <td> <img src="{!! asset('images/register/registro3.jpg')!!}" alt="" /></td>
+                        <tr>  <td> 
+                            <div id="star3" class="dialog-open">
+                                    <img src="{!! asset('images/register/registro3.jpg')!!}" alt="" />
+                                </div>
+                                
+                            
+                            </td>
                             <td>
+                                <div id="star3" class="dialog-open">
                                 <h2 class='titletable'>
-                                    Agencias de viajes
+                                    Viajes Organizados
                                 </h2>
-                                Agencia de viajes, guía independiente, exploración, etc</td>
+                                
+                                Agencia de viajes, guía independiente, exploración, etc
+                                </div>
+                                </td>
                             <td><input class="demo labelauty" name="id_catalogo_servicio3" id="checkbox-3" value="3" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_3!!}/></td></tr>
                         <tr class="alt"><td> 
-                                <div id="star" class="dialog-open">
+                                <div id="star4" class="dialog-open">
                                     <img src="{!! asset('images/register/registro4.jpg')!!}" alt="" />
                                 </div>
                             </td>
                             <td>
+                                <div id="star4" class="dialog-open">
                                 <h2 class='titletable'>
                                     Centros turísticos
                                 </h2>
+                                    
                                 Museos ,parques nacionales, zoologicos, etc
+                                </div>
                             </td>
                             <td><input class="demo labelauty" name="id_catalogo_servicio4" id="checkbox-4" value="4" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_4!!}/></td></tr>
-                        <tr><td> <img src="{!! asset('images/register/registro5.jpg')!!}" alt="" /></td>
+                        <tr><td> 
+                                
+                                <div id="star5" class="dialog-open">
+                                    <img src="{!! asset('images/register/registro5.jpg')!!}" alt="" />
+                                </div>
+                            </td>
                             <td>
+                                <div id="star5" class="dialog-open">
                                 <h2 class='titletable'>
                                     Diversión nocturna
                                 </h2>
                                 Discoteca, bar, casino, etc
+                                </div>
+                                
                             </td>
                             <td><input class="demo labelauty" name="id_catalogo_servicio5" id="checkbox-5" value="5" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_5!!}/></td></tr>
 
-                        <tr class="alt"><td> 
-                                <img src="{!! asset('images/register/registro6.jpg')!!}" alt="" /></td>
+                        <tr class="alt"><td>
+                                <div id="star6" class="dialog-open">
+                                    <img src="{!! asset('images/register/registro6.jpg')!!}" alt="" />
+                                </div>
+                                
                             <td>
+                                <div id="star6" class="dialog-open">
                                 <h2 class='titletable'>
                                     Reuniones sociales
                                 </h2>
-                                Parrilladas, viajes, caídas, after office, etc</td>
+                                Parrilladas, viajes, caídas, after office, actividades espontaneas etc
+                                </div>
+                                
+                                </td>
                             <td><input class="demo labelauty" name="id_catalogo_servicio6" id="checkbox-6" value="6" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_6!!}/></td></tr>
 
                     </tbody>

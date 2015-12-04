@@ -9,20 +9,19 @@
  */
 
 
-function callModal($servicio){
+function callModal($servicio) {
 
-var $id='.cls';
- 		$($id).modal();
-$(".simplemodal-wrap").LoadingOverlay("show");
-		return false;
-	
+    var $id = '.cls';
+    $($id).modal();
+    $(".simplemodal-wrap").LoadingOverlay("show");
+    return false;
 }
 
-function callModalMap($servicio){
+function callModalMap($servicio) {
 
-var $id='.cls';
- 		$($id).modal();
-
-		return false;
-	
+    var $id = '.cls';
+    $($id).modal();
+    return false;
 }
+
+

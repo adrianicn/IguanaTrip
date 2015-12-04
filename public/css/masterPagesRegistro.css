@@ -260,6 +260,14 @@
 	background-color: #282828; 
 	margin-bottom: 0px;
 }
+
+#title-box-header-navigation{
+	width: 915px;
+	float:left;
+	background-color: #282828; 
+	margin-bottom: 20px;
+        height: 26px;
+}
 #title-box-type{
 	background-color: #282828; 
 	float: left;
@@ -288,6 +296,15 @@
     color: #f05a22;
     display: block;
     font-size: 1.56em;
+    font-weight: normal;
+    line-height: 31px;
+    text-indent: 31px;
+}
+
+.head-title-navigation strong {
+    color: #0C7E7F;
+    display: block;
+    font-size: 0.90em;
     font-weight: normal;
     line-height: 31px;
     text-indent: 31px;
@@ -570,8 +587,16 @@
     color: #98BB2D;
     cursor: pointer
 }
+
+.remove-registro{
+    font-size: 20px;
+    color: red;
+    cursor: pointer
+}
+
 .tabla-itinerario-detalle{
     width: 100%;
+    
 }
 .servicio-usuario-detalle{
     padding-left: 10px;

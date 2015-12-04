@@ -1,14 +1,35 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
+{!! HTML::style('css/calendar/ui-jquery.css') !!}
+
 <div class="rowerror">
 </div>
 
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+            
+          <?php switch (session('tip_oper')) {
+    case 1:
+        $prefix="I'm an ";
+        $operadorName="Agency";
+        break;
+    case 2:
+        $prefix="I'm an ";
+        $operadorName="Enterprise";
+        break;
+    case 3:
+        $prefix="I'm just";
+        $operadorName="Me";
+        break;
+    
+}
+?>
+
+           
             <h2 class="head-title">
-                I'm an                <strong>Agency</strong>
+    {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
             </h2>
         </div>
         <div id="description-box-type">
@@ -18,7 +39,10 @@
     </div>
     <div id="space"></div>
 
-
+<div class="form-group-step2">
+            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
+            @include('reusable.uploadImage', ['tipo' => '2','objeto'=>$listPromociones])  
+        </div>
     {!! Form::open(['url' => route('postPromocion'), 'method' => 'post', 'role' => 'form', 'id'=>'Updatepromocion']) !!}
     @foreach ($listPromociones as $promo)
 
@@ -27,10 +51,7 @@
 
     <div class="wrapper uwa-font-aa">
 
-        <div class="form-group-step2">
-            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
-            @include('reusable.uploadImage', ['tipo' => '2','objeto'=>$listPromociones])  
-        </div>
+        
 
         <div class="form-group-step2">
             {!!Form::label('nombre_promocion', 'Nombre Promocion', array('id'=>'iconFormulario-step2'))!!}
@@ -39,12 +60,12 @@
 
         <div class="form-group-step2">
             {!!Form::label('Fecha_inicio', 'Fecha Inicio', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('fecha_desde', $promo->fecha_desde, array('class'=>'inputtext-step2'))!!}
+            {!!Form::text('fecha_desde', $promo->fecha_desde, array('class'=>'inputtext-step2 datepicker'))!!}
         </div>
 
         <div class="form-group-step2">
             {!!Form::label('Fecha_fin', 'Fecha Hasta', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('fecha_hasta', $promo->fecha_hasta, array('class'=>'inputtext-step2'))!!}
+            {!!Form::text('fecha_hasta', $promo->fecha_hasta, array('class'=>'inputtext-step2 datepicker'))!!}
         </div>
 
         <div class="form-group-step2">
@@ -82,7 +103,8 @@
         </div>
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRegistro('Updatepromocion')" href="#">Siguiente</a>
+                <a class="button-1" onclick="AjaxContainerRetrunMessage('Updatepromocion','optional')" href="#">Siguiente</a>
+                
             </div>
         </div>
     </div>
@@ -91,5 +113,13 @@
     {!! Form::close() !!}
 </div>
 
+{!! HTML::script('js/jquery.js') !!}
+  
+  
 
+<script>
+  $(function() {
+     $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
+  });
+  </script>
 @stop

@@ -65,10 +65,10 @@
             {!! HTML::script('js/jquery.js') !!}
             {!! HTML::script('js/bootstrap.min.js') !!}
             {!!HTML::script('js/loadingScreen/loadingoverlay.js') !!}
-            {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
+            
             {!!HTML::script('js/Compartido.js') !!}
-
-
+            {!! HTML::script('js/calendar/calendar.js') !!}
+            {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
 
             @yield('scripts')
 

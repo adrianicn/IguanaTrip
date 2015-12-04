@@ -14,7 +14,7 @@
 <div class="rowerror">
 </div>
 <?php
-$ImgPromociones = null; 
+
 $usuarioServicio->id = 0;
 $usuarioServicio->nombre_servicio = '';
 $usuarioServicio->detalle_servicio = '';
@@ -60,9 +60,28 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 @endforeach
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+            
+          <?php switch (session('tip_oper')) {
+    case 1:
+        $prefix="I'm an ";
+        $operadorName="Agency";
+        break;
+    case 2:
+        $prefix="I'm an ";
+        $operadorName="Enterprise";
+        break;
+    case 3:
+        $prefix="I'm just";
+        $operadorName="Me";
+        break;
+    
+}
+?>
+
+           
             <h2 class="head-title">
-                I'm an                <strong>Agency</strong>
+    {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
             </h2>
         </div>
         <div id="description-box-type">
@@ -73,6 +92,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
     <div id="space"></div>
 
     <div class="wrapper uwa-font-aa">
+        {!!$Servicio->nombre_servicio!!}
         {!! Form::open(['url' => route('upload-postusuarioservicios'), 'method' => 'post', 'role' => 'form', 'id'=>'registro_step1'] ) !!}
 
         <input type="hidden" value="{!!$usuarioServicio->id!!}" name="id" id="id">
@@ -132,74 +152,50 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             </div>
             <div id="secondary-data">
                 <div id="promocion"><a class="button-step4" onclick="RenderPartialGeneric('reusable.promocion',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
-                <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
+                <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewEvent',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
                 <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Itinerario</a></div>
             </div>
         </div>
         <div id="part-1-form">
-            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
-        </div>
-        <div id="part-1-form">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRegistro('registro_step1')" href="#">Siguiente</a>
+                <a class="button-1" onclick="AjaxContainerRetrunMessage('registro_step1','optional')" href="#">Siguiente</a>
             </div>              
         </div>
-<!--        
-
-        <div class="form-group-1">
-            {!!Form::label('precio_anterior_1', 'Precio Anterior', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('precio_anterior', $usuarioServicio->precio_anterior, array('class'=>'inputtext','placeholder'=>'Precio Anterior'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('precio_actual_1', 'Precio Actual', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('precio_actual', $usuarioServicio->precio_actual, array('class'=>'inputtext','placeholder'=>'Precio actual'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('descuento_servicio_1', 'Desuento Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('descuento_servico', $usuarioServicio->descuento_servico, array('class'=>'inputtext','placeholder'=>'Descuento del Servicio'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('nombre_comercial_servicio_1', 'Nombre Comercial', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('nombre_comercial', $usuarioServicio->nombre_comercial, array('class'=>'inputtext','placeholder'=>'Nombre Comercial'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('tags_1', 'Tags', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('tags', $usuarioServicio->tags, array('class'=>'inputtext','placeholder'=>'Tags'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('descuento_clientes_1', 'Descuento del Cliente', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('descuento_clientes', $usuarioServicio->descuento_clientes, array('class'=>'inputtext','placeholder'=>'Descuento del Cliente'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('tags_servicio_1', 'Tags del Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('tags_servicio', $usuarioServicio->tags_servicio, array('class'=>'inputtext','placeholder'=>'Tags del Servicio'))!!}
-
-        </div>
-        <div class="form-group-1">
-            {!!Form::label('observaciones_1', 'Observaciones del Servicio', array('class'=>'control-label','id'=>'iconFormulario'))!!}
-            {!!Form::text('observaciones', $usuarioServicio->observaciones, array('class'=>'inputtext','placeholder'=>'Observaciones del Servicio'))!!}
-
-        </div>
--->
         {!! Form::close() !!}
-
+<div id="part-1-form">
+            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
+        </div>
+        
         @include('reusable.uploadImage', ['tipo' => '1','objeto'=>$usuarioServicio])  
 
+        
+            <div id="renderPartialListaServicios">
+                    @section('contentPanelServicios')
+                    @show
+                </div>    
     </div>
 </div>
 
 @section('scripts')
+<<<<<<< HEAD
 {!! HTML::script('/js/tabla_dinamica.js') !!}
 {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
 {!! HTML::script('/js/jsModal/basic.js') !!}
 
+=======
+    {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
+    {!! HTML::script('/js/jsModal/basic.js') !!}
+    
+    
+>>>>>>> f496af78b621633bbf143fff4b0ac6abc2aeafee
 @stop
+
+<script>
+    $(document).ready(function () {
+        
+        GetDataAjaxSectionEventos("/IguanaTrip/public/getlistaServiciosComplete/{!!$usuarioServicio->id!!}");
+    });
+</script>
 
 @stop
 

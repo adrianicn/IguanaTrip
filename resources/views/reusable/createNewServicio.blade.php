@@ -1,3 +1,6 @@
+
+<div class="rowerrorM">
+</div>
 <div id="testboxForm" class="testboxForm">
     <h1>Agregar Servicio </h1>
     <hr>
@@ -15,7 +18,7 @@
        </div>
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
-                <a class="button-1" id="btnsubm" onclick="AjaxContainerRegistroWithLoad('newServicio','testboxForm')" href="#">Siguiente</a>
+                <a class="button-1" id="btnsubm" onclick="AjaxContainerRegistroWithLoad('newServicio','simplemodal-wrap')" href="#">Siguiente</a>
             </div>              
         </div>
 

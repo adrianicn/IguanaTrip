@@ -80,11 +80,11 @@ class ServicioController extends Controller
 		}
     	return $view;
     }
-    public function step2(Guard $auth, $tipoOperador, OperadorRepository $operador_gestion)
+    public function step2(Guard $auth, OperadorRepository $operador_gestion)
     {
     	if ($auth->check()) {
-    		$operador = $operador_gestion->getOperadorTipo(Session::get('user_id'),$tipoOperador);
-    		$data['tipoOperador'] = $tipoOperador;
+    		$operador = $operador_gestion->getOperadorTipo(Session::get('user_id'),session('tip_oper'));
+    		$data['tipoOperador'] = session('tip_oper');
     		$view = view('RegistroOperadores.registroStep2',compact('data','operador')); // revisar debe redirecccionar a otro lado
     	} else {
     		$view = view('auth.completeRegister');
@@ -101,16 +101,27 @@ class ServicioController extends Controller
     
 
     public function step4( $id, $id_catalogo,ServiciosOperadorRepository $gestion )
+            
     {
+        //permisssion
+        $permiso = $gestion->getPermiso($id);
+        
+        if(!isset($permiso) || $permiso->id_usuario!=session('user_id')){
+            
+            
+             return view('errors.404');
+        }
+        
     	$operador_gestion = new OperadorRepository() ;
     	
     	$usuarioServicio = $operador_gestion->getUsuarioServicio($id);
+        $Servicio = $operador_gestion->getServicio($id_catalogo);
 		$catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimientoExistente($id_catalogo,$id);
 		if(count($catalogoServicioEstablecimiento) == 0 )
 			$catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimiento($id_catalogo);
-	   $ImgPromociones = $gestion->getImageOperador($id,1);
+	   $ImgPromociones = $gestion->getImageOperador($id ,1);
            
-    	return view('RegistroOperadores.registroStep4', compact('usuarioServicio','catalogoServicioEstablecimiento','id_catalogo','ImgPromociones'));
+    	return view('RegistroOperadores.registroStep4', compact('usuarioServicio','catalogoServicioEstablecimiento','id_catalogo','ImgPromociones','Servicio'));
     }
     
     /**
@@ -191,6 +202,7 @@ class ServicioController extends Controller
     			'id_tipo_operador' => $formFields['id_tipo_operador'],
     			'estado_contacto_operador' => 1,
     			'id_usuario_op' => $formFields['id_usuario_op']
+                        
     	);
     	$validator = Validator::make($operadorData, $this->validationRules);
     	if ($validator->fails()) {
@@ -202,27 +214,31 @@ class ServicioController extends Controller
     		
     		if($formFields['id_usuario_op'] > 0){
     			$id_usuario_op = $formFields['id_usuario_op'];
+                        $request->session()->put('operador_id', $formFields['id_usuario_op']);
+                        
     			$operador = $operador_gestion->update( $operadorData );
     		} else {
     			$operador = $operador_gestion->store( $operadorData	);
+                        $request->session()->put('operador_id', $operador->id);
     			$operadores = $operador_gestion->getLastIdInsert( $operadorData );
     			foreach ($operadores as $operador)
     				$id_usuario_op = $operador->id_usuario_op;
     		}
     	}
-    		$returnHTML = ('/IguanaTrip/public/userservice/'. $id_usuario_op);
+    		$returnHTML = ('/IguanaTrip/public/userservice');
     		return response()->json(array('success' => true, 'redirectto'=>$returnHTML));    
     
     }
 
     public function postTipoOperadores(Request $request, OperadorRepository $operador_gestion) {
+        
     	$inputData = Input::get('formData');
     	parse_str($inputData, $formFields);
-    	 
+    	 $request->session()->put('tip_oper', $formFields['tipo_operador']);
     	$operadorData = array(
     			'tipo_operador' => $formFields['tipo_operador'],
     	);
-    	$returnHTML = ('servicios/operador/'. $operadorData['tipo_operador']);
+    	$returnHTML = ('operador');
     	return response()->json(array('success' => true, 'redirectto'=>$returnHTML));
     }
     

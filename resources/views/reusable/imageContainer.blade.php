@@ -12,8 +12,8 @@
                 <?php
                 $url = "images/icon/" . $imagen->filename
                 ?>
-                <img src="{{asset($url)}}">
-                <a href='#' onclick='AjaxContainerRetrunMessage("deleteImage", {!!$imagen -> id!!})' class='basic'>Eliminar</a>
+                <img src="{{asset($url)}}" href='#' onclick='AjaxContainerRetrunMessage("deleteImage", {!!$imagen -> id!!})'>
+                
             </li>
             @endforeach 
         </ul>
@@ -30,8 +30,15 @@
             $(document).ready(function()
     {
     $('#slider1').tinycarousel();
+    
     });
+    
+
+
+
 </script>
+    {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
+    {!! HTML::script('/js/jsModal/basic.js') !!}
 
 @stop
 

@@ -43,7 +43,7 @@ class ImageRepository
         $allowed_filename = $this->createUniqueFilename( $filename );
         
 
-        $filenameExt = $allowed_filename .'.jpg';
+        $filenameExt = $form_data['id_auxiliar'].$allowed_filename .'.jpg';
         
         
 
@@ -64,7 +64,7 @@ class ImageRepository
         }
 
         $sessionImage = new Image;
-        $sessionImage->filename      = $allowed_filename.'.jpg';
+        $sessionImage->filename      =$form_data['id_auxiliar'].$allowed_filename.'.jpg';
         $sessionImage->original_name = $originalName;
         $sessionImage->id_catalogo_fotografia = $form_data['id_catalogo_fotografia'];
         $sessionImage->id_usuario_servicio = $form_data['id_usuario_servicio'];

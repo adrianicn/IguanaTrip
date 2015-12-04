@@ -22,6 +22,7 @@ return array(
     'CreatePostsTable' => $baseDir . '/database/migrations/2014_10_26_172107_create_posts_table.php',
     'CreatePromocionUsuarioServicioTable' => $baseDir . '/database/migrations/2015_11_14_060651_create_promocion_usuario_servicio_table.php',
     'CreateRolesTable' => $baseDir . '/database/migrations/2014_10_21_105844_create_roles_table.php',
+    'CreateSearchEngineTable' => $baseDir . '/database/migrations/2015_12_03_042931_create_search_engine_table.php',
     'CreateServicioEstablecimientoUsuarioTable' => $baseDir . '/database/migrations/2015_11_09_104907_create_servicio_establecimiento_usuario_table.php',
     'CreateTagsTable' => $baseDir . '/database/migrations/2014_10_26_172631_create_tags_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',

@@ -6,9 +6,28 @@
 
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+            
+          <?php switch (session('tip_oper')) {
+    case 1:
+        $prefix="I'm an ";
+        $operadorName="Agency";
+        break;
+    case 2:
+        $prefix="I'm an ";
+        $operadorName="Enterprise";
+        break;
+    case 3:
+        $prefix="I'm just";
+        $operadorName="Me";
+        break;
+    
+}
+?>
+
+           
             <h2 class="head-title">
-                I'm an                <strong>Agency</strong>
+    {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
             </h2>
         </div>
         <div id="description-box-type">
@@ -19,7 +38,7 @@
     <div id="space"></div>
 
 
-    {!! Form::open(['url' => route('postPromocion'), 'method' => 'post', 'role' => 'form', 'id'=>'UpdateEvento']) !!}
+    {!! Form::open(['url' => route('postEvento'), 'method' => 'post', 'role' => 'form', 'id'=>'UpdateEvento']) !!}
     @foreach ($listEventos as $evento)
 
     <input type="hidden" name="id_usuario_servicio" value="{{ $evento->id_usuario_servicio }}">
@@ -54,9 +73,14 @@
         </div>
 
      <div class="form-group-step2-popup">
+         
                 @if(isset($listEventos))
                 @foreach ($listEventos as $itiner)
+                @if($itiner->longitud_evento!="")
                 @include('reusable.maps', ['longitud_servicio' => $itiner->longitud_evento,'latitud_servicio'=>$itiner->latitud_evento])  
+                @else
+                @include('reusable.maps', ['longitud_servicio' => '-78.46783820000002','latitud_servicio'=>'-0.1806532'])   
+                @endif
                 @endforeach
                 @else
                 @include('reusable.maps', ['longitud_servicio' => '-78.46783820000002','latitud_servicio'=>'-0.1806532'])   
@@ -69,7 +93,7 @@
         </div>
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRegistro('UpdateEvento')" href="#">Siguiente</a>
+                <a class="button-1" onclick="AjaxContainerRetrunMessage('UpdateEvento','optional')" href="#">Siguiente</a>
             </div>
         </div>
     </div>

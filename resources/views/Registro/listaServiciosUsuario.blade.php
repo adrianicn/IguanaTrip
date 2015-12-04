@@ -2,6 +2,7 @@
 
 @section('step1')
 
+
 {!! HTML::style('css/table.css') !!} 
 <div style='display:none'>
     <img src="{!! asset('img/x.png')!!}" alt='' />
@@ -17,9 +18,28 @@
 
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+            
+          <?php switch (session('tip_oper')) {
+    case 1:
+        $prefix="I'm an ";
+        $operadorName="Agency";
+        break;
+    case 2:
+        $prefix="I'm an ";
+        $operadorName="Enterprise";
+        break;
+    case 3:
+        $prefix="I'm just";
+        $operadorName="Me";
+        break;
+    
+}
+?>
+
+           
             <h2 class="head-title">
-                I'm an                <strong>Agency</strong>
+    {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
             </h2>
         </div>
         <div id="description-box-type">
@@ -37,7 +57,7 @@
 
         {!! Form::open(['url' => route('upload-postDetalleOperador'),  'id'=>$servicios->id_catalogo_servicios]) !!}
         <div id="table_{!!$servicios->id!!}" class="servicio-usuario-detalle">
-            <h2>{!!$servicios->nombre_servicio!!} <strong class="add-registro" onclick="RenderPartial('reusable.createNewServicio', {!!$servicios - > id_catalogo_servicios!!}, {!!$servicios - > id_usuario_operador!!})">+</strong> <strong class="text-add-registro">(agregar registro)</strong> </h2>
+            <h2>{!!$servicios->nombre_servicio!!} <strong class="add-registro" onclick="RenderPartial('reusable.createNewServicio', {!!$servicios -> id_catalogo_servicios!!}, {!!$servicios -> id_usuario_operador!!})">+</strong> <strong class="text-add-registro">(agregar registro)</strong> </h2>
             <table class="tabla-servicio-usuario-detalle">
                 <tr>
                     <th>Nombre del Servicio</th>
@@ -63,7 +83,7 @@
                     @endif
                     <td> 
                         <label class="switch switch-green">
-                            <input type="checkbox" id='estado_servicio_usuario_{!!$servicio->id!!}' {!!$check!!} name ='estado_servicio_usuario_{!!$servicio->id!!}' class="switch-input" onchange="AjaxContainerRetrunMessage({!!$servicios - > id_catalogo_servicios!!}, {!!$servicio - > id!!})">
+                            <input type="checkbox" id='estado_servicio_usuario_{!!$servicio->id!!}' {!!$check!!} name ='estado_servicio_usuario_{!!$servicio->id!!}' class="switch-input" onchange="AjaxContainerRetrunMessage({!!$servicios -> id_catalogo_servicios!!}, {!!$servicio -> id!!})">
                             <span class="switch-label" data-on="On" data-off="Off"></span>
                             <span class="switch-handle"></span>
 
@@ -79,17 +99,6 @@
                 @endif
                 @endforeach 
 
-                <!-- This is our clonable table line -->
-                <tr class="hide">
-                    <td contenteditable="true">Untitled</td>
-                    <td contenteditable="true">undefined</td>
-                    <td>
-                        <span class="table-remove glyphicon glyphicon-remove"></span>
-                    </td>
-                    <td>
-                        {!! link_to_route('details.show', 'Details', [0,$servicios->id_catalogo_servicios]) !!}
-                    </td>
-                </tr>
             </table>
 
         </div>

@@ -71,13 +71,19 @@ Route::controllers([
 Route::get('/image', ['as' => 'upload', 'uses' => 'ImageController@getUpload']);
 Route::post('upload', ['as' => 'upload-post', 'uses' =>'ImageController@postUpload']);
 Route::post('upload/delete', ['as' => 'upload-remove', 'uses' =>'ImageController@deleteUpload']);
-Route::get('userservice/{id_usuario_op}',
+Route::get('userservice',
     ['uses'=>'UsuarioServiciosController@getServiciosOperador','as'=>'userservice'
     ,'middleware' => 'notAuth']);
 
 
-Route::post('servicios/servicioOprador', ['as' => 'upload-postServicioOperador', 'uses' =>'UsuarioServiciosController@postServicioOperadores']);
-Route::get('/detalleServicios/{id_usuario_op}', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios']);
+Route::post('servicioOperador', ['as' => 'upload-postServicioOperador', 'uses' =>'UsuarioServiciosController@postServicioOperadores','middleware' => 'notAuth']);
+Route::post('estadoItinerario/{id}', ['as' => 'postEstadoItinerario', 'uses' =>'UsuarioServiciosController@postEstadoDetalleItinerario','middleware' => 'notAuth']);
+Route::post('deleteItinerario/{id}', ['as' => 'postEstadoItinerario', 'uses' =>'UsuarioServiciosController@postDeleteItinerario','middleware' => 'notAuth']);
+Route::post('estadoItinerarioPrincipal/{id}', ['as' => 'postEstadoItinerarioPrincipal', 'uses' =>'UsuarioServiciosController@postEstadoItinerario','middleware' => 'notAuth']);
+Route::post('estadoPromocion/{id}', ['as' => 'postEstadoPromocion', 'uses' =>'UsuarioServiciosController@postEstadoPromocion','middleware' => 'notAuth']);
+Route::post('estadoEvento/{id}', ['as' => 'postEstadoEvento', 'uses' =>'UsuarioServiciosController@postEstadoEvento','middleware' => 'notAuth']);
+
+Route::get('/detalleServicios', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios','middleware' => 'notAuth']);
 Route::get('/render/{id_partial}', ['as' => 'render', 'uses' => 'UsuarioServiciosController@RenderPartial']);
 Route::get('/render/{id_partial}/{id_data}', ['as' => 'render', 'uses' => 'UsuarioServiciosController@RenderPartialWithData']);
 
@@ -95,15 +101,19 @@ Route::post('maps',function()
     
     return Input::all();
 });
-Route::post('promocion', ['as' => 'postPromocion', 'uses' =>'UsuarioServiciosController@postPromocion']);
-Route::post('itinerario', ['as' => 'postItinerario', 'uses' =>'UsuarioServiciosController@postItinerario']);
-Route::post('evento', ['as' => 'postEvento', 'uses' =>'UsuarioServiciosController@postEvento']);
-Route::post('itinerarioP', ['as' => 'postPuntoItinerario', 'uses' =>'UsuarioServiciosController@postPuntoItinerario']);
+Route::post('promocion', ['as' => 'postPromocion', 'uses' =>'UsuarioServiciosController@postPromocion','middleware' => 'notAuth']);
+Route::post('itinerario', ['as' => 'postItinerario', 'uses' =>'UsuarioServiciosController@postItinerario','middleware' => 'notAuth']);
+Route::post('evento', ['as' => 'postEvento', 'uses' =>'UsuarioServiciosController@postEvento','middleware' => 'notAuth']);
+Route::post('itinerarioP', ['as' => 'postPuntoItinerario', 'uses' =>'UsuarioServiciosController@postPuntoItinerario','middleware' => 'notAuth']);
 
 
 Route::get('promocion/{id_promocion}',
     ['uses'=>'UsuarioServiciosController@getPromociones','as'=>'getPromocion'
     ,'middleware' => 'notAuth']);
+Route::get('eventos/{id}',
+    ['uses'=>'UsuarioServiciosController@getEventos','as'=>'getEventos'
+    ,'middleware' => 'notAuth']);
+
 
 Route::get('itinerario/{id}',
     ['uses'=>'UsuarioServiciosController@getItinerarios','as'=>'getItinerarios'
@@ -111,9 +121,9 @@ Route::get('itinerario/{id}',
 
 
 Route::post('/delete/image/{id}', ['as' => 'delete-image', 'uses' =>'ImageController@postDeleteImage']);
-Route::get('/getTipoDificultad', ['as' => 'tipoDificultad', 'uses' => 'UsuarioServiciosController@getTipoDificultad']);
-Route::get('/getlistaItinerarios/{id}', ['as' => 'itinerariosList', 'uses' => 'UsuarioServiciosController@getListaItinerarios']);
-Route::get('/getlistaServiciosComplete/{id_usuario_servicio}', ['as' => 'completeServices', 'uses' => 'UsuarioServiciosController@getAllServicios']);
+Route::get('/getTipoDificultad', ['as' => 'tipoDificultad', 'uses' => 'UsuarioServiciosController@getTipoDificultad','middleware' => 'notAuth']);
+Route::get('/getlistaItinerarios/{id}', ['as' => 'itinerariosList', 'uses' => 'UsuarioServiciosController@getListaItinerarios','middleware' => 'notAuth']);
+Route::get('/getlistaServiciosComplete/{id_usuario_servicio}', ['as' => 'completeServices', 'uses' => 'UsuarioServiciosController@getAllServicios','middleware' => 'notAuth']);
 
 
 // Event::listen('illuminate.query', function($query)
@@ -127,11 +137,15 @@ Route::get('/getlistaServiciosComplete/{id_usuario_servicio}', ['as' => 'complet
 
 Route::get('servicios', 'ServicioController@index');
 
-Route::post('servicios/tipoOperador', ['as' => 'upload-postTipoOperador', 'uses' =>'ServicioController@postTipoOperadores']);
-Route::post('servicios/operador', ['as' => 'upload-postoperador', 'uses' =>'ServicioController@postOperadores']);
-Route::get('servicios/operadorServicios', 'ServicioController@step3');
-Route::get('servicios/operador/{tipoOperador}', 'ServicioController@step2');
+Route::post('servicios/tipoOperador', ['as' => 'upload-postTipoOperador', 'uses' =>'ServicioController@postTipoOperadores','middleware' => 'notAuth']);
+Route::post('servicios/operadores', ['as' => 'upload-postoperador', 'uses' =>'ServicioController@postOperadores','middleware' => 'notAuth']);
 
-Route::get('servicios/serviciooperador/{id}/{id_catalogo}', ['as' => 'details.show', 'uses' => 'ServicioController@step4'] );
-Route::post('servicios/serviciosoperador', ['as' => 'upload-postusuarioservicios', 'uses' =>'ServicioController@postUsuarioServicios']);
-Route::post('servicios/serviciosoperadormini', ['as' => 'upload-postusuarioserviciosmini', 'uses' =>'ServicioController@postUsuarioServiciosMini']);
+Route::get('servicios/operadorServicios', ['as' => 'operadorServicios', 'uses' => 'ServicioController@step3','middleware' => 'notAuth']);
+Route::get('operador', ['as' => 'operador', 'uses' => 'ServicioController@step2','middleware' => 'notAuth']);
+
+
+
+
+Route::get('servicios/serviciooperador/{id}/{id_catalogo}', ['as' => 'details.show', 'uses' => 'ServicioController@step4','middleware' => 'notAuth'] );
+Route::post('servicios/serviciosoperador', ['as' => 'upload-postusuarioservicios', 'uses' =>'ServicioController@postUsuarioServicios','middleware' => 'notAuth']);
+Route::post('servicios/serviciosoperadormini', ['as' => 'upload-postusuarioserviciosmini', 'uses' =>'ServicioController@postUsuarioServiciosMini','middleware' => 'notAuth']);

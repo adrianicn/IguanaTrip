@@ -1,6 +1,10 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
+{!! HTML::style('css/calendar/ui-jquery.css') !!}
+
+  
+   
 
 <div class="rowerror">
 </div>
@@ -13,9 +17,28 @@
 
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+            
+          <?php switch (session('tip_oper')) {
+    case 1:
+        $prefix="I'm an ";
+        $operadorName="Agency";
+        break;
+    case 2:
+        $prefix="I'm an ";
+        $operadorName="Enterprise";
+        break;
+    case 3:
+        $prefix="I'm just";
+        $operadorName="Me";
+        break;
+    
+}
+?>
+
+           
             <h2 class="head-title">
-                I'm an                <strong>Agency</strong>
+    {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
             </h2>
         </div>
         <div id="description-box-type">
@@ -34,15 +57,15 @@
                 @include('reusable.modify_dificultades',['diffic' => $listDificultades,'elegido'=>$itiner->id_catalogo_dificultad])
                 <div class="form-group-step2">
                     {!!Form::label('nombre_itinerario', 'Nombre Itinerario', array('id'=>'iconFormulario-step2'))!!}
-                    {!!Form::text('nombre_itinerario', $itiner->nombre_itinerario, array('class'=>'inputtext-step2','placeholder'=>'Nombre del Servicio'))!!}
+                    {!!Form::text('nombre_itinerario', $itiner->nombre_itinerario, array('class'=>'inputtext-step2',"title"=>"Please provide your firstname.",'placeholder'=>'Nombre del Servicio'))!!}
                 </div>
                 <div class="form-group-step2">
                     {!!Form::label('Fecha_desde', 'Fecha Inicio', array('id'=>'iconFormulario-step2'))!!}
-                    {!!Form::text('fecha_desde', $itiner->fecha_desde, array('class'=>'inputtext-step2'))!!}
+                    {!!Form::text('fecha_desde', $itiner->fecha_desde, array('class'=>'inputtext-step2 datepicker',"title"=>"La fecha en la que inicia el programa completo por ejemplo el viaje de Carchi a Loja empieza es 12 de Octubre y termina el 13 de Octubre.",))!!}
                 </div>
                 <div class="form-group-step2">
                     {!!Form::label('Fecha_fin', 'Fecha Hasta', array('id'=>'iconFormulario-step2'))!!}
-                    {!!Form::text('fecha_hasta', $itiner->fecha_hasta, array('class'=>'inputtext-step2'))!!}
+                    {!!Form::text('fecha_hasta', $itiner->fecha_hasta, array('class'=>'inputtext-step2 datepicker'))!!}
                 </div>
                 <div class="form-group-step2">
                     {!!Form::label('precio_normal', 'Precio Normal', array('id'=>'iconFormulario-step2'))!!}
@@ -71,8 +94,8 @@
                 </div>
             </div>
             <div id="secondary-data">
-                <div id="renderPartial">
-                    @section('contentPanel')
+                <div id="renderPartialItinerarios">
+                    @section('contentPanelItinerarios')
                     @show
                 </div>    
 
@@ -82,6 +105,17 @@
     </div>
 
     {!! Form::close() !!}
+    <?php
+    $ImgPromociones=$ImgItinerarios;
+    ?>
+    
+            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
+    
+        
+        @include('reusable.uploadImage', ['tipo' => '3','objeto'=>$listItinerarios])  
+
+     
+      
 </div>
 
 
@@ -92,17 +126,32 @@
 
 {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
 {!! HTML::script('/js/jsModal/basic.js') !!}
-<script>
-    $(document).ready(function () {
-        GetDataAjaxSection("/IguanaTrip/public/getlistaItinerarios/{!!$itiner->id!!}");
-        GetDataAjaxSectionEventos("/IguanaTrip/public/getlistaServiciosComplete/22");
-        //usuario_servicio
 
-    });
-</script>
 
 
 
 @stop
+<script>
+    $(document).ready(function () {
+        GetDataAjaxSectionItiner("/IguanaTrip/public/getlistaItinerarios/{!!$itiner->id!!}");
+        //GetDataAjaxSection("/IguanaTrip/public/getlistaServiciosComplete/22");
+    });
+</script>
+<script>
+  $(function() {
+    $('.datepicker').datepicker();
+  });
+  </script>
+   <script>
+  $(function() {
+    var tooltips = $( "[title]" ).tooltip({
+      position: {
+        my: "left top",
+        at: "right+5 top-5"
+      }
+    });
+   
+  });
+  </script>
 
 @stop

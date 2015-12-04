@@ -21,14 +21,34 @@ $email_contacto_operador = $operadorData->email_contacto_operador;
 ?>
 @endforeach     
 
+
 <div class="rowerror">
 </div>
 
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+            
+          <?php switch (session('tip_oper')) {
+    case 1:
+        $prefix="I'm an ";
+        $operadorName="Agency";
+        break;
+    case 2:
+        $prefix="I'm an ";
+        $operadorName="Enterprise";
+        break;
+    case 3:
+        $prefix="I'm just";
+        $operadorName="Me";
+        break;
+    
+}
+?>
+
+           
             <h2 class="head-title">
-                I'm an                <strong>Agency</strong>
+    {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
             </h2>
         </div>
         <div id="description-box-type">
@@ -36,6 +56,17 @@ $email_contacto_operador = $operadorData->email_contacto_operador;
             sin necesidad de llamar a nadie
         </div>
     </div>
+    <div id="space"></div>
+    <div id="title-box-header-navigation">
+        
+           <h2 class="head-title-navigation">
+   <a class="button-step4" href="#"> 
+               <strong> Datos Personales >>  </strong></a>
+            </h2>
+    </div>
+    
+    
+    
     <div id="space"></div>
     {!! Form::open(['url' => route('upload-postoperador'),  'id'=>'registro_step1']) !!}
 
