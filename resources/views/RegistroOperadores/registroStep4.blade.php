@@ -101,19 +101,19 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             <div id="principal-data">
                 <div class="form-group-1">
                     {!!Form::label('nombre_servicio_1', 'Nombre Servicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
-                    {!!Form::text('nombre_servicio', $usuarioServicio->nombre_servicio, array('class'=>'inputtext','placeholder'=>'Nombre del Servicio'))!!}
+                    {!!Form::text('nombre_servicio', $usuarioServicio->nombre_servicio, array('class'=>'inputtext chng','placeholder'=>'Nombre del Servicio'))!!}
                 </div>
                 <div class="form-group-1">
                     {!!Form::label('precio_desde_1', 'Precio Desde', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
-                    {!!Form::text('precio_desde', $usuarioServicio->precio_desde, array('class'=>'inputtext','placeholder'=>'Precio Desde'))!!}
+                    {!!Form::text('precio_desde', $usuarioServicio->precio_desde, array('class'=>'inputtext chng','placeholder'=>'Precio Desde'))!!}
                 </div>
                 <div class="form-group-1">
                     {!!Form::label('precio_hasta_1', 'Precio Hasta', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
-                    {!!Form::text('precio_hasta', $usuarioServicio->precio_hasta, array('class'=>'inputtext','placeholder'=>'Precio Hasta'))!!}
+                    {!!Form::text('precio_hasta', $usuarioServicio->precio_hasta, array('class'=>'inputtext chng','placeholder'=>'Precio Hasta'))!!}
                 </div>
                 <div class="form-group-1">
                     {!!Form::label('direccion_servicio_1', 'Direccion Servicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
-                    {!!Form::text('direccion_servicio', $usuarioServicio->direccion_servicio, array('class'=>'inputtext','placeholder'=>'Direccion del Servicio'))!!}
+                    {!!Form::text('direccion_servicio', $usuarioServicio->direccion_servicio, array('class'=>'inputtext chng','placeholder'=>'Direccion del Servicio'))!!}
                 </div>
                 <div class="form-group-1">
                     @include('reusable.maps', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
@@ -122,21 +122,21 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             <div id="secondary-data">
                 <div class="form-group-2">
                     {!!Form::label('detalle_servicio_1', 'Detalle Servicio', array('class'=>'control-label-1'))!!}
-                    <textarea id="detalle_servicio" name="detalle_servicio" class="ptm" placeholder="Detalle Servicio">
+                    <textarea id="detalle_servicio" name="detalle_servicio" class="ptm chng" placeholder="Detalle Servicio">
                         {!!$usuarioServicio->detalle_servicio!!}
                     </textarea>
                 </div>
                 <div class="form-group-2">
                     {!!Form::label('telefono_1', 'Telefono', array('class'=>'control-label-2'))!!}
-                    {!!Form::text('telefono', $usuarioServicio->telefono, array('class'=>'form-control-1','placeholder'=>'Telefono del Servicio'))!!}
+                    {!!Form::text('telefono', $usuarioServicio->telefono, array('class'=>'form-control-1 chng','placeholder'=>'Telefono del Servicio'))!!}
                 </div>
                 <div class="form-group-2">
                     {!!Form::label('correo_contacto_1', 'Correo del contacto', array('class'=>'control-label-2'))!!}
-                    {!!Form::text('correo_contacto', $usuarioServicio->correo_contacto, array('class'=>'form-control-1','placeholder'=>'Correo Contacto'))!!}
+                    {!!Form::text('correo_contacto', $usuarioServicio->correo_contacto, array('class'=>'form-control-1 chng','placeholder'=>'Correo Contacto'))!!}
                 </div>
                 <div class="form-group-2">
                     {!!Form::label('pagina_web_1', 'Pagina Web', array('class'=>'control-label-2'))!!}
-                    {!!Form::text('pagina_web', $usuarioServicio->pagina_web, array('class'=>'form-control-1','placeholder'=>'URL'))!!}
+                    {!!Form::text('pagina_web', $usuarioServicio->pagina_web, array('class'=>'form-control-1 chng','placeholder'=>'URL'))!!}
                 </div>
                 <div class="form-group-2">
                     <ul style="list-style: none">
@@ -158,7 +158,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
         </div>
         <div id="part-1-form">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRetrunMessage('registro_step1','optional')" href="#">Siguiente</a>
+                <a class="button-1" onclick="AjaxContainerRetrunMessage('registro_step1','optional')" href="#">Finalizar</a>
             </div>              
         </div>
         {!! Form::close() !!}
@@ -192,6 +192,10 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
         
         GetDataAjaxSectionEventos("/IguanaTrip/public/getlistaServiciosComplete/{!!$usuarioServicio->id!!}");
     });
+    
+    $( ".chng" ).change(function() {
+  AjaxContainerRetrunMessage('registro_step1','optional')
+});
 </script>
 
 @stop

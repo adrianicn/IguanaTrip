@@ -15,7 +15,7 @@ use App\Models\Detalle_Itinerario;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
 use App\Models\Invitaciones_Amigos;
-
+use App\Jobs\InviteFriendsMail;
 class UsuarioServiciosController extends Controller {
 
     /**
@@ -361,6 +361,7 @@ class UsuarioServiciosController extends Controller {
         }
         
         $object = $gestion->storeNewInviarAmigo($formFields);
+        $this->dispatch(new InviteFriendsMail($object));
 
         return response()->json(array(
                     'success' => true,
