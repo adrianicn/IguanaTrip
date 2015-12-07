@@ -112,8 +112,9 @@ $email_contacto_operador = $operadorData->email_contacto_operador;
     </div>
     {!! Form::close() !!}
 
-    
-             <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.invitar_amigo')" href="#"> <h1 class="h1-agregar">+</h1> Invitar a un amigo</a></div>
+        
+                 <a onclick="RenderPartialGeneric('reusable.invitar_amigo')" href="#"><img src="{{ asset('img/amigo-1.png')}}"></a> 
+             
                 
 </div>
 

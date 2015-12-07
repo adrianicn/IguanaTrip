@@ -14,7 +14,7 @@
         <meta name="author" content="IguanaTrip group">
 
         <link rel="shortcut icon" href="favicon.ico" />
-        <link rel="apple-touch-icon" href="images/favicon.png" />        
+        <link rel="apple-touch-icon" href="{{ asset('images/favicon.png')}}" />        
 
         <!--        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
         {!! HTML::style('css/demo.css') !!} 
@@ -35,7 +35,9 @@
         <!-- Loading Screen -->
         <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
             <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-            <div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+            <!-- Loading Screen 
+            <div style="position:absolute;display:block;background:url("{!!asset('img/internas/loading.gif')!!}") no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+            -->
         </div>
         <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1360px; height: 235px; overflow: hidden;">
             <div data-p="112.50" style="display: none;">
@@ -189,7 +191,7 @@
             /* size of bullet elment */
             width: 16px;
             height: 16px;
-            background:url('img/internas/b05.png') no-repeat;
+            background:url ("{!!asset("img/internas/b05.png")!!}") no-repeat;
             overflow: hidden;
             cursor: pointer;
         }
@@ -214,7 +216,7 @@
             width: 30px;
             height: 46px;
             cursor: pointer;
-            background:url('img/internas/a12.png') no-repeat;
+            background:url("{!!asset("img/internas/a12.png")!!}") no-repeat;
             overflow: hidden;
         }
         .jssora12l { background-position: -16px -37px; }

@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'email-title' => 'Email verification',
+	'email-title' => 'IguanaTrip Email verification',
 	'email-intro'=> 'To validate your email ',
 	'email-link' => 'click on this link',
 	'message' => 'Thanks for signing up! Please check your email.',

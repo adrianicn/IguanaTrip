@@ -22,7 +22,7 @@
        </div>
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
-                <a class="button-1" id="btnsubm" onclick="AjaxContainerRegistroWithLoad('invitacion','simplemodal-wrap')" href="#">Enviar</a>
+                <a class="button-1" id="btnsubm" onclick="AjaxContainerRegistroWithMessage('invitacion','simplemodal-wrap','La invitación ha sido enviada, puede invitar más amigos si lo desa.')" href="#">Enviar</a>
             </div>              
         </div>
     

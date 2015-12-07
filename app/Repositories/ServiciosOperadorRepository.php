@@ -9,6 +9,7 @@ use App\Models\Detalle_Itinerario;
 use App\Models\Itinerario_Usuario_Servicio;
 use App\Models\Usuario_Operador;
 use App\Models\Eventos_usuario_Servicio;
+use App\Models\Invitaciones_Amigos;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 
@@ -33,6 +34,7 @@ class ServiciosOperadorRepository extends BaseRepository {
     protected $detalle_itinerarios_u;
     protected $eventos;
     protected $operador;
+    protected $invitar_amigo;
     
 
     /**
@@ -51,6 +53,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->detalle_itinerarios_u = new Detalle_Itinerario();
         $this->eventos = new Eventos_usuario_Servicio();
         $this->operador = new Usuario_Operador();
+        $this->invitar_amigo = new Invitaciones_Amigos();
     }
 
     /**
@@ -163,6 +166,27 @@ class ServiciosOperadorRepository extends BaseRepository {
         return $ItinerarioU;
     }
 
+    
+    public function storeNewInviarAmigo($inputs) {
+
+        $ItinerarioU = new $this->invitar_amigo;
+
+
+        $ItinerarioU->invitacion_de = $inputs['invitacion_de'];
+        $ItinerarioU->invitacion_para = $inputs['invitacion_para'];
+        $ItinerarioU->mensaje = $inputs['mensaje'];
+        $ItinerarioU->estado_invitacion = 1;
+        $ItinerarioU->estado_invitacion = 1;
+        $ItinerarioU->ip_envio = "";
+        $ItinerarioU->id_usuario_invita = session('user_id');
+        
+        
+        $ItinerarioU->created_at = \Carbon\Carbon::now()->toDateTimeString();
+        $ItinerarioU->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+        $this->save($ItinerarioU);
+        return $ItinerarioU;
+    }
     public function storeUpdateEstado($inputs, $usuario_servicio) {
 
         //Transformo el arreglo en un solo objeto

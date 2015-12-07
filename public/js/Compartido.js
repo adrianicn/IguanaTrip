@@ -127,6 +127,43 @@ function AjaxContainerRegistroWithLoadCharge($formulario, $loadScreen,$itinerari
 
 
 
+//Hace la logica y envia el div que se quiere queaparezca el loading page
+//funciona para parciales pequeños
+function AjaxContainerRegistroWithMessage($formulario, $loadScreen,$message) {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+    });
+    $("."+$loadScreen).LoadingOverlay("show");
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize(),
+            url = $form.attr("action");
+    var posting = $.post(url, {formData: data});
+    posting.done(function (data) {
+        if (data.fail) {
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+
+            $("."+$loadScreen).LoadingOverlay("hide", true);
+            $('.rowerrorM').html(errorString);
+
+        }
+        if (data.success) {
+            $("."+$loadScreen).LoadingOverlay("hide", true);
+            alert($message);
+            
+            
+        } 
+    });
+}
+
+
+
 //dado un parcial nombre de la carpeta incluido
 //lo materializa en el lugar indicado
 function RenderPartialGeneric($idPartial, $id_usuario_servicio) {

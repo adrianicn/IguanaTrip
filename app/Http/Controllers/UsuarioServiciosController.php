@@ -14,6 +14,7 @@ use App\Models\Eventos_usuario_Servicio;
 use App\Models\Detalle_Itinerario;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
+use App\Models\Invitaciones_Amigos;
 
 class UsuarioServiciosController extends Controller {
 
@@ -339,6 +340,35 @@ class UsuarioServiciosController extends Controller {
         $returnHTML = ('/IguanaTrip/public/detalleServicios');
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
+    
+    
+    
+    
+        public function postInvitarAmigo(ServiciosOperadorRepository $gestion) {
+
+
+
+        $inputData = Input::get('formData');
+
+        parse_str($inputData, $formFields);
+        
+         $validator = Validator::make($formFields, Invitaciones_Amigos::$rulesP);
+        if ($validator->fails()) {
+            return response()->json(array(
+                        'fail' => true,
+                        'errors' => $validator->getMessageBag()->toArray()
+            ));
+        }
+        
+        $object = $gestion->storeNewInviarAmigo($formFields);
+
+        return response()->json(array(
+                    'success' => true,
+                    'message' => trans('front/verify.message')
+        ));
+        //}
+    }
+
 
     /**
      * Handle a registration request for the application.
