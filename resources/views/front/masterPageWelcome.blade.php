@@ -40,14 +40,26 @@
     </head>
 
     <body>
+        <div id="menu">
+            <div id="menu-ul">
+                <ul id="seleccionitem">
+                    <li><a href="#home" class="active">{!! link_to('/',  trans('welcome/index.labelRegister')) !!}</a></li>
+                    <li><a href="#about">{{ trans('welcome/index.labelAbout') }}</a></li>
+                    <li><a href="#contact">{{ trans('welcome/index.labelContact') }}</a></li>
+                    <li><a href="#contact">{!! link_to('auth/logout', trans('front/site.logout')) !!}</a></li>
+                </ul>
+            </div>
+            <div id="logindiv">
+                @yield('contentLogin')
+            </div>
+        </div>
+
         <div id="target">
             <!-- Logo -->
 
-
             <div id="logo_">
                 <div id="logo-imagen">
-
-                    <a href="eng"><img src="{{ asset('img/index-logo.png')}}" width="270" height="258" alt="IguanaTrip" /></a> 
+                   <a href="eng"><img src="{{ asset('img/index-logo.png')}}" width="270" height="258" alt="IguanaTrip" /></a> 
                 </div>
 
             </div>
@@ -66,24 +78,11 @@
 
             <!-- Main Navigation -->
             <nav class="main-nav">
-                <ul>
-
-                    <li><a href="#home" class="active">{!! link_to('/',  trans('welcome/index.labelRegister')) !!}</a></li>
-                    <li><a href="#about">{{ trans('welcome/index.labelAbout') }}</a></li>
-                    <li><a href="#contact">{{ trans('welcome/index.labelContact') }}</a></li>
-                    <li><a href="#contact">{!! link_to('auth/logout', trans('front/site.logout')) !!}</a></li>
-
-
-                </ul>
-            </nav>
-
+            </nav>    
             <!-- Slider Controls -->
 
 
             <!-- Home Page -->
-            <div id="logindiv">
-                @yield('contentLogin')
-            </div>
 
 
             <section class="content show" id="home">

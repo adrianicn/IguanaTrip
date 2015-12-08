@@ -8,12 +8,12 @@
 <table cellspacing="0" role="presentation" id='tablelogin'>
     <tr>
         <td>
-            <div id=usern''>
+            <div id="usern">
                 <input type="text" class='logininput' id="email" name="log" placeholder="{{trans('front/login.log')}}">
             </div>
         </td>
         <td>
-            <div id='inputpassword'>
+            <div id="inputpassword">
                 <input type="password" class='logininput' id="password" name="password" placeholder="{{trans('front/login.password')}}">
             </div>
         </td>
