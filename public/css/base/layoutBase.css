@@ -878,3 +878,38 @@ input[type=password]{
       
       color: #0C7E7F;
   }
+  #contenedor-columnas-servicios{
+      width: 915px;
+  }
+  #itinerarios-1{
+      width: 280px;
+      float: left;
+      border-right: 1px #FFFFFF solid;
+      padding-left: 10px;
+      margin-top: 10px;
+  }
+  #eventos-1{
+      padding-left: 10px;
+      margin-top: 10px;
+      width: 280px;
+      float: left;
+      border-right: 1px #FFFFFF solid;
+  }
+  #promociones-1{
+      padding-left: 10px;
+      margin-top: 10px;
+      width: 280px;
+      float: left;
+  }
+  #promociones-1 ul li{
+      text-decoration: none;
+      display: block;
+  }  
+  #promociones-1 a{
+      text-decoration: none;
+  }
+  .listado-1{
+      width: 270px;
+      float: left;
+      margin-bottom: 10px;
+  }

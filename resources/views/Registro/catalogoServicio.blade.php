@@ -77,9 +77,9 @@ switch ($servicio->id_catalogo_servicio) {
         
            <h2 class="head-title-navigation">
    <a class="button-step4" href="/"> 
-               <strong> Datos Personales >>  </strong></a>
+       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
                <a class="button-step4" href="/"> 
-               <strong> Catálogo de servicios >>  </strong></a>
+               <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2</strong></a>
             </h2>
     </div>
     

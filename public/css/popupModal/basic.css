@@ -22,3 +22,10 @@ z-index: 2000;
 #simplemodal-container a {color:#ddd;}
 
 #simplemodal-container h3 {color:#84b8d9;}
+#logo-imagen{
+    position: absolute;
+    z-index: 3;
+    margin-left: 183px;
+    margin-top: 218px;
+
+}

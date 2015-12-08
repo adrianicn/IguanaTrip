@@ -62,6 +62,7 @@
                 <tr>
                     <th>Nombre del Servicio</th>
                     <th>Estado</th>
+                    <th></th>
                 </tr>
                 @foreach ($listServiciosAll as $servicio)
                 @if($servicio->id_catalogo_servicios==$servicios->id_catalogo_servicios)
@@ -91,6 +92,10 @@
                     </td>
                 <input type="hidden" value="{!!$servicio->id!!}" name="usuario_servicio">
                 <td id='basic-modal' contenteditable="true">
+                </td>
+                <td>
+                    <img src="{!! asset('img/flecha-1.png')!!}" height="10px" width="10px" />
+                    Para modificar el servicio dale clic en el nombre
                 </td>
 
 

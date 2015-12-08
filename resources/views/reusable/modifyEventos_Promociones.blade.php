@@ -1,19 +1,15 @@
 @section('contentPanelServicios')	
 
 {!! HTML::style('css/table.css') !!} 
-<div>
+<div id="contenedor-columnas-servicios">
     @if(isset($itinerarios))
-    <div id='itinerarios'>
+    <div id='itinerarios-1'>
         <h1>Itinerarios</h1>
         <ul>
         @foreach ($itinerarios as $itinerario)
         
-        <li><div>
-                
-                
+        <li><div class="listado-1">
                 <a class="button-1 white" onclick="redirect('/IguanaTrip/public/itinerario/'+{!!$itinerario->id!!})" href="#">{!!$itinerario->nombre_itinerario!!}</a>
-            </div> 
-            <div>
                 @if($itinerario->estado_itinerario==1)
                   <label class="switch switch-green">
                             
@@ -32,28 +28,22 @@
                         
                     </label>
                 @endif
-                
-            </div>
+
+            </div> 
          
         </li>
-            
-            
         
         @endforeach
 </ul>
     </div>
     @endif
     @if(isset($eventos))
-    <div id='eventos'>
+    <div id='eventos-1'>
         <h1>Eventos</h1>
         @foreach ($eventos as $evento)
         
-        <li><div>
-                
-                
+        <li><div class="listado-1">
                 <a class="button-1 white" onclick="redirect('/IguanaTrip/public/eventos/'+{!!$evento->id!!})" href="#">{!!$evento->nombre_evento!!}</a>
-            </div> 
-            <div>
                 @if($evento->estado_evento==1)
                   <label class="switch switch-green">
                             
@@ -82,17 +72,14 @@
     </div>
     @endif
     @if(isset($promociones))
-    <div id='promociones'>
+    <div id='promociones-1'>
         <h1>Promociones</h1>
        <ul>
         @foreach ($promociones as $promocion)
         
-        <li><div>
+        <li>
+            <div class="listado-1">
             <a class="button-1 white" onclick="redirect('/IguanaTrip/public/promocion/'+{!!$promocion->id!!})" href="#">{!!$promocion->nombre_promocion!!}</a>
-            </div> 
-            
-            
-            <div>
                 @if($promocion->estado_promocion==1)
                 
                 <label class="switch switch-green">
@@ -112,10 +99,8 @@
                         
                     </label>
                 @endif
-                
-            </div>
             
-         
+            </div> 
         </li>
             
             

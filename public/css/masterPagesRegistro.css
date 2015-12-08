@@ -607,7 +607,7 @@
     margin-right: 100px;
 }
 .tabla-servicio-usuario-detalle{
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
 }
 .vinculo-servicio a{
@@ -619,4 +619,21 @@
 }
 .text-add-registro{
     color: #FFFFFF;
+}
+.sessionName{
+    float: right;
+    width: 250px;
+    text-align: left;
+    padding-top: 10px;
+    padding-right: 10px;
+    color: #0C7E7F;
+    font-weight: bold;
+}
+.iconoInvitacion{
+    width: 155px;
+    float: right;
+    margin-left: 620px;
+    margin-top: 46px;
+    position: absolute;
+    z-index: 3;
 }

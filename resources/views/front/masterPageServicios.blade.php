@@ -96,6 +96,7 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="sessionName">Renato</div>
                 </div>
             </header>
             <div class="container" id="target">
