@@ -130,7 +130,11 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::label('direccion_servicio_1', 'Direccion Servicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
                     {!!Form::text('direccion_servicio', $usuarioServicio->direccion_servicio, array("title"=>"La dirección exacta de tu servicio, te brindamos la opción de señalarlo en el mapa para ubicarte geograficamente. Debido a que no todas las provincias están disponibles por Google intenta acercar lo más posible tu ubicación será más fácil para los turistas encontrarte.",'class'=>'inputtext chng','placeholder'=>'Direccion del Servicio'))!!}
                 </div>
-                    @include('reusable.provincia', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
+                <div id='provincias'>
+                    @section('provincias')
+                    @show
+                    
+                </div>
                     @include('reusable.canton', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
                     @include('reusable.parroquia', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
                 <div class="form-group-1">
@@ -209,6 +213,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
     $(document).ready(function () {
         
         GetDataAjaxSectionEventos("{!!asset('/getlistaServiciosComplete')!!}/{!!$usuarioServicio->id!!}");
+        GetDataAjaxProvincias("{!!asset('/getProvincias')!!}");
     });
     
     $( ".chng" ).change(function() {

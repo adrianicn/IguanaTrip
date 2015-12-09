@@ -319,6 +319,28 @@ function GetDataAjaxSectionEventos(url) {
     });
 }
 
+function GetDataAjaxProvincias(url) {
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            $("#provincias").LoadingOverlay("show");
+            $("#provincias").html(data.provincias);
+            $("#provincias").LoadingOverlay("hide", true);
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
 
 function GetDataAjaxSectionItiner(url) {
 

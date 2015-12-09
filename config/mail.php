@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => 'adrianic.na@gmail.com', 'name' => 'Admin'],
+	'from' => ['address' => 'info@iguanatrip.com', 'name' => 'IguanaTrip'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
 	|
 	*/
 
-	'username' => 'adrianic.na@gmail.com',
+	'username' => 'infoiguanatrip@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
 	|
 	*/
 
-	'password' => '0049303411614',
+	'password' => '2016IguanaTrip',
 
 	/*
 	|--------------------------------------------------------------------------

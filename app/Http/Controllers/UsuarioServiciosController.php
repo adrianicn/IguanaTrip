@@ -91,6 +91,23 @@ class UsuarioServiciosController extends Controller {
         $view = view('Registro.catalogoServicio', compact('data', 'listServicios'));
         return ($view);
     }
+    
+    public function getProvincias(Request $request,ServiciosOperadorRepository $gestion) {
+        //
+
+        $listProvincias = $gestion->getProvincias();
+
+        
+        $view = View::make('reusable.provincia')->with('provincias', $listProvincias);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
+    }
 
     public function getTipoDificultad(Request $request, ServiciosOperadorRepository $gestion) {
         //

@@ -132,6 +132,7 @@ Route::get('thankyou',function()
 });
 
 Route::get('/getlistaItinerarios/{id}', ['as' => 'itinerariosList', 'uses' => 'UsuarioServiciosController@getListaItinerarios','middleware' => 'notAuth']);
+Route::get('/getProvincias', ['as' => 'provincia', 'uses' => 'UsuarioServiciosController@getProvincias','middleware' => 'notAuth']);
 Route::get('/getlistaServiciosComplete/{id_usuario_servicio}', ['as' => 'completeServices', 'uses' => 'UsuarioServiciosController@getAllServicios','middleware' => 'notAuth']);
 
 

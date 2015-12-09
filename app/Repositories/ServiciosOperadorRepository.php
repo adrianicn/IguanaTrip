@@ -10,6 +10,7 @@ use App\Models\Itinerario_Usuario_Servicio;
 use App\Models\Usuario_Operador;
 use App\Models\Eventos_usuario_Servicio;
 use App\Models\Invitaciones_Amigos;
+use App\Models\UbicacionGeografica;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 
@@ -35,6 +36,7 @@ class ServiciosOperadorRepository extends BaseRepository {
     protected $eventos;
     protected $operador;
     protected $invitar_amigo;
+    protected $ubicacion_geografica;
     
 
     /**
@@ -54,6 +56,8 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->eventos = new Eventos_usuario_Servicio();
         $this->operador = new Usuario_Operador();
         $this->invitar_amigo = new Invitaciones_Amigos();
+        $this->ubicacion_geografica = new UbicacionGeografica();
+        
     }
 
     /**
@@ -392,6 +396,12 @@ class ServiciosOperadorRepository extends BaseRepository {
         $user_servicios = new $this->model;
         return $user_servicios::where('id_usuario_operador', $id_usuario_operador)
                         ->where('estado_servicio', '=', 1)->get();
+    }
+    
+    //Entrega el arreglo de Servicios por operador
+    public function getProvincias() {
+        $ubicacion = new $this->ubicacion_geografica;
+        return $ubicacion::where('idUbicacionGeograficaPadre', '=',1)->get();
     }
     
     
