@@ -17,7 +17,7 @@
 
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
             
           <?php switch (session('tip_oper')) {
     case 1:
@@ -42,9 +42,19 @@
             </h2>
         </div>
         <div id="description-box-type">
-            Explicacion de que es lo que hace todo este proceso para que pueda ver el usuario que hacer
-            sin necesidad de llamar a nadie
+            En ésta sección podrás crear itinerarios y sus respectivas actividades detalladas para poder dar al turista la seguridad de lo que se está ofreciendo. En el caso de brindar una actividad de transporte se tratarán como rutas y sus respectivas paradas si fuese el caso.
         </div>
+    </div>
+    <div id="space"></div>
+     <div id="title-box-header-navigation">
+        
+           <h2 class="head-title-navigation">
+   <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios/serviciooperador')!!}/{{ $itiner->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'"> 
+       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Regresar </strong></a>
+               
+       
+               
+            </h2>
     </div>
     <div id="space"></div>
     {!! Form::open(['url' => route('postItinerario'), 'method' => 'post', 'role' => 'form', 'id'=>'Updatepromocion']) !!}
@@ -53,11 +63,11 @@
 
     <div class="wrapper uwa-font-aa">
         <div id="part-1-form">
-            <div id="principal-data">
+            <div id="principal-data" title="Esta opción es exclusiva de los servicios turisticos donde se especifica el requerimiento físico necesario para completar el trip. Si en su caso no es relevante puede poner No aplica.">
                 @include('reusable.modify_dificultades',['diffic' => $listDificultades,'elegido'=>$itiner->id_catalogo_dificultad])
                 <div class="form-group-step2">
                     {!!Form::label('nombre_itinerario', 'Nombre Itinerario', array('id'=>'iconFormulario-step2'))!!}
-                    {!!Form::text('nombre_itinerario', $itiner->nombre_itinerario, array('class'=>'inputtext-step2',"title"=>"Please provide your firstname.",'placeholder'=>'Nombre del Servicio'))!!}
+                    {!!Form::text('nombre_itinerario', $itiner->nombre_itinerario, array('class'=>'inputtext-step2',"title"=>"Nombre del itinerario.",'placeholder'=>'Nombre del Itinerario'))!!}
                 </div>
                 <div class="form-group-step2">
                     {!!Form::label('Fecha_desde', 'Fecha Inicio', array('id'=>'iconFormulario-step2'))!!}
@@ -94,7 +104,7 @@
                 </div>
             </div>
             <div id="secondary-data">
-                <div id="renderPartialItinerarios">
+                <div id="renderPartialItinerarios" title="Esta opción te permite crear el detalle de tus itinerarios al hacer click en +, irás agregando nuevos puntos dentro de tu itinerario. Ejemplo  1)Ruta Quito-Ibarra, 2)Ruta Ibarra-Tulcan">
                     @section('contentPanelItinerarios')
                     @show
                 </div>    
@@ -133,7 +143,7 @@
 @stop
 <script>
     $(document).ready(function () {
-        GetDataAjaxSectionItiner("/IguanaTrip/public/getlistaItinerarios/{!!$itiner->id!!}");
+        GetDataAjaxSectionItiner("{!!asset('/getlistaItinerarios')!!}/{!!$itiner->id!!}");
         //GetDataAjaxSection("/IguanaTrip/public/getlistaServiciosComplete/22");
     });
 </script>

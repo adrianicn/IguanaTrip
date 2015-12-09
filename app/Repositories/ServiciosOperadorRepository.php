@@ -174,10 +174,10 @@ class ServiciosOperadorRepository extends BaseRepository {
 
         $ItinerarioU->invitacion_de = $inputs['invitacion_de'];
         $ItinerarioU->invitacion_para = $inputs['invitacion_para'];
-        $ItinerarioU->mensaje = $inputs['mensaje'];
-        $ItinerarioU->estado_invitacion = 1;
+        $ItinerarioU->correo = $inputs['correo'];
         $ItinerarioU->estado_invitacion = 1;
         $ItinerarioU->ip_envio = "";
+        if((session('user_id')!=null))
         $ItinerarioU->id_usuario_invita = session('user_id');
         
         
@@ -459,6 +459,13 @@ class ServiciosOperadorRepository extends BaseRepository {
     public function getItinerariosUsuario($id_itinerario) {
         $itiner = new $this->itinerarios_u;
         return $itiner::where('id', $id_itinerario)->get();
+    }
+    
+    
+     //Entrega el arreglo de itinerarios por operador
+    public function getUsuario_serv($id) {
+        $itiner = new $this->model;
+        return $itiner::where('id', $id)->first();
     }
     
     //Entrega el arreglo de detalle itinerarios por id tinerario

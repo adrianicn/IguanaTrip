@@ -21,7 +21,7 @@
             <td> 
                 @if($detalle->estado_punto==1)
                   <label class="switch switch-green">
-                        <input type="checkbox" id='estado_itinerario_{!!$detalle->id!!}' checked name ='estado_itinerario_{!!$detalle->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('/IguanaTrip/public/estadoItinerario/',{!!$detalle->id!!},{!!$detalle->id!!},'itinerario-detalle')">
+                        <input type="checkbox" id='estado_itinerario_{!!$detalle->id!!}' checked name ='estado_itinerario_{!!$detalle->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoItinerario')!!}/',{!!$detalle->id!!},{!!$detalle->id!!},'itinerario-detalle')">
                         <span class="switch-label" data-on="Si" data-off="No"></span>
                         <span class="switch-handle"></span>
                         
@@ -29,7 +29,7 @@
                 @else
                 
                 <label class="switch switch-green">
-                        <input type="checkbox" id='estado_itinerario_{!!$detalle->id!!}'  name ='estado_itinerario_{!!$detalle->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('/IguanaTrip/public/estadoItinerario/',{!!$detalle->id!!},{!!$detalle->id!!})">
+                        <input type="checkbox" id='estado_itinerario_{!!$detalle->id!!}'  name ='estado_itinerario_{!!$detalle->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoItinrario')!!}/',{!!$detalle->id!!},{!!$detalle->id!!})">
                         <span class="switch-label" data-on="Si" data-off="No"></span>
                         <span class="switch-handle"></span>
                         
@@ -38,7 +38,7 @@
             </td>
             <td>
                 <div id='delete'>
-                    <h2> <strong class="remove-registro" onclick="AjaxContainerRetrunBurnURL('/IguanaTrip/public/deleteItinerario/',{!!$detalle->id!!},{!!$detalle->id!!});GetDataAjaxSectionItiner('/IguanaTrip/public/getlistaItinerarios/{!!$detalle->id_itinerario!!}')" >X</strong></h2></div>
+                    <h2> <strong class="remove-registro" onclick="AjaxContainerRetrunBurnURL('{!!asset('/deleteItinerario')!!}/',{!!$detalle->id!!},{!!$detalle->id!!});GetDataAjaxSectionItiner('{!!asset('/getlistaItinerarios')!!}/{!!$detalle->id_itinerario!!}')" >X</strong></h2></div>
             </td>
         </tr>
         

@@ -64,9 +64,13 @@ class UsuarioServiciosController extends Controller {
         }
 
         $listEventos = $gestion->getEventosporId($id);
+         foreach ($listEventos as $servicioBase) {
+            
+                $servicio = $gestion->getUsuario_serv($servicioBase->id_usuario_servicio);
+            }
         $ImgPromociones = $gestion->getImageOperador($id, 4);
 
-        return view('Registro.editEvento', compact('listEventos', 'ImgPromociones'));
+        return view('Registro.editEvento', compact('listEventos', 'ImgPromociones','servicio'));
     }
 
     /**
@@ -496,11 +500,15 @@ class UsuarioServiciosController extends Controller {
         //logica que comprueba si el usuario tiene promociones para ser modificados
 
         $listPromociones = $gestion->getPromocionesOperador($id_promocion);
+        foreach ($listPromociones as $servicioBase) {
+            
+                $servicio = $gestion->getUsuario_serv($servicioBase->id_usuario_servicio);
+            }
 
         //imagenes de la promocion
         $ImgPromociones = $gestion->getImagePromocionesOperador($id_promocion);
 
-        $view = view('Registro.editPromocion', compact('ImgPromociones', 'listPromociones'));
+        $view = view('Registro.editPromocion', compact('ImgPromociones', 'listPromociones','servicio'));
         return ($view);
     }
 
@@ -538,12 +546,20 @@ class UsuarioServiciosController extends Controller {
         //logica que comprueba si el usuario tiene promociones para ser modificados
 
         $listItinerarios = $gestion->getItinerariosUsuario($id);
+        
+            foreach ($listItinerarios as $servicioBase) {
+            
+                $servicio = $gestion->getUsuario_serv($servicioBase->id_usuario_servicio);
+            }
+            
+        
+        
 
         //imagenes de la promocion
         $ImgItinerarios = $gestion->getImageOperador($id, 3);
         $listDificultades = $gestion->getCatalogoDificultad();
 
-        $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios', 'listDificultades'));
+        $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios', 'listDificultades','servicio'));
         return ($view);
     }
 

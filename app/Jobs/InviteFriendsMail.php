@@ -6,21 +6,23 @@ use App\Jobs\Job;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
+use App\Models\Invitaciones_Amigos;
 use Illuminate\Contracts\Mail\Mailer;
 
 class InviteFriendsMail extends Job implements SelfHandling
 
 {
-    
+    protected $invitacion;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Invitaciones_Amigos $invitacion)
     {
         //
+          $this->invitacion = $invitacion;
     }
 
     /**
@@ -32,15 +34,15 @@ class InviteFriendsMail extends Job implements SelfHandling
     public function handle(Mailer $mailer)
     {
         $data = [
-            'title'  => trans('front/verify.email-title'),
-            'intro'  => trans('front/verify.email-intro'),
-            'link'   => trans('front/verify.email-link'),
+            'title'  => "Invitación IguanaTrip.com",
+            'nombrede'  => $this->invitacion->invitacion_de,
+            'nombrepara'   => $this->invitacion->invitacion_para,
             
         ];
         
         $mailer->send('emails.auth.inviteFriend', $data, function($message) {
-            $message->to("adrian.dcn@hotmail.com", "Adrian")
-                    ->subject(trans('front/verify.email-title'));
+            $message->to( $this->invitacion->correo, $this->invitacion->invitacion_para)
+                    ->subject("Invitación IguanaTrip.com");
         });
     }
     

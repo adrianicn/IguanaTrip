@@ -3,7 +3,7 @@
 
 
                         <h2 class='titletable'>
-                            Estado físico
+                            Dificultad del trayecto
                         </h2>
 
 

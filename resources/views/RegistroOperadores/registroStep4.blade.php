@@ -1,6 +1,7 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
+{!! HTML::style('css/calendar/ui-jquery.css') !!}
 <div style='display:none'>
     <img src="{!! asset('img/x.png')!!}" alt='' />
 </div>
@@ -60,7 +61,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 @endforeach
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
             
           <?php switch (session('tip_oper')) {
     case 1:
@@ -85,9 +86,23 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             </h2>
         </div>
         <div id="description-box-type">
-            Explicacion de que es lo que hace todo este proceso para que pueda ver el usuario que hacer
-            sin necesidad de llamar a nadie
+            En ésta sección se detalla el servicio, se da a conocer la ubicación geográfica de donde se puede contratar el servicio, se pueden agregar fotografías, eventos, promociones e itinerarios. 
         </div>
+    </div>
+      <div id="space"></div>
+     <div id="title-box-header-navigation">
+        
+           <h2 class="head-title-navigation">
+   <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios')!!}'"> 
+       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
+               <a class="button-step4" onclick="window.location.href = '{!!asset('/operador')!!}'"> 
+       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2 </strong></a>
+               <a class="button-step4" onclick="window.location.href = '{!!asset('/userservice')!!}'"> 
+       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 3 </strong></a>
+               <a class="button-step4" onclick="window.location.href = '{!!asset('/detalleServicios')!!}'"> 
+       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 4 </strong></a>
+               
+            </h2>
     </div>
     <div id="space"></div>
 
@@ -101,19 +116,19 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             <div id="principal-data">
                 <div class="form-group-1">
                     {!!Form::label('nombre_servicio_1', 'Nombre Servicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
-                    {!!Form::text('nombre_servicio', $usuarioServicio->nombre_servicio, array('class'=>'inputtext chng','placeholder'=>'Nombre del Servicio'))!!}
+                    {!!Form::text('nombre_servicio', $usuarioServicio->nombre_servicio, array("title"=>"Es el nombre comercial del servicio o el nombre con el que quieres que los turistas encuentren tu servicio.",'class'=>'inputtext chng','placeholder'=>'Nombre del Servicio'))!!}
                 </div>
                 <div class="form-group-1">
                     {!!Form::label('precio_desde_1', 'Precio Desde', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
-                    {!!Form::text('precio_desde', $usuarioServicio->precio_desde, array('class'=>'inputtext chng','placeholder'=>'Precio Desde'))!!}
+                    {!!Form::text('precio_desde', $usuarioServicio->precio_desde, array("title"=>"Para realizar una segmentación adecuada de interesados, sería bueno que nos des el rango de precios de tu servicio. El valor es en dólares americanos",'class'=>'inputtext chng','placeholder'=>'Precio Desde'))!!}
                 </div>
                 <div class="form-group-1">
                     {!!Form::label('precio_hasta_1', 'Precio Hasta', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
-                    {!!Form::text('precio_hasta', $usuarioServicio->precio_hasta, array('class'=>'inputtext chng','placeholder'=>'Precio Hasta'))!!}
+                    {!!Form::text('precio_hasta', $usuarioServicio->precio_hasta, array("title"=>"Para realizar una segmentación adecuada de interesados, sería bueno que nos des el rango de precios de tu servicio. El valor es en dólares americanos",'class'=>'inputtext chng','placeholder'=>'Precio Hasta'))!!}
                 </div>
                 <div class="form-group-1">
                     {!!Form::label('direccion_servicio_1', 'Direccion Servicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
-                    {!!Form::text('direccion_servicio', $usuarioServicio->direccion_servicio, array('class'=>'inputtext chng','placeholder'=>'Direccion del Servicio'))!!}
+                    {!!Form::text('direccion_servicio', $usuarioServicio->direccion_servicio, array("title"=>"La dirección exacta de tu servicio, te brindamos la opción de señalarlo en el mapa para ubicarte geograficamente. Debido a que no todas las provincias están disponibles por Google intenta acercar lo más posible tu ubicación será más fácil para los turistas encontrarte.",'class'=>'inputtext chng','placeholder'=>'Direccion del Servicio'))!!}
                 </div>
                 <div class="form-group-1">
                     @include('reusable.maps', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
@@ -121,22 +136,22 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             </div>
             <div id="secondary-data">
                 <div class="form-group-2">
-                    {!!Form::label('detalle_servicio_1', 'Detalle Servicio', array('class'=>'control-label-1'))!!}
-                    <textarea id="detalle_servicio" name="detalle_servicio" class="ptm chng" placeholder="Detalle Servicio">
+                    {!!Form::label('detalle_servicio_1', 'Detalle Servicio', array("title"=>"Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.",'class'=>'control-label-1'))!!}
+                    <textarea id="detalle_servicio" name="detalle_servicio" class="ptm chng" placeholder="Detalle Servicio" title="Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.">
                         {!!$usuarioServicio->detalle_servicio!!}
                     </textarea>
                 </div>
                 <div class="form-group-2">
                     {!!Form::label('telefono_1', 'Telefono', array('class'=>'control-label-2'))!!}
-                    {!!Form::text('telefono', $usuarioServicio->telefono, array('class'=>'form-control-1 chng','placeholder'=>'Telefono del Servicio'))!!}
+                    {!!Form::text('telefono', $usuarioServicio->telefono, array("title"=>"El turista podrá comunicarse directamente contigo si así lo deseas",'class'=>'form-control-1 chng','placeholder'=>'Telefono del Servicio'))!!}
                 </div>
                 <div class="form-group-2">
                     {!!Form::label('correo_contacto_1', 'Correo del contacto', array('class'=>'control-label-2'))!!}
-                    {!!Form::text('correo_contacto', $usuarioServicio->correo_contacto, array('class'=>'form-control-1 chng','placeholder'=>'Correo Contacto'))!!}
+                    {!!Form::text('correo_contacto', $usuarioServicio->correo_contacto, array("title"=>"Siempre es bueno tener un correo electrónico en el cual puedan pedirte más información sobre tu servicio",'class'=>'form-control-1 chng','placeholder'=>'Correo Contacto'))!!}
                 </div>
                 <div class="form-group-2">
                     {!!Form::label('pagina_web_1', 'Pagina Web', array('class'=>'control-label-2'))!!}
-                    {!!Form::text('pagina_web', $usuarioServicio->pagina_web, array('class'=>'form-control-1 chng','placeholder'=>'URL'))!!}
+                    {!!Form::text('pagina_web', $usuarioServicio->pagina_web, array("title"=>"Si tienes una página web servirá mucho para tu credibilidad.",'class'=>'form-control-1 chng','placeholder'=>'URL'))!!}
                 </div>
                 <div class="form-group-2">
                     <ul style="list-style: none">
@@ -151,14 +166,14 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 
             </div>
             <div id="secondary-data">
-                <div id="promocion"><a class="button-step4" onclick="RenderPartialGeneric('reusable.promocion',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
-                <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewEvent',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
-                <div id="evento"><a class="button-step4" onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Itinerario</a></div>
+                <div id="promocion"><a class="button-step4" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGeneric('reusable.promocion',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
+                <div id="evento"><a class="button-step4" title="Puedes crear varios eventos para tu servicio. Ejemplo si tu servicio es una discoteca puedes agregar Jueves laydies night como evento o si eres un restaurante puedes agregar eventos como inauguraciones, etc." onclick="RenderPartialGeneric('reusable.createNewEvent',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
+                <div id="evento"><a class="button-step4" title="Esta opción es orientada a servicios turísticos de viajes y transporte. Por ejemplo tu servicio es una agencia de viajes y tienes varios itinerarios Trip Cotopaxi, Trip Amazonía o si eres un transporte podrás especificar la ruta de tu servicio." onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Itinerario</a></div>
             </div>
         </div>
         <div id="part-1-form">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRetrunMessage('registro_step1','optional')" href="#">Finalizar</a>
+                <a class="button-1" title="Antes de finalizar recuerda que puedes ingresar fotografías de tu servicio en la parte inferior." onclick="AjaxContainerRetrunMessage('registro_step1','optional'); window.location.href = '/IguanaTrip/public/thankyou'" href="#">Finalizar</a>
             </div>              
         </div>
         {!! Form::close() !!}
@@ -190,13 +205,25 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 <script>
     $(document).ready(function () {
         
-        GetDataAjaxSectionEventos("/IguanaTrip/public/getlistaServiciosComplete/{!!$usuarioServicio->id!!}");
+        GetDataAjaxSectionEventos("{!!asset('/getlistaServiciosComplete')!!}/{!!$usuarioServicio->id!!}");
     });
     
     $( ".chng" ).change(function() {
   AjaxContainerRetrunMessage('registro_step1','optional')
 });
 </script>
+<script>
+  $(function() {
+    var tooltips = $( "[title]" ).tooltip({
+      position: {
+        my: "left top",
+        at: "right+5 top-5"
+      }
+    });
+   
+  });
+  </script>
+
 
 @stop
 

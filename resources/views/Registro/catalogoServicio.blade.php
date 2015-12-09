@@ -14,6 +14,7 @@ $servicio_3 = '';
 $servicio_4 = '';
 $servicio_5 = '';
 $servicio_6 = '';
+$servicio_7 = '';
 ?>
 @foreach ($listServicios as $servicio)
 <?php
@@ -36,13 +37,16 @@ switch ($servicio->id_catalogo_servicio) {
     case 6:
         $servicio_6 = 'checked';
         break;
+    case 7:
+        $servicio_7 = 'checked';
+        break;
 }
 ?>
 @endforeach     
 
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
             
           <?php switch (session('tip_oper')) {
     case 1:
@@ -67,8 +71,7 @@ switch ($servicio->id_catalogo_servicio) {
             </h2>
         </div>
         <div id="description-box-type">
-            Explicacion de que es lo que hace todo este proceso para que pueda ver el usuario que hacer
-            sin necesidad de llamar a nadie
+           El Paso 3, despliega una lista de los principales servicios turisticos a nivel nacional. Usted podrá escoger uno o más servicios dependiendo de su actividad turistica. Ejemplo, un hotel podría brindar también servicio de restaurante por lo que sería conveniente tratarlos en forma independiente para mayor impacto en las búsquedas.
         </div>
     </div>
     
@@ -76,9 +79,9 @@ switch ($servicio->id_catalogo_servicio) {
     <div id="title-box-header-navigation">
         
            <h2 class="head-title-navigation">
-   <a class="button-step4" href="/"> 
+   <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios')!!}'"> 
        <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
-               <a class="button-step4" href="/"> 
+               <a class="button-step4" onclick="window.location.href = '{!!asset('/operador')!!}'"> 
                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2</strong></a>
             </h2>
     </div>
@@ -141,6 +144,14 @@ switch ($servicio->id_catalogo_servicio) {
                 <div class="label-dialog"><i ><img src="{!! asset('images/register/registro6.jpg')!!}" alt="Centros turísticos" /></i></div>
                 <div class="body-dialog">
                     <p>Reuniones  <span>sociales </span>.Dentro de esta clasificación se encuentran parrilladas, paseos en bicileta, caídas, cualquier tipo de actividad donde se quiera invitar al público en general a unirse sean nacionales o extranjeros.</p>
+                </div>
+                <div class="ok-dialog"><i class="icon-ok-sign"></i></div>
+            </div>
+            
+            <div id="dialog-star7" class="dialog">
+                <div class="label-dialog"><i ><img src="{!! asset('images/register/transporte-1.png')!!}" alt="Transporte" /></i></div>
+                <div class="body-dialog">
+                    <p>Transporte  <span>general </span>.Dentro de esta clasificación se encuentran buses, taxis, lanchas, camionetas que se dediquen a la actividad del transporte público o privado.</p>
                 </div>
                 <div class="ok-dialog"><i class="icon-ok-sign"></i></div>
             </div>
@@ -257,8 +268,24 @@ switch ($servicio->id_catalogo_servicio) {
                                 </div>
                                 
                             </td>
-                            <td><input class="demo labelauty" name="id_catalogo_servicio5" id="checkbox-5" value="5" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_5!!}/></td></tr>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio7" id="checkbox-7" value="7" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_7!!}/></td></tr>
 
+                        <tr class="alt"><td>
+                                <div id="star7" class="dialog-open">
+                                    <img src="{!! asset('images/register/transporte-1.png')!!}" alt="" />
+                                </div>
+                                
+                            <td>
+                                <div id="star7" class="dialog-open">
+                                <h2 class='titletable'>
+                                    Transporte
+                                </h2>
+                                Buses, taxis, barcos, etc.
+                                </div>
+                                
+                                </td>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio6" id="checkbox-6" value="6" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_6!!}/></td>
+                        </tr>
                         <tr class="alt"><td>
                                 <div id="star6" class="dialog-open">
                                     <img src="{!! asset('images/register/registro6.jpg')!!}" alt="" />
@@ -273,7 +300,8 @@ switch ($servicio->id_catalogo_servicio) {
                                 </div>
                                 
                                 </td>
-                            <td><input class="demo labelauty" name="id_catalogo_servicio6" id="checkbox-6" value="6" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_6!!}/></td></tr>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio6" id="checkbox-6" value="6" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_6!!}/></td>
+                        </tr>
 
                     </tbody>
                 </table>

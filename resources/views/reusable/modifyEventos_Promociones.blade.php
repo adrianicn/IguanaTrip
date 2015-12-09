@@ -9,11 +9,11 @@
         @foreach ($itinerarios as $itinerario)
         
         <li><div class="listado-1">
-                <a class="button-1 white" onclick="redirect('/IguanaTrip/public/itinerario/'+{!!$itinerario->id!!})" href="#">{!!$itinerario->nombre_itinerario!!}</a>
+                <a class="button-1 white" onclick="redirect('{!!asset('/itinerario')!!}/'+{!!$itinerario->id!!})" href="#">{!!$itinerario->nombre_itinerario!!}</a>
                 @if($itinerario->estado_itinerario==1)
                   <label class="switch switch-green">
                             
-                        <input type="checkbox" id='estado_itinerario_{!!$itinerario->id!!}' checked name ='estado_itinerario_{!!$itinerario->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('/IguanaTrip/public/estadoItinerarioPrincipal/',{!!$itinerario->id!!},{!!$itinerario->id!!},'itinerarios')">
+                        <input type="checkbox" id='estado_itinerario_{!!$itinerario->id!!}' checked name ='estado_itinerario_{!!$itinerario->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoItinerarioPrincipal')!!}/',{!!$itinerario->id!!},{!!$itinerario->id!!},'itinerarios')">
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                         
@@ -22,7 +22,7 @@
                 
                  <label class="switch switch-green">
                             
-                        <input type="checkbox" id='estado_itinerario_{!!$itinerario->id!!}'  name ='estado_itinerario_{!!$itinerario->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('/IguanaTrip/public/estadoItinerarioPrincipal/',{!!$itinerario->id!!},{!!$itinerario->id!!},'itinerarios')">
+                        <input type="checkbox" id='estado_itinerario_{!!$itinerario->id!!}'  name ='estado_itinerario_{!!$itinerario->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoItinerarioPrincipal')!!}/',{!!$itinerario->id!!},{!!$itinerario->id!!},'itinerarios')">
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                         
@@ -43,11 +43,11 @@
         @foreach ($eventos as $evento)
         
         <li><div class="listado-1">
-                <a class="button-1 white" onclick="redirect('/IguanaTrip/public/eventos/'+{!!$evento->id!!})" href="#">{!!$evento->nombre_evento!!}</a>
+                <a class="button-1 white" onclick="redirect('{!!asset('/eventos')!!}/'+{!!$evento->id!!})" href="#">{!!$evento->nombre_evento!!}</a>
                 @if($evento->estado_evento==1)
                   <label class="switch switch-green">
                             
-                        <input type="checkbox" id='estado_evento_{!!$evento->id!!}' checked name ='estado_evento_{!!$evento->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('/IguanaTrip/public/estadoEvento/',{!!$evento->id!!},{!!$evento->id!!},'eventos')">
+                        <input type="checkbox" id='estado_evento_{!!$evento->id!!}' checked name ='estado_evento_{!!$evento->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoEvento')!!}/',{!!$evento->id!!},{!!$evento->id!!},'eventos')">
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                         
@@ -56,7 +56,7 @@
                 
                  <label class="switch switch-green">
                             
-                        <input type="checkbox" id='estado_evento_{!!$evento->id!!}'  name ='estado_evento_{!!$evento->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('/IguanaTrip/public/estadoItinerarioPrincipal/',{!!$evento->id!!},{!!$evento->id!!},'eventos')">
+                        <input type="checkbox" id='estado_evento_{!!$evento->id!!}'  name ='estado_evento_{!!$evento->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoItinerarioPrincipal')!!}/',{!!$evento->id!!},{!!$evento->id!!},'eventos')">
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                         
@@ -79,12 +79,12 @@
         
         <li>
             <div class="listado-1">
-            <a class="button-1 white" onclick="redirect('/IguanaTrip/public/promocion/'+{!!$promocion->id!!})" href="#">{!!$promocion->nombre_promocion!!}</a>
+            <a class="button-1 white" onclick="redirect('{!!asset('/promocion')!!}/'+{!!$promocion->id!!})" href="#">{!!$promocion->nombre_promocion!!}</a>
                 @if($promocion->estado_promocion==1)
                 
                 <label class="switch switch-green">
                         
-                        <input type="checkbox" id='estado_itinerario_{!!$promocion->id!!}' checked name ='estado_itinerario_{!!$promocion->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('/IguanaTrip/public/estadoPromocion/',{!!$promocion->id!!},{!!$promocion->id!!},'promociones')">
+                        <input type="checkbox" id='estado_itinerario_{!!$promocion->id!!}' checked name ='estado_itinerario_{!!$promocion->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoPromocion')!!}/',{!!$promocion->id!!},{!!$promocion->id!!},'promociones')">
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                         
@@ -93,7 +93,7 @@
                 
                  <label class="switch switch-green">
                             
-                        <input type="checkbox" id='estado_itinerario_{!!$promocion->id!!}'  name ='estado_itinerario_{!!$promocion->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('/IguanaTrip/public/estadoPromocion/',{!!$promocion->id!!},{!!$promocion->id!!},'promociones')">
+                        <input type="checkbox" id='estado_itinerario_{!!$promocion->id!!}'  name ='estado_itinerario_{!!$promocion->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoPromocion')!!}/',{!!$promocion->id!!},{!!$promocion->id!!},'promociones')">
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                         

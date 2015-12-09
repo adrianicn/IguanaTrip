@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'label1' => 'Estado Físico',
+	'label1' => 'Dificultad del trayecto',
 	'label2' => 'Agregar Evento ',
 	'label3' => 'Nombre evento',
 	'label4' => 'Agregar Itinerario',

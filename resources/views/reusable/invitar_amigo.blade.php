@@ -8,18 +8,18 @@
     
        <div class="form-group-step2-popup">
             {!!Form::label('nombre_1', 'De', array('id'=>'iconFormulario-step2-popup'))!!}
-            {!!Form::text('invitacion_de',session('user_email'), array('class'=>'inputtext-step2-popup','placeholder'=>'Invitación de'))!!}
+            {!!Form::text('invitacion_de',session('user_name'), array('class'=>'inputtext-step2-popup','placeholder'=>'Invitación de'))!!}
        </div>
     <div class="form-group-step2-popup">
             {!!Form::label('nombre_1', 'Para', array('id'=>'iconFormulario-step2-popup'))!!}
             {!!Form::text('invitacion_para',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Invitación para'))!!}
        </div>
     
-       <div class="form-group-step2-popup">
-            {!!Form::label('detalle_1', 'Mensaje', array('id'=>'iconFormulario-step2-popup'))!!}
-            {!!Form::textarea('mensaje','Hola, soy '. session('user_name').' quisiera invitarte a esta nueva iniciativa turistica, se que te ayudará para que des a conocer tus servicios turísticos a nivel mundial', array('class'=>'inputtextarea-step2-popup-1','placeholder'=>'Mensaje que deseas incluir para tus amigos'))!!}
-
+    <div class="form-group-step2-popup">
+            {!!Form::label('nombre_1', 'Email', array('id'=>'iconFormulario-step2-popup'))!!}
+            {!!Form::text('correo',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Email para quien va la invitación'))!!}
        </div>
+       
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
                 <a class="button-1" id="btnsubm" onclick="AjaxContainerRegistroWithMessage('invitacion','simplemodal-wrap','La invitación ha sido enviada, puede invitar más amigos si lo desa.')" href="#">Enviar</a>

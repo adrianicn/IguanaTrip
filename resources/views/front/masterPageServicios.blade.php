@@ -21,6 +21,7 @@
         {!! HTML::style('css/masterPagesRegistro.css') !!}
         {!! HTML::style('css/base/layoutBase.css') !!} 
         {!! HTML::style('css/popupModal/basic.css') !!} 
+        {!! HTML::style('css/calendar/ui-jquery.css') !!}
         {!!HTML::script('js/sliderTop/jquery-1.9.1.min.js') !!}
             {!!HTML::script('js/sliderTop/jssor.slider.mini.js') !!}
             
@@ -87,7 +88,7 @@
                 <div id="menu">
                     <div id="menu-ul">
                         <ul id="seleccionitem">
-                            <li><a href="#">Home</a></li>
+                            <li><a href="{!!asset('/')!!}">Home</a></li>
                             <li><a href="#">Gallery</a></li>
                             <li><a href="#">Contact</a></li>
                             <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
@@ -96,7 +97,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="sessionName">Renato</div>
+                    <div class="sessionName">Bienvenido {!!session('user_name')!!}</div>
                 </div>
             </header>
             <div class="container" id="target">
@@ -109,7 +110,7 @@
             <div id="footers">
                 <div id="menu-ul">
                     <ul id="seleccionitem">
-                        <li><a href=”#”>Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href=”#”>Gallery</a></li>
                         <li><a href=”#”>Contact</a></li>
                         <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>

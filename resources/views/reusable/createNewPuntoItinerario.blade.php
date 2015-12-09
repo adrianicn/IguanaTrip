@@ -1,5 +1,4 @@
 
-
 <div style='display:none'>
     <img src="{!! asset('img/x.png')!!}" alt='' />
 </div>
@@ -25,9 +24,9 @@
 
     <div class="form-group-step2-popup">
         {!!Form::label('lugar_1', 'Lugar', array('id'=>'iconFormulario-step2-popup'))!!}
-        {!!Form::text('lugar_punto',NULL, array('id'=>'lugar_punto','class'=>'inputtext-step2-popup','placeholder'=>'Punto de encuentro, punto A, etc'))!!}
+        {!!Form::text('lugar_punto',NULL, array('id'=>'lugar_punto',"title"=>"Es el nombre con el que se distinguirá un punto específico dentro del itinerario. Ejemplo, El itinerario se llama Viaje al Cotopaxi, el primer punto será el lugar de encuentro, el segundo punto puede ser parque nacional cotopaxi donde se llevará acabo el almuerzo, etc.",'class'=>'inputtext-step2-popup','placeholder'=>'Punto de encuentro, punto A, etc'))!!}
     </div>
-    <div class="form-group-step2-popup">
+    <div class="form-group-step2-popup" title="Aquí podrás desplegar el lugar exacto donde se levará acabo esa actividad específica. Ejemplo Actividad paseo a caballo, snorkel, etc">
         @if(isset($listItinerarios))
         @foreach ($listItinerarios as $itiner)
         @include('reusable.maps', ['longitud_servicio' => $itiner->longitud_punto,'latitud_servicio'=>$itiner->latitud_punto])  
@@ -38,11 +37,11 @@
     </div>
     <div class="form-group-step2-popup">
         {!!Form::label('dia_hora_1', 'Día / Hora', array('id'=>'iconFormulario-step2-popup'))!!}
-        {!!Form::text('diahora_punto',NULL, array('id'=>'diahora_punto','class'=>'inputtext-step2-popup','placeholder'=>'Sabado 8AM, todos los días 11 Am, etc'))!!}
+        {!!Form::text('diahora_punto',NULL, array('title'=>'La fecha, hora y lugar donde se llevará acabo la actividad. Pueden ingresarse actividades semanales ejemplo: Todos los martes a las 3pm.','id'=>'diahora_punto','class'=>'inputtext-step2-popup','placeholder'=>'Sabado 8AM, todos los días 11 Am, etc'))!!}
     </div>
     <div class="form-group-step2-popup">
-        {!!Form::label('incluye_1', 'Incluye', array('id'=>'iconFormulario-step2-popup'))!!}
-        {!!Form::textarea('incluye_punto',NULL, array('id'=>'incluye_punto','class'=>'inputtextarea-step2-popup-1','placeholder'=>'Incluye equipos, incluye almuerzo, no incluye bicicletas, etc'))!!}
+        {!!Form::label('incluye_1', 'Observaciones/Incluye', array('id'=>'iconFormulario-step2-popup'))!!}
+        {!!Form::textarea('incluye_punto',NULL, array('title'=>'Se pueden detallar observaciones o las cosas que incluye esa actividad específica. Ejemplo Punto snorkel incluye equipos o en el punto de encuentro se dará desayuno','id'=>'incluye_punto','class'=>'inputtextarea-step2-popup-1','placeholder'=>'Incluye equipos, incluye almuerzo, no incluye bicicletas, etc'))!!}
     </div>
 
     <div id="form-group-step2-popup">
@@ -87,6 +86,7 @@
 
     <script>
 
+
         $("#map").width(550);
         $("#map").height(175);
 
@@ -103,6 +103,10 @@
 
 
     </script>
+
+    
+  
+
 
 
 </div>

@@ -18,7 +18,7 @@
 
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
             
           <?php switch (session('tip_oper')) {
     case 1:
@@ -43,9 +43,21 @@
             </h2>
         </div>
         <div id="description-box-type">
-            Explicacion de que es lo que hace todo este proceso para que pueda ver el usuario que hacer
-            sin necesidad de llamar a nadie
+            En ésta sección, podrás administrar los servicios agregar, activar o desactivar los mismos, ingresar fotografías, eventos, itinerarios, etc.
         </div>
+    </div>
+     <div id="space"></div>
+     <div id="title-box-header-navigation">
+        
+           <h2 class="head-title-navigation">
+   <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios')!!}'"> 
+       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
+               <a class="button-step4" onclick="window.location.href = '{!!asset('/operador')!!}'"> 
+       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2 </strong></a>
+               <a class="button-step4" onclick="window.location.href = '{!!asset('/userservice')!!}'"> 
+       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 3 </strong></a>
+               
+            </h2>
     </div>
     <div id="space"></div>
 

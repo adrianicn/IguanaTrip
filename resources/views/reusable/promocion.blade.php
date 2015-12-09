@@ -19,7 +19,7 @@
 
        <div class="form-group-step2-popup">
             {!!Form::label('nombre_1', 'Nombre', array('id'=>'iconFormulario-step2-popup'))!!}
-            {!!Form::text('nombre_promocion',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Nombre'))!!}
+            {!!Form::text('nombre_promocion',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Jueves 2x1, Descuento del 10%, etc'))!!}
        </div>
        <div class="form-group-step2-popup">
             {!!Form::label('inicio_1', 'Inicio', array('id'=>'iconFormulario-step2-popup'))!!}
@@ -38,7 +38,7 @@
             {!!Form::text('descuento',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'%'))!!}
        </div>
        <div class="form-group-step2-popup">
-            {!!Form::label('codigo_1', 'Codigo', array('id'=>'iconFormulario-step2-popup'))!!}
+            {!!Form::label('codigo_1', 'Código', array('id'=>'iconFormulario-step2-popup'))!!}
             {!!Form::text('codigo',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Ej. IGTRCOD001'))!!}
        </div>
        <div class="form-group-step2-popup">

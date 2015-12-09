@@ -1,12 +1,14 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
+{!! HTML::style('css/calendar/ui-jquery.css') !!}
 <div class="rowerror">
 </div>
+@foreach ($listEventos as $evento)
 
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '/IguanaTrip/public/servicios'">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
             
           <?php switch (session('tip_oper')) {
     case 1:
@@ -31,20 +33,31 @@
             </h2>
         </div>
         <div id="description-box-type">
-            Explicacion de que es lo que hace todo este proceso para que pueda ver el usuario que hacer
-            sin necesidad de llamar a nadie
+                      IguanaTrip te da la opción de crear eventos dentro de tu servicio. Si eres un hotel por ejemplo y quieres realizar una fiesta puedes agregarla a esta opción nosotros nos encargaremos de que tu información sea leída por el segmento adecuado.
         </div>
+    </div>
+    <div id="space"></div>
+     <div id="title-box-header-navigation">
+        
+           <h2 class="head-title-navigation">
+   <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios/serviciooperador')!!}/{{ $evento->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'"> 
+   
+       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Regresar </strong></a>
+               
+       
+               
+            </h2>
     </div>
     <div id="space"></div>
 
 
     {!! Form::open(['url' => route('postEvento'), 'method' => 'post', 'role' => 'form', 'id'=>'UpdateEvento']) !!}
-    @foreach ($listEventos as $evento)
+    
 
     <input type="hidden" name="id_usuario_servicio" value="{{ $evento->id_usuario_servicio }}">
     <input type="hidden" name="id" value="{{ $evento->id }}">
 
-    <div class="wrapper uwa-font-aa">
+    <div class="wrapper uwa-font-aa" title="Carga las imágenes que consideres describen a tu evento.">
 
         <div class="form-group-step2">
             @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
@@ -53,7 +66,7 @@
 
         <div class="form-group-step2">
             {!!Form::label('nombre_evento', 'Nombre Evento', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('nombre_evento', $evento->nombre_evento, array('class'=>'inputtext-step2','placeholder'=>'Nombre del evento'))!!}
+            {!!Form::text('nombre_evento', $evento->nombre_evento, array("title"=>"Es el nombre del evento. Recuerda ser creativo y diverido al escoger el nombre.",'class'=>'inputtext-step2','placeholder'=>'Nombre del evento'))!!}
         </div>
 
         <div class="form-group-step2">
@@ -89,7 +102,7 @@
 
         <div class="form-group-step2">
             {!!Form::label('tags', 'Tags', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('tags', $evento->tags, array('class'=>'inputtext-step2','placeholder'=>'Tags'))!!}
+            {!!Form::text('tags', $evento->tags, array("title"=>"Para mejorar las búsquedas ingresa palabras clave separadas por comas que describan tu servicio. Ejemplo: mar, playa, ceviche, discoteca, etc.",'class'=>'inputtext-step2','placeholder'=>'Tags'))!!}
         </div>
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
@@ -101,6 +114,18 @@
 
     {!! Form::close() !!}
 </div>
-
-
+@section('scripts')
+{!! HTML::script('js/jquery.js') !!}
+ <script>
+  $(function() {
+    var tooltips = $( "[title]" ).tooltip({
+      position: {
+        my: "left top",
+        at: "right+5 top-5"
+      }
+    });
+   
+  });
+  </script>
+@stop
 @stop
