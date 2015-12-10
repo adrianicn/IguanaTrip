@@ -913,3 +913,18 @@ input[type=password]{
       float: left;
       margin-bottom: 10px;
   }
+  #eventos-1 ul li{
+      text-decoration: none;
+      display: block;
+  }  
+  #eventos-1 a{
+      text-decoration: none;
+  }
+  #itinerarios-1 ul li{
+      text-decoration: none;
+      display: block;
+  }  
+  #itinerarios-1 a{
+      text-decoration: none;
+  }
+  
