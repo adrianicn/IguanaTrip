@@ -130,6 +130,9 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::label('direccion_servicio_1', 'Direccion Servicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
                     {!!Form::text('direccion_servicio', $usuarioServicio->direccion_servicio, array("title"=>"La dirección exacta de tu servicio, te brindamos la opción de señalarlo en el mapa para ubicarte geograficamente. Debido a que no todas las provincias están disponibles por Google intenta acercar lo más posible tu ubicación será más fácil para los turistas encontrarte.",'class'=>'inputtext chng','placeholder'=>'Direccion del Servicio'))!!}
                 </div>
+                    @include('reusable.provincia', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
+                    @include('reusable.canton', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
+                    @include('reusable.parroquia', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
                 <div class="form-group-1">
                     @include('reusable.maps', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
                 </div>    
@@ -169,21 +172,6 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 <div id="promocion"><a class="button-step4" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGeneric('reusable.promocion',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
                 <div id="evento"><a class="button-step4" title="Puedes crear varios eventos para tu servicio. Ejemplo si tu servicio es una discoteca puedes agregar Jueves laydies night como evento o si eres un restaurante puedes agregar eventos como inauguraciones, etc." onclick="RenderPartialGeneric('reusable.createNewEvent',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
                 <div id="evento"><a class="button-step4" title="Esta opción es orientada a servicios turísticos de viajes y transporte. Por ejemplo tu servicio es una agencia de viajes y tienes varios itinerarios Trip Cotopaxi, Trip Amazonía o si eres un transporte podrás especificar la ruta de tu servicio." onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Itinerario</a></div>
-            </div>
-            <div>
-                <div class="form-group-step2">
-                    {!!Form::label('provincia_1', 'Provincia', array('class'=>'control-label-2'))!!}
-                    {!!Form::select('id_provincia', array('L' => 'Large', 'S' => 'Small'))!!}
-                </div>
-                <div class="form-group-step2">
-                    {!!Form::label('canton_1', 'Canton', array('class'=>'control-label-2'))!!}
-                    {!!Form::select('id_canton',  array('L' => 'Large', 'S' => 'Small'))!!}
-                </div>
-                <div class="form-group-step2">
-                    {!!Form::label('parroquia_1', 'Parroquia', array('class'=>'control-label-2'))!!}
-                    {!!Form::select('id_parroquia',  array('L' => 'Large', 'S' => 'Small'))!!}
-                </div>
-                                
             </div>
         </div>
         <div id="part-1-form">
