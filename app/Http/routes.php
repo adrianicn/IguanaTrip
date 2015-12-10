@@ -131,6 +131,18 @@ Route::get('thankyou',function()
     return view('Registro.endRegister');
 });
 
+Route::get('terminos',function()
+{
+    
+    return view('RegistroOperadores.registroTerminos');
+});
+
+Route::get('acerca',function()
+{
+    
+    return view('RegistroOperadores.registroAcercaDe');
+});
+
 Route::get('/getlistaItinerarios/{id}', ['as' => 'itinerariosList', 'uses' => 'UsuarioServiciosController@getListaItinerarios','middleware' => 'notAuth']);
 Route::get('/getProvincias/{id_provincia}/{id_canton}/{id_parroquia}', ['as' => 'provincia', 'uses' => 'UsuarioServiciosController@getProvincias']);
 Route::get('/getCantones/{id}/{id_canton}/{id_parroquia}', ['as' => 'cantones', 'uses' => 'UsuarioServiciosController@getCantones']);

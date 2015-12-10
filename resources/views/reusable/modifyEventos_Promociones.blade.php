@@ -5,12 +5,15 @@
     @if(isset($itinerarios))
     <div id='itinerarios-1'>
         <h1>Itinerarios</h1>
-        <ul>
+        
+   
+        <table width="400" >
         @foreach ($itinerarios as $itinerario)
         
-        <li><div class="listado-1">
-                <a class="button-1 white" onclick="redirect('{!!asset('/itinerario')!!}/'+{!!$itinerario->id!!})" href="#">{!!$itinerario->nombre_itinerario!!}</a>
-                @if($itinerario->estado_itinerario==1)
+        <tr><td width="35%">
+                <a class="button-1 white" onclick="redirect('{!!asset('/itinerario')!!}/'+{!!$itinerario->id!!})" href="#">{!!$itinerario->nombre_itinerario!!}</a></td>
+            <td>
+            @if($itinerario->estado_itinerario==1)
                   <label class="switch switch-green">
                             
                         <input type="checkbox" id='estado_itinerario_{!!$itinerario->id!!}' checked name ='estado_itinerario_{!!$itinerario->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoItinerarioPrincipal')!!}/',{!!$itinerario->id!!},{!!$itinerario->id!!},'itinerarios')">
@@ -30,20 +33,22 @@
                 @endif
 
             </div> 
-         
-        </li>
+         </td>    
+        </tr>
         
         @endforeach
-</ul>
+</table>
     </div>
     @endif
     @if(isset($eventos))
     <div id='eventos-1'>
         <h1>Eventos</h1>
+        <table width="400" >
         @foreach ($eventos as $evento)
+         <tr><td width="35%">
         
-        <li><div class="listado-1">
-                <a class="button-1 white" onclick="redirect('{!!asset('/eventos')!!}/'+{!!$evento->id!!})" href="#">{!!$evento->nombre_evento!!}</a>
+                 <a class="button-1 white" onclick="redirect('{!!asset('/eventos')!!}/'+{!!$evento->id!!})" href="#">{!!$evento->nombre_evento!!}</a></td>
+             <td>
                 @if($evento->estado_evento==1)
                   <label class="switch switch-green">
                             
@@ -62,25 +67,25 @@
                         
                     </label>
                 @endif
-                
+                </td>
             </div>
          
         </li>
         
         @endforeach
-
+</table>
     </div>
     @endif
     @if(isset($promociones))
     <div id='promociones-1'>
         <h1>Promociones</h1>
-       <ul>
+       <table width="400" >
         @foreach ($promociones as $promocion)
+        <tr><td width="35%">
         
-        <li>
-            <div class="listado-1">
-            <a class="button-1 white" onclick="redirect('{!!asset('/promocion')!!}/'+{!!$promocion->id!!})" href="#">{!!$promocion->nombre_promocion!!}</a>
-                @if($promocion->estado_promocion==1)
+                <a class="button-1 white" onclick="redirect('{!!asset('/promocion')!!}/'+{!!$promocion->id!!})" href="#">{!!$promocion->nombre_promocion!!}</a></td>
+                
+            <td>@if($promocion->estado_promocion==1)
                 
                 <label class="switch switch-green">
                         
@@ -99,15 +104,13 @@
                         
                     </label>
                 @endif
-            
+            </td>
             </div> 
-        </li>
             
             
         
         @endforeach
-</ul>
-
+</table>
     </div>
     @endif
 

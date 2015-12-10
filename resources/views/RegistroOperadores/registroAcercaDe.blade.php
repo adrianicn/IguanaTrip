@@ -42,7 +42,7 @@
             </h2>
         </div>
         <div id="description-box-type">
-            El Paso 2 es la información matriz del establecimeinto y su respectivo administrador o contacto. Por ejemplo existen empresas con varias sucursales, en este formulario se detalla el contacto de quien es responsable del establecimiento matriz y quien será encargado del contenido de la página
+            Saludo
         </div>
     </div>
     <div id="space"></div>
@@ -61,38 +61,47 @@
 
     <div class="wrapper uwa-font-aa">
         <div class="form-group-step2">
-            texto...........................
+            
+            
+            <p>&nbsp;</p><p>&nbsp;</p>
+            <p>Reciban ustedes un cordial y atento saludo, &nbsp;as&iacute; como una extensa felicitaci&oacute;n por su exitosa trayectoria en el campo &nbsp;tur&iacute;stico.</p>
+<p>Por medio de la presente nos permitimos presentarles los servicios de nuestra p&aacute;gina web:</p>
+<p>&nbsp;</p>
+
+<p>Iguana Trip es una nueva p&aacute;gina web especializada en la promoci&oacute;n de servicios tur&iacute;sticos locales de calidad a nivel nacional e internacional. Esta innovadora iniciativa busca revolucionar la manera de hacer turismo tanto para los visitantes cuanto para los proveedores locales de servicios tur&iacute;sticos en base a tres principios generales:</p>
+
+
+<p style="margin-left:18pt;">&nbsp;I.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Promover el recurso tur&iacute;stico del Ecuador a nivel mundial facilitando la publicaci&oacute;n de, y el acceso a, &nbsp;informaci&oacute;n &uacute;til, veraz y detallada sobre los destinos y servicios tur&iacute;sticos.</p>
+<p style="margin-left:18pt;">II.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Conectar a turistas en todo el mundo directamente con los proveedores locales de servicios tur&iacute;sticos en el Ecuador.</p>
+<p style="margin-left:18pt;">III.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fomentar un turismo con base local que garantice el desarrollo socio-econ&oacute;mico del Ecuador y la conservaci&oacute;n de su recurso tur&iacute;stico.</p>
+<p style="margin-left:18pt;">&nbsp;</p>
+<p>En la fase de lanzamiento, Iguana Trip ofrece a los suscriptores de manera gratuita y permanente los siguientes servicios:</p>
+<p style="margin-left:21.3pt;">&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Promoci&oacute;n internacional de la informaci&oacute;n a trav&eacute;s de nuestra amplia cadena de colaboradores, para proveedores de servicios tur&iacute;sticos;</p>
+<p style="margin-left:21.3pt;">&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Publicaci&oacute;n de un archivo fotogr&aacute;fico, para proveedores de servicios tur&iacute;sticos;</p>
+<p style="margin-left:21.3pt;">&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Una interfaz visualmente atractiva y f&aacute;cil de utilizar, para turistas y proveedores de servicios tur&iacute;sticos;</p>
+<p style="margin-left:21.3pt;">&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Espacio de comentarios y sugerencias, para turistas;</p>
+<p style="margin-left:21.3pt;">&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Acceso al contenido de nuestra p&aacute;gina en varios idiomas, para turistas.</p>
+<p style="margin-left:21.3pt;">&nbsp;</p>
+<p>En caso de que se encuentren interesados en nuestros servicios, los invitamos muy amablemente a registrarse nuestra p&aacute;gina web y anunciarse a trav&eacute;s de Iguana Trip.</p>
+<p>Para mayor informaci&oacute;n sobre las siguientes fases de nuestra iniciativa o ante cualquier inquietud por favor comun&iacute;quense con nosotros a la direcci&oacute;n de correo electr&oacute;nico:</p>
+<p>info@iguanatrip.com</p>
+<p>Sin otro particular, nos despedimos de ustedes, no sin antes agradecerles por la atenci&oacute;n brindada a esta invitaci&oacute;n.</p>
+<p>&nbsp;</p>
+<p>Atentamente,</p>
+<p>El equipo de IguanaTrip</p>
+<p>&nbsp;</p><p>&nbsp;</p>
+<div align="center">
+
+                    <a href="eng"><img src="{{ asset('img/index-logo.png')}}" width="270" height="258" alt="IguanaTrip" /></a> 
+                </div>
         </div>
 
     </div>
 
-    <div class="iconoInvitacion">    
-                 <a onclick="RenderPartialGeneric('reusable.invitar_amigo')" href="#"><img src="{{ asset('img/amigo-1.png')}}"></a> 
-    </div>         
+    
                 
 </div>
 
-@section('scripts')
 
-
-{!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
-{!! HTML::script('/js/jsModal/basic.js') !!}
-
-
-    
-
-@stop
-
-  <script>
-  $(function() {
-    var tooltips = $( "[title]" ).tooltip({
-      position: {
-        my: "left top",
-        at: "right+5 top-5"
-      }
-    });
-   
-  });
-  </script>
 
 @stop

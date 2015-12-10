@@ -45,10 +45,10 @@
 
 
             <div id="logo_">
-                <div id="logo-imagen">
+                    <div id="logo-imagen">
 
-                    <a href="eng"><img src="{{ asset('img/index-logo.png')}}" width="270" height="258" alt="IguanaTrip" /></a> 
-                </div>
+                        <a href="eng"><img src="{{ asset('img/index-logo.png')}}" width="270" height="258" alt="IguanaTrip" /></a> 
+                    </div>
 
             </div>
 
