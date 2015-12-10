@@ -92,13 +92,46 @@ class UsuarioServiciosController extends Controller {
         return ($view);
     }
     
-    public function getProvincias(Request $request,ServiciosOperadorRepository $gestion) {
+    public function getProvincias(Request $request,ServiciosOperadorRepository $gestion, $id_provincia,$id_canton,$id_parroquia) {
         //
 
         $listProvincias = $gestion->getProvincias();
 
         
-        $view = View::make('reusable.provincia')->with('provincias', $listProvincias);
+        $view = View::make('reusable.provincia')->with('provincias', $listProvincias)->with('id_provincia', $id_provincia)->with('id_canton', $id_canton)->with('id_parroquia', $id_parroquia);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
+    }
+    
+    public function getCantones(Request $request,ServiciosOperadorRepository $gestion, $id, $id_canton,$id_parroquia) {
+        //
+
+        $listCantones = $gestion->getRecursivo($id);
+
+        
+        $view = View::make('reusable.canton')->with('cantones', $listCantones)->with('id_canton', $id_canton)->with('id_parroquia', $id_parroquia);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
+    }
+    public function getparroquias(Request $request,ServiciosOperadorRepository $gestion, $id,$id_parroquia) {
+        //
+
+        $listParroquia = $gestion->getRecursivo($id);
+
+        
+        $view = View::make('reusable.parroquia')->with('parroquias', $listParroquia)->with('id_parroquia', $id_parroquia);
         if ($request->ajax()) {
             $sections = $view->rendersections();
 

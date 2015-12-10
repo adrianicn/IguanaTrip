@@ -5,12 +5,37 @@
                     {!!Form::label('provincia_1', 'Provincia', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
                     
                     
-                    <select name="id_provincia" id="sports" class='inputselect chng'>
+                    <select name="id_provincia" id="id_provincia" class='inputselect chng'>
 @foreach($provincias as $provincia)
-<option value="{!!$provincia->id!!}" >{!!$provincia->nombre!!}</option>
+@if($id_provincia==$provincia->id)
+<option value="{!!$provincia->id!!}" selected >{!!$provincia->nombre!!}</option>
+@else
+<option value="{!!$provincia->id!!}"  >{!!$provincia->nombre!!}</option>
+@endif
     @endforeach
 
 </select>
                 </div>
 
- @endsection
+<div id='canton'>
+                    @section('cantones')
+                    @show
+                    
+                </div>
+
+@if($id_canton!='0') 
+ <script>
+  
+  GetDataAjaxCantones("{!!asset('/getCantones')!!}"+"/"+{!!$id_provincia!!}+"/"+{!!$id_canton!!}+"/"+{!!$id_parroquia!!});
+
+</script>
+@endif
+
+ <script>
+$('#id_provincia').on('change', function() {
+    var valor=this.value;
+  
+  GetDataAjaxCantones("{!!asset('/getCantones')!!}"+"/"+valor+"/0/0");
+});
+</script>
+@endsection

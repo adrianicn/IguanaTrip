@@ -404,6 +404,12 @@ class ServiciosOperadorRepository extends BaseRepository {
         return $ubicacion::where('idUbicacionGeograficaPadre', '=',1)->get();
     }
     
+    public function getRecursivo($id_geo) {
+        $ubicacion = new $this->ubicacion_geografica;
+        return $ubicacion::where('idUbicacionGeograficaPadre', '=',$id_geo)->get();
+    }
+    
+    
     
     //detalle itinersrioo
   public function getEstadoDetalleItiner($id_detalleItinerario) {

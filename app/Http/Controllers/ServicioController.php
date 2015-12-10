@@ -280,7 +280,10 @@ class ServicioController extends Controller
     			'telefono' => $formFields['telefono'],
     			'latitud_servicio' => $formFields['latitud_servicio'],
     			'longitud_servicio' => $formFields['longitud_servicio'],
-    			'id_usuario_servicio' => $formFields['id']
+    			'id_usuario_servicio' => $formFields['id'],
+                'id_provincia' => $formFields['id_provincia'],
+                'id_canton' => $formFields['id_canton'],
+                'id_parroquia' => $formFields['id_parroquia']
     	);
     	$validator = Validator::make($usuarioServicioData, $this->validationUsuarioServicios);
     	if ($validator->fails()) {
