@@ -170,6 +170,21 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 <div id="evento"><a class="button-step4" title="Puedes crear varios eventos para tu servicio. Ejemplo si tu servicio es una discoteca puedes agregar Jueves laydies night como evento o si eres un restaurante puedes agregar eventos como inauguraciones, etc." onclick="RenderPartialGeneric('reusable.createNewEvent',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
                 <div id="evento"><a class="button-step4" title="Esta opción es orientada a servicios turísticos de viajes y transporte. Por ejemplo tu servicio es una agencia de viajes y tienes varios itinerarios Trip Cotopaxi, Trip Amazonía o si eres un transporte podrás especificar la ruta de tu servicio." onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Itinerario</a></div>
             </div>
+            <div>
+                <div class="form-group-step2">
+                    {!!Form::label('provincia_1', 'Provincia', array('class'=>'control-label-2'))!!}
+                    {!!Form::select('id_provincia', array('L' => 'Large', 'S' => 'Small'))!!}
+                </div>
+                <div class="form-group-step2">
+                    {!!Form::label('canton_1', 'Canton', array('class'=>'control-label-2'))!!}
+                    {!!Form::select('id_canton',  array('L' => 'Large', 'S' => 'Small'))!!}
+                </div>
+                <div class="form-group-step2">
+                    {!!Form::label('parroquia_1', 'Parroquia', array('class'=>'control-label-2'))!!}
+                    {!!Form::select('id_parroquia',  array('L' => 'Large', 'S' => 'Small'))!!}
+                </div>
+                                
+            </div>
         </div>
         <div id="part-1-form">
             <div class="box-content-button-1">
