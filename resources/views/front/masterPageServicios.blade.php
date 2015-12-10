@@ -91,6 +91,8 @@
                             <li><a href="{!!asset('/')!!}">Home</a></li>
                             <li><a href="#">Gallery</a></li>
                             <li><a href="#">Contact</a></li>
+                            <li><a href="#contact">{{ trans('welcome/index.labelTerminos') }}</a></li>
+                            <li><a href="#contact">{{ trans('welcome/index.labelAcercaDe') }}</a></li>
                             <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
                             <li>
  <!--                               <a href="{!! url('language') !!}"><img width="32" height="32" alt="en" src="{!! asset('img/' . (session('locale') == 'es' ? 'english' : 'español') . '-flag.png') !!}"></a>-->
