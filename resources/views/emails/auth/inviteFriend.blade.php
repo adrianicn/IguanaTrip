@@ -1224,7 +1224,7 @@
             <table class="header centered" style="border-collapse: collapse;border-spacing: 0;Margin-left: auto;Margin-right: auto;width: 100%;">
                 <tbody><tr>
                         <td style="padding: 0;vertical-align: top;">&nbsp;</td>
-                        <td class="logo emb-logo-padding-box" style="padding: 0;vertical-align: top;mso-line-height-rule: at-least;width: 600px;padding-top: 20px;padding-bottom: 26px;"><div class="logo-center" style="font-family: Ubuntu,sans-serif;color: #e6e6e6;text-align: center;font-size: 0px !important;line-height: 0 !important;" align="center" id="emb-email-header"><img style="border: 0;-ms-interpolation-mode: bicubic;display: block;Margin-left: auto;Margin-right: auto;max-width: 153px;" src="{!! asset('img/index-logo.png')!!}" alt="" width="153" height="146" /></div></td>
+                        <td class="logo emb-logo-padding-box" style="padding: 0;vertical-align: top;mso-line-height-rule: at-least;width: 600px;padding-top: 20px;padding-bottom: 26px;"><div class="logo-center" style="font-family: Ubuntu,sans-serif;color: #e6e6e6;text-align: center;font-size: 0px !important;line-height: 0 !important;" align="center" id="emb-email-header"><img style="border: 0;-ms-interpolation-mode: bicubic;display: block;Margin-left: auto;Margin-right: auto;max-width: 153px;" src="{!! asset('public/img/index-logo.png')!!}" alt="" width="153" height="146" /></div></td>
                         <td style="padding: 0;vertical-align: top;">&nbsp;</td>
                     </tr>
                 </tbody></table>
@@ -1237,7 +1237,7 @@
                                         <td class="column" style="padding: 0;vertical-align: top;text-align: left;">
 
                                             <div class="image" style="font-size: 12px;mso-line-height-rule: at-least;font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 0;font-family: Cabin,Avenir,sans-serif;color: #fff;" align="center">
-                                                <img class="gnd-corner-image gnd-corner-image-center gnd-corner-image-top" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 900px;" src="{!! asset('img/extra-pag-1c.png')!!}" alt="iguanatrip.com" width="600" height="293" />
+                                                <img class="gnd-corner-image gnd-corner-image-center gnd-corner-image-top" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 900px;" src="{!! asset('public/img/extra-pag-1c.png')!!}" alt="iguanatrip.com" width="600" height="293" />
                                             </div>
 
                                             <table class="contents" style="border-collapse: collapse;border-spacing: 0;table-layout: fixed;width: 100%;">
@@ -1307,26 +1307,7 @@
                 <tbody><tr>
                         <td style="padding: 0;vertical-align: top;">&nbsp;</td>
                         <td class="inner" style="padding: 58px 0 29px 0;vertical-align: top;width: 600px;">
-                            <table class="right" style="border-collapse: collapse;border-spacing: 0;" align="right">
-                                <tbody><tr>
-                                        <td style="padding: 0;vertical-align: top;color: #e6e6e6;font-size: 12px;line-height: 22px;max-width: 200px;mso-line-height-rule: at-least;">
-                                            <div class="sharing">
-                                                <div style="Margin-bottom: 5px;">
-                                                    <fblike class="fblike" style="font-family: Cabin,Avenir,sans-serif;background-color: #0f0f0f;background-image: url(https://i9.createsend1.com/static/eb/master/09-onyx/imgf/fblike.png);background-repeat: no-repeat;background-size: 200px 56px;border-radius: 2px;color: #ffffff;display: block;font-size: 11px;font-weight: bold;line-height: 11px;padding: 8px 11px 7px 28px;text-align: left;text-decoration: none;" cs-button data-width="78" left-align-text="true">
-                                                        Like
-                                                    </fblike>
-                                                </div>
-
-
-                                                <div style="Margin-bottom: 5px;">
-                                                    <forwardtoafriend class="forwardtoafriend" style="font-family: Cabin,Avenir,sans-serif;background-color: #0f0f0f;background-image: url(https://i4.createsend1.com/static/eb/master/09-onyx/imgf/forward.png);background-repeat: no-repeat;background-size: 200px 56px;border-radius: 2px;color: #ffffff;display: block;font-size: 11px;font-weight: bold;line-height: 11px;padding: 8px 11px 7px 28px;text-align: left;text-decoration: none;" cs-button data-width="78" left-align-text="true">
-                                                        Forward
-                                                    </forwardtoafriend>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody></table>
+                            
                             <table class="left" style="border-collapse: collapse;border-spacing: 0;" align="left">
                                 <tbody><tr>
                                         <td style="padding: 0;vertical-align: top;color: #e6e6e6;font-size: 12px;line-height: 22px;text-align: left;width: 400px;">
