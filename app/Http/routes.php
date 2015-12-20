@@ -143,6 +143,8 @@ Route::get('acerca',function()
     return view('RegistroOperadores.registroAcercaDe');
 });
 
+
+
 Route::get('/getlistaItinerarios/{id}', ['as' => 'itinerariosList', 'uses' => 'UsuarioServiciosController@getListaItinerarios','middleware' => 'notAuth']);
 Route::get('/getProvincias/{id_provincia}/{id_canton}/{id_parroquia}', ['as' => 'provincia', 'uses' => 'UsuarioServiciosController@getProvincias']);
 Route::get('/getCantones/{id}/{id_canton}/{id_parroquia}', ['as' => 'cantones', 'uses' => 'UsuarioServiciosController@getCantones']);
@@ -173,3 +175,22 @@ Route::get('operador', ['as' => 'operador', 'uses' => 'ServicioController@step2'
 Route::get('servicios/serviciooperador/{id}/{id_catalogo}', ['as' => 'details.show', 'uses' => 'ServicioController@step4','middleware' => 'notAuth'] );
 Route::post('servicios/serviciosoperador', ['as' => 'upload-postusuarioservicios', 'uses' =>'ServicioController@postUsuarioServicios','middleware' => 'notAuth']);
 Route::post('servicios/serviciosoperadormini', ['as' => 'upload-postusuarioserviciosmini', 'uses' =>'ServicioController@postUsuarioServiciosMini','middleware' => 'notAuth']);
+
+
+
+/*Rutas dispositivo mobil*/
+
+
+Route::get('loginmobile',function()
+{
+    
+    return view('mobile.logInMobile.LogInMobile');
+});
+
+Route::get('registerMobile',function()
+{
+    
+    return view('mobile.logInMobile.registerMobile');
+});
+
+/**End rutas dispositivo mobil************************************************/

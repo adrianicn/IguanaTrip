@@ -1237,7 +1237,7 @@
                                         <td class="column" style="padding: 0;vertical-align: top;text-align: left;">
 
                                             <div class="image" style="font-size: 12px;mso-line-height-rule: at-least;font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 0;font-family: Cabin,Avenir,sans-serif;color: #fff;" align="center">
-                                                <img class="gnd-corner-image gnd-corner-image-center gnd-corner-image-top" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 900px;" src="{!! asset('public/img/extra-pag-1c.png')!!}" alt="iguanatrip.com" width="600" height="293" />
+                                                <img class="gnd-corner-image gnd-corner-image-center gnd-corner-image-top" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 900px;" src="{!! asset('public/img/cotopaxi.jpg')!!}" alt="iguanatrip.com" width="600" height="293" />
                                             </div>
 
                                             <table class="contents" style="border-collapse: collapse;border-spacing: 0;table-layout: fixed;width: 100%;">

@@ -18,9 +18,9 @@ use Input;
 class AuthController extends Controller {
 
     protected $validationRules = [
-        'username' => 'required|max:30|alpha|unique:users',
+        'username' => 'required|max:30|unique:users',
         'email' => 'required|email|max:255|unique:users',
-        'password' => 'required|confirmed',
+        'password' => 'required|confirmed|min:5',
     ];
 
     use AuthenticatesAndRegistersUsers,
@@ -70,10 +70,18 @@ class AuthController extends Controller {
             if ($throttles) {
                 $this->incrementLoginAttempts($request);
             }
-
+if(session('device')=='desk')
+{
             return redirect('/')
                             ->with('error', trans('front/login.credentials'))
                             ->withInput($request->only('log'));
+}
+else
+    {
+            return redirect('/loginmobile')
+                            ->with('error', trans('front/login.credentials'))
+                            ->withInput($request->only('log'));
+}
         }
 
         $user = $auth->getLastAttempted();
@@ -96,8 +104,12 @@ $request->session()->put('user_email', $user->email);
         }
 
         
-
+if(session('device')=='desk')
+{
         return redirect('/')->with('error', trans('front/verify.again'));
+}
+else{
+return redirect('/loginmobile')->with('error', trans('front/verify.again'));}
     }
 
     /**

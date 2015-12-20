@@ -1,39 +1,63 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-
-    <head>
-        <title>IguanaTrip- Deja de ser turista conviertete en viajero</title>
-        <meta charset='utf-8' />
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>IguanaTrip- Deja de ser turista conviertete en viajero</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
         <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
         <meta name="_token" content="{!! csrf_token() !!}"/>
         <meta name="description" content="Registra tus servicios turisticos. Nosotros haremos que lo conozcan a nivel internacional y turistas de todo el mundo vengan a visitarte. Iguana Trip surge como una alternativa turística comunitaria para defender y revalorizar los recursos culturales y naturales. Planea tu viaje y aprende sobre la historia y la cultura del país mientras te involucras en la realidad del mismo. Iguana Trip te brindara información práctica de acuerdo a tus intereses sobre el lugar específico que decidas visitar. Encuentra hoteles, day trips, museos, playas, sitios turísticos, restaurantes, bares, todo tipo de atracciones desde la más pequeña a la más grande. Y lo más importante si lo deseas, IgunaTrip te guiará en tu recorrido para que ayudes a generar ingresos complementarios a comunidades locales en busca de desarrollo. Nos encontraos en la etapa de registro de operadores turísticos">
-        <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW, ARCHIVE" />
+        <meta NAME="ROBOTS" CONTENT="INDEX, FOLLOW, ARCHIVE" />
         <meta name="keywords" content="HTML,CSS,XML,JavaScript">
         <meta name="author" content="IguanaTrip group">
-
-        <link rel="shortcut icon" href="favicon.ico" />
-        <link rel="apple-touch-icon" href="{{ asset('images/favicon.png')}}" />        
-
-        <!--        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
-        {!! HTML::style('css/demo.css') !!} 
-        {!! HTML::style('css/masterPagesRegistro.css') !!}
-        {!! HTML::style('css/base/layoutBase.css') !!} 
-        {!! HTML::style('css/popupModal/basic.css') !!} 
-        {!! HTML::style('css/calendar/ui-jquery.css') !!}
-        {!!HTML::script('js/sliderTop/jquery-1.9.1.min.js') !!}
-            {!!HTML::script('js/sliderTop/jssor.slider.mini.js') !!}
-            
-
-        
+   
+         
     
-    </head>
-    <div id='loadingScreen'>
-        <body>
-            <header role="banner">
-                <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1360px; height: 235px; overflow: hidden; visibility: hidden;">
+    {!!HTML::script('js/sliderTop/jquery-1.9.1.min.js') !!}
+    {!!HTML::script('js/sliderTop/jssor.slider.mini.js') !!}
+    {!! HTML::style('cssMobile/themes/1/conf-room1.min.css') !!} 
+    {!! HTML::style('cssMobile/themes/1/jquery.mobile.icons.min.css') !!} 
+    {!! HTML::style('libMobile/jqm/1.4.4/jquery.mobile.structure-1.4.5.min.css') !!} 
+    {!! HTML::style('cssMobile/app.css') !!} 
+    {!!HTML::script('libMobile/jqm/1.4.4/jquery-2.1.1.min.js') !!}
+    {!!HTML::script('libMobile/jqm/1.4.4/jquery.mobile-1.4.5.min.js') !!}
+    {!! HTML::style('css/demo.css') !!} 
+    {!!HTML::script('js/loadingScreen/loadingoverlay.js') !!}
+
+    {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
+</head>
+
+
+
+    
+
+    <body>
+        
+        <div data-role="page" id="page1" role="banner">
+ 
+    <style>
+        #logo_{
+            margin-left: 20px;
+    margin-top: 15px;
+    position: absolute;
+    z-index: 500;
+            
+        }
+        
+    </style>
+    
+    <div data-role="header" data-theme="c">
+            <h1>IguanaTrip.com</h1>
+        </div><!-- /header -->
+       <div id="logo_" align="center">
+            <div id="logo-imagen">
+
+                <a href="#" onclick="window.location.href = '{!!asset('/')!!}'"><img src="{{ asset('img/index-logo.png')}}" width="100" height="88" alt="IguanaTrip" /></a> 
+            </div>
+            
+        </div>
+    
+                    <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1360px; height: 635px; overflow: hidden; visibility: hidden;">
         <!-- Loading Screen -->
         <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
             <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
@@ -41,40 +65,26 @@
             <div style="position:absolute;display:block;background:url("{!!asset('img/internas/loading.gif')!!}") no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
             -->
         </div>
-        <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1360px; height: 235px; overflow: hidden;">
+        <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1360px; height: 635px; overflow: hidden;">
             <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="{{ asset('img/internas/banner-1.png')}}" />
+                <img data-u="image" src="{{ asset('img/cotopaxi.jpg')}}" />
+            </div>
+          
+            
+            <div data-p="112.50" style="display: none;">
+                <img data-u="image" src="{{ asset('img/extra-pag-1b.png')}}" />
             </div>
             <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="{{ asset('img/internas/banner-11.png')}}" />
+                <img data-u="image" src="{{ asset('img/index-fondo.jpg')}}" />
             </div>
             <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="{{ asset('img/internas/banner-3.png')}}" />
+                <img data-u="image" src="{{ asset('img/extra-pag-1c.png')}}" />
             </div>
-            <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="{{ asset('img/internas/banner-4.png')}}" />
-            </div>
-            <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="{{ asset('img/internas/banner-5.png')}}" />
-            </div>
-            <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="{{ asset('img/internas/banner-6.png')}}" />
-            </div>
-            <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="{{ asset('img/internas/banner-7.png')}}" />
-            </div>
-            <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="{{ asset('img/internas/banner-8.png')}}" />
-            </div>
-            <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="{{ asset('img/internas/banner-9.png')}}" />
-            </div>
-            <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="{{ asset('img/internas/banner-13.png')}}" />
-            </div>
-            <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="{{ asset('img/internas/banner-15.png')}}" />
-            </div>
+            
+            
+            
+            
+            
         </div>
         <!-- Bullet Navigator -->
         <div data-u="navigator" class="jssorb05" style="bottom:16px;right:16px;" data-autocenter="1">
@@ -86,63 +96,20 @@
         <span data-u="arrowright" class="jssora12r" style="top:0px;right:0px;width:30px;height:46px;" data-autocenter="2"></span>
         
     </div>
-                <div id="menu">
-                    <div id="menu-ul">
-                        <ul id="seleccionitem">
-                            <li><a href="{!!asset('/')!!}">Home</a></li>
-                            <li><a href="#" onclick="window.location.href = '{!!asset('/terminos')!!}'">{{ trans('welcome/index.labelTerminos') }}</a></li>
-                            <li><a href="#" onclick="window.location.href = '{!!asset('/acerca')!!}'">{{ trans('welcome/index.labelAcercaDe') }}</a></li>
-                            <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
-                            
-                        </ul>
-                    </div>
-                    <div class="sessionName">Bienvenido {!!session('user_name')!!}</div>
-                </div>
-            </header>
-            <div class="container" id="target">
-                <div class="content show" id="registro-step1">
-                    @yield('step1')
-                </div>	
-
-            </div>
+        
+        @yield('content')
             
-            <div class="auspciantes" >
+        </div>
+        
                 
-<img data-u="image" src="{{ asset('img/internas/logos-base-blanco.png')}}" />
-            </div>
+        
 
-            <div id="footers">
-                <div id="menu-ul">
-                    <ul id="seleccionitem">
-                            <li><a href="{!!asset('/')!!}">Home</a></li>
-                            <li><a href="#" onclick="window.location.href = '{!!asset('/terminos')!!}'">{{ trans('welcome/index.labelTerminos') }}</a></li>
-                            <li><a href="#" onclick="window.location.href = '{!!asset('/acerca')!!}'">{{ trans('welcome/index.labelAcercaDe') }}</a></li>
-                            <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
+    </body>
 
-                    </ul>
-                </div>	
-            </div>
-            
-               <div class="copyr" >
-                
-                  <span id="uxp_ftr_link_trademark">                  © 2015 IguanaTrip Group All rights reserved                </span>
-            </div>
+</html>
+@yield('scripts')
+<script>
 
-
-
-            {!! HTML::script('js/jquery.js') !!}
-            {!! HTML::script('js/bootstrap.min.js') !!}
-            {!!HTML::script('js/loadingScreen/loadingoverlay.js') !!}
-            
-            {!!HTML::script('js/Compartido.js') !!}
-            {!! HTML::script('js/calendar/calendar.js') !!}
-            {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
-            
-            {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
-            
-            
-            
-            <script>
         jQuery(document).ready(function ($) {
             
             var jssor_1_SlideshowTransitions = [
@@ -239,10 +206,3 @@
         .jssora12l.jssora12ldn { background-position: -256px -37px; }
         .jssora12r.jssora12rdn { background-position: -315px -37px; }
     </style>
-
-            @yield('scripts')
-
-
-        </body>
-    </div>
-</html>
