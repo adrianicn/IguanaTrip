@@ -237,7 +237,8 @@ switch ($servicio->id_catalogo_servicio) {
                                 Agencia de viajes, guía independiente, exploración, etc
                                 </div>
                                 </td>
-                            <td><input class="demo labelauty" name="id_catalogo_servicio3" id="checkbox-3" value="3" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_3!!}/></td></tr>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio3" id="checkbox-3" value="3" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_3!!}/></td>
+                        </tr>
                         <tr class="alt"><td> 
                                 <div id="star4" class="dialog-open">
                                     <img src="{!! asset('images/register/registro4.jpg')!!}" alt="" />
@@ -252,7 +253,9 @@ switch ($servicio->id_catalogo_servicio) {
                                 Museos ,parques nacionales, zoologicos, etc
                                 </div>
                             </td>
-                            <td><input class="demo labelauty" name="id_catalogo_servicio4" id="checkbox-4" value="4" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_4!!}/></td></tr>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio4" id="checkbox-4" value="4" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_4!!}/></td>
+                        </tr>
+                       
                         <tr><td> 
                                 
                                 <div id="star5" class="dialog-open">
@@ -268,7 +271,8 @@ switch ($servicio->id_catalogo_servicio) {
                                 </div>
                                 
                             </td>
-                            <td><input class="demo labelauty" name="id_catalogo_servicio7" id="checkbox-7" value="7" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_7!!}/></td></tr>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio5" id="checkbox-5" value="5" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_5!!}/></td>
+                        </tr>
 
                         <tr class="alt"><td>
                                 <div id="star7" class="dialog-open">
@@ -284,7 +288,7 @@ switch ($servicio->id_catalogo_servicio) {
                                 </div>
                                 
                                 </td>
-                            <td><input class="demo labelauty" name="id_catalogo_servicio6" id="checkbox-6" value="6" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_6!!}/></td>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio7" id="checkbox-7" value="7" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_7!!}/></td>
                         </tr>
                         <tr class="alt"><td>
                                 <div id="star6" class="dialog-open">

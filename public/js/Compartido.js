@@ -364,6 +364,29 @@ function GetDataAjaxCantones(url) {
     });
 }
 
+function GetDataAjaxDescripcion(url) {
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+
+            $("#descripcionGeografica1").html(data.descripcionGeografica);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
 function GetDataAjaxParroquias(url) {
 
     $.ajax({
@@ -371,9 +394,9 @@ function GetDataAjaxParroquias(url) {
         url: url,
         dataType: 'json',
         success: function (data) {
-            $("#parroquia").LoadingOverlay("show");
+
             $("#parroquia").html(data.parroquias);
-            $("#parroquia").LoadingOverlay("hide", true);
+
 
         },
         error: function (data) {

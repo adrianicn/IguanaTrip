@@ -103,6 +103,7 @@ class ServicioController extends Controller
     public function step4( $id, $id_catalogo,ServiciosOperadorRepository $gestion )
             
     {
+        session()->forget('parroquia_admin');
         //permisssion
         $permiso = $gestion->getPermiso($id);
         

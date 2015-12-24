@@ -15,5 +15,23 @@
 
 </select>
                 </div>
- 
+<div id='descripcionGeografica1'>
+                    @section('descripcionGeografica')
+                    @show
+                    
+                </div>
+
+
+@if (session('parroquia_admin'))
+<script>
+$('#id_parroquia').on('change', function() {
+    var valor=this.value;
+  
+  GetDataAjaxDescripcion("{!!asset('/getDescripcionGeografica')!!}"+"/"+valor+"/8");
+  $('#id_auxiliar').val(valor);
+});
+</script>   
+
+@endif
+
 @endsection

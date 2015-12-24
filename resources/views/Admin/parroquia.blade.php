@@ -1,5 +1,62 @@
+@extends('front.masterPageServicios')
 
+@section('step1')
 
+<div style='display:none'>
+    <img src="{!! asset('img/x.png')!!}" alt='' />
+</div>
+<style>
+    #simplemodal-container a.modalCloseImg {
+        background:url("{!! asset('img/x.png')!!}") no-repeat;
+        width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+</style>
+<div id="basic-modal-content" class="cls loadModal"></div>
+
+<div class="rowerror">
+</div>
+
+<div class="row-step4">
+    <div id="title-box-header">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
+      
+
+           
+            <h2 class="head-title">
+    I am            <strong>Admin</strong>
+            </h2>
+        </div>
+        <div id="description-box-type">
+            Detalle de cantones
+        </div>
+    </div>
+    <div id="space"></div>
+     <div id="title-box-header-navigation">
+        
+           <h2 class="head-title-navigation">
+   <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios')!!}'"> 
+       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
+               
+            </h2>
+    </div>
+    
+    
+    
+    <div id="space"></div>
+    
+{!! Form::open(['url' => route('postGeoLoc'),  'id'=>'postGeoLoc']) !!}
+    <div class="wrapper uwa-font-aa">
+          <div id='provincias'>
+                    @section('provincias')
+                    @show
+                    
+                </div>
+        
+        
+
+    </div>
+    
+{!! Form::close() !!}
+          
 <!--{!! HTML::style('/packages/bootstrap/css/bootstrap.min.css') !!}
 {!! HTML::style('/assets/css/style.css') !!}-->
 {!! HTML::style('/packages/dropzone/dropzone.css') !!}
@@ -8,7 +65,7 @@
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="col-md-offset-1 col-md-10">
             <div class="jumbotron how-to-create" >
-@foreach ($objeto as $promounic)
+
 
 
 
@@ -16,11 +73,11 @@
 
                 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="hidden" name="id_catalogo_fotografia" value="{{ $tipo }}">
+                    <input type="hidden" name="id_catalogo_fotografia" value="8">
                         
                         <input type="hidden" name="id_usuario_servicio" value="0">
                             
-                            <input type="hidden" name="id_auxiliar" value="0">
+                            <input type="hidden" id="id_auxiliar" name="id_auxiliar" value="2">
                 <div class="dz-message">
 
                 </div>
@@ -34,7 +91,7 @@
                 <h4 style="text-align: center;color:#428bca;">Arrastra las imágenes aquí  <span class="glyphicon glyphicon-hand-down"></span></h4>
 
                 {!! Form::close() !!}
-                @endforeach
+                
 
             </div>
             
@@ -92,4 +149,23 @@
 {!! HTML::script('/assets/js/dropzone-config.js') !!}
 
 
+    
+                
+</div>
 
+
+<script>
+    $(document).ready(function () {
+        
+        GetDataAjaxProvincias("{!!asset('/getProvincias')!!}/0/0/0");
+    });
+
+
+$('#id_provincia').on('change', function() {
+    var valor=this.value;
+  $('#id_auxiliar').val(valor);
+  
+});
+</script>
+
+@stop

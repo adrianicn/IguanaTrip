@@ -93,6 +93,13 @@
                             <li><a href="#" onclick="window.location.href = '{!!asset('/terminos')!!}'">{{ trans('welcome/index.labelTerminos') }}</a></li>
                             <li><a href="#" onclick="window.location.href = '{!!asset('/acerca')!!}'">{{ trans('welcome/index.labelAcercaDe') }}</a></li>
                             <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
+                            @if(session('statut')=='admin')
+                            
+                            <li><a href="#" onclick="window.location.href = '{!!asset('/getProvinciasDescipcion')!!}'">Descr. Provincias</a></li>
+                            <li><a href="#" onclick="window.location.href = '{!!asset('/getCantonesDescipcion')!!}'">Cantones</a></li>
+                            <li><a href="#" onclick="window.location.href = '{!!asset('/getParroquiaDescipcion')!!}'">Parroquia</a></li>
+                            
+                            @endif
                             
                         </ul>
                     </div>
