@@ -73,6 +73,7 @@ class ServicioController extends Controller
     public function index(Guard $auth, OperadorRepository $operador_gestion)
     {
     	if ($auth->check()) {
+            
     		$listOperadores = $operador_gestion->getOperador(Session::get('user_id'));
     		$view = view('RegistroOperadores.registroStep1',compact('listOperadores')); // revisar debe redirecccionar a otro lado
 		} else {
@@ -256,11 +257,23 @@ class ServicioController extends Controller
     	$inputData = Input::get('formData');
     	parse_str($inputData, $formFields);
     	
+        if(isset($formFields['id_servicio_est'])){
     	foreach ($formFields['id_servicio_est'] as $catalogo)
     		$servicio_establecimiento_usuario[] = $catalogo;
-    	
+        }
+        else
+        {
+            $servicio_establecimiento_usuario[] = "";
+        }
 //     	var_dump($servicio_establecimiento_usuario);
 //     	exit;
+        
+        if(!isset($formFields['id_provincia']))
+          $formFields['id_provincia']=0;
+if(!isset($formFields['id_canton']))
+        $formFields['id_canton']=0;
+if(!isset($formFields['id_parroquia']))        
+$formFields['id_parroquia']=0;
     	
     	$usuarioServicioData = array(
     			'nombre_servicio' => $formFields['nombre_servicio'],

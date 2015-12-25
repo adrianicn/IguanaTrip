@@ -45,8 +45,8 @@ class AuthController extends Controller {
      */
     public function postLogin(
     LoginRequest $request, Guard $auth) {
-        
-        
+
+
         $logValue = $request->input('log');
 
         $logAccess = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
@@ -70,18 +70,15 @@ class AuthController extends Controller {
             if ($throttles) {
                 $this->incrementLoginAttempts($request);
             }
-if(session('device')=='desk')
-{
-            return redirect('/')
-                            ->with('error', trans('front/login.credentials'))
-                            ->withInput($request->only('log'));
-}
-else
-    {
-            return redirect('/loginmobile')
-                            ->with('error', trans('front/login.credentials'))
-                            ->withInput($request->only('log'));
-}
+            if (session('device') == 'desk') {
+                return redirect('/')
+                                ->with('error', trans('front/login.credentials'))
+                                ->withInput($request->only('log'));
+            } else {
+                return redirect('/loginmobile')
+                                ->with('error', trans('front/login.credentials'))
+                                ->withInput($request->only('log'));
+            }
         }
 
         $user = $auth->getLastAttempted();
@@ -97,19 +94,18 @@ else
                 $request->session()->forget('user_id');
             }
             $request->session()->put('user_id', $user->id);
-$request->session()->put('user_name', $user->username);
-$request->session()->put('user_email', $user->email);
-            
+            $request->session()->put('user_name', $user->username);
+            $request->session()->put('user_email', $user->email);
+
             return redirect('/servicios')->with('user', $user->id);
         }
 
-        
-if(session('device')=='desk')
-{
-        return redirect('/')->with('error', trans('front/verify.again'));
-}
-else{
-return redirect('/loginmobile')->with('error', trans('front/verify.again'));}
+
+        if (session('device') == 'desk') {
+            return redirect('/')->with('error', trans('front/verify.again'));
+        } else {
+            return redirect('/loginmobile')->with('error', trans('front/verify.again'));
+        }
     }
 
     /**
@@ -133,7 +129,7 @@ return redirect('/loginmobile')->with('error', trans('front/verify.again'));}
         );
         $validator = Validator::make($userData, $this->validationRules);
 
-        
+
 
 
         if ($validator->fails()) {

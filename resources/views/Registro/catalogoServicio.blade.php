@@ -83,6 +83,9 @@ switch ($servicio->id_catalogo_servicio) {
        <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
                <a class="button-step4" onclick="window.location.href = '{!!asset('/operador')!!}'"> 
                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2</strong></a>
+                              <a class="button-step4"> 
+       <strong>Paso 3 </strong></a>
+
             </h2>
     </div>
     

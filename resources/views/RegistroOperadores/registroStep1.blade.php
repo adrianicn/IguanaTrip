@@ -5,6 +5,7 @@
 
 
 <?php
+
 $label_tipo_operador_agencia = 'Registro gratis';
 $label_tipo_operador_empresa = 'Registro gratis';
 $label_tipo_operador_persona = 'Registro gratis';

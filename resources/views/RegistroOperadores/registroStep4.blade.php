@@ -108,6 +108,9 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
        <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 3 </strong></a>
                <a class="button-step4" onclick="window.location.href = '{!!asset('/detalleServicios')!!}'"> 
        <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 4 </strong></a>
+                              <a class="button-step4"> 
+       <strong>Paso 5 </strong></a>
+
                
             </h2>
     </div>
