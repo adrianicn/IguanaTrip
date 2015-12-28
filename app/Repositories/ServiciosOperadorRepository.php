@@ -13,6 +13,7 @@ use App\Models\Invitaciones_Amigos;
 use App\Models\UbicacionGeografica;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
+use App\Models\SearchEngine;
 
 class ServiciosOperadorRepository extends BaseRepository {
 
@@ -37,6 +38,8 @@ class ServiciosOperadorRepository extends BaseRepository {
     protected $operador;
     protected $invitar_amigo;
     protected $ubicacion_geografica;
+    protected $search_engine;
+    
 
     /**
      * Create a new ServiciosOperadorRepository instance.
@@ -56,6 +59,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->operador = new Usuario_Operador();
         $this->invitar_amigo = new Invitaciones_Amigos();
         $this->ubicacion_geografica = new UbicacionGeografica();
+        $this->search_engine = new SearchEngine();
     }
 
     /**
@@ -92,7 +96,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $promocionU = new $this->promocion;
         $promocionU->id_usuario_servicio = $inputs['id_usuario_servicio'];
         $promocionU->id_catalogo_tipo_fotografia = 2;
-        $promocionU->descripcion_promocion = $inputs['descripcion'];
+        $promocionU->descripcion_promocion = $inputs['descripcion_promocion'];
         $promocionU->nombre_promocion = $inputs['nombre_promocion'];
         $promocionU->estado_promocion = 1;
         $promocionU->fecha_desde = $inputs['fecha_inicio'];
@@ -108,6 +112,28 @@ class ServiciosOperadorRepository extends BaseRepository {
     }
 
     /**/
+    
+    
+    
+        //Guarda las promociones por usuario_servicio
+    public function storeSearchEngine($usuario_servicio,$search,$tipo_busqueda,$id_tipo) {
+
+        $objeto = new $this->search_engine;
+        $objeto->id_usuario_servicio = $usuario_servicio;
+        $objeto->search = $search;
+        $objeto->estado_search = 1;
+        $objeto->tipo_busqueda = $tipo_busqueda;
+        $objeto->id_tipo = $id_tipo;
+        
+        $objeto->created_at = \Carbon\Carbon::now()->toDateTimeString();
+        $objeto->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+        $this->save($objeto);
+        return true;
+    }
+    
+    
+    
 
     public function storeNewItinerario($inputs) {
 
@@ -311,6 +337,36 @@ class ServiciosOperadorRepository extends BaseRepository {
         return true;
     }
 
+    
+    
+    
+    /*
+Actualizar tabla de busqueda 
+     * $inputs: parametros de entrada
+     * $objeto: la instancia del objeto encontrado
+     * $tipo:1=Promocion
+     *       2=Evento
+     *       3=Itinerario
+     *       4=Usuario Servicio
+     * $id_tipo: id de la instancia a actualizar
+     *      */
+        public function storeUpdateSerchEngine($objeto,$tipo,$id_tipo,$search) {
+
+        foreach ($objeto as $servicioBase) {
+            
+            $operador = new $this->search_engine;
+        $operadorData = $operador::where('id_tipo', $id_tipo)
+                ->where('tipo_busqueda', '=', $tipo)
+                ->update(['search' => $search]);
+        }
+
+        return true;
+    }
+
+    
+    
+    
+    
     public function UpdateGeoLoc($inputs) {
 
         if (isset($inputs['id_provincia']))

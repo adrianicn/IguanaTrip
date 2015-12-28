@@ -48,7 +48,7 @@
             <div id="logo_">
                     <div id="logo-imagen">
 
-                        <a href="eng"><img src="{{ asset('img/index-logo.png')}}" width="230" height="218" alt="IguanaTrip" /></a> 
+                        <a href="#" onclick="window.location.href = '{!!asset('/')!!}'"><img src="{{ asset('img/index-logo.png')}}" width="230" height="218" alt="IguanaTrip" /></a> 
                     </div>
 
             </div>

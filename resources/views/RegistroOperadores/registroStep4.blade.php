@@ -15,7 +15,8 @@
 <div class="rowerror">
 </div>
 <?php
-
+$prefix="";
+        $operadorName="";
 $usuarioServicio->id = 0;
 $usuarioServicio->nombre_servicio = '';
 $usuarioServicio->detalle_servicio = '';

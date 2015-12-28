@@ -7,7 +7,10 @@
 
 </div>
 
+
 <?php
+$prefix='';
+$operadorName='';
 $servicio_1 = '';
 $servicio_2 = '';
 $servicio_3 = '';
@@ -48,7 +51,10 @@ switch ($servicio->id_catalogo_servicio) {
     <div id="title-box-header">
         <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
             
-          <?php switch (session('tip_oper')) {
+            
+          <?php
+          
+          switch (session('tip_oper')) {
     case 1:
         $prefix="I'm an ";
         $operadorName="Agency";

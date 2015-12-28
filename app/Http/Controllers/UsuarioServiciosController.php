@@ -581,7 +581,7 @@ class UsuarioServiciosController extends Controller {
                         'errors' => $validator->getMessageBag()->toArray()
             ));
         }
-
+        
         //obtengo llas promociones por id
         if (isset($formFields['id'])) {
             $Promocion = $gestion->getPromocion($formFields['id']);
@@ -591,9 +591,19 @@ class UsuarioServiciosController extends Controller {
             //logica update
 
             $gestion->storeUpdatePromocion($formFields, $Promocion);
+            
+            
+        //Gestion de actualizacion de busqueda    
+            $search=$formFields['nombre_promocion']." ".$formFields['descripcion_promocion']." ".$formFields['codigo_promocion']." ".$formFields['tags']." ".$formFields['observaciones_promocion'];            
+            $gestion->storeUpdateSerchEngine( $Promocion,1,$formFields['id'],$search);
+            
+            
         } else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
             $object = $gestion->storeNewPromocion($formFields);
+        $search=$formFields['nombre_promocion']." ".$formFields['descripcion_promocion']." ".$formFields['codigo'];            
+            //Gestion de nueva de busqueda    
+            $gestion->storeSearchEngine($formFields['id_usuario_servicio'], $search,1,$object->id);
 
             $returnHTML = ('/IguanaTrip/public/promocion/' . $object->id);
             return response()->json(array('success' => true, 'redirectto' => $returnHTML));

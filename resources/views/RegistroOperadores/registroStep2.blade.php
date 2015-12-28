@@ -39,7 +39,11 @@ $email_contacto_operador = $operadorData->email_contacto_operador;
     <div id="title-box-header">
         <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
             
-          <?php switch (session('tip_oper')) {
+          <?php
+                  $prefix="";
+        $operadorName="";
+
+          switch (session('tip_oper')) {
     case 1:
         $prefix="I'm an ";
         $operadorName="Agency";

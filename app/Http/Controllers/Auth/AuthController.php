@@ -13,6 +13,7 @@ use App\Repositories\UserRepository;
 use App\Jobs\SendMail;
 use Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 use Input;
 
 class AuthController extends Controller {
@@ -93,15 +94,27 @@ class AuthController extends Controller {
             if ($request->session()->has('user_id')) {
                 $request->session()->forget('user_id');
             }
+            
+           // $name = Cookie::forget('name');
+            //$iden = Cookie::forget('iden');
+            //$email = Cookie::forget('email');
+            
+            
+            //$name = Cookie::make('name', $user->username,1000);
+            //$iden = Cookie::make('iden', $user->id,1000);
+            //$email = Cookie::make('email', $user->email,1000);
+            
+            
             $request->session()->put('user_id', $user->id);
             $request->session()->put('user_name', $user->username);
             $request->session()->put('user_email', $user->email);
 
+            //return redirect('/servicios')->with('user', $user->id)->withCookie($name)->withCookie($iden)->withCookie($email);
             return redirect('/servicios')->with('user', $user->id);
         }
 
 
-        if (session('device') == 'desk') {
+        if (session('device') != 'mobile') {
             return redirect('/')->with('error', trans('front/verify.again'));
         } else {
             return redirect('/loginmobile')->with('error', trans('front/verify.again'));
