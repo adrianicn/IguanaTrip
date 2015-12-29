@@ -78,7 +78,7 @@
 </div>
 
 <div class="testbox">
-    <h1>Registration </h1>
+    <h1>{{trans('front/register.register')}} </h1>
 
 
 

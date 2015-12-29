@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
 use App\Models\Invitaciones_Amigos;
 use App\Jobs\InviteFriendsMail;
+
 class UsuarioServiciosController extends Controller {
 
     /**
@@ -64,13 +65,30 @@ class UsuarioServiciosController extends Controller {
         }
 
         $listEventos = $gestion->getEventosporId($id);
-         foreach ($listEventos as $servicioBase) {
-            
-                $servicio = $gestion->getUsuario_serv($servicioBase->id_usuario_servicio);
-            }
+        foreach ($listEventos as $servicioBase) {
+
+            $servicio = $gestion->getUsuario_serv($servicioBase->id_usuario_servicio);
+        }
         $ImgPromociones = $gestion->getImageOperador($id, 4);
 
-        return view('Registro.editEvento', compact('listEventos', 'ImgPromociones','servicio'));
+        return view('Registro.editEvento', compact('listEventos', 'ImgPromociones', 'servicio'));
+    }
+
+    //despliega la descipcion de las provincias
+    public function getProvinciasDescipcion() {
+
+        return view('Admin.provincia');
+    }
+
+    public function getCantonesDescipcion() {
+        //
+        return view('Admin.canton');
+    }
+
+    public function getParroquiaDescipcion(Request $request) {
+        //
+        $request->session()->put('parroquia_admin', 1);
+        return view('Admin.parroquia');
     }
 
     /**
@@ -91,14 +109,117 @@ class UsuarioServiciosController extends Controller {
         $view = view('Registro.catalogoServicio', compact('data', 'listServicios'));
         return ($view);
     }
-    
-    public function getProvincias(Request $request,ServiciosOperadorRepository $gestion) {
+
+    public function getProvinciaCanton(Request $request, ServiciosOperadorRepository $gestion) {
         //
 
         $listProvincias = $gestion->getProvincias();
 
-        
-        $view = View::make('reusable.provincia')->with('provincias', $listProvincias);
+
+        $view = View::make('reusable.provinciaCanton')->with('provincias', $listProvincias);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
+    }
+
+    public function getProvincias(Request $request, ServiciosOperadorRepository $gestion, $id_provincia, $id_canton, $id_parroquia) {
+        //
+
+        $listProvincias = $gestion->getProvincias();
+
+
+        $view = View::make('reusable.provincia')->with('provincias', $listProvincias)->with('id_provincia', $id_provincia)->with('id_canton', $id_canton)->with('id_parroquia', $id_parroquia);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
+    }
+
+    public function getOnlyProvincias(Request $request, ServiciosOperadorRepository $gestion) {
+        //
+
+        $listProvincias = $gestion->getProvincias();
+
+
+        $view = View::make('reusable.onlyProvincia')->with('provincias', $listProvincias);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
+    }
+
+    public function getOnlyCanton(Request $request, ServiciosOperadorRepository $gestion, $id) {
+        //
+
+        $listCantones = $gestion->getRecursivo($id);
+
+
+        $view = View::make('reusable.onlyCanton')->with('cantones', $listCantones);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
+    }
+
+    public function getCantones(Request $request, ServiciosOperadorRepository $gestion, $id, $id_canton, $id_parroquia) {
+        //
+
+        $listCantones = $gestion->getRecursivo($id);
+
+
+        $view = View::make('reusable.canton')->with('cantones', $listCantones)->with('id_provincia', $id)->with('id_canton', $id_canton)->with('id_parroquia', $id_parroquia);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
+    }
+
+    public function getDescripcionGeografica(Request $request, ServiciosOperadorRepository $gestion, $id, $id_catalogo) {
+        //
+
+        $lista = $gestion->getRecursivoDescription($id);
+        $ImgPromociones = $gestion->getImageUbcacionGeografica($id, $id_catalogo);
+
+
+        $view = View::make('Admin.descripcionProvincia')->with('descripcion', $lista)->with('ImgPromociones', $ImgPromociones);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+            return $view;
+    }
+
+    public function getparroquias(Request $request, ServiciosOperadorRepository $gestion, $id, $id_parroquia) {
+        //
+
+        $listParroquia = $gestion->getRecursivo($id);
+
+
+        $view = View::make('reusable.parroquia')->with('parroquias', $listParroquia)->with('id_parroquia', $id_parroquia);
         if ($request->ajax()) {
             $sections = $view->rendersections();
 
@@ -180,9 +301,7 @@ class UsuarioServiciosController extends Controller {
         $gestion->storeUpdateEstadoEvento($serviciosBase, $ServiciosOperador);
         return response()->json(array('success' => true));
     }
-    
-    
-    
+
     //actualiza el estado de las promociones
     public function postEstadoPromocion($id, ServiciosOperadorRepository $gestion) {
 
@@ -361,26 +480,23 @@ class UsuarioServiciosController extends Controller {
         $returnHTML = ('/IguanaTrip/public/detalleServicios');
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
-    
-    
-    
-    
-        public function postInvitarAmigo(ServiciosOperadorRepository $gestion) {
+
+    public function postInvitarAmigo(ServiciosOperadorRepository $gestion) {
 
 
 
         $inputData = Input::get('formData');
 
         parse_str($inputData, $formFields);
-        
-         $validator = Validator::make($formFields, Invitaciones_Amigos::$rulesP);
+
+        $validator = Validator::make($formFields, Invitaciones_Amigos::$rulesP);
         if ($validator->fails()) {
             return response()->json(array(
                         'fail' => true,
                         'errors' => $validator->getMessageBag()->toArray()
             ));
         }
-        
+
         $object = $gestion->storeNewInviarAmigo($formFields);
         $this->dispatch(new InviteFriendsMail($object));
 
@@ -390,7 +506,6 @@ class UsuarioServiciosController extends Controller {
         ));
         //}
     }
-
 
     /**
      * Handle a registration request for the application.
@@ -466,7 +581,7 @@ class UsuarioServiciosController extends Controller {
                         'errors' => $validator->getMessageBag()->toArray()
             ));
         }
-
+        
         //obtengo llas promociones por id
         if (isset($formFields['id'])) {
             $Promocion = $gestion->getPromocion($formFields['id']);
@@ -476,9 +591,19 @@ class UsuarioServiciosController extends Controller {
             //logica update
 
             $gestion->storeUpdatePromocion($formFields, $Promocion);
+            
+            
+        //Gestion de actualizacion de busqueda    
+            $search=$formFields['nombre_promocion']." ".$formFields['descripcion_promocion']." ".$formFields['codigo_promocion']." ".$formFields['tags']." ".$formFields['observaciones_promocion'];            
+            $gestion->storeUpdateSerchEngine( $Promocion,1,$formFields['id'],$search);
+            
+            
         } else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
             $object = $gestion->storeNewPromocion($formFields);
+        $search=$formFields['nombre_promocion']." ".$formFields['descripcion_promocion']." ".$formFields['codigo'];            
+            //Gestion de nueva de busqueda    
+            $gestion->storeSearchEngine($formFields['id_usuario_servicio'], $search,1,$object->id);
 
             $returnHTML = ('/IguanaTrip/public/promocion/' . $object->id);
             return response()->json(array('success' => true, 'redirectto' => $returnHTML));
@@ -487,6 +612,17 @@ class UsuarioServiciosController extends Controller {
 
 
 
+        return response()->json(array('success' => true));
+    }
+
+    
+    
+    //Post para cambiar las descripciones de provincia canton parroquia
+    public function postGeoLoc(ServiciosOperadorRepository $gestion) {
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        $gestion->UpdateGeoLoc($formFields);
         return response()->json(array('success' => true));
     }
 
@@ -518,33 +654,29 @@ class UsuarioServiciosController extends Controller {
 
         $listPromociones = $gestion->getPromocionesOperador($id_promocion);
         foreach ($listPromociones as $servicioBase) {
-            
-                $servicio = $gestion->getUsuario_serv($servicioBase->id_usuario_servicio);
-            }
+
+            $servicio = $gestion->getUsuario_serv($servicioBase->id_usuario_servicio);
+        }
 
         //imagenes de la promocion
         $ImgPromociones = $gestion->getImagePromocionesOperador($id_promocion);
 
-        $view = view('Registro.editPromocion', compact('ImgPromociones', 'listPromociones','servicio'));
+        $view = view('Registro.editPromocion', compact('ImgPromociones', 'listPromociones', 'servicio'));
         return ($view);
     }
 
-    
-    public function postDeleteItinerario($id,ServiciosOperadorRepository $gestion) {
+    public function postDeleteItinerario($id, ServiciosOperadorRepository $gestion) {
 
 
 
-        
+
         $Servicio = $gestion->deleteItinerario($id);
         return response()->json(array('success' => true));
-        
-        
     }
-    
+
     public function getItinerarios($id, ServiciosOperadorRepository $gestion) {
         //
-
-          //usuario_servicio_id
+        //usuario_servicio_id
 
         $validacion = $gestion->getPermisoItinerario($id);
         if (isset($validacion))
@@ -563,20 +695,20 @@ class UsuarioServiciosController extends Controller {
         //logica que comprueba si el usuario tiene promociones para ser modificados
 
         $listItinerarios = $gestion->getItinerariosUsuario($id);
-        
-            foreach ($listItinerarios as $servicioBase) {
-            
-                $servicio = $gestion->getUsuario_serv($servicioBase->id_usuario_servicio);
-            }
-            
-        
-        
+
+        foreach ($listItinerarios as $servicioBase) {
+
+            $servicio = $gestion->getUsuario_serv($servicioBase->id_usuario_servicio);
+        }
+
+
+
 
         //imagenes de la promocion
         $ImgItinerarios = $gestion->getImageOperador($id, 3);
         $listDificultades = $gestion->getCatalogoDificultad();
 
-        $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios', 'listDificultades','servicio'));
+        $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios', 'listDificultades', 'servicio'));
         return ($view);
     }
 
@@ -640,7 +772,7 @@ class UsuarioServiciosController extends Controller {
         $eventos = $gestion->getEventosUsuarioServicio($id_usuario_servicio);
 
 
-        $view = View::make('reusable.modifyEventos_Promociones')->with('itinerarios', $itinerarios)->with('promociones', $promociones)->with('eventos',$eventos);
+        $view = View::make('reusable.modifyEventos_Promociones')->with('itinerarios', $itinerarios)->with('promociones', $promociones)->with('eventos', $eventos);
         if ($request->ajax()) {
             $sections = $view->rendersections();
 
@@ -680,7 +812,7 @@ class UsuarioServiciosController extends Controller {
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-         $permiso = $gestion->getPermiso($formFields['id_usuario_servicio']);
+        $permiso = $gestion->getPermiso($formFields['id_usuario_servicio']);
 
 
         if (!isset($permiso) || $permiso->id_usuario != session('user_id')) {

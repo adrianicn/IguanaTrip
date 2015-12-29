@@ -7,7 +7,10 @@
 
 </div>
 
+
 <?php
+$prefix='';
+$operadorName='';
 $servicio_1 = '';
 $servicio_2 = '';
 $servicio_3 = '';
@@ -48,7 +51,10 @@ switch ($servicio->id_catalogo_servicio) {
     <div id="title-box-header">
         <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
             
-          <?php switch (session('tip_oper')) {
+            
+          <?php
+          
+          switch (session('tip_oper')) {
     case 1:
         $prefix="I'm an ";
         $operadorName="Agency";
@@ -83,6 +89,9 @@ switch ($servicio->id_catalogo_servicio) {
        <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
                <a class="button-step4" onclick="window.location.href = '{!!asset('/operador')!!}'"> 
                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2</strong></a>
+                              <a class="button-step4"> 
+       <strong>Paso 3 </strong></a>
+
             </h2>
     </div>
     
@@ -237,7 +246,8 @@ switch ($servicio->id_catalogo_servicio) {
                                 Agencia de viajes, guía independiente, exploración, etc
                                 </div>
                                 </td>
-                            <td><input class="demo labelauty" name="id_catalogo_servicio3" id="checkbox-3" value="3" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_3!!}/></td></tr>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio3" id="checkbox-3" value="3" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_3!!}/></td>
+                        </tr>
                         <tr class="alt"><td> 
                                 <div id="star4" class="dialog-open">
                                     <img src="{!! asset('images/register/registro4.jpg')!!}" alt="" />
@@ -252,7 +262,9 @@ switch ($servicio->id_catalogo_servicio) {
                                 Museos ,parques nacionales, zoologicos, etc
                                 </div>
                             </td>
-                            <td><input class="demo labelauty" name="id_catalogo_servicio4" id="checkbox-4" value="4" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_4!!}/></td></tr>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio4" id="checkbox-4" value="4" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_4!!}/></td>
+                        </tr>
+                       
                         <tr><td> 
                                 
                                 <div id="star5" class="dialog-open">
@@ -268,7 +280,8 @@ switch ($servicio->id_catalogo_servicio) {
                                 </div>
                                 
                             </td>
-                            <td><input class="demo labelauty" name="id_catalogo_servicio7" id="checkbox-7" value="7" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_7!!}/></td></tr>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio5" id="checkbox-5" value="5" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_5!!}/></td>
+                        </tr>
 
                         <tr class="alt"><td>
                                 <div id="star7" class="dialog-open">
@@ -284,7 +297,7 @@ switch ($servicio->id_catalogo_servicio) {
                                 </div>
                                 
                                 </td>
-                            <td><input class="demo labelauty" name="id_catalogo_servicio6" id="checkbox-6" value="6" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_6!!}/></td>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio7" id="checkbox-7" value="7" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_7!!}/></td>
                         </tr>
                         <tr class="alt"><td>
                                 <div id="star6" class="dialog-open">

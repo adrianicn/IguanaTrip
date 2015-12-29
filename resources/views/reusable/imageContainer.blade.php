@@ -1,6 +1,9 @@
 {!! HTML::style('css/imageContainer/tinycarousel.css') !!}
+
 {!! HTML::script('js/imageContainer/example7.js') !!}
 
+
+    
 @if(isset($ImgPromociones))
 {!! Form::open(['url' => route('delete-image'),  'id'=>'deleteImage']) !!}
 <div id="slider1">
@@ -12,7 +15,7 @@
                 <?php
                 $url = "images/icon/" . $imagen->filename
                 ?>
-                <img src="{{asset($url)}}" href='#' onclick='AjaxContainerRetrunMessage("deleteImage", {!!$imagen -> id!!})'>
+                <img src="{{asset($url)}}" href='#' onclick='alertaConfirm({!!$imagen -> id!!})'>
                 
             </li>
             @endforeach 
@@ -39,6 +42,20 @@
 </script>
     {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
     {!! HTML::script('/js/jsModal/basic.js') !!}
+    
+    
+    
+    <script>
+    function alertaConfirm(id){
+        
+        var r = confirm("Está seguro de que desea eliminar esta imagen?");
+if (r == true) {
+           AjaxContainerRetrunMessage("deleteImage", id)
+} else {
+    txt = "Cencelado";
+}
+    }
+   </script>
 
 @stop
 

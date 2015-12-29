@@ -20,7 +20,10 @@
     <div id="title-box-header">
         <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
             
-          <?php switch (session('tip_oper')) {
+          <?php
+          $prefix="";
+        $operadorName="";
+          switch (session('tip_oper')) {
     case 1:
         $prefix="I'm an ";
         $operadorName="Agency";
@@ -56,6 +59,9 @@
        <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2 </strong></a>
                <a class="button-step4" onclick="window.location.href = '{!!asset('/userservice')!!}'"> 
        <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 3 </strong></a>
+                              <a class="button-step4"> 
+       <strong>Paso 4 </strong></a>
+
                
             </h2>
     </div>

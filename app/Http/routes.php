@@ -131,10 +131,43 @@ Route::get('thankyou',function()
     return view('Registro.endRegister');
 });
 
+Route::get('terminos',function()
+{
+    
+    return view('RegistroOperadores.registroTerminos');
+});
+
+Route::get('acerca',function()
+{
+    
+    return view('RegistroOperadores.registroAcercaDe');
+});
+
+
+
 Route::get('/getlistaItinerarios/{id}', ['as' => 'itinerariosList', 'uses' => 'UsuarioServiciosController@getListaItinerarios','middleware' => 'notAuth']);
-Route::get('/getProvincias', ['as' => 'provincia', 'uses' => 'UsuarioServiciosController@getProvincias','middleware' => 'notAuth']);
+Route::get('/getProvincias/{id_provincia}/{id_canton}/{id_parroquia}', ['as' => 'provincia', 'uses' => 'UsuarioServiciosController@getProvincias']);
+Route::get('/getCantones/{id}/{id_canton}/{id_parroquia}', ['as' => 'cantones', 'uses' => 'UsuarioServiciosController@getCantones']);
+Route::get('/getParroquias/{id}/{id_parroquia}', ['as' => 'parroquias', 'uses' => 'UsuarioServiciosController@getParroquias']);
+
+Route::get('/getOnlyProvincias', ['as' => 'provincia', 'uses' => 'UsuarioServiciosController@getOnlyProvincias']);
+Route::get('/getOnlyCanton/{id}', ['as' => 'provincia', 'uses' => 'UsuarioServiciosController@getOnlyCanton']);
+Route::get('/getProvinciasCanton', ['as' => 'provincia', 'uses' => 'UsuarioServiciosController@getProvinciaCanton']);
+Route::get('/getDescripcionGeografica/{id}/{id_catalogo}', ['as' => 'cantones', 'uses' => 'UsuarioServiciosController@getDescripcionGeografica']);
+
+
+
 Route::get('/getlistaServiciosComplete/{id_usuario_servicio}', ['as' => 'completeServices', 'uses' => 'UsuarioServiciosController@getAllServicios','middleware' => 'notAuth']);
 
+
+Route::get('/getProvinciasDescipcion', ['as' => 'provincias', 'uses' => 'UsuarioServiciosController@getProvinciasDescipcion','middleware' => 'notAuth']);
+Route::get('/getCantonesDescipcion', ['as' => 'provincias', 'uses' => 'UsuarioServiciosController@getCantonesDescipcion','middleware' => 'notAuth']);
+Route::get('/getParroquiaDescipcion', ['as' => 'provincias', 'uses' => 'UsuarioServiciosController@getparroquiaDescipcion','middleware' => 'notAuth']);
+
+
+Route::get('/getProvinciasDescipciones/{id}', ['as' => 'provincias', 'uses' => 'UsuarioServiciosController@getProvinciasDescipciones','middleware' => 'notAuth']);
+
+Route::post('postGeoLoc', ['as' => 'postGeoLoc', 'uses' =>'UsuarioServiciosController@postGeoLoc','middleware' => 'notAuth']);
 
 // Event::listen('illuminate.query', function($query)
  //{
@@ -145,7 +178,8 @@ Route::get('/getlistaServiciosComplete/{id_usuario_servicio}', ['as' => 'complet
 
 //servicios
 
-Route::get('servicios', 'ServicioController@index');
+
+Route::get('/servicios', ['as' => 'servicios', 'uses' => 'ServicioController@index','middleware' => 'notAuth']);
 
 Route::post('servicios/tipoOperador', ['as' => 'upload-postTipoOperador', 'uses' =>'ServicioController@postTipoOperadores','middleware' => 'notAuth']);
 Route::post('servicios/operadores', ['as' => 'upload-postoperador', 'uses' =>'ServicioController@postOperadores','middleware' => 'notAuth']);
@@ -159,3 +193,22 @@ Route::get('operador', ['as' => 'operador', 'uses' => 'ServicioController@step2'
 Route::get('servicios/serviciooperador/{id}/{id_catalogo}', ['as' => 'details.show', 'uses' => 'ServicioController@step4','middleware' => 'notAuth'] );
 Route::post('servicios/serviciosoperador', ['as' => 'upload-postusuarioservicios', 'uses' =>'ServicioController@postUsuarioServicios','middleware' => 'notAuth']);
 Route::post('servicios/serviciosoperadormini', ['as' => 'upload-postusuarioserviciosmini', 'uses' =>'ServicioController@postUsuarioServiciosMini','middleware' => 'notAuth']);
+
+
+
+/*Rutas dispositivo mobil*/
+
+
+Route::get('loginmobile',function()
+{
+    
+    return view('mobile.logInMobile.LogInMobile');
+});
+
+Route::get('registerMobile',function()
+{
+    
+    return view('mobile.logInMobile.registerMobile');
+});
+
+/**End rutas dispositivo mobil************************************************/

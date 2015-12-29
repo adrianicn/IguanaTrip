@@ -15,7 +15,8 @@
 <div class="rowerror">
 </div>
 <?php
-
+$prefix="";
+        $operadorName="";
 $usuarioServicio->id = 0;
 $usuarioServicio->nombre_servicio = '';
 $usuarioServicio->detalle_servicio = '';
@@ -33,8 +34,12 @@ $usuarioServicio->descuento_clientes = '';
 $usuarioServicio->tags_servicio = '';
 $usuarioServicio->observaciones = '';
 $usuarioServicio->telefono = '';
+$usuarioServicio->id_provincia = '';
+$usuarioServicio->id_canton = '';
+$usuarioServicio->id_parroquia = '';
 $usuarioServicio->latitud_servicio = -0.1806532;
 $usuarioServicio->longitud_servicio = -78.46783820000002;
+
 ?>
 @foreach ($usuarioServicio as $detalles)
 <?php
@@ -53,6 +58,9 @@ $usuarioServicio->nombre_comercial = $detalles->nombre_comercial;
 $usuarioServicio->tags = $detalles->tags;
 $usuarioServicio->descuento_clientes = $detalles->descuento_clientes;
 $usuarioServicio->tags_servicio = $detalles->tags_servicio;
+$usuarioServicio->id_provincia = $detalles->id_provincia;
+$usuarioServicio->id_canton = $detalles->id_canton;
+$usuarioServicio->id_parroquia = $detalles->id_parroquia;
 $usuarioServicio->observaciones = $detalles->observaciones;
 $usuarioServicio->telefono = $detalles->telefono;
 $usuarioServicio->latitud_servicio = ($detalles->latitud_servicio == '') ? -0.1806532 : $detalles->latitud_servicio;
@@ -101,6 +109,9 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
        <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 3 </strong></a>
                <a class="button-step4" onclick="window.location.href = '{!!asset('/detalleServicios')!!}'"> 
        <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 4 </strong></a>
+                              <a class="button-step4"> 
+       <strong>Paso 5 </strong></a>
+
                
             </h2>
     </div>
@@ -135,8 +146,8 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     @show
                     
                 </div>
-                    @include('reusable.canton', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
-                    @include('reusable.parroquia', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
+                    
+                    
                 <div class="form-group-1">
                     @include('reusable.maps', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
                 </div>    
@@ -208,12 +219,27 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
     
 
 @stop
+@if($usuarioServicio->id_provincia=='' )
+<script>
+    $(document).ready(function () {
+        GetDataAjaxProvincias("{!!asset('/getProvincias')!!}/0/0/0");
+    });
 
+</script>
+@else
+<script>
+    $(document).ready(function () {
+        
+        GetDataAjaxProvincias("{!!asset('/getProvincias')!!}/{!!$usuarioServicio->id_provincia!!}/{!!$usuarioServicio->id_canton!!}/{!!$usuarioServicio->id_parroquia!!}");
+    });
+
+</script>
+@endif
 <script>
     $(document).ready(function () {
         
         GetDataAjaxSectionEventos("{!!asset('/getlistaServiciosComplete')!!}/{!!$usuarioServicio->id!!}");
-        GetDataAjaxProvincias("{!!asset('/getProvincias')!!}");
+
     });
     
     $( ".chng" ).change(function() {

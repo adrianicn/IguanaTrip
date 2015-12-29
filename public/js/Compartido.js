@@ -341,6 +341,74 @@ function GetDataAjaxProvincias(url) {
         }
     });
 }
+function GetDataAjaxCantones(url) {
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            $("#canton").LoadingOverlay("show");
+            $("#canton").html(data.cantones);
+            $("#canton").LoadingOverlay("hide", true);
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+function GetDataAjaxDescripcion(url) {
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+
+            $("#descripcionGeografica1").html(data.descripcionGeografica);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+function GetDataAjaxParroquias(url) {
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+
+            $("#parroquia").html(data.parroquias);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
 
 function GetDataAjaxSectionItiner(url) {
 

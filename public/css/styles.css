@@ -106,11 +106,11 @@ a:hover {text-decoration:underline;}
 /* Set Page Elements */
 .content { 
 	float:left;
-	margin:90px;
+	margin:128px;
 	position:absolute;
 	top:-10px;
 	//width:600px;
-        left:833px;
+        left:877px;
 	z-index:9999;
 	-webkit-font-smoothing:antialiased;
 }
@@ -249,7 +249,7 @@ a.buttonlogin {
   -webkit-border-radius: 5px; 
   -moz-border-radius: 5px; 
   border-radius: 5px; 
-  background-color: #0c7e7f;
+  background-color: #ef620a;
   //-webkit-box-shadow: 0 3px rgba(58,87,175,.75); 
   //-moz-box-shadow: 0 3px rgba(58,87,175,.75); 
   //box-shadow: 0 3px rgba(58,87,175,.75);

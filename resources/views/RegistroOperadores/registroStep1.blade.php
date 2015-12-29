@@ -5,6 +5,7 @@
 
 
 <?php
+
 $label_tipo_operador_agencia = 'Registro gratis';
 $label_tipo_operador_empresa = 'Registro gratis';
 $label_tipo_operador_persona = 'Registro gratis';
@@ -55,7 +56,7 @@ $label_tipo_operador_persona = 'Registro gratis';
                 I'm just                <strong>Me</strong>
             </h2>
             <div class="box-content-text">
-                <p>Soy una persona natural con deseos de organizar un paseo e invitar a todo el mundo a unirme a esta aventura nacionales e internacionales.</p>
+                <p>Soy una persona natural con deseos de organizar un paseo e invitar a todo el mundo a unirse a esta aventura nacionales e internacionales.</p>
                 <div class="box-content-button">
                     <a class="button" onclick="$(tipo_operador).val(3);AjaxContainerRegistro('registro_step1')" href="#">{{$label_tipo_operador_persona}}</a>
                 </div>

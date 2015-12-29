@@ -2,6 +2,7 @@
 
 return [
 	'title' => 'Inscription',
+    'register' => 'Registration',
 	'infos' => "It's completely free",
 	'email' => 'Email',
 	'pseudo' => 'Name',

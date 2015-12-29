@@ -43,7 +43,7 @@
        </div>
        <div class="form-group-step2-popup">
             {!!Form::label('detalle_1', 'Detalle', array('id'=>'iconFormulario-step2-popup'))!!}
-            {!!Form::textarea('descripcion',NULL, array('class'=>'inputtextarea-step2-popup-1','placeholder'=>'descripcion'))!!}
+            {!!Form::textarea('descripcion_promocion',NULL, array('class'=>'inputtextarea-step2-popup-1','placeholder'=>'descripcion'))!!}
        </div>
     
         <div id="form-group-step2-popup">

@@ -13,14 +13,15 @@ use App\Repositories\UserRepository;
 use App\Jobs\SendMail;
 use Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 use Input;
 
 class AuthController extends Controller {
 
     protected $validationRules = [
-        'username' => 'required|max:30|alpha|unique:users',
+        'username' => 'required|max:30|unique:users',
         'email' => 'required|email|max:255|unique:users',
-        'password' => 'required|confirmed',
+        'password' => 'required|confirmed|min:5',
     ];
 
     use AuthenticatesAndRegistersUsers,
@@ -45,8 +46,8 @@ class AuthController extends Controller {
      */
     public function postLogin(
     LoginRequest $request, Guard $auth) {
-        
-        
+
+
         $logValue = $request->input('log');
 
         $logAccess = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
@@ -70,10 +71,15 @@ class AuthController extends Controller {
             if ($throttles) {
                 $this->incrementLoginAttempts($request);
             }
-
-            return redirect('/')
-                            ->with('error', trans('front/login.credentials'))
-                            ->withInput($request->only('log'));
+            if (session('device') == 'desk') {
+                return redirect('/')
+                                ->with('error', trans('front/login.credentials'))
+                                ->withInput($request->only('log'));
+            } else {
+                return redirect('/loginmobile')
+                                ->with('error', trans('front/login.credentials'))
+                                ->withInput($request->only('log'));
+            }
         }
 
         $user = $auth->getLastAttempted();
@@ -88,16 +94,31 @@ class AuthController extends Controller {
             if ($request->session()->has('user_id')) {
                 $request->session()->forget('user_id');
             }
-            $request->session()->put('user_id', $user->id);
-$request->session()->put('user_name', $user->username);
-$request->session()->put('user_email', $user->email);
             
+           // $name = Cookie::forget('name');
+            //$iden = Cookie::forget('iden');
+            //$email = Cookie::forget('email');
+            
+            
+            //$name = Cookie::make('name', $user->username,1000);
+            //$iden = Cookie::make('iden', $user->id,1000);
+            //$email = Cookie::make('email', $user->email,1000);
+            
+            
+            $request->session()->put('user_id', $user->id);
+            $request->session()->put('user_name', $user->username);
+            $request->session()->put('user_email', $user->email);
+
+            //return redirect('/servicios')->with('user', $user->id)->withCookie($name)->withCookie($iden)->withCookie($email);
             return redirect('/servicios')->with('user', $user->id);
         }
 
-        
 
-        return redirect('/')->with('error', trans('front/verify.again'));
+        if (session('device') != 'mobile') {
+            return redirect('/')->with('error', trans('front/verify.again'));
+        } else {
+            return redirect('/loginmobile')->with('error', trans('front/verify.again'));
+        }
     }
 
     /**
@@ -121,7 +142,7 @@ $request->session()->put('user_email', $user->email);
         );
         $validator = Validator::make($userData, $this->validationRules);
 
-        
+
 
 
         if ($validator->fails()) {

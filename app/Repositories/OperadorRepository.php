@@ -107,6 +107,7 @@ class OperadorRepository extends BaseRepository
 											'nombre_contacto_operador_1'=>$inputs['nombre_contacto_operador_1'],
 											'telf_contacto_operador_1'=>$inputs['telf_contacto_operador_1'],
 											'email_contacto_operador'=>$inputs['email_contacto_operador'],
+                                                                                        'ip_registro_operador'=>$inputs['ip_registro_operador'],
 											'direccion_empresa_operador'=>$inputs['direccion_empresa_operador']
 									]);
 	}
@@ -244,7 +245,10 @@ class OperadorRepository extends BaseRepository
 //											'observaciones'=>$inputs['observaciones'],
 											'telefono'=>$inputs['telefono'],
 											'latitud_servicio'=>$inputs['latitud_servicio'],
-											'longitud_servicio'=>$inputs['longitud_servicio']
+											'longitud_servicio'=>$inputs['longitud_servicio'],
+                                                                            'id_provincia'=>$inputs['id_provincia'],
+                                                                            'id_canton'=>$inputs['id_canton'],
+                                                                            'id_parroquia'=>$inputs['id_parroquia']                                                                            
 									]);
 	}
 	
