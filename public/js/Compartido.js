@@ -185,6 +185,31 @@ callModal('cls');
 }
 
 
+
+
+function RenderPartialGeneric($idPartial, $id_catalogo_fotografia,$id_usuario_servicio,$id_auxiliar) {
+
+    
+callModal('cls');
+    var url = "/IguanaTrip/public/render/" + $idPartial;
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: {
+        }}).done(function (newHtml) {
+
+        /* output the javascript object to HTML */
+        $('#basic-modal-content').html(newHtml.newHtml);
+        $('#basic-modal-content').find('#id_catalogo_fotografia').val($id_catalogo_fotografia);
+        $('#basic-modal-content').find('#id_usuario_servicio').val($id_usuario_servicio);
+        $('#basic-modal-content').find('#id_auxiliar').val($id_auxiliar);
+        $(".simplemodal-wrap").LoadingOverlay("hide", true);
+    });
+}
+
+
+
+
 //Renderiza el parcial Map, es una logica diferente ya que hay conflictos
 //con el load screen
 function RenderPartialGenericMap($idPartial, $itiner) {
@@ -319,16 +344,16 @@ function GetDataAjaxSectionEventos(url) {
     });
 }
 
-function GetDataAjaxProvincias(url) {
+function GetDataAjaxImagenes(url) {
 
     $.ajax({
         type: 'GET',
         url: url,
         dataType: 'json',
         success: function (data) {
-            $("#provincias").LoadingOverlay("show");
-            $("#provincias").html(data.provincias);
-            $("#provincias").LoadingOverlay("hide", true);
+            
+            $("#renderPartialImagenes").html(data.contentImagenes);
+                 
 
         },
         error: function (data) {
@@ -341,6 +366,32 @@ function GetDataAjaxProvincias(url) {
         }
     });
 }
+
+
+function GetDataAjaxProvincias(url) {
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+
+            $("#provincias").html(data.provincias);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
 function GetDataAjaxCantones(url) {
 
     $.ajax({
@@ -348,9 +399,9 @@ function GetDataAjaxCantones(url) {
         url: url,
         dataType: 'json',
         success: function (data) {
-            $("#canton").LoadingOverlay("show");
+            
             $("#canton").html(data.cantones);
-            $("#canton").LoadingOverlay("hide", true);
+            
 
         },
         error: function (data) {

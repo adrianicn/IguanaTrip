@@ -89,8 +89,28 @@ switch ($servicio->id_catalogo_servicio) {
        <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
                <a class="button-step4" onclick="window.location.href = '{!!asset('/operador')!!}'"> 
                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2</strong></a>
-                              <a class="button-step4"> 
-       <strong>Paso 3 </strong></a>
+                             <a class="button-step4 "> 
+                   <div style="color:#F26803; display: block;
+    font-size: 0.9em;
+    font-weight: normal;
+    line-height: 31px;
+    text-indent: 31px;"> Paso 3 </div></a>
+               
+               <a class="button-step4 "> 
+                   <div style="color:#999; display: block;
+    font-size: 0.9em;
+    font-weight: normal;
+    line-height: 31px;
+    text-indent: 31px;"> Paso 4 </div></a>
+    
+    <a class="button-step4 "> 
+                   <div style="color:#999; display: block;
+    font-size: 0.9em;
+    font-weight: normal;
+    line-height: 31px;
+    text-indent: 31px;"> Paso 5</div></a>
+    
+    
 
             </h2>
     </div>
@@ -205,7 +225,7 @@ switch ($servicio->id_catalogo_servicio) {
                                 <div id="star1" class="dialog-open">
                                     
                                 <h2 class='titletable'>
-                                    Lugares de comida
+                                    Alimentación y bebidas
                                 </h2>
                                       
                                 
@@ -222,7 +242,7 @@ switch ($servicio->id_catalogo_servicio) {
                             <td>
                                 <div id="star2" class="dialog-open">
                                 <h2 class='titletable'>
-                                    Hospedajes
+                                    Alojamiento
                                 </h2>
                                 
                                 Hotel, hostal, home state, coachsurfing, etc
@@ -240,7 +260,7 @@ switch ($servicio->id_catalogo_servicio) {
                             <td>
                                 <div id="star3" class="dialog-open">
                                 <h2 class='titletable'>
-                                    Viajes Organizados
+                                    Organización de viajes
                                 </h2>
                                 
                                 Agencia de viajes, guía independiente, exploración, etc
@@ -256,7 +276,7 @@ switch ($servicio->id_catalogo_servicio) {
                             <td>
                                 <div id="star4" class="dialog-open">
                                 <h2 class='titletable'>
-                                    Centros turísticos
+                                    Centros turísticos y actividades culturales
                                 </h2>
                                     
                                 Museos ,parques nacionales, zoologicos, etc
@@ -307,7 +327,7 @@ switch ($servicio->id_catalogo_servicio) {
                             <td>
                                 <div id="star6" class="dialog-open">
                                 <h2 class='titletable'>
-                                    Reuniones sociales
+                                    Actividades en grupo
                                 </h2>
                                 Parrilladas, viajes, caídas, after office, actividades espontaneas etc
                                 </div>

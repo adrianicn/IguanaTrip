@@ -17,10 +17,8 @@
                 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="id_catalogo_fotografia" value="{{ $tipo }}">
-                        
-                        <input type="hidden" name="id_usuario_servicio" value="0">
-                            
-                            <input type="hidden" name="id_auxiliar" value="0">
+                        <input type="hidden" name="id_usuario_servicio" value="{{$promounic->id_usuario_servicio }}">
+                            <input type="hidden" name="id_auxiliar" value="{{$promounic->id}}">
                 <div class="dz-message">
 
                 </div>

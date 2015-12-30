@@ -158,6 +158,8 @@ class ServiciosOperadorRepository extends BaseRepository {
         $evento->id_fotografia = 4;
         $evento->descripcion_evento = $inputs['descripcion_evento'];
         $evento->nombre_evento = $inputs['nombre_evento'];
+        $evento->fecha_desde = $inputs['fecha_desde'];
+        $evento->fecha_hasta = $inputs['fecha_hasta'];
         $evento->estado_evento = 1;
         $evento->created_at = \Carbon\Carbon::now()->toDateTimeString();
         $evento->updated_at = \Carbon\Carbon::now()->toDateTimeString();
@@ -350,7 +352,7 @@ Actualizar tabla de busqueda
      *       4=Usuario Servicio
      * $id_tipo: id de la instancia a actualizar
      *      */
-        public function storeUpdateSerchEngine($objeto,$tipo,$id_tipo,$search) {
+        public function storeUpdateSerchEngine( $objeto,$tipo,$id_tipo,$search) {
 
         foreach ($objeto as $servicioBase) {
             
@@ -550,6 +552,14 @@ Actualizar tabla de busqueda
         $promociones = new $this->image;
         return $promociones::where('id_auxiliar', $id_promocion)
                         ->where('id_catalogo_fotografia', '=', 2)
+                        ->where('estado_fotografia', '=', 1)->get();
+    }
+    
+    //Entrega el arreglo de Imagenes por promocion por operador
+    public function getGenericImagePromocionesOperador($tipo,$idtipo) {
+        $promociones = new $this->image;
+        return $promociones::where('id_auxiliar', $idtipo)
+                        ->where('id_catalogo_fotografia', '=', $tipo)
                         ->where('estado_fotografia', '=', 1)->get();
     }
 

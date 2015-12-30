@@ -55,7 +55,9 @@
     <div id="space"></div>
 
 <div class="form-group-step2" title="Carga las imágenes que consideres describen a tu promoción.">
-            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
+     @if(count($ImgPromociones)>0)        
+    @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
+     @endif
             @include('reusable.uploadImage', ['tipo' => '2','objeto'=>$listPromociones])  
         </div>
     {!! Form::open(['url' => route('postPromocion'), 'method' => 'post', 'role' => 'form', 'id'=>'Updatepromocion']) !!}
@@ -118,7 +120,7 @@
         </div>
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRetrunMessage('Updatepromocion','optional')" href="#">Guardar</a>
+                <a class="button-1" onclick="AjaxContainerRetrunMessage('Updatepromocion','optional'); window.location.href = '{!!asset('/servicios/serviciooperador/')!!}/{{ $promo->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'" href="#">Finalizar y regresar</a>
                 
             </div>
         </div>

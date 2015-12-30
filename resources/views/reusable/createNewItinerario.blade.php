@@ -29,13 +29,17 @@
         <div id="renderPartial" title="Esta opción es exclusiva de los servicios turisticos donde se especifica el requerimiento físico necesario para completar el trip. Si en su caso no es relevante puede poner No aplica.">
             @section('dificultades')
             @show
-        </div>        
+        </div>    
+    
+    
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
                 <a class="button-1" onclick="AjaxContainerRegistroWithLoad('itinerario-popup','simplemodal-wrap')" href="#">Siguiente</a>
             </div>              
         </div>
 {!! Form::close() !!}
+
+
 
 </div>
 

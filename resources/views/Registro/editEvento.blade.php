@@ -65,7 +65,9 @@
     <div class="wrapper uwa-font-aa" title="Carga las imágenes que consideres describen a tu evento.">
 
         <div class="form-group-step2">
+             @if(count($ImgPromociones)>0)
             @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
+            @endif
             @include('reusable.uploadImage', ['tipo' => '4','objeto'=>$listEventos])  
         </div>
 
@@ -76,12 +78,12 @@
 
         <div class="form-group-step2">
             {!!Form::label('Fecha_inicio', 'Fecha inicio', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('fecha_desde', $evento->fecha_desde, array('class'=>'inputtext-step2'))!!}
+            {!!Form::text('fecha_desde', $evento->fecha_desde, array('class'=>'datepicker inputtext-step2'))!!}
         </div>
 
         <div class="form-group-step2">
             {!!Form::label('Fecha_fin', 'Fecha fin', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('fecha_hasta', $evento->fecha_hasta, array('class'=>'inputtext-step2'))!!}
+            {!!Form::text('fecha_hasta', $evento->fecha_hasta, array('class'=>'inputtext-step2 datepicker'))!!}
         </div>
 
         <div class="form-group-step2">
@@ -111,17 +113,22 @@
         </div>
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRetrunMessage('UpdateEvento','optional')" href="#">Siguiente</a>
+                <a class="button-1" onclick="AjaxContainerRetrunMessage('UpdateEvento','optional'); window.location.href = '{!!asset('/servicios/serviciooperador')!!}/{{ $evento->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'" href="#">Finalizar y regresar</a>
             </div>
         </div>
     </div>
     @endforeach 
 
     {!! Form::close() !!}
+  
 </div>
 @section('scripts')
 {!! HTML::script('js/jquery.js') !!}
+  <script>
+    $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
+    </script>
  <script>
+     
   $(function() {
     var tooltips = $( "[title]" ).tooltip({
       position: {
@@ -132,5 +139,6 @@
    
   });
   </script>
+  
 @stop
 @stop

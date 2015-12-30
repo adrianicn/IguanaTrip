@@ -18,6 +18,7 @@
         <link rel="apple-touch-icon" href="{{ asset('images/favicon.png')}}" />        
 
         <!--        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+       
         {!! HTML::style('css/demo.css') !!} 
         {!! HTML::style('css/masterPagesRegistro.css') !!}
         {!! HTML::style('css/base/layoutBase.css') !!} 
@@ -30,8 +31,9 @@
         
     
     </head>
-    <div id='loadingScreen'>
+    
         <body>
+            <div id='loadingScreen'>
             <header role="banner">
                 <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1360px; height: 235px; overflow: hidden; visibility: hidden;">
         <!-- Loading Screen -->
@@ -145,10 +147,6 @@
             {!! HTML::script('js/calendar/calendar.js') !!}
             {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
             
-            {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
-            
-            
-            
             <script>
         jQuery(document).ready(function ($) {
             
@@ -249,7 +247,7 @@
 
             @yield('scripts')
 
-
+</div>
         </body>
-    </div>
+    
 </html>

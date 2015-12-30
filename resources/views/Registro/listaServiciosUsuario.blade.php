@@ -59,10 +59,19 @@
        <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2 </strong></a>
                <a class="button-step4" onclick="window.location.href = '{!!asset('/userservice')!!}'"> 
        <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 3 </strong></a>
-                              <a class="button-step4"> 
-       <strong>Paso 4 </strong></a>
-
-               
+                              
+         <a class="button-step4 "> 
+                   <div style="color:#F26803; display: block;
+    font-size: 0.9em;
+    font-weight: normal;
+    line-height: 31px;
+    text-indent: 31px;"> Paso 4 </div></a>
+               <a class="button-step4 "> 
+                   <div style="color:#999; display: block;
+    font-size: 0.9em;
+    font-weight: normal;
+    line-height: 31px;
+    text-indent: 31px;"> Paso 5</div></a>
             </h2>
     </div>
     <div id="space"></div>

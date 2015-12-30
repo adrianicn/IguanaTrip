@@ -103,7 +103,8 @@ class OperadorRepository extends BaseRepository
 	{
 		$operador = new $this->model;
 		$operadorData = $operador::where('id_usuario_op',$inputs['id_usuario_op'])
-									->update(['nombre_empresa_operador'=>$inputs['nombre_empresa_operador'],
+									->update([
+                                                                            //'nombre_empresa_operador'=>$inputs['nombre_empresa_operador'],
 											'nombre_contacto_operador_1'=>$inputs['nombre_contacto_operador_1'],
 											'telf_contacto_operador_1'=>$inputs['telf_contacto_operador_1'],
 											'email_contacto_operador'=>$inputs['email_contacto_operador'],

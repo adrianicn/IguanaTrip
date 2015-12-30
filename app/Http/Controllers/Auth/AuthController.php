@@ -105,10 +105,15 @@ class AuthController extends Controller {
             //$email = Cookie::make('email', $user->email,1000);
             
             
-            $request->session()->put('user_id', $user->id);
+            //$request->session()->put('user_id', $user->id);
+            
             $request->session()->put('user_name', $user->username);
-            $request->session()->put('user_email', $user->email);
+            //$request->session()->put('user_email', $user->email);
 
+            $email = $auth->user()->email;
+            $nombre = $auth->user()->user_name;
+            
+            
             //return redirect('/servicios')->with('user', $user->id)->withCookie($name)->withCookie($iden)->withCookie($email);
             return redirect('/servicios')->with('user', $user->id);
         }

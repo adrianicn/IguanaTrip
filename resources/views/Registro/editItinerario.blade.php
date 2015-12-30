@@ -60,7 +60,7 @@
             </h2>
     </div>
     <div id="space"></div>
-    {!! Form::open(['url' => route('postItinerario'), 'method' => 'post', 'role' => 'form', 'id'=>'Updatepromocion']) !!}
+    {!! Form::open(['url' => route('postItinerario'), 'method' => 'post', 'role' => 'form', 'id'=>'Updateitinerario']) !!}
     <input type="hidden" name="id_usuario_servicio" value="{{ $itiner->id_usuario_servicio }}">
     <input type="hidden" name="id" value="{{ $itiner->id }}">
 
@@ -102,9 +102,11 @@
                 </div>
                 <div id="form-group-step2-popup">
                     <div class="box-content-button-1">
-                        <a class="button-1" onclick="AjaxContainerRegistro('Updatepromocion')" href="#">Siguiente</a>
+                        <a class="button-1" onclick="AjaxContainerRegistro('Updateitinerario')" href="#">Guardar</a>
+                        <a class="button-1" onclick="AjaxContainerRegistro('Updateitinerario'); window.location.href = '{!!asset('/servicios/serviciooperador')!!}/{{ $itiner->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'" href="#">Regresar</a>
                     </div>
                 </div>
+                
             </div>
             <div id="secondary-data">
                 <div id="renderPartialItinerarios" title="Esta opción te permite crear el detalle de tus itinerarios al hacer click en +, irás agregando nuevos puntos dentro de tu itinerario. Ejemplo  1)Ruta Quito-Ibarra, 2)Ruta Ibarra-Tulcan">
@@ -121,9 +123,9 @@
     <?php
     $ImgPromociones=$ImgItinerarios;
     ?>
-    
+     @if(count($ImgPromociones)>0)
             @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
-    
+    @endif
         
         @include('reusable.uploadImage', ['tipo' => '3','objeto'=>$listItinerarios])  
 
@@ -152,7 +154,7 @@
 </script>
 <script>
   $(function() {
-    $('.datepicker').datepicker();
+    $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
   });
   </script>
    <script>

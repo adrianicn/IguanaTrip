@@ -2,6 +2,7 @@
 
 @section('step1')
 {!! HTML::style('css/calendar/ui-jquery.css') !!}
+
 <div style='display:none'>
     <img src="{!! asset('img/x.png')!!}" alt='' />
 </div>
@@ -9,14 +10,14 @@
     #simplemodal-container a.modalCloseImg {
         background:url("{!! asset('img/x.png')!!}") no-repeat;
         width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
-</style>
-<div id="basic-modal-content" class="cls loadModal"></div>
+    </style>
+    <div id="basic-modal-content" class="cls loadModal"></div>
 
 <div class="rowerror">
 </div>
 <?php
-$prefix="";
-        $operadorName="";
+$prefix = "";
+$operadorName = "";
 $usuarioServicio->id = 0;
 $usuarioServicio->nombre_servicio = '';
 $usuarioServicio->detalle_servicio = '';
@@ -39,7 +40,6 @@ $usuarioServicio->id_canton = '';
 $usuarioServicio->id_parroquia = '';
 $usuarioServicio->latitud_servicio = -0.1806532;
 $usuarioServicio->longitud_servicio = -78.46783820000002;
-
 ?>
 @foreach ($usuarioServicio as $detalles)
 <?php
@@ -69,58 +69,58 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 @endforeach
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
-            
-          <?php switch (session('tip_oper')) {
-    case 1:
-        $prefix="I'm an ";
-        $operadorName="Agency";
-        break;
-    case 2:
-        $prefix="I'm an ";
-        $operadorName="Enterprise";
-        break;
-    case 3:
-        $prefix="I'm just";
-        $operadorName="Me";
-        break;
-    
-}
-?>
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset(' / servicios')!!}'">
 
-           
+            <?php
+            switch (session('tip_oper')) {
+                case 1:
+                    $prefix = "I'm an ";
+                    $operadorName = "Agency";
+                    break;
+                case 2:
+                    $prefix = "I'm an ";
+                    $operadorName = "Enterprise";
+                    break;
+                case 3:
+                    $prefix = "I'm just";
+                    $operadorName = "Me";
+                    break;
+            }
+            ?>
             <h2 class="head-title">
-    {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
+                {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
             </h2>
         </div>
         <div id="description-box-type">
             En ésta sección se detalla el servicio, se da a conocer la ubicación geográfica de donde se puede contratar el servicio, se pueden agregar fotografías, eventos, promociones e itinerarios. 
         </div>
     </div>
-      <div id="space"></div>
-     <div id="title-box-header-navigation">
-        
-           <h2 class="head-title-navigation">
-   <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios')!!}'"> 
-       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
-               <a class="button-step4" onclick="window.location.href = '{!!asset('/operador')!!}'"> 
-       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2 </strong></a>
-               <a class="button-step4" onclick="window.location.href = '{!!asset('/userservice')!!}'"> 
-       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 3 </strong></a>
-               <a class="button-step4" onclick="window.location.href = '{!!asset('/detalleServicios')!!}'"> 
-       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 4 </strong></a>
-                              <a class="button-step4"> 
-       <strong>Paso 5 </strong></a>
+    <div id="space"></div>
+    <div id="title-box-header-navigation">
 
-               
-            </h2>
+        <h2 class="head-title-navigation">
+            <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios')!!}'"> 
+                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
+            <a class="button-step4" onclick="window.location.href = '{!!asset('/operador')!!}'"> 
+                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2 </strong></a>
+            <a class="button-step4" onclick="window.location.href = '{!!asset('/userservice')!!}'"> 
+                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 3 </strong></a>
+            <a class="button-step4" onclick="window.location.href = '{!!asset('/detalleServicios')!!}'"> 
+                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 4 </strong></a>
+            <a class="button-step4 "> 
+                <div style="color:#F26803; display: block;
+                     font-size: 0.9em;
+                     font-weight: normal;
+                     line-height: 31px;
+                     text-indent: 31px;"> Paso 5 </div></a>
+        </h2>
     </div>
+    
     <div id="space"></div>
 
     <div class="wrapper uwa-font-aa">
         {!!$Servicio->nombre_servicio!!}
         {!! Form::open(['url' => route('upload-postusuarioservicios'), 'method' => 'post', 'role' => 'form', 'id'=>'registro_step1'] ) !!}
-
         <input type="hidden" value="{!!$usuarioServicio->id!!}" name="id" id="id">
         <input type="hidden" value="{!!$id_catalogo!!}" name="id_catalogo" id="id_catalogo">
         <div id="part-1-form">
@@ -144,10 +144,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 <div id='provincias'>
                     @section('provincias')
                     @show
-                    
                 </div>
-                    
-                    
                 <div class="form-group-1">
                     @include('reusable.maps', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
                 </div>    
@@ -173,91 +170,116 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 </div>
                 <div class="form-group-2">
                     <ul style="list-style: none">
-                            @foreach ($catalogoServicioEstablecimiento as $catalogo)	
-                                <li>
-                                    <input class="circulo" name="id_servicio_est[]" id="id_servicio_est[]" value="{!!$catalogo->id!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {{($catalogo->estado_servicio_est_us <> NULL)?'checked':''}}/>
-                                    {!!$catalogo->nombre_servicio_est!!}
-                                </li>    
-                            @endforeach
+                        @foreach ($catalogoServicioEstablecimiento as $catalogo)	
+                        <li>
+                            <input class="circulo" name="id_servicio_est[]" id="id_servicio_est[]" value="{!!$catalogo->id!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {{($catalogo->estado_servicio_est_us <> NULL)?'checked':''}}/>
+                            {!!$catalogo->nombre_servicio_est!!}
+                        </li>    
+                        @endforeach
                     </ul>
                 </div>
-
             </div>
             <div id="secondary-data">
-                <div id="promocion"><a class="button-step4" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGeneric('reusable.promocion',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
-                <div id="evento"><a class="button-step4" title="Puedes crear varios eventos para tu servicio. Ejemplo si tu servicio es una discoteca puedes agregar Jueves laydies night como evento o si eres un restaurante puedes agregar eventos como inauguraciones, etc." onclick="RenderPartialGeneric('reusable.createNewEvent',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
-                <div id="evento"><a class="button-step4" title="Esta opción es orientada a servicios turísticos de viajes y transporte. Por ejemplo tu servicio es una agencia de viajes y tienes varios itinerarios Trip Cotopaxi, Trip Amazonía o si eres un transporte podrás especificar la ruta de tu servicio." onclick="RenderPartialGeneric('reusable.createNewItinerario',{!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Itinerario</a></div>
+                <div id="promocion"><a class="button-step4" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGeneric('reusable.promocion', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
+                <div id="evento"><a class="button-step4" title="Puedes crear varios eventos para tu servicio. Ejemplo si tu servicio es una discoteca puedes agregar Jueves laydies night como evento o si eres un restaurante puedes agregar eventos como inauguraciones, etc." onclick="RenderPartialGeneric('reusable.createNewEvent', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
+                <div id="evento"><a class="button-step4" title="Esta opción es orientada a servicios turísticos de viajes y transporte. Por ejemplo tu servicio es una agencia de viajes y tienes varios itinerarios Trip Cotopaxi, Trip Amazonía o si eres un transporte podrás especificar la ruta de tu servicio." onclick="RenderPartialGeneric('reusable.createNewItinerario', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Itinerario</a></div>
+
+                <div id="promocion"><a class="button-step4" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGeneric('reusable.uploadImagePopUp', 1, {!!$usuarioServicio->id!!}, {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a></div>
             </div>
         </div>
         <div id="part-1-form">
             <div class="box-content-button-1">
-                <a class="button-1" title="Antes de finalizar recuerda que puedes ingresar fotografías de tu servicio en la parte inferior." onclick="AjaxContainerRetrunMessage('registro_step1','optional'); window.location.href = '/IguanaTrip/public/thankyou'" href="#">Finalizar</a>
+                <a class="button-1" title="Antes de finalizar recuerda que puedes ingresar fotografías de tu servicio en la parte inferior." onclick="AjaxContainerRetrunMessage('registro_step1', 'optional'); window.location.href = '/IguanaTrip/public/thankyou'" href="#">Finalizar</a>
             </div>              
         </div>
         {!! Form::close() !!}
-<div id="part-1-form">
-            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
-        </div>
-        
-        @include('reusable.uploadImage', ['tipo' => '1','objeto'=>$usuarioServicio])  
 
-        
-            <div id="renderPartialListaServicios">
-                    @section('contentPanelServicios')
-                    @show
-                </div>    
+        <div id="renderPartialImagenes">
+            @section('contentImagenes')
+            @show
+        </div>    
+
+
+        <div id="renderPartialListaServicios">
+            @section('contentPanelServicios')
+            @show
+        </div>    
     </div>
 </div>
 
-@section('scripts')
 
-{!! HTML::script('/js/tabla_dinamica.js') !!}
+<input type="hidden" value="0" id="flag_image">
+
+@if($usuarioServicio->id_provincia=='' )
+<script>
+            $(document).ready(function () {
+            GetDataAjaxProvincias("{!!asset('/getProvincias')!!}/0/0/0");
+    });</script>
+@else
+<script>
+            $(document).ready(function () {
+    GetDataAjaxProvincias("{!!asset('/getProvincias')!!}/{!!$usuarioServicio->id_provincia!!}/{!!$usuarioServicio->id_canton!!}/{!!$usuarioServicio->id_parroquia!!}");
+    });</script>
+@endif
+
+<script>
+    $(document).ready(function () {
+
+                GetDataAjaxSectionEventos("{!!asset('/getlistaServiciosComplete')!!}/{!!$usuarioServicio->id!!}");
+               // GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/1/{!!$usuarioServicio->id!!}");
+    });
+    
+    
+    $(".chng").change(function() {
+    AjaxContainerRetrunMessage('registro_step1', 'optional')
+            });
+            $(function() {
+            var tooltips = $("[title]").tooltip({
+            position: {
+            my: "left top",
+                    at: "right+5 top-5"
+            }
+            });
+            });
+        
+    
+</script>
+
+
+
+
+{!!HTML::script('js/loadingScreen/loadingoverlay.js') !!}
+{!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
+
+
+@stop
+
+
+@section('scripts')
 {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
 {!! HTML::script('/js/jsModal/basic.js') !!}
 
-
-    
-
-@stop
-@if($usuarioServicio->id_provincia=='' )
 <script>
     $(document).ready(function () {
-        GetDataAjaxProvincias("{!!asset('/getProvincias')!!}/0/0/0");
-    });
 
-</script>
-@else
-<script>
-    $(document).ready(function () {
-        
-        GetDataAjaxProvincias("{!!asset('/getProvincias')!!}/{!!$usuarioServicio->id_provincia!!}/{!!$usuarioServicio->id_canton!!}/{!!$usuarioServicio->id_parroquia!!}");
-    });
-
-</script>
-@endif
-<script>
-    $(document).ready(function () {
-        
-        GetDataAjaxSectionEventos("{!!asset('/getlistaServiciosComplete')!!}/{!!$usuarioServicio->id!!}");
-
+                
+                GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/1/{!!$usuarioServicio->id!!}");
     });
     
-    $( ".chng" ).change(function() {
-  AjaxContainerRetrunMessage('registro_step1','optional')
-});
-</script>
-<script>
-  $(function() {
-    var tooltips = $( "[title]" ).tooltip({
-      position: {
-        my: "left top",
-        at: "right+5 top-5"
-      }
-    });
-   
-  });
-  </script>
+     ///Script para actualizar el container una vez que se hayan subido las imagenes
+     setInterval( function() {
+    
+        if ($('#flag_image').val() == 1) {
+            // Save the new value
+           GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/1/{!!$usuarioServicio->id!!}");
+           $("#flag_image").val('0');
 
+            // TODO - Handle the changed value
+        }
+    
+}, 100);
+</script>
 
 @stop
+
 
