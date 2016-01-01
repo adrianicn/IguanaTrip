@@ -3,37 +3,48 @@
 @section('step1')
 {!! HTML::style('css/calendar/ui-jquery.css') !!}
 
+<div style='display:none'>
+    <img src="{!! asset('img/x.png')!!}" alt='' />
+</div>
+<style>
+    #simplemodal-container a.modalCloseImg {
+        background:url("{!! asset('img/x.png')!!}") no-repeat;
+        width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+    </style>
+    <div id="basic-modal-content" class="cls loadModal"></div>
 <div class="rowerror">
 </div>
 
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
-            
-          <?php 
-          
-          $prefix="";
-        $operadorName="";
-          switch (session('tip_oper')) {
-    case 1:
-        $prefix="I'm an ";
-        $operadorName="Agency";
-        break;
-    case 2:
-        $prefix="I'm an ";
-        $operadorName="Enterprise";
-        break;
-    case 3:
-        $prefix="I'm just";
-        $operadorName="Me";
-        break;
-    
-}
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset(' / servicios')!!}'">
+
+            <?php
+            $prefix = "";
+            $operadorName = "";
+            switch (session('tip_oper')) {
+                case 1:
+                    $prefix = "I'm an ";
+                    $operadorName = "Agency";
+                    break;
+                case 2:
+                    $prefix = "I'm an ";
+                    $operadorName = "Enterprise";
+                    break;
+                case 3:
+                    $prefix = "I'm just";
+                    $operadorName = "Me";
+                    break;
+            }
+            ?>
+            @foreach ($listPromociones as $promo)
+            <?php
+
+$usuarioServicio=$promo->id;
 ?>
-@foreach ($listPromociones as $promo)
-           
+
             <h2 class="head-title">
-    {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
+                {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
             </h2>
         </div>
         <div id="description-box-type">
@@ -42,33 +53,27 @@
         </div>
     </div>
     <div id="space"></div>
-     <div id="title-box-header-navigation">
-        
-           <h2 class="head-title-navigation">
-   <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios/serviciooperador/')!!}/{{ $promo->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'"> 
-       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Regresar </strong></a>
-               
-       
-               
-            </h2>
+    <div id="title-box-header-navigation">
+
+        <h2 class="head-title-navigation">
+            <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios/serviciooperador/')!!}/{{ $promo->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'"> 
+                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Regresar </strong></a>
+
+
+
+        </h2>
     </div>
     <div id="space"></div>
 
-<div class="form-group-step2" title="Carga las imágenes que consideres describen a tu promoción.">
-     @if(count($ImgPromociones)>0)        
-    @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
-     @endif
-            @include('reusable.uploadImage', ['tipo' => '2','objeto'=>$listPromociones])  
-        </div>
+    <div class="form-group-step2" >
+    </div>
     {!! Form::open(['url' => route('postPromocion'), 'method' => 'post', 'role' => 'form', 'id'=>'Updatepromocion']) !!}
-    
+
 
     <input type="hidden" name="id_usuario_servicio" value="{{ $promo->id_usuario_servicio }}">
     <input type="hidden" name="id" value="{{ $promo->id }}">
 
     <div class="wrapper uwa-font-aa">
-
-        
 
         <div class="form-group-step2">
             {!!Form::label('nombre_promocion', 'Nombre Promocion', array('id'=>'iconFormulario-step2'))!!}
@@ -116,38 +121,65 @@
 
         <div class="form-group-step2">
             {!!Form::label('tags', 'Tags', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('tags', $promo->tags, array("title"=>"Para mejorar las búsquedas ingresa palabras clave separadas por comas que describan tu servicio. Ejemplo: mar, playa, ceviche, discoteca, etc.",'class'=>'inputtext-step2','placeholder'=>'Tags'))!!}
+            {!!Form::text('tags', $promo->tags, array("title"=>"Para mejorar las búsquedas ingresa palabras clave separadas por comas que describan tu servicio. Ejemplo: mar, playa, ceviche, discoteca, etc.",'class'=>'inputtext-step2','placeholder'=>'#tagejemplo, #comida galapagos, '))!!}
         </div>
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRetrunMessage('Updatepromocion','optional'); window.location.href = '{!!asset('/servicios/serviciooperador/')!!}/{{ $promo->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'" href="#">Finalizar y regresar</a>
                 
+                <a class="button-1" onclick="AjaxContainerRetrunMessagePostParametro('Updatepromocion',{!!$servicio->id_catalogo_servicio!!})" href="#">Finalizar y regresar</a>
+
             </div>
         </div>
     </div>
-    @endforeach 
+   <div id="secondary-data">
+                <div id="promocion"><a class="button-step4" title="Si deseas agregar fotografias de tu servicio puedes hacerlo aquí, nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 2, {!!$promo->id_usuario_servicio!!}, {!!$promo->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a></div>
+            </div>
+
 
     {!! Form::close() !!}
+    <div id="renderPartialImagenes">
+        @section('contentImagenes')
+        @show
+    </div>
+    <input type="hidden" value="0" id="flag_image">
+    @endforeach 
 </div>
+<script>
+            $(function() {
+            var tooltips = $("[title]").tooltip({
+            position: {
+            my: "left top",
+                    at: "right+5 top-5"
+            }
+            });
+            });</script>
 
+{!!HTML::script('js/loadingScreen/loadingoverlay.js') !!}
+{!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
 {!! HTML::script('js/jquery.js') !!}
-  
-  
+
+
+@stop
+@section('scripts')
+{!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
+{!! HTML::script('/js/jsModal/basic.js') !!}
 
 <script>
-  $(function() {
-     $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
-  });
-  </script>
-  <script>
-  $(function() {
-    var tooltips = $( "[title]" ).tooltip({
-      position: {
-        my: "left top",
-        at: "right+5 top-5"
-      }
-    });
-   
-  });
-  </script>
+            $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});</script>
+
+<script>
+            $(document).ready(function () {
+                GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/2/{!!$usuarioServicio!!}");
+            });
+            
+            ///Script para actualizar el container una vez que se hayan subido las imagenes
+            setInterval(function() {
+            if ($('#flag_image').val() == 1) {
+            // Save the new value
+            GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/2/{!!$usuarioServicio!!}");
+                    $("#flag_image").val('0');
+                    // TODO - Handle the changed value
+            }
+            }, 100);
+</script>
 @stop

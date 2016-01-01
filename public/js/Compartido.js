@@ -74,6 +74,7 @@ function AjaxContainerRegistroWithLoad($formulario, $loadScreen) {
         }
         if (data.success) {
             $("."+$loadScreen).LoadingOverlay("hide", true);
+            
             window.location.href = data.redirectto;
 
             //  $('#containerbase').empty();
@@ -85,6 +86,51 @@ function AjaxContainerRegistroWithLoad($formulario, $loadScreen) {
 
     });
 }
+
+
+
+
+//retorna un mensaje despues de ejecutar la logica del controller
+function AjaxContainerRetrunMessagePostParametro($formulario, $id) {
+    $('.error').html('');
+
+    $("#target").LoadingOverlay("show");
+
+
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize() + '&catalogo=' + $id;
+    url = $form.attr("action");
+    var posting = $.post(url, {formData: data});
+    posting.done(function (data) {
+        if (data.fail) {
+
+
+
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#target").LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+            $('.rowerror').html(errorString);
+
+        }
+        if (data.success) {
+            $("#target").LoadingOverlay("hide", true);
+            
+            
+            window.location.href = data.redirectto;
+
+
+
+
+        } //success
+    }); //done
+
+}
+
 
 
 
@@ -168,7 +214,6 @@ function AjaxContainerRegistroWithMessage($formulario, $loadScreen,$message) {
 //lo materializa en el lugar indicado
 function RenderPartialGeneric($idPartial, $id_usuario_servicio) {
 
-    
 callModal('cls');
     var url = "/IguanaTrip/public/render/" + $idPartial;
     $.ajax({
@@ -187,7 +232,7 @@ callModal('cls');
 
 
 
-function RenderPartialGeneric($idPartial, $id_catalogo_fotografia,$id_usuario_servicio,$id_auxiliar) {
+function RenderPartialGenericFotografia($idPartial, $id_catalogo_fotografia,$id_usuario_servicio,$id_auxiliar) {
 
     
 callModal('cls');
@@ -483,6 +528,10 @@ function GetDataAjaxSectionItiner(url) {
         }
     });
 }
+
+
+
+
 
 
 //retorna un mensaje despues de ejecutar la logica del controller

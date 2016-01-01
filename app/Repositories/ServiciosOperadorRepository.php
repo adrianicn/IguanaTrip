@@ -83,8 +83,8 @@ class ServiciosOperadorRepository extends BaseRepository {
      */
     public function storeNew($inputs) {
         $user_servicios = new $this->model;
-        $user_servicios->id_catalogo_servicio = $inputs['id_catalogo_servicio'];
-        $user_servicios->id_usuario_operador = $inputs['id_usuario_op'];
+        $user_servicios->id_catalogo_servicio = trim($inputs['id_catalogo_servicio']);
+        $user_servicios->id_usuario_operador = trim($inputs['id_usuario_op']);
         $user_servicios->estado_servicio = '1';
         $this->save($user_servicios);
         return $user_servicios;
@@ -94,16 +94,16 @@ class ServiciosOperadorRepository extends BaseRepository {
     public function storeNewPromocion($inputs) {
 
         $promocionU = new $this->promocion;
-        $promocionU->id_usuario_servicio = $inputs['id_usuario_servicio'];
+        $promocionU->id_usuario_servicio = trim($inputs['id_usuario_servicio']);
         $promocionU->id_catalogo_tipo_fotografia = 2;
-        $promocionU->descripcion_promocion = $inputs['descripcion_promocion'];
-        $promocionU->nombre_promocion = $inputs['nombre_promocion'];
+        $promocionU->descripcion_promocion = trim($inputs['descripcion_promocion']);
+        $promocionU->nombre_promocion = trim($inputs['nombre_promocion']);
         $promocionU->estado_promocion = 1;
         $promocionU->fecha_desde = $inputs['fecha_inicio'];
         $promocionU->fecha_hasta = $inputs['fecha_fin'];
-        $promocionU->precio_normal = $inputs['precio_normal'];
-        $promocionU->descuento = $inputs['descuento'];
-        $promocionU->codigo_promocion = $inputs['codigo'];
+        $promocionU->precio_normal = trim($inputs['precio_normal']);
+        $promocionU->descuento = trim($inputs['descuento']);
+        $promocionU->codigo_promocion = trim($inputs['codigo']);
         $promocionU->created_at = \Carbon\Carbon::now()->toDateTimeString();
         $promocionU->updated_at = \Carbon\Carbon::now()->toDateTimeString();
 
@@ -138,10 +138,10 @@ class ServiciosOperadorRepository extends BaseRepository {
     public function storeNewItinerario($inputs) {
 
         $ItinerarioU = new $this->itinerarios_u;
-        $ItinerarioU->id_usuario_servicio = $inputs['id_usuario_servicio'];
+        $ItinerarioU->id_usuario_servicio = trim($inputs['id_usuario_servicio']);
         $ItinerarioU->id_fotografia = 3;
-        $ItinerarioU->descripcion_itinerario = $inputs['descripcion_itinerario'];
-        $ItinerarioU->nombre_itinerario = $inputs['nombre_itinerario'];
+        $ItinerarioU->descripcion_itinerario = trim($inputs['descripcion_itinerario']);
+        $ItinerarioU->nombre_itinerario = trim($inputs['nombre_itinerario']);
         $ItinerarioU->id_catalogo_dificultad = $inputs['id_dificultad'];
         $ItinerarioU->estado_itinerario = 1;
         $ItinerarioU->created_at = \Carbon\Carbon::now()->toDateTimeString();
@@ -156,8 +156,8 @@ class ServiciosOperadorRepository extends BaseRepository {
         $evento = new $this->eventos;
         $evento->id_usuario_servicio = $inputs['id_usuario_servicio'];
         $evento->id_fotografia = 4;
-        $evento->descripcion_evento = $inputs['descripcion_evento'];
-        $evento->nombre_evento = $inputs['nombre_evento'];
+        $evento->descripcion_evento = trim($inputs['descripcion_evento']);
+        $evento->nombre_evento = trim($inputs['nombre_evento']);
         $evento->fecha_desde = $inputs['fecha_desde'];
         $evento->fecha_hasta = $inputs['fecha_hasta'];
         $evento->estado_evento = 1;
@@ -174,13 +174,13 @@ class ServiciosOperadorRepository extends BaseRepository {
 
 
         $ItinerarioU->id_itinerario = $inputs['id_itinerario'];
-        $ItinerarioU->lugar_punto = $inputs['lugar_punto'];
+        $ItinerarioU->lugar_punto = trim($inputs['lugar_punto']);
         $ItinerarioU->longitud_punto = $inputs['longitud_servicio'];
         $ItinerarioU->latitud_punto = $inputs['latitud_servicio'];
         $ItinerarioU->estado_punto = 1;
         $ItinerarioU->diahora_punto = $inputs['diahora_punto'];
         $ItinerarioU->incluye_punto = $inputs['incluye_punto'];
-        $ItinerarioU->tags_punto = $inputs['tag'];
+        $ItinerarioU->tags_punto = trim($inputs['tag']);
         $ItinerarioU->created_at = \Carbon\Carbon::now()->toDateTimeString();
         $ItinerarioU->updated_at = \Carbon\Carbon::now()->toDateTimeString();
 
@@ -193,13 +193,15 @@ class ServiciosOperadorRepository extends BaseRepository {
         $ItinerarioU = new $this->invitar_amigo;
 
 
-        $ItinerarioU->invitacion_de = $inputs['invitacion_de'];
-        $ItinerarioU->invitacion_para = $inputs['invitacion_para'];
-        $ItinerarioU->correo = $inputs['correo'];
+        $ItinerarioU->invitacion_de = trim($inputs['invitacion_de']);
+        $ItinerarioU->invitacion_para = trim($inputs['invitacion_para']);
+        $ItinerarioU->correo = trim($inputs['correo']);
         $ItinerarioU->estado_invitacion = 1;
         $ItinerarioU->ip_envio = "";
         if ((session('user_id') != null))
+        {
             $ItinerarioU->id_usuario_invita = session('user_id');
+            }
 
 
         $ItinerarioU->created_at = \Carbon\Carbon::now()->toDateTimeString();

@@ -24,8 +24,24 @@ $('#id_provincia').on('change', function() {
     var valor=this.value;
   
 GetDataAjaxDescripcion("{!!asset('/getDescripcionGeografica')!!}"+"/"+valor+"/6");
+GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/6/"+valor+"");
   $('#id_auxiliar').val(valor);
 });
+
+  ///Script para actualizar el container una vez que se hayan subido las imagenes
+     setInterval( function() {
+    
+        if ($('#flag_image').val() == 1) {
+            var valor=$('#id_provincia').val();
+            
+            // Save the new value
+           GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/6/"+valor+"");
+           $("#flag_image").val('0');
+
+            // TODO - Handle the changed value
+        }
+    
+}, 100);
 </script>   
 
 

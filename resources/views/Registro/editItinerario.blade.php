@@ -14,7 +14,10 @@
 
 
 @foreach ($listItinerarios as $itiner)
+<?php
 
+$usuarioServicio=$itiner->id;
+?>
 <div class="row-step4">
     <div id="title-box-header">
         <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
@@ -106,6 +109,9 @@
                         <a class="button-1" onclick="AjaxContainerRegistro('Updateitinerario'); window.location.href = '{!!asset('/servicios/serviciooperador')!!}/{{ $itiner->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'" href="#">Regresar</a>
                     </div>
                 </div>
+                 <div id="secondary-data">
+                <div id="promocion"><a class="button-step4" title="Si deseas agregar fotografias de tu servicio puedes hacerlo aquí, nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 3, {!!$itiner->id_usuario_servicio!!}, {!!$itiner->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a></div>
+            </div>
                 
             </div>
             <div id="secondary-data">
@@ -120,23 +126,21 @@
     </div>
 
     {!! Form::close() !!}
-    <?php
-    $ImgPromociones=$ImgItinerarios;
-    ?>
-     @if(count($ImgPromociones)>0)
-            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
-    @endif
-        
-        @include('reusable.uploadImage', ['tipo' => '3','objeto'=>$listItinerarios])  
-
+    
      
-      
+       <div id="renderPartialImagenes">
+            @section('contentImagenes')
+            @show
+        </div>
+    
+<input type="hidden" value="0" id="flag_image">
+
+@endforeach 
 </div>
 
 
 
 
-@endforeach 
 @section('scripts')
 
 {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
@@ -149,8 +153,22 @@
 <script>
     $(document).ready(function () {
         GetDataAjaxSectionItiner("{!!asset('/getlistaItinerarios')!!}/{!!$itiner->id!!}");
-        //GetDataAjaxSection("/IguanaTrip/public/getlistaServiciosComplete/22");
+        GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/3/{!!$usuarioServicio!!}");
     });
+    
+       ///Script para actualizar el container una vez que se hayan subido las imagenes
+     setInterval( function() {
+    
+        if ($('#flag_image').val() == 1) {
+            
+            // Save the new value
+           GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/3/{!!$usuarioServicio!!}");
+           $("#flag_image").val('0');
+
+            // TODO - Handle the changed value
+        }
+    
+}, 100);
 </script>
 <script>
   $(function() {

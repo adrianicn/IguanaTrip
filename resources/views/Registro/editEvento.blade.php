@@ -2,10 +2,23 @@
 
 @section('step1')
 {!! HTML::style('css/calendar/ui-jquery.css') !!}
+<div style='display:none'>
+    <img src="{!! asset('img/x.png')!!}" alt='' />
+</div>
+<style>
+    #simplemodal-container a.modalCloseImg {
+        background:url("{!! asset('img/x.png')!!}") no-repeat;
+        width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+    </style>
+    <div id="basic-modal-content" class="cls loadModal"></div>
 <div class="rowerror">
 </div>
 @foreach ($listEventos as $evento)
 
+<?php
+
+$usuarioServicio=$evento->id;
+?>
 <div class="row-step4">
     <div id="title-box-header">
         <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
@@ -65,15 +78,12 @@
     <div class="wrapper uwa-font-aa" title="Carga las imágenes que consideres describen a tu evento.">
 
         <div class="form-group-step2">
-             @if(count($ImgPromociones)>0)
-            @include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
-            @endif
-            @include('reusable.uploadImage', ['tipo' => '4','objeto'=>$listEventos])  
+        
         </div>
 
         <div class="form-group-step2">
             {!!Form::label('nombre_evento', 'Nombre Evento', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('nombre_evento', $evento->nombre_evento, array("title"=>"Es el nombre del evento. Recuerda ser creativo y diverido al escoger el nombre.",'class'=>'inputtext-step2','placeholder'=>'Nombre del evento'))!!}
+            {!!Form::text('nombre_evento', trim($evento->nombre_evento), array("title"=>"Es el nombre del evento. Recuerda ser creativo y diverido al escoger el nombre.",'class'=>'inputtext-step2','placeholder'=>'Nombre del evento'))!!}
         </div>
 
         <div class="form-group-step2">
@@ -88,8 +98,12 @@
 
         <div class="form-group-step2">
             {!!Form::label('detalle_promocion', 'Descripción evento', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::textarea('descripcion_evento', $evento->descripcion_evento, array('class'=>'inputtext-step2'))!!}
+            {!!Form::textarea('descripcion_evento', trim($evento->descripcion_evento), array('class'=>'inputtext-step2'))!!}
 
+        </div>
+        <div class="form-group-step2">
+            {!!Form::label('tags', 'Tags', array('id'=>'iconFormulario-step2'))!!}
+            {!!Form::text('tags', trim($evento->tags), array("title"=>"Para mejorar las búsquedas ingresa palabras clave separadas por comas que describan tu servicio. Ejemplo: mar, playa, ceviche, discoteca, etc.",'class'=>'inputtext-step2','placeholder'=>'Tags'))!!}
         </div>
 
      <div class="form-group-step2-popup">
@@ -108,25 +122,30 @@
         </div>
 
         <div class="form-group-step2">
-            {!!Form::label('tags', 'Tags', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('tags', $evento->tags, array("title"=>"Para mejorar las búsquedas ingresa palabras clave separadas por comas que describan tu servicio. Ejemplo: mar, playa, ceviche, discoteca, etc.",'class'=>'inputtext-step2','placeholder'=>'Tags'))!!}
+            
         </div>
         <div id="form-group-step2-popup">
             <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRetrunMessage('UpdateEvento','optional'); window.location.href = '{!!asset('/servicios/serviciooperador')!!}/{{ $evento->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'" href="#">Finalizar y regresar</a>
+                <a class="button-1" onclick="AjaxContainerRetrunMessagePostParametro('UpdateEvento',{!!$servicio->id_catalogo_servicio!!})" href="#">Finalizar y regresar</a>
             </div>
         </div>
     </div>
-    @endforeach 
+        <div id="secondary-data">
+                <div id="promocion"><a class="button-step4" title="Si deseas agregar fotografias de tu servicio puedes hacerlo aquí, nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 4, {!!$evento->id_usuario_servicio!!}, {!!$evento->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a></div>
+            </div>
 
     {!! Form::close() !!}
-  
+    <div id="renderPartialImagenes">
+            @section('contentImagenes')
+            @show
+        </div>
+    
+<input type="hidden" value="0" id="flag_image">
+
+  @endforeach 
 </div>
-@section('scripts')
-{!! HTML::script('js/jquery.js') !!}
-  <script>
-    $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
-    </script>
+
+  
  <script>
      
   $(function() {
@@ -139,6 +158,38 @@
    
   });
   </script>
+  {!!HTML::script('js/loadingScreen/loadingoverlay.js') !!}
+{!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
+{!! HTML::script('js/jquery.js') !!}
+  @stop
+@section('scripts')
+{!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
+{!! HTML::script('/js/jsModal/basic.js') !!}
+
+<script>
+    $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
+    </script>
+    
+    <script>
+    $(document).ready(function () {
+
+                
+                GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/4/{!!$usuarioServicio!!}");
+    });
+    
+     ///Script para actualizar el container una vez que se hayan subido las imagenes
+     setInterval( function() {
+    
+        if ($('#flag_image').val() == 1) {
+            
+            // Save the new value
+           GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/4/{!!$usuarioServicio!!}");
+           $("#flag_image").val('0');
+
+            // TODO - Handle the changed value
+        }
+    
+}, 100);
+</script>
   
-@stop
 @stop

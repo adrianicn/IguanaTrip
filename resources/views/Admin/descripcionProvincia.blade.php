@@ -19,71 +19,42 @@ $id = $operadorData->id;
 
 
         {!!Form::label('detalle_servicio_1', 'Descripción Español', array("title"=>"Descripcion",'class'=>'control-label-1'))!!}
-        <textarea id="descripcion_esp" name="descripcion_esp" class="ptm chng" placeholder="Descripcion" title="Descripción.">
-                        {!!$descripcion_esp!!}
-        </textarea>
+        <textarea id="descripcion_esp" name="descripcion_esp" class="ptm chng" placeholder="Descripcion" title="Descripción.">{!!trim($descripcion_esp)!!}</textarea>
 
     </div>
     <div class="form-group-step2">
 
 
         {!!Form::label('detalle_servicio_1', 'Descripción Inglés', array("title"=>"Descripcion",'class'=>'control-label-1'))!!}
-        <textarea id="descripcion_eng" name="descripcion_eng" class="ptm chng" placeholder="Descripcion" title="Descripción.">
-                        {!!$descripcion_eng!!}
-        </textarea>
+        <textarea id="descripcion_eng" name="descripcion_eng" class="ptm chng" placeholder="Descripcion" title="Descripción.">{!!trim($descripcion_eng)!!}</textarea>
     </div>
 
     <div class="form-group-step2">
         <div class="box-content-button-step2">
-            <a class="button" onclick="AjaxContainerRegistroWithMessage('postGeoLoc','wrapper','Se ha guardado con éxito')" href="#">Siguiente</a>
+            <a class="button" onclick="AjaxContainerRegistroWithMessage('postGeoLoc','wrapper','Se ha guardado con éxito')" href="#">Guardar</a>
         </div>
     </div>    
+        <div id="secondary-data">
+                <div id="promocion"><a class="button-step4" title="Si deseas agregar fotografias de tu servicio puedes hacerlo aquí, nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', {!!$typeGeo!!},0, {!!$id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a></div>
+            </div>
 
 </div>
-
-
-
-
-
-
-@include('reusable.imageContainer',['objetoImg' => $ImgPromociones])
-
-
-
-
-{!! HTML::script('js/imageContainer/jquery.tinycarousel.js') !!}
-
-<script type="text/javascript">
-            $(document).ready(function()
-    {
-    $('#slider1').tinycarousel();
+  <div id="renderPartialImagenes">
+            @section('contentImagenes')
+            @show
+        </div>
     
-    });
-    
+<input type="hidden" value="0" id="flag_image">
 
 
 
-</script>
     {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
     {!! HTML::script('/js/jsModal/basic.js') !!}
     {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
-            
-            {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
+    {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
             
     
     
-    <script>
-    function alertaConfirm(id){
-        
-        var r = confirm("Está seguro de que desea eliminar esta imagen?");
-if (r == true) {
-           AjaxContainerRetrunMessage("deleteImage", id)
-} else {
-    txt = "Cencelado";
-}
-    }
-   </script>
-
 
 
 @endsection

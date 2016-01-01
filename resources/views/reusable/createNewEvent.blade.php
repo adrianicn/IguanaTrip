@@ -19,14 +19,12 @@
     <hr>
         <div class="form-group-step2-popup">
             {!!Form::label('nombre_1', trans('registro/labels.label3'), array('id'=>'iconFormulario-step2-popup'))!!}
-            {!!Form::text('nombre_evento',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Nombre del evento'))!!}
+            {!!Form::text('nombre_evento',NULL, array('class'=>'inputtext-step2-popup','placeholder'=>'Nombre significativo'))!!}
         </div>
     
         <div class="form-group-step2-popup">
             {!!Form::label('Detalle_1', 'Detalle', array('id'=>'iconFormulario-step2-popup'))!!}
-            <textarea id="descripcion_evento" name="descripcion_evento" class="ptm-popup" placeholder="Detalle evento">
-                        
-            </textarea>
+            <textarea id="descripcion_evento" name="descripcion_evento" class="ptm-popup" placeholder="Cena navideña, concierto, etc."></textarea>
         </div>
     
     <div class="form-group-step2-popup">

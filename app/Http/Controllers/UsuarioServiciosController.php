@@ -71,9 +71,9 @@ class UsuarioServiciosController extends Controller {
 
             $servicio = $gestion->getUsuario_serv($servicioBase->id_usuario_servicio);
         }
-        $ImgPromociones = $gestion->getImageOperador($id, 4);
+        
 
-        return view('Registro.editEvento', compact('listEventos', 'ImgPromociones', 'servicio'));
+        return view('Registro.editEvento', compact('listEventos', 'servicio'));
     }
 
     //despliega la descipcion de las provincias
@@ -165,6 +165,7 @@ class UsuarioServiciosController extends Controller {
     public function getOnlyCanton(Request $request, ServiciosOperadorRepository $gestion, $id) {
 
         $listCantones = $gestion->getRecursivo($id);
+        
         $view = View::make('reusable.onlyCanton')->with('cantones', $listCantones);
         if ($request->ajax()) {
             $sections = $view->rendersections();
@@ -188,9 +189,9 @@ class UsuarioServiciosController extends Controller {
     public function getDescripcionGeografica(Request $request, ServiciosOperadorRepository $gestion, $id, $id_catalogo) {
 
         $lista = $gestion->getRecursivoDescription($id);
-        $ImgPromociones = $gestion->getImageUbcacionGeografica($id, $id_catalogo);
+        
 
-        $view = View::make('Admin.descripcionProvincia')->with('descripcion', $lista)->with('ImgPromociones', $ImgPromociones);
+        $view = View::make('Admin.descripcionProvincia')->with('descripcion', $lista)->with('typeGeo', $id_catalogo);
         if ($request->ajax()) {
             $sections = $view->rendersections();
 
@@ -530,7 +531,7 @@ class UsuarioServiciosController extends Controller {
         //Gestion de actualizacion de busqueda    
             $search=$formFields['nombre_promocion']." ".$formFields['descripcion_promocion']." ".$formFields['codigo_promocion']." ".$formFields['tags']." ".$formFields['observaciones_promocion'];            
             $gestion->storeUpdateSerchEngine( $Promocion,1,$formFields['id'],$search);
-            
+            $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/'.$formFields['id_usuario_servicio'].'/'.$formFields['catalogo']);
         } else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
             $object = $gestion->storeNewPromocion($formFields);
@@ -540,10 +541,10 @@ class UsuarioServiciosController extends Controller {
             $gestion->storeSearchEngine($formFields['id_usuario_servicio'], $search,1,$object->id);
 
             $returnHTML = ('/IguanaTrip/public/promocion/' . $object->id);
-            return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+            
         }
 
-        return response()->json(array('success' => true));
+        return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
 
     
@@ -648,10 +649,10 @@ class UsuarioServiciosController extends Controller {
         }
 
         //imagenes de la promocion
-        $ImgItinerarios = $gestion->getImageOperador($id, 3);
+        
         $listDificultades = $gestion->getCatalogoDificultad();
 
-        $view = view('Registro.editItinerario', compact('ImgItinerarios', 'listItinerarios', 'listDificultades', 'servicio'));
+        $view = view('Registro.editItinerario', compact( 'listItinerarios', 'listDificultades', 'servicio'));
         return ($view);
     }
 
@@ -661,6 +662,7 @@ class UsuarioServiciosController extends Controller {
      * @return Response
      */
     public function postEvento(Guard $auth,ServiciosOperadorRepository $gestion) {
+        
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
@@ -692,16 +694,17 @@ class UsuarioServiciosController extends Controller {
             $search=$formFields['nombre_evento']." ".$formFields['descripcion_evento']." ".$formFields['tags'];            
             
             $gestion->storeUpdateSerchEngine( $Evento,2,$formFields['id'],$search);
-            
+            $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/'.$formFields['id_usuario_servicio'].'/'.$formFields['catalogo']);
 
-            $returnHTML = ('/IguanaTrip/public/eventos/' . $formFields['id']);
+            
+            //$returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/'.$formFields['id_usuario_servicio'].'/'.$formFields['catalogo']);
         } else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
             $object = $gestion->storeNewEvento($formFields);
             //Gestion de nueva de busqueda    
             $search=$formFields['nombre_evento']." ".$formFields['descripcion_evento'];            
             $gestion->storeSearchEngine($formFields['id_usuario_servicio'], $search,2,$object->id);
-            $returnHTML = ('/IguanaTrip/public/eventos/' . $object->id);
+            $returnHTML = ('/IguanaTrip/public/eventos/'.$object->id);
         }
 
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));

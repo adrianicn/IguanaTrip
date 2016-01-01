@@ -88,7 +88,7 @@
             <table class="tabla-servicio-usuario-detalle">
                 <tr>
                     <th>Nombre del Servicio</th>
-                    <th>Estado</th>
+                    <th>Activo</th>
                     <th></th>
                 </tr>
                 @foreach ($listServiciosAll as $servicio)
@@ -112,7 +112,7 @@
                     <td> 
                         <label class="switch switch-green">
                             <input type="checkbox" id='estado_servicio_usuario_{!!$servicio->id!!}' {!!$check!!} name ='estado_servicio_usuario_{!!$servicio->id!!}' class="switch-input" onchange="AjaxContainerRetrunMessage({!!$servicios -> id_catalogo_servicios!!}, {!!$servicio -> id!!})">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-label" data-on="Si" data-off="No"></span>
                             <span class="switch-handle"></span>
 
                         </label>

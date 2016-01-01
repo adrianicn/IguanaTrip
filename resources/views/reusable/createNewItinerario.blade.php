@@ -21,9 +21,7 @@
         </div>
         <div class="form-group-step2-popup">
             {!!Form::label('Detalle_1', trans('registro/labels.label7'), array('id'=>'iconFormulario-step2-popup'))!!}
-            <textarea id="descripcion_itinerario" title="Descripción del viaje en general, despues se detallarán las etapas o rutas del miso. Ejemplo el viaje por las islas es considerado una de las mayores atracciones a nivel mundial por sus flora y faua" name="descripcion_itinerario" class="ptm-popup" placeholder="Detalle Servicio">
-                        
-            </textarea>
+            <textarea id="descripcion_itinerario" title="Descripción del viaje en general, despues se detallarán las etapas o rutas del miso. Ejemplo el viaje por las islas es considerado una de las mayores atracciones a nivel mundial por sus flora y faua" name="descripcion_itinerario" class="ptm-popup" placeholder="Detalle Servicio"></textarea>
         </div>
 
         <div id="renderPartial" title="Esta opción es exclusiva de los servicios turisticos donde se especifica el requerimiento físico necesario para completar el trip. Si en su caso no es relevante puede poner No aplica.">

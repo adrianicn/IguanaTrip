@@ -44,24 +44,24 @@ $usuarioServicio->longitud_servicio = -78.46783820000002;
 @foreach ($usuarioServicio as $detalles)
 <?php
 $usuarioServicio->id = $detalles->id;
-$usuarioServicio->nombre_servicio = $detalles->nombre_servicio;
-$usuarioServicio->detalle_servicio = $detalles->detalle_servicio;
-$usuarioServicio->precio_desde = $detalles->precio_desde;
-$usuarioServicio->precio_hasta = $detalles->precio_hasta;
-$usuarioServicio->precio_anterior = $detalles->precio_anterior;
-$usuarioServicio->precio_actual = $detalles->precio_actual;
-$usuarioServicio->descuento_servico = $detalles->descuento_servico;
-$usuarioServicio->direccion_servicio = $detalles->direccion_servicio;
-$usuarioServicio->correo_contacto = $detalles->correo_contacto;
-$usuarioServicio->pagina_web = $detalles->pagina_web;
-$usuarioServicio->nombre_comercial = $detalles->nombre_comercial;
-$usuarioServicio->tags = $detalles->tags;
+$usuarioServicio->nombre_servicio = trim($detalles->nombre_servicio);
+$usuarioServicio->detalle_servicio = trim($detalles->detalle_servicio);
+$usuarioServicio->precio_desde = trim($detalles->precio_desde);
+$usuarioServicio->precio_hasta = trim($detalles->precio_hasta);
+$usuarioServicio->precio_anterior = trim($detalles->precio_anterior);
+$usuarioServicio->precio_actual = trim($detalles->precio_actual);
+$usuarioServicio->descuento_servico = trim($detalles->descuento_servico);
+$usuarioServicio->direccion_servicio = trim($detalles->direccion_servicio);
+$usuarioServicio->correo_contacto = trim($detalles->correo_contacto);
+$usuarioServicio->pagina_web = trim($detalles->pagina_web);
+$usuarioServicio->nombre_comercial = trim($detalles->nombre_comercial);
+$usuarioServicio->tags = trim($detalles->tags);
 $usuarioServicio->descuento_clientes = $detalles->descuento_clientes;
-$usuarioServicio->tags_servicio = $detalles->tags_servicio;
+$usuarioServicio->tags_servicio = trim($detalles->tags_servicio);
 $usuarioServicio->id_provincia = $detalles->id_provincia;
 $usuarioServicio->id_canton = $detalles->id_canton;
 $usuarioServicio->id_parroquia = $detalles->id_parroquia;
-$usuarioServicio->observaciones = $detalles->observaciones;
+$usuarioServicio->observaciones = trim($detalles->observaciones);
 $usuarioServicio->telefono = $detalles->telefono;
 $usuarioServicio->latitud_servicio = ($detalles->latitud_servicio == '') ? -0.1806532 : $detalles->latitud_servicio;
 $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78.46783820000002 : $detalles->longitud_servicio;
@@ -152,9 +152,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             <div id="secondary-data">
                 <div class="form-group-2">
                     {!!Form::label('detalle_servicio_1', 'Detalle Servicio', array("title"=>"Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.",'class'=>'control-label-1'))!!}
-                    <textarea id="detalle_servicio" name="detalle_servicio" class="ptm chng" placeholder="Detalle Servicio" title="Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.">
-                        {!!$usuarioServicio->detalle_servicio!!}
-                    </textarea>
+                    <textarea id="detalle_servicio" name="detalle_servicio" class="ptm chng" placeholder="Detalle Servicio" title="Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.">{!!trim($usuarioServicio->detalle_servicio)!!}</textarea>
                 </div>
                 <div class="form-group-2">
                     {!!Form::label('telefono_1', 'Telefono', array('class'=>'control-label-2'))!!}
@@ -184,7 +182,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 <div id="evento"><a class="button-step4" title="Puedes crear varios eventos para tu servicio. Ejemplo si tu servicio es una discoteca puedes agregar Jueves laydies night como evento o si eres un restaurante puedes agregar eventos como inauguraciones, etc." onclick="RenderPartialGeneric('reusable.createNewEvent', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
                 <div id="evento"><a class="button-step4" title="Esta opción es orientada a servicios turísticos de viajes y transporte. Por ejemplo tu servicio es una agencia de viajes y tienes varios itinerarios Trip Cotopaxi, Trip Amazonía o si eres un transporte podrás especificar la ruta de tu servicio." onclick="RenderPartialGeneric('reusable.createNewItinerario', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Itinerario</a></div>
 
-                <div id="promocion"><a class="button-step4" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGeneric('reusable.uploadImagePopUp', 1, {!!$usuarioServicio->id!!}, {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a></div>
+                <div id="promocion"><a class="button-step4" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 1, {!!$usuarioServicio->id!!}, {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a></div>
             </div>
         </div>
         <div id="part-1-form">

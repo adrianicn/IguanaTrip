@@ -18,7 +18,7 @@
 <div id='descripcionGeografica1'>
                     @section('descripcionGeografica')
                     @show
-                    
+                        
                 </div>
 
 
@@ -28,8 +28,24 @@ $('#id_parroquia').on('change', function() {
     var valor=this.value;
   
   GetDataAjaxDescripcion("{!!asset('/getDescripcionGeografica')!!}"+"/"+valor+"/8");
+  GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/8/"+valor+"");
   $('#id_auxiliar').val(valor);
 });
+
+///Script para actualizar el container una vez que se hayan subido las imagenes
+     setInterval( function() {
+    
+        if ($('#flag_image').val() == 1) {
+            var valor=$('#id_parroquia').val();
+            
+            // Save the new value
+           GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/8/"+valor+"");
+           $("#flag_image").val('0');
+
+            // TODO - Handle the changed value
+        }
+    
+}, 100);
 </script>   
 
 @endif
