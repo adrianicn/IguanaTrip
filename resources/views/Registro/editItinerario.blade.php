@@ -69,7 +69,7 @@ $usuarioServicio=$itiner->id;
 
     <div class="wrapper uwa-font-aa">
         <div id="part-1-form">
-            <div id="principal-data" title="Esta opción es exclusiva de los servicios turisticos donde se especifica el requerimiento físico necesario para completar el trip. Si en su caso no es relevante puede poner No aplica.">
+            <div id="principal-data" >
                 @include('reusable.modify_dificultades',['diffic' => $listDificultades,'elegido'=>$itiner->id_catalogo_dificultad])
                 <div class="form-group-step2">
                     {!!Form::label('nombre_itinerario', 'Nombre Itinerario', array('id'=>'iconFormulario-step2'))!!}
@@ -152,7 +152,7 @@ $usuarioServicio=$itiner->id;
 @stop
 <script>
     $(document).ready(function () {
-        GetDataAjaxSectionItiner("{!!asset('/getlistaItinerarios')!!}/{!!$itiner->id!!}");
+        GetDataAjaxSectionItiner("{!!asset('/getlistaItinerarios')!!}/{!!$itiner->id!!}",{!!$usuarioServicio!!});
         GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/3/{!!$usuarioServicio!!}");
     });
     

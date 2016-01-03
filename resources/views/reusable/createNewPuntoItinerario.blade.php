@@ -21,6 +21,7 @@
     <input type="hidden"  class="id_itinerario" name="id_itinerario">
     <input type="hidden"  class="tag" name="tag">
     <input type="hidden"  class="id_detalle" name="id">
+    <input type="hidden"  class="id_usuario_servicio" name="id_usuario_servicio">
 
     <div class="form-group-step2-popup">
         {!!Form::label('lugar_1', 'Lugar', array('id'=>'iconFormulario-step2-popup'))!!}
@@ -46,9 +47,11 @@
 
     <div id="form-group-step2-popup">
         <div class="box-content-button-1">
-            <a class="button-1" id="nextbtn"  href="#">Siguiente</a>
+            <a class="button-1" id="nextbtn"  href="#">Guardar</a>
         </div>              
     </div>
+ 
+    
 
     {!! Form::close() !!}
 
@@ -97,9 +100,10 @@
             $('.tag').val(value);
             AjaxContainerRegistroWithLoadCharge('puntoitinerario', 'simplemodal-wrap', itinerario);
 
-            $(".simplemodal-close").trigger("click");
+            
 
         });
+
 
 
     </script>

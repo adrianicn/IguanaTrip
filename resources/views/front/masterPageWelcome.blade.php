@@ -69,7 +69,7 @@
             <nav class="main-nav">
                 <ul>
 
-                    <li><a href="#home"> {{ trans('welcome/index.labelRegister') }}</a></li>
+                    <li><a onclick="window.location.href = '{!!asset('/terminos')!!}'"> {{ trans('welcome/index.labelRegister') }}</a></li>
                     <li><a href="#about">{{ trans('welcome/index.labelAbout') }}</a></li>
                     <li><a href="#contact">{{ trans('welcome/index.labelContact') }}</a></li>
                     

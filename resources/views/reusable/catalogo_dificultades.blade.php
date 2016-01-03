@@ -2,7 +2,7 @@
 {!! HTML::style('css/checkBoxCss/stylesheet-pure-css.css') !!} 
 
 
-                        <h2 class='titletable'>
+                        <h2 class='titletable' title="Esta opción es exclusiva de los servicios turísticos donde se especifica el requerimiento físico necesario para completar el trip. Si en su caso no es relevante puede poner No aplica.">
                             {{trans('registro/labels.label1')}}
                             
                         </h2>

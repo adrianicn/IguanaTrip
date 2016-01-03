@@ -506,7 +506,7 @@ function GetDataAjaxParroquias(url) {
     });
 }
 
-function GetDataAjaxSectionItiner(url) {
+function GetDataAjaxSectionItiner(url,$id_usuario_servicio) {
 
     $.ajax({
         type: 'GET',
@@ -515,6 +515,7 @@ function GetDataAjaxSectionItiner(url) {
         success: function (data) {
             $("#renderPartialItinerarios").LoadingOverlay("show");
             $("#renderPartialItinerarios").html(data.contentPanelItinerarios);
+            $('#renderPartialItinerarios').find('.id_usuario_servicio').val($id_usuario_servicio);
             $("#renderPartialItinerarios").LoadingOverlay("hide", true);
 
         },

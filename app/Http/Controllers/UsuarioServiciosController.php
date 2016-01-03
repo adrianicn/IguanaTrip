@@ -41,6 +41,7 @@ class UsuarioServiciosController extends Controller {
         //
 
         $listServiciosUnicos = $gestion->getServiciosOperadorUnicos(session('operador_id'));
+        
         $listServiciosAll = $gestion->getServiciosOperadorAll(session('operador_id'));
         return view('Registro.listaServiciosUsuario', compact('listServiciosUnicos', 'listServiciosAll'));
     }
@@ -93,6 +94,10 @@ class UsuarioServiciosController extends Controller {
         return view('Admin.parroquia');
     }
 
+    
+    
+    
+    
     /**
      * Despliega los servicios por operador
      *

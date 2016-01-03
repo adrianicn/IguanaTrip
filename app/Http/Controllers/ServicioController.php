@@ -25,6 +25,14 @@ class ServicioController extends Controller {
         'email_contacto_operador' => 'required|max:255',
         'telf_contacto_operador_1' => 'required|max:255'
     ];
+    
+      protected  $messages = [
+        
+        'nombre_contacto_operador_1.required' => 'El nombre del contacto es requerido',
+          'direccion_empresa_operador.required' => 'La dirección del contacto es requerido',
+          'email_contacto_operador.required' => 'El email del contacto es requerido',
+          'telf_contacto_operador_1.required' => 'El teléfono del contacto es requerido'
+    ];
     protected $validationUsuarioServicios = [
         'nombre_servicio' => 'required|max:255|',
             //'detalle_servicio' => 'required|max:255|',
@@ -76,6 +84,21 @@ class ServicioController extends Controller {
         }
         return $view;
     }
+    
+    public function getMyProfileOp(Guard $auth, OperadorRepository $operador_gestion) {
+        //
+        if ($auth->check()) {
+            
+
+            $listOperadores = $operador_gestion->getOperador($auth->user()->id);
+            $view = view('Welcome.myprofileOp', compact('listOperadores')); // revisar debe redirecccionar a otro lado
+        } else {
+            $view = view('auth.completeRegister');
+        }
+        return $view;
+    }
+
+    
 
     public function step2(Guard $auth, OperadorRepository $operador_gestion) {
         if ($auth->check()) {
@@ -142,7 +165,7 @@ class ServicioController extends Controller {
             'estado_contacto_operador' => 1,
             'id_usuario_op' => $formFields['id_usuario_op']
         );
-        $validator = Validator::make($operadorData, $this->validationRules);
+        $validator = Validator::make($operadorData, $this->validationRules, $this->messages);
         if ($validator->fails()) {
             return response()->json(array(
                         'fail' => true,
@@ -176,6 +199,18 @@ class ServicioController extends Controller {
             'tipo_operador' => $formFields['tipo_operador'],
         );
         $returnHTML = ('operador');
+        return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+    }
+    
+    public function postTipoOperadoresProfile(Request $request, OperadorRepository $operador_gestion) {
+
+        Session::forget('operador_id');
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        $request->session()->put('operador_id', $formFields['operador_id']);
+      
+        $returnHTML = ('detalleServicios');
+        
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
 

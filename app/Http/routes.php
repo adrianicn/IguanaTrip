@@ -90,6 +90,7 @@ Route::get('/render/{id_partial}', ['as' => 'render', 'uses' => 'UsuarioServicio
 Route::get('/render/{id_partial}/{id_data}', ['as' => 'render', 'uses' => 'UsuarioServiciosController@RenderPartialWithData']);
 
 Route::get('/editServicios/{id_usuario_op}', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios']);
+
 Route::post('servicios/DetalleOperador', ['as' => 'upload-postDetalleOperador', 'uses' =>'UsuarioServiciosController@postDetalle']);
 Route::get('/editServicios/{id_usuario_servicio}', ['as' => 'detailServicio', 'uses' => 'UsuarioServiciosController@tablaServicios']);
 Route::get('maps',function()
@@ -143,6 +144,11 @@ Route::get('acerca',function()
     return view('RegistroOperadores.registroAcercaDe');
 });
 
+Route::get('contactAdmin',function()
+{
+    
+    return view('Welcome.contact');
+});
 
 
 Route::get('/getlistaItinerarios/{id}', ['as' => 'itinerariosList', 'uses' => 'UsuarioServiciosController@getListaItinerarios','middleware' => 'notAuth']);
@@ -182,7 +188,10 @@ Route::get('/imagenesAjax/{tipo}/{idtipo}', ['as' => 'getimages', 'uses' => 'Usu
 
 Route::get('/servicios', ['as' => 'servicios', 'uses' => 'ServicioController@index','middleware' => 'notAuth']);
 
+Route::get('/myProfileOp', ['as' => 'profileOp', 'uses' => 'ServicioController@getMyProfileOp']);
+
 Route::post('servicios/tipoOperador', ['as' => 'upload-postTipoOperador', 'uses' =>'ServicioController@postTipoOperadores','middleware' => 'notAuth']);
+Route::post('tipoOperadorProfile', ['as' => 'postTipoOperadorProfile', 'uses' =>'ServicioController@postTipoOperadoresProfile','middleware' => 'notAuth']);
 Route::post('servicios/operadores', ['as' => 'upload-postoperador', 'uses' =>'ServicioController@postOperadores','middleware' => 'notAuth']);
 
 Route::get('servicios/operadorServicios', ['as' => 'operadorServicios', 'uses' => 'ServicioController@step3','middleware' => 'notAuth']);

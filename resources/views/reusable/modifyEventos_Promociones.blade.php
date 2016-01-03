@@ -2,12 +2,15 @@
 
 {!! HTML::style('css/table.css') !!} 
 <div id="contenedor-columnas-servicios">
-    @if(isset($itinerarios))
+    @if(isset($itinerarios) && count($itinerarios)>0)
     <div id='itinerarios-1'>
         <h1>Itinerarios</h1>
         
    
         <table width="400" >
+            <tr>
+                <td>Nombre</td><td>Activo</td>
+            </tr>
         @foreach ($itinerarios as $itinerario)
         
         <tr><td width="35%">
@@ -17,7 +20,7 @@
                   <label class="switch switch-green">
                             
                         <input type="checkbox" id='estado_itinerario_{!!$itinerario->id!!}' checked name ='estado_itinerario_{!!$itinerario->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoItinerarioPrincipal')!!}/',{!!$itinerario->id!!},{!!$itinerario->id!!},'itinerarios')">
-                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                        <span class="switch-label" data-on="Si" data-off="No"></span>
                         <span class="switch-handle"></span>
                         
                     </label>
@@ -26,13 +29,13 @@
                  <label class="switch switch-green">
                             
                         <input type="checkbox" id='estado_itinerario_{!!$itinerario->id!!}'  name ='estado_itinerario_{!!$itinerario->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoItinerarioPrincipal')!!}/',{!!$itinerario->id!!},{!!$itinerario->id!!},'itinerarios')">
-                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                        <span class="switch-label" data-on="Si" data-off="No"></span>
                         <span class="switch-handle"></span>
                         
                     </label>
                 @endif
 
-            </div> 
+            
          </td>    
         </tr>
         
@@ -40,10 +43,13 @@
 </table>
     </div>
     @endif
-    @if(isset($eventos))
+    @if(isset($eventos) && count($eventos)>0)
     <div id='eventos-1'>
         <h1>Eventos</h1>
         <table width="400" >
+            <tr>
+                <td>Nombre</td><td>Activo</td>
+            </tr>
         @foreach ($eventos as $evento)
          <tr><td width="35%">
         
@@ -53,7 +59,7 @@
                   <label class="switch switch-green">
                             
                         <input type="checkbox" id='estado_evento_{!!$evento->id!!}' checked name ='estado_evento_{!!$evento->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoEvento')!!}/',{!!$evento->id!!},{!!$evento->id!!},'eventos')">
-                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                        <span class="switch-label" data-on="Si" data-off="No"></span>
                         <span class="switch-handle"></span>
                         
                     </label>
@@ -62,24 +68,25 @@
                  <label class="switch switch-green">
                             
                         <input type="checkbox" id='estado_evento_{!!$evento->id!!}'  name ='estado_evento_{!!$evento->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoItinerarioPrincipal')!!}/',{!!$evento->id!!},{!!$evento->id!!},'eventos')">
-                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                        <span class="switch-label" data-on="Si" data-off="No"></span>
                         <span class="switch-handle"></span>
                         
                     </label>
                 @endif
                 </td>
-            </div>
+            
          
-        </li>
-        
         @endforeach
 </table>
     </div>
     @endif
-    @if(isset($promociones))
+    @if(isset($promociones) && count($promociones)>0)
     <div id='promociones-1'>
         <h1>Promociones</h1>
        <table width="400" >
+           <tr>
+                <td>Nombre</td><td>Activo</td>
+            </tr>
         @foreach ($promociones as $promocion)
         <tr><td width="35%">
         
@@ -90,7 +97,7 @@
                 <label class="switch switch-green">
                         
                         <input type="checkbox" id='estado_itinerario_{!!$promocion->id!!}' checked name ='estado_itinerario_{!!$promocion->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoPromocion')!!}/',{!!$promocion->id!!},{!!$promocion->id!!},'promociones')">
-                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                        <span class="switch-label" data-on="Si" data-off="No"></span>
                         <span class="switch-handle"></span>
                         
                     </label>
@@ -99,13 +106,13 @@
                  <label class="switch switch-green">
                             
                         <input type="checkbox" id='estado_itinerario_{!!$promocion->id!!}'  name ='estado_itinerario_{!!$promocion->id!!}' class="switch-input" onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoPromocion')!!}/',{!!$promocion->id!!},{!!$promocion->id!!},'promociones')">
-                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                        <span class="switch-label" data-on="Si" data-off="No"></span>
                         <span class="switch-handle"></span>
                         
                     </label>
                 @endif
             </td>
-            </div> 
+            
             
             
         

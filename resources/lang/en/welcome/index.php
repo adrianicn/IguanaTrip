@@ -24,7 +24,7 @@ return [
     'labelregister' =>"Sign Up",
     'logfailmobile' =>"Login Failed",
     'logfailmessage' =>"Did you enter the right credentials?",
-    
+    'home' =>"Home"
     
 	
     

@@ -183,6 +183,8 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 <div id="evento"><a class="button-step4" title="Esta opción es orientada a servicios turísticos de viajes y transporte. Por ejemplo tu servicio es una agencia de viajes y tienes varios itinerarios Trip Cotopaxi, Trip Amazonía o si eres un transporte podrás especificar la ruta de tu servicio." onclick="RenderPartialGeneric('reusable.createNewItinerario', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Itinerario</a></div>
 
                 <div id="promocion"><a class="button-step4" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 1, {!!$usuarioServicio->id!!}, {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a></div>
+                
+                <div id="promocion"><a onclick="RenderPartialGeneric('reusable.invitar_amigo')" href="#"><img src="{{ asset('img/amigo-1.png')}}" style="width:111px"></a> </div>
             </div>
         </div>
         <div id="part-1-form">

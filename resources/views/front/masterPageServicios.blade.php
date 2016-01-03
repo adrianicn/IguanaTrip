@@ -99,15 +99,17 @@
                 <div id="menu">
                     <div id="menu-ul">
                         <ul id="seleccionitem">
-                            <li><a href="{!!asset('/')!!}">Home</a></li>
+                            <li><a href="{!!asset('/')!!}">{{ trans('welcome/index.home') }}</a></li>
                             <li><a href="#" onclick="window.location.href = '{!!asset('/terminos')!!}'">{{ trans('welcome/index.labelTerminos') }}</a></li>
                             <li><a href="#" onclick="window.location.href = '{!!asset('/acerca')!!}'">{{ trans('welcome/index.labelAcercaDe') }}</a></li>
-                            <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
+                            <li><a href="#" onclick="window.location.href = '{!!asset('/myProfileOp')!!}'">Mi perfil</a></li>
+                            <li><a href="#" onclick="window.location.href = '{!!asset('/contactAdmin')!!}'">Contacto</a></li>                            
                             @if(session('statut')=='admin')
                             
                             <li><a href="#" onclick="window.location.href = '{!!asset('/getProvinciasDescipcion')!!}'">Descr. Provincias</a></li>
                             <li><a href="#" onclick="window.location.href = '{!!asset('/getCantonesDescipcion')!!}'">Cantones</a></li>
                             <li><a href="#" onclick="window.location.href = '{!!asset('/getParroquiaDescipcion')!!}'">Parroquia</a></li>
+                            <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
                             
                             @endif
                             
@@ -134,6 +136,7 @@
                             <li><a href="{!!asset('/')!!}">Home</a></li>
                             <li><a href="#" onclick="window.location.href = '{!!asset('/terminos')!!}'">{{ trans('welcome/index.labelTerminos') }}</a></li>
                             <li><a href="#" onclick="window.location.href = '{!!asset('/acerca')!!}'">{{ trans('welcome/index.labelAcercaDe') }}</a></li>
+<li><a href="#" onclick="window.location.href = '{!!asset('/contactAdmin')!!}'">Contacto</a></li>                            
                             <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
 
                     </ul>

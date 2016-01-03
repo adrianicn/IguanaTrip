@@ -86,6 +86,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $user_servicios->id_catalogo_servicio = trim($inputs['id_catalogo_servicio']);
         $user_servicios->id_usuario_operador = trim($inputs['id_usuario_op']);
         $user_servicios->estado_servicio = '1';
+        $user_servicios->estado_servicio_usuario = '1';
         $this->save($user_servicios);
         return $user_servicios;
     }

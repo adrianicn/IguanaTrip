@@ -440,6 +440,10 @@ body {
     line-height: 21px;
     text-indent: 31px;
 }
+.rowerror{
+    color:#F05A24;
+    
+}
 .box-content-text {
     color: #b8b8b8;
     font-size: 1.23em;

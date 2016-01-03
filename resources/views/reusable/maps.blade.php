@@ -18,8 +18,8 @@
 </style>
 
 <div class='form-group'>
-    <label for=''>Busqueda: </label>
-    <input type="text" id='searchmap'>
+    <label for=''>Ubicación: </label>
+    <input type="text" id='searchmap' style="height: 27px; width: 95%;">
     <div id="map"></div>
 
 </div>
@@ -85,6 +85,7 @@
 
 
 </script>
+
 </head>
 
 

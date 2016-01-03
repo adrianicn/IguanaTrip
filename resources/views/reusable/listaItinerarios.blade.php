@@ -2,8 +2,8 @@
 {!! HTML::style('css/table.css') !!} 
 <div id="itinerario-detalle">
     
-    <h2>Detalle Itinerario <strong class="add-registro" onclick="RenderPartialGenericMap('reusable.createNewPuntoItinerario', {!!$id_itinerario!!})">+</strong> (agregar registro) </h2>
-    <input type="hidden" value="xxx" name="usuario_servicio">
+    <h2>Detalle del tour o itinerario <strong class="add-registro" onclick="RenderPartialGenericMap('reusable.createNewPuntoItinerario', {!!$id_itinerario!!})">+</strong> (agregar registro) </h2>
+    <input type="hidden" value="" class='id_usuario_servicio' name="id_usuario_servicio">
     <table class="tabla-itinerario-detalle">
         <tr>
             <th>Punto de Encuentro</th>
@@ -38,10 +38,29 @@
             </td>
             <td>
                 <div id='delete'>
-                    <h2> <strong class="remove-registro" onclick="AjaxContainerRetrunBurnURL('{!!asset('/deleteItinerario')!!}/',{!!$detalle->id!!},{!!$detalle->id!!});GetDataAjaxSectionItiner('{!!asset('/getlistaItinerarios')!!}/{!!$detalle->id_itinerario!!}')" >X</strong></h2></div>
+                    <h2> <strong class="remove-registro" onclick="alertaConfirmItiner({!!$detalle->id!!})" >X</strong></h2></div>
             </td>
         </tr>
         
+        <script>
+        
+           
+            //Funcion para eliminación
+            
+            
+            function alertaConfirmItiner(id){
+
+            var r = confirm("Está seguro de que desea eliminar este itinerario?");
+                    if (r == true) {
+            
+            AjaxContainerRetrunBurnURL('{!!asset('/deleteItinerario')!!}/',id,id);
+            GetDataAjaxSectionItiner('{!!asset('/getlistaItinerarios')!!}/'+id,$('.id_usuario_servicio').val());
+            
+                    } else {
+            txt = "Cencelado";
+                    }
+            }
+                </script>
         @endforeach 
 
     </table>

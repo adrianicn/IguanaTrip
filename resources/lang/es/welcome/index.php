@@ -25,5 +25,6 @@ return [
     
     'logfailmobile' =>"Falló el ingreso",
     'logfailmessage' =>"Ingresaste las credenciales correctas?",
+    'home' =>"Inicio"
     
 ];
