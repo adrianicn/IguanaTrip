@@ -76,63 +76,69 @@ $usuarioServicio=$evento->id;
     <input type="hidden" name="id" value="{{ $evento->id }}">
 
     <div class="wrapper uwa-font-aa" title="Carga las imágenes que consideres describen a tu evento.">
+        <div id="part-1-form">
+            <div id="principal-data" >
 
-        <div class="form-group-step2">
-        
-        </div>
+                <div class="form-group-step2">
 
-        <div class="form-group-step2">
-            {!!Form::label('nombre_evento', 'Nombre Evento', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('nombre_evento', trim($evento->nombre_evento), array("title"=>"Es el nombre del evento. Recuerda ser creativo y diverido al escoger el nombre.",'class'=>'inputtext-step2','placeholder'=>'Nombre del evento'))!!}
-        </div>
+                </div>
 
-        <div class="form-group-step2">
-            {!!Form::label('Fecha_inicio', 'Fecha inicio', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('fecha_desde', $evento->fecha_desde, array('class'=>'datepicker inputtext-step2'))!!}
-        </div>
+                <div class="form-group-step2">
+                    {!!Form::label('nombre_evento', 'Nombre Evento', array('id'=>'iconFormulario-step2'))!!}
+                    {!!Form::text('nombre_evento', trim($evento->nombre_evento), array("title"=>"Es el nombre del evento. Recuerda ser creativo y diverido al escoger el nombre.",'class'=>'inputtext-step2','placeholder'=>'Nombre del evento'))!!}
+                </div>
 
-        <div class="form-group-step2">
-            {!!Form::label('Fecha_fin', 'Fecha fin', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('fecha_hasta', $evento->fecha_hasta, array('class'=>'inputtext-step2 datepicker'))!!}
-        </div>
+                <div class="form-group-step2">
+                    {!!Form::label('Fecha_inicio', 'Fecha inicio', array('id'=>'iconFormulario-step2'))!!}
+                    {!!Form::text('fecha_desde', $evento->fecha_desde, array('class'=>'datepicker inputtext-step2'))!!}
+                </div>
 
-        <div class="form-group-step2">
-            {!!Form::label('detalle_promocion', 'Descripción evento', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::textarea('descripcion_evento', trim($evento->descripcion_evento), array('class'=>'inputtext-step2'))!!}
+                <div class="form-group-step2">
+                    {!!Form::label('Fecha_fin', 'Fecha fin', array('id'=>'iconFormulario-step2'))!!}
+                    {!!Form::text('fecha_hasta', $evento->fecha_hasta, array('class'=>'inputtext-step2 datepicker'))!!}
+                </div>
 
-        </div>
-        <div class="form-group-step2">
-            {!!Form::label('tags', 'Tags', array('id'=>'iconFormulario-step2'))!!}
-            {!!Form::text('tags', trim($evento->tags), array("title"=>"Para mejorar las búsquedas ingresa palabras clave separadas por comas que describan tu servicio. Ejemplo: mar, playa, ceviche, discoteca, etc.",'class'=>'inputtext-step2','placeholder'=>'Tags'))!!}
-        </div>
+                <div class="form-group-step2">
+                    {!!Form::label('detalle_promocion', 'Descripción evento', array('id'=>'iconFormulario-step2'))!!}
+                    {!!Form::textarea('descripcion_evento', trim($evento->descripcion_evento), array('class'=>'inputtext-step2'))!!}
 
-     <div class="form-group-step2-popup">
-         
-                @if(isset($listEventos))
-                @foreach ($listEventos as $itiner)
-                @if($itiner->longitud_evento!="")
-                @include('reusable.maps', ['longitud_servicio' => $itiner->longitud_evento,'latitud_servicio'=>$itiner->latitud_evento])  
-                @else
-                @include('reusable.maps', ['longitud_servicio' => '-78.46783820000002','latitud_servicio'=>'-0.1806532'])   
-                @endif
-                @endforeach
-                @else
-                @include('reusable.maps', ['longitud_servicio' => '-78.46783820000002','latitud_servicio'=>'-0.1806532'])   
-                @endif
-        </div>
+                </div>
+                <div class="form-group-step2">
+                    {!!Form::label('tags', 'Tags', array('id'=>'iconFormulario-step2'))!!}
+                    {!!Form::text('tags', trim($evento->tags), array("title"=>"Para mejorar las búsquedas ingresa palabras clave separadas por comas que describan tu servicio. Ejemplo: mar, playa, ceviche, discoteca, etc.",'class'=>'inputtext-step2','placeholder'=>'Tags'))!!}
+                </div>
 
-        <div class="form-group-step2">
-            
-        </div>
-        <div id="form-group-step2-popup">
-            <div class="box-content-button-1">
-                <a class="button-1" onclick="AjaxContainerRetrunMessagePostParametro('UpdateEvento',{!!$servicio->id_catalogo_servicio!!})" href="#">Finalizar y regresar</a>
+             <div class="form-group-step2-popup">
+
+                        @if(isset($listEventos))
+                        @foreach ($listEventos as $itiner)
+                        @if($itiner->longitud_evento!="")
+                        @include('reusable.maps', ['longitud_servicio' => $itiner->longitud_evento,'latitud_servicio'=>$itiner->latitud_evento])  
+                        @else
+                        @include('reusable.maps', ['longitud_servicio' => '-78.46783820000002','latitud_servicio'=>'-0.1806532'])   
+                        @endif
+                        @endforeach
+                        @else
+                        @include('reusable.maps', ['longitud_servicio' => '-78.46783820000002','latitud_servicio'=>'-0.1806532'])   
+                        @endif
+                </div>
+
+                <div class="form-group-step2">
+
+                </div>
+                <div id="form-group-step2-popup">
+                    <div class="box-content-button-1">
+                        <a class="button-1" onclick="AjaxContainerRetrunMessagePostParametro('UpdateEvento',{!!$servicio->id_catalogo_servicio!!})" href="#">Finalizar y regresar</a>
+                    </div>
+                </div>
+            </div>
+            <div id="secondary-data">
+                <div id="promocion">
+                    <a class="button-step4" title="Si deseas agregar fotografias de tu servicio puedes hacerlo aquí, nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 4, {!!$evento->id_usuario_servicio!!}, {!!$evento->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a>
+                </div>
             </div>
         </div>
     </div>
-        <div id="secondary-data">
-                <div id="promocion"><a class="button-step4" title="Si deseas agregar fotografias de tu servicio puedes hacerlo aquí, nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 4, {!!$evento->id_usuario_servicio!!}, {!!$evento->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a></div>
-            </div>
 
     {!! Form::close() !!}
     <div id="renderPartialImagenes">

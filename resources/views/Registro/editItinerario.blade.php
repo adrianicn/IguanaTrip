@@ -109,17 +109,23 @@ $usuarioServicio=$itiner->id;
                         <a class="button-1" onclick="AjaxContainerRegistro('Updateitinerario'); window.location.href = '{!!asset('/servicios/serviciooperador')!!}/{{ $itiner->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'" href="#">Regresar</a>
                     </div>
                 </div>
-                 <div id="secondary-data">
-                <div id="promocion"><a class="button-step4" title="Si deseas agregar fotografias de tu servicio puedes hacerlo aquí, nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 3, {!!$itiner->id_usuario_servicio!!}, {!!$itiner->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a></div>
-            </div>
-                
             </div>
             <div id="secondary-data">
                 <div id="renderPartialItinerarios" title="Esta opción te permite crear el detalle de tus itinerarios al hacer click en +, irás agregando nuevos puntos dentro de tu itinerario. Ejemplo  1)Ruta Quito-Ibarra, 2)Ruta Ibarra-Tulcan">
                     @section('contentPanelItinerarios')
                     @show
-                </div>    
-
+                </div>  
+                <table style="width: 100%;padding-top: 50px">
+                    <tr>
+                        <td>
+                            <div id="promocion" style="margin-left: 145px">
+                                <a class="button-step4" title="Si deseas agregar fotografias de tu servicio puedes hacerlo aquí, nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 3, {!!$itiner->id_usuario_servicio!!}, {!!$itiner->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a>
+                            </div> 
+                        </td>
+                    </tr>
+                </table>    
+            </div>
+                
             </div>
 
         </div>
