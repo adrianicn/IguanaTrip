@@ -14,30 +14,30 @@ $id = $operadorData->id;
 
 
 <div class="wrapper uwa-font-aa">
-    <div class="form-group-step2">
-        <input type="hidden" value="{!!Session::get('user_id')!!}" name="id_usuario" id="id_usuario">
+    <div id="part-1-form">
+        <div id="principal-data" >
+            <div class="form-group-step2">
+                <input type="hidden" value="{!!Session::get('user_id')!!}" name="id_usuario" id="id_usuario">
+                {!!Form::label('detalle_servicio_1', 'Descripción Español', array("title"=>"Descripcion",'class'=>'control-label-1'))!!}
+                <textarea id="descripcion_esp" name="descripcion_esp" class="ptm chng" placeholder="Descripcion" title="Descripción.">{!!trim($descripcion_esp)!!}</textarea>
 
-
-        {!!Form::label('detalle_servicio_1', 'Descripción Español', array("title"=>"Descripcion",'class'=>'control-label-1'))!!}
-        <textarea id="descripcion_esp" name="descripcion_esp" class="ptm chng" placeholder="Descripcion" title="Descripción.">{!!trim($descripcion_esp)!!}</textarea>
-
-    </div>
-    <div class="form-group-step2">
-
-
-        {!!Form::label('detalle_servicio_1', 'Descripción Inglés', array("title"=>"Descripcion",'class'=>'control-label-1'))!!}
-        <textarea id="descripcion_eng" name="descripcion_eng" class="ptm chng" placeholder="Descripcion" title="Descripción.">{!!trim($descripcion_eng)!!}</textarea>
-    </div>
-
-    <div class="form-group-step2">
-        <div class="box-content-button-step2">
-            <a class="button" onclick="AjaxContainerRegistroWithMessage('postGeoLoc','wrapper','Se ha guardado con éxito')" href="#">Guardar</a>
-        </div>
-    </div>    
-        <div id="secondary-data">
-                <div id="promocion"><a class="button-step4" title="Si deseas agregar fotografias de tu servicio puedes hacerlo aquí, nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', {!!$typeGeo!!},0, {!!$id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a></div>
             </div>
-
+            <div class="form-group-step2">
+                {!!Form::label('detalle_servicio_1', 'Descripción Inglés', array("title"=>"Descripcion",'class'=>'control-label-1'))!!}
+                <textarea id="descripcion_eng" name="descripcion_eng" class="ptm chng" placeholder="Descripcion" title="Descripción.">{!!trim($descripcion_eng)!!}</textarea>
+            </div>
+            <div class="form-group-step2">
+                <div class="box-content-button-step2">
+                    <a class="button" onclick="AjaxContainerRegistroWithMessage('postGeoLoc','wrapper','Se ha guardado con éxito')" href="#">Guardar</a>
+                </div>
+            </div>    
+        </div>
+        <div id="secondary-data">
+            <div id="promocion" style="margin-left: 145px">
+                <a class="button-step4" title="Si deseas agregar fotografias de tu servicio puedes hacerlo aquí, nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', {!!$typeGeo!!},0, {!!$id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a>
+            </div>
+        </div>
+    </div>
 </div>
   <div id="renderPartialImagenes">
             @section('contentImagenes')
