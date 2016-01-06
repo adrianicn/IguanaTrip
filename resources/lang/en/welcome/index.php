@@ -24,7 +24,13 @@ return [
     'labelregister' =>"Sign Up",
     'logfailmobile' =>"Login Failed",
     'logfailmessage' =>"Did you enter the right credentials?",
-    'home' =>"Home"
+    'home' =>"Home",
+    'processreg' =>"Tour operators registration",
+    'processDes' =>"At the moment we are in the process of registration. If you are a tour operator you can register your tour services for free.",
+    'descrip2' =>"IguanaTrip is a new tech tool specializing in the promotion of local tourism service quality at national and international level . This innovative initiative aims to revolutionize the way of sightseeing for both visitors as for local tourism service providers.",
+    'title2Mob' =>"Our plans",
+    'descrip3' =>"IguanaTrip emerges as an alternative tourist community to defend and enhance the cultural and natural resources. Plan your trip and learn about the history and culture of the country while you engage in the reality of the local people.",
+    
     
 	
     

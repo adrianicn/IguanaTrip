@@ -5,8 +5,8 @@
         
 
 <header>
-								<h2>Arcue ut vel commodo</h2>
-								<p>Aliquam ut ex ut augue consectetur interdum endrerit imperdiet amet eleifend fringilla.</p>
+								<h2>{{ trans('welcome/index.processreg')}}</h2>
+								<p>{{ trans('welcome/index.processDes') }}</p>
 							</header>
 							<ul class="actions vertical">
 								<li><a href="#" onclick="window.location.href = '{!!asset('/loginmobile')!!}'" class="button fit special">{{ trans('welcome/index.labelsignin') }}</a></li>

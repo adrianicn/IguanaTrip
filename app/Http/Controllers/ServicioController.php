@@ -217,6 +217,7 @@ class ServicioController extends Controller {
         Session::forget('operador_id');
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
+        $request->session()->put('tip_oper', $formFields['tipo_operador']);
         $request->session()->put('operador_id', $formFields['operador_id']);
       
         $returnHTML = ('detalleServicios');

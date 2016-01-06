@@ -34,7 +34,8 @@ $id = $operadorData->id;
         </div>
         <div id="secondary-data">
             <div id="promocion" style="margin-left: 145px">
-                <a class="button-step4" title="Si deseas agregar fotografias de tu servicio puedes hacerlo aquí, nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', {!!$typeGeo!!},0, {!!$id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar foto</a>
+                
+                <a onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', {!!$typeGeo!!},0, {!!$id!!})" href="#"><img src="{{ asset('img/fotograf.png')}}" style="width:111px"></a>
             </div>
         </div>
     </div>

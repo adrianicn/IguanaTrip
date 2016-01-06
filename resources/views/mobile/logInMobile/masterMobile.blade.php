@@ -58,16 +58,14 @@
 						</section>
 						<section class="spotlight">
 							<div class="image"><img data-u="image" src="{{ asset('img/cotopaxi.jpg')}}" /></div><div class="content">
-								<h2>Tortor dolore feugiat<br />
-								elementum magna</h2>
-								<p>Aliquam ut ex ut augue consectetur interdum. Donec hendrerit imperdiet. Mauris eleifend fringilla nullam aenean mi ligula.</p>
+								<h2>{{ trans('welcome/index.labelAbout')}}</h2>
+								<p>{{ trans('welcome/index.descrip2')}}</p>
 							</div>
 						</section>
 						<section class="spotlight">
 							<div class="image"><img src="{!! asset('img/extra-pag-1b.png')!!}" alt="" /></div><div class="content">
-								<h2>Augue eleifend aliquet<br />
-								sed condimentum</h2>
-								<p>Aliquam ut ex ut augue consectetur interdum. Donec hendrerit imperdiet. Mauris eleifend fringilla nullam aenean mi ligula.</p>
+								<h2>{{ trans('welcome/index.title2Mob')}}</h2>
+								<p>{{ trans('welcome/index.descrip3')}}</p>
 							</div>
 						</section>
 					</section>
