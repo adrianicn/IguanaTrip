@@ -85,6 +85,16 @@ class ServicioController extends Controller {
         return $view;
     }
     
+    
+    public function registerMobile() {
+        
+        return view('mobile.logInMobile.registerMobile');
+    }
+    
+    
+    
+        
+    
     public function getMyProfileOp(Guard $auth, OperadorRepository $operador_gestion) {
         //
         if ($auth->check()) {
@@ -296,5 +306,7 @@ class ServicioController extends Controller {
         $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/' . $usuarioServicio . '/' . $formFields['id_catalogo_servicio']);
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
+    
+    
 
 }

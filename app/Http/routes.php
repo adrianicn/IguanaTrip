@@ -215,10 +215,7 @@ Route::get('loginmobile',function()
     return view('mobile.logInMobile.LogInMobile');
 });
 
-Route::get('registerMobile',function()
-{
-    
-    return view('mobile.logInMobile.registerMobile');
-});
+Route::get('registerMobile', ['as' => 'registerMobile', 'uses' => 'ServicioController@registerMobile'] );
+
 
 /**End rutas dispositivo mobil************************************************/

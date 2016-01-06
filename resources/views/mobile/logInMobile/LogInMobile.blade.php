@@ -1,72 +1,132 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+        Spectral by HTML5 UP
+        html5up.net | @n33co
+        Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-<head>
-    <title>Iguanatrip - Sign In</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
- 
-   
-         
-    {!! HTML::style('cssMobile/themes/1/conf-room1.min.css') !!} 
-    {!! HTML::style('cssMobile/themes/1/jquery.mobile.icons.min.css') !!} 
+    <head>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        {!! HTML::style('css/responsiveAdmin/main.css') !!} 
+        <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+{!! HTML::style('cssMobile/themes/1/conf-room1.min.css') !!} 
+    
     {!! HTML::style('libMobile/jqm/1.4.4/jquery.mobile.structure-1.4.5.min.css') !!} 
     {!! HTML::style('cssMobile/app.css') !!} 
     {!!HTML::script('libMobile/jqm/1.4.4/jquery-2.1.1.min.js') !!}
     {!!HTML::script('libMobile/jqm/1.4.4/jquery.mobile-1.4.5.min.js') !!}
-</head>
+    </head>
+    <body class="landing">
 
-<body>
-    <div data-role="page">
-        <div data-role="header" data-theme="c">
-            <h1>IguanaTrip.com</h1>
-        </div><!-- /header -->
-        <br>
-        <div id="logo_" align="center">
-            <div id="logo-imagen">
+        <!-- Page Wrapper -->
+        <div id="page-wrapper">
 
-                <a href="#" onclick="window.location.href = '{!!asset('/')!!}'"><img src="{{ asset('img/index-logo.png')}}" width="100" height="88" alt="IguanaTrip" /></a> 
+            <!-- Header -->
+            <header id="header" class="alt">
+                <h1><a href="index.html">IguanaTrip</a></h1>
+
+            </header>
+            @if(session()->has('error'))
+
+
+            <div role="main" class="ui-content">
+                <h3 class="mc-text-danger">Login Failed</h3>
+                <p>Did you enter the right credentials?</p>
+                <div class="mc-text-center"><a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
             </div>
-            
-        </div>
-        
-        @if(session()->has('error'))
-                
-     
-                <div role="main" class="ui-content">
-                    <h3 class="mc-text-danger">Login Failed</h3>
-                    <p>Did you enter the right credentials?</p>
-                    <div class="mc-text-center"><a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+
+
+            @endif
+
+
+            <!-- Banner -->
+            <section id="banner">
+                <div class="inner">
+                    <h2>IguanaTrip</h2>
+                    <div id="logo_" align="center">
+                        <div id="logo-imagen">
+
+                            <a href="#" onclick="window.location.href = '{!!asset('/')!!}'"><img src="{{ asset('img/index-logo.png')}}" width="100" height="88" alt="IguanaTrip" /></a> 
+                        </div>
+
+                    </div>
+
+                    <br/>
+                    <br/>
                 </div>
-     
-     
-                @endif
-        {!! Form::open(['url' => 'auth/login', 'method' => 'post', 'role' => 'form']) !!}	
-        <div role="main" class="ui-content">
-            <h3>{{ trans('welcome/index.labelsignin') }}</h3>
-            
-            
-					
-					
-            {!! Form::control('text', 6, 'log', $errors, trans('front/login.log')) !!}
-            
-            {!! Form::control('password', 6, 'password', $errors, trans('front/login.password')) !!}
-            <fieldset data-role="controlgroup">
-                
-                {!! Form::check('memory', trans('front/login.remind')) !!}
-                <label for="chck-rememberme">Remember me</label>
-            </fieldset>
-            
-            <div id='btnlogin'>
-                <a id='logbtn' href="#" data-transition="pop" data-position-to="window" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" onclick="$(this).closest('form').submit()">{!! (trans('front/login.logbtn')) !!}</a>
-            </div>
-            
-           <!--  <p class="mc-top-margin-1-5"><a href="begin-password-reset.html">Can't access your account?</a></p>-->
-           
-        </div><!-- /content -->
-        
-    </div><!-- /page -->
-    
-    
-    
-    {!! Form::close() !!}
-</body>
+
+
+            </section>
+
+
+
+            <!-- Two -->
+            <section id="two" class="wrapper alt style2">
+                <section class="spotlight">
+                    <div class="content">
+
+                        <h2>{{ trans('welcome/index.labelsignin') }}</h2>
+                        <p>
+                            {!! Form::open(['url' => 'auth/login', 'method' => 'post', 'role' => 'form']) !!}	
+                        <div role="main" class="ui-content">
+                            {!! Form::control('text', 6, 'log', $errors, trans('front/login.log')) !!}
+                            {!! Form::control('password', 6, 'password', $errors, trans('front/login.password')) !!}
+                            
+                            <br/>
+                            <br/>
+                            
+                            
+                            <ul class="actions vertical">
+								<li>
+                                                                    <a id='logbtn' href="#" data-transition="pop" data-position-to="window" class="button fit special" onclick="$(this).closest('form').submit()">{!! (trans('front/login.logbtn')) !!}</a></li>
+                                                                    
+							</ul>
+
+                        
+<!--  <p class="mc-top-margin-1-5"><a href="begin-password-reset.html">Can't access your account?</a></p>-->
+
+                        </div><!-- /content -->
+                        {!! Form::close() !!}    
+                    </div><!-- /page -->
+                    
+                    
+                </section>
+
+            </section>
+
+
+
+
+            <!-- Footer -->
+            <footer id="footer">
+                <ul class="icons">
+                    <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+                    <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+                </ul>
+                <ul class="copyright">
+                    <li>&copy; IguanaTrip.com</li><li>2016</li>
+                </ul>
+            </footer>
+
+        </div>
+
+        <!-- Scripts -->
+        {!!HTML::script('js/responsiveAdmin/jquery.min.js') !!}
+        {!!HTML::script('js/responsiveAdmin/jquery.scrollex.min.js') !!}
+        {!!HTML::script('js/responsiveAdmin/jquery.scrolly.min.js') !!}
+        {!!HTML::script('js/responsiveAdmin/skel.min.js') !!}
+        {!!HTML::script('js/responsiveAdmin/util.js') !!}
+        {!!HTML::script('js/responsiveAdmin/main.js') !!}
+
+
+
+    </body>
 </html>
+
