@@ -219,3 +219,13 @@ Route::get('registerMobile', ['as' => 'registerMobile', 'uses' => 'ServicioContr
 
 
 /**End rutas dispositivo mobil************************************************/
+
+
+
+
+/*Rutas para la parte publica del sistema*/
+
+Route::get('/publico', ['as' => 'publico', 'uses' => 'HomePublicController@getHome']);
+Route::get('/getRegiones', ['as' => 'regiones', 'uses' => 'HomePublicController@getRegiones']);
+
+ /*  Fin de las rutas del sistema publico*/

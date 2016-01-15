@@ -50,7 +50,7 @@ class OperadorRepository extends BaseRepository
 	 */
 	private function save($operador, $inputs)
 	{
-		$operador->nombre_empresa_operador = $inputs['nombre_empresa_operador'];
+		//$operador->nombre_empresa_operador = $inputs['nombre_empresa_operador'];
 		$operador->nombre_contacto_operador_1 = $inputs['nombre_contacto_operador_1'];
 		$operador->telf_contacto_operador_1 = $inputs['telf_contacto_operador_1'];
 		$operador->ip_registro_operador = $inputs['ip_registro_operador'];
@@ -133,7 +133,7 @@ class OperadorRepository extends BaseRepository
 	public function getLastIdInsert($inputs)
 	{
 		$operador = new $this->model;
-		return $operador::where('nombre_empresa_operador',$inputs['nombre_empresa_operador'])
+		return $operador::where('nombre_contacto_operador_1',$inputs['nombre_contacto_operador_1'])
 							->where('nombre_contacto_operador_1',$inputs['nombre_contacto_operador_1'])
 							->where('telf_contacto_operador_1',$inputs['telf_contacto_operador_1'])
 							->where('email_contacto_operador',$inputs['email_contacto_operador'])

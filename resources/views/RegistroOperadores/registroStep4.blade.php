@@ -69,7 +69,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 @endforeach
 <div class="row-step4">
     <div id="title-box-header">
-        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset(' / servicios')!!}'">
+        <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
 
             <?php
             switch (session('tip_oper')) {

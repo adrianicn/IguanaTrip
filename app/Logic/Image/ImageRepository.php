@@ -133,7 +133,7 @@ DB::table('images')
     public function icon( $photo, $filename )
     {
         $manager = new ImageManager();
-        $image = $manager->make( $photo )->encode('jpg')->resize(200, null, function($constraint){$constraint->aspectRatio();})->save( 'images/icon/'  . $filename );
+        $image = $manager->make( $photo )->encode('jpg')->resize(700, null, function($constraint){$constraint->aspectRatio();})->save( 'images/icon/'  . $filename );
 
         return $image;
     }

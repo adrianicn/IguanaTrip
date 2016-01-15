@@ -13,7 +13,6 @@
         <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
         <meta name="_token" content="{!! csrf_token() !!}"/>
         <meta name="description" content="Registra tus servicios turisticos. Nosotros haremos que lo conozcan a nivel internacional y turistas de todo el mundo vengan a visitarte. Iguana Trip surge como una alternativa turística comunitaria para defender y revalorizar los recursos culturales y naturales. Planea tu viaje y aprende sobre la historia y la cultura del país mientras te involucras en la realidad del mismo. Iguana Trip te brindara información práctica de acuerdo a tus intereses sobre el lugar específico que decidas visitar. Encuentra hoteles, day trips, museos, playas, sitios turísticos, restaurantes, bares, todo tipo de atracciones desde la más pequeña a la más grande. Y lo más importante si lo deseas, IgunaTrip te guiará en tu recorrido para que ayudes a generar ingresos complementarios a comunidades locales en busca de desarrollo. Nos encontraos en la etapa de registro de operadores turísticos">
-<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW, ARCHIVE" />
         <meta name="keywords" content="HTML,CSS,XML,JavaScript">
         <meta name="author" content="IguanaTrip group">
         <title>{{ trans('welcome/index.labelComming') }}</title>	

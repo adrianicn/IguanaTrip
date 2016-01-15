@@ -1,5 +1,5 @@
 @section('contentPanelItinerarios')	
-{!! HTML::style('css/table.css') !!} 
+{!! HTML::style('zzcss/table.css') !!} 
 <div id="itinerario-detalle">
     
     <h2>Detalle del tour o itinerario <strong class="add-registro" onclick="RenderPartialGenericMap('reusable.createNewPuntoItinerario', {!!$id_itinerario!!})">+</strong> (agregar registro) </h2>

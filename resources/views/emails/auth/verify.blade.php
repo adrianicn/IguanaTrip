@@ -931,7 +931,7 @@ tr.border td {
             <table align="left" style="border-collapse: collapse;border-spacing: 0;">
               <tbody><tr>
                 <td style="padding: 0;vertical-align: top;mso-line-height-rule: at-least;width: 280px;padding-top: 13px;padding-bottom: 4px;" class="logo emb-logo-padding-box">
-                  <div align="left" id="emb-email-header" style="font-weight: 700;font-family: Avenir,sans-serif;color: #555;font-size: 0px !important;line-height: 0 !important;" class="logo-left"><a href="http://igt.createsend1.com/t/i-l-ijfjkl-l-r/" style="text-decoration: none;transition: opacity 0.2s ease-in;color: #555;" target="_blank"><img width="107" height="102" alt="IguanaTrip" src="https://i1.createsend1.com/ei/i/15/9BB/E12/100539/csfinal/registro-logo.png" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 107px;"></a></div>
+                  <div align="left" id="emb-email-header" style="font-weight: 700;font-family: Avenir,sans-serif;color: #555;font-size: 0px !important;line-height: 0 !important;" class="logo-left"><a href="http://igt.createsend1.com/t/i-l-ijfjkl-l-r/" style="text-decoration: none;transition: opacity 0.2s ease-in;color: #555;" target="_blank"><img width="107" height="102" alt="IguanaTrip" src="{!! asset('public/img/registro-logo.png')!!}" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 107px;"></a></div>
                 </td>
               </tr>
             </tbody></table>
@@ -962,7 +962,7 @@ tr.border td {
                         </tbody></table>
                       
             <div align="center" style="font-size: 12px;mso-line-height-rule: at-least;font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 0;font-family: &quot;Open Sans&quot;,sans-serif;color: #60666d;" class="image">
-              <a href="http://igt.createsend1.com/t/i-l-ijfjkl-l-y/" style="transition: opacity 0.2s ease-in;color: #5c91ad;" target="_blank"><img width="600" height="293" alt="IguanaTrip" src="https://i1.createsend1.com/ei/i/15/9BB/E12/100539/csfinal/extra-pag-1b.png" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 900px;"></a>
+              <a href="http://igt.createsend1.com/t/i-l-ijfjkl-l-y/" style="transition: opacity 0.2s ease-in;color: #5c91ad;" target="_blank"><img width="600" height="293" alt="IguanaTrip" src="{!! asset('public/img/extra-pag-1b.png')!!}" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 900px;"></a>
             </div>
           
                         <table style="border-collapse: collapse;border-spacing: 0;table-layout: fixed;width: 100%;" class="contents">
@@ -1015,7 +1015,7 @@ tr.border td {
                             <td style="padding: 0;vertical-align: top;padding-left: 32px;padding-right: 16px;word-break: break-word;word-wrap: break-word;" class="padded">
                               
             <div align="center" style="font-size: 12px;mso-line-height-rule: at-least;font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 0;font-family: &quot;Open Sans&quot;,sans-serif;color: #60666d;" class="image">
-              <img width="252" height="139" alt="" src="https://i2.createsend1.com/ei/i/15/9BB/E12/100539/csfinal/galapagos2.jpg" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 480px;">
+              <img width="252" height="139" alt="" src="{!! asset('public/img/galapagos2.jpg')!!}" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 480px;">
             </div>
           
                             </td>
@@ -1035,6 +1035,7 @@ tr.border td {
                             </td>
                           </tr>
                         </tbody></table>
+                      <a href="../../endRegister.blade.php"></a>
                       
                       <div style="font-size: 32px;line-height: 32px;transition-timing-function: cubic-bezier(0, 0, 0.2, 1);transition-duration: 150ms;transition-property: all;" class="column-bottom">&nbsp;</div>
                     </td>
@@ -1058,7 +1059,7 @@ tr.border td {
                             <td style="padding: 0;vertical-align: top;padding-left: 32px;padding-right: 16px;word-break: break-word;word-wrap: break-word;" class="padded">
                               
             <div align="center" style="font-size: 12px;mso-line-height-rule: at-least;font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 0;font-family: &quot;Open Sans&quot;,sans-serif;color: #60666d;" class="image">
-              <img width="252" height="123" alt="" src="https://i3.createsend1.com/ei/i/15/9BB/E12/100539/csfinal/extra-pag-1c.png" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 480px;">
+              <img width="252" height="123" alt="" src="{!! asset('public/img/extra-pag-1c.png')!!}" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 480px;">
             </div>
           
                             </td>
@@ -1111,7 +1112,7 @@ tr.border td {
                             <td style="padding: 0;vertical-align: top;padding-left: 32px;padding-right: 16px;word-break: break-word;word-wrap: break-word;" class="padded">
                               
             <div align="center" style="font-size: 12px;mso-line-height-rule: at-least;font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 0;font-family: &quot;Open Sans&quot;,sans-serif;color: #60666d;" class="image">
-              <img width="252" height="189" alt="" src="https://i4.createsend1.com/ei/i/15/9BB/E12/100539/csfinal/Quito.jpg" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 480px;">
+              <img width="252" height="189" alt="" src="{!! asset('public/img/Quito.jpg')!!}" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 480px;">
             </div>
           
                             </td>

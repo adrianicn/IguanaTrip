@@ -39,27 +39,26 @@ $email_contacto_operador = $operadorData->email_contacto_operador;
     <div id="title-box-header">
         <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
             
-          <?php
+             <?php
                   $prefix="";
         $operadorName="";
 
           switch (session('tip_oper')) {
     case 1:
-        $prefix="I'm an ";
-        $operadorName="Agency";
+        $prefix="Soy un ";
+        $operadorName="Negocio";
         break;
     case 2:
-        $prefix="I'm an ";
-        $operadorName="Enterprise";
+        $prefix="Soy una ";
+        $operadorName="Agencia";
         break;
     case 3:
-        $prefix="I'm just";
-        $operadorName="Me";
+        $prefix="Soy solo";
+        $operadorName="Yo";
         break;
     
 }
 ?>
-
            
             <h2 class="head-title">
     {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
@@ -114,7 +113,6 @@ $email_contacto_operador = $operadorData->email_contacto_operador;
 
     <div class="wrapper uwa-font-aa">
          <input type="hidden" value="{!!$data['tipoOperador']!!}" name="id_tipo_operador" id="id_tipo_operador">
-            <input type="hidden" value="{!!Session::get('user_id')!!}" name="id_usuario" id="id_usuario">
             <input type="hidden" value="{!!$id_usuario_op!!}" name="id_usuario_op" id="id_usuario_op">
            
         <!--<div class="form-group-step2">

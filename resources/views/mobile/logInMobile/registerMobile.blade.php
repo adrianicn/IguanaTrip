@@ -6,15 +6,15 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-        {!! HTML::style('css/responsiveAdmin/main.css') !!} 
+        {!! HTML::style('public/css/responsiveAdmin/main.css') !!} 
         <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
         <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-{!! HTML::style('cssMobile/themes/1/conf-room1.min.css') !!} 
+{!! HTML::style('public/cssMobile/themes/1/conf-room1.min.css') !!} 
     
-    {!! HTML::style('libMobile/jqm/1.4.4/jquery.mobile.structure-1.4.5.min.css') !!} 
-    {!! HTML::style('cssMobile/app.css') !!} 
-    {!!HTML::script('libMobile/jqm/1.4.4/jquery-2.1.1.min.js') !!}
-    {!!HTML::script('libMobile/jqm/1.4.4/jquery.mobile-1.4.5.min.js') !!}
+    {!! HTML::style('public/libMobile/jqm/1.4.4/jquery.mobile.structure-1.4.5.min.css') !!} 
+    {!! HTML::style('public/cssMobile/app.css') !!} 
+    {!!HTML::script('public/libMobile/jqm/1.4.4/jquery-2.1.1.min.js') !!}
+    {!!HTML::script('public/libMobile/jqm/1.4.4/jquery.mobile-1.4.5.min.js') !!}
     </head>
     <body class="landing">
 
@@ -50,7 +50,7 @@
                     <div id="logo_" align="center">
                         <div id="logo-imagen">
 
-                            <a href="#" onclick="window.location.href = '{!!asset('/')!!}'"><img src="{{ asset('img/index-logo.png')}}" width="100" height="88" alt="IguanaTrip" /></a> 
+                            <a href="#" onclick="window.location.href = '{!!asset('/')!!}'"><img src="{{ asset('public/img/index-logo.png')}}" width="100" height="88" alt="IguanaTrip" /></a> 
                         </div>
 
                     </div>
@@ -69,7 +69,7 @@
                 <section class="spotlight">
                     <div class="content">
 
-                        <h2>Sign Up</h2>
+                        <h2>{{trans('front/register.register')}}</h2>
                         <p>
                             
                             
@@ -132,12 +132,12 @@
         </div>
 
         <!-- Scripts -->
-        {!!HTML::script('js/responsiveAdmin/jquery.min.js') !!}
-        {!!HTML::script('js/responsiveAdmin/jquery.scrollex.min.js') !!}
-        {!!HTML::script('js/responsiveAdmin/jquery.scrolly.min.js') !!}
-        {!!HTML::script('js/responsiveAdmin/skel.min.js') !!}
-        {!!HTML::script('js/responsiveAdmin/util.js') !!}
-        {!!HTML::script('js/responsiveAdmin/main.js') !!}
+        {!!HTML::script('public/js/responsiveAdmin/jquery.min.js') !!}
+        {!!HTML::script('public/js/responsiveAdmin/jquery.scrollex.min.js') !!}
+        {!!HTML::script('public/js/responsiveAdmin/jquery.scrolly.min.js') !!}
+        {!!HTML::script('public/js/responsiveAdmin/skel.min.js') !!}
+        {!!HTML::script('public/js/responsiveAdmin/util.js') !!}
+        {!!HTML::script('public/js/responsiveAdmin/main.js') !!}
 
 
 
