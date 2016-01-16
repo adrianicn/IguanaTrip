@@ -5,6 +5,7 @@
                     
                     
                     <select name="id_parroquia" id="id_parroquia" class='inputselect chng'>
+                        <option value="0"  >Seleccionar</option>
 @foreach($parroquias as $parroquia)
 @if($id_parroquia==$parroquia->id)
 <option value="{!!$parroquia->id!!}" selected >{!!$parroquia->nombre!!}</option>

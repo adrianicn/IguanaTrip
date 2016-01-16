@@ -16,9 +16,9 @@
 		<div class="mcontent">
 			<div class="box mr20">
 				<h2>Contáctanos</h2>
-				<p>Ecuador : (593)-2330-107<br/>
-                                   Australia : (593)-2330-107<br/>
-                                   España : (593)-2330-107
+				<p>Ecuador(UIO):(593)995465562<br/>
+                                   Australia(QLD):(61)468313723<br/>
+                                   Australia(VIC):(61)481399595
                                 </p>
 			</div>
 			<div class="box mr20">

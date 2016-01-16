@@ -215,10 +215,17 @@ Route::get('loginmobile',function()
     return view('mobile.logInMobile.LogInMobile');
 });
 
-Route::get('registerMobile',function()
-{
-    
-    return view('mobile.logInMobile.registerMobile');
-});
+Route::get('registerMobile', ['as' => 'registerMobile', 'uses' => 'ServicioController@registerMobile'] );
+
 
 /**End rutas dispositivo mobil************************************************/
+
+
+
+
+/*Rutas para la parte publica del sistema*/
+
+Route::get('/publico', ['as' => 'publico', 'uses' => 'HomePublicController@getHome']);
+Route::get('/getRegiones', ['as' => 'regiones', 'uses' => 'HomePublicController@getRegiones']);
+
+ /*  Fin de las rutas del sistema publico*/

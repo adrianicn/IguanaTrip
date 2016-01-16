@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+<<<<<<< HEAD
+=======
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/Auth/AuthController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/cssMobile/themes/1/conf-room1.min.css</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/front/masterPageWelcome.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/HomeController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/maps.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/mobile/completeRegister.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/password.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/cssMobile/app.css</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/UsuarioServiciosController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/mobile/logInMobile/registerMobile.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/register.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/mobile/logInMobile/masterMobile.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Registro/editEvento.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/completeRegister.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/mobile/logInMobile/LogInMobile.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/mobile/sign-in.html</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/libMobile/jqm/1.4.4/jquery.mobile.structure-1.4.5.css</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/routes.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/login.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/ServicioController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/css/responsiveAdmin/main.css</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/front/masterPageServicios.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/RegistroOperadores/registroStep4.blade.php</file>
+        </group>
+    </open-files>
+>>>>>>> 84a940fa90d32a88b8bc6edad0f26f05b73d1b4f
 </project-private>

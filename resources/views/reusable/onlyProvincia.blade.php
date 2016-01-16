@@ -6,6 +6,7 @@
                     
                     
                     <select name="id_provincia" id="id_provincia" class='inputselect chng'>
+                        <option value="0"  >Seleccionar</option>
 @foreach($provincias as $provincia)
 <option value="{!!$provincia->id!!}"  >{!!$provincia->nombre!!}</option>
     @endforeach

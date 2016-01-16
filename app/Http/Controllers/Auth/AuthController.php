@@ -94,26 +94,22 @@ class AuthController extends Controller {
             if ($request->session()->has('user_id')) {
                 $request->session()->forget('user_id');
             }
-            
-           // $name = Cookie::forget('name');
+
+            // $name = Cookie::forget('name');
             //$iden = Cookie::forget('iden');
             //$email = Cookie::forget('email');
-            
-            
             //$name = Cookie::make('name', $user->username,1000);
             //$iden = Cookie::make('iden', $user->id,1000);
             //$email = Cookie::make('email', $user->email,1000);
-            
-            
             //$request->session()->put('user_id', $user->id);
-            
+
             $request->session()->put('user_name', $user->username);
             //$request->session()->put('user_email', $user->email);
 
             $email = $auth->user()->email;
             $nombre = $auth->user()->user_name;
-            
-            
+
+
             //return redirect('/servicios')->with('user', $user->id)->withCookie($name)->withCookie($iden)->withCookie($email);
             return redirect('/servicios')->with('user', $user->id);
         }
@@ -139,12 +135,24 @@ class AuthController extends Controller {
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-        $userData = array(
-            'username' => $formFields['username'],
-            'email' => $formFields['email'],
-            'password' => $formFields['password'],
-            'password_confirmation' => $formFields['password_confirmation'],
-        );
+        if ($inputData != "") {
+
+            $userData = array(
+                'username' => $formFields['username'],
+                'email' => $formFields['email'],
+                'password' => $formFields['password'],
+                'password_confirmation' => $formFields['password_confirmation'],
+            );
+        } else {
+
+            $userData = array(
+                'username' => $request->input('username'),
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
+                'password_confirmation' => $request->input('password_confirmation'),
+            );
+        }
+
         $validator = Validator::make($userData, $this->validationRules);
 
 
@@ -152,11 +160,17 @@ class AuthController extends Controller {
 
         if ($validator->fails()) {
 
+            if (session('device') == 'mobile') {
 
-            return response()->json(array(
-                        'fail' => true,
-                        'errors' => $validator->getMessageBag()->toArray()
-            ));
+
+                return view('mobile.logInMobile.registerMobile')->with('errorsMob', $validator->getMessageBag()->toArray());
+            } else {
+
+                return response()->json(array(
+                            'fail' => true,
+                            'errors' => $validator->getMessageBag()->toArray()
+                ));
+            }
         } else {
             $user = $user_gestion->store(
                     $userData, $confirmation_code = str_random(30)
@@ -168,6 +182,12 @@ class AuthController extends Controller {
             //    return redirect('/')->with('ok', trans('front/verify.message'));
             //return redirect('/auth/confirmation/'.$confirmation_code);*/
 
+
+            if (session('device') == 'mobile') {
+               
+                
+                return view('mobile.logInMobile.registerMobile')->with('successMob', "El registro se ha realizado con éxito. Se ha enviado un email su correo electrónico");
+            }
             return response()->json(array(
                         'success' => true,
                         'message' => trans('front/verify.message')

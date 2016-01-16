@@ -5,38 +5,28 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 
     <head>
-        <title>IguanaTrip- Deja de ser turista conviertete en viajero</title>
+        <title>IguanaTrip - Deja de ser turista conviertete en viajero</title>
         <meta charset='utf-8' />
         <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
         <meta name="_token" content="{!! csrf_token() !!}"/>
-        <meta name="description" content="Registra tus servicios turisticos. Nosotros haremos que lo conozcan a nivel internacional y turistas de todo el mundo vengan a visitarte. Iguana Trip surge como una alternativa turística comunitaria para defender y revalorizar los recursos culturales y naturales. Planea tu viaje y aprende sobre la historia y la cultura del país mientras te involucras en la realidad del mismo. Iguana Trip te brindara información práctica de acuerdo a tus intereses sobre el lugar específico que decidas visitar. Encuentra hoteles, day trips, museos, playas, sitios turísticos, restaurantes, bares, todo tipo de atracciones desde la más pequeña a la más grande. Y lo más importante si lo deseas, IgunaTrip te guiará en tu recorrido para que ayudes a generar ingresos complementarios a comunidades locales en busca de desarrollo. Nos encontraos en la etapa de registro de operadores turísticos">
-        <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW, ARCHIVE" />
+        <meta name="description" content="Registra tus servicios turísticos. Nosotros haremos que lo conozcan a nivel internacional y turistas de todo el mundo vengan a visitarte. IguanaTrip surge como una alternativa turística comunitaria para defender y revalorizar los recursos culturales y naturales. Planea tu viaje y aprende sobre la historia y la cultura del país mientras te involucras en la realidad del mismo. IguanaTrip te brindara información práctica de acuerdo a tus intereses sobre el lugar específico que decidas visitar. Encuentra hoteles, day trips, museos, playas, sitios turísticos, restaurantes, bares, todo tipo de atracciones desde la más pequeña a la más grande. Y lo más importante si lo deseas, IgunaTrip te guiará en tu recorrido para que ayudes a generar ingresos complementarios a comunidades locales en busca de desarrollo. Nos encontraos en la etapa de registro de operadores turísticos">
         <meta name="keywords" content="HTML,CSS,XML,JavaScript">
         <meta name="author" content="IguanaTrip group">
-
         <link rel="shortcut icon" href="favicon.ico" />
         <link rel="apple-touch-icon" href="{{ asset('images/favicon.png')}}" />        
 
-        <!--        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
        
-        {!! HTML::style('css/demo.css') !!} 
-        
-        {!! HTML::style('css/masterPagesRegistro.css') !!}
+            
+    </head>
+     {!! HTML::style('css/demo.css') !!} 
+     {!! HTML::style('css/masterPagesRegistro.css') !!}
         {!! HTML::style('css/base/layoutBase.css') !!} 
         {!! HTML::style('css/popupModal/basic.css') !!} 
         {!! HTML::style('css/calendar/ui-jquery.css') !!}
         {!!HTML::script('js/sliderTop/jquery-1.9.1.min.js') !!}
-            {!!HTML::script('js/sliderTop/jssor.slider.mini.js') !!}
-            
-  
+        {!!HTML::script('js/sliderTop/jssor.slider.mini.js') !!}
         
-    
-    </head>
-
-    
-        <body>
-            <div id='loadingScreen'>
-
+   
         <body class="full-padding" style="margin: 0;padding: 0;min-width: 100%;">
     <div id='loadingScreen'>
             <center class="wrapper" style="display: table;table-layout: fixed;width: 100%;min-width: 620px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;background-color: #323232;">
@@ -258,13 +248,9 @@
 
             @yield('scripts')
 
-
+ </center>
 </div>
-        </body>
-    
-
-    </center>
-    </div>
+      
         </body>
 
 

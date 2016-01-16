@@ -32,7 +32,7 @@
 
                 <div class="dropzone-previews" id="dropzonePreview"></div>
 
-                <h4 style="text-align: center;color:#428bca;">Arrastra las imágenes aquí  <span class="glyphicon glyphicon-hand-down"></span></h4>
+                <h4 style="text-align: center;color:#428bca;">Arrastra las imágenes aquí (Formato: jpg, tamaño max: 6Mb)  <span class="glyphicon glyphicon-hand-down"></span></h4>
 
                 {!! Form::close() !!}
                 
@@ -110,6 +110,7 @@ $("#nextbtn").click(function() {
     $("#flag_image").val('1');
 
 });
+
 
 
     </script>

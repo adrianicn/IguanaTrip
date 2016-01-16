@@ -103,7 +103,7 @@
                 <tr>
                     @if($servicio->nombre_servicio=="")
                     <td class="vinculo-servicio">
-                        {!! link_to_route('details.show', 'Ingresar Nombre', [$servicio->id,$servicio->id_catalogo_servicios]) !!}
+                        {!! link_to_route('details.show', 'Ingresar', [$servicio->id,$servicio->id_catalogo_servicios]) !!}
                     </td>
                     @else
                     <td class="vinculo-servicio">
@@ -122,9 +122,10 @@
                 <input type="hidden" value="{!!$servicio->id!!}" name="usuario_servicio">
                 <td id='basic-modal' contenteditable="true">
                 </td>
-                <td>
+                <td id='change'>
                     <img src="{!! asset('img/flecha-1.png')!!}" height="10px" width="10px" />
-                    Para modificar el servicio dale clic en el nombre
+                    
+                    {!! link_to_route('details.show', 'Para modificar el servicio dale click aquí', [$servicio->id,$servicio->id_catalogo_servicios]) !!}
                 </td>
 
 
@@ -148,7 +149,9 @@
 
 
 
-
+<script>
+    $('#change a').css('color','white');
+    </script>
 
 
 

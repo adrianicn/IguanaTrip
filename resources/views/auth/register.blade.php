@@ -35,7 +35,7 @@
     @endforeach
     @endif
 
-    <p>By clicking Register, you agree on our <a href="#">terms and condition</a>.</p>
+    <p>By clicking Register, you agree on our <a href="#" onclick="window.location.href = '{!!asset('/terminos')!!}'">terms and condition</a>.</p>
 
     <a href="#" class="button" onclick="$(this).closest('form').submit()">{!! (trans('front/form.send')) !!}</a>
 </form>{!! Form::close() !!}

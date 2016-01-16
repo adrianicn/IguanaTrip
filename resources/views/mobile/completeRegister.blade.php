@@ -3,14 +3,17 @@
 @section('content')
 
         
-        <div role="main" class="ui-content">
-            <h2 class="mc-text-center">{{ trans('welcome/index.labelWelcome') }}!</h2>
-            <p class="mc-top-margin-1-5"><b>{{ trans('welcome/index.labelusermobile') }}</b></p>
-            <a href="#" onclick="window.location.href = '{!!asset('/loginmobile')!!}'" class="ui-btn ui-btn-b ui-corner-all">{{ trans('welcome/index.labelsignin') }}</a>
-            <p class="mc-top-margin-1-5"><b>{{ trans('welcome/index.labelnoaccountmobile') }}</b></p>
-            <a href="#" onclick="window.location.href = '{!!asset('/registerMobile')!!}'" class="ui-btn ui-btn-b ui-corner-all">{{ trans('welcome/index.labelregister') }}</a>
-            <p></p>
-        </div><!-- /content -->
+
+<header>
+								<h2>{{ trans('welcome/index.processreg')}}</h2>
+								<p>{{ trans('welcome/index.processDes') }}</p>
+							</header>
+							<ul class="actions vertical">
+								<li><a href="#" onclick="window.location.href = '{!!asset('/loginmobile')!!}'" class="button fit special">{{ trans('welcome/index.labelsignin') }}</a></li>
+								<li><a href="#" onclick="window.location.href = '{!!asset('/registerMobile')!!}'" class="button fit">{{ trans('welcome/index.labelregister') }}</a></li>
+							</ul>
+
+
         <div id="lang">
 
 

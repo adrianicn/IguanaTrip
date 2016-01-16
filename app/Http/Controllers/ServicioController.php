@@ -85,6 +85,16 @@ class ServicioController extends Controller {
         return $view;
     }
     
+    
+    public function registerMobile() {
+        
+        return view('mobile.logInMobile.registerMobile');
+    }
+    
+    
+    
+        
+    
     public function getMyProfileOp(Guard $auth, OperadorRepository $operador_gestion) {
         //
         if ($auth->check()) {
@@ -148,11 +158,11 @@ class ServicioController extends Controller {
      * @param  App\Repositories\UserRepository $user_gestion
      * @return Response
      */
-    public function postOperadores(Request $request, OperadorRepository $operador_gestion) {
+    public function postOperadores(Guard $auth,Request $request, OperadorRepository $operador_gestion) {
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-
+        
         $operadorData = array(
             //'nombre_empresa_operador' => $formFields['nombre_empresa_operador'],
             'nombre_contacto_operador_1' => $formFields['nombre_contacto_operador_1'],
@@ -160,7 +170,7 @@ class ServicioController extends Controller {
             'ip_registro_operador' => $this->getIp(),
             'email_contacto_operador' => $formFields['email_contacto_operador'],
             'direccion_empresa_operador' => $formFields['direccion_empresa_operador'],
-            'id_usuario' => $formFields['id_usuario'],
+            'id_usuario' => $auth->user()->id,
             'id_tipo_operador' => $formFields['id_tipo_operador'],
             'estado_contacto_operador' => 1,
             'id_usuario_op' => $formFields['id_usuario_op']
@@ -178,12 +188,15 @@ class ServicioController extends Controller {
                 $request->session()->put('operador_id', $formFields['id_usuario_op']);
 
                 $operador = $operador_gestion->update($operadorData);
-            } else {
+            }
+            
+            else {
                 $operador = $operador_gestion->store($operadorData);
                 $request->session()->put('operador_id', $operador->id);
                 $operadores = $operador_gestion->getLastIdInsert($operadorData);
-                foreach ($operadores as $operador)
+                //foreach ($operadores as $operador)
                     $id_usuario_op = $operador->id_usuario_op;
+                    
             }
         }
         $returnHTML = ('/IguanaTrip/public/userservice');
@@ -207,6 +220,7 @@ class ServicioController extends Controller {
         Session::forget('operador_id');
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
+        $request->session()->put('tip_oper', $formFields['tipo_operador']);
         $request->session()->put('operador_id', $formFields['operador_id']);
       
         $returnHTML = ('detalleServicios');
@@ -296,5 +310,7 @@ class ServicioController extends Controller {
         $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/' . $usuarioServicio . '/' . $formFields['id_catalogo_servicio']);
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
+    
+    
 
 }

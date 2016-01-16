@@ -6,6 +6,7 @@
                     
                     
                     <select name="id_canton" id="id_canton" class='inputselect chng'>
+                        <option value="0"  >Seleccionar</option>
 @foreach($cantones as $canton)
 @if($id_canton==$canton->id)
 <option value="{!!$canton->id!!}" selected>{!!$canton->nombre!!}</option>

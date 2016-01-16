@@ -1,5 +1,5 @@
 
-{!! HTML::style('css/checkBoxCss/stylesheet-pure-css.css') !!} 
+{!! HTML::style('zcss/checkBoxCss/stylesheet-pure-css.css') !!} 
 
 
                         <h2 class='titletable'>
