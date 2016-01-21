@@ -227,5 +227,6 @@ Route::get('registerMobile', ['as' => 'registerMobile', 'uses' => 'ServicioContr
 
 Route::get('/publico', ['as' => 'publico', 'uses' => 'HomePublicController@getHome']);
 Route::get('/getRegiones', ['as' => 'regiones', 'uses' => 'HomePublicController@getRegiones']);
+Route::get('/getProvinciaDescipcion/{id_provincia}/{id_image}', ['as' => 'provinciasdescr', 'uses' => 'HomePublicController@getProvinciaDescripcion']);
 
  /*  Fin de las rutas del sistema publico*/

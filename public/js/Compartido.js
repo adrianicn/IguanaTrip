@@ -231,7 +231,9 @@ callModal('cls');
 
 
 
-
+//
+//id_catalogo_fotografia= es el catalogo que tiene la base de datos catalogo fotografia
+//id_auxiliar = es el id principal de la tabla que manda a guardar la imagen
 function RenderPartialGenericFotografia($idPartial, $id_catalogo_fotografia,$id_usuario_servicio,$id_auxiliar) {
 
     

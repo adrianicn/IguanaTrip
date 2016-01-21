@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-<<<<<<< HEAD
-=======
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/Auth/AuthController.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/public/cssMobile/themes/1/conf-room1.min.css</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/front/masterPageWelcome.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/HomeController.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/maps.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/mobile/completeRegister.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/js/Compartido.js</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/search_inbox/css/default.css</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/password.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/public/cssMobile/app.css</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/UsuarioServiciosController.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/mobile/logInMobile/registerMobile.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/register.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/mobile/logInMobile/masterMobile.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Registro/editEvento.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/completeRegister.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/mobile/logInMobile/LogInMobile.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/mobile/sign-in.html</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/public/libMobile/jqm/1.4.4/jquery.mobile.structure-1.4.5.css</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/routes.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/RegistroOperadores/registroStep2.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/js/js_public/Compartido.js</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/en/publico/labels.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/uploadImagePopUp.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/PublicServiceRepository.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/login.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/ServicioController.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/public/css/responsiveAdmin/main.css</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/imageContainerAjax.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/search_inbox/css/component.css</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/es/publico/labels.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/front/masterPageServicios.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/portfolio-masonry2.html</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/RegistroOperadores/registroStep4.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/regiones.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/modifyEventos_Promociones.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/homePage.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/UsuarioServiciosController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Registro/catalogoServicio.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/HomePublicController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/reset.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/OperadorRepository.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/register.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Registro/editEvento.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Admin/descripcionProvincia.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/completeRegister.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/ServiciosOperadorRepository.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/routes.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/ServicioController.php</file>
         </group>
     </open-files>
->>>>>>> 84a940fa90d32a88b8bc6edad0f26f05b73d1b4f
 </project-private>

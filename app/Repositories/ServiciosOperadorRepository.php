@@ -549,6 +549,7 @@ Actualizar tabla de busqueda
         $dif = new $this->catalogo_dificultad;
         return $dif::All();
     }
+    
 
     //Entrega el arreglo de Imagenes por promocion por operador
     public function getImagePromocionesOperador($id_promocion) {

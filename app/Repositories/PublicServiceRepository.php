@@ -61,91 +61,150 @@ class PublicServiceRepository extends BaseRepository {
         $this->search_engine = new SearchEngine();
     }
 
-    /**
-     * Save the User.
-     *
-     * @param  App\Models\UserServicio $user_servicios
-
-     * @return void
-     */
-    private function save($user_servicios) {
-
-        $user_servicios->save();
-    }
-
     //Entrega el arreglo de los servicios más visitados
     public function getUsuario_serv($ubicacion) {
-
 
         if ($ubicacion != "") {
 
             $ubicGeo = DB::table('ubicacion_geografica')
-                            ->where('ubicacion_geografica.nombre', '=',  $ubicacion->city )
-                            ->select('ubicacion_geografica.*')->get();
+                            ->where('ubicacion_geografica.nombre', '=', $ubicacion->city)
+                            ->select('ubicacion_geografica.*')->first();
 
             if ($ubicGeo == null) {
 
                 $visitados = DB::table('usuario_servicios')
-                                ->select('usuario_servicios.*')
+                                ->where('usuario_servicios.estado_servicio', '=', '1')
+                                ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                                ->select('usuario_servicios.id')
                                 ->orderBy('num_visitas', 'desc')
                                 ->take(10)->get();
             } else {
-                
-                foreach ($ubicGeo as $unique) {
-                    
+
+                //foreach ($ubicGeo as $unique) {
+
+                $visitados = DB::table('usuario_servicios')
+                                ->where('usuario_servicios.id_canton', '=', $ubicGeo->id)
+                                ->where('usuario_servicios.estado_servicio', '=', '1')
+                                ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                                ->select('usuario_servicios.id')
+                                ->orderBy('num_visitas', 'desc')
+                                ->take(10)->get();
+
+
+                //}
+
+                if ($visitados == null || count($visitados < 10)) {
+
+                    //foreach ($ubicGeo as $unique) {
+
                     $visitados = DB::table('usuario_servicios')
-                                    ->where('usuario_servicios.id_canton', '=',  $unique->id)
-                                    ->select('usuario_servicios.*')
+                                    ->where('usuario_servicios.id_provincia', '=', $ubicGeo->idUbicacionGeograficaPadre)
+                                    ->where('usuario_servicios.estado_servicio', '=', '1')
+                                    ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                                    ->select('usuario_servicios.id')
                                     ->orderBy('num_visitas', 'desc')
-                                    ->take(5)->get();
-                    
-                }
-                
-                if($visitados==null)
-                {
-                    
-                foreach ($ubicGeo as $unique) {
-                    
-                    $visitados = DB::table('usuario_servicios')
-                                    ->where('usuario_servicios.id_provincia', '=',  $unique->idUbicacionGeograficaPadre)
-                                    ->select('usuario_servicios.*')
-                                    ->orderBy('num_visitas', 'desc')
-                                    ->take(5)->get();
-                    
-                }    
-                    
+                                    ->take(10)->get();
+
+                    // }
                 }
             }
         } else {
 
             $visitados = DB::table('usuario_servicios')
-                            ->select('usuario_servicios.*')
+                            ->where('usuario_servicios.estado_servicio', '=', '1')
+                            ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                            ->select('usuario_servicios.id')
                             ->orderBy('num_visitas', 'desc')
-                            ->take(5)->get();
-            
+                            ->take(10)->get();
         }
 
-        return $visitados;
+        if ($visitados != null) {
+            $array = array();
+            foreach ($visitados as $visitado) {
+
+                $array[] = $visitado->id;
+            }
+
+
+
+            $imagenes = DB::table('images')
+                    ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                    ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
+                    ->whereIn('id_usuario_servicio', $array)
+                    ->where('estado_fotografia', '=', '1')
+                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre')
+                    ->get();
+        }
+        return $imagenes;
     }
 
-    //Entrega el arreglo de detalle itinerarios por id tinerario
-    public function getItinerariosDetalle($id_itinerario) {
-        $itiner = new $this->detalle_itinerarios_u;
-        return $itiner::where('id_itinerario', $id_itinerario)->get();
+    //Obtiene las top imagenes de cada region
+    public function getRegiones() {
+
+        //array de las regiones del ecuador
+        //1: Costa
+        //2: Sierra
+        //3:Oriente
+        //4:Galapagos
+
+        $array = array(1, 2, 3, 4);
+
+        $id_imagenes = array();
+        $final_imagen = array();
+
+        $provincias = DB::table('ubicacion_geografica')
+                ->whereIn('id_region', $array)
+                ->select('ubicacion_geografica.id')
+                ->get();
+        
+         
+            foreach ($provincias as $provincia) {
+                $id_imagenes = DB::table('images')
+                            ->where('id_auxiliar', '=',$provincia->id)
+                            ->where('estado_fotografia', '=', '1')
+                            ->select('images.id')->take(3)->get();
+                            
+            if($id_imagenes!=null){
+                foreach ($id_imagenes as $imagen) {
+                    
+                    $final_imagen[]=$imagen->id;
+                }
+                
+            }
+            }
+        
+        $imagenes = DB::table('images')
+                ->join('ubicacion_geografica', 'ubicacion_geografica.id', '=', 'images.id_auxiliar')
+                ->whereIn('images.id', $final_imagen)
+                ->where('estado_fotografia', '=', '1')
+                ->select('images.*', 'ubicacion_geografica.nombre','ubicacion_geografica.id as id_geo','ubicacion_geografica.id_region')
+                ->get();
+
+
+        return $imagenes;
     }
 
-    //Entrega el arreglo de Servicios por operador
-    public function getCatalogoDificultad() {
-        $dif = new $this->catalogo_dificultad;
-        return $dif::All();
+    //Entrega el detalle de la provincia
+    public function getProvinciaDetails($id_provincia) {
+        
+          $provincias = DB::table('ubicacion_geografica')
+                ->where('id','=', $id_provincia)
+                ->select('ubicacion_geografica.*')
+                ->first();
+          return $provincias;
     }
 
-    //Entrega el arreglo de Imagenes por promocion por operador
-    public function getImagePromocionesOperador($id_promocion) {
-        $promociones = new $this->image;
-        return $promociones::where('id_auxiliar', $id_promocion)
-                        ->where('id_catalogo_fotografia', '=', 2)
-                        ->where('estado_fotografia', '=', 1)->get();
+    //Entrega el arreglo de Imagenes por provincia
+    public function getImageporProvincia($id_provincia) {
+           
+        $imagenes = DB::table('images')
+                ->where('id_auxiliar','=', $id_provincia)
+                ->where('estado_fotografia', '=', '1')
+                ->select('images.*')
+                ->get();
+
+
+        return $imagenes;
     }
 
     //Entrega el arreglo de Imagenes por promocion por operador

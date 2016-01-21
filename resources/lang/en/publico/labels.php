@@ -1,18 +1,27 @@
 <?php
 
 return [
-	'masvisitados' => 'Top places visited in ',
-	'label2' => 'Agregar Evento ',
-	'label3' => 'Nombre evento',
-	'label4' => 'Agregar Itinerario',
-	'label5' => 'Nombre del itinerario',
-	'label6' => 'Nombre del itinerario principal',
-	'label7' => 'Detalle',
-	'label8' => 'Ejemplo de detalle',
-	'label9' => 'Servicio',
-	'label10' => 'descripcion',
+	'masvisitados' => 'Top places in ',
+	'label1' => 'Home',
+	'label2' => 'Trips',
+	'label3' => 'Destination',
+	'label4' => 'Blog',
+	'label5' => 'Contacts',
+	'label6' => 'Login',
+    
+	'label9' => 'Service',
+	'label10' => 'Where do you want to go today?...',
 	'label11' => 'Direccion',
-	'label12' => 'Contacto',
+    
+    	'label12' => 'All',
+    	'label13' => 'Coast',
+    	'label14' => 'Andes',
+    	'label15' => 'Jungle',
+    	'label16' => 'Galapagos',
+    
+    'label17' => 'About iWanaTrip',
+    'label18' => 'What to do?',
+
 	'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

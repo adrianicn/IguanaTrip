@@ -3,11 +3,11 @@
 @section('step1')
 
 <div style='display:none'>
-    <img src="{!! asset('public/img/x.png')!!}" alt='' />
+    <img src="{!! asset('img/x.png')!!}" alt='' />
 </div>
 <style>
     #simplemodal-container a.modalCloseImg {
-        background:url("{!! asset('public/img/x.png')!!}") no-repeat;
+        background:url("{!! asset('img/x.png')!!}") no-repeat;
         width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
 </style>
 <div id="basic-modal-content" class="cls loadModal"></div>
@@ -34,7 +34,7 @@
         
            <h2 class="head-title-navigation">
    <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios')!!}'"> 
-       <strong><img src="{!! asset('public/img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
+       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
                
             </h2>
     </div>

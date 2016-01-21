@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
 use App\Repositories\PublicServiceRepository;
 
+
+
+use Jenssegers\Agent\Agent;
+use Illuminate\Support\Facades\Session;
+
+
+
+        
+        
+        
+
 class HomePublicController extends Controller {
 
     private function getIp() {
@@ -26,17 +37,30 @@ class HomePublicController extends Controller {
      */
     public function getHome(PublicServiceRepository $gestion) {
         //
-
-
         try {
             $ipUser = $this->getIp();
             $location = json_decode(file_get_contents("http://ipinfo.io/200.125.245.238"));
         } catch (Exception $e) {
             $location = "";
+
+            }
+            
+            
+        $agent = new Agent();
+
+        $desk = $device = $agent->isMobile();
+        if ($desk == 1)
+            $desk = "mobile";
+        else {
+            $desk = "desk";
         }
+
         $visitados = $gestion->getUsuario_serv($location);
+        $regiones = $gestion->getRegiones();
         
-        return view('public_page.front.homePage')->with('location',$location)->with('visitados',$visitados);
+        
+        
+        return view('public_page.front.homePage')->with('location',$location)->with('visitados',$visitados)->with('regiones',$regiones);
     }
 
     //Obtiene las regiones del pais
@@ -46,10 +70,8 @@ class HomePublicController extends Controller {
         //$listProvincias = $gestion->getProvincias();
         // $location=file_get_contents('http://freegeoip.net/json/200.125.245.238');
 
-
-
         $view = View::make('public_page.partials.regiones')->with('location', $location);
-        ;
+        
         if ($request->ajax()) {
             $sections = $view->rendersections();
 
@@ -59,5 +81,26 @@ class HomePublicController extends Controller {
         } else
             return $view;
     }
+    
+    
+    //Obtiene las descripcion de la provincia elegida
+    public function getProvinciaDescripcion($id_provincia, $id_image, PublicServiceRepository $gestion) {
+         $agent = new Agent();
+
+        $desk = $device = $agent->isMobile();
+        if ($desk == 1)
+            $desk = "mobile";
+        else {
+            $desk = "desk";
+        }
+        
+        Session::put('device', $desk);
+        $provincias = $gestion->getProvinciaDetails($id_provincia);
+        $imagenes = $gestion->getImageporProvincia($id_provincia);
+        
+        return view('public_page.front.detalleProvincia')->with('provincias',$provincias)->with('imagenes',$imagenes);
+    }
+    
+    
 
 }
