@@ -22,6 +22,17 @@ return [
     'label17' => 'About iWanaTrip',
     'label18' => 'What to do?',
 
+    'label19' => 'Choose a city',
+    'label20' => 'See all the cities',
+    'label21' => 'Cities',
+    'label22' => 'Description',
+    'label23' => 'Aditional details',
+    'label24' => 'Events and cultural calendar',
+    'label25' => 'None',
+    'label26' => 'Still you can not find what you are looking for ?. Learn a little more of Ecuador, have a look at other provinces in this region',
+    'label27' => 'Go',
+    'label28' => 'Top Destinations',
+    'label29' => 'Explore',
 	'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

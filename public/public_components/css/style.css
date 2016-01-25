@@ -89,6 +89,11 @@ img {
   vertical-align: top;
 }
 
+.activities {
+  
+  vertical-align: text-bottom;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -3665,6 +3670,13 @@ ul.filter-categories > li li:last-child {
   color: #343434;
   text-align: center;
 }
+
+.page-title-container .whitex{
+  font-weight: 300;
+  font-size: 3.3333em;
+  color: white;
+  text-align: center;
+}
 .page-title-container .page-title {
   padding: 120px 0 25px;
 }
@@ -3752,7 +3764,7 @@ ul.filter-categories > li li:last-child {
   color: #fff;
 }
 .page-title-container.style3 {
-  background-image: url("http://placehold.it/1920x358");
+  background-image: url("../../img/extra-pag-1b.png");
   background-size: cover;
 }
 .page-title-container.style4 .banner {
@@ -7022,7 +7034,7 @@ ul.filter-categories > li li:last-child {
   transition: top 0.5s ease 0s;
 }
 #footer .back-to-top:before {
-  background-image: url("../../img/index-logo.png");
+  background-image: url("../../img/rsz_31linea-blanca.png");
   -moz-transition: all 0.25s ease 0s;
   -o-transition: all 0.25s ease 0s;
   -webkit-transition: all 0.25s ease 0s;

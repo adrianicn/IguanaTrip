@@ -20,6 +20,17 @@ return [
     	'label15' => 'Oriente',
     	'label16' => 'Galápagos',
     'label18' => 'Qué hacer?',
+    'label19' => 'Escoge la ciudad',
+    'label20' => 'Ver todas las ciudades',
+    'label21' => 'Ciudades',
+    'label22' => 'Descripción',
+    'label23' => 'Detalles adicionales',
+    'label24' => 'Eventos y calendario cultural',
+    'label25' => 'Ninguno',
+    'label26' => 'Aún no encuentras lo que buscas?. Conoce un poco más del Ecuador, echale un vistazo al resto de provincias de ésta región',
+    'label27' => 'Ir',
+    'label28' => 'Destinos principales',
+    
 	'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

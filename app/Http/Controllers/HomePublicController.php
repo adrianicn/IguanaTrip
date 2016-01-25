@@ -97,10 +97,35 @@ class HomePublicController extends Controller {
         Session::put('device', $desk);
         $provincias = $gestion->getProvinciaDetails($id_provincia);
         $imagenes = $gestion->getImageporProvincia($id_provincia);
+        $ciudades = $gestion->getCiudades($id_provincia);
+        //$visitados = $gestion->getVisitadosProvincia($id_provincia);
+       // $eventosProvincia = $gestion->getEventosProvincia($id_provincia);
         
-        return view('public_page.front.detalleProvincia')->with('provincias',$provincias)->with('imagenes',$imagenes);
+        
+        return view('public_page.front.detalleProvincia')->with('provincias',$provincias)->with('imagenes',$imagenes)->with('ciudades',$ciudades);
     }
     
+    
+    
+      //Obtiene todas las provincias de la region
+    public function getRegionsId($id_region, PublicServiceRepository $gestion) {
+         $agent = new Agent();
+
+        $desk = $device = $agent->isMobile();
+        if ($desk == 1)
+            $desk = "mobile";
+        else {
+            $desk = "desk";
+        }
+        
+        Session::put('device', $desk);
+        $provincias = $gestion->getRegionDetails($id_region);
+        $imagenes = $gestion->getImageporRegion($id_region);
+        
+        
+        
+        return view('public_page.front.allRegions')->with('provincias',$provincias)->with('imagenes',$imagenes)->with('region',$id_region);
+    }
     
 
 }

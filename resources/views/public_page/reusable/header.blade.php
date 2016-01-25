@@ -1,19 +1,8 @@
-
-
-            
-
-
-
-
                 <div class="container">
                     <div class="header-inner">
                         <div class="branding">
                             <h1 class="logo">
-                                
-                                
                                 <a href="#" onclick="window.location.href = '{!!asset('/')!!}'"><img src="" alt=""><span></span></a>
-
-                                
                             </h1>
                         </div>
                         <nav id="nav">
@@ -63,7 +52,7 @@
                                      </div>
                                  </li>-->
 
-                                <li class="mini-search">
+                                <li class="mini-cart">
                                     <div id="lang">
 
 

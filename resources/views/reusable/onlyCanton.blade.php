@@ -28,7 +28,7 @@ $('#id_canton').on('change', function() {
     var valor=this.value;
   
   GetDataAjaxDescripcion("{!!asset('/getDescripcionGeografica')!!}"+"/"+valor+"/7");
-  GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/7/"+valor+"");
+  GetDataAjaxImagenes("{!!asset('/imagenesAjaxDescription')!!}/7/"+valor+"");
   $('#id_auxiliar').val(valor);
 });
 
@@ -39,7 +39,7 @@ $('#id_canton').on('change', function() {
             var valor=$('#id_canton').val();
             
             // Save the new value
-           GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/7/"+valor+"");
+           GetDataAjaxImagenes("{!!asset('/imagenesAjaxDescription')!!}/7/"+valor+"");
            $("#flag_image").val('0');
 
             // TODO - Handle the changed value

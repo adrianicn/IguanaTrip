@@ -29,7 +29,7 @@ $('#id_parroquia').on('change', function() {
     var valor=this.value;
   
   GetDataAjaxDescripcion("{!!asset('/getDescripcionGeografica')!!}"+"/"+valor+"/8");
-  GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/8/"+valor+"");
+  GetDataAjaxImagenes("{!!asset('/imagenesAjaxDescription')!!}/8/"+valor+"");
   $('#id_auxiliar').val(valor);
 });
 
@@ -40,7 +40,7 @@ $('#id_parroquia').on('change', function() {
             var valor=$('#id_parroquia').val();
             
             // Save the new value
-           GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/8/"+valor+"");
+           GetDataAjaxImagenes("{!!asset('/imagenesAjaxDescription')!!}/8/"+valor+"");
            $("#flag_image").val('0');
 
             // TODO - Handle the changed value

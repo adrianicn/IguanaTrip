@@ -1,5 +1,6 @@
  @if(session('device')!='mobile')
-                <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1360px; height: 235px; overflow: hidden; visibility: hidden;">
+<div class="page-title-container">               
+ <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1360px; height: 235px; overflow: hidden; visibility: hidden;">
                     <!-- Loading Screen -->
                     <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
                         <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
@@ -56,11 +57,15 @@
 
 
                 </div>
-                @else
 
-                <div class="page-title">
-                    <div class="container">
-                        <h1 class="entry-title">{!!$provincias->nombre!!}</h1>
-                    </div>
+                @else
+   <div class="page-title-container parallax style3"  data-stellar-background-ratio="0.5">
+            <div class="page-title">
+                <div class="container">
+                    <h1 class="whitex">{!!$titulo!!}</h1>
                 </div>
+            </div>
+            
+        
+               
                 @endif

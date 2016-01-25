@@ -124,6 +124,7 @@ Route::get('itinerario/{id}',
 
 
 Route::post('/delete/image/{id}', ['as' => 'delete-image', 'uses' =>'ImageController@postDeleteImage']);
+Route::post('/uploadImage/{id}', ['as' => 'uploadDesc-image', 'uses' =>'ImageController@postDescrImage']);
 Route::get('/getTipoDificultad', ['as' => 'tipoDificultad', 'uses' => 'UsuarioServiciosController@getTipoDificultad','middleware' => 'notAuth']);
 
 Route::get('thankyou',function()
@@ -186,6 +187,10 @@ Route::post('postGeoLoc', ['as' => 'postGeoLoc', 'uses' =>'UsuarioServiciosContr
 
 Route::get('/imagenesAjax/{tipo}/{idtipo}', ['as' => 'getimages', 'uses' => 'UsuarioServiciosController@getImages','middleware' => 'notAuth']);
 
+Route::get('/imagenesAjaxDescription/{tipo}/{idtipo}', ['as' => 'getimages', 'uses' => 'UsuarioServiciosController@getImagesDescription','middleware' => 'notAuth']);
+
+
+
 Route::get('/servicios', ['as' => 'servicios', 'uses' => 'ServicioController@index','middleware' => 'notAuth']);
 
 Route::get('/myProfileOp', ['as' => 'profileOp', 'uses' => 'ServicioController@getMyProfileOp']);
@@ -228,5 +233,6 @@ Route::get('registerMobile', ['as' => 'registerMobile', 'uses' => 'ServicioContr
 Route::get('/publico', ['as' => 'publico', 'uses' => 'HomePublicController@getHome']);
 Route::get('/getRegiones', ['as' => 'regiones', 'uses' => 'HomePublicController@getRegiones']);
 Route::get('/getProvinciaDescipcion/{id_provincia}/{id_image}', ['as' => 'provinciasdescr', 'uses' => 'HomePublicController@getProvinciaDescripcion']);
+Route::get('/getRegionDescipcion/{id_region}', ['as' => 'regiondescr', 'uses' => 'HomePublicController@getRegionsId']);
 
  /*  Fin de las rutas del sistema publico*/

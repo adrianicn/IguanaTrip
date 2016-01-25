@@ -153,22 +153,46 @@
                                 @if($region->id_region==1)
                                 <div class="iso-item filter-all filter-website filter-business filter-costa">
                                     <article class="post">
-                                        <a class="image soap-mfp-popup hover-style3" onclick="window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" href="#" >
-                                            <img src="{{ asset('images/icon/'.$region->filename)}}" alt="">
-                                            <span class="image-extras"></span>
-                                        </a>
+                                   <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
+                                    <div class="portfolio-hover-holder">
+                                        <div class="portfolio-text">
+                                            <div class="portfolio-text-inner">
+                                                <h5 class="portfolio-title">{!!$region->nombre!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label13')}}</span>
+                                            </div>
+                                        </div>
+                                        <span class="portfolio-action">
+                                            <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
+                                                <i class="fa fa-eye has-circle"></i></a>
+                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
+                                        </span>
+                                    </div>
+                                            
+                                        
                                     </article>
                                 </div>
+                                
+                               
                                 @endif
 
                                 <!- Sierra ->
                                 @if($region->id_region==2)
                                 <div class="iso-item filter-all filter-website filter-sierra">
-                                    <article class="post">
-                                        <a class="image soap-mfp-popup hover-style3" onclick="window.location.href = '{!!asset(' / getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" href="#" >
-                                            <img src="{{ asset('images/icon/'.$region->filename)}}" alt="">
-                                            <span class="image-extras"></span>
-                                        </a>
+                                   <article class="post">
+                                   <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
+                                    <div class="portfolio-hover-holder">
+                                        <div class="portfolio-text">
+                                            <div class="portfolio-text-inner">
+                                                <h5 class="portfolio-title">{!!$region->nombre!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label14')}}</span>
+                                            </div>
+                                        </div>
+                                        <span class="portfolio-action">
+                                            <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
+                                                <i class="fa fa-eye has-circle"></i></a>
+                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
+                                        </span>
+                                    </div>
+                                            
+                                        
                                     </article>
                                 </div>
                                 @endif
@@ -176,11 +200,22 @@
                                 <!-Oriente ->
                                 @if($region->id_region==3)
                                 <div class="iso-item filter-all filter-oriente">
-                                    <article class="post">
-                                        <a class="image soap-mfp-popup hover-style3" onclick="window.location.href = '{!!asset(' / getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" href="#" >
-                                            <img src="{{ asset('images/icon/'.$region->filename)}}" alt="">
-                                            <span class="image-extras"></span>
-                                        </a>
+                                   <article class="post">
+                                   <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
+                                    <div class="portfolio-hover-holder">
+                                        <div class="portfolio-text">
+                                            <div class="portfolio-text-inner">
+                                                <h5 class="portfolio-title">{!!$region->nombre!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label15')}}</span>
+                                            </div>
+                                        </div>
+                                        <span class="portfolio-action">
+                                            <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
+                                                <i class="fa fa-eye has-circle"></i></a>
+                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
+                                        </span>
+                                    </div>
+                                            
+                                        
                                     </article>
                                 </div>
                                 @endif
@@ -189,11 +224,22 @@
 
                                 @if($region->id_region==4)
                                 <div class="iso-item double-width filter-all filter-galapagos">
-                                    <article class="post">
-                                        <a class="image soap-mfp-popup hover-style3" onclick="window.location.href = '{!!asset(' / getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" href="#" >
-                                            <img src="{{ asset('images/icon/'.$region->filename)}}" alt="">
-                                            <span class="image-extras"></span>
-                                        </a>
+                                   <article class="post">
+                                   <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
+                                    <div class="portfolio-hover-holder">
+                                        <div class="portfolio-text">
+                                            <div class="portfolio-text-inner">
+                                                <h5 class="portfolio-title">{!!$region->nombre!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label16')}}</span>
+                                            </div>
+                                        </div>
+                                        <span class="portfolio-action">
+                                            <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
+                                                <i class="fa fa-eye has-circle"></i></a>
+                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
+                                        </span>
+                                    </div>
+                                            
+                                        
                                     </article>
                                 </div>
 

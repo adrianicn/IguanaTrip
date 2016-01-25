@@ -52,14 +52,22 @@ class ImageController extends Controller
         parse_str($inputData, $formFields);
         //Arreglo de servicios prestados que vienen del formulario
         //Arreglo de servicios prestados que vienen del formulario
+        
         foreach ($formFields as $key => $value) {
             //verifica si el arreglo de parametros es un catalogo
+            if($value!="")
             $root_array[$key] = $value;
         }
         $idImage = $root_array['ids'];
         $Servicio = $gestion->getServiciosImageporId($idImage);
-
-        $gestion->storeUpdateEstado($root_array, $Servicio);
+        if(isset($root_array['actionImage']))
+        {
+            $gestion->storeDescrFoto($root_array, $Servicio,$idImage);
+            
+        }
+        else{
+        
+        $gestion->storeUpdateEstado($root_array, $Servicio);}
 
 $returnHTML = ('/IguanaTrip/public/');
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
