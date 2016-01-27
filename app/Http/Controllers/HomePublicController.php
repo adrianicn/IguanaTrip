@@ -54,7 +54,8 @@ class HomePublicController extends Controller {
         else {
             $desk = "desk";
         }
-
+        
+        Session::put('device', $desk);
         $visitados = $gestion->getUsuario_serv($location);
         $regiones = $gestion->getRegiones();
         
@@ -98,11 +99,12 @@ class HomePublicController extends Controller {
         $provincias = $gestion->getProvinciaDetails($id_provincia);
         $imagenes = $gestion->getImageporProvincia($id_provincia);
         $ciudades = $gestion->getCiudades($id_provincia);
-        //$visitados = $gestion->getVisitadosProvincia($id_provincia);
+        $visitados = $gestion->getVisitadosProvincia($id_provincia);
+        
        // $eventosProvincia = $gestion->getEventosProvincia($id_provincia);
+        $explore = $gestion->getExplorer($id_provincia);
         
-        
-        return view('public_page.front.detalleProvincia')->with('provincias',$provincias)->with('imagenes',$imagenes)->with('ciudades',$ciudades);
+        return view('public_page.front.detalleProvincia')->with('provincias',$provincias)->with('imagenes',$imagenes)->with('ciudades',$ciudades)->with('explore',$explore)->with('visitados',$visitados);
     }
     
     

@@ -30,6 +30,7 @@ return [
     'label26' => 'Aún no encuentras lo que buscas?. Conoce un poco más del Ecuador, echale un vistazo al resto de provincias de ésta región',
     'label27' => 'Ir',
     'label28' => 'Destinos principales',
+    'label29' => 'Explora',
     
 	'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'

@@ -180,28 +180,20 @@
                                             </div>
                                         </div>
                                     </form>
-                                    
+                                    @if(isset($explore) && count($explore)>0)
                                      <div class="social-wrap">
                                 <label>{{ trans('publico/labels.label29')}}</label>
                                 <div class="social-icons">
                                     
-                                    <a href="#" class="social-icon" title="Museo"><i title="Museo" class="fa  has-circle" data-toggle="tooltip" data-placement="top" ><img class='activities' src="{{ asset('img/museum37.png')}}" alt="Museo"></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-twitter has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-facebook has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-google-plus has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-linkedin has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-skype has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-dribbble has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-tumblr has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-twitter has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-facebook has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-google-plus has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-linkedin has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-skype has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-dribbble has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                    <a href="#" class="social-icon"><i class="fa fa-tumblr has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
+                                    
+                                       @foreach ($explore as $explor)
+                                       <a href="#" class="social-icon" title="{!!$explor->nombre_servicio_est!!}"><i title="{!!$explor->nombre_servicio_est!!}" class="fa  has-circle" data-toggle="tooltip" data-placement="top" ><img class='activities' src="{{ asset('img/'.$explor->url_image)}}" alt="{!!$explor->nombre_servicio_est!!}"></i></a>
+                                       @endforeach
+                                    
+                                    
                                 </div>
                             </div>
+                                    @endif
 
                                 </div>
                             </div>
@@ -302,21 +294,32 @@
                         <div class="product type-product">
                             <h4>{{ trans('publico/labels.label28')}}</h4>
                             <ul class="related products row add-clearfix">
-                                <li class="product col-sms-6 col-sm-6 col-md-4 box">
+                <?php $flag=0;?>
+                @for ($x = 0; $x < count($visitados); $x++)
+
+                        <?php list($width, $height) = getimagesize(asset('images/icon/' . $visitados[$x]->filename)); ?>
+                            @if($height>500 && $height<600)
+                                @if($flag==0)
+                            <li class="product col-sms-6 col-sm-6 col-md-4 box">
                                     <a class="product-image" href="#">
                                         <div class="first-img">
-                                            <img alt="" src="{{ asset('images/fullsize/68dsc03030.jpg')}}">
+                                            <img alt="" src="{{ asset('images/icon/'.$visitados[$x]->filename)}}">
                                         </div>
+                                        @if(isset($visitados[$x+1])&& $visitados[$x+1]->id_auxiliar==$visitados[$x]->id_auxiliar)
                                         <div class="back-img">
-                                            <img alt="" src="{{ asset('images/fullsize/5712-08-2015-88.jpg')}}">
+                                            <img alt="" src="{{ asset('images/icon/'.$visitados[$x+1]->filename)}}">
                                         </div>
+                                       <?php $flag=1;?>
+                                        @endif
                                     </a>
                                     <div class="product-content">
-                                        <h5 class="product-title"><a href="#">Pichincha</a></h5>
-                                        <span class="product-price"><span class="currency-symbol"></span>Sierra</span>
+                                        <h5 class="product-title"><a href="#">{!!$visitados[$x]->nombre_servicio!!}</a></h5>
+                                        <span class="product-price"><span class="currency-symbol"></span>{!!$visitados[$x]->catalogo_nombre!!}</span>
                                         <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
                                             <span data-stars="4"></span>
                                         </span>
+                                        <p><a href="#">{!!$visitados[$x]->nombre!!}</p>
+                                        
                                     </div>
                                     <div class="product-action">
                                         <!--<a class="btn btn-add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add To Cart</a>-->
@@ -325,59 +328,14 @@
                                         <a class="btn btn-compare" href="#"><i class="fa fa-star-half-o"></i></a>
                                     </div>
                                 </li>
-                                <li class="product col-sms-6 col-sm-6 col-md-4 box">
-                                    <a class="product-image" href="#">
-                                        <div class="first-img">
-                                            <img alt="" src="{{ asset('images/fullsize/5709-08-2015-31.jpg')}}">
-                                        </div>
-                                        <div class="back-img">
-                                            <img alt="" src="{{ asset('images/fullsize/5709-08-2015-25.jpg')}}">
-                                        </div>
-                                    </a>
-                                    <div class="product-content">
-                                        <h5 class="product-title"><a href="#">Azuay</a></h5>
-                                        <span class="product-price"><span class="currency-symbol"></span>Sierra</span>
-                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
-                                            <span data-stars="4"></span>
-                                        </span>
-                                    </div>
-                                    <div class="product-action">
-
-                                        <a class="btn btn-add-to-wishlist" href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="ajax/woocommerce-product-quickview.html" class="btn btn-quick-view"><i class="fa fa-search"></i></a>
-                                        <a class="btn btn-compare" href="#"><i class="fa fa-star-half-o"></i></a>
-                                    </div>
-                                </li>
-                                <li class="product col-sms-6 col-sm-6 col-md-4 box">
-                                    <a class="product-image" href="#">
-                                        <div class="first-img">
-                                            <img alt="" src="{{ asset('images/fullsize/6009-08-2015-8.jpg')}}">
-                                        </div>
-                                        <div class="back-img">
-                                            <img alt="" src="{{ asset('images/fullsize/6010-08-2015-65.jpg')}}">
-                                        </div>
-                                    </a>
-                                    <div class="product-content">
-                                        <h5 class="product-title"><a href="#">Imbabura</a></h5>
-                                        <span class="product-price"><span class="currency-symbol"></span>Sierra</span>
-                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
-                                            <span data-stars="4"></span>
-                                        </span>
-                                    </div>
-                                    <div class="product-action">
-
-                                        <a class="btn btn-add-to-wishlist" href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="ajax/woocommerce-product-quickview.html" class="btn btn-quick-view"><i class="fa fa-search"></i></a>
-                                        <a class="btn btn-compare" href="#"><i class="fa fa-star-half-o"></i></a>
-                                    </div>
-                                </li>
-
+                                @else
+                                <?php $flag=0;?>
+                                @endif
+                                  @endif
+                        @endfor
                             </ul>
                         </div>
                         @endif
-
-
-
                     </div>
                     <div class="sidebar col-sm-4 col-md-3">
 

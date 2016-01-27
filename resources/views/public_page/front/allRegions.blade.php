@@ -56,6 +56,18 @@
           <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
           <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
         <![endif]-->
+        
+        <style>
+
+            a.morelink {
+                text-decoration:none;
+                outline: none;
+            }
+            .morecontent span {
+                display: none;
+            }
+
+        </style>
 </head>
 <body>
     <div id="page-wrapper">

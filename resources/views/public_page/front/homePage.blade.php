@@ -18,8 +18,10 @@
         <!-- Theme Styles -->
         <link rel="stylesheet" href="{{ asset('public_components/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{ asset('public_components/css/font-awesome.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('public_components/search_inbox/css/component.css')}}">
         <link rel="stylesheet" href="{{ asset('public_components/search_inbox/css/default.css')}}">
+        <link rel="stylesheet" href="{{ asset('public_components/search_inbox/css/component.css')}}">
+        
+        
 
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
@@ -75,60 +77,114 @@
                 <div class="revolution-slider">
                     <ul>    <!-- SLIDE  -->
                         <!-- Slide1 -->
-                        <li data-transition="zoomin" data-slotamount="7" data-masterspeed="1500">
-                            <!-- MAIN IMAGE -->
-                            <img src="{{ asset('img/cotopaxi.jpg')}}" alt="">
-                        </li>
+                      
+                        
+                        <li data-slotamount="7" 
+                            data-transition="notransition" 
+                            class="tp-revslider-slidesli active-revslide current-sr-slide-visible"
+                            >
+                        <!-- MAIN IMAGE -->
+                        <div  data-bgfit="cover"
+                             
+                             style="width:100%;height:100%;" 
+                             class="slotholder">
+                            <div style="background-color: transparent; 
+                                 background-repeat: no-repeat; 
+                                 background-image: url('{{ asset('img/index-fondo.jpg')}}'); 
+                                 background-size: cover; 
+                                 background-position: center center;
+                                 width: 100%; height: 100%; opacity: 1; 
+                                 visibility: inherit;" 
+                                 
+                                 src="{{ asset('img/index-rodelas.png')}}" 
+                                  data-bgrepeat="no-repeat" 
+                                 data-bgposition="center center" data-bgfit="cover" 
+                                  class="tp-bgimg defaultimg">
+                                     
+                            </div>
+                                     
+                        </div>
+                        <!-- LAYERS -->
 
-                        <!-- Slide2 -->
-                        <li data-transition="zoomout" data-slotamount="7" data-masterspeed="1500">
-                            <!-- MAIN IMAGE -->
-                            <img src="{{ asset('img/extra-pag-1b.png')}}" alt="">
-                        </li>
-
-                        <!-- Slide3 -->
-                        <li data-transition="slidedown" data-slotamount="7" data-masterspeed="1500">
-                            <!-- MAIN IMAGE -->
-                            <img src="{{ asset('img/galapagos2.jpg')}}" alt="">
-                        </li>
-                    </ul>
-
-                    <div class="tp-static-layers">
                         <!-- LAYER NR. 1 -->
-                        <div class="tp-caption customin customout tp-static-layer"
-                             data-x="right" data-hoffset="0"
-                             data-y="bottom" data-voffset="0"
-                             data-customin="x:0;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"
-                             data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-                             data-speed="800"
-                             data-start="700"
-                             data-endslide="10004"
-                             data-startslide="0"
-                             data-easing="Power4.easeOut"
+                        <div 
+                            
+                            
+                            
+                            
+                            data-endspeed="300" data-endelementdelay="0.1" 
+                             data-elementdelay="0.1" data-splitout="none" data-splitin="none"
+                             data-easing="easeInCubic" data-start="500" data-speed="600" 
+                             data-y="410" data-hoffset="0"   data-x="center"
+                             class="tp-caption lft fadeout tp-resizeme start">
+                            
+                            @if(session('device')!='mobile')
+                        <h2 class="caption-xl" >
+                                Embarcate en una aventura en Ecuador y acompañanos a descubrirlo.
+                        </h2>
+                              @else
+                       <h2 class="caption-xl" style="font-size: 40px;">
+                                Embarcate en una aventura en Ecuador y acompañanos a descubrirlo.
+                            </h2>
+                                            @endif
+                                            
+                        </div>
 
-                             data-endeasing="Power4.easeIn"
-                             style="z-index: 3">
-                            <div class="rs-wave ">
-                                <!-- Optional columns for small components -->
-                                <img src="{{ asset('img/index-logo.png')}}" alt="">
-                                <div class="column">
-                                    <p>Embarcate en una aventura en Ecuador y acompañanos a descubrirlo.</p>
-                                    <p> Deja de ser turista, conviertete en viajero.</p>
-                                </div>
-                                <div class="column">
-                                    <div id="sb-search" class="sb-search">
+                        <!-- LAYER NR. 2 -->
+                        <div 
+                             data-endspeed="300" data-endelementdelay="0.1"
+                             data-elementdelay="0.1" data-splitout="none" 
+                             data-splitin="none" data-easing="easeInOutCubic"
+                             data-start="700" data-speed="600" data-y="490" 
+                             data-hoffset="0" data-x="center" 
+                             class="tp-caption lfl fadeout tp-resizeme start">
+                            <h2 class="caption-md skin-color" > Deja de ser turista, conviertete en viajero.</h2>
+                        </div>
+
+                        @if(session('device')!='mobile')
+                        <!-- LAYER NR. 3 -->
+                        <div style="margin-left: 10px;"
+                             data-endspeed="300" data-endelementdelay="0.1"
+                             data-elementdelay="0.1" data-splitout="none"
+                             data-splitin="none" data-easing="Power3.easeInOut"
+                             data-start="1000" data-speed="300" data-voffset="-79" 
+                             data-y="4" data-x="-250" class="tp-caption sfl fadeout start">
+                             <img alt="" src="{{ asset('img/index-logo.png')}}" >
+                        </div>
+
+                        @endif
+                        <!-- LAYER NR. 4 -->
+                        <div style='width: 80%'
+                            data-endspeed="300" data-endelementdelay="0.1" data-elementdelay="0.1" 
+                            data-splitout="none" data-splitin="none" data-easing="easeOutBack"
+                            data-start="1500" data-speed="600" data-y="580" data-x="center"
+                            class="tp-caption sfr str start">
+                   
                                         <form>
+                                            @if(session('device')!='mobile')
                                             <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" type="text" value="" name="search" id="search">
+                                            @else
+                                            <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" style="font-size: 13px;" type="text" value="" name="search" id="search">
+                                            @endif
+                                            
                                             <input class="sb-search-submit" type="submit" value="">
                                             <span class="sb-icon-search"></span>
                                         </form>
-                                    </div>
-                                </div>
+                                    
                                 
-                            </div>
-
+                             
                         </div>
-                    </div>
+
+                      
+                    </li>
+
+                     
+                    </ul>
+                    
+          
+                    
+
+                    
                 </div>
             </div>
 
@@ -136,6 +192,10 @@
 
             <section id="content">
                 <div class="container">
+                     <div class="heading-box col-md-10 col-lg-8">
+                    <h2 class="box-title">Ecuador an <em class="skin-color">amazing </em> country waiting for you</h2>
+                    <p>Find the most beautiful and featured cities, events, parties, everything that you can imagine for your enjoy.</p>
+                </div>
                     <div id="main">
                         <div class="post-wrapper">
                             <div class="post-filters">

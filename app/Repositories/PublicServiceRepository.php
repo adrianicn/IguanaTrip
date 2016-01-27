@@ -61,7 +61,7 @@ class PublicServiceRepository extends BaseRepository {
         $this->search_engine = new SearchEngine();
     }
 
-    //Entrega el arreglo de los servicios más visitados por provincia
+//Entrega el arreglo de los servicios más visitados por provincia
     public function getVisitadosProvincia($id_provincia) {
 
         $visitados = DB::table('usuario_servicios')
@@ -79,23 +79,57 @@ class PublicServiceRepository extends BaseRepository {
             $array = array();
             foreach ($visitados as $visitado) {
 
-                $array[] = $visitado->id;
+
+                $imagenes = DB::table('images')
+                                ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                                ->where('id_usuario_servicio', '=', $visitado->id)
+                                ->where('estado_fotografia', '=', '1')
+                                ->select('images.id')
+                                ->orderBy('id_auxiliar', 'desc')
+                                ->take(2)->get();
+
+
+                if ($imagenes != null) {
+
+                    foreach ($imagenes as $imagen) {
+
+                        $array[] = $imagen->id;
+                    }
+                }
             }
 
 
 
-            $imagenes = DB::table('images')
+
+
+
+            $imagenesF = DB::table('images')
                     ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
                     ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
-                    ->whereIn('id_usuario_servicio', $array)
+                    ->join('ubicacion_geografica', 'usuario_servicios.id_provincia', '=', 'ubicacion_geografica.id')
+                    ->whereIn('images.id', $array)
                     ->where('estado_fotografia', '=', '1')
-                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre')
+                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre','ubicacion_geografica.nombre')
+                    ->orderBy('id_auxiliar', 'desc')
                     ->get();
         }
-        return $imagenes;
+        else
+        {
+             $imagenesF = DB::table('images')
+                    ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                    ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
+                     ->join('ubicacion_geografica', 'usuario_servicios.id_provincia', '=', 'ubicacion_geografica.id')
+                    ->where('estado_fotografia', '=', '1')
+                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre','ubicacion_geografica.nombre')
+                    ->orderBy('id_auxiliar', 'desc')
+                      ->take(10)->get();
+                    
+            
+        }
+        return $imagenesF;
     }
 
-    //Entrega el arreglo de los servicios más visitados
+//Entrega el arreglo de los servicios más visitados
     public function getUsuario_serv($ubicacion) {
 
         if ($ubicacion != "") {
@@ -114,7 +148,7 @@ class PublicServiceRepository extends BaseRepository {
                                 ->take(10)->get();
             } else {
 
-                //foreach ($ubicGeo as $unique) {
+//foreach ($ubicGeo as $unique) {
 
                 $visitados = DB::table('usuario_servicios')
                                 ->where('usuario_servicios.id_canton', '=', $ubicGeo->id)
@@ -125,11 +159,11 @@ class PublicServiceRepository extends BaseRepository {
                                 ->take(10)->get();
 
 
-                //}
+//}
 
                 if ($visitados == null || count($visitados < 10)) {
 
-                    //foreach ($ubicGeo as $unique) {
+//foreach ($ubicGeo as $unique) {
 
                     $visitados = DB::table('usuario_servicios')
                                     ->where('usuario_servicios.id_provincia', '=', $ubicGeo->idUbicacionGeograficaPadre)
@@ -139,7 +173,7 @@ class PublicServiceRepository extends BaseRepository {
                                     ->orderBy('num_visitas', 'desc')
                                     ->take(10)->get();
 
-                    // }
+// }
                 }
             }
         } else {
@@ -172,14 +206,14 @@ class PublicServiceRepository extends BaseRepository {
         return $imagenes;
     }
 
-    //Obtiene las top imagenes de cada region
+//Obtiene las top imagenes de cada region
     public function getRegiones() {
 
-        //array de las regiones del ecuador
-        //1: Costa
-        //2: Sierra
-        //3:Oriente
-        //4:Galapagos
+//array de las regiones del ecuador
+//1: Costa
+//2: Sierra
+//3:Oriente
+//4:Galapagos
 
         $array = array(1, 2, 3, 4);
 
@@ -217,14 +251,14 @@ class PublicServiceRepository extends BaseRepository {
         return $imagenes;
     }
 
-    //Obtiene las top imagenes de cada region
+//Obtiene las top imagenes de cada region
     public function getImageporRegion($id_region) {
 
-        //array de las regiones del ecuador
-        //1: Costa
-        //2: Sierra
-        //3:Oriente
-        //4:Galapagos
+//array de las regiones del ecuador
+//1: Costa
+//2: Sierra
+//3:Oriente
+//4:Galapagos
 
 
 
@@ -262,7 +296,7 @@ class PublicServiceRepository extends BaseRepository {
         return $imagenes;
     }
 
-    //Entrega el detalle de la provincia
+//Entrega el detalle de la provincia
     public function getProvinciaDetails($id_provincia) {
 
         $provincias = DB::table('ubicacion_geografica')
@@ -272,7 +306,7 @@ class PublicServiceRepository extends BaseRepository {
         return $provincias;
     }
 
-    //Entrega el detalle de la region
+//Entrega el detalle de la region
     public function getRegionDetails($id_region) {
 
         $provincias = DB::table('ubicacion_geografica')
@@ -282,7 +316,7 @@ class PublicServiceRepository extends BaseRepository {
         return $provincias;
     }
 
-    //Entrega las ciudades de la provincia
+//Entrega las ciudades de la provincia
     public function getCiudades($id_provincia) {
 
         $ciudades = DB::table('ubicacion_geografica')
@@ -292,7 +326,23 @@ class PublicServiceRepository extends BaseRepository {
         return $ciudades;
     }
 
-    //Entrega los eventos de la provincia
+//Entrega los sitios o atracciones por provincia
+    public function getExplorer($id_provincia) {
+
+        $explore = DB::table('usuario_servicios')
+                ->join('servicio_establecimiento_usuario', 'id_usuario_servicio', '=', 'usuario_servicios.id')
+                ->join('catalogo_servicio_establecimiento', 'servicio_establecimiento_usuario.id_servicio_est', '=', 'catalogo_servicio_establecimiento.id')
+                ->distinct()->select('catalogo_servicio_establecimiento.nombre_servicio_est', 'catalogo_servicio_establecimiento.url_image')
+                ->where('catalogo_especifico', '=', 0)
+                ->where('id_provincia', '=', $id_provincia)
+                ->where('estado_servicio', '=', 1)
+                ->where('estado_servicio_usuario', '=', 1)
+                ->where('estado_servicio_est', '=', 1)
+                ->get();
+        return $explore;
+    }
+
+//Entrega los eventos de la provincia
     public function getEventosProvincia($id_provincia) {
 
         $ciudades = DB::table('ubicacion_geografica')
@@ -302,7 +352,7 @@ class PublicServiceRepository extends BaseRepository {
         return $ciudades;
     }
 
-    //Entrega el arreglo de Imagenes por provincia
+//Entrega el arreglo de Imagenes por provincia
     public function getImageporProvincia($id_provincia) {
 
         $imagenes = DB::table('images')
@@ -315,7 +365,7 @@ class PublicServiceRepository extends BaseRepository {
         return $imagenes;
     }
 
-    //Entrega el arreglo de Imagenes por promocion por operador
+//Entrega el arreglo de Imagenes por promocion por operador
     public function getGenericImagePromocionesOperador($tipo, $idtipo) {
         $promociones = new $this->image;
         return $promociones::where('id_auxiliar', $idtipo)
@@ -323,7 +373,7 @@ class PublicServiceRepository extends BaseRepository {
                         ->where('estado_fotografia', '=', 1)->get();
     }
 
-    //Entrega el arreglo de Imagenes por promocion por operador
+//Entrega el arreglo de Imagenes por promocion por operador
     public function getImageUbcacionGeografica($id, $tipo) {
         $promociones = new $this->image;
         return $promociones::where('id_auxiliar', $id)
@@ -331,7 +381,7 @@ class PublicServiceRepository extends BaseRepository {
                         ->where('estado_fotografia', '=', 1)->get();
     }
 
-    //Entrega el arreglo de Imagenes por promocion por operador
+//Entrega el arreglo de Imagenes por promocion por operador
     public function getImageOperador($id_aux, $catalogo) {
         $promociones = new $this->image;
         return $promociones::where('id_auxiliar', $id_aux)

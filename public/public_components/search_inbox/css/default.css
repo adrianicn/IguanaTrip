@@ -38,12 +38,8 @@ a:active {
 /* Header Style */
 .main,
 .container > header {
-	 align-self: center;
-    margin-top: 13%;
-    overflow: hidden;
-    padding: 2em;
-    position: absolute;
-    z-index: 3;
+	margin: 0 auto;
+	padding: 2em;
 }
 
 .container > header {
