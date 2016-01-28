@@ -59,9 +59,10 @@ class HomePublicController extends Controller {
         $visitados = $gestion->getUsuario_serv($location);
         $regiones = $gestion->getRegiones();
         
+        $topPlacesEcuador= $gestion->getTopPlaces(3);
         
         
-        return view('public_page.front.homePage')->with('location',$location)->with('visitados',$visitados)->with('regiones',$regiones);
+        return view('public_page.front.homePage')->with('location',$location)->with('visitados',$visitados)->with('topPlacesEcuador',$topPlacesEcuador);
     }
 
     //Obtiene las regiones del pais

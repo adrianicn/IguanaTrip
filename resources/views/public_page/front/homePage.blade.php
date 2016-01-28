@@ -115,7 +115,7 @@
                             data-endspeed="300" data-endelementdelay="0.1" 
                              data-elementdelay="0.1" data-splitout="none" data-splitin="none"
                              data-easing="easeInCubic" data-start="500" data-speed="600" 
-                             data-y="410" data-hoffset="0"   data-x="center"
+                             data-y="460" data-hoffset="0"   data-x="center"
                              class="tp-caption lft fadeout tp-resizeme start">
                             
                             @if(session('device')!='mobile')
@@ -135,7 +135,7 @@
                              data-endspeed="300" data-endelementdelay="0.1"
                              data-elementdelay="0.1" data-splitout="none" 
                              data-splitin="none" data-easing="easeInOutCubic"
-                             data-start="700" data-speed="600" data-y="490" 
+                             data-start="700" data-speed="600" data-y="540" 
                              data-hoffset="0" data-x="center" 
                              class="tp-caption lfl fadeout tp-resizeme start">
                             <h2 class="caption-md skin-color" > Deja de ser turista, conviertete en viajero.</h2>
@@ -148,7 +148,7 @@
                              data-elementdelay="0.1" data-splitout="none"
                              data-splitin="none" data-easing="Power3.easeInOut"
                              data-start="1000" data-speed="300" data-voffset="-79" 
-                             data-y="4" data-x="-250" class="tp-caption sfl fadeout start">
+                             data-y="5" data-x="-280" class="tp-caption sfl fadeout start">
                              <img alt="" src="{{ asset('img/index-logo.png')}}" >
                         </div>
 
@@ -157,14 +157,14 @@
                         <div style='width: 80%'
                             data-endspeed="300" data-endelementdelay="0.1" data-elementdelay="0.1" 
                             data-splitout="none" data-splitin="none" data-easing="easeOutBack"
-                            data-start="1500" data-speed="600" data-y="580" data-x="center"
+                            data-start="1500" data-speed="600" data-y="630" data-x="center"
                             class="tp-caption sfr str start">
                    
                                         <form>
                                             @if(session('device')!='mobile')
                                             <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" type="text" value="" name="search" id="search">
                                             @else
-                                            <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" style="font-size: 13px;" type="text" value="" name="search" id="search">
+                                            <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" style="font-size: 12px;" type="text" value="" name="search" id="search">
                                             @endif
                                             
                                             <input class="sb-search-submit" type="submit" value="">
@@ -206,18 +206,32 @@
                                 <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-galapagos">{{ trans('publico/labels.label16')}}</a>
                             </div>
                             <div class="iso-container iso-col-4 style-masonry">
-                                <?php shuffle($regiones); ?>
+                                <?php shuffle($topPlacesEcuador); ?>
 
-                                @foreach ($regiones as $region)
+                                @foreach ($topPlacesEcuador as $region)
                                 <!- Costa ->
                                 @if($region->id_region==1)
-                                <div class="iso-item filter-all filter-website filter-business filter-costa">
+                                <div class="shortcode-banner style-animated iso-item filter-all filter-website filter-business filter-costa" >
                                     <article class="post">
                                    <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
+                                   
+                                     @if(session('device')!='mobile')
+                                
+                                        <div class="shortcode-banner-inside" style=" width: 108%;">
+                                            @else
+                                            <div class="shortcode-banner-inside" style=" width: 112%;">
+                                            @endif
+                                    <div class="shortcode-banner-content">
+                                        <h3 class="banner-title">{!!$region->nombre_servicio!!}</h3>
+                                        <div class="details">
+                                            <p>{!!$region->detalle_servicio!!}</p>
+                                        </div>
+                                    </div>
+                                </div>
                                     <div class="portfolio-hover-holder">
                                         <div class="portfolio-text">
                                             <div class="portfolio-text-inner">
-                                                <h5 class="portfolio-title">{!!$region->nombre!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label13')}}</span>
+                                                <h5 class="portfolio-title">{!!$region->nombre_servicio!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label13')}}</span>
                                             </div>
                                         </div>
                                         <span class="portfolio-action">
@@ -236,13 +250,27 @@
 
                                 <!- Sierra ->
                                 @if($region->id_region==2)
-                                <div class="iso-item filter-all filter-website filter-sierra">
+                                <div class="shortcode-banner style-animated  iso-item filter-all filter-website filter-sierra" >
                                    <article class="post">
                                    <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
+                                   
+                                     @if(session('device')!='mobile')
+                                
+                                        <div class="shortcode-banner-inside" style=" width: 108%;">
+                                            @else
+                                            <div class="shortcode-banner-inside" style=" width: 112%;">
+                                            @endif
+                                    <div class="shortcode-banner-content">
+                                        <h3 class="banner-title">{!!$region->nombre_servicio!!}</h3>
+                                        <div class="details">
+                                            <p>{!!$region->detalle_servicio!!}</p>
+                                        </div>
+                                    </div>
+                                </div>
                                     <div class="portfolio-hover-holder">
                                         <div class="portfolio-text">
                                             <div class="portfolio-text-inner">
-                                                <h5 class="portfolio-title">{!!$region->nombre!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label14')}}</span>
+                                                <h5 class="portfolio-title">{!!$region->nombre_servicio!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label14')}}</span>
                                             </div>
                                         </div>
                                         <span class="portfolio-action">
@@ -259,13 +287,27 @@
 
                                 <!-Oriente ->
                                 @if($region->id_region==3)
-                                <div class="iso-item filter-all filter-oriente">
+                                <div class="shortcode-banner style-animated  iso-item filter-all filter-oriente ">
                                    <article class="post">
                                    <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
+                                   
+                                     @if(session('device')!='mobile')
+                                
+                                        <div class="shortcode-banner-inside" style=" width: 108%;">
+                                            @else
+                                            <div class="shortcode-banner-inside" style=" width: 112%;">
+                                            @endif
+                                    <div class="shortcode-banner-content">
+                                        <h3 class="banner-title">{!!$region->nombre_servicio!!}</h3>
+                                        <div class="details">
+                                            <p>{!!$region->detalle_servicio!!}</p>
+                                        </div>
+                                    </div>
+                                </div>
                                     <div class="portfolio-hover-holder">
                                         <div class="portfolio-text">
                                             <div class="portfolio-text-inner">
-                                                <h5 class="portfolio-title">{!!$region->nombre!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label15')}}</span>
+                                                <h5 class="portfolio-title">{!!$region->nombre_servicio!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label15')}}</span>
                                             </div>
                                         </div>
                                         <span class="portfolio-action">
@@ -283,13 +325,32 @@
                                 <!-Galapagos ->
 
                                 @if($region->id_region==4)
-                                <div class="iso-item double-width filter-all filter-galapagos">
+                                
+                                
+                                <div class=" shortcode-banner style-animated  iso-item filter-all filter-galapagos">
                                    <article class="post">
-                                   <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
-                                    <div class="portfolio-hover-holder">
+                                   <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt="">
+                                   
+                                   </figure> 
+                                   
+                                @if(session('device')!='mobile')
+                                
+                                        <div class="shortcode-banner-inside" style=" width: 108%;">
+                                            @else
+                                            <div class="shortcode-banner-inside" style=" width: 112%;">
+                                            @endif
+                                    <div class="shortcode-banner-content">
+                                        <h3 class="banner-title">{!!$region->nombre_servicio!!}</h3>
+                                        <div class="details">
+                                            <p>{!!$region->detalle_servicio!!}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                   
+                                         <div class="portfolio-hover-holder">
                                         <div class="portfolio-text">
                                             <div class="portfolio-text-inner">
-                                                <h5 class="portfolio-title">{!!$region->nombre!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label16')}}</span>
+                                                <h5 class="portfolio-title">{!!$region->nombre_servicio!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label15')}}</span>
                                             </div>
                                         </div>
                                         <span class="portfolio-action">
@@ -302,7 +363,6 @@
                                         
                                     </article>
                                 </div>
-
                                 @endif
                                 @endforeach
 
@@ -411,9 +471,6 @@
 
 
 
-        <script>
-                    new UISearch(document.getElementById('sb-search'));
-        </script>
     </body>
 
 

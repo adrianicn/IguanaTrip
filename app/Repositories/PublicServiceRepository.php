@@ -206,6 +206,70 @@ class PublicServiceRepository extends BaseRepository {
         return $imagenes;
     }
 
+    
+    
+    
+    
+    //Obtiene las top n places de cada provincia
+    public function getTopPlaces($n) {
+
+//array de las regiones del ecuador
+//1: Costa
+//2: Sierra
+//3:Oriente
+//4:Galapagos
+
+        $array = array(1, 2, 3, 4);
+
+        $final_top = array();
+
+        $provincias = DB::table('ubicacion_geografica')
+                ->whereIn('id_region', $array)
+                ->select('ubicacion_geografica.id')
+                ->get();
+
+
+        foreach ($provincias as $provincia) {
+            $top = DB::table('usuario_servicios')
+                            ->where('usuario_servicios.id_provincia', '=', $provincia->id)
+                            ->where('usuario_servicios.id_catalogo_servicio', '=', '4')
+                            ->where('usuario_servicios.estado_servicio', '=', '1')
+                            ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                           ->orderBy('usuario_servicios.num_visitas', 'desc')
+                            ->take($n)->get();
+
+            if ($top != null) {
+                foreach ($top as $to) {
+                    $imagenes = DB::table('images')
+                ->where('images.id_auxiliar','=', $to->id)
+                ->where('estado_fotografia', '=', '1')
+                ->where('id_catalogo_fotografia', '=', '1')
+                ->select('images.id')
+                ->first();
+
+                    if($imagenes!=null)
+                    $final_top[] = $imagenes->id;
+                }
+            }
+            
+            
+            
+            
+        }
+
+        
+ $imagenesF = DB::table('images')
+                            ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                            ->join('ubicacion_geografica', 'usuario_servicios.id_provincia', '=', 'ubicacion_geografica.id')
+                            ->whereIn('images.id', $final_top)
+                            
+                            ->select('images.*','usuario_servicios.*', 'ubicacion_geografica.nombre', 'ubicacion_geografica.id as id_geo', 'ubicacion_geografica.id_region')
+                            ->get();
+
+        return $imagenesF;
+    }
+    
+    
 //Obtiene las top imagenes de cada region
     public function getRegiones() {
 
