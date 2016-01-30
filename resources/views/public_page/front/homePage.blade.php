@@ -282,20 +282,49 @@
 
         <script>
             $(document).ready(function () {
-                GetDataAjaxTopPlaces("{!!asset('/getTopPlaces')!!}");
+                GetDataAjaxTopPlaces("{!!asset('/getTopPlaces')!!}?page=1");
             });
 
+
+     $(window).on('hashchange', function() { 
+         if (window.location.hash) { 
+             var page = window.location.hash.replace('#', ''); 
+             if (page == Number.NaN || page <= 0) { 
+                 return false; 
+             } else { 
+                 alert(page);
+                 //getPosts(page); 
+             } 
+         } 
+     }); 
+  
+     $(document).ready(function() { 
+         $(document).on('click', '.moreImagess', function (e) { 
+             getPosts($(this).attr('href').split('page=')[1]); 
+             e.preventDefault(); 
+         }); 
+     }); 
+  
+
+ window.current_page=1;
+
     $(".moreImages").click(function () {
+        
         $(".topPlaces").LoadingOverlay("show");
         $.ajax({
             type: 'GET',
             url: "{!!asset('/getTopPlaces')!!}",
+               data:{
+            'page': window.current_page + 1 // you might need to init that var on top of page (= 0)
+            },
+
             dataType: 'json',
             success: function (data) {
-
+            
+            window.current_page=current_page+1;
             $(".topPlaces").LoadingOverlay("hide", true);
             var imgs = [];
-            $("#x1").each(function () {
+            $(data.topPlaces).each(function () {
                 var its = $(this).html();
                     imgs.push(its);
             });

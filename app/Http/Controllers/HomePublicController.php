@@ -72,8 +72,11 @@ class HomePublicController extends Controller {
     public function getTopPlaces(Request $request, PublicServiceRepository $gestion) {
         //
         $topPlacesEcuador= $gestion->getTopPlaces(3);
-        $view = View::make('public_page.partials.AllTopPlaces')->with('topPlacesEcuador', $topPlacesEcuador);
+        
+        $view = View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador));
+     
         if ($request->ajax()) {
+           //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
             $sections = $view->rendersections();
             return Response::json($sections);
             //return  Response::json($sections['contentPanel']); 

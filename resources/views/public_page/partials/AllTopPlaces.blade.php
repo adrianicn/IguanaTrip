@@ -128,6 +128,8 @@
                                 </div>
                                 @endif
                                 @endforeach
-                                </div>                       
+                            
+                                </div>   
+                                    
                                 @endsection
                                 

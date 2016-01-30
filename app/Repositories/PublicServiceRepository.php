@@ -262,9 +262,8 @@ class PublicServiceRepository extends BaseRepository {
                             ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
                             ->join('ubicacion_geografica', 'usuario_servicios.id_provincia', '=', 'ubicacion_geografica.id')
                             ->whereIn('images.id', $final_top)
-                            
                             ->select('images.*','usuario_servicios.*', 'ubicacion_geografica.nombre', 'ubicacion_geografica.id as id_geo', 'ubicacion_geografica.id_region')
-                            ->get();
+                            ->paginate(2);
 
         return $imagenesF;
     }
