@@ -235,4 +235,6 @@ Route::get('/getRegiones', ['as' => 'regiones', 'uses' => 'HomePublicController@
 Route::get('/getProvinciaDescipcion/{id_provincia}/{id_image}', ['as' => 'provinciasdescr', 'uses' => 'HomePublicController@getProvinciaDescripcion']);
 Route::get('/getRegionDescipcion/{id_region}', ['as' => 'regiondescr', 'uses' => 'HomePublicController@getRegionsId']);
 
+Route::get('/getTopPlaces', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getTopPlaces']);
+
  /*  Fin de las rutas del sistema publico*/

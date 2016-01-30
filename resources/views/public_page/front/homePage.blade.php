@@ -20,8 +20,8 @@
         <link rel="stylesheet" href="{{ asset('public_components/css/font-awesome.min.css')}}">
         <link rel="stylesheet" href="{{ asset('public_components/search_inbox/css/default.css')}}">
         <link rel="stylesheet" href="{{ asset('public_components/search_inbox/css/component.css')}}">
-        
-        
+
+
 
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
@@ -33,7 +33,6 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.transitions.css')}}" media="screen" />
         <!-- Magnific Popup core CSS file -->
         <link rel="stylesheet" href="{{ asset('public_components/components/magnific-popup/magnific-popup.css')}}"> 
-
         <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/revolution_slider/css/settings.css')}}" media="screen" />
         <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/revolution_slider/css/style.css')}}" media="screen" />
 
@@ -54,148 +53,107 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('public_components/css/ie.css')}}" />
         <![endif]-->
 
-
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
           <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
         <![endif]-->
     </head>
-
-
-
     <body>
-
-
         <div id="page-wrapper">
             <header id="header" class="header-color-white">
                 @include('public_page.reusable.header')
             </header>
-
-
             <div id="slideshow">
                 <div class="revolution-slider">
                     <ul>    <!-- SLIDE  -->
-                        <!-- Slide1 -->
-                      
-                        
                         <li data-slotamount="7" 
                             data-transition="notransition" 
-                            class="tp-revslider-slidesli active-revslide current-sr-slide-visible"
-                            >
-                        <!-- MAIN IMAGE -->
-                        <div  data-bgfit="cover"
-                             
-                             style="width:100%;height:100%;" 
-                             class="slotholder">
-                            <div style="background-color: transparent; 
-                                 background-repeat: no-repeat; 
-                                 background-image: url('{{ asset('img/index-fondo.jpg')}}'); 
-                                 background-size: cover; 
-                                 background-position: center center;
-                                 width: 100%; height: 100%; opacity: 1; 
-                                 visibility: inherit;" 
-                                 
-                                 src="{{ asset('img/index-rodelas.png')}}" 
-                                  data-bgrepeat="no-repeat" 
-                                 data-bgposition="center center" data-bgfit="cover" 
-                                  class="tp-bgimg defaultimg">
-                                     
+                            class="tp-revslider-slidesli active-revslide current-sr-slide-visible">
+                            <!-- MAIN IMAGE -->
+                            <div  data-bgfit="cover" style="width:100%;height:100%;" class="slotholder">
+                                <div style="background-color: transparent; 
+                                     background-repeat: no-repeat; 
+                                     background-image: url('{{ asset('img/index-fondo.jpg')}}'); 
+                                     background-size: cover; 
+                                     background-position: center center;
+                                     width: 100%; height: 100%; opacity: 1; 
+                                     visibility: inherit;" 
+                                     src="{{ asset('img/index-rodelas.png')}}" 
+                                     data-bgrepeat="no-repeat" 
+                                     data-bgposition="center center" data-bgfit="cover" 
+                                     class="tp-bgimg defaultimg">
+                                </div>
                             </div>
-                                     
-                        </div>
-                        <!-- LAYERS -->
+                            <!-- LAYERS -->
+                            <div 
+                                data-endspeed="300" data-endelementdelay="0.1" 
+                                data-elementdelay="0.1" data-splitout="none" data-splitin="none"
+                                data-easing="easeInCubic" data-start="500" data-speed="600" 
+                                data-y="460" data-hoffset="0"   data-x="center"
+                                class="tp-caption lft fadeout tp-resizeme start">
+                                @if(session('device')!='mobile')
+                                <h2 class="caption-xl" >
+                                    Embarcate en una aventura en Ecuador y acompañanos a descubrirlo.
+                                </h2>
+                                @else
+                                <h2 class="caption-xl" style="font-size: 40px;">
+                                    Embarcate en una aventura en Ecuador y acompañanos a descubrirlo.
+                                </h2>
+                                @endif
+                            </div>
 
-                        <!-- LAYER NR. 1 -->
-                        <div 
-                            
-                            
-                            
-                            
-                            data-endspeed="300" data-endelementdelay="0.1" 
-                             data-elementdelay="0.1" data-splitout="none" data-splitin="none"
-                             data-easing="easeInCubic" data-start="500" data-speed="600" 
-                             data-y="460" data-hoffset="0"   data-x="center"
-                             class="tp-caption lft fadeout tp-resizeme start">
-                            
+                            <!-- LAYER NR. 2 -->
+                            <div 
+                                data-endspeed="300" data-endelementdelay="0.1"
+                                data-elementdelay="0.1" data-splitout="none" 
+                                data-splitin="none" data-easing="easeInOutCubic"
+                                data-start="700" data-speed="600" data-y="540" 
+                                data-hoffset="0" data-x="center" 
+                                class="tp-caption lfl fadeout tp-resizeme start">
+                                <h2 class="caption-md skin-color" > Deja de ser turista, conviertete en viajero.</h2>
+                            </div>
+
                             @if(session('device')!='mobile')
-                        <h2 class="caption-xl" >
-                                Embarcate en una aventura en Ecuador y acompañanos a descubrirlo.
-                        </h2>
-                              @else
-                       <h2 class="caption-xl" style="font-size: 40px;">
-                                Embarcate en una aventura en Ecuador y acompañanos a descubrirlo.
-                            </h2>
-                                            @endif
-                                            
-                        </div>
+                            <!-- LAYER NR. 3 -->
+                            <div style="margin-left: 10px;"
+                                 data-endspeed="300" data-endelementdelay="0.1"
+                                 data-elementdelay="0.1" data-splitout="none"
+                                 data-splitin="none" data-easing="Power3.easeInOut"
+                                 data-start="1000" data-speed="300" data-voffset="-79" 
+                                 data-y="5" data-x="-280" class="tp-caption sfl fadeout start">
+                                <img alt="" src="{{ asset('img/index-logo.png')}}" >
+                            </div>
 
-                        <!-- LAYER NR. 2 -->
-                        <div 
-                             data-endspeed="300" data-endelementdelay="0.1"
-                             data-elementdelay="0.1" data-splitout="none" 
-                             data-splitin="none" data-easing="easeInOutCubic"
-                             data-start="700" data-speed="600" data-y="540" 
-                             data-hoffset="0" data-x="center" 
-                             class="tp-caption lfl fadeout tp-resizeme start">
-                            <h2 class="caption-md skin-color" > Deja de ser turista, conviertete en viajero.</h2>
-                        </div>
+                            @endif
+                            <!-- LAYER NR. 4 -->
+                            <div style='width: 80%'
+                                 data-endspeed="300" data-endelementdelay="0.1" data-elementdelay="0.1" 
+                                 data-splitout="none" data-splitin="none" data-easing="easeOutBack"
+                                 data-start="1500" data-speed="600" data-y="630" data-x="center"
+                                 class="tp-caption sfr str start">
 
-                        @if(session('device')!='mobile')
-                        <!-- LAYER NR. 3 -->
-                        <div style="margin-left: 10px;"
-                             data-endspeed="300" data-endelementdelay="0.1"
-                             data-elementdelay="0.1" data-splitout="none"
-                             data-splitin="none" data-easing="Power3.easeInOut"
-                             data-start="1000" data-speed="300" data-voffset="-79" 
-                             data-y="5" data-x="-280" class="tp-caption sfl fadeout start">
-                             <img alt="" src="{{ asset('img/index-logo.png')}}" >
-                        </div>
+                                <form>
+                                    @if(session('device')!='mobile')
+                                    <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" type="text" value="" name="search" id="search">
+                                    @else
+                                    <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" style="font-size: 12px;" type="text" value="" name="search" id="search">
+                                    @endif
 
-                        @endif
-                        <!-- LAYER NR. 4 -->
-                        <div style='width: 80%'
-                            data-endspeed="300" data-endelementdelay="0.1" data-elementdelay="0.1" 
-                            data-splitout="none" data-splitin="none" data-easing="easeOutBack"
-                            data-start="1500" data-speed="600" data-y="630" data-x="center"
-                            class="tp-caption sfr str start">
-                   
-                                        <form>
-                                            @if(session('device')!='mobile')
-                                            <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" type="text" value="" name="search" id="search">
-                                            @else
-                                            <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" style="font-size: 12px;" type="text" value="" name="search" id="search">
-                                            @endif
-                                            
-                                            <input class="sb-search-submit" type="submit" value="">
-                                            <span class="sb-icon-search"></span>
-                                        </form>
-                                    
-                                
-                             
-                        </div>
-
-                      
-                    </li>
-
-                     
+                                    <input class="sb-search-submit" type="submit" value="">
+                                    <span class="sb-icon-search"></span>
+                                </form>
+                            </div>
+                        </li>
                     </ul>
-                    
-          
-                    
-
-                    
                 </div>
             </div>
-
-
-
             <section id="content">
                 <div class="container">
-                     <div class="heading-box col-md-10 col-lg-8">
-                    <h2 class="box-title">Ecuador an <em class="skin-color">amazing </em> country waiting for you</h2>
-                    <p>Find the most beautiful and featured cities, events, parties, everything that you can imagine for your enjoy.</p>
-                </div>
+                    <div class="heading-box col-md-10 col-lg-8">
+                        <h2 class="box-title">Ecuador an <em class="skin-color">amazing </em> country waiting for you</h2>
+                        <p>Find the most beautiful and featured cities, events, parties, everything that you can imagine for your enjoy.</p>
+                    </div>
                     <div id="main">
                         <div class="post-wrapper">
                             <div class="post-filters">
@@ -205,175 +163,41 @@
                                 <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-oriente">{{ trans('publico/labels.label15')}}</a>
                                 <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-galapagos">{{ trans('publico/labels.label16')}}</a>
                             </div>
-                            <div class="iso-container iso-col-4 style-masonry">
-                                <?php shuffle($topPlacesEcuador); ?>
-
-                                @foreach ($topPlacesEcuador as $region)
-                                <!- Costa ->
-                                @if($region->id_region==1)
-                                <div class="shortcode-banner style-animated iso-item filter-all filter-website filter-business filter-costa" >
-                                    <article class="post">
-                                   <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
-                                   
-                                     @if(session('device')!='mobile')
-                                
-                                        <div class="shortcode-banner-inside" style=" width: 108%;">
-                                            @else
-                                            <div class="shortcode-banner-inside" style=" width: 112%;">
-                                            @endif
-                                    <div class="shortcode-banner-content">
-                                        <h3 class="banner-title">{!!$region->nombre_servicio!!}</h3>
-                                        <div class="details">
-                                            <p>{!!$region->detalle_servicio!!}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="portfolio-hover-holder">
-                                        <div class="portfolio-text">
-                                            <div class="portfolio-text-inner">
-                                                <h5 class="portfolio-title">{!!$region->nombre_servicio!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label13')}}</span>
-                                            </div>
-                                        </div>
-                                        <span class="portfolio-action">
-                                            <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
-                                                <i class="fa fa-eye has-circle"></i></a>
-                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
-                                        </span>
-                                    </div>
-                                            
-                                        
-                                    </article>
-                                </div>
-                                
-                               
-                                @endif
-
-                                <!- Sierra ->
-                                @if($region->id_region==2)
-                                <div class="shortcode-banner style-animated  iso-item filter-all filter-website filter-sierra" >
-                                   <article class="post">
-                                   <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
-                                   
-                                     @if(session('device')!='mobile')
-                                
-                                        <div class="shortcode-banner-inside" style=" width: 108%;">
-                                            @else
-                                            <div class="shortcode-banner-inside" style=" width: 112%;">
-                                            @endif
-                                    <div class="shortcode-banner-content">
-                                        <h3 class="banner-title">{!!$region->nombre_servicio!!}</h3>
-                                        <div class="details">
-                                            <p>{!!$region->detalle_servicio!!}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="portfolio-hover-holder">
-                                        <div class="portfolio-text">
-                                            <div class="portfolio-text-inner">
-                                                <h5 class="portfolio-title">{!!$region->nombre_servicio!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label14')}}</span>
-                                            </div>
-                                        </div>
-                                        <span class="portfolio-action">
-                                            <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
-                                                <i class="fa fa-eye has-circle"></i></a>
-                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
-                                        </span>
-                                    </div>
-                                            
-                                        
-                                    </article>
-                                </div>
-                                @endif
-
-                                <!-Oriente ->
-                                @if($region->id_region==3)
-                                <div class="shortcode-banner style-animated  iso-item filter-all filter-oriente ">
-                                   <article class="post">
-                                   <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
-                                   
-                                     @if(session('device')!='mobile')
-                                
-                                        <div class="shortcode-banner-inside" style=" width: 108%;">
-                                            @else
-                                            <div class="shortcode-banner-inside" style=" width: 112%;">
-                                            @endif
-                                    <div class="shortcode-banner-content">
-                                        <h3 class="banner-title">{!!$region->nombre_servicio!!}</h3>
-                                        <div class="details">
-                                            <p>{!!$region->detalle_servicio!!}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="portfolio-hover-holder">
-                                        <div class="portfolio-text">
-                                            <div class="portfolio-text-inner">
-                                                <h5 class="portfolio-title">{!!$region->nombre_servicio!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label15')}}</span>
-                                            </div>
-                                        </div>
-                                        <span class="portfolio-action">
-                                            <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
-                                                <i class="fa fa-eye has-circle"></i></a>
-                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
-                                        </span>
-                                    </div>
-                                            
-                                        
-                                    </article>
-                                </div>
-                                @endif
-
-                                <!-Galapagos ->
-
-                                @if($region->id_region==4)
-                                
-                                
-                                <div class=" shortcode-banner style-animated  iso-item filter-all filter-galapagos">
-                                   <article class="post">
-                                   <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt="">
-                                   
-                                   </figure> 
-                                   
-                                @if(session('device')!='mobile')
-                                
-                                        <div class="shortcode-banner-inside" style=" width: 108%;">
-                                            @else
-                                            <div class="shortcode-banner-inside" style=" width: 112%;">
-                                            @endif
-                                    <div class="shortcode-banner-content">
-                                        <h3 class="banner-title">{!!$region->nombre_servicio!!}</h3>
-                                        <div class="details">
-                                            <p>{!!$region->detalle_servicio!!}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                   
-                                         <div class="portfolio-hover-holder">
-                                        <div class="portfolio-text">
-                                            <div class="portfolio-text-inner">
-                                                <h5 class="portfolio-title">{!!$region->nombre_servicio!!}</h5> - <span class="portfolio-category">{{ trans('publico/labels.label15')}}</span>
-                                            </div>
-                                        </div>
-                                        <span class="portfolio-action">
-                                            <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
-                                                <i class="fa fa-eye has-circle"></i></a>
-                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
-                                        </span>
-                                    </div>
-                                            
-                                        
-                                    </article>
-                                </div>
-                                @endif
-                                @endforeach
-
+                            <div class="iso-container iso-col-4 style-masonry topPlaces">
+                                <div class="grid-sizer"></div>
+                                @section('topPlaces')
+                                @show
                             </div>
                             <div class="text-center">
-                                <a href="#" class="btn style4 hover-blue load-more">Load More</a>
+                                <a  class="btn style4 hover-blue load-more moreImages">Load More</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <div class="parallax parallax-image1" data-stellar-background-ratio="0.1">
+                <div class="section text-center">
+                    <div class="container">
+                        <div class="heading-box">
+                            <h2 class="box-title color-white">{{ trans('publico/labels.label30')}}</h2>
+                        </div>
+                        <div class="features-icon-slider owl-carousel box-lg" data-items="6">
+                            <a href="#" class="feature-icon"><i class="fa fa-cutlery"></i><div style="alignment-baseline: central">Alimentación y bebidas</div></a>
+                            <a href="#" class="feature-icon"><i class="fa fa-bed"></i><div style="alignment-baseline: central">Hospedaje</div></a>
+                            <a href="#" class="feature-icon"><i class="fa fa-suitcase"></i><div style="alignment-baseline: central">Agencia de viajes</div></a>
+                            <a href="#" class="feature-icon"><i class="fa fa-beer"></i><div style="alignment-baseline: central">Night life</div></a>
+                            <a href="#" class="feature-icon"><i class="fa fa-bus"></i><div style="alignment-baseline: central">Transporte</div></a>
+                            <a href="#" class="feature-icon"><i class="fa fa-shopping-cart"></i><div style="alignment-baseline: central">Shopping</div></a>
+
+
+                        </div>
+                        <h3 class="skin-color">Fully Adaptive to All Screen Sizes</h3>
+                        <p>Miracle is designed in a way that it automatically adjusts to any screen which makes it a true responsive design.<br>
+                            Each and every design element was created in a way that it will not look lame when seen on smaller screen size.</p>
+                    </div>
+                </div>
+            </div>
 
             @if($location->city!="")
             <?php
@@ -382,7 +206,6 @@
             @else
             $titulo="Ecuador";
             @endif
-
 
             <section id="content" class="no-padding">
                 <div class="section no-padding">
@@ -415,7 +238,6 @@
                         </div>
                     </div>
             </section>
-
             <footer id="footer" class="style4">
                 @include('public_page.reusable.footer')
             </footer>
@@ -426,20 +248,11 @@
         {!!HTML::script('js/js_public/Compartido.js') !!}
         {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
 
-
-        <script>
-                    $(document).ready(function () {
-
-            // GetDataAjaxregiones("{!!asset('/getRegiones')!!}");
-            });        </script>
-
         <script type="text/javascript" src="{{ asset('public_components/js/jquery-2.1.3.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('public_components/js/jquery.noconflict.js')}}"></script>
         <script type="text/javascript" src="{{ asset('public_components/js/modernizr.2.8.3.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('public_components/js/jquery-migrate-1.2.1.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('public_components/js/jquery-ui.1.11.2.min.js')}}"></script>
-        <script src="{{ asset('public_components/search_inbox/js/classie.js')}}"></script>
-        <script src="{{ asset('public_components/search_inbox/js/uisearch.js')}}"></script>
 
         <!-- Twitter Bootstrap -->
         <script type="text/javascript" src="{{ asset('public_components/js/bootstrap.min.js')}}"></script>
@@ -465,13 +278,58 @@
 
         <!-- load page Javascript -->
         <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
-
         <script type="text/javascript" src="{{ asset('public_components/js/revolution-slider.js')}}"></script>
 
+        <script>
+            $(document).ready(function () {
+                GetDataAjaxTopPlaces("{!!asset('/getTopPlaces')!!}");
+            });
 
+    $(".moreImages").click(function () {
+        $(".topPlaces").LoadingOverlay("show");
+        $.ajax({
+            type: 'GET',
+            url: "{!!asset('/getTopPlaces')!!}",
+            dataType: 'json',
+            success: function (data) {
 
-
+            $(".topPlaces").LoadingOverlay("hide", true);
+            var imgs = [];
+            $("#x1").each(function () {
+                var its = $(this).html();
+                    imgs.push(its);
+            });
+            itemsHTML = $.map(imgs, function (src) {
+                return src;
+            });
+            var items = $(itemsHTML.join(''));
+            $(function () {
+                var container = $('.topPlaces');
+                sjq(container).imagesLoaded(function () {
+                    // init isotope
+                    sjq(container).isotope({
+                        masonry: {
+                            columnWidth: '.TopPlace'
+                        }
+                    });
+                    // append other items when they are loaded
+                    sjq(items).imagesLoaded(function () {
+                        sjq(container).append(items)
+                                .isotope('appended', items);
+                    });
+                });
+            });
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+});
+        </script>
     </body>
-
-
 </html>

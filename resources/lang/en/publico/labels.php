@@ -33,6 +33,7 @@ return [
     'label27' => 'Go',
     'label28' => 'Top Destinations',
     'label29' => 'Explore',
+    'label30' => 'Sites of interest',
 	'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

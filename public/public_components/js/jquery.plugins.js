@@ -538,6 +538,7 @@ var e=this.getItems(t);e=e.length?e:this.items,this._updateItemsSortData(e)},d.p
 (function($) {
     $.fn.soapPortfolioFilter = function(options)
     {
+        
         return this.each(function()
         {
             var _container       = $(this),

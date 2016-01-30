@@ -64,6 +64,23 @@ class HomePublicController extends Controller {
         
         return view('public_page.front.homePage')->with('location',$location)->with('visitados',$visitados)->with('topPlacesEcuador',$topPlacesEcuador);
     }
+    
+    
+    
+    
+    //Obtiene los top places paginados
+    public function getTopPlaces(Request $request, PublicServiceRepository $gestion) {
+        //
+        $topPlacesEcuador= $gestion->getTopPlaces(3);
+        $view = View::make('public_page.partials.AllTopPlaces')->with('topPlacesEcuador', $topPlacesEcuador);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } 
+    }
+    
+    
 
     //Obtiene las regiones del pais
     public function getRegiones(Request $request) {

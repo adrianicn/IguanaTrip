@@ -9201,7 +9201,7 @@ ul.filter-options li:hover a, ul.filter-options li.active a {
 }
 
 .parallax-image1 {
-  background-image: url("http://placehold.it/1920x1280");
+  background-image: url(../../img/parallax1.jpg);
 }
 
 .parallax-image2 {
