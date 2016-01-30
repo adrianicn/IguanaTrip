@@ -79,6 +79,7 @@
                                      background-position: center center;
                                      width: 100%; height: 100%; opacity: 1; 
                                      visibility: inherit;" 
+                                     data-src="{{ asset('img/index-rodelas.png')}}"
                                      src="{{ asset('img/index-rodelas.png')}}" 
                                      data-bgrepeat="no-repeat" 
                                      data-bgposition="center center" data-bgfit="cover" 
@@ -284,81 +285,9 @@
             $(document).ready(function () {
                 GetDataAjaxTopPlaces("{!!asset('/getTopPlaces')!!}?page=1");
             });
-
-
-     $(window).on('hashchange', function() { 
-         if (window.location.hash) { 
-             var page = window.location.hash.replace('#', ''); 
-             if (page == Number.NaN || page <= 0) { 
-                 return false; 
-             } else { 
-                 alert(page);
-                 //getPosts(page); 
-             } 
-         } 
-     }); 
-  
-     $(document).ready(function() { 
-         $(document).on('click', '.moreImagess', function (e) { 
-             getPosts($(this).attr('href').split('page=')[1]); 
-             e.preventDefault(); 
-         }); 
-     }); 
-  
-
- window.current_page=1;
-
-    $(".moreImages").click(function () {
-        
-        $(".topPlaces").LoadingOverlay("show");
-        $.ajax({
-            type: 'GET',
-            url: "{!!asset('/getTopPlaces')!!}",
-               data:{
-            'page': window.current_page + 1 // you might need to init that var on top of page (= 0)
-            },
-
-            dataType: 'json',
-            success: function (data) {
-            
-            window.current_page=current_page+1;
-            $(".topPlaces").LoadingOverlay("hide", true);
-            var imgs = [];
-            $(data.topPlaces).each(function () {
-                var its = $(this).html();
-                    imgs.push(its);
+            $(".moreImages").click(function () {
+                GetDataAjaxTopPlacesHome("{!!asset('/getTopPlaces')!!}");
             });
-            itemsHTML = $.map(imgs, function (src) {
-                return src;
-            });
-            var items = $(itemsHTML.join(''));
-            $(function () {
-                var container = $('.topPlaces');
-                sjq(container).imagesLoaded(function () {
-                    // init isotope
-                    sjq(container).isotope({
-                        masonry: {
-                            columnWidth: '.TopPlace'
-                        }
-                    });
-                    // append other items when they are loaded
-                    sjq(items).imagesLoaded(function () {
-                        sjq(container).append(items)
-                                .isotope('appended', items);
-                    });
-                });
-            });
-        },
-        error: function (data) {
-            var errors = data.responseJSON;
-            if (errors) {
-                $.each(errors, function (i) {
-                    console.log(errors[i]);
-                });
-            }
-        }
-    });
-});
         </script>
     </body>
 </html>

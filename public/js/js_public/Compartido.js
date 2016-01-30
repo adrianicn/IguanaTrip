@@ -8,34 +8,7 @@ $.ajaxSetup({
 
 
 
-function getPhotos(callback) {
-
-    $.ajax({
-        type: "GET",
-        dataType: 'json',
-        url: "http://localhost:8080/IguanaTrip/public/getTopPlaces", // this is a variable that holds my route url
-        data: {
-            'page': window.current_page + 1 // you might need to init that var on top of page (= 0)
-        }
-    })
-            .done(function (response) {
-                alert(photosObj);
-                var photosObj = $.parseJSON(response.photos);
-                console.log(photosObj);
-
-                window.current_page = photosObj.current_page;
-
-                // hide the [load more] button when all pages are loaded
-                if (window.current_page == photosObj.last_page) {
-                    $('#load-more-photos').hide();
-                }
-
-                callback(photosObj);
-            })
-            .fail(function (response) {
-                console.log("Error: " + response);
-            });
-}
+//Funcion para ordenar las tabletas de la pagina de inicio
 function masonryBlocks() {
 
     var container = $('.topPlaces');
@@ -56,6 +29,8 @@ function masonryBlocks() {
   });
 }
 
+
+//Javascript para cargar las imagenes via ajax
 function GetDataAjaxTopPlaces(url) {
     $(".topPlaces").LoadingOverlay("show");
     $.ajax({
@@ -78,6 +53,63 @@ function GetDataAjaxTopPlaces(url) {
         }
     });
 }
+
+
+window.current_page=1;
+//Javascript para cargar las imagenes via ajax con el botonload more
+function GetDataAjaxTopPlacesHome(url) {
+   
+    $(".topPlaces").LoadingOverlay("show");
+        $.ajax({
+            type: 'GET',
+            url: url,
+               data:{
+            'page': window.current_page + 1 // you might need to init that var on top of page (= 0)
+            },
+
+            dataType: 'json',
+            success: function (data) {
+            
+            window.current_page=current_page+1;
+            $(".topPlaces").LoadingOverlay("hide", true);
+            var imgs = [];
+            $(data.topPlaces).each(function () {
+                var its = $(this).html();
+                    imgs.push(its);
+            });
+            itemsHTML = $.map(imgs, function (src) {
+                return src;
+            });
+            var items = $(itemsHTML.join(''));
+            $(function () {
+                var container = $('.topPlaces');
+                sjq(container).imagesLoaded(function () {
+                    // init isotope
+                    sjq(container).isotope({
+                        masonry: {
+                            columnWidth: '.TopPlace'
+                        }
+                    });
+                    // append other items when they are loaded
+                    sjq(items).imagesLoaded(function () {
+                        sjq(container).append(items)
+                                .isotope('appended', items);
+                    });
+                });
+            });
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+   
+}
+
 
 
 
