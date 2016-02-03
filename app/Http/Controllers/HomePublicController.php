@@ -71,7 +71,7 @@ class HomePublicController extends Controller {
     //Obtiene los top places paginados
     public function getTopPlaces(Request $request, PublicServiceRepository $gestion) {
         //
-        $topPlacesEcuador= $gestion->getTopPlaces(3);
+        $topPlacesEcuador= $gestion->getTopPlaces(10);
         
         $view = View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador));
      

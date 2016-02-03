@@ -278,7 +278,12 @@ class ServicioController extends Controller {
             'id_usuario_servicio' => $formFields['id'],
             'id_provincia' => $formFields['id_provincia'],
             'id_canton' => $formFields['id_canton'],
-            'id_parroquia' => $formFields['id_parroquia']
+            'id_parroquia' => $formFields['id_parroquia'],
+                'como_llegar1' => $formFields['como_llegar1'],
+                'como_llegar1_1' => $formFields['como_llegar1_1'],
+                'como_llegar2_2' => $formFields['como_llegar2_2'],
+                'como_llegar2' => $formFields['como_llegar2']
+                
         );
         $validator = Validator::make($usuarioServicioData, $this->validationUsuarioServicios);
         if ($validator->fails()) {

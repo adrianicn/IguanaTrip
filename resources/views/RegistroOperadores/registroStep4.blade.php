@@ -38,6 +38,10 @@ $usuarioServicio->telefono = '';
 $usuarioServicio->id_provincia = '';
 $usuarioServicio->id_canton = '';
 $usuarioServicio->id_parroquia = '';
+$usuarioServicio->como_llegar1 = '';
+$usuarioServicio->como_llegar2 = '';
+$usuarioServicio->como_llegar1_1 = '';
+$usuarioServicio->como_llegar2_2 = '';
 $usuarioServicio->latitud_servicio = -0.1806532;
 $usuarioServicio->longitud_servicio = -78.46783820000002;
 ?>
@@ -61,6 +65,12 @@ $usuarioServicio->tags_servicio = trim($detalles->tags_servicio);
 $usuarioServicio->id_provincia = $detalles->id_provincia;
 $usuarioServicio->id_canton = $detalles->id_canton;
 $usuarioServicio->id_parroquia = $detalles->id_parroquia;
+$usuarioServicio->como_llegar1 = $detalles->como_llegar1;
+$usuarioServicio->como_llegar2 = $detalles->como_llegar2;
+$usuarioServicio->como_llegar1_1 = $detalles->como_llegar1_1;
+$usuarioServicio->como_llegar2_2 = $detalles->como_llegar2_2;
+
+
 $usuarioServicio->observaciones = trim($detalles->observaciones);
 $usuarioServicio->telefono = $detalles->telefono;
 $usuarioServicio->latitud_servicio = ($detalles->latitud_servicio == '') ? -0.1806532 : $detalles->latitud_servicio;
@@ -154,6 +164,19 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::label('detalle_servicio_1', 'Detalle Servicio', array("title"=>"Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.",'class'=>'control-label-1'))!!}
                     <textarea id="detalle_servicio" name="detalle_servicio" class="ptm chng" placeholder="Detalle Servicio" title="Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.">{!!trim($usuarioServicio->detalle_servicio)!!}</textarea>
                 </div>
+                
+                <div class="form-group-2">
+                    {!!Form::label('como_llegar1', 'Como llegar desde', array('class'=>'control-label-2'))!!}
+                    {!!Form::text('como_llegar1_1', $usuarioServicio->como_llegar1_1, array("title"=>"Como llegar",'class'=>'form-control-1 chng','placeholder'=>'Quito, GYE, Parque central ,etc'))!!}
+                    <textarea style="height: 100px;" id="como_llegar1" name="como_llegar1" class="ptm chng" placeholder="Detalle de como llegar a tu servicio" title="Ingresa un detalle de como llegar a tu local o servicio desde algún lugar conocido.">{!!trim($usuarioServicio->como_llegar1)!!}</textarea>
+                </div>
+                
+                <div class="form-group-2">
+                    {!!Form::label('como_llegar2', 'Como llegar desde', array('class'=>'control-label-2'))!!}
+                    {!!Form::text('como_llegar2_2', $usuarioServicio->como_llegar2_2, array("title"=>"Como llegar",'class'=>'form-control-1 chng','placeholder'=>'Cuenca, Manta, Parque central ,etc'))!!}
+                    <textarea style="height: 100px;" id="como_llegar2" name="como_llegar2" class="ptm chng" placeholder="Detalle de como llegar a tu servicio" title="Ingresa un detalle de como llegar a tu local o servicio desde algún lugar conocido.">{!!trim($usuarioServicio->como_llegar2)!!}</textarea>
+                </div>
+                
                 <div class="form-group-2">
                     {!!Form::label('telefono_1', 'Telefono', array('class'=>'control-label-2'))!!}
                     {!!Form::text('telefono', $usuarioServicio->telefono, array("title"=>"El turista podrá comunicarse directamente contigo si así lo deseas",'class'=>'form-control-1 chng','placeholder'=>'Telefono del Servicio'))!!}
@@ -263,7 +286,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
     $(document).ready(function () {
 
                 
-                GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/1/{!!$usuarioServicio->id!!}");
+                GetDataAjaxImagenes("{!!asset('/imagenesAjaxDescription')!!}/1/{!!$usuarioServicio->id!!}");
     });
     
      ///Script para actualizar el container una vez que se hayan subido las imagenes
@@ -271,7 +294,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
     
         if ($('#flag_image').val() == 1) {
             // Save the new value
-           GetDataAjaxImagenes("{!!asset('/imagenesAjax')!!}/1/{!!$usuarioServicio->id!!}");
+           GetDataAjaxImagenes("{!!asset('/imagenesAjaxDescription')!!}/1/{!!$usuarioServicio->id!!}");
            $("#flag_image").val('0');
 
             // TODO - Handle the changed value

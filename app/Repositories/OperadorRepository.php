@@ -249,6 +249,9 @@ class OperadorRepository extends BaseRepository
 											'longitud_servicio'=>$inputs['longitud_servicio'],
                                                                             'id_provincia'=>$inputs['id_provincia'],
                                                                             'id_canton'=>$inputs['id_canton'],
+                                                                            'como_llegar1'=>$inputs['como_llegar1'],
+                                                                            'como_llegar2'=>$inputs['como_llegar2'],
+                                                                            
                                                                             'id_parroquia'=>$inputs['id_parroquia']                                                                            
 									]);
 	}

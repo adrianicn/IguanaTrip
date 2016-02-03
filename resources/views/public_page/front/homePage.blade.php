@@ -79,7 +79,7 @@
                                      background-position: center center;
                                      width: 100%; height: 100%; opacity: 1; 
                                      visibility: inherit;" 
-                                     data-src="{{ asset('img/index-rodelas.png')}}"
+                                     data-src="{{ asset('images/backgrounds/gradient.png')}}"
                                      src="{{ asset('img/index-rodelas.png')}}" 
                                      data-bgrepeat="no-repeat" 
                                      data-bgposition="center center" data-bgfit="cover" 
@@ -165,7 +165,24 @@
                                 <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-galapagos">{{ trans('publico/labels.label16')}}</a>
                             </div>
                             <div class="iso-container iso-col-4 style-masonry topPlaces">
-                                <div class="grid-sizer"></div>
+                                <div class="shortcode-banner style-animated iso-item  filter-all " >
+                                    <article class="post">
+                                   <figure ><img src="{{ asset('img/events.jpg')}}" alt=""></figure>
+                                     @if(session('device')!='mobile')
+                                        <div class="shortcode-banner-inside" style=" width: 108%;">
+                                            @else
+                                            <div class="shortcode-banner-inside" style=" width: 112%;">
+                                            @endif
+                                    <div class="shortcode-banner-content">
+                                        <h3 class="banner-title">Upcomming Events</h3>
+                                        <div class="details">
+                                            <p>Son los eventos más destacados y recientes de cada región del país</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                                    </article>
+                                </div>
                                 @section('topPlaces')
                                 @show
                             </div>
@@ -187,7 +204,7 @@
                             <a href="#" class="feature-icon"><i class="fa fa-cutlery"></i><div style="alignment-baseline: central">Alimentación y bebidas</div></a>
                             <a href="#" class="feature-icon"><i class="fa fa-bed"></i><div style="alignment-baseline: central">Hospedaje</div></a>
                             <a href="#" class="feature-icon"><i class="fa fa-suitcase"></i><div style="alignment-baseline: central">Agencia de viajes</div></a>
-                            <a href="#" class="feature-icon"><i class="fa fa-beer"></i><div style="alignment-baseline: central">Night life</div></a>
+                            <a href="#" class="feature-icon"><i class="fa fa-beer"></i><div style="alignment-baseline: central">Entretenimiento</div></a>
                             <a href="#" class="feature-icon"><i class="fa fa-bus"></i><div style="alignment-baseline: central">Transporte</div></a>
                             <a href="#" class="feature-icon"><i class="fa fa-shopping-cart"></i><div style="alignment-baseline: central">Shopping</div></a>
 

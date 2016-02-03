@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'masvisitados' => 'Top places in ',
+	'masvisitados' => 'Close to me, ',
 	'label1' => 'Home',
 	'label2' => 'Trips',
 	'label3' => 'Destination',

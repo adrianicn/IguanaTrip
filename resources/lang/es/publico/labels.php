@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'masvisitados' => 'Más visitados en ',
+	'masvisitados' => 'Cerca de mi, ',
 	'label1' => 'Inicio',
 	'label2' => 'Trips',
 	'label3' => 'Destinos',
