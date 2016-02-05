@@ -236,7 +236,7 @@ class ServicioController extends Controller {
         return $_SERVER['REMOTE_ADDR'];
     }
 
-    public function postUsuarioServicios(Request $request, OperadorRepository $usuarioSevicio_gestion) {
+    public function postUsuarioServicios(Request $request, OperadorRepository $usuarioSevicio_gestion , ServiciosOperadorRepository $gestion) {
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
 
@@ -271,7 +271,7 @@ class ServicioController extends Controller {
             'correo_contacto' => $formFields['correo_contacto'],
             'pagina_web' => $formFields['pagina_web'],
 //    			'nombre_comercial' => $formFields['nombre_comercial'],
-//    			'tags' => $formFields['tags'],
+    			'tags' => $formFields['tags'],
 //    			'descuento_clientes' => $formFields['descuento_clientes'],
    			'tags' => $formFields['tags'],
 //    			'observaciones' => $formFields['observaciones'],
@@ -300,12 +300,25 @@ class ServicioController extends Controller {
 
             //return $servicio_establecimiento_usuario;
             $usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServicios($usuarioServicioData, $servicio_establecimiento_usuario, $formFields['id'], $formFields['id_catalogo']);
+            
+            if ($formFields['id'] == 0)
+		{
+		//new       
+                $search=$formFields['nombre_servicio']." ".$formFields['detalle_servicio'];            
+            $gestion->storeSearchEngine($formFields['id'], $search,4,$usuarioServicio->id);
+            
+		} else {
+                 //update
+                    $search=$formFields['nombre_servicio']." ".$formFields['detalle_servicio']." ".$formFields['tags'];            
+                    $gestion->storeUpdateSerchEngine( $usuarioServicio,4,$formFields['id'],$search);
+		}
+             
         }
         $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/' . $formFields['id'] . '/' . $formFields['id_catalogo']);
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
 
-    public function postUsuarioServiciosMini(Request $request, OperadorRepository $usuarioSevicio_gestion) {
+    public function postUsuarioServiciosMini(Request $request, OperadorRepository $usuarioSevicio_gestion, ServiciosOperadorRepository $gestion) {
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
@@ -317,6 +330,12 @@ class ServicioController extends Controller {
             'id_catalogo_servicio' => $formFields['id_catalogo_servicio']
         );
         $usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServiciosMini($usuarioServicioData);
+    
+		//new       
+                $search=$formFields['nombre_servicio']." ".$formFields['detalle_servicio'];            
+            $gestion->storeSearchEngine($usuarioServicio, $search,4,$usuarioServicio);
+            
+		
         $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/' . $usuarioServicio . '/' . $formFields['id_catalogo_servicio']);
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }

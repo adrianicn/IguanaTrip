@@ -240,7 +240,7 @@ class OperadorRepository extends BaseRepository
 											'correo_contacto'=>$inputs['correo_contacto'],
 											'pagina_web'=>$inputs['pagina_web'],
 //											'nombre_comercial'=>$inputs['nombre_comercial'],
-//											'tags'=>$inputs['tags'],
+											'tags'=>$inputs['tags'],
 //											'descuento_clientes'=>$inputs['descuento_clientes'],
 //											'tags_servicio'=>$inputs['tags_servicio'],
 //											'observaciones'=>$inputs['observaciones'],
@@ -316,6 +316,7 @@ class OperadorRepository extends BaseRepository
 		{
 			$this->saveUsuarioServicios($usuarioServicio, $inputs);
 			$this->saveServicioEstablecimientoUsuario( $servicio_establecimiento_usuario, $id_usuario_servicio, $id_catalogo );
+                        
 		} else {
 			$this->updateUsuarioServicios($usuarioServicio, $inputs);
 			$this->saveServicioEstablecimientoUsuario( $servicio_establecimiento_usuario, $id_usuario_servicio, $id_catalogo );
