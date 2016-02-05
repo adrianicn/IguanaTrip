@@ -25,7 +25,10 @@ function masonryBlocks($cont,$item) {
   });
      // append other items when they are loaded
     sjq(items).imagesLoaded( function() {
-        sjq(container).isotope( 'appended', items );
+        
+        sjq(container).append(items)
+                                .isotope('appended', items)
+                        .isotope('layout');;
     });
   });
 }
@@ -117,7 +120,8 @@ function GetDataAjaxTopPlacesHome(url) {
                     // append other items when they are loaded
                     sjq(items).imagesLoaded(function () {
                         sjq(container).append(items)
-                                .isotope('appended', items);
+                                .isotope('appended', items)
+                                  .isotope('layout');
                     });
                 });
             });
