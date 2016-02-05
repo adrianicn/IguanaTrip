@@ -252,6 +252,8 @@ class OperadorRepository extends BaseRepository
                                                                             'como_llegar1'=>$inputs['como_llegar1'],
                                                                             'como_llegar2'=>$inputs['como_llegar2'],
                                                                             
+                                                                            'fecha_ingreso' => $inputs['fecha_ingreso'],
+                                                                             'fecha_fin' => $inputs['fecha_fin'],
                                                                             'id_parroquia'=>$inputs['id_parroquia']                                                                            
 									]);
 	}

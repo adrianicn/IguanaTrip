@@ -8,17 +8,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
 use App\Repositories\PublicServiceRepository;
-
-
-
+use Input;
 use Jenssegers\Agent\Agent;
 use Illuminate\Support\Facades\Session;
-
-
-
-        
-        
-        
 
 class HomePublicController extends Controller {
 
@@ -42,10 +34,10 @@ class HomePublicController extends Controller {
             $location = json_decode(file_get_contents("http://ipinfo.io/200.125.245.238"));
         } catch (Exception $e) {
             $location = "";
+        }
 
-            }
-            
-            
+
+
         $agent = new Agent();
 
         $desk = $device = $agent->isMobile();
@@ -54,36 +46,67 @@ class HomePublicController extends Controller {
         else {
             $desk = "desk";
         }
-        
+
         Session::put('device', $desk);
-        $visitados = $gestion->getUsuario_serv($location);
+        //$visitados = $gestion->getUsuario_serv($location);
         $regiones = $gestion->getRegiones();
-        
-        $topPlacesEcuador= $gestion->getTopPlaces(3);
-        
-        
-        return view('public_page.front.homePage')->with('location',$location)->with('visitados',$visitados)->with('topPlacesEcuador',$topPlacesEcuador);
+
+        $topPlacesEcuador = $gestion->getTopPlaces(3);
+
+
+        return view('public_page.front.homePage')->with('location', $location)->with('topPlacesEcuador', $topPlacesEcuador);
+        //->with('visitados',$visitados)
     }
-    
-    
-    
-    
+
     //Obtiene los top places paginados
     public function getTopPlaces(Request $request, PublicServiceRepository $gestion) {
         //
-        $topPlacesEcuador= $gestion->getTopPlaces(10);
-        
+        $topPlacesEcuador = $gestion->getTopPlaces(100);
+
         $view = View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador));
-     
+
         if ($request->ajax()) {
-           //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
+            //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
             $sections = $view->rendersections();
             return Response::json($sections);
             //return  Response::json($sections['contentPanel']); 
-        } 
+        }
     }
-    
-    
+
+    //Obtiene los top places paginados
+    public function getcloseToMe(Request $request, PublicServiceRepository $gestion) {
+        //
+
+        try {
+            $ipUser = $this->getIp();
+            $location = json_decode(file_get_contents("http://ipinfo.io/186.47.241.78"));
+        } catch (Exception $e) {
+            $location = "";
+        }
+
+
+        $eventosCloseProv = null;
+        $eventosClose = $gestion->getEventsIndepCity($location,100,1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+       // $eventosDepClose = $gestion->getEventsIndepCity($location,100,1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+
+        
+        if (Input::get('page') > $eventosClose->currentPage()){
+            $eventosCloseProv = $gestion->getEventsIndepProvince($location, Input::get('page'), $eventosClose->currentPage(),100,1);             
+        }
+
+
+        $view = View::make('public_page.partials.closeToMe', array('eventosClose' => $eventosClose, 'eventosCloseProv' => $eventosCloseProv));
+
+        if ($request->ajax()) {
+            //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
+
+
+            $sections = $view->rendersections();
+            return Response::json($sections);
+
+            //return  Response::json($sections['contentPanel']); 
+        }
+    }
 
     //Obtiene las regiones del pais
     public function getRegiones(Request $request) {
@@ -93,7 +116,7 @@ class HomePublicController extends Controller {
         // $location=file_get_contents('http://freegeoip.net/json/200.125.245.238');
 
         $view = View::make('public_page.partials.regiones')->with('location', $location);
-        
+
         if ($request->ajax()) {
             $sections = $view->rendersections();
 
@@ -103,11 +126,10 @@ class HomePublicController extends Controller {
         } else
             return $view;
     }
-    
-    
+
     //Obtiene las descripcion de la provincia elegida
     public function getProvinciaDescripcion($id_provincia, $id_image, PublicServiceRepository $gestion) {
-         $agent = new Agent();
+        $agent = new Agent();
 
         $desk = $device = $agent->isMobile();
         if ($desk == 1)
@@ -115,24 +137,22 @@ class HomePublicController extends Controller {
         else {
             $desk = "desk";
         }
-        
+
         Session::put('device', $desk);
         $provincias = $gestion->getProvinciaDetails($id_provincia);
         $imagenes = $gestion->getImageporProvincia($id_provincia);
         $ciudades = $gestion->getCiudades($id_provincia);
         $visitados = $gestion->getVisitadosProvincia($id_provincia);
-        
-       // $eventosProvincia = $gestion->getEventosProvincia($id_provincia);
+
+        // $eventosProvincia = $gestion->getEventosProvincia($id_provincia);
         $explore = $gestion->getExplorer($id_provincia);
-        
-        return view('public_page.front.detalleProvincia')->with('provincias',$provincias)->with('imagenes',$imagenes)->with('ciudades',$ciudades)->with('explore',$explore)->with('visitados',$visitados);
+
+        return view('public_page.front.detalleProvincia')->with('provincias', $provincias)->with('imagenes', $imagenes)->with('ciudades', $ciudades)->with('explore', $explore)->with('visitados', $visitados);
     }
-    
-    
-    
-      //Obtiene todas las provincias de la region
+
+    //Obtiene todas las provincias de la region
     public function getRegionsId($id_region, PublicServiceRepository $gestion) {
-         $agent = new Agent();
+        $agent = new Agent();
 
         $desk = $device = $agent->isMobile();
         if ($desk == 1)
@@ -140,15 +160,14 @@ class HomePublicController extends Controller {
         else {
             $desk = "desk";
         }
-        
+
         Session::put('device', $desk);
         $provincias = $gestion->getRegionDetails($id_region);
         $imagenes = $gestion->getImageporRegion($id_region);
-        
-        
-        
-        return view('public_page.front.allRegions')->with('provincias',$provincias)->with('imagenes',$imagenes)->with('region',$id_region);
+
+
+
+        return view('public_page.front.allRegions')->with('provincias', $provincias)->with('imagenes', $imagenes)->with('region', $id_region);
     }
-    
 
 }

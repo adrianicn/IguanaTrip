@@ -1,8 +1,8 @@
 @section('contentImagenes')	
 
-{!! HTML::style('public/css/imageAjax/owl.carousel.css') !!}
-{!! HTML::style('public/css/imageAjax/owl.theme.css') !!}
-{!! HTML::style('public/css/imageAjax/prettify.css') !!}
+{!! HTML::style('css/imageAjax/owl.carousel.css') !!}
+{!! HTML::style('css/imageAjax/owl.theme.css') !!}
+{!! HTML::style('css/imageAjax/prettify.css') !!}
 
 
 
@@ -23,7 +23,7 @@
                 ?>
 
                 <div class="item">
-                    <img src="{!! asset('public/img/x.png')!!}" onclick='alertaConfirm({!!$imagen->id!!})' style=" width:25px; height:29px; position:absolute; top:2px; right:0px; cursor:pointer;" alt='' />
+                    <img src="{!! asset('img/x.png')!!}" onclick='alertaConfirm({!!$imagen->id!!})' style=" width:25px; height:29px; position:absolute; top:2px; right:0px; cursor:pointer;" alt='' />
                     <img src="{{asset($url)}}" href='#' >
                     
             
@@ -44,7 +44,7 @@
 @endif
 
 
-{!! HTML::script('public/js/imageAjax/owl.carousel.js') !!}
+{!! HTML::script('js/imageAjax/owl.carousel.js') !!}
 <!-- Demo -->
 
 <style>
@@ -85,11 +85,11 @@
 
 
 
-{!! HTML::script('public/js/imageAjax/bootstrap-collapse.js') !!}
-{!! HTML::script('public/js/imageAjax/bootstrap-transition.js') !!}
-{!! HTML::script('public/js/imageAjax/bootstrap-tab.js') !!}
-{!! HTML::script('public/js/imageAjax/prettify.js') !!}
-{!! HTML::script('public/js/imageAjax/application.js') !!}
+{!! HTML::script('js/imageAjax/bootstrap-collapse.js') !!}
+{!! HTML::script('js/imageAjax/bootstrap-transition.js') !!}
+{!! HTML::script('js/imageAjax/bootstrap-tab.js') !!}
+{!! HTML::script('js/imageAjax/prettify.js') !!}
+{!! HTML::script('js/imageAjax/application.js') !!}
 
 
 

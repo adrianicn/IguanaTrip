@@ -246,8 +246,11 @@ class ServicioController extends Controller {
         } else {
             $servicio_establecimiento_usuario[] = "";
         }
-//     	var_dump($servicio_establecimiento_usuario);
-//     	exit;
+
+        if (!isset($formFields['fecha_ingreso']))
+            $formFields['fecha_ingreso'] = '0000-00-00 00:00:00';
+        if (!isset($formFields['fecha_fin']))
+            $formFields['fecha_fin'] ='0000-00-00 00:00:00';
 
         if (!isset($formFields['id_provincia']))
             $formFields['id_provincia'] = 0;
@@ -270,7 +273,7 @@ class ServicioController extends Controller {
 //    			'nombre_comercial' => $formFields['nombre_comercial'],
 //    			'tags' => $formFields['tags'],
 //    			'descuento_clientes' => $formFields['descuento_clientes'],
-//    			'tags_servicio' => $formFields['tags_servicio'],
+   			'tags' => $formFields['tags'],
 //    			'observaciones' => $formFields['observaciones'],
             'telefono' => $formFields['telefono'],
             'latitud_servicio' => $formFields['latitud_servicio'],
@@ -282,7 +285,9 @@ class ServicioController extends Controller {
                 'como_llegar1' => $formFields['como_llegar1'],
                 'como_llegar1_1' => $formFields['como_llegar1_1'],
                 'como_llegar2_2' => $formFields['como_llegar2_2'],
-                'como_llegar2' => $formFields['como_llegar2']
+                'como_llegar2' => $formFields['como_llegar2'],
+                'fecha_ingreso' => $formFields['fecha_ingreso'],
+                'fecha_fin' => $formFields['fecha_fin']
                 
         );
         $validator = Validator::make($usuarioServicioData, $this->validationUsuarioServicios);

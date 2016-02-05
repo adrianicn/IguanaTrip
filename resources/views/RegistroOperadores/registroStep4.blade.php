@@ -22,6 +22,7 @@ $usuarioServicio->id = 0;
 $usuarioServicio->nombre_servicio = '';
 $usuarioServicio->detalle_servicio = '';
 $usuarioServicio->precio_desde = '';
+$usuarioServicio->tags = '';
 $usuarioServicio->precio_hasta = '';
 $usuarioServicio->precio_anterior = '';
 $usuarioServicio->precio_actual = '';
@@ -40,6 +41,8 @@ $usuarioServicio->id_canton = '';
 $usuarioServicio->id_parroquia = '';
 $usuarioServicio->como_llegar1 = '';
 $usuarioServicio->como_llegar2 = '';
+$usuarioServicio->fecha_ingreso = '';
+$usuarioServicio->fecha_fin = '';
 $usuarioServicio->como_llegar1_1 = '';
 $usuarioServicio->como_llegar2_2 = '';
 $usuarioServicio->latitud_servicio = -0.1806532;
@@ -55,6 +58,7 @@ $usuarioServicio->precio_hasta = trim($detalles->precio_hasta);
 $usuarioServicio->precio_anterior = trim($detalles->precio_anterior);
 $usuarioServicio->precio_actual = trim($detalles->precio_actual);
 $usuarioServicio->descuento_servico = trim($detalles->descuento_servico);
+$usuarioServicio->tags = trim($detalles->tags);
 $usuarioServicio->direccion_servicio = trim($detalles->direccion_servicio);
 $usuarioServicio->correo_contacto = trim($detalles->correo_contacto);
 $usuarioServicio->pagina_web = trim($detalles->pagina_web);
@@ -69,6 +73,8 @@ $usuarioServicio->como_llegar1 = $detalles->como_llegar1;
 $usuarioServicio->como_llegar2 = $detalles->como_llegar2;
 $usuarioServicio->como_llegar1_1 = $detalles->como_llegar1_1;
 $usuarioServicio->como_llegar2_2 = $detalles->como_llegar2_2;
+$usuarioServicio->fecha_ingreso = $detalles->fecha_ingreso;
+$usuarioServicio->fecha_fin = $detalles->fecha_fin;
 
 
 $usuarioServicio->observaciones = trim($detalles->observaciones);
@@ -139,6 +145,19 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::label('nombre_servicio_1', 'Nombre Servicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
                     {!!Form::text('nombre_servicio', $usuarioServicio->nombre_servicio, array("title"=>"Es el nombre comercial del servicio o el nombre con el que quieres que los turistas encuentren tu servicio.",'class'=>'inputtext chng','placeholder'=>'Nombre del Servicio'))!!}
                 </div>
+                @if($id_catalogo==8)
+                    <div class="form-group-1">
+                    {!!Form::label('Fecha_inicio', 'Fecha inicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
+                   
+                    {!!Form::text('fecha_ingreso', $usuarioServicio->fecha_ingreso, array('class'=>'datepicker inputtext chng'))!!}
+                </div>
+
+                <div class="form-group-1">
+                    {!!Form::label('Fecha_fin', 'Fecha fin', array('id'=>'iconFormulario-step2'))!!}
+                    {!!Form::text('fecha_fin', $usuarioServicio->fecha_fin, array('class'=>'inputtext chng datepicker'))!!}
+                </div>
+                @endif
+
                 <div class="form-group-1">
                     {!!Form::label('precio_desde_1', 'Precio Desde', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
                     {!!Form::text('precio_desde', $usuarioServicio->precio_desde, array("title"=>"Para realizar una segmentación adecuada de interesados, sería bueno que nos des el rango de precios de tu servicio. El valor es en dólares americanos",'class'=>'inputtext chng','placeholder'=>'Precio Desde'))!!}
@@ -189,11 +208,16 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::label('pagina_web_1', 'Pagina Web', array('class'=>'control-label-2'))!!}
                     {!!Form::text('pagina_web', $usuarioServicio->pagina_web, array("title"=>"Si tienes una página web servirá mucho para tu credibilidad.",'class'=>'form-control-1 chng','placeholder'=>'URL'))!!}
                 </div>
+                
+                <div class="form-group-2">
+                    {!!Form::label('tags', 'tags', array('class'=>'control-label-2'))!!}
+                    {!!Form::text('tags', $usuarioServicio->tags, array("title"=>"Palabras clave o referencias separadas por comas",'class'=>'form-control-1 chng','placeholder'=>'#ruta del sol, #museos'))!!}
+                </div>
                 <div class="form-group-2"> Mi servicio o establecimiento incluye:
                     <ul style="list-style: none">
                         @foreach ($catalogoServicioEstablecimiento as $catalogo)	
                         <li>
-                            <input class="circulo" name="id_servicio_est[]" id="id_servicio_est[]" value="{!!$catalogo->id!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {{($catalogo->estado_servicio_est_us <> NULL)?'checked':''}}/>
+                            <input class="circulo chng" name="id_servicio_est[]" id="id_servicio_est[]" value="{!!$catalogo->id!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {{($catalogo->estado_servicio_est_us <> NULL)?'checked':''}}/>
                             {!!$catalogo->nombre_servicio_est!!}
                         </li>    
                         @endforeach
@@ -302,6 +326,10 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
     
 }, 100);
 </script>
+<script>
+    $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
+    </script>
+    
 
 @stop
 

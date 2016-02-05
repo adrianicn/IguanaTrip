@@ -3,44 +3,39 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/front/masterPageWelcome.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/public/js/Compartido.js</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/blog-mini-fullwidth.html</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/search_inbox/css/default.css</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/password.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/RegistroOperadores/registroStep2.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/js/main.js</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/ImageController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Image.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/js/main.js</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Logic/Image/ImageRepository.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/BlogRepository.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/public/js/js_public/Compartido.js</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/reusable/header.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/reusable/banner.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/js/isotope.pkgd.js</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/AllTopPlaces.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/js/jquery.plugins.js</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/en/publico/labels.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/uploadImagePopUp.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/provincia.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/catalogo_dificultades.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/PublicServiceRepository.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/login.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/imageContainerAjax.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/search_inbox/css/component.css</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/es/publico/labels.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/front/masterPageServicios.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/portfolio-masonry2.html</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/RegistroOperadores/registroStep4.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/regiones.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/woocommerce-product-sidebar.html</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/modifyEventos_Promociones.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/es/publico/labels.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/homepage6.html</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/css/style.css</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/homepage2.html</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/homePage.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/allRegions.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/UsuarioServiciosController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/allRegions.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Usuario_Servicio.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/detalleProvincia.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Registro/catalogoServicio.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/HomePublicController.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/reset.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/OperadorRepository.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/register.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Registro/editEvento.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Admin/canton.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Admin/descripcionProvincia.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/completeRegister.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/ServiciosOperadorRepository.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/onlyProvincia.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/routes.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/ServicioController.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/reusable/footer.blade.php</file>
         </group>
     </open-files>
 </project-private>

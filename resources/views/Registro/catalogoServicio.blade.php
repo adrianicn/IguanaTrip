@@ -18,6 +18,7 @@ $servicio_4 = '';
 $servicio_5 = '';
 $servicio_6 = '';
 $servicio_7 = '';
+$servicio_8 = '';
 ?>
 @foreach ($listServicios as $servicio)
 <?php
@@ -42,6 +43,9 @@ switch ($servicio->id_catalogo_servicio) {
         break;
     case 7:
         $servicio_7 = 'checked';
+        break;
+    case 8:
+        $servicio_8 = 'checked';
         break;
 }
 ?>
@@ -319,6 +323,23 @@ switch ($servicio->id_catalogo_servicio) {
                                 </td>
                             <td><input class="demo labelauty" name="id_catalogo_servicio7" id="checkbox-7" value="7" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_7!!}/></td>
                         </tr>
+                        
+                         <tr class="alt"><td>
+                                <div id="star6" class="dialog-open">
+                                    <img src="{!! asset('images/register/registro6.jpg')!!}" alt="" />
+                                </div>
+                                
+                            <td>
+                                <div id="star6" class="dialog-open">
+                                <h2 class='titletable'>
+                                    Eventos o actividades
+                                </h2>
+                                Eventos o actividades en las cuales pueda asistir el público en general
+                                </div>
+                                
+                                </td>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio8" id="checkbox-8" value="8" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_8!!}/></td>
+                        </tr>
                         <tr class="alt"><td>
                                 <div id="star6" class="dialog-open">
                                     <img src="{!! asset('images/register/registro6.jpg')!!}" alt="" />
@@ -327,7 +348,7 @@ switch ($servicio->id_catalogo_servicio) {
                             <td>
                                 <div id="star6" class="dialog-open">
                                 <h2 class='titletable'>
-                                    Actividades en grupo
+                                    Otros
                                 </h2>
                                 Parrilladas, viajes, caídas, after office, actividades espontaneas etc
                                 </div>

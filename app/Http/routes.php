@@ -236,5 +236,6 @@ Route::get('/getProvinciaDescipcion/{id_provincia}/{id_image}', ['as' => 'provin
 Route::get('/getRegionDescipcion/{id_region}', ['as' => 'regiondescr', 'uses' => 'HomePublicController@getRegionsId']);
 
 Route::get('/getTopPlaces', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getTopPlaces']);
+Route::get('/getEventscloseToMe', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getcloseToMe']);
 
  /*  Fin de las rutas del sistema publico*/

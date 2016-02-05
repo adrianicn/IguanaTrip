@@ -1,5 +1,25 @@
 @section('topPlaces')	
 <div id="x1">
+    @if($topPlacesEcuador->currentPage()==1)
+       <div class="shortcode-banner style-animated iso-item TopPlace  filter-all " >
+                                    <article class="post">
+                                   <figure ><img src="{{ asset('img/events.jpg')}}" alt=""></figure>
+                                     @if(session('device')!='mobile')
+                                        <div class="shortcode-banner-inside" style=" width: 108%;">
+                                            @else
+                                            <div class="shortcode-banner-inside" style=" width: 112%;">
+                                            @endif
+                                    <div class="shortcode-banner-content">
+                                        <h3 class="banner-title">Upcomming Events</h3>
+                                        <div class="details">
+                                            <p>Son los eventos más destacados y recientes de cada región del país</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                                    </article>
+                                </div>
+                                     @endif
 @foreach ($topPlacesEcuador as $region)
                                 @if($region->id_region==1)
                                 <div class="shortcode-banner style-animated iso-item TopPlace filter-all filter-costa" >

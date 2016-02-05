@@ -165,29 +165,13 @@
                                 <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-galapagos">{{ trans('publico/labels.label16')}}</a>
                             </div>
                             <div class="iso-container iso-col-4 style-masonry topPlaces">
-                                <div class="shortcode-banner style-animated iso-item  filter-all " >
-                                    <article class="post">
-                                   <figure ><img src="{{ asset('img/events.jpg')}}" alt=""></figure>
-                                     @if(session('device')!='mobile')
-                                        <div class="shortcode-banner-inside" style=" width: 108%;">
-                                            @else
-                                            <div class="shortcode-banner-inside" style=" width: 112%;">
-                                            @endif
-                                    <div class="shortcode-banner-content">
-                                        <h3 class="banner-title">Upcomming Events</h3>
-                                        <div class="details">
-                                            <p>Son los eventos más destacados y recientes de cada región del país</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                 
-                                    </article>
-                                </div>
+                             
                                 @section('topPlaces')
                                 @show
+
                             </div>
                             <div class="text-center">
-                                <a  class="btn style4 hover-blue load-more moreImages">Load More</a>
+                                <a  class="btn style4 hover-blue load-more moreImagesTop">{{ trans('publico/labels.label31')}}</a>
                             </div>
                         </div>
                     </div>
@@ -230,32 +214,111 @@
                     <h2 class="section-title">{{ trans('publico/labels.masvisitados')}}{!!$titulo!!}</h2>
                     <div class="post-wrapper">
                         <div class="iso-container iso-col-4 style-fancy">
-                            <?php shuffle($visitados); ?>
-                            @foreach ($visitados as $visitado)
-                            <?php list($width, $height) = getimagesize(asset('images/icon/' . $visitado->filename)); ?>
-                            @if($height>500 && $height<600 )
-                            <div class="iso-item filter-all filter-website">
-                                <article class="post">
-                                    <figure><img src="{{ asset('images/icon/'.$visitado->filename)}}" alt=""></figure>
-                                    <div class="portfolio-hover-holder">
-                                        <div class="portfolio-text">
-                                            <div class="portfolio-text-inner">
-                                                <h5 class="portfolio-title">{!!$visitado->nombre_servicio!!}</h5> - <span class="portfolio-category">{!!$visitado->catalogo_nombre!!}</span>
-                                            </div>
+                               <div class="shortcode-banner style-animated iso-item  filter-all " >
+                                    <article class="post">
+                                   <figure ><img src="{{ asset('img/ocio.jpg')}}" alt=""></figure>
+                                     @if(session('device')!='mobile')
+                                        <div class="shortcode-banner-inside" style=" width: 108%;">
+                                            @else
+                                            <div class="shortcode-banner-inside" style=" width: 112%;">
+                                            @endif
+                                    <div class="shortcode-banner-content">
+                                        <h3 class="banner-title">Ocio</h3>
+                                        <div class="details">
+                                            <p>Son los eventos más destacados y recientes de cada región del país</p>
                                         </div>
-                                        <span class="portfolio-action">
-                                            <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$visitado->filename)}}">
-                                                <i class="fa fa-eye has-circle"></i></a>
-                                            <a href="portfolio-single1.html"><i class="fa fa-chain has-circle"></i></a>
-                                        </span>
                                     </div>
-                                </article>
-                            </div>
-                            @endif
-                            @endforeach
+                                </div>
+                                 
+                                    </article>
+                                </div>
+                                        <div class="shortcode-banner style-animated iso-item  filter-all " >
+                                    <article class="post">
+                                   <figure ><img src="{{ asset('img/adventure.jpg')}}" alt=""></figure>
+                                     @if(session('device')!='mobile')
+                                        <div class="shortcode-banner-inside" style=" width: 108%;">
+                                            @else
+                                            <div class="shortcode-banner-inside" style=" width: 112%;">
+                                            @endif
+                                    <div class="shortcode-banner-content">
+                                        <h3 class="banner-title">Aventura</h3>
+                                        <div class="details">
+                                            <p>Son los eventos más destacados y recientes de cada región del país</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                                    </article>
+                                </div>
+                                        <div class="shortcode-banner style-animated iso-item  filter-all " >
+                                    <article class="post">
+                                   <figure ><img src="{{ asset('img/rsz_quito.jpg')}}" alt=""></figure>
+                                     @if(session('device')!='mobile')
+                                        <div class="shortcode-banner-inside" style=" width: 108%;">
+                                            @else
+                                            <div class="shortcode-banner-inside" style=" width: 112%;">
+                                            @endif
+                                    <div class="shortcode-banner-content">
+                                        <h3 class="banner-title">Cultura</h3>
+                                        <div class="details">
+                                            <p>Son los eventos más destacados y recientes de cada región del país</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                                    </article>
+                                </div>
+                                        <div class="shortcode-banner style-animated iso-item  filter-all " >
+                                    <article class="post">
+                                   <figure ><img src="{{ asset('img/tour.jpg')}}" alt=""></figure>
+                                     @if(session('device')!='mobile')
+                                        <div class="shortcode-banner-inside" style=" width: 108%;">
+                                            @else
+                                            <div class="shortcode-banner-inside" style=" width: 112%;">
+                                            @endif
+                                    <div class="shortcode-banner-content">
+                                        <h3 class="banner-title">Tours</h3>
+                                        <div class="details">
+                                            <p>Son los eventos más destacados y recientes de cada región del país</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                                    </article>
+                                </div>
                         </div>
                     </div>
             </section>
+            
+                    <section id="content">
+                <div class="container">
+                    <div class="heading-box col-md-10 col-lg-8">
+                        <h2 class="box-title">Discover <em class="skin-color">events and promotions </em> close to you</h2>
+                        
+                    </div>
+                    <div id="main">
+                        <div class="post-wrapper">
+                           <div class="post-filters">
+                                <a href="#" class="btn btn-sm style4 hover-blue active" data-filter="filter-alls">{{ trans('publico/labels.label12')}}</a>
+                                <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-eventos">{{ trans('publico/labels.label13')}}</a>
+                                <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-promociones">{{ trans('publico/labels.label14')}}</a>
+                                
+                            </div>
+                            <div class="iso-container iso-col-4 style-masonry eventsPromo">
+                           
+                                @section('eventsPromo')
+                                @show
+                                
+                            </div>
+                            <div class="text-center">
+                                <a  class="btn style4 hover-blue load-more moreImagesEvents">{{ trans('publico/labels.label31')}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>                   
+                           
+
             <footer id="footer" class="style4">
                 @include('public_page.reusable.footer')
             </footer>
@@ -301,10 +364,18 @@
         <script>
             $(document).ready(function () {
                 GetDataAjaxTopPlaces("{!!asset('/getTopPlaces')!!}?page=1");
+                GetDataAjaxEventsInd("{!!asset('/getEventscloseToMe')!!}?page=1");
             });
-            $(".moreImages").click(function () {
+            $(".moreImagesTop").click(function () {
                 GetDataAjaxTopPlacesHome("{!!asset('/getTopPlaces')!!}");
             });
+            
+            $(".moreImagesEvents").click(function () {
+                GetDataAjaxEventsHome("{!!asset('/getEventscloseToMe')!!}");
+            });
+            
+            
+            
         </script>
     </body>
 </html>
