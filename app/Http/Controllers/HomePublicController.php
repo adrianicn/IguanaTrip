@@ -86,16 +86,22 @@ class HomePublicController extends Controller {
 
 
         $eventosCloseProv = null;
+        $eventosDepCloseProv = null;
         $eventosClose = $gestion->getEventsIndepCity($location,100,1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
-       // $eventosDepClose = $gestion->getEventsIndepCity($location,100,1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $eventosDepClose = $gestion->getEventsDepCity($location,100,1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        //$PromoDepClose = $gestion->getPromoDepCity($location,100,1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
 
         
         if (Input::get('page') > $eventosClose->currentPage()){
             $eventosCloseProv = $gestion->getEventsIndepProvince($location, Input::get('page'), $eventosClose->currentPage(),100,1);             
         }
+        
+        if (Input::get('page') > $eventosDepClose->currentPage()){
+            $eventosDepCloseProv = $gestion->getEventsDepProvince($location, Input::get('page'), $eventosDepClose->currentPage(),100,1);             
+        }
 
 
-        $view = View::make('public_page.partials.closeToMe', array('eventosClose' => $eventosClose, 'eventosCloseProv' => $eventosCloseProv));
+        $view = View::make('public_page.partials.closeToMe', array('eventosClose' => $eventosClose, 'eventosCloseProv' => $eventosCloseProv, 'eventosDepClose' => $eventosDepClose,'eventosDepCloseProv' => $eventosDepCloseProv));
 
         if ($request->ajax()) {
             //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());

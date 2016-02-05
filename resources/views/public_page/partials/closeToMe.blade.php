@@ -4,7 +4,7 @@
     @foreach ($eventosClose as $event)
 
 
-    <div class="shortcode-banner style-animated iso-item eventInd filter-eventos filter-alls" >
+    <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item eventInd filter-eventos filter-alls" >
         <article class="post">
             <figure ><img src="{{ asset('images/icon/'.$event->filename)}}" alt=""></figure>
             @if(session('device')!='mobile')
@@ -24,8 +24,8 @@
     </div>
     @endforeach
 
-
-@if(!$eventosClose->hasMorePages())
+<!--
+@if(!$eventosClose->hasMorePages() && $eventosClose->currentPage()==$eventosClose->lastPage() && $eventosCloseProv==null)
     <div class="shortcode-banner style-animated iso-item eventInd filter-eventos filter-alls" >
         <article class="post">
             <figure ><img src="{{ asset('img/rsz_addevent.png')}}" alt=""></figure>
@@ -44,13 +44,13 @@
 
         </article>
     </div>
-            @endif
+            @endif-->
 
-    @if(isset($eventosCloseProv))
+    @if($eventosCloseProv!=null)
     @foreach ($eventosCloseProv as $event)
 
 
-    <div class="shortcode-banner style-animated iso-item eventInd filter-eventos filter-alls" >
+    <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item eventInd filter-eventos filter-alls" >
         <article class="post">
             <figure ><img src="{{ asset('images/icon/'.$event->filename)}}" alt=""></figure>
             @if(session('device')!='mobile')
@@ -70,6 +70,59 @@
     </div>
     @endforeach
     @endif
+    
+    
+      @if($eventosDepCloseProv!=null)
+    @foreach ($eventosDepCloseProv as $event)
+
+
+    <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item eventInd filter-eventos filter-alls" >
+        <article class="post">
+            <figure ><img src="{{ asset('images/icon/'.$event->filename)}}" alt=""></figure>
+            @if(session('device')!='mobile')
+            <div class="shortcode-banner-inside" style=" width: 108%;">
+                @else
+                <div class="shortcode-banner-inside" style=" width: 112%;">
+                    @endif
+                    <div class="shortcode-banner-content">
+                        <a href="#"><h3 class="banner-title">{!!$event->nombre_evento!!}</h3></a>
+                        <div class="details">
+                            <p>{!!$event->nombre_servicio!!}</p><p>{!!$event->descripcion_evento!!}</p>
+                        </div>
+                    </div>
+                </div>
+
+        </article>
+    </div>
+    @endforeach
+    @endif
+    
+    
+    
+     @foreach ($eventosDepClose as $event)
+
+
+    <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item eventInd filter-eventos filter-alls" >
+        <article class="post">
+            <figure ><img src="{{ asset('images/icon/'.$event->filename)}}" alt=""></figure>
+            @if(session('device')!='mobile')
+            <div class="shortcode-banner-inside" style=" width: 108%;">
+                @else
+                <div class="shortcode-banner-inside" style=" width: 112%;">
+                    @endif
+                    <div class="shortcode-banner-content">
+                        <a href="#"><h3 class="banner-title">{!!$event->nombre_evento!!}</h3></a>
+                        <div class="details">
+                            <p>{!!$event->nombre_servicio!!}</p><p>{!!$event->descripcion_evento!!}</p>
+                        </div>
+                    </div>
+                </div>
+
+        </article>
+    </div>
+    @endforeach
+    
+    
 
 </div>
 

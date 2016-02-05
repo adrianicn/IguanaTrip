@@ -172,10 +172,10 @@ function GetDataAjaxEventsHome(url) {
                         }
                     });
                     // append other items when they are loaded
-                    //sjq(items).imagesLoaded(function () {
+                    sjq(items).imagesLoaded(function () {
                         sjq(container).append(items)
                                 .isotope('appended', items);
-                    //});
+                    });
                 });
             });
         },

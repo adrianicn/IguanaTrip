@@ -35,6 +35,8 @@ return [
     'label29' => 'Explore',
     'label30' => 'Sites of interest',
     'label31' => 'Load More',
+    'label32' => 'Events',
+    'label33' => 'Promo',
     
 	'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'

@@ -1,7 +1,7 @@
 @section('topPlaces')	
 <div id="x1">
     @if($topPlacesEcuador->currentPage()==1)
-       <div class="shortcode-banner style-animated iso-item TopPlace  filter-all " >
+       <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item TopPlace filter-all ">
                                     <article class="post">
                                    <figure ><img src="{{ asset('img/events.jpg')}}" alt=""></figure>
                                      @if(session('device')!='mobile')
@@ -22,7 +22,7 @@
                                      @endif
 @foreach ($topPlacesEcuador as $region)
                                 @if($region->id_region==1)
-                                <div class="shortcode-banner style-animated iso-item TopPlace filter-all filter-costa" >
+                                <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item TopPlace filter-all filter-costa" >
                                     <article class="post">
                                    <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
                                      @if(session('device')!='mobile')
@@ -54,7 +54,7 @@
                                 @endif
 
                                 @if($region->id_region==2)
-                                <div class="shortcode-banner style-animated TopPlace iso-item filter-all filter-sierra" >
+                                <div style=" margin-bottom: 0;" class="shortcode-banner style-animated TopPlace iso-item filter-all filter-sierra" >
                                    <article class="post">
                                    <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
                                      @if(session('device')!='mobile')
@@ -85,7 +85,7 @@
                                 </div>
                                 @endif
                                 @if($region->id_region==3)
-                                <div class="shortcode-banner style-animated TopPlace iso-item filter-all filter-oriente ">
+                                <div style=" margin-bottom: 0;" class="shortcode-banner style-animated TopPlace iso-item filter-all filter-oriente ">
                                    <article class="post">
                                    <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
                                      @if(session('device')!='mobile')
@@ -116,7 +116,7 @@
                                 </div>
                                 @endif
                                 @if($region->id_region==4)
-                                <div class=" shortcode-banner style-animated TopPlace iso-item filter-all filter-galapagos">
+                                <div style=" margin-bottom: 0;" class=" shortcode-banner style-animated TopPlace iso-item filter-all filter-galapagos">
                                    <article class="post">
                                    <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt="">
                                    </figure> 
