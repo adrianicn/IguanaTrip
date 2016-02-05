@@ -27,7 +27,7 @@ function masonryBlocks($cont,$item) {
     sjq(items).imagesLoaded( function() {
         
         sjq(container).append(items)
-                                .isotope('appended', items)
+                .isotope('appended', items)
                         .isotope('layout');;
     });
   });
@@ -42,9 +42,37 @@ function GetDataAjaxTopPlaces(url) {
         dataType: 'json',
         success: function (data) {
 
+
             $(".topPlaces").LoadingOverlay("hide", true);
-            $(".topPlaces").append(data.topPlaces);
-               setTimeout(function() { masonryBlocks('topPlaces','TopPlace'); }, 500);
+            
+                
+            var imgs = [];
+            $(data.topPlaces).each(function () {
+                var its = $(this).html();
+                    imgs.push(its);
+            });
+            itemsHTML = $.map(imgs, function (src) {
+                return src;
+            });
+            var items = $(itemsHTML.join(''));
+            $(function () {
+                var container = $('.topPlaces');
+                sjq(container).imagesLoaded(function () {
+                    // init isotope
+                    sjq(container).isotope({
+                        masonry: {
+                            columnWidth: '.TopPlace'
+                        }
+                    });
+                    // append other items when they are loaded
+                    sjq(items).imagesLoaded(function () {
+                        sjq(container).append(items)
+                                .isotope('appended', items)
+                                  .isotope('layout');
+                    });
+                });
+            });
+            
         },
         error: function (data) {
             var errors = data.responseJSON;
@@ -66,9 +94,34 @@ function GetDataAjaxEventsInd(url) {
         dataType: 'json',
         success: function (data) {
 
+            
             $(".eventsPromo").LoadingOverlay("hide", true);
-            $(".eventsPromo").append(data.eventsPromo);
-               setTimeout(function() { masonryBlocks('eventsPromo','eventInd'); }, 500);
+            var imgs = [];
+            $(data.eventsPromo).each(function () {
+                var its = $(this).html();
+                    imgs.push(its);
+            });
+            itemsHTML = $.map(imgs, function (src) {
+                return src;
+            });
+            var items = $(itemsHTML.join(''));
+            $(function () {
+                var container = $('.eventsPromo');
+                sjq(container).imagesLoaded(function () {
+                    // init isotope
+                    sjq(container).isotope({
+                        masonry: {
+                            columnWidth: '.eventInd'
+                        }
+                    });
+                    // append other items when they are loaded
+                    sjq(items).imagesLoaded(function () {
+                        sjq(container).append(items)
+                                .isotope('appended', items)
+                        .isotope('layout');;
+                    });
+                });
+            });
         },
         error: function (data) {
             var errors = data.responseJSON;

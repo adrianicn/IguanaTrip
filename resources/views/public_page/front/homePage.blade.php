@@ -363,6 +363,7 @@
 
         <script>
             $(document).ready(function () {
+                
                 GetDataAjaxTopPlaces("{!!asset('/getTopPlaces')!!}?page=1");
                 GetDataAjaxEventsInd("{!!asset('/getEventscloseToMe')!!}?page=1");
             });
