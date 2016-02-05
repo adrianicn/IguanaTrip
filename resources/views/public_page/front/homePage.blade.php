@@ -195,7 +195,7 @@
 
                         </div>
                         <h3 class="skin-color">Fully Adaptive to All Screen Sizes</h3>
-                        <p>Miracle is designed in a way that it automatically adjusts to any screen which makes it a true responsive design.<br>
+                        <p>iWanaTrip is designed in a way that it automatically adjusts to any screen which makes it a true responsive design.<br>
                             Each and every design element was created in a way that it will not look lame when seen on smaller screen size.</p>
                     </div>
                 </div>
