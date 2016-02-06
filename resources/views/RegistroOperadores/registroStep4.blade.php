@@ -230,7 +230,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     $list_number = ($count_services / 2);
                 }
                 else{
-                    $list_number = (int)($count_services / 2) + 1;
+                    $list_number = (int)($count_services / 2);
                 }
                 $count_list = 0;
             ?>
