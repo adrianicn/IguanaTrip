@@ -224,6 +224,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     <table>
                         <tr>
                             <td>
+                                <ul style="list-style: none">
             <?php
                 $count_services = count($catalogoServicioEstablecimiento);
                 if (($count_services % 2) == 0){
@@ -235,13 +236,6 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 $count_list = 0;
             ?>
                                 @foreach ($catalogoServicioEstablecimiento as $catalogo)	
-                                <?php
-                                    if($count_list == 0){
-                                ?>
-                                        <ul style="list-style: none">
-                                <?php        
-                                    }
-                                ?>
                                         <li>
                                             <input class="circulo chng" name="id_servicio_est[]" id="id_servicio_est[]" value="{!!$catalogo->id!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {{($catalogo->estado_servicio_est_us <> NULL)?'checked':''}}/>
                                             {!!$catalogo->nombre_servicio_est!!}
