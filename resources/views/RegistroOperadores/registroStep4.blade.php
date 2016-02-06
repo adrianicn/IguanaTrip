@@ -221,14 +221,49 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::text('tags', $usuarioServicio->tags, array("title"=>"Palabras clave o referencias separadas por comas",'class'=>'form-control-1 chng','placeholder'=>'#ruta del sol, #museos'))!!}
                 </div>
                 <div class="form-group-2"> Mi servicio o establecimiento incluye:
-                    <ul style="list-style: none">
-                        @foreach ($catalogoServicioEstablecimiento as $catalogo)	
-                        <li>
-                            <input class="circulo chng" name="id_servicio_est[]" id="id_servicio_est[]" value="{!!$catalogo->id!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {{($catalogo->estado_servicio_est_us <> NULL)?'checked':''}}/>
-                            {!!$catalogo->nombre_servicio_est!!}
-                        </li>    
-                        @endforeach
-                    </ul>
+                    <table>
+                        <tr>
+                            <td>
+            <?php
+                $count_services = count($catalogoServicioEstablecimiento);
+                if (($count_services % 2) == 0){
+                    $list_number = ($count_services / 2);
+                }
+                else{
+                    $list_number = (int)($count_services / 2) + 1;
+                }
+                $count_list = 0;
+            ?>
+                                @foreach ($catalogoServicioEstablecimiento as $catalogo)	
+                                <?php
+                                    if($count_list == 0){
+                                ?>
+                                        <ul style="list-style: none">
+                                <?php        
+                                    }
+                                ?>
+                                        <li>
+                                            <input class="circulo chng" name="id_servicio_est[]" id="id_servicio_est[]" value="{!!$catalogo->id!!}" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {{($catalogo->estado_servicio_est_us <> NULL)?'checked':''}}/>
+                                            {!!$catalogo->nombre_servicio_est!!}
+                                        </li>    
+                                    
+                                <?php
+                                    $count_list++;
+                                    if($count_list > $list_number){
+                                ?>        
+                                       </ul>
+                                       </td>
+                                       <td> 
+                                       <ul style="list-style: none">    
+                                <?php  
+                                    $count_list = 0;
+                                    }
+                                ?>
+                                @endforeach
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>    
                 </div>
             </div>
 <!--            
