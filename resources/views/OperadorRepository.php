@@ -91,6 +91,29 @@ class OperadorRepository extends BaseRepository
 		return $operador;
 		
 	}
+        
+         public function storageUsuarioServiciosMiniPadre(  $inputs )
+	{
+		$usuarioServicio = new $this->usuarioServicio;
+				
+		return $this->saveUsuarioServiciosPadre($usuarioServicio, $inputs);
+		
+	}
+        
+           public function saveUsuarioServiciosPadre($usuarioServicio, $inputs)
+	{
+		$usuarioServicio->nombre_servicio = $inputs['nombre_servicio'];
+		$usuarioServicio->detalle_servicio = $inputs['detalle_servicio'];
+ 		$usuarioServicio->estado_servicio_usuario = 1;
+ 		$usuarioServicio->estado_servicio = 1;
+ 		$usuarioServicio->id_catalogo_servicio = $inputs['id_catalogo_servicio'];
+		$usuarioServicio->id_usuario_operador = $inputs['id_usuario_operador'];
+                $usuarioServicio->id_padre = $inputs['id_padre'];
+	
+		$usuarioServicio->save();
+		return $usuarioServicio->id;
+	}
+	
 
 	/**
 	 * Update a user.
@@ -204,26 +227,25 @@ class OperadorRepository extends BaseRepository
 	{
 		$usuarioServicio->nombre_servicio = $inputs['nombre_servicio'];
 		$usuarioServicio->detalle_servicio = $inputs['detalle_servicio'];
+// 		$usuarioServicio->precio_desde = $inputs['precio_desde'];
+// 		$usuarioServicio->precio_hasta = $inputs['precio_hasta'];
+// 		$usuarioServicio->precio_anterior = $inputs['precio_anterior'];
+// 		$usuarioServicio->precio_actual = $inputs['precio_actual'];
+// 		$usuarioServicio->descuento_servico = $inputs['descuento_servico'];
+// 		$usuarioServicio->direccion_servicio = $inputs['direccion_servicio'];
+// 		$usuarioServicio->correo_contacto = $inputs['correo_contacto'];
+// 		$usuarioServicio->pagina_web = $inputs['pagina_web'];
+// 		$usuarioServicio->nombre_comercial = $inputs['nombre_comercial'];
+// 		$usuarioServicio->tags = $inputs['tags'];
+// 		$usuarioServicio->descuento_clientes = $inputs['descuento_clientes'];
  		$usuarioServicio->estado_servicio_usuario = 1;
  		$usuarioServicio->estado_servicio = 1;
  		$usuarioServicio->id_catalogo_servicio = $inputs['id_catalogo_servicio'];
 		$usuarioServicio->id_usuario_operador = $inputs['id_usuario_operador'];
 	
 		$usuarioServicio->save();
-		return $usuarioServicio->id;
-	}
-        
-        public function saveUsuarioServiciosPadre($usuarioServicio, $inputs)
-	{
-		$usuarioServicio->nombre_servicio = $inputs['nombre_servicio'];
-		$usuarioServicio->detalle_servicio = $inputs['detalle_servicio'];
- 		$usuarioServicio->estado_servicio_usuario = 1;
- 		$usuarioServicio->estado_servicio = 1;
- 		$usuarioServicio->id_catalogo_servicio = $inputs['id_catalogo_servicio'];
-		$usuarioServicio->id_usuario_operador = $inputs['id_usuario_operador'];
-                $usuarioServicio->id_padre = $inputs['id_padre'];
-	
-		$usuarioServicio->save();
+		//$objeto=$usuarioServicio->save();
+		
 		return $usuarioServicio->id;
 	}
 	
@@ -264,14 +286,6 @@ class OperadorRepository extends BaseRepository
 		$usuarioServicio = new $this->usuarioServicio;
 				
 		return $this->saveUsuarioServicios($usuarioServicio, $inputs);
-		
-	}
-        
-        public function storageUsuarioServiciosMiniPadre(  $inputs )
-	{
-		$usuarioServicio = new $this->usuarioServicio;
-				
-		return $this->saveUsuarioServiciosPadre($usuarioServicio, $inputs);
 		
 	}
 	public function saveServicioEstablecimientoUsuario( $servicio_establecimiento_usuario, $id_usuario_servicio, $id_catalogo )
@@ -325,7 +339,6 @@ class OperadorRepository extends BaseRepository
 		{
 			$this->saveUsuarioServicios($usuarioServicio, $inputs);
 			$this->saveServicioEstablecimientoUsuario( $servicio_establecimiento_usuario, $id_usuario_servicio, $id_catalogo );
-                        
 		} else {
 			$this->updateUsuarioServicios($usuarioServicio, $inputs);
 			$this->saveServicioEstablecimientoUsuario( $servicio_establecimiento_usuario, $id_usuario_servicio, $id_catalogo );

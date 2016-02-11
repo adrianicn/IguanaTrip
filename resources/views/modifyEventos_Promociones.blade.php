@@ -1,6 +1,6 @@
 @section('contentPanelServicios')	
 
-{!! HTML::style('css/table.css') !!} 
+{!! HTML::style('public/css/table.css') !!} 
 <div id="contenedor-columnas-servicios">
     @if(isset($itinerarios) && count($itinerarios)>0)
     <div id='itinerarios-1'>
@@ -121,8 +121,7 @@
     </div>
     @endif
     
-    
-    @if(isset($hijos) && count($hijos)>0)
+        @if(isset($hijos) && count($hijos)>0)
     <div id='itinerarios-1'>
         <h1>Dependencias</h1>
         

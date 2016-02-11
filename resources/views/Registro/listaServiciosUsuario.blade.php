@@ -107,6 +107,9 @@
                     </td>
                     @else
                     <td class="vinculo-servicio">
+                        @if($servicio->id_padre!=0)
+                        <img src="{!! asset('img/Star.png')!!}" height="10px" width="10px" />
+                        @endif
                         {!! link_to_route('details.show',$servicio->nombre_servicio, [$servicio->id,$servicio->id_catalogo_servicios]) !!}
 
                     </td>

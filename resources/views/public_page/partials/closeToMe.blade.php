@@ -13,7 +13,11 @@
                 <div class="shortcode-banner-inside" style=" width: 112%;">
                     @endif
                     <div class="shortcode-banner-content">
-                        <a href="#"><h3 class="banner-title">{!!$event->nombre_servicio!!}</h3></a>
+                        <?php
+                        $date = date_create($event->fecha_ingreso);
+                        ?>
+
+                        <a href="#"><h3 class="banner-title">{!!$event->nombre_servicio!!}</h3><h3 style="color: red">{!!date_format($date, 'j F ')!!}</h3></a>
                         <div class="details">
                             <p>{!!$event->detalle_servicio!!}</p>
                         </div>
@@ -52,14 +56,18 @@
 
     <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item eventInd filter-eventos filter-alls" >
         <article class="post">
-            <figure ><img src="{{ asset('images/icon/'.$event->filename)}}" alt=""></figure>
+            <figure ><img src="{{ asset('images/icon/'.$event->filename)}}" alt="{!!$event->nombre_servicio!!}"></figure>
             @if(session('device')!='mobile')
             <div class="shortcode-banner-inside" style=" width: 108%;">
                 @else
                 <div class="shortcode-banner-inside" style=" width: 112%;">
                     @endif
                     <div class="shortcode-banner-content">
-                        <a href="#"><h3 class="banner-title">{!!$event->nombre_servicio!!}</h3></a>
+                                                <?php
+                        $date1 = date_create($event->fecha_ingreso);
+                        ?>
+
+                        <a href="#"><h3 class="banner-title">{!!$event->nombre_servicio!!}</h3><h3 style="color: red">{!!date_format($date1, 'j F ')!!}</h3></a>
                         <div class="details">
                             <p>{!!$event->detalle_servicio!!}</p>
                         </div>
@@ -85,7 +93,11 @@
                 <div class="shortcode-banner-inside" style=" width: 112%;">
                     @endif
                     <div class="shortcode-banner-content">
-                        <a href="#"><h3 class="banner-title">{!!$event->nombre_evento!!}</h3></a>
+                         <?php
+                        $date2 = date_create($event->fecha_desde);
+                        ?>
+
+                        <a href="#"><h3 class="banner-title">{!!$event->nombre_evento!!}</h3><h3 style="color: red">{!!date_format($date2, 'j F ')!!}</h3></a>
                         <div class="details">
                             <p>{!!$event->nombre_servicio!!}</p><p>{!!$event->descripcion_evento!!}</p>
                         </div>
@@ -98,7 +110,7 @@
     @endif
     
     
-    
+    @if(count($eventosDepClose)!=null)
      @foreach ($eventosDepClose as $event)
 
 
@@ -111,9 +123,13 @@
                 <div class="shortcode-banner-inside" style=" width: 112%;">
                     @endif
                     <div class="shortcode-banner-content">
-                        <a href="#"><h3 class="banner-title">{!!$event->nombre_evento!!}</h3></a>
+                         <?php
+                        $date3 = date_create($event->fecha_desde);
+                        ?>
+                        <a href="#"><h3 class="banner-title">{!!$event->nombre_evento!!}</h3><h3 style="color: red">{!!date_format($date3, 'j F ')!!}</h3></a>
                         <div class="details">
-                            <p>{!!$event->nombre_servicio!!}</p><p>{!!$event->descripcion_evento!!}</p>
+                            <p>{{ trans('publico/labels.label34')}} {!!$event->nombre_servicio!!}</p>
+                            <p>{!!$event->descripcion_evento!!}</p>
                         </div>
                     </div>
                 </div>
@@ -121,6 +137,32 @@
         </article>
     </div>
     @endforeach
+    @endif
+    
+    @if(count($PromoDepClose!=null))
+     @foreach ($PromoDepClose as $promo)
+
+
+    <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item eventInd filter-promo filter-alls" >
+        <article class="post">
+            <figure ><img src="{{ asset('images/icon/'.$promo->filename)}}" alt=""></figure>
+            @if(session('device')!='mobile')
+            <div class="shortcode-banner-inside" style=" width: 108%;">
+                @else
+                <div class="shortcode-banner-inside" style=" width: 112%;">
+                    @endif
+                    <div class="shortcode-banner-content">
+                        <a href="#"><h3 class="banner-title">{!!$promo->nombre_promocion!!}</h3></a>
+                        <div class="details">
+                            <p>{!!$event->nombre_servicio!!}</p><p>{!!$promo->descripcion_promocion!!}</p>
+                        </div>
+                    </div>
+                </div>
+
+        </article>
+    </div>
+    @endforeach
+    @endif
     
     
 

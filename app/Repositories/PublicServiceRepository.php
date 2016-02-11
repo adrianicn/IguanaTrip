@@ -87,11 +87,9 @@ class PublicServiceRepository extends BaseRepository {
         }
         return $imagenesF;
     }
-    
-    
-    
+
     //Entrega el arreglo de los eventos según la localización
-    public function getEventsDepProvince($ubicacion, $page_now, $page_stoped,$take, $pagination) {
+    public function getEventsDepProvince($ubicacion, $page_now, $page_stoped, $take, $pagination) {
 
         /* Se despliegan los eventos, promociones e itinerarios de los alrededores de la ubicación establecida
 
@@ -119,7 +117,7 @@ class PublicServiceRepository extends BaseRepository {
                             ->join('eventos_usuario_servicios', 'usuario_servicios.id', '=', 'eventos_usuario_servicios.id_usuario_servicio')
                             ->where('usuario_servicios.estado_servicio', '=', '1')
                             ->where('eventos_usuario_servicios.estado_evento', '=', '1')
-                            ->where('eventos_usuario_servicios.fecha_desde', '>=', "'".Carbon::now()."'")
+                            ->where('eventos_usuario_servicios.fecha_hasta', '>=', "'" . Carbon::now() . "'")
                             ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
                             ->select('eventos_usuario_servicios.id')
                             ->orderBy('usuario_servicios.num_visitas', 'desc')
@@ -131,7 +129,7 @@ class PublicServiceRepository extends BaseRepository {
                             ->join('eventos_usuario_servicios', 'usuario_servicios.id', '=', 'eventos_usuario_servicios.id_usuario_servicio')
                             ->where('usuario_servicios.id_provincia', '=', $ubicGeo->idUbicacionGeograficaPadre)
                             ->where('usuario_servicios.estado_servicio', '=', '1')
-                            ->where('eventos_usuario_servicios.fecha_hasta', '>=', "'".Carbon::now()."'")
+                            ->where('eventos_usuario_servicios.fecha_hasta', '>=', "'" . Carbon::now() . "'")
                             ->where('eventos_usuario_servicios.estado_evento', '=', '1')
                             ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
                             ->select('eventos_usuario_servicios.id')
@@ -156,7 +154,7 @@ class PublicServiceRepository extends BaseRepository {
                     $array[] = $imagenes->id;
             }
 
-            $allCity = $this->getEventsDepCityAll($ubicacion);
+            $allCity = $this->getEventsDepCityAll($ubicacion, $take);
             $currentPage = ($page_now - $page_stoped);
             // You can set this to any page you want to paginate to
             // Make sure that you call the static method currentPageResolver()
@@ -173,7 +171,9 @@ class PublicServiceRepository extends BaseRepository {
                     ->whereIn('images.id', $resulte)
                     ->whereNotIn('images.id', $allCity)
                     ->where('estado_fotografia', '=', '1')
-                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre','eventos_usuario_servicios.*')
+                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre', 'eventos_usuario_servicios.*')
+                    ->orderBy('usuario_servicios.prioridad', 'desc')
+                    ->orderBy('usuario_servicios.num_visitas', 'desc')
                     ->paginate($pagination);
 
 
@@ -183,7 +183,7 @@ class PublicServiceRepository extends BaseRepository {
     }
 
     //Entrega el arreglo de los eventos según la localización
-    public function getEventsIndepProvince($ubicacion, $page_now, $page_stoped,$take, $pagination) {
+    public function getEventsIndepProvince($ubicacion, $page_now, $page_stoped, $take, $pagination) {
 
         /* Se despliegan los eventos, promociones e itinerarios de los alrededores de la ubicación establecida
 
@@ -211,7 +211,7 @@ class PublicServiceRepository extends BaseRepository {
                             ->where('usuario_servicios.estado_servicio', '=', '1')
                             ->where('usuario_servicios.id_catalogo_servicio', '=', '8')
                             ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
-                            ->where('usuario_servicios.fecha_fin', '>=', "'".Carbon::now()."'")
+                            ->where('usuario_servicios.fecha_fin', '>=', "'" . Carbon::now() . "'")
                             ->select('usuario_servicios.id')
                             ->orderBy('num_visitas', 'desc')
                             ->take($take)->get();
@@ -222,7 +222,7 @@ class PublicServiceRepository extends BaseRepository {
                             ->where('usuario_servicios.id_provincia', '=', $ubicGeo->idUbicacionGeograficaPadre)
                             ->where('usuario_servicios.estado_servicio', '=', '1')
                             ->where('usuario_servicios.id_catalogo_servicio', '=', '8')
-                                ->where('usuario_servicios.fecha_fin', '>=', "'".Carbon::now()."'")
+                            ->where('usuario_servicios.fecha_fin', '>=', "'" . Carbon::now() . "'")
                             ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
                             ->select('usuario_servicios.id')
                             ->orderBy('num_visitas', 'desc')
@@ -246,7 +246,7 @@ class PublicServiceRepository extends BaseRepository {
                     $array[] = $imagenes->id;
             }
 
-            $allCity = $this->getEventsIndepCityAll($ubicacion);
+            $allCity = $this->getEventsIndepCityAll($ubicacion, $take);
             $currentPage = ($page_now - $page_stoped);
             // You can set this to any page you want to paginate to
             // Make sure that you call the static method currentPageResolver()
@@ -263,6 +263,8 @@ class PublicServiceRepository extends BaseRepository {
                     ->whereNotIn('images.id', $allCity)
                     ->where('estado_fotografia', '=', '1')
                     ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre')
+                    ->orderBy('usuario_servicios.prioridad', 'desc')
+                    ->orderBy('usuario_servicios.num_visitas', 'desc')
                     ->paginate($pagination);
 
 
@@ -272,7 +274,77 @@ class PublicServiceRepository extends BaseRepository {
     }
 
     //Entrega el arreglo de los eventos según la localización que son dependientes de un servicio
-    public function getEventsDepCity($ubicacion ,$take,$pagination) {
+    public function getPromoDepCity($ubicacion, $take, $pagination) {
+
+        /* Se despliegan los eventos, promociones e itinerarios de los alrededores de la ubicación establecida
+
+         * Eventos o Actividades: son los eventos macro independientes de la tabla usuario_servicio catalogo 5
+         * Eventos dependientes: son los eventos dependientes de un usuario_ servicio tabla eventos
+         * Promociones: promociones dependientes del usuario_ servicio
+         * Itinerarios: Igual
+         *          */
+
+
+        if ($ubicacion != "") {
+
+            $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.nombre', '=', $ubicacion->city)
+                            ->select('ubicacion_geografica.*')->first();
+        }
+        ///Si la $ubicacion es null
+        else {
+            return null;
+        }
+        if ($ubicGeo != null) {
+            $eventos = DB::table('usuario_servicios')
+                            ->join('promocion_usuario_servicio', 'usuario_servicios.id', '=', 'promocion_usuario_servicio.id_usuario_servicio')
+                            ->where('usuario_servicios.id_canton', '=', $ubicGeo->id)
+                            ->where('usuario_servicios.estado_servicio', '=', '1')
+                            ->where('promocion_usuario_servicio.estado_promocion', '=', '1')
+                            ->where('promocion_usuario_servicio.fecha_hasta', '>=', "'" . Carbon::now() . "'")
+                            ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                            ->select('promocion_usuario_servicio.id')
+                            ->orderBy('usuario_servicios.num_visitas', 'desc')
+                            ->take($take)->get();
+        }
+
+        if ($eventos != null) {
+            $array = array();
+
+            foreach ($eventos as $to) {
+                $imagenes = DB::table('images')
+                        ->where('images.id_auxiliar', '=', $to->id)
+                        ->where('estado_fotografia', '=', '1')
+                        ->where('id_catalogo_fotografia', '=', '2')
+                        ->select('images.id')
+                        ->first();
+
+                if ($imagenes != null)
+                    $array[] = $imagenes->id;
+            }
+
+
+
+
+
+            $imagenes = DB::table('images')
+                    ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                    ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
+                    ->join('promocion_usuario_servicio', 'usuario_servicios.id', '=', 'promocion_usuario_servicio.id_usuario_servicio')
+                    ->whereIn('images.id', $array)
+                    ->where('estado_fotografia', '=', '1')
+                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre', 'promocion_usuario_servicio.*')
+                    ->orderBy('usuario_servicios.prioridad', 'desc')
+                    ->orderBy('usuario_servicios.num_visitas', 'desc')
+                    ->paginate($pagination);
+
+            return $imagenes;
+        }
+        return null;
+    }
+
+    //Entrega el arreglo de los eventos según la localización que son dependientes de un servicio
+    public function getEventsDepCity($ubicacion, $take, $pagination) {
 
         /* Se despliegan los eventos, promociones e itinerarios de los alrededores de la ubicación establecida
 
@@ -299,7 +371,7 @@ class PublicServiceRepository extends BaseRepository {
                             ->where('usuario_servicios.id_canton', '=', $ubicGeo->id)
                             ->where('usuario_servicios.estado_servicio', '=', '1')
                             ->where('eventos_usuario_servicios.estado_evento', '=', '1')
-                            ->where('fecha_hasta', '>=', "'".Carbon::now()."'")
+                            ->where('fecha_hasta', '>=', "'" . Carbon::now() . "'")
                             ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
                             ->select('eventos_usuario_servicios.id')
                             ->orderBy('usuario_servicios.num_visitas', 'desc')
@@ -331,18 +403,18 @@ class PublicServiceRepository extends BaseRepository {
                     ->join('eventos_usuario_servicios', 'usuario_servicios.id', '=', 'eventos_usuario_servicios.id_usuario_servicio')
                     ->whereIn('images.id', $array)
                     ->where('estado_fotografia', '=', '1')
-                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre','eventos_usuario_servicios.*')
+                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre', 'eventos_usuario_servicios.*')
+                    ->orderBy('usuario_servicios.prioridad', 'desc')
+                    ->orderBy('usuario_servicios.num_visitas', 'desc')
                     ->paginate($pagination);
 
             return $imagenes;
         }
         return null;
     }
-    
-    
-    
+
     //Entrega el arreglo de los eventos según la localización
-    public function getEventsIndepCity($ubicacion ,$take,$pagination) {
+    public function getEventsIndepCity($ubicacion, $take, $pagination) {
 
         /* Se despliegan los eventos, promociones e itinerarios de los alrededores de la ubicación establecida
 
@@ -368,8 +440,7 @@ class PublicServiceRepository extends BaseRepository {
                             ->where('usuario_servicios.id_canton', '=', $ubicGeo->id)
                             ->where('usuario_servicios.estado_servicio', '=', '1')
                             ->where('usuario_servicios.id_catalogo_servicio', '=', '8')
-                            ->where('fecha_fin', '>=', "'".Carbon::now()."'")
-                            
+                            ->where('fecha_fin', '>=', "'" . Carbon::now() . "'")
                             ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
                             ->select('usuario_servicios.id')
                             ->orderBy('num_visitas', 'desc')
@@ -401,17 +472,17 @@ class PublicServiceRepository extends BaseRepository {
                     ->whereIn('images.id', $array)
                     ->where('estado_fotografia', '=', '1')
                     ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre')
+                    ->orderBy('usuario_servicios.prioridad', 'desc')
+                    ->orderBy('usuario_servicios.num_visitas', 'desc')
                     ->paginate($pagination);
 
             return $imagenes;
         }
         return null;
     }
-    
-    
-    
+
     //Entrega el arreglo de los eventos según la localización
-    public function getEventsDepCityAll($ubicacion) {
+    public function getEventsDepCityAll($ubicacion, $take) {
 
         /* Se despliegan los eventos, promociones e itinerarios de los alrededores de la ubicación establecida
 
@@ -430,27 +501,27 @@ class PublicServiceRepository extends BaseRepository {
         }
         ///Si la $ubicacion es null
         else {
-            return  null;
+            return null;
         }
         if ($ubicGeo != null) {
-     
-            
-             $eventos = DB::table('usuario_servicios')
+
+
+            $eventos = DB::table('usuario_servicios')
                             ->join('eventos_usuario_servicios', 'usuario_servicios.id', '=', 'eventos_usuario_servicios.id_usuario_servicio')
                             ->where('usuario_servicios.id_canton', '=', $ubicGeo->id)
                             ->where('usuario_servicios.estado_servicio', '=', '1')
                             ->where('eventos_usuario_servicios.estado_evento', '=', '1')
-                            ->where('fecha_hasta', '>=', "'".Carbon::now()."'")
+                            ->where('fecha_hasta', '>=', "'" . Carbon::now() . "'")
                             ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
                             ->select('eventos_usuario_servicios.id')
                             ->orderBy('usuario_servicios.num_visitas', 'desc')
-                            ->take(100)->get();
+                            ->take($take)->get();
         }
 
         if ($eventos != null) {
             $array = array();
 
-            
+
             foreach ($eventos as $to) {
                 $imagenes = DB::table('images')
                         ->where('images.id_auxiliar', '=', $to->id)
@@ -470,7 +541,7 @@ class PublicServiceRepository extends BaseRepository {
     }
 
     //Entrega el arreglo de los eventos según la localización
-    public function getEventsIndepCityAll($ubicacion) {
+    public function getEventsIndepCityAll($ubicacion, $take) {
 
         /* Se despliegan los eventos, promociones e itinerarios de los alrededores de la ubicación establecida
 
@@ -489,24 +560,24 @@ class PublicServiceRepository extends BaseRepository {
         }
         ///Si la $ubicacion es null
         else {
-            return  null;
+            return null;
         }
         if ($ubicGeo != null) {
             $eventos = DB::table('usuario_servicios')
                             ->where('usuario_servicios.id_canton', '=', $ubicGeo->id)
                             ->where('usuario_servicios.estado_servicio', '=', '1')
                             ->where('usuario_servicios.id_catalogo_servicio', '=', '8')
-                            ->where('fecha_fin', '>=', "'".Carbon::now()."'")
+                            ->where('fecha_fin', '>=', "'" . Carbon::now() . "'")
                             ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
                             ->select('usuario_servicios.id')
                             ->orderBy('num_visitas', 'desc')
-                            ->take(100)->get();
+                            ->take($take)->get();
         }
 
         if ($eventos != null) {
             $array = array();
 
-            
+
             foreach ($eventos as $to) {
                 $imagenes = DB::table('images')
                         ->where('images.id_auxiliar', '=', $to->id)
@@ -628,6 +699,7 @@ class PublicServiceRepository extends BaseRepository {
                             ->where('usuario_servicios.id_catalogo_servicio', '=', '4')
                             ->where('usuario_servicios.estado_servicio', '=', '1')
                             ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                            ->orderBy('usuario_servicios.prioridad', 'desc')
                             ->orderBy('usuario_servicios.num_visitas', 'desc')
                             ->take($n)->get();
 
@@ -652,6 +724,8 @@ class PublicServiceRepository extends BaseRepository {
                 ->join('ubicacion_geografica', 'usuario_servicios.id_provincia', '=', 'ubicacion_geografica.id')
                 ->whereIn('images.id', $final_top)
                 ->select('images.*', 'usuario_servicios.*', 'ubicacion_geografica.nombre', 'ubicacion_geografica.id as id_geo', 'ubicacion_geografica.id_region')
+                ->orderBy('usuario_servicios.prioridad', 'desc')
+                ->orderBy('usuario_servicios.num_visitas', 'desc')
                 ->paginate(5);
 
         return $imagenesF;
@@ -757,6 +831,16 @@ class PublicServiceRepository extends BaseRepository {
         return $provincias;
     }
 
+    //Entrega el detalle de la provincia
+    public function getAtraccionDetails($id_atraccion) {
+
+        $provincias = DB::table('usuario_servicios')
+                ->where('id', '=', $id_atraccion)
+                ->select('usuario_servicios.*')
+                ->first();
+        return $provincias;
+    }
+
 //Entrega el detalle de la region
     public function getRegionDetails($id_region) {
 
@@ -815,5 +899,151 @@ class PublicServiceRepository extends BaseRepository {
 
         return $imagenes;
     }
+
+    //Entrega el arreglo de Imagenes por atraccion
+    public function getAtraccionImages($id) {
+
+        $imagenes = DB::table('images')
+                ->where('id_auxiliar', '=', $id)
+                ->where('estado_fotografia', '=', '1')
+                ->where('id_catalogo_fotografia', '=', '1')
+                ->select('images.*')
+                ->get();
+
+
+        return $imagenes;
+    }
+
+    public function getEventosImagenAtraccion($eventos) {
+
+        $final_imagen = array();
+        foreach ($eventos as $evento) {
+
+            $imagenes = DB::table('images')
+                    ->where('id_auxiliar', '=', $evento->id)
+                    ->where('estado_fotografia', '=', '1')
+                    ->where('id_catalogo_fotografia', '=', '4')
+                    ->first();
+
+            if ($imagenes != null) {
+
+
+                $final_imagen[] = $imagenes->id;
+            }
+        }
+        $imagenesf = DB::table('images')
+                ->whereIn('images.id', $final_imagen)
+                ->where('estado_fotografia', '=', '1')
+                ->where('id_catalogo_fotografia', '=', '4')
+                ->select('images.*')
+                ->get();
+
+
+        return $imagenesf;
+    }
+    
+    
+     public function getPromotionsImagenAtraccion($promos) {
+
+        $final_imagen = array();
+        foreach ($promos as $promo) {
+
+            $imagenes = DB::table('images')
+                    ->where('id_auxiliar', '=', $promo->id)
+                    ->where('estado_fotografia', '=', '1')
+                    ->where('id_catalogo_fotografia', '=', '2')
+                    ->first();
+
+            if ($imagenes != null) {
+
+
+                $final_imagen[] = $imagenes->id;
+            }
+        }
+        $imagenesf = DB::table('images')
+                ->whereIn('images.id', $final_imagen)
+                ->where('estado_fotografia', '=', '1')
+                ->where('id_catalogo_fotografia', '=', '2')
+                ->select('images.*')
+                ->get();
+
+
+        return $imagenesf;
+    }
+    
+    
+    public function getItinerImagenAtraccion($itinerarios) {
+
+        $final_imagen = array();
+        foreach ($itinerarios as $itiner) {
+
+            $imagenes = DB::table('images')
+                    ->where('id_auxiliar', '=', $itiner->id)
+                    ->where('estado_fotografia', '=', '1')
+                    ->where('id_catalogo_fotografia', '=', '3')
+                    ->first();
+
+            if ($imagenes != null) {
+
+
+                $final_imagen[] = $imagenes->id;
+            }
+        }
+        $imagenesf = DB::table('images')
+                ->whereIn('images.id', $final_imagen)
+                ->where('estado_fotografia', '=', '1')
+                ->where('id_catalogo_fotografia', '=', '3')
+                ->select('images.*')
+                ->get();
+
+
+        return $imagenesf;
+    }
+    
+    
+    public function getEventosAtraccion($id) {
+
+        $events = DB::table('eventos_usuario_servicios')
+                ->where('id_usuario_servicio', '=', $id)
+                ->where('estado_evento', '=', '1')
+                ->where('fecha_hasta', '>=', "'" . Carbon::now() . "'")
+                ->select('eventos_usuario_servicios.*')
+                ->get();
+
+
+        return $events;
+    }
+    
+    public function getPromoAtraccion($id) {
+
+        $events = DB::table('promocion_usuario_servicio')
+                ->where('id_usuario_servicio', '=', $id)
+                ->where('estado_promocion', '=', '1')
+                ->where('fecha_desde', '<=', "'" . Carbon::now() . "'")
+                ->where('fecha_hasta', '>=', "'" . Carbon::now() . "'")
+                ->select('promocion_usuario_servicio.*')
+                ->get();
+
+
+        return $events;
+    }
+    
+     public function getItinerAtraccion($id) {
+
+        $itiner = DB::table('itinerarios_usuario_servicios')
+                ->where('id_usuario_servicio', '=', $id)
+                ->where('estado_itinerario', '=', '1')
+                ->where('fecha_desde', '<=', "'" . Carbon::now() . "'")
+                ->where('fecha_hasta', '>=', "'" . Carbon::now() . "'")
+                ->select('itinerarios_usuario_servicios.*')
+                ->get();
+
+
+        return $itiner;
+    }
+    
+    
+    
+    
 
 }

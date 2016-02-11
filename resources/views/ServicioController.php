@@ -162,7 +162,7 @@ class ServicioController extends Controller {
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-        
+
         $operadorData = array(
             //'nombre_empresa_operador' => $formFields['nombre_empresa_operador'],
             'nombre_contacto_operador_1' => $formFields['nombre_contacto_operador_1'],
@@ -188,18 +188,15 @@ class ServicioController extends Controller {
                 $request->session()->put('operador_id', $formFields['id_usuario_op']);
 
                 $operador = $operador_gestion->update($operadorData);
-            }
-            
-            else {
+            } else {
                 $operador = $operador_gestion->store($operadorData);
                 $request->session()->put('operador_id', $operador->id);
-                $operadores = $operador_gestion->getLastIdInsert($operadorData);
-                //foreach ($operadores as $operador)
+               // $operadores = $operador_gestion->getLastIdInsert($operadorData);
+                // foreach ($operadores as $operador)
                     $id_usuario_op = $operador->id_usuario_op;
-                    
             }
         }
-        $returnHTML = ('/IguanaTrip/public/userservice');
+        $returnHTML = ('/userservice');
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
 
@@ -236,7 +233,7 @@ class ServicioController extends Controller {
         return $_SERVER['REMOTE_ADDR'];
     }
 
-    public function postUsuarioServicios(Request $request, OperadorRepository $usuarioSevicio_gestion , ServiciosOperadorRepository $gestion) {
+    public function postUsuarioServicios(Request $request, OperadorRepository $usuarioSevicio_gestion, ServiciosOperadorRepository $gestion) {
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
 
@@ -246,12 +243,13 @@ class ServicioController extends Controller {
         } else {
             $servicio_establecimiento_usuario[] = "";
         }
+//     	var_dump($servicio_establecimiento_usuario);
+//     	exit;
 
-        if (!isset($formFields['fecha_ingreso']))
+          if (!isset($formFields['fecha_ingreso']))
             $formFields['fecha_ingreso'] = '0000-00-00 00:00:00';
         if (!isset($formFields['fecha_fin']))
             $formFields['fecha_fin'] ='0000-00-00 00:00:00';
-
         if (!isset($formFields['id_provincia']))
             $formFields['id_provincia'] = 0;
         if (!isset($formFields['id_canton']))
@@ -260,7 +258,7 @@ class ServicioController extends Controller {
             $formFields['id_parroquia'] = 0;
 
         $usuarioServicioData = array(
-                'nombre_servicio' => $formFields['nombre_servicio'],
+                 'nombre_servicio' => $formFields['nombre_servicio'],
                 'detalle_servicio' => $formFields['detalle_servicio'],
                 'precio_desde' => $formFields['precio_desde'],
                 'precio_hasta' => $formFields['precio_hasta'],
@@ -288,7 +286,6 @@ class ServicioController extends Controller {
                     'como_llegar2' => $formFields['como_llegar2'],
                     'fecha_ingreso' => $formFields['fecha_ingreso'],
                     'fecha_fin' => $formFields['fecha_fin']
-                
         );
         $validator = Validator::make($usuarioServicioData, $this->validationUsuarioServicios);
         if ($validator->fails()) {
@@ -300,8 +297,7 @@ class ServicioController extends Controller {
 
             //return $servicio_establecimiento_usuario;
             $usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServicios($usuarioServicioData, $servicio_establecimiento_usuario, $formFields['id'], $formFields['id_catalogo']);
-            
-            if ($formFields['id'] == 0)
+              if ($formFields['id'] == 0)
 		{
 		//new       
                 $search=$formFields['nombre_servicio']." ".$formFields['detalle_servicio'];            
@@ -312,9 +308,8 @@ class ServicioController extends Controller {
                     $search=$formFields['nombre_servicio']." ".$formFields['detalle_servicio']." ".$formFields['tags'];            
                     $gestion->storeUpdateSerchEngine( $usuarioServicio,4,$formFields['id'],$search);
 		}
-             
         }
-        $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/' . $formFields['id'] . '/' . $formFields['id_catalogo']);
+        $returnHTML = ('/servicios/serviciooperador/' . $formFields['id'] . '/' . $formFields['id_catalogo']);
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
 
@@ -330,18 +325,15 @@ class ServicioController extends Controller {
             'id_catalogo_servicio' => $formFields['id_catalogo_servicio']
         );
         $usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServiciosMini($usuarioServicioData);
-    
-		//new       
+        	//new       
                 $search=$formFields['nombre_servicio']." ".$formFields['detalle_servicio'];            
             $gestion->storeSearchEngine($usuarioServicio, $search,4,$usuarioServicio);
             
-		
-        $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/' . $usuarioServicio . '/' . $formFields['id_catalogo_servicio']);
+        $returnHTML = ('/servicios/serviciooperador/' . $usuarioServicio . '/' . $formFields['id_catalogo_servicio']);
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
     
-    
-    public function postUsuarioServiciosMiniPadre(Request $request, OperadorRepository $usuarioSevicio_gestion, ServiciosOperadorRepository $gestion) {
+        public function postUsuarioServiciosMiniPadre(Request $request, OperadorRepository $usuarioSevicio_gestion, ServiciosOperadorRepository $gestion) {
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
@@ -360,10 +352,8 @@ class ServicioController extends Controller {
             $gestion->storeSearchEngine($usuarioServicio, $search,4,$usuarioServicio);
             
 		
-        $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/' . $usuarioServicio . '/' . $formFields['id_catalogo_servicio']);
+        $returnHTML = ('/servicios/serviciooperador/' . $usuarioServicio . '/' . $formFields['id_catalogo_servicio']);
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
     
-    
-
 }

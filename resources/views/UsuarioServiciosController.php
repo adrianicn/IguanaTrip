@@ -77,6 +77,26 @@ class UsuarioServiciosController extends Controller {
         return view('Registro.editEvento', compact('listEventos', 'servicio'));
     }
 
+    
+    public function getImagesDescription(Request $request,$tipo, $idtipo,ServiciosOperadorRepository $gestion) {
+        
+         $ImgPromociones = $gestion->getGenericImagePromocionesOperador($tipo,$idtipo);
+
+        $view = View::make('reusable.imageContainerDescriptionAjax')->with('ImgPromociones', $ImgPromociones);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+        {
+        return $view;}
+        
+        
+        
+    }
+
     //despliega la descipcion de las provincias
     public function getProvinciasDescipcion() {
 
@@ -437,7 +457,7 @@ class UsuarioServiciosController extends Controller {
         }
 
 
-        $returnHTML = ('/IguanaTrip/public/detalleServicios');
+        $returnHTML = ('/detalleServicios');
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
 
@@ -536,7 +556,7 @@ class UsuarioServiciosController extends Controller {
         //Gestion de actualizacion de busqueda    
             $search=$formFields['nombre_promocion']." ".$formFields['descripcion_promocion']." ".$formFields['codigo_promocion']." ".$formFields['tags']." ".$formFields['observaciones_promocion'];            
             $gestion->storeUpdateSerchEngine( $Promocion,1,$formFields['id'],$search);
-            $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/'.$formFields['id_usuario_servicio'].'/'.$formFields['catalogo']);
+            $returnHTML = ('/servicios/serviciooperador/'.$formFields['id_usuario_servicio'].'/'.$formFields['catalogo']);
         } else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
             $object = $gestion->storeNewPromocion($formFields);
@@ -545,7 +565,7 @@ class UsuarioServiciosController extends Controller {
              $search=$formFields['nombre_promocion']." ".$formFields['descripcion_promocion']." ".$formFields['codigo'];            
             $gestion->storeSearchEngine($formFields['id_usuario_servicio'], $search,1,$object->id);
 
-            $returnHTML = ('/IguanaTrip/public/promocion/' . $object->id);
+            $returnHTML = ('/promocion/' . $object->id);
             
         }
 
@@ -559,17 +579,7 @@ class UsuarioServiciosController extends Controller {
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-        
-        //return $formFields;
         $gestion->UpdateGeoLoc($formFields);
-        
-          /*$usuarioServicioData = array(
-            'nombre_servicio' => $formFields['nombre_servicio'],
-            'detalle_servicio' => $formFields['detalle_servicio'],
-               'id_usuario_servicio' => $formFields['id'],
-            'id_provincia' => $formFields['id_provincia'],
-            'id_canton' => $formFields['id_canton'],
-            'id_parroquia' => $formFields['id_parroquia']  );*/
         return response()->json(array('success' => true));
     }
 
@@ -617,27 +627,6 @@ class UsuarioServiciosController extends Controller {
          $ImgPromociones = $gestion->getGenericImagePromocionesOperador($tipo,$idtipo);
 
         $view = View::make('reusable.imageContainerAjax')->with('ImgPromociones', $ImgPromociones);
-        if ($request->ajax()) {
-            $sections = $view->rendersections();
-
-
-            return Response::json($sections);
-            //return  Response::json($sections['contentPanel']); 
-        } else
-        {
-        return $view;}
-        
-        
-        
-    }
-    
-    
-      
-    public function getImagesDescription(Request $request,$tipo, $idtipo,ServiciosOperadorRepository $gestion) {
-        
-         $ImgPromociones = $gestion->getGenericImagePromocionesOperador($tipo,$idtipo);
-
-        $view = View::make('reusable.imageContainerDescriptionAjax')->with('ImgPromociones', $ImgPromociones);
         if ($request->ajax()) {
             $sections = $view->rendersections();
 
@@ -730,17 +719,17 @@ class UsuarioServiciosController extends Controller {
             $search=$formFields['nombre_evento']." ".$formFields['descripcion_evento']." ".$formFields['tags'];            
             
             $gestion->storeUpdateSerchEngine( $Evento,2,$formFields['id'],$search);
-            $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/'.$formFields['id_usuario_servicio'].'/'.$formFields['catalogo']);
+            $returnHTML = ('/servicios/serviciooperador/'.$formFields['id_usuario_servicio'].'/'.$formFields['catalogo']);
 
             
-            //$returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/'.$formFields['id_usuario_servicio'].'/'.$formFields['catalogo']);
+            //$returnHTML = ('/servicios/serviciooperador/'.$formFields['id_usuario_servicio'].'/'.$formFields['catalogo']);
         } else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
             $object = $gestion->storeNewEvento($formFields);
             //Gestion de nueva de busqueda    
             $search=$formFields['nombre_evento']." ".$formFields['descripcion_evento'];            
             $gestion->storeSearchEngine($formFields['id_usuario_servicio'], $search,2,$object->id);
-            $returnHTML = ('/IguanaTrip/public/eventos/'.$object->id);
+            $returnHTML = ('/eventos/'.$object->id);
         }
 
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
@@ -755,9 +744,7 @@ class UsuarioServiciosController extends Controller {
         $itinerarios = $gestion->getItinerariosporUsuario($id_usuario_servicio);
         $promociones = $gestion->getPromocionesUsuarioServicio($id_usuario_servicio);
         $eventos = $gestion->getEventosUsuarioServicio($id_usuario_servicio);
-        
-        $hijos = $gestion->getHijosUsuarioServicio($id_usuario_servicio);
-
+$hijos = $gestion->getHijosUsuarioServicio($id_usuario_servicio);
 
         $view = View::make('reusable.modifyEventos_Promociones')->with('itinerarios', $itinerarios)->with('promociones', $promociones)->with('eventos', $eventos)->with('hijos', $hijos);
         if ($request->ajax()) {
@@ -831,7 +818,7 @@ class UsuarioServiciosController extends Controller {
         
             
 
-            $returnHTML = ('/IguanaTrip/public/itinerario/' . $formFields['id']);
+            $returnHTML = ('/itinerario/' . $formFields['id']);
         } else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
             $object = $gestion->storeNewItinerario($formFields);
@@ -840,7 +827,7 @@ class UsuarioServiciosController extends Controller {
             $search=$formFields['nombre_itinerario']." ".$formFields['descripcion_itinerario'];            
             $gestion->storeSearchEngine($formFields['id_usuario_servicio'], $search,3,$object->id);
             
-            $returnHTML = ('/IguanaTrip/public/itinerario/' . $object->id);
+            $returnHTML = ('/itinerario/' . $object->id);
         }
 
 
@@ -876,7 +863,7 @@ class UsuarioServiciosController extends Controller {
             $gestion->storeUpdateSerchEngine( $Itinerario,4,$formFields['id'],$search);
         
             
-            $returnHTML = ('/IguanaTrip/public/itinerario/' . $formFields['id_itinerario']);
+            $returnHTML = ('/itinerario/' . $formFields['id_itinerario']);
         } else { //logica de insert
             //Arreglo de inputs prestados que vienen del formulario
             $object = $gestion->storeNewDetalleItinerario($formFields);
@@ -885,7 +872,7 @@ class UsuarioServiciosController extends Controller {
              $search=$formFields['lugar_punto']." ".$formFields['incluye_punto'];            
             $gestion->storeSearchEngine($formFields['id_usuario_servicio'], $search,4,$object->id);
             
-            $returnHTML = ('/IguanaTrip/public/itinerario/' . $formFields['id_itinerario']);
+            $returnHTML = ('/itinerario/' . $formFields['id_itinerario']);
         }
 
 

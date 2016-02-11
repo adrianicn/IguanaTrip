@@ -35,7 +35,19 @@ return [
     'label31' => 'Ver más',
     'label32' => 'Eventos',
     'label33' => 'Promociones',
-    
+    'label34' => 'Lugar:',
+    'label35' => 'Dirección',
+    'label36' => 'Como llegar',
+    'label37' => 'Precios',
+    'label38' => 'Teléfono',
+    'label39' => 'Correo electónico',
+      'label40' => 'Web page',
+    'label41' => 'Info',
+    'label42' => 'Desde',
+    'label43' => 'Promociones',
+    'label44' => 'No existen eventos disponibles por el momento',
+    'label45' => 'No existen promociones disponibles por el momento',
+    'label46' => 'Trips',
 	'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

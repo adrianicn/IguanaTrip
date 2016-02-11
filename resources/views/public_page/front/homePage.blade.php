@@ -301,7 +301,7 @@
                            <div class="post-filters">
                                 <a href="#" class="btn btn-sm style4 hover-blue active" data-filter="filter-alls">{{ trans('publico/labels.label12')}}</a>
                                 <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-eventos">{{ trans('publico/labels.label32')}}</a>
-                                <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-promociones">{{ trans('publico/labels.label33')}}</a>
+                                <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-promo">{{ trans('publico/labels.label33')}}</a>
                                 
                             </div>
                             <div class="iso-container iso-col-4 style-masonry eventsPromo">

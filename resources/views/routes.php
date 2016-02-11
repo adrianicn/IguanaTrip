@@ -211,7 +211,6 @@ Route::post('servicios/serviciosoperadormini', ['as' => 'upload-postusuarioservi
 Route::post('servicios/serviciosoperadorminiPadre', ['as' => 'upload-postusuarioserviciosminiPadre', 'uses' =>'ServicioController@postUsuarioServiciosMiniPadre','middleware' => 'notAuth']);
 
 
-
 /*Rutas dispositivo mobil*/
 
 
@@ -236,9 +235,4 @@ Route::get('/getRegiones', ['as' => 'regiones', 'uses' => 'HomePublicController@
 Route::get('/getProvinciaDescipcion/{id_provincia}/{id_image}', ['as' => 'provinciasdescr', 'uses' => 'HomePublicController@getProvinciaDescripcion']);
 Route::get('/getRegionDescipcion/{id_region}', ['as' => 'regiondescr', 'uses' => 'HomePublicController@getRegionsId']);
 
-Route::get('/getTopPlaces', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getTopPlaces']);
-Route::get('/getEventscloseToMe', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getcloseToMe']);
-
-
-Route::get('/getDescipcionAtraccion/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getAtraccionDescripcion']);
  /*  Fin de las rutas del sistema publico*/

@@ -1,14 +1,14 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
-{!! HTML::style('css/calendar/ui-jquery.css') !!}
+{!! HTML::style('public/css/calendar/ui-jquery.css') !!}
 
 <div style='display:none'>
-    <img src="{!! asset('img/x.png')!!}" alt='' />
+    <img src="{!! asset('public/img/x.png')!!}" alt='' />
 </div>
 <style>
     #simplemodal-container a.modalCloseImg {
-        background:url("{!! asset('img/x.png')!!}") no-repeat;
+        background:url("{!! asset('public/img/x.png')!!}") no-repeat;
         width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
     </style>
     <div id="basic-modal-content" class="cls loadModal"></div>
@@ -22,7 +22,6 @@ $usuarioServicio->id = 0;
 $usuarioServicio->nombre_servicio = '';
 $usuarioServicio->detalle_servicio = '';
 $usuarioServicio->precio_desde = '';
-$usuarioServicio->tags = '';
 $usuarioServicio->precio_hasta = '';
 $usuarioServicio->precio_anterior = '';
 $usuarioServicio->precio_actual = '';
@@ -36,19 +35,15 @@ $usuarioServicio->descuento_clientes = '';
 $usuarioServicio->tags_servicio = '';
 $usuarioServicio->observaciones = '';
 $usuarioServicio->telefono = '';
+$usuarioServicio->como_llegar1 = '';
+$usuarioServicio->como_llegar2 = '';
+$usuarioServicio->como_llegar1_1 = '';
+$usuarioServicio->id_usuario_operador = '';
+$usuarioServicio->id_padre = '';
+$usuarioServicio->como_llegar2_2 = '';
 $usuarioServicio->id_provincia = '';
 $usuarioServicio->id_canton = '';
 $usuarioServicio->id_parroquia = '';
-$usuarioServicio->como_llegar1 = '';
-$usuarioServicio->como_llegar2 = '';
-
-$usuarioServicio->id_usuario_operador = '';
-$usuarioServicio->id_padre = '';
-
-$usuarioServicio->fecha_ingreso = '';
-$usuarioServicio->fecha_fin = '';
-$usuarioServicio->como_llegar1_1 = '';
-$usuarioServicio->como_llegar2_2 = '';
 $usuarioServicio->latitud_servicio = -0.1806532;
 $usuarioServicio->longitud_servicio = -78.46783820000002;
 ?>
@@ -62,29 +57,23 @@ $usuarioServicio->precio_hasta = trim($detalles->precio_hasta);
 $usuarioServicio->precio_anterior = trim($detalles->precio_anterior);
 $usuarioServicio->precio_actual = trim($detalles->precio_actual);
 $usuarioServicio->descuento_servico = trim($detalles->descuento_servico);
-$usuarioServicio->tags = trim($detalles->tags);
 $usuarioServicio->direccion_servicio = trim($detalles->direccion_servicio);
 $usuarioServicio->correo_contacto = trim($detalles->correo_contacto);
 $usuarioServicio->pagina_web = trim($detalles->pagina_web);
 $usuarioServicio->nombre_comercial = trim($detalles->nombre_comercial);
+
 $usuarioServicio->tags = trim($detalles->tags);
+$usuarioServicio->id_usuario_operador = $detalles->id_usuario_operador;
+$usuarioServicio->id_padre = $detalles->id_padre;
 $usuarioServicio->descuento_clientes = $detalles->descuento_clientes;
 $usuarioServicio->tags_servicio = trim($detalles->tags_servicio);
+$usuarioServicio->como_llegar1 = $detalles->como_llegar1;
+$usuarioServicio->como_llegar2 = $detalles->como_llegar2;
+$usuarioServicio->como_llegar1_1 = $detalles->como_llegar1_1;
+$usuarioServicio->como_llegar2_2 = $detalles->como_llegar2_2;
 $usuarioServicio->id_provincia = $detalles->id_provincia;
 $usuarioServicio->id_canton = $detalles->id_canton;
 $usuarioServicio->id_parroquia = $detalles->id_parroquia;
-$usuarioServicio->como_llegar1 = $detalles->como_llegar1;
-$usuarioServicio->como_llegar2 = $detalles->como_llegar2;
-$usuarioServicio->id_usuario_operador = $detalles->id_usuario_operador;
-
-
-$usuarioServicio->como_llegar1_1 = $detalles->como_llegar1_1;
-$usuarioServicio->como_llegar2_2 = $detalles->como_llegar2_2;
-$usuarioServicio->fecha_ingreso = $detalles->fecha_ingreso;
-$usuarioServicio->fecha_fin = $detalles->fecha_fin;
-$usuarioServicio->id_padre = $detalles->id_padre;
-
-
 $usuarioServicio->observaciones = trim($detalles->observaciones);
 $usuarioServicio->telefono = $detalles->telefono;
 $usuarioServicio->latitud_servicio = ($detalles->latitud_servicio == '') ? -0.1806532 : $detalles->latitud_servicio;
@@ -95,22 +84,26 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
     <div id="title-box-header">
         <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
 
-            <?php
-            switch (session('tip_oper')) {
-                case 1:
-                    $prefix = "I'm an ";
-                    $operadorName = "Agency";
-                    break;
-                case 2:
-                    $prefix = "I'm an ";
-                    $operadorName = "Enterprise";
-                    break;
-                case 3:
-                    $prefix = "I'm just";
-                    $operadorName = "Me";
-                    break;
-            }
-            ?>
+             <?php
+                  $prefix="";
+        $operadorName="";
+
+          switch (session('tip_oper')) {
+    case 1:
+        $prefix="Soy un ";
+        $operadorName="Negocio";
+        break;
+    case 2:
+        $prefix="Soy una ";
+        $operadorName="Agencia";
+        break;
+    case 3:
+        $prefix="Soy solo";
+        $operadorName="Yo";
+        break;
+    
+}
+?>
             <h2 class="head-title">
                 {!!$prefix!!}             <strong>{!!$operadorName!!}</strong>
             </h2>
@@ -124,13 +117,13 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 
         <h2 class="head-title-navigation">
             <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios')!!}'"> 
-                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
+                <strong><img src="{!! asset('public/img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
             <a class="button-step4" onclick="window.location.href = '{!!asset('/operador')!!}'"> 
-                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2 </strong></a>
+                <strong><img src="{!! asset('public/img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2 </strong></a>
             <a class="button-step4" onclick="window.location.href = '{!!asset('/userservice')!!}'"> 
-                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 3 </strong></a>
+                <strong><img src="{!! asset('public/img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 3 </strong></a>
             <a class="button-step4" onclick="window.location.href = '{!!asset('/detalleServicios')!!}'"> 
-                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 4 </strong></a>
+                <strong><img src="{!! asset('public/img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 4 </strong></a>
             <a class="button-step4 "> 
                 <div style="color:#F26803; display: block;
                      font-size: 0.9em;
@@ -153,7 +146,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::label('nombre_servicio_1', 'Nombre Servicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
                     {!!Form::text('nombre_servicio', $usuarioServicio->nombre_servicio, array('class'=>'inputtext chng','placeholder'=>'Nombre del Servicio'))!!}
                 </div>
-                @if($id_catalogo==8)
+                           @if($id_catalogo==8)
                     <div class="form-group-1">
                     {!!Form::label('Fecha_inicio', 'Fecha inicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
                    
@@ -165,7 +158,6 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::text('fecha_fin', $usuarioServicio->fecha_fin, array('class'=>'inputtext chng datepicker'))!!}
                 </div>
                 @endif
-
                 <div class="form-group-1">
                     {!!Form::label('precio_desde_1', 'Precio Desde', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
                     {!!Form::text('precio_desde', $usuarioServicio->precio_desde, array("title"=>"Para realizar una segmentación adecuada de interesados, sería bueno que nos des el rango de precios de tu servicio. El valor es en dólares americanos",'class'=>'inputtext chng','placeholder'=>'Precio Desde'))!!}
@@ -184,15 +176,14 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 </div>
                 <div class="form-group-1">
                     @include('reusable.maps', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
-                </div>   
-                    
-                <div id="promocion"><a class="button-step4" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGeneric('reusable.promocion', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
+                </div>  
+                   <div id="promocion"><a class="button-step4" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGeneric('reusable.promocion', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
                 <div id="evento"><a class="button-step4" title="Puedes crear varios eventos para tu servicio. Ejemplo si tu servicio es una discoteca puedes agregar Jueves laydies night como evento o si eres un restaurante puedes agregar eventos como inauguraciones, etc." onclick="RenderPartialGeneric('reusable.createNewEvent', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
                 <div id="evento"><a class="button-step4" title="Esta opción es orientada a servicios turísticos de viajes y transporte. Por ejemplo tu servicio es una agencia de viajes y tienes varios itinerarios Trip Cotopaxi, Trip Amazonía o si eres un transporte podrás especificar la ruta de tu servicio." onclick="RenderPartialGeneric('reusable.createNewItinerario', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar tour o itinerario</a></div>
-                <div id="promocion"><a onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 1, {!!$usuarioServicio->id!!}, {!!$usuarioServicio->id!!})" href="#"><img src="{{ asset('img/fotograf.png')}}" style="width:111px"></a> </div>
-                <div id="promocion"><a onclick="RenderPartialGeneric('reusable.invitar_amigo')" href="#"><img src="{{ asset('img/amigo-1.png')}}" style="width:111px"></a> </div>
-                
-                @if($id_catalogo==4 && $usuarioServicio->id_padre==0)
+                <div id="promocion"><a onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 1, {!!$usuarioServicio->id!!}, {!!$usuarioServicio->id!!})" href="#"><img src="{{ asset('public/img/fotograf.png')}}" style="width:111px"></a> </div>
+                <div id="promocion"><a onclick="RenderPartialGeneric('reusable.invitar_amigo')" href="#"><img src="{{ asset('public/img/amigo-1.png')}}" style="width:111px"></a> </div>
+         
+                 @if($id_catalogo==4 && $usuarioServicio->id_padre==0)
                 
                 <div id="promocion"><a class="button-step4" title="Si desea crear atracciones dependientes" onclick="RenderPartialPadre('reusable.createNewServicioHijo', 4, {!!$usuarioServicio->id_usuario_operador!!},{!!$usuarioServicio->id!!});" href="#"> <h1 class="h1-agregar">+</h1> Agregar Dependencia</a></div>
                 
@@ -205,7 +196,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 
                 
                     @endif
-               
+                
             </div>
             <div id="secondary-data">
                 <div class="form-group-2">
@@ -224,7 +215,6 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::text('como_llegar2_2', $usuarioServicio->como_llegar2_2, array("title"=>"Como llegar",'class'=>'form-control-1 chng','placeholder'=>'Cuenca, Manta, Parque central ,etc'))!!}
                     <textarea style="height: 100px;" id="como_llegar2" name="como_llegar2" class="ptm chng" placeholder="Detalle de como llegar a tu servicio" >{!!trim($usuarioServicio->como_llegar2)!!}</textarea>
                 </div>
-                
                 <div class="form-group-2">
                     {!!Form::label('telefono_1', 'Telefono', array('class'=>'control-label-2'))!!}
                     {!!Form::text('telefono', $usuarioServicio->telefono, array("title"=>"El turista podrá comunicarse directamente contigo si así lo deseas",'class'=>'form-control-1 chng','placeholder'=>'Telefono del Servicio'))!!}
@@ -237,8 +227,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::label('pagina_web_1', 'Pagina Web', array('class'=>'control-label-2'))!!}
                     {!!Form::text('pagina_web', $usuarioServicio->pagina_web, array("title"=>"Si tienes una página web servirá mucho para tu credibilidad.",'class'=>'form-control-1 chng','placeholder'=>'URL'))!!}
                 </div>
-                
-                <div class="form-group-2">
+                 <div class="form-group-2">
                     {!!Form::label('tags', 'Tags', array('class'=>'control-label-2'))!!}
                     {!!Form::text('tags', $usuarioServicio->tags, array("title"=>"Palabras clave o referencias separadas por comas",'class'=>'form-control-1 chng','placeholder'=>'#ruta del sol, #museos'))!!}
                 </div>
@@ -282,21 +271,11 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     </table>    
                 </div>
             </div>
-<!--            
-            <div id="secondary-data">
-                <div id="promocion"><a class="button-step4" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGeneric('reusable.promocion', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
-                <div id="evento"><a class="button-step4" title="Puedes crear varios eventos para tu servicio. Ejemplo si tu servicio es una discoteca puedes agregar Jueves laydies night como evento o si eres un restaurante puedes agregar eventos como inauguraciones, etc." onclick="RenderPartialGeneric('reusable.createNewEvent', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
-                <div id="evento"><a class="button-step4" title="Esta opción es orientada a servicios turísticos de viajes y transporte. Por ejemplo tu servicio es una agencia de viajes y tienes varios itinerarios Trip Cotopaxi, Trip Amazonía o si eres un transporte podrás especificar la ruta de tu servicio." onclick="RenderPartialGeneric('reusable.createNewItinerario', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar tour o itinerario</a></div>
-
-                
-                <div id="promocion"><a onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 1, {!!$usuarioServicio->id!!}, {!!$usuarioServicio->id!!})" href="#"><img src="{{ asset('img/fotograf.png')}}" style="width:111px"></a> </div>
-                <div id="promocion"><a onclick="RenderPartialGeneric('reusable.invitar_amigo')" href="#"><img src="{{ asset('img/amigo-1.png')}}" style="width:111px"></a> </div>
-            </div>
--->
+          
         </div>
         <div id="part-1-form">
             <div class="box-content-button-1">
-                <a class="button-1" title="Antes de finalizar recuerda que puedes ingresar fotografías de tu servicio en la parte inferior." onclick="AjaxContainerRetrunMessage('registro_step1', 'optional'); window.location.href = '/IguanaTrip/public/thankyou'" href="#">Guardar y Finalizar</a>
+                <a class="button-1" title="Antes de finalizar recuerda que puedes ingresar fotografías de tu servicio en la parte inferior." onclick="AjaxContainerRetrunMessage('registro_step1', 'optional'); window.location.href = '/thankyou'" href="#">Guardar y finalizar</a>
             </div>              
         </div>
         {!! Form::close() !!}
@@ -355,16 +334,16 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 
 
 
-{!!HTML::script('js/loadingScreen/loadingoverlay.js') !!}
-{!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
+{!!HTML::script('public/js/loadingScreen/loadingoverlay.js') !!}
+{!!HTML::script('public/js/loadingScreen/loadingoverlay.min.js') !!}
 
 
 @stop
 
 
 @section('scripts')
-{!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
-{!! HTML::script('/js/jsModal/basic.js') !!}
+{!! HTML::script('public/js/jsModal/jquery.simplemodal.js') !!}
+{!! HTML::script('public/js/jsModal/basic.js') !!}
 
 <script>
     $(document).ready(function () {
@@ -386,10 +365,6 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
     
 }, 100);
 </script>
-<script>
-    $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
-    </script>
-    
 
 @stop
 

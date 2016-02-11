@@ -1,14 +1,14 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
-{!! HTML::style('public/css/calendar/ui-jquery.css') !!}
+{!! HTML::style('css/calendar/ui-jquery.css') !!}
 
 <div style='display:none'>
-    <img src="{!! asset('public/img/x.png')!!}" alt='' />
+    <img src="{!! asset('img/x.png')!!}" alt='' />
 </div>
 <style>
     #simplemodal-container a.modalCloseImg {
-        background:url("{!! asset('public/img/x.png')!!}") no-repeat;
+        background:url("{!! asset('img/x.png')!!}") no-repeat;
         width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
     </style>
     <div id="basic-modal-content" class="cls loadModal"></div>
@@ -57,7 +57,7 @@ $usuarioServicio=$promo->id;
 
         <h2 class="head-title-navigation">
             <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios/serviciooperador/')!!}/{{ $promo->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'"> 
-                <strong><img src="{!! asset('public/img/flecha-1.png')!!}" height="15px" width="15px" /> Regresar </strong></a>
+                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Regresar </strong></a>
 
 
 
@@ -135,7 +135,7 @@ $usuarioServicio=$promo->id;
             <div id="secondary-data">
                 <div id="promocion" style="margin-left: 145px">
                     
-                    <a onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 2, {!!$promo->id_usuario_servicio!!}, {!!$promo->id!!})" href="#"><img src="{{ asset('public/img/fotograf.png')}}" style="width:111px"></a>
+                    <a onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 2, {!!$promo->id_usuario_servicio!!}, {!!$promo->id!!})" href="#"><img src="{{ asset('img/fotograf.png')}}" style="width:111px"></a>
                 </div>
             </div>
         </div>
@@ -161,15 +161,15 @@ $usuarioServicio=$promo->id;
             });
             });</script>
 
-{!!HTML::script('public/js/loadingScreen/loadingoverlay.js') !!}
-{!!HTML::script('public/js/loadingScreen/loadingoverlay.min.js') !!}
-{!! HTML::script('public/js/jquery.js') !!}
+{!!HTML::script('js/loadingScreen/loadingoverlay.js') !!}
+{!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
+{!! HTML::script('js/jquery.js') !!}
 
 
 @stop
 @section('scripts')
-{!! HTML::script('public/js/jsModal/jquery.simplemodal.js') !!}
-{!! HTML::script('public/js/jsModal/basic.js') !!}
+{!! HTML::script('js/jsModal/jquery.simplemodal.js') !!}
+{!! HTML::script('js/jsModal/basic.js') !!}
 
 <script>
             $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});</script>

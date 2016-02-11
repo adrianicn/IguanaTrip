@@ -49,7 +49,7 @@ class HomePublicController extends Controller {
 
         Session::put('device', $desk);
         //$visitados = $gestion->getUsuario_serv($location);
-        $regiones = $gestion->getRegiones();
+        //  $regiones = $gestion->getRegiones();
 
         $topPlacesEcuador = $gestion->getTopPlaces(3);
 
@@ -87,21 +87,20 @@ class HomePublicController extends Controller {
 
         $eventosCloseProv = null;
         $eventosDepCloseProv = null;
-        $eventosClose = $gestion->getEventsIndepCity($location,100,1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
-        $eventosDepClose = $gestion->getEventsDepCity($location,100,1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
-        //$PromoDepClose = $gestion->getPromoDepCity($location,100,1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $eventosClose = $gestion->getEventsIndepCity($location, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $eventosDepClose = $gestion->getEventsDepCity($location, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $PromoDepClose = $gestion->getPromoDepCity($location, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
 
-        
-        if (Input::get('page') > $eventosClose->currentPage()){
-            $eventosCloseProv = $gestion->getEventsIndepProvince($location, Input::get('page'), $eventosClose->currentPage(),100,1);             
-        }
-        
-        if (Input::get('page') > $eventosDepClose->currentPage()){
-            $eventosDepCloseProv = $gestion->getEventsDepProvince($location, Input::get('page'), $eventosDepClose->currentPage(),100,1);             
+
+        if (Input::get('page') > $eventosClose->currentPage()) {
+            $eventosCloseProv = $gestion->getEventsIndepProvince($location, Input::get('page'), $eventosClose->currentPage(), 100, 1);
         }
 
+        if (Input::get('page') > $eventosDepClose->currentPage()) {
+            $eventosDepCloseProv = $gestion->getEventsDepProvince($location, Input::get('page'), $eventosDepClose->currentPage(), 100, 1);
+        }
 
-        $view = View::make('public_page.partials.closeToMe', array('eventosClose' => $eventosClose, 'eventosCloseProv' => $eventosCloseProv, 'eventosDepClose' => $eventosDepClose,'eventosDepCloseProv' => $eventosDepCloseProv));
+        $view = View::make('public_page.partials.closeToMe', array('eventosClose' => $eventosClose, 'eventosCloseProv' => $eventosCloseProv, 'eventosDepClose' => $eventosDepClose, 'eventosDepCloseProv' => $eventosDepCloseProv, 'PromoDepClose' => $PromoDepClose));
 
         if ($request->ajax()) {
             //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
@@ -154,6 +153,54 @@ class HomePublicController extends Controller {
         $explore = $gestion->getExplorer($id_provincia);
 
         return view('public_page.front.detalleProvincia')->with('provincias', $provincias)->with('imagenes', $imagenes)->with('ciudades', $ciudades)->with('explore', $explore)->with('visitados', $visitados);
+    }
+
+    //Obtiene las descripcion de la atraccion elegida
+    public function getAtraccionDescripcion($id_atraccion, PublicServiceRepository $gestion) {
+        $agent = new Agent();
+
+        $desk = $device = $agent->isMobile();
+        if ($desk == 1)
+            $desk = "mobile";
+        else {
+            $desk = "desk";
+        }
+
+        Session::put('device', $desk);
+        $Imgeventos = null;
+        $ImgPromociones = null;
+        $ImgItiner = null;
+        $explore = null;
+        $atraccion = $gestion->getAtraccionDetails($id_atraccion);
+        $imagenes = $gestion->getAtraccionImages($id_atraccion);
+        $eventos = $gestion->getEventosAtraccion($id_atraccion);
+        $promociones = $gestion->getPromoAtraccion($id_atraccion);
+        $itinerarios = $gestion->getItinerAtraccion($id_atraccion);
+
+
+
+        if ($eventos != null)
+            $Imgeventos = $gestion->getEventosImagenAtraccion($eventos);
+
+        if ($promociones != null)
+            $ImgPromociones = $gestion->getPromotionsImagenAtraccion($promociones);
+
+
+        if ($itinerarios != null)
+            $ImgItiner = $gestion->getItinerImagenAtraccion($itinerarios);
+
+        
+        if (isset($atraccion->id_provincia))
+            $explore = $gestion->getExplorer($atraccion->id_provincia);
+
+        
+        return view('public_page.front.detalleAtracciones')->with('atraccion', $atraccion)
+                        ->with('imagenes', $imagenes)->with('explore', $explore)
+                        ->with('eventos', $eventos)->with('Imgeventos', $Imgeventos)
+                        ->with('promociones', $promociones)
+                        ->with('ImgPromociones', $ImgPromociones)
+                        ->with('itinerarios', $itinerarios)
+                        ->with('ImgItiner', $ImgItiner);
     }
 
     //Obtiene todas las provincias de la region

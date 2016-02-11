@@ -114,6 +114,14 @@ class ServiciosOperadorRepository extends BaseRepository {
 
     /**/
     
+     //Entrega el arreglo de servicios hijos por usuario servicio
+    public function getHijosUsuarioServicio($id_usuario_servicio) {
+        $servicios = new $this->model;
+        return $servicios::where('id_padre', '=', $id_usuario_servicio)->get();
+
+
+        return $eventos::All();
+    }
     
     
         //Guarda las promociones por usuario_servicio
@@ -519,16 +527,6 @@ Actualizar tabla de busqueda
 
         return $eventos::All();
     }
-    
-     //Entrega el arreglo de servicios hijos por usuario servicio
-    public function getHijosUsuarioServicio($id_usuario_servicio) {
-        $servicios = new $this->model;
-        return $servicios::where('id_padre', '=', $id_usuario_servicio)->get();
-
-
-        return $eventos::All();
-    }
-    
 
     //Entrega el arreglo de itinerarios por usuario_servicio
     public function getItinerariosporUsuario($id_usuario_servicio) {
@@ -559,7 +557,6 @@ Actualizar tabla de busqueda
         $dif = new $this->catalogo_dificultad;
         return $dif::All();
     }
-    
 
     //Entrega el arreglo de Imagenes por promocion por operador
     public function getImagePromocionesOperador($id_promocion) {
@@ -646,7 +643,7 @@ Actualizar tabla de busqueda
                         ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
                         ->where('id_usuario_operador', $id_usuario_operador)
                         ->where('estado_servicio', '=', 1)
-                        ->select('usuario_servicios.nombre_servicio', 'catalogo_servicios.id_catalogo_servicios', 'usuario_servicios.id', 'usuario_servicios.id_padre', 'usuario_servicios.estado_servicio_usuario', 'usuario_servicios.id_usuario_operador')
+                        ->select('usuario_servicios.nombre_servicio', 'catalogo_servicios.id_catalogo_servicios', 'usuario_servicios.id', 'usuario_servicios.estado_servicio_usuario', 'usuario_servicios.id_usuario_operador')
                         ->get();
     }
 

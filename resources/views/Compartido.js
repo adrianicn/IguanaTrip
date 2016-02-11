@@ -43,6 +43,55 @@ function AjaxContainerRegistro($formulario) {
     });
 }
 
+
+
+
+//retorna un mensaje despues de ejecutar la logica del controller
+function AjaxSaveDetailsFotografia($formulario, $id) {
+    $('.error').html('');
+
+    $("#target").LoadingOverlay("show");
+
+
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize() + '&ids=' + $id + '&actionImage=update';
+    url = $form.attr("action");
+    var posting = $.post(url, {formData: data});
+    posting.done(function (data) {
+        if (data.fail) {
+
+
+
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#target").LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+            $('.rowerror').html(errorString);
+
+        }
+        if (data.success) {
+            $("#target").LoadingOverlay("hide", true);
+            $('.register').fadeOut(); //hiding Reg form
+            var successContent = '' + data.message + '';
+            
+
+
+
+
+        } //success
+    }); //done
+
+}
+
+
+
+
+
+
 //Hace la logica y envia el div que se quiere queaparezca el loading page
 //funciona para parciales pequeños
 function AjaxContainerRegistroWithLoad($formulario, $loadScreen) {
@@ -166,7 +215,7 @@ function AjaxContainerRegistroWithLoadCharge($formulario, $loadScreen,$itinerari
             $("."+$loadScreen).LoadingOverlay("hide", true);
             alert("El itinerario ha sido agregado. Puede modificar los campos para agregar un nuevo itinerario")
             
-            GetDataAjaxSectionItiner("/IguanaTrip/public/getlistaItinerarios/"+$itinerario);
+            GetDataAjaxSectionItiner("/getlistaItinerarios/"+$itinerario);
         } 
     });
 }
@@ -215,7 +264,7 @@ function AjaxContainerRegistroWithMessage($formulario, $loadScreen,$message) {
 function RenderPartialGeneric($idPartial, $id_usuario_servicio) {
 
 callModal('cls');
-    var url = "/IguanaTrip/public/render/" + $idPartial;
+    var url = "/render/" + $idPartial;
     $.ajax({
         type: "GET",
         url: url,
@@ -231,14 +280,12 @@ callModal('cls');
 
 
 
-//
-//id_catalogo_fotografia= es el catalogo que tiene la base de datos catalogo fotografia
-//id_auxiliar = es el id principal de la tabla que manda a guardar la imagen
+
 function RenderPartialGenericFotografia($idPartial, $id_catalogo_fotografia,$id_usuario_servicio,$id_auxiliar) {
 
     
 callModal('cls');
-    var url = "/IguanaTrip/public/render/" + $idPartial;
+    var url = "/render/" + $idPartial;
     $.ajax({
         type: "GET",
         url: url,
@@ -263,7 +310,7 @@ function RenderPartialGenericMap($idPartial, $itiner) {
 
     callModalMap('cls');
 
-    var url = "/IguanaTrip/public/render/" + $idPartial;
+    var url = "/render/" + $idPartial;
 
     $.ajax({
         type: "GET",
@@ -283,7 +330,7 @@ function RenderPartialGenericMapUpdate($idPartial, $itiner, $id_detalle) {
 
     callModalMap('cls');
 
-    var url = "/IguanaTrip/public/render/" + $idPartial+"/"+$id_detalle;
+    var url = "/render/" + $idPartial+"/"+$id_detalle;
 
     $.ajax({
         type: "GET",
@@ -305,7 +352,7 @@ function RenderPartialPadre($idPartial, $id_catalogo_servicio, $id_usuario_opera
 
     callModalMap('cls');
 
-    var url = "/IguanaTrip/public/render/" + $idPartial+"/"+$padre;
+    var url = "/render/" + $idPartial+"/"+$padre;
 
     $.ajax({
         type: "GET",
@@ -328,7 +375,7 @@ function RenderPartial($idPartial, $id_catalogo_servicio, $id_usuario_operador) 
 
     callModal('cls');
 
-    var url = "/IguanaTrip/public/render/" + $idPartial;
+    var url = "/render/" + $idPartial;
 
     $.ajax({
         type: "GET",
@@ -556,52 +603,6 @@ function GetDataAjaxSectionItiner(url,$id_usuario_servicio) {
     });
 }
 
-
-
-
-
-
-
-//retorna un mensaje despues de ejecutar la logica del controller
-function AjaxSaveDetailsFotografia($formulario, $id) {
-    $('.error').html('');
-
-    $("#target").LoadingOverlay("show");
-
-
-
-    var $form = $('#' + $formulario),
-            data = $form.serialize() + '&ids=' + $id + '&actionImage=update';
-    url = $form.attr("action");
-    var posting = $.post(url, {formData: data});
-    posting.done(function (data) {
-        if (data.fail) {
-
-
-
-            var errorString = '<ul>';
-            $.each(data.errors, function (key, value) {
-                errorString += '<li>' + value + '</li>';
-            });
-            errorString += '</ul>';
-            $("#target").LoadingOverlay("hide", true);
-            //$('#error').html(errorString);
-            $('.rowerror').html(errorString);
-
-        }
-        if (data.success) {
-            $("#target").LoadingOverlay("hide", true);
-            $('.register').fadeOut(); //hiding Reg form
-            var successContent = '' + data.message + '';
-            
-
-
-
-
-        } //success
-    }); //done
-
-}
 
 
 

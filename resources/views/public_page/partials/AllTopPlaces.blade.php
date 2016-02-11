@@ -1,7 +1,7 @@
 @section('topPlaces')	
 <div id="x1">
     @if($topPlacesEcuador->currentPage()==1)
-       <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item TopPlace filter-all ">
+     <!--  <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item TopPlace filter-all ">
                                     <article class="post">
                                    <figure ><img src="{{ asset('img/events.jpg')}}" alt=""></figure>
                                      @if(session('device')!='mobile')
@@ -18,7 +18,7 @@
                                 </div>
                                  
                                     </article>
-                                </div>
+                                </div>-->
                                      @endif
 @foreach ($topPlacesEcuador as $region)
                                 @if($region->id_region==1)
@@ -31,7 +31,8 @@
                                             <div class="shortcode-banner-inside" style=" width: 112%;">
                                             @endif
                                     <div class="shortcode-banner-content">
-                                        <h3 class="banner-title">{!!$region->nombre_servicio!!}</h3>
+                                        <a style="cursor:pointer" onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getDescipcionAtraccion')!!}/{!!$region->id!!}'"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
+                                        
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
                                         </div>
@@ -46,7 +47,7 @@
                                         <span class="portfolio-action">
                                             <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
                                                 <i class="fa fa-eye has-circle"></i></a>
-                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
+                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getDescipcionAtraccion')!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
                                         </span>
                                     </div>
                                     </article>
