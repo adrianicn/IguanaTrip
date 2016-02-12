@@ -133,7 +133,9 @@
                                     <li class="active"><a href="#tab3-2" data-toggle="tab">{{ trans('publico/labels.label36')}}</a></li>
                                     <li ><a href="#tab3-3" data-toggle="tab">{{ trans('publico/labels.label24')}}</a></li>
                                     <li ><a href="#tab3-4" data-toggle="tab">{{ trans('publico/labels.label43')}}</a></li>
+                                    @if(count($itinerarios)>0)
                                     <li ><a href="#tab3-5" data-toggle="tab">{{ trans('publico/labels.label46')}}</a></li>
+                                    @endif
                                     <li><a href="#tab3-6" data-toggle="tab">Product Tags</a></li>
                                 </ul>
                                 <div id="tab3-1" class="tab-content panel entry-content">
@@ -281,14 +283,14 @@
 
                                     </div>
                                 </div>
-                                
+                                   @if(count($itinerarios)>0)
                                 <div id="tab3-5" class="tab-content panel entry-content ">
                                     <div class="tab-pane">
                                         <div id="comments">
-                                            <h3>{{ trans('publico/labels.label43')}}</h3>
+                                            <h3>{{ trans('publico/labels.label46')}}</h3>
                                             <ol class="commentlist">
 
-                                                @if(count($itinerarios)>0)
+                                             
                                                 
                                                 @foreach ($itinerarios as $itiner)
                                                 <li class="comment">
@@ -323,25 +325,15 @@
                                                     </div>
                                                 </li>
                                                 @endforeach
-                                                 @else
-                                                  <li class="comment">
-                                                    <div class="author-img">
-                                                        <span><img src="http://placehold.it/100x100" alt=""></span>
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        <h5 class="comment-author-name"><a href="#">{{ trans('publico/labels.label45')}}</a></h5>
-                                                        <div class="description">
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                @endif
+                                                
+                                                 
+                                            
                                             </ol>
                                         </div>
 
                                     </div>
                                 </div>
-                                
+                                    @endif
                                 <div id="tab3-6" class="tab-content panel entry-content">
                                     <div class="tab-pane">
                                         <form class="add-product-tags">
