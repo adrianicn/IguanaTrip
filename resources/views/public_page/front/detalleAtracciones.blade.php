@@ -78,8 +78,7 @@
             @include('public_page.reusable.banner', ['titulo' =>$atraccion->nombre_servicio])  
 
             <ul class="breadcrumbs">
-                <li><a style="cursor:pointer" onclick="$('.woocommerce').LoadingOverlay('show');
-                        window.location.href = '{!!asset(' / publico')!!}'">{{ trans('publico/labels.label1')}}</a></li>
+                <li><a href="{!!asset('/publico')!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
                 <li class="active">{!!$atraccion->nombre_servicio!!}</li>
             </ul>
         </div>
@@ -95,14 +94,41 @@
                                             @foreach ($imagenes as $imagen)
                                             <a href="{{ asset('images/fullsize/'.$imagen->filename)}}" class="soap-mfp-popup">
                                                 <img src="{{ asset('images/fullsize/'.$imagen->filename)}}" alt="">
+                                                
+                                                @if($imagen->descripcion_fotografia!="")
                                                 <div class="slide-text caption-animated" data-animation-type="slideInLeft" data-animation-duration="2">
-                                                    <h4 class="slide-title">nombre</h4>
-                                                    <p>{!!$imagen->descripcion_fotografia!!}</p>
+                                                    <h4 class="slide-title">{!!$imagen->descripcion_fotografia!!}</h4>
+                                                    
                                                 </div>
+                                                @endif
                                             </a>
                                             @endforeach
                                         </div>
                                     </div>
+                                    <div id="sync2" class="owl-carousel post-slider style3 thumbnails" data-items="4">
+                                       
+                                        
+                                         @foreach ($imagenes as $imagen)
+                                           
+                                         
+                                          <div class="item">
+                                            <a href="#"><img src="{{ asset('images/icon/'.$imagen->filename)}}" alt=""></a>
+                                        </div>
+                                       
+                                            @endforeach
+                                     
+                                    </div>
+                                    
+                                        @if(isset($explore) && count($explore)>0)
+                                    <div class="social-wrap ">
+                                        <label>{{ trans('publico/labels.label29')}}</label>
+                                        <div class="social-icons">
+                                            @foreach ($explore as $explor)
+                                            <a href="#" class="social-icon" title="{!!$explor->nombre_servicio_est!!}"><i title="{!!$explor->nombre_servicio_est!!}" class="fa  has-circle" data-toggle="tooltip" data-placement="top" ><img style=" max-width: 60%;" class='activities' src="{{ asset('img/'.$explor->url_image)}}" alt="{!!$explor->nombre_servicio_est!!}"></i></a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                                 <div class="summary entry-summary col-sm-7 box-lg">
                                     <div class="clearfix">
@@ -111,33 +137,33 @@
                                             <span data-stars="4"></span>
                                         </span>
                                     </div>
-                                    <p class="more">{!!$atraccion->detalle_servicio!!}</p>
-                                  
-                                    @if(isset($explore) && count($explore)>0)
-                                    <div class="social-wrap">
-                                        <label>{{ trans('publico/labels.label29')}}</label>
-                                        <div class="social-icons">
-                                            @foreach ($explore as $explor)
-                                            <a href="#" class="social-icon" title="{!!$explor->nombre_servicio_est!!}"><i title="{!!$explor->nombre_servicio_est!!}" class="fa  has-circle" data-toggle="tooltip" data-placement="top" ><img class='activities' src="{{ asset('img/'.$explor->url_image)}}" alt="{!!$explor->nombre_servicio_est!!}"></i></a>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                    @if($provincia!=null)
+                                    <span class="product-price box">{!!$provincia->nombre!!}</span>
                                     @endif
+                                    <p class="mores">{!!$atraccion->detalle_servicio!!}</p>
+                                    <div class="clearfix box" style=" width: 90%;  margin-left: 10%;">
+                                            <div class="col-xs-12 col-lg-6">
+                                                <img class='activities' src="{{ asset('img/mapa-costa.png')}}" alt="">
+                                            </div>
+                                        </div>
+                              
+                                    
+                                       
                                 </div>
                             </div>
+                            
                             <div class="woocommerce-tabs tab-container vertical-tab clearfix box">
                                 <ul class="tabs">
-
                                     <li ><a href="#tab3-1" data-toggle="tab">{{ trans('publico/labels.label41')}}</a></li>
-
                                     <li class="active"><a href="#tab3-2" data-toggle="tab">{{ trans('publico/labels.label36')}}</a></li>
                                     <li ><a href="#tab3-3" data-toggle="tab">{{ trans('publico/labels.label24')}}</a></li>
                                     <li ><a href="#tab3-4" data-toggle="tab">{{ trans('publico/labels.label43')}}</a></li>
                                     @if(count($itinerarios)>0)
                                     <li ><a href="#tab3-5" data-toggle="tab">{{ trans('publico/labels.label46')}}</a></li>
                                     @endif
-                                    <li><a href="#tab3-6" data-toggle="tab">Product Tags</a></li>
+                                   
                                 </ul>
+                                
                                 <div id="tab3-1" class="tab-content panel entry-content">
                                     <div class="tab-pane">
                                         <p>{{ trans('publico/labels.label35')}}: {!!$atraccion->direccion_servicio!!}</p>
@@ -319,14 +345,12 @@
                         
                                                         <span class="comment-date">{!!date_format($date, 'j F ')!!}-{!!date_format($date2, 'j F ')!!}</span>
                                                         <div class="description">
-                                                            <p>{!!$promo->descripcion_itinerario!!}</p>
+                                                            <p>{!!$itiner->descripcion_itinerario!!}</p>
                                                             
                                                         </div>
                                                     </div>
                                                 </li>
                                                 @endforeach
-                                                
-                                                 
                                             
                                             </ol>
                                         </div>
@@ -334,32 +358,103 @@
                                     </div>
                                 </div>
                                     @endif
-                                <div id="tab3-6" class="tab-content panel entry-content">
-                                    <div class="tab-pane">
-                                        <form class="add-product-tags">
-                                            <div class="row">
-                                                <div class="col-lg-10">
-                                                    <div class="form-group">
-                                                        <input type="text" class="input-text full-width" placeholder="Add your tags">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <p>Use spaces to separate tags. Use single quotes (') for phrases.</p>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                              
                             </div>
 
                         </div>
-                        @if(session('device')!='mobile')
-                        <div class="product type-product">
+                        
+                      <div class="product type-product">
                             <h4>{{ trans('publico/labels.label28')}}</h4>
+                            <ul class="related products row add-clearfix">
+                <?php $flag=0;?>
+                                
+                @for ($x = 0; $x < count($related); $x++)
 
+                        
+                            
+                                @if($flag==0)
+                            <li class="product col-sms-6 col-sm-6 col-md-4 box">
+                                    <a class="product-image" href="#">
+                                        <div class="first-img">
+                                            <img alt="" src="{{ asset('images/icon/'.$related[$x]->filename)}}">
+                                        </div>
+                                        @if(isset($related[$x+1])&& $related[$x+1]->id_auxiliar==$related[$x]->id_auxiliar)
+                                        
+                                        <div class="back-img">
+                                            <img alt="" src="{{ asset('images/icon/'.$related[$x+1]->filename)}}">
+                                        </div>
+                                       <?php $flag=1;?>
+                                        @endif
+                                    </a>
+                                    <div class="product-content">
+                                        <h5 class="product-title"><a href="#">{!!$related[$x]->nombre_servicio!!}</a></h5>
+                                        <span class="product-price"><span class="currency-symbol"></span>{!!$related[$x]->catalogo_nombre!!}</span>
+                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
+                                            <span data-stars="4"></span>
+                                        </span>
+                                        <p><a href="#">{!!$related[$x]->nombre!!}</p>
+                                        
+                                    </div>
+                                    <div class="product-action">
+                                        <!--<a class="btn btn-add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add To Cart</a>-->
+                                        <a class="btn btn-add-to-wishlist" href="#"><i class="fa fa-heart"></i></a>
+                                        <a href="ajax/woocommerce-product-quickview.html" class="btn btn-quick-view"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-compare" href="#"><i class="fa fa-star-half-o"></i></a>
+                                    </div>
+                                </li>
+                                @else
+                                <?php $flag=0;?>
+                                
+                                  @endif
+                        @endfor
+                        
+                        
+                        <?php $flag1=0;?>
+                                
+                @for ($x = 0; $x < count($visitados); $x++)
+
+                        
+                            
+                                @if($flag1==0)
+                            <li class="product col-sms-6 col-sm-6 col-md-4 box">
+                                    <a class="product-image" href="#">
+                                        <div class="first-img">
+                                            <img alt="" src="{{ asset('images/icon/'.$visitados[$x]->filename)}}">
+                                        </div>
+                                        @if(isset($visitados[$x+1])&& $visitados[$x+1]->id_auxiliar==$visitados[$x]->id_auxiliar)
+                                        
+                                        <div class="back-img">
+                                            <img alt="" src="{{ asset('images/icon/'.$visitados[$x+1]->filename)}}">
+                                        </div>
+                                       <?php $flag1=1;?>
+                                        @endif
+                                    </a>
+                                    <div class="product-content">
+                                        <h5 class="product-title"><a href="#">{!!$visitados[$x]->nombre_servicio!!}</a></h5>
+                                        <span class="product-price"><span class="currency-symbol"></span>{!!$visitados[$x]->catalogo_nombre!!}</span>
+                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
+                                            <span data-stars="4"></span>
+                                        </span>
+                                        <p><a href="#">{!!$visitados[$x]->nombre!!}</p>
+                                        
+                                    </div>
+                                    <div class="product-action">
+                                        <!--<a class="btn btn-add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add To Cart</a>-->
+                                        <a class="btn btn-add-to-wishlist" href="#"><i class="fa fa-heart"></i></a>
+                                        <a href="ajax/woocommerce-product-quickview.html" class="btn btn-quick-view"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-compare" href="#"><i class="fa fa-star-half-o"></i></a>
+                                    </div>
+                                </li>
+                                @else
+                                <?php $flag1=0;?>
+                                
+                                  @endif
+                        @endfor
+                        
+                        
+                            </ul>
                         </div>
-                        @endif
+                        
                     </div>
                     <div class="sidebar col-sm-4 col-md-3">
 
@@ -420,37 +515,45 @@
                                 </li>
                             </ul>
                         </div>
-
-                        @if(session('device')!='mobile')
+                      
+                        
+                         @if(session('device')!='mobile')
                         <div class="widget banner-slider box">
                             <div class="owl-carousel" data-itemsPerDisplayWidth="[[0, 1], [480, 2], [768, 1], [992, 1], [1200, 1]]" data-items="1">
                                 <a href="#">
-                                    <img src="http://placehold.it/324x444" alt="">
+                                    <img src="{{ asset('img/rsz_00kwwk8s.jpg')}}" alt="">
                                 </a>
-                                <a href="#">
-                                    <img src="http://placehold.it/324x444" alt="">
-                                </a>
+                              
                             </div>
                             <div class="banner-text">
-                                <h2 class="banner-title">Ecuador</h2>
-                                <span class="banner-content">2016 What’s New</span>
+                                <h2 class="banner-title" style="text-transform: initial;">iWaNaTrip.com</h2>
+                                
+                            </div>
+                        </div>
+                           
+                        <div class="box">
+                            <h4>Tags</h4>
+                            <div class="tags">
+                                @if($atraccion->tags!="")
+                                <?php 
+                            $tags = explode(",", $atraccion->tags);
+                            ?>
+                                  @foreach ($tags as $tag)
+                                <a class="tag" href="#">{!!$tag!!}</a>
+                                @endforeach
+                                @endif
+                                @if($provincia!=null)
+                                <a class="tag" href="#">#{!!$provincia->nombre!!}</a>
+                                @endif
+                                @if($canton!=null)
+                                <a class="tag" href="#">#{!!$canton->nombre!!}</a>
+                                @endif
+                                @if($parroquia!=null)
+                                <a class="tag" href="#">#{!!$parroquia->nombre!!}</a>
+                                @endif
                             </div>
                         </div>
                         @endif
-                        <div class="box">
-                            <h4>Popular Tags</h4>
-                            <div class="tags">
-                                <a class="tag" href="#">masonry</a>
-                                <a class="tag" href="#">responsive</a>
-                                <a class="tag" href="#">Ecommerce</a>
-                                <a class="tag" href="#">retina</a>
-                                <a class="tag" href="#">multi-purpose</a>
-                                <a class="tag" href="#">blog posts</a>
-                                <a class="tag" href="#">web design</a>
-                                <a class="tag" href="#">wordpres</a>
-                                <a class="tag" href="#">mobile</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

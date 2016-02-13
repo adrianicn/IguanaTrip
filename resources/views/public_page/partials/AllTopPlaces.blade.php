@@ -24,14 +24,14 @@
                                 @if($region->id_region==1)
                                 <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item TopPlace filter-all filter-costa" >
                                     <article class="post">
-                                   <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt=""></figure>
+                                   <figure ><img src="{{ asset('images/icon/'.$region->filename)}}" alt="{!!$region->nombre_servicio!!}"></figure>
                                      @if(session('device')!='mobile')
                                         <div class="shortcode-banner-inside" style=" width: 108%;">
                                             @else
                                             <div class="shortcode-banner-inside" style=" width: 112%;">
                                             @endif
                                     <div class="shortcode-banner-content">
-                                        <a style="cursor:pointer" onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getDescipcionAtraccion')!!}/{!!$region->id!!}'"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
+                                        <a href="{!!asset('/getDescipcionAtraccion')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
                                         
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
@@ -64,7 +64,8 @@
                                             <div class="shortcode-banner-inside" style=" width: 112%;">
                                             @endif
                                     <div class="shortcode-banner-content">
-                                        <h3 class="banner-title">{!!$region->nombre_servicio!!}</h3>
+                                        
+                                        <a href="{!!asset('/getDescipcionAtraccion')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
                                         </div>
@@ -95,7 +96,7 @@
                                             <div class="shortcode-banner-inside" style=" width: 112%;">
                                             @endif
                                     <div class="shortcode-banner-content">
-                                        <h3 class="banner-title">{!!$region->nombre_servicio!!}</h3>
+                                        <a href="{!!asset('/getDescipcionAtraccion')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
                                         </div>
@@ -127,7 +128,7 @@
                                             <div class="shortcode-banner-inside" style=" width: 112%;">
                                             @endif
                                     <div class="shortcode-banner-content">
-                                        <h3 class="banner-title">{!!$region->nombre_servicio!!}</h3>
+                                        <a href="{!!asset('/getDescipcionAtraccion')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
                                         </div>

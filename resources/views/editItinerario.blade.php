@@ -1,7 +1,7 @@
 @extends('front.masterPageServicios')
 
 @section('step1')
-{!! HTML::style('css/calendar/ui-jquery.css') !!}
+{!! HTML::style('public/css/calendar/ui-jquery.css') !!}
 
   
    
@@ -23,21 +23,22 @@ $itiner_id=$itiner->id;
     <div id="title-box-header">
         <div id="title-box-type" style="cursor:pointer;"onclick="window.location.href = '{!!asset('/servicios')!!}'">
             
-          <?php 
-          $prefix="";
+           <?php
+                  $prefix="";
         $operadorName="";
+
           switch (session('tip_oper')) {
     case 1:
-        $prefix="I'm an ";
-        $operadorName="Agency";
+        $prefix="Soy un ";
+        $operadorName="Negocio";
         break;
     case 2:
-        $prefix="I'm an ";
-        $operadorName="Enterprise";
+        $prefix="Soy una ";
+        $operadorName="Agencia";
         break;
     case 3:
-        $prefix="I'm just";
-        $operadorName="Me";
+        $prefix="Soy solo";
+        $operadorName="Yo";
         break;
     
 }
@@ -57,7 +58,7 @@ $itiner_id=$itiner->id;
         
            <h2 class="head-title-navigation">
    <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios/serviciooperador')!!}/{{ $itiner->id_usuario_servicio }}/{!!$servicio->id_catalogo_servicio!!}'"> 
-       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Regresar </strong></a>
+       <strong><img src="{!! asset('public/img/flecha-1.png')!!}" height="15px" width="15px" /> Regresar </strong></a>
                
        
                
@@ -65,9 +66,9 @@ $itiner_id=$itiner->id;
     </div>
     <div id="space"></div>
     {!! Form::open(['url' => route('postItinerario'), 'method' => 'post', 'role' => 'form', 'id'=>'Updateitinerario']) !!}
-    
+    <input type="hidden" name="id_usuario_servicio" value="{{ $itiner->id_usuario_servicio }}">
     <input type="hidden" name="id" value="{{ $itiner->id }}">
-<input type="hidden" name="id_usuario_servicio" value="{{ $itiner->id_usuario_servicio }}">
+
     <div class="wrapper uwa-font-aa">
         <div id="part-1-form">
             <div id="principal-data" >
@@ -121,7 +122,7 @@ $itiner_id=$itiner->id;
                         <td>
                             <div id="promocion" style="margin-left: 145px">
                                 
-                                <a onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 3, {!!$itiner->id_usuario_servicio!!}, {!!$itiner->id!!})" href="#"><img src="{{ asset('img/fotograf.png')}}" style="width:111px"></a>
+                                <a onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 3, {!!$itiner->id_usuario_servicio!!}, {!!$itiner->id!!})" href="#"><img src="{{ asset('public/img/fotograf.png')}}" style="width:111px"></a>
                             </div> 
                         </td>
                     </tr>
@@ -151,8 +152,9 @@ $itiner_id=$itiner->id;
 
 @section('scripts')
 
-{!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
-{!! HTML::script('/js/jsModal/basic.js') !!}
+{!! HTML::script('public/js/jsModal/jquery.simplemodal.js') !!}
+{!! HTML::script('public/js/jsModal/basic.js') !!}
+
 
 
 

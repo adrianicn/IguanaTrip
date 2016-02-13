@@ -23,6 +23,74 @@ class PublicServiceRepository extends BaseRepository {
     public function __construct() {
         
     }
+    
+    
+    
+    
+//Entrega el arreglo de los servicios más visitados por provincia
+    public function getHijosAtraccion($id_atraccion) {
+
+        $visitados = DB::table('usuario_servicios')
+                        ->where('usuario_servicios.estado_servicio', '=', '1')
+                        ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                        ->where('usuario_servicios.id_padre', '=', $id_atraccion)
+                        ->select('usuario_servicios.id')
+                        ->orderBy('num_visitas', 'desc')
+                        ->orderBy('prioridad', 'desc')
+                        ->take(10)->get();
+
+
+
+
+        if ($visitados != null) {
+            $array = array();
+            foreach ($visitados as $visitado) {
+
+
+                $imagenes = DB::table('images')
+                                ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                                ->where('id_usuario_servicio', '=', $visitado->id)
+                                ->where('estado_fotografia', '=', '1')
+                                ->select('images.id')
+                                ->orderBy('id_auxiliar', 'desc')
+                                ->take(2)->get();
+
+
+                if ($imagenes != null) {
+
+                    foreach ($imagenes as $imagen) {
+
+                        $array[] = $imagen->id;
+                    }
+                }
+            }
+
+
+
+
+
+
+            $imagenesF = DB::table('images')
+                    ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                    ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
+                    ->join('ubicacion_geografica', 'usuario_servicios.id_provincia', '=', 'ubicacion_geografica.id')
+                    ->whereIn('images.id', $array)
+                    ->where('estado_fotografia', '=', '1')
+                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre', 'ubicacion_geografica.nombre')
+                    ->orderBy('id_auxiliar', 'desc')
+                    ->get();
+        } else {
+            $imagenesF = DB::table('images')
+                            ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                            ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
+                            ->join('ubicacion_geografica', 'usuario_servicios.id_provincia', '=', 'ubicacion_geografica.id')
+                            ->where('estado_fotografia', '=', '1')
+                            ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre', 'ubicacion_geografica.nombre')
+                            ->orderBy('id_auxiliar', 'desc')
+                            ->take(10)->get();
+        }
+        return $imagenesF;
+    }
 
 //Entrega el arreglo de los servicios más visitados por provincia
     public function getVisitadosProvincia($id_provincia) {
@@ -33,6 +101,7 @@ class PublicServiceRepository extends BaseRepository {
                         ->where('usuario_servicios.id_provincia', '=', $id_provincia)
                         ->select('usuario_servicios.id')
                         ->orderBy('num_visitas', 'desc')
+                ->orderBy('prioridad', 'desc')
                         ->take(10)->get();
 
 
@@ -833,6 +902,7 @@ class PublicServiceRepository extends BaseRepository {
 
     //Entrega el detalle de la provincia
     public function getAtraccionDetails($id_atraccion) {
+        
 
         $provincias = DB::table('usuario_servicios')
                 ->where('id', '=', $id_atraccion)
@@ -840,7 +910,26 @@ class PublicServiceRepository extends BaseRepository {
                 ->first();
         return $provincias;
     }
+    
+    
+    //Entrega el detalle geografico de la atraccion
+    public function getUbicacionAtraccion($id_ubicacion) {
+        
 
+        $ubicacion = DB::table('ubicacion_geografica')
+                ->where('id', '=', $id_ubicacion)
+                ->select('ubicacion_geografica.nombre')
+                ->first();
+        return $ubicacion;
+    }
+    
+    
+
+    
+   
+    
+    
+    
 //Entrega el detalle de la region
     public function getRegionDetails($id_region) {
 
@@ -1033,7 +1122,7 @@ class PublicServiceRepository extends BaseRepository {
         $itiner = DB::table('itinerarios_usuario_servicios')
                 ->where('id_usuario_servicio', '=', $id)
                 ->where('estado_itinerario', '=', '1')
-                ->where('fecha_desde', '<=', "'" . Carbon::now() . "'")
+                
                 ->where('fecha_hasta', '>=', "'" . Carbon::now() . "'")
                 ->select('itinerarios_usuario_servicios.*')
                 ->get();

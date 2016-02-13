@@ -47,7 +47,7 @@ return [
     'label43' => 'Promociones',
     'label44' => 'No existen eventos disponibles por el momento',
     'label45' => 'No existen promociones disponibles por el momento',
-    'label46' => 'Trips',
+    'label46' => 'Itineraries & trips',
 	'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

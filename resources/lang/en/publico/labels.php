@@ -49,7 +49,7 @@ return [
     'label43' => 'Promotions',
     'label44' => 'There are not events available at the moment',
     'label45' => 'There are not promotions available at the moment',
-    'label46' => 'Trips',
+    'label46' => 'Itinerarios & trips',
     
 	'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'

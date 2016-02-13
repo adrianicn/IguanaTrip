@@ -673,7 +673,7 @@ class UsuarioServiciosController extends Controller {
             return view('errors.404');
         }
 
-        $data['id'] = $id;
+        //$data['id'] = $id;
 
         //logica que comprueba si el usuario tiene promociones para ser modificados
 
@@ -704,6 +704,8 @@ class UsuarioServiciosController extends Controller {
         parse_str($inputData, $formFields);
         $permiso = $gestion->getPermiso($formFields['id_usuario_servicio']);
 
+        
+         
         if (!isset($permiso) || $permiso->id_usuario != $auth->user()->id) {
 
             return view('errors.404');
@@ -801,11 +803,15 @@ class UsuarioServiciosController extends Controller {
         $permiso = $gestion->getPermiso($formFields['id_usuario_servicio']);
 
 
+
+
+     
         if (!isset($permiso) || $permiso->id_usuario != $auth->user()->id) {
 
             return view('errors.404');
         }
 
+        
         $validator = Validator::make($formFields, Itinerario_Usuario_Servicio::$rulesP);
         if ($validator->fails()) {
             return response()->json(array(

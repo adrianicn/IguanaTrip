@@ -171,13 +171,32 @@ class HomePublicController extends Controller {
         $ImgPromociones = null;
         $ImgItiner = null;
         $explore = null;
+        $visitados=null;
+        
+        $provincia=null;
+        $canton=null;
+        $parroquia=null;
+        
         $atraccion = $gestion->getAtraccionDetails($id_atraccion);
         $imagenes = $gestion->getAtraccionImages($id_atraccion);
         $eventos = $gestion->getEventosAtraccion($id_atraccion);
         $promociones = $gestion->getPromoAtraccion($id_atraccion);
         $itinerarios = $gestion->getItinerAtraccion($id_atraccion);
-
-
+        $related = $gestion->getHijosAtraccion($id_atraccion);
+        
+        
+        
+        if($atraccion->id_provincia!=0)
+            $provincia = $gestion->getUbicacionAtraccion($atraccion->id_provincia);
+        
+             if($atraccion->id_canton!=0)
+            $canton = $gestion->getUbicacionAtraccion($atraccion->id_canton);
+             
+                  if($atraccion->id_parroquia!=0)
+            $parroqia = $gestion->getUbicacionAtraccion($atraccion->id_parroquia);
+            
+        if($related==null || count($related<6))
+        $visitados = $gestion->getVisitadosProvincia($atraccion->id_provincia);
 
         if ($eventos != null)
             $Imgeventos = $gestion->getEventosImagenAtraccion($eventos);
@@ -200,7 +219,13 @@ class HomePublicController extends Controller {
                         ->with('promociones', $promociones)
                         ->with('ImgPromociones', $ImgPromociones)
                         ->with('itinerarios', $itinerarios)
-                        ->with('ImgItiner', $ImgItiner);
+                        ->with('ImgItiner', $ImgItiner)
+        ->with('related', $related)
+            ->with('visitados', $visitados)
+            ->with('canton', $canton)
+                ->with('provincia', $provincia)
+            ->with('parroquia', $parroquia)
+            ;
     }
 
     //Obtiene todas las provincias de la region

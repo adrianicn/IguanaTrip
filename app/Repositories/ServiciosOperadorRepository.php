@@ -673,11 +673,15 @@ Actualizar tabla de busqueda
 
     public function getPermiso($id) {
 
-        return DB::table('usuario_servicios')
+        $x= DB::table('usuario_servicios')
                         ->join('usuario_operadores', 'usuario_servicios.id_usuario_operador', '=', 'usuario_operadores.id_usuario_op')
                         ->where('usuario_servicios.id', $id)
                         ->select('usuario_operadores.id_usuario_op', 'usuario_operadores.id_usuario')
                         ->first();
+        
+        //dd($id);
+        return $x;
+        
     }
 
     public function getPermisoPromocion($id) {
