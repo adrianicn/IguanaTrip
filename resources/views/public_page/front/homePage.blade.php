@@ -122,7 +122,7 @@
                                  data-elementdelay="0.1" data-splitout="none"
                                  data-splitin="none" data-easing="Power3.easeInOut"
                                  data-start="1000" data-speed="300" data-voffset="-79" 
-                                 data-y="5" data-x="-280" class="tp-caption sfl fadeout start">
+                                 data-y="35" data-x="-280" class="tp-caption sfl fadeout start">
                                 <img alt="" src="{{ asset('img/index-logo.png')}}" >
                             </div>
 

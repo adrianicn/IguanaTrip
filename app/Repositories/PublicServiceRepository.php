@@ -66,10 +66,6 @@ class PublicServiceRepository extends BaseRepository {
             }
 
 
-
-
-
-
             $imagenesF = DB::table('images')
                     ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
                     ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')

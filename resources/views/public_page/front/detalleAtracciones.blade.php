@@ -190,6 +190,9 @@
                                         <p>{!!$atraccion->como_llegar2!!}</p>
                                         <p>{!!$atraccion->como_llegar2_2!!}</p>
                                         
+                                          <div class="soap-google-map">
+                
+            </div>
                                     </div>
                                 </div>
                                 <div id="tab3-3" class="tab-content panel entry-content ">
@@ -593,6 +596,9 @@
     <!-- Magnific Popup core JS file -->
     <script type="text/javascript" src="{{ asset('public_components/components/magnific-popup/jquery.magnific-popup.min.js')}}"></script> 
 
+     <!-- Google Map Api -->
+    <script type='text/javascript' src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
+    <script type="text/javascript" src="{{ asset('public_components/js/gmap3.js')}}"></script>
     <!-- parallax -->
     <script type="text/javascript" src="{{ asset('public_components/js/jquery.stellar.min.js')}}"></script>
 
@@ -809,6 +815,37 @@
         .jssora12r.jssora12rdn { background-position: -315px -37px; }
     </style>
     @endif
+    <script type="text/javascript">
+        sjq(".soap-google-map").gmap3({
+            map: {
+                options: {
+                    center: [{!!$atraccion->latitud_servicio!!},{!!$atraccion->longitud_servicio!!}],
+                    zoom: 15,
+					mapTypeControlOptions: {
+						position: google.maps.ControlPosition.RIGHT_BOTTOM
+					},
+					zoomControlOptions: {
+						position: google.maps.ControlPosition.LEFT_CENTER
+					},
+					panControlOptions: {
+						position: google.maps.ControlPosition.LEFT_CENTER
+					}
+                }
+            },
+            marker:{
+                values: [
+                    {latLng:[ {!!$atraccion->latitud_servicio!!},{!!$atraccion->longitud_servicio!!}], data:"Ecuador"}
+                    
+
+                ]
+                //,
+                //options: {
+                  //  draggable: false,
+                    //icon: "{!!asset("img/CollageIsmage_opt.png")!!}",
+                //},
+            }
+        });
+    </script>
 
     <!-- load page Javascript -->
     <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>

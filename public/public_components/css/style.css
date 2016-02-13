@@ -7503,7 +7503,7 @@ ul.filter-categories > li li:last-child {
 
 /* google map */
 .soap-google-map {
-  height: 680px;
+  height: 480px;
 }
 .soap-google-map img {
   max-width: none;
