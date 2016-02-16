@@ -29,7 +29,7 @@ return [
     'label25' => 'Ninguno',
     'label26' => 'Aún no encuentras lo que buscas?. Conoce un poco más del Ecuador, echale un vistazo al resto de provincias de ésta región',
     'label27' => 'Ir',
-    'label28' => 'Destinos principales',
+    'label28' => 'También te podría interesar visitar',
     'label29' => 'Explora',
     'label30' => 'Sitios de interes',
     'label31' => 'Ver más',
@@ -48,6 +48,9 @@ return [
     'label44' => 'No existen eventos disponibles por el momento',
     'label45' => 'No existen promociones disponibles por el momento',
     'label46' => 'Itineraries & trips',
+    'label47' => 'Relacionados',
+    'label48' => 'Eventos cercanos',
+    'label49' => 'Promociones cerca',
 	'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

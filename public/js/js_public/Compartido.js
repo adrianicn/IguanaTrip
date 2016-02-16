@@ -85,6 +85,10 @@ function GetDataAjaxTopPlaces(url) {
     });
 }
 
+
+
+
+
 //Javascript para cargar las imagenes via ajax
 function GetDataAjaxEventsInd(url) {
     $(".eventsPromo").LoadingOverlay("show");
@@ -258,8 +262,38 @@ function GetDataAjaxregiones(url) {
         url: url,
         dataType: 'json',
         success: function (data) {
+            
             $(".regiones").LoadingOverlay("hide", true);
             $(".regiones").html(data.regiones);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+window.current_pageIntern=0;
+
+function GetDataAjaxCloseIntern(url) {
+    $(".cercanos").LoadingOverlay("show");
+    $.ajax({
+        type: 'GET',
+        url: url,
+            data:{
+            'page': window.current_pageIntern + 1 // you might need to init that var on top of page (= 0)
+            },
+        dataType: 'json',
+        success: function (data) {
+            window.current_pageIntern=current_pageIntern+1;
+            $(".cercanos").LoadingOverlay("hide", true);
+            $(".cercanos").append(data.cercanos);
 
 
         },

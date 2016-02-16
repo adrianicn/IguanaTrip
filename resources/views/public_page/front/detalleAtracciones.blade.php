@@ -119,7 +119,17 @@
                                      
                                     </div>
                                     
-                                        @if(isset($explore) && count($explore)>0)
+                                      <div class="social-wrap">
+                                        <label>Share with friends</label>
+                                        <div class="social-icons">
+                                            <a href="#" class="social-icon"><i class="fa fa-twitter has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
+                                            <a href="#" class="social-icon"><i class="fa fa-facebook has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
+                                            <a href="#" class="social-icon"><i class="fa fa-google-plus has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                           @if(isset($explore) && count($explore)>0)
                                     <div class="social-wrap ">
                                         <label>{{ trans('publico/labels.label29')}}</label>
                                         <div class="social-icons">
@@ -147,7 +157,7 @@
                                             </div>
                                         </div>
                               
-                                    
+                                
                                        
                                 </div>
                             </div>
@@ -157,13 +167,18 @@
                                     <li ><a href="#tab3-1" data-toggle="tab">{{ trans('publico/labels.label41')}}</a></li>
                                     <li class="active"><a href="#tab3-2" data-toggle="tab">{{ trans('publico/labels.label36')}}</a></li>
                                     <li ><a href="#tab3-3" data-toggle="tab">{{ trans('publico/labels.label24')}}</a></li>
+                                    
+                                    
                                     <li ><a href="#tab3-4" data-toggle="tab">{{ trans('publico/labels.label43')}}</a></li>
+                                    
+                                    
                                     @if(count($itinerarios)>0)
                                     <li ><a href="#tab3-5" data-toggle="tab">{{ trans('publico/labels.label46')}}</a></li>
                                     @endif
                                    
                                 </ul>
                                 
+                                <!-Info->
                                 <div id="tab3-1" class="tab-content panel entry-content">
                                     <div class="tab-pane">
                                         <p>{{ trans('publico/labels.label35')}}: {!!$atraccion->direccion_servicio!!}</p>
@@ -179,6 +194,8 @@
                                     </div>
                                 </div>
 
+                                
+                                <!-Como llegar->
                                 <div id="tab3-2" class="tab-content panel entry-content in active">
                                     <div class="tab-pane">
                                         
@@ -195,6 +212,9 @@
             </div>
                                     </div>
                                 </div>
+                                
+                                
+                                <!-Eventos->
                                 <div id="tab3-3" class="tab-content panel entry-content ">
                                     <div class="tab-pane">
                                         <div id="comments">
@@ -253,6 +273,8 @@
                                     </div>
                                 </div>
                                 
+                                
+                                <!-Promociones->
                                 <div id="tab3-4" class="tab-content panel entry-content ">
                                     <div class="tab-pane">
                                         <div id="comments">
@@ -312,6 +334,9 @@
 
                                     </div>
                                 </div>
+                                
+                                
+                                <!-Itinerarios->
                                    @if(count($itinerarios)>0)
                                 <div id="tab3-5" class="tab-content panel entry-content ">
                                     <div class="tab-pane">
@@ -365,30 +390,28 @@
                             </div>
 
                         </div>
-                        
+                        @if(count($related)>0)
                       <div class="product type-product">
-                            <h4>{{ trans('publico/labels.label28')}}</h4>
+                            <h4>{{ trans('publico/labels.label47')}}</h4>
                             <ul class="related products row add-clearfix">
-                <?php $flag=0;?>
-                                
-                @for ($x = 0; $x < count($related); $x++)
-
-                        
                             
-                                @if($flag==0)
-                            <li class="product col-sms-6 col-sm-6 col-md-4 box">
-                                    <a class="product-image" href="#">
-                                        <div class="first-img">
-                                            <img alt="" src="{{ asset('images/icon/'.$related[$x]->filename)}}">
-                                        </div>
-                                        @if(isset($related[$x+1])&& $related[$x+1]->id_auxiliar==$related[$x]->id_auxiliar)
-                                        
-                                        <div class="back-img">
-                                            <img alt="" src="{{ asset('images/icon/'.$related[$x+1]->filename)}}">
-                                        </div>
+                                <!-Despliega los hijos que tiene una atraccion especifica ->                                
+
+                                <?php $flag=0;?>
+                                @for ($x = 0; $x < count($related); $x++)
+                                    @if($flag==0)
+                                         <li class="product col-sms-6 col-sm-6 col-md-4 box">
+                                             <a class="product-image" href="#">
+                                                  <div class="first-img">
+                                                        <img alt="" src="{{ asset('images/icon/'.$related[$x]->filename)}}">
+                                                  </div>
+                                                    @if(isset($related[$x+1])&& $related[$x+1]->id_auxiliar==$related[$x]->id_auxiliar)
+                                                  <div class="back-img">
+                                                      <img alt="" src="{{ asset('images/icon/'.$related[$x+1]->filename)}}">
+                                                  </div>
                                        <?php $flag=1;?>
                                         @endif
-                                    </a>
+                                              </a>
                                     <div class="product-content">
                                         <h5 class="product-title"><a href="#">{!!$related[$x]->nombre_servicio!!}</a></h5>
                                         <span class="product-price"><span class="currency-symbol"></span>{!!$related[$x]->catalogo_nombre!!}</span>
@@ -407,57 +430,27 @@
                                 </li>
                                 @else
                                 <?php $flag=0;?>
-                                
                                   @endif
-                        @endfor
-                        
-                        
-                        <?php $flag1=0;?>
+                                @endfor
                                 
-                @for ($x = 0; $x < count($visitados); $x++)
-
-                        
-                            
-                                @if($flag1==0)
-                            <li class="product col-sms-6 col-sm-6 col-md-4 box">
-                                    <a class="product-image" href="#">
-                                        <div class="first-img">
-                                            <img alt="" src="{{ asset('images/icon/'.$visitados[$x]->filename)}}">
-                                        </div>
-                                        @if(isset($visitados[$x+1])&& $visitados[$x+1]->id_auxiliar==$visitados[$x]->id_auxiliar)
-                                        
-                                        <div class="back-img">
-                                            <img alt="" src="{{ asset('images/icon/'.$visitados[$x+1]->filename)}}">
-                                        </div>
-                                       <?php $flag1=1;?>
-                                        @endif
-                                    </a>
-                                    <div class="product-content">
-                                        <h5 class="product-title"><a href="#">{!!$visitados[$x]->nombre_servicio!!}</a></h5>
-                                        <span class="product-price"><span class="currency-symbol"></span>{!!$visitados[$x]->catalogo_nombre!!}</span>
-                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
-                                            <span data-stars="4"></span>
-                                        </span>
-                                        <p><a href="#">{!!$visitados[$x]->nombre!!}</p>
-                                        
-                                    </div>
-                                    <div class="product-action">
-                                        <!--<a class="btn btn-add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add To Cart</a>-->
-                                        <a class="btn btn-add-to-wishlist" href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="ajax/woocommerce-product-quickview.html" class="btn btn-quick-view"><i class="fa fa-search"></i></a>
-                                        <a class="btn btn-compare" href="#"><i class="fa fa-star-half-o"></i></a>
-                                    </div>
-                                </li>
-                                @else
-                                <?php $flag1=0;?>
                                 
-                                  @endif
-                        @endfor
+                        
                         
                         
                             </ul>
                         </div>
+                        @endif
                         
+                        <div class="product type-product">
+                            <h4>{{ trans('publico/labels.label28')}}</h4>
+                            <ul class="related products row add-clearfix cercanos">
+                                @section('cercanos')
+                                @show
+                            </ul>
+                        </div>
+                          <div class="text-center">
+                                <a  class="btn style4 hover-blue load-more moreImg">{{ trans('publico/labels.label31')}}</a>
+                            </div>
                     </div>
                     <div class="sidebar col-sm-4 col-md-3">
 
@@ -845,6 +838,13 @@
                 //},
             }
         });
+    </script>
+    
+    <script>
+      $(".moreImg").click(function () {
+                GetDataAjaxCloseIntern("{!!asset('/getCercanosIntern')!!}/{!!$atraccion->id!!}/{!!$atraccion->id_provincia!!}/{!!$atraccion->id_canton!!}/{!!$atraccion->id_parroquia!!}");
+                
+            });
     </script>
 
     <!-- load page Javascript -->

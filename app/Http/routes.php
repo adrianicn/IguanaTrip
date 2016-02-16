@@ -241,4 +241,6 @@ Route::get('/getEventscloseToMe', ['as' => 'topPlaces', 'uses' => 'HomePublicCon
 
 
 Route::get('/getDescipcionAtraccion/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getAtraccionDescripcion']);
+
+Route::get('/getCercanosIntern/{id_atraccion}/{id_provincia}/{id_canton}/{id_parroquia}', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getCercanosIntern']);
  /*  Fin de las rutas del sistema publico*/

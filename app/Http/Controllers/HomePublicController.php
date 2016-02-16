@@ -74,6 +74,74 @@ class HomePublicController extends Controller {
     }
 
     //Obtiene los top places paginados
+    public function getCercanosIntern(Request $request, PublicServiceRepository $gestion, $id_atraccion, $id_provincia, $id_canton, $id_parroquia) {
+        //
+//saber cuales son los hijos de la atraccion principal si lo tiene
+        //$related = $gestion->getHijosAtraccion($id_atraccion);
+
+
+        $provincias = null;
+        $canton = null;
+        $parroquia = null;
+        $evntParroquia = null;
+        $prmoParroquia = null;
+        $evntCanton = null;
+        $prmoCanton = null;
+
+
+        if ($id_parroquia != 0) {
+            $parroquia = $gestion->getParroquiaIntern($id_parroquia, $id_atraccion);
+
+            if ($parroquia != null) {
+                $evntParroquia = $gestion->getEventIntern($parroquia);
+                $prmoParroquia = $gestion->getPromoIntern($parroquia);
+            }
+        }
+
+        if ($id_canton != 0) {
+            if ($parroquia != null) {
+                if (Input::get('page') > $parroquia->currentPage()) {
+                    $canton = $gestion->getCantonIntern($id_canton, $id_atraccion, $id_parroquia, Input::get('page'), $parroquia->currentPage());
+
+               
+                }
+            } else {
+                $canton = $gestion->getCantonIntern($id_canton, $id_atraccion, $id_parroquia, null, null);
+                
+              
+            }
+              if ($canton != null) {
+
+                    $evntCanton = $gestion->getEventIntern($canton);
+                    $prmoCanton = $gestion->getPromoIntern($canton);
+                }
+        }
+
+        if ($id_provincia != 0) {
+            //$provincias = $gestion->getProvinciaIntern($id_provincia,$id_atraccion,$canton,$parroquia);
+        }
+
+        $view = View::make('public_page.partials.cercanosIntern', array('parroquia' => $parroquia,
+                    'evntParroquia' => $evntParroquia,
+                    'prmoParroquia' => $prmoParroquia,
+                    'canton' => $canton,
+                    'provincias' => $provincias,
+                    'evntCanton' => $evntCanton,
+                    'prmoCanton' => $prmoCanton,
+        ));
+
+        if ($request->ajax()) {
+            //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
+
+
+            $sections = $view->rendersections();
+            return Response::json($sections);
+
+            //return  Response::json($sections['contentPanel']); 
+        }
+    }
+
+    //Obtiene los top places paginados
     public function getcloseToMe(Request $request, PublicServiceRepository $gestion) {
         //
 
@@ -171,32 +239,32 @@ class HomePublicController extends Controller {
         $ImgPromociones = null;
         $ImgItiner = null;
         $explore = null;
-        $visitados=null;
-        
-        $provincia=null;
-        $canton=null;
-        $parroquia=null;
-        
+        $visitados = null;
+
+        $provincia = null;
+        $canton = null;
+        $parroquia = null;
+
         $atraccion = $gestion->getAtraccionDetails($id_atraccion);
         $imagenes = $gestion->getAtraccionImages($id_atraccion);
         $eventos = $gestion->getEventosAtraccion($id_atraccion);
         $promociones = $gestion->getPromoAtraccion($id_atraccion);
         $itinerarios = $gestion->getItinerAtraccion($id_atraccion);
         $related = $gestion->getHijosAtraccion($id_atraccion);
-        
-        
-        
-        if($atraccion->id_provincia!=0)
+
+
+
+        if ($atraccion->id_provincia != 0)
             $provincia = $gestion->getUbicacionAtraccion($atraccion->id_provincia);
-        
-             if($atraccion->id_canton!=0)
+
+        if ($atraccion->id_canton != 0)
             $canton = $gestion->getUbicacionAtraccion($atraccion->id_canton);
-             
-                  if($atraccion->id_parroquia!=0)
+
+        if ($atraccion->id_parroquia != 0)
             $parroqia = $gestion->getUbicacionAtraccion($atraccion->id_parroquia);
-            
-        if($related==null || count($related<6))
-        $visitados = $gestion->getVisitadosProvincia($atraccion->id_provincia);
+
+        if ($related == null)
+            $visitados = $gestion->getVisitadosProvincia($atraccion->id_provincia);
 
         if ($eventos != null)
             $Imgeventos = $gestion->getEventosImagenAtraccion($eventos);
@@ -208,11 +276,11 @@ class HomePublicController extends Controller {
         if ($itinerarios != null)
             $ImgItiner = $gestion->getItinerImagenAtraccion($itinerarios);
 
-        
+
         if (isset($atraccion->id_provincia))
             $explore = $gestion->getExplorer($atraccion->id_provincia);
 
-        
+
         return view('public_page.front.detalleAtracciones')->with('atraccion', $atraccion)
                         ->with('imagenes', $imagenes)->with('explore', $explore)
                         ->with('eventos', $eventos)->with('Imgeventos', $Imgeventos)
@@ -220,12 +288,12 @@ class HomePublicController extends Controller {
                         ->with('ImgPromociones', $ImgPromociones)
                         ->with('itinerarios', $itinerarios)
                         ->with('ImgItiner', $ImgItiner)
-        ->with('related', $related)
-            ->with('visitados', $visitados)
-            ->with('canton', $canton)
-                ->with('provincia', $provincia)
-            ->with('parroquia', $parroquia)
-            ;
+                        ->with('related', $related)
+                        ->with('visitados', $visitados)
+                        ->with('canton', $canton)
+                        ->with('provincia', $provincia)
+                        ->with('parroquia', $parroquia)
+        ;
     }
 
     //Obtiene todas las provincias de la region

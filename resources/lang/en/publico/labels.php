@@ -31,7 +31,7 @@ return [
     'label25' => 'None',
     'label26' => 'Still you can not find what you are looking for ?. Learn a little more of Ecuador, have a look at other provinces in this region',
     'label27' => 'Go',
-    'label28' => 'Top Destinations',
+    'label28' => 'Top destinations close',
     'label29' => 'Explore',
     'label30' => 'Sites of interest',
     'label31' => 'Load More',
@@ -50,6 +50,9 @@ return [
     'label44' => 'There are not events available at the moment',
     'label45' => 'There are not promotions available at the moment',
     'label46' => 'Itinerarios & trips',
+    'label47' => 'Related',
+    'label48' => 'Events close to you',
+    'label49' => 'Promotions close to you',
     
 	'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
