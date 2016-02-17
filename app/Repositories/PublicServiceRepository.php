@@ -166,12 +166,18 @@ class PublicServiceRepository extends BaseRepository {
     }
 
 //Entrega el arreglo de los servicios más visitados por provincia
-    public function getProvinciaIntern($id_provincia, $id_atraccion, $canton, $parroquia) {
+    public function getProvinciaIntern($id_provincia, $id_atraccion, $canton, $parroquia,$page_now, $page_stoped) {
 
-
-        $arrayAtraccion = array();
-        $arrayParroquia = array();
-        $arrayCanton = array();
+    $arrayAtraccion = array();
+        if ($parroquia == 0) {
+            $parroquia = 1;
+        }
+  
+        if ($canton == 0) {
+            $canton = 1;
+        }
+        
+       
 
         $img_Atraccion = $this->getHijosAtraccion($id_atraccion);
         //verifica que no se repitan las atracciones hijas
@@ -179,27 +185,25 @@ class PublicServiceRepository extends BaseRepository {
             $arrayAtraccion = array_pluck($img_Atraccion, 'id_usuario_servicio');
         }
 
-        //verifica que no se repitan las atracciones por parroquia
-        if ($parroquia != null) {
-            $arrayParroquia = array_pluck($parroquia, 'id_usuario_servicio');
-        }
-        if ($canton != null) {
-            $arrayCanton = array_pluck($canton, 'id_usuario_servicio');
-        }
+  
+
         $visitados = DB::table('usuario_servicios')
                 ->where('usuario_servicios.estado_servicio', '=', '1')
                 ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                
                 ->where('usuario_servicios.id_provincia', '=', $id_provincia)
                 ->whereIn('id_catalogo_servicio', array(4, 8))
                 ->whereNotIn('usuario_servicios.id', array($id_atraccion))
                 ->whereNotIn('usuario_servicios.id', $arrayAtraccion)
-                ->whereNotIn('usuario_servicios.id', $arrayParroquia)
-                ->whereNotIn('usuario_servicios.id', $arrayCanton)
+                ->whereNotIn('usuario_servicios.id_canton',array($canton))
+                ->whereNotIn('usuario_servicios.id_parroquia',array($parroquia))
                 ->select('usuario_servicios.id')
                 ->orderBy('num_visitas', 'desc')
                 ->orderBy('prioridad', 'desc')
                 ->take(10)
                 ->get();
+
+
 
         if ($visitados != null) {
             $array = array();
@@ -213,25 +217,32 @@ class PublicServiceRepository extends BaseRepository {
                                 ->where('estado_fotografia', '=', '1')
                                 ->where('estado_fotografia', '=', '1')
                                 ->whereNotIn('images.id_usuario_servicio', $arrayAtraccion)
-                                ->whereNotIn('images.id_usuario_servicio', $arrayParroquia)
-                                ->whereNotIn('images.id_usuario_servicio', $arrayCanton)
                                 ->whereNotIn('usuario_servicios.id', array($id_atraccion))
                                 ->select('images.id')
                                 ->orderBy('id_auxiliar', 'desc')
                                 ->orderBy('usuario_servicios.prioridad', 'desc')
                                 ->orderBy('usuario_servicios.num_visitas', 'desc')
-                                ->take(2)->get();
+                                ->first();
 
 
                 if ($imagenes != null) {
 
                     foreach ($imagenes as $imagen) {
 
-                        $array[] = $imagen->id;
+                        $array[] = $imagen;
                     }
                 }
             }
 
+            if ($page_now != null) {
+                $currentPage = ($page_now - $page_stoped);
+                // You can set this to any page you want to paginate to
+                // Make sure that you call the static method currentPageResolver()
+                // before querying users
+                Paginator::currentPageResolver(function () use ($currentPage) {
+                    return $currentPage;
+                });
+            }
             $imagenesF = DB::table('images')
                     ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
                     ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
@@ -239,25 +250,23 @@ class PublicServiceRepository extends BaseRepository {
                     ->whereIn('images.id', $array)
                     ->where('id_catalogo_fotografia', '=', '1')
                     ->whereNotIn('images.id', $arrayAtraccion)
+                    ->whereNotIn('usuario_servicios.id_canton',array($canton))
+                ->whereNotIn('usuario_servicios.id_parroquia',array($parroquia))
+                    
                     ->whereNotIn('usuario_servicios.id', array($id_atraccion))
                     ->where('estado_fotografia', '=', '1')
                     ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre', 'ubicacion_geografica.nombre')
                     ->orderBy('id_auxiliar', 'desc')
-                    ->paginate(1);
+                    ->paginate(3);
+            
+            
         } else {
-            $imagenesF = DB::table('images')
-                    ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
-                    ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
-                    ->join('ubicacion_geografica', 'usuario_servicios.id_provincia', '=', 'ubicacion_geografica.id')
-                    ->where('estado_fotografia', '=', '1')
-                    ->where('id_catalogo_fotografia', '=', '1')
-                    ->whereNotIn('usuario_servicios.id', $arrayAtraccion)
-                    ->whereNotIn('usuario_servicios.id', array($id_atraccion))
-                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre', 'ubicacion_geografica.nombre')
-                    ->orderBy('id_auxiliar', 'desc')
-                    ->paginate(1);
+            $imagenesF =null;
         }
         return $imagenesF;
+        
+        
+        
     }
 
     //Entrega el arreglo de los servicios más visitados por provincia canton para la parte interna
@@ -309,14 +318,14 @@ class PublicServiceRepository extends BaseRepository {
                                 ->orderBy('id_auxiliar', 'desc')
                                 ->orderBy('usuario_servicios.prioridad', 'desc')
                                 ->orderBy('usuario_servicios.num_visitas', 'desc')
-                                ->take(2)->get();
+                                ->first();
 
 
                 if ($imagenes != null) {
 
                     foreach ($imagenes as $imagen) {
 
-                        $array[] = $imagen->id;
+                        $array[] = $imagen;
                     }
                 }
             }
@@ -391,14 +400,14 @@ class PublicServiceRepository extends BaseRepository {
                                 ->orderBy('id_auxiliar', 'desc')
                                 ->orderBy('usuario_servicios.prioridad', 'desc')
                                 ->orderBy('usuario_servicios.num_visitas', 'desc')
-                                ->take(2)->get();
+                                ->first();
 
 
                 if ($imagenes != null) {
 
                     foreach ($imagenes as $imagen) {
 
-                        $array[] = $imagen->id;
+                        $array[] = $imagen;
                     }
                 }
             }
@@ -876,15 +885,14 @@ class PublicServiceRepository extends BaseRepository {
             $array[] = $ub->id_usuario_servicio;
         }
     
-
-
         $eventos = DB::table('eventos_usuario_servicios')
                         ->whereIn('eventos_usuario_servicios.id_usuario_servicio', $array)
                         ->where('fecha_hasta', '>=', "'" . Carbon::now() . "'")
                         ->where('eventos_usuario_servicios.estado_evento', '=', '1')
-                        ->select('eventos_usuario_servicios.id')->take(10)->get();
-
-        
+                        ->select('eventos_usuario_servicios.id')
+                ->orderBy('eventos_usuario_servicios.id_usuario_servicio', 'desc')
+                
+                ->take(10)->get();
 
         if ($eventos != null) {
             $array = array();

@@ -452,7 +452,7 @@
                                 <a  class="btn style4 hover-blue load-more moreImg">{{ trans('publico/labels.label31')}}</a>
                             </div>
                     </div>
-                    <div class="sidebar col-sm-4 col-md-3">
+                    <div class="sidebar col-sm-4 col-md-3" >
 
                         @if(session('device')!='mobile')
                         <div class="main-mini-search-form full-width box">

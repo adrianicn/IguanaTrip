@@ -76,7 +76,7 @@ class HomePublicController extends Controller {
     //Obtiene los top places paginados
     public function getCercanosIntern(Request $request, PublicServiceRepository $gestion, $id_atraccion, $id_provincia, $id_canton, $id_parroquia) {
         //
-//saber cuales son los hijos de la atraccion principal si lo tiene
+        //saber cuales son los hijos de la atraccion principal si lo tiene
         //$related = $gestion->getHijosAtraccion($id_atraccion);
 
 
@@ -87,6 +87,8 @@ class HomePublicController extends Controller {
         $prmoParroquia = null;
         $evntCanton = null;
         $prmoCanton = null;
+        $evntProvincia = null;
+        $prmoProvincia = null;
 
 
         if ($id_parroquia != 0) {
@@ -97,28 +99,47 @@ class HomePublicController extends Controller {
                 $prmoParroquia = $gestion->getPromoIntern($parroquia);
             }
         }
-
         if ($id_canton != 0) {
             if ($parroquia != null) {
                 if (Input::get('page') > $parroquia->currentPage()) {
                     $canton = $gestion->getCantonIntern($id_canton, $id_atraccion, $id_parroquia, Input::get('page'), $parroquia->currentPage());
-
-               
                 }
             } else {
                 $canton = $gestion->getCantonIntern($id_canton, $id_atraccion, $id_parroquia, null, null);
-                
-              
             }
               if ($canton != null) {
-
                     $evntCanton = $gestion->getEventIntern($canton);
                     $prmoCanton = $gestion->getPromoIntern($canton);
                 }
         }
 
         if ($id_provincia != 0) {
-            //$provincias = $gestion->getProvinciaIntern($id_provincia,$id_atraccion,$canton,$parroquia);
+            
+             if ($canton != null) {
+                 if($parroquia!=null)
+                 
+                 {$page=$canton->currentPage()+$parroquia->currentPage();
+                 $stop=$parroquia->currentPage();
+                 }
+                 
+                 else
+                 {$page=$canton->currentPage();
+                 $stop=$canton->currentPage();
+                 }
+                 
+                if (Input::get('page') > ($page)) {
+                    $provincias = $gestion->getProvinciaIntern($id_provincia, $id_atraccion,$id_canton, $id_parroquia, Input::get('page'), $stop);
+                }
+            } else {
+                $provincias = $gestion->getProvinciaIntern($id_provincia, $id_atraccion,$id_canton, $id_parroquia,null, null);
+            }
+            
+             if ($provincias != null) {
+                    $evntProvincia = $gestion->getEventIntern($provincias);
+                    
+                    $prmoProvincia = $gestion->getPromoIntern($provincias);
+                }
+            
         }
 
         $view = View::make('public_page.partials.cercanosIntern', array('parroquia' => $parroquia,
@@ -128,6 +149,8 @@ class HomePublicController extends Controller {
                     'provincias' => $provincias,
                     'evntCanton' => $evntCanton,
                     'prmoCanton' => $prmoCanton,
+                    'evntProvincia' => $evntProvincia,
+                    'prmoProvincia' => $prmoProvincia,
         ));
 
         if ($request->ajax()) {

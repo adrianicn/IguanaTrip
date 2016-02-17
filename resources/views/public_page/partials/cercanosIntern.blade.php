@@ -205,14 +205,55 @@
                         @endfor
                         @endif
                 
+                           @if($prmoCanton!=null)
+                        <?php $flag3=0;?>
+                @for ($x = 0; $x < count($prmoCanton); $x++)
+                
+                                @if($flag3==0)
+                            <li class="product col-sms-6 col-sm-6 col-md-4 box">
+                                    <a class="product-image" href="#">
+                                        <div class="first-img">
+                                            <img alt="" src="{{ asset('images/icon/'.$prmoCanton[$x]->filename)}}">
+                                        </div>
+                                        @if(isset($prmoCanton[$x+1])&& $prmoCanton[$x+1]->id_auxiliar==$prmoCanton[$x]->id_auxiliar)
+                                        
+                                        <div class="back-img">
+                                            <img alt="" src="{{ asset('images/icon/'.$prmoCanton[$x+1]->filename)}}">
+                                        </div>
+                                       <?php $flag3=1;?>
+                                        @endif
+                                    </a>
+                                    <div class="product-content">
+                                        <h5 class="product-title"><a href="#">{!!$prmoCanton[$x]->nombre_promocion!!}</a></h5>
+                                        <span class="product-price"><span class="currency-symbol"></span>{{ trans('publico/labels.label49')}}</span>
+                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
+                                            <span data-stars="4"></span>
+                                        </span>
+                                        <p><a href="#">{!!$prmoCanton[$x]->nombre_servicio!!}</p>
+                                        
+                                    </div>
+                                    <div class="product-action">
+                                        <!--<a class="btn btn-add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add To Cart</a>-->
+                                        <a class="btn btn-add-to-wishlist" href="#"><i class="fa fa-heart"></i></a>
+                                        <a href="ajax/woocommerce-product-quickview.html" class="btn btn-quick-view"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-compare" href="#"><i class="fa fa-star-half-o"></i></a>
+                                    </div>
+                                </li>
+                                @else
+                                <?php $flag3=0;?>
+                                
+                                  @endif
+                        @endfor
+                        @endif
+                        
                         
                         
                         
                         @if($provincias!=null)
-                        <?php $flag5=0;?>
+                        <?php $flag8=0;?>
                 @for ($x = 0; $x < count($provincias); $x++)
                 
-                                @if($flag5==0)
+                                @if($flag8==0)
                             <li class="product col-sms-6 col-sm-6 col-md-4 box">
                                     <a class="product-image" href="#">
                                         <div class="first-img">
@@ -223,7 +264,7 @@
                                         <div class="back-img">
                                             <img alt="" src="{{ asset('images/icon/'.$provincias[$x+1]->filename)}}">
                                         </div>
-                                       <?php $flag5=1;?>
+                                       <?php $flag8=1;?>
                                         @endif
                                     </a>
                                    <div class="product-content">
@@ -243,7 +284,50 @@
                                     </div>
                                 </li>
                                 @else
-                                <?php $flag5=0;?>
+                                <?php $flag8=0;?>
+                                
+                                  @endif
+                        @endfor
+                        @endif
+                        
+                        
+                        
+                        @if($evntProvincia!=null)
+                        <?php $flag9=0;?>
+                @for ($x = 0; $x < count($evntProvincia); $x++)
+                
+                                @if($flag9==0)
+                            <li class="product col-sms-6 col-sm-6 col-md-4 box">
+                                    <a class="product-image" href="#">
+                                        <div class="first-img">
+                                            <img alt="" src="{{ asset('images/icon/'.$evntProvincia[$x]->filename)}}">
+                                        </div>
+                                        @if(isset($evntProvincia[$x+1])&& $evntProvincia[$x+1]->id_auxiliar==$evntProvincia[$x]->id_auxiliar)
+                                        
+                                        <div class="back-img">
+                                            <img alt="" src="{{ asset('images/icon/'.$evntProvincia[$x+1]->filename)}}">
+                                        </div>
+                                       <?php $flag9=1;?>
+                                        @endif
+                                    </a>
+                                    <div class="product-content">
+                                        <h5 class="product-title"><a href="#">{!!$evntProvincia[$x]->nombre_evento!!}</a></h5>
+                                        <span class="product-price"><span class="currency-symbol"></span>{{ trans('publico/labels.label48')}}</span>
+                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
+                                            <span data-stars="4"></span>
+                                        </span>
+                                        <p><a href="#">{!!$evntProvincia[$x]->nombre_servicio!!}</p>
+                                        
+                                    </div>
+                                    <div class="product-action">
+                                        <!--<a class="btn btn-add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add To Cart</a>-->
+                                        <a class="btn btn-add-to-wishlist" href="#"><i class="fa fa-heart"></i></a>
+                                        <a href="ajax/woocommerce-product-quickview.html" class="btn btn-quick-view"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-compare" href="#"><i class="fa fa-star-half-o"></i></a>
+                                    </div>
+                                </li>
+                                @else
+                                <?php $flag9=0;?>
                                 
                                   @endif
                         @endfor
