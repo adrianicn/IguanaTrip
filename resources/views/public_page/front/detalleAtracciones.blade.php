@@ -153,7 +153,13 @@
                                     <p class="mores">{!!$atraccion->detalle_servicio!!}</p>
                                     <div class="clearfix box" style=" width: 90%;  margin-left: 10%;">
                                             <div class="col-xs-12 col-lg-6">
-                                                <img class='activities' src="{{ asset('img/mapa-costa.png')}}" alt="">
+                                                
+                                                @if($provincia!=null)
+                                                <img class='activities' src="{{ asset('img/Maps/')}}/{!!$atraccion->id_provincia!!}.png" title="{!!$provincia->nombre!!}" alt="{!!$provincia->nombre!!}">
+                                               @else
+                                                
+                                                <img class='activities' src="{{ asset('img/Maps/')}}/0.png" title="Ecuador" alt="Ecuador">
+                                                @endif
                                             </div>
                                         </div>
                               
@@ -401,7 +407,7 @@
                                 @for ($x = 0; $x < count($related); $x++)
                                     @if($flag==0)
                                          <li class="product col-sms-6 col-sm-6 col-md-4 box">
-                                             <a class="product-image" href="#">
+                                             <a class="product-image" href="{!!asset('/tokenDc$rip')!!}/{!!$related[$x]->id_usuario_servicio!!}"  onclick="$('.container').LoadingOverlay('show')">
                                                   <div class="first-img">
                                                         <img alt="" src="{{ asset('images/icon/'.$related[$x]->filename)}}">
                                                   </div>
@@ -413,20 +419,15 @@
                                         @endif
                                               </a>
                                     <div class="product-content">
-                                        <h5 class="product-title"><a href="#">{!!$related[$x]->nombre_servicio!!}</a></h5>
+                                        <h5 class="product-title"><a  href="{!!asset('/tokenDc$rip')!!}/{!!$related[$x]->id_usuario_servicio!!}"  onclick="$('.container').LoadingOverlay('show')">{!!$related[$x]->nombre_servicio!!}</a></h5>
                                         <span class="product-price"><span class="currency-symbol"></span>{!!$related[$x]->catalogo_nombre!!}</span>
-                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
+                                       <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
                                             <span data-stars="4"></span>
                                         </span>
                                         <p><a href="#">{!!$related[$x]->nombre!!}</p>
                                         
                                     </div>
-                                    <div class="product-action">
-                                        <!--<a class="btn btn-add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add To Cart</a>-->
-                                        <a class="btn btn-add-to-wishlist" href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="ajax/woocommerce-product-quickview.html" class="btn btn-quick-view"><i class="fa fa-search"></i></a>
-                                        <a class="btn btn-compare" href="#"><i class="fa fa-star-half-o"></i></a>
-                                    </div>
+                                    
                                 </li>
                                 @else
                                 <?php $flag=0;?>
@@ -467,48 +468,38 @@
                         <div class="widget box">
                             <h4>{{ trans('publico/labels.label18')}}</h4>
                             <ul class="product-list-widget">
+                                
+                                @if(isset($servicios))
+                                
+                                @foreach ($servicios as $serv)
+                                
                                 <li>
                                     <div class="product-image">
                                         <a href="#">
-                                            <img src="{{ asset('images/register/registro1.jpg')}}" alt="">
+                                            <img src="{{ asset('img/register/')}}/{!!$serv->id_catalogo_servicios!!}.jpg" alt="">
                                         </a>
                                     </div>
+                                    
+                                    
                                     <div class="product-content">
-                                        <h6 class="product-title"><a href="#">Alimentacion y bebidas</a></h6>
-                                        <span class="product-price">desde $18.99</span>
+                                    
+                                           @if(session('locale') == 'es' )
+                                    <h6 class="product-title"><a href="#">{!!$serv->nombre_servicio!!}</a></h6>
+                                    
+                                    @else
+                                    <h6 class="product-title"><a href="#">{!!$serv->nombre_servicio_eng!!}</a></h6>
+
+                                    @endif
+                                        
+                                        <span class="product-price">{{ trans('publico/labels.label50')}}</span>
                                         <span class="star-rating" title="4" data-toggle="tooltip">
                                             <span data-stars="4"></span>
                                         </span>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="product-image">
-                                        <a href="#">
-                                            <img src="{{ asset('images/register/registro2.jpg')}}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product-content">
-                                        <h6 class="product-title"><a href="#">Alojamiento</a></h6>
-                                        <span class="product-price">desde $23.58</span>
-                                        <span class="star-rating" title="4" data-toggle="tooltip">
-                                            <span data-stars="4"></span>
-                                        </span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="product-image">
-                                        <a href="#">
-                                            <img src="{{ asset('images/register/registro3.jpg')}}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product-content">
-                                        <h6 class="product-title"><a href="#">Tours y actividades</a></h6>
-                                        <span class="product-price">desde $76.00</span>
-                                        <span class="star-rating" title="4" data-toggle="tooltip">
-                                            <span data-stars="4"></span>
-                                        </span>
-                                    </div>
-                                </li>
+                                @endforeach
+                                @endif
+                                
                             </ul>
                         </div>
                       

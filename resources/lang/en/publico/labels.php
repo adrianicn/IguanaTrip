@@ -53,6 +53,7 @@ return [
     'label47' => 'Related',
     'label48' => 'Events close to you',
     'label49' => 'Promotions close to you',
+    'label50' => 'Read more',
     
 	'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'

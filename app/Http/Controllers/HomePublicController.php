@@ -274,9 +274,9 @@ class HomePublicController extends Controller {
         $promociones = $gestion->getPromoAtraccion($id_atraccion);
         $itinerarios = $gestion->getItinerAtraccion($id_atraccion);
         $related = $gestion->getHijosAtraccion($id_atraccion);
-
-
-
+        $servicios = $gestion->getServicios($atraccion->id_provincia);
+   
+        
         if ($atraccion->id_provincia != 0)
             $provincia = $gestion->getUbicacionAtraccion($atraccion->id_provincia);
 
@@ -316,8 +316,52 @@ class HomePublicController extends Controller {
                         ->with('canton', $canton)
                         ->with('provincia', $provincia)
                         ->with('parroquia', $parroquia)
+                ->with('servicios', $servicios)
         ;
     }
+    
+    
+    /*::           where: 'M' is statute miles (default)                         :*/
+/*::                  'K' is kilometers                                      :*/
+/*::                  'N' is nautical miles   
+    public function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+
+  $theta = $lon1 - $lon2;
+  $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+  $dist = acos($dist);
+  $dist = rad2deg($dist);
+  $miles = $dist * 60 * 1.1515;
+  $unit = strtoupper($unit);
+
+  if ($unit == "K") {
+    return ($miles * 1.609344);
+  } else if ($unit == "N") {
+      return ($miles * 0.8684);
+    } else {
+        return $miles;
+      }
+}
+                               :*/
+    
+    //Obtiene las descripcion de la atraccion elegida
+    public function getCatalogoDescripcion(PublicServiceRepository $gestion,$id_catalogo,$id_provincia,$id_canton,$id_parroquia) {
+        $agent = new Agent();
+
+        $desk = $device = $agent->isMobile();
+        if ($desk == 1)
+            $desk = "mobile";
+        else {
+            $desk = "desk";
+        }
+        Session::put('device', $desk);
+        
+        $catalogo= $gestion->getCatalogoDetails($id_atraccion);
+        
+
+        return view('public_page.front.listServices');
+    }
+    
+    
 
     //Obtiene todas las provincias de la region
     public function getRegionsId($id_region, PublicServiceRepository $gestion) {

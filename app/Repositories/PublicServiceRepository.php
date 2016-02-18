@@ -51,14 +51,14 @@ class PublicServiceRepository extends BaseRepository {
                                 ->where('usuario_servicios.id_padre', '=', $id_atraccion)
                                 ->select('images.id')
                                 ->orderBy('id_auxiliar', 'desc')
-                                ->take(2)->get();
+                                ->first();
 
 
                 if ($imagenes != null) {
 
                     foreach ($imagenes as $imagen) {
 
-                        $array[] = $imagen->id;
+                        $array[] = $imagen;
                     }
                 }
             }
@@ -1277,6 +1277,32 @@ class PublicServiceRepository extends BaseRepository {
         return $provincias;
     }
 
+    
+    
+    
+    
+    
+       //Entrega el detalle de los servicios
+    public function getServicios($id_provincia) {
+
+
+        
+        $servicios = DB::table('catalogo_servicios')
+                ->join('usuario_servicios', 'id_catalogo_servicios', '=', 'usuario_servicios.id_catalogo_servicio')
+                ->where('usuario_servicios.id_provincia', '=', $id_provincia)
+                ->select('catalogo_servicios.nombre_servicio','catalogo_servicios.id_catalogo_servicios','catalogo_servicios.nombre_servicio_eng')
+                ->distinct()->get();
+        
+        
+        
+        
+        return $servicios;
+        
+    }
+    
+  
+    
+    
     //Entrega el detalle de la provincia
     public function getAtraccionDetails($id_atraccion) {
 
@@ -1288,6 +1314,20 @@ class PublicServiceRepository extends BaseRepository {
         return $provincias;
     }
 
+    
+    
+    //Entrega el detalle del catalogo
+    public function getCatalogoDetails($id_catalogo) {
+
+
+        $provincias = DB::table('catalogo_servicios')
+                ->where('id', '=', $id_catalogo)
+                ->select('catalogo_servicios.*')
+                ->first();
+        return $provincias;
+    }
+    
+    
     //Entrega el detalle geografico de la atraccion
     public function getUbicacionAtraccion($id_ubicacion) {
 

@@ -31,7 +31,7 @@
                                             <div class="shortcode-banner-inside" style=" width: 112%;">
                                             @endif
                                     <div class="shortcode-banner-content">
-                                        <a href="{!!asset('/getDescipcionAtraccion')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
+                                        <a href="{!!asset('/tokenDc$rip')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
                                         
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
@@ -47,7 +47,7 @@
                                         <span class="portfolio-action">
                                             <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
                                                 <i class="fa fa-eye has-circle"></i></a>
-                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getDescipcionAtraccion')!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
+                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/tokenDc$rip')!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
                                         </span>
                                     </div>
                                     </article>
@@ -65,7 +65,7 @@
                                             @endif
                                     <div class="shortcode-banner-content">
                                         
-                                        <a href="{!!asset('/getDescipcionAtraccion')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
+                                        <a href="{!!asset('/tokenDc$rip')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
                                         </div>
@@ -80,7 +80,7 @@
                                         <span class="portfolio-action">
                                             <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
                                                 <i class="fa fa-eye has-circle"></i></a>
-                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
+                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/tokenDc$rip')!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
                                         </span>
                                     </div>
                                     </article>
@@ -96,7 +96,7 @@
                                             <div class="shortcode-banner-inside" style=" width: 112%;">
                                             @endif
                                     <div class="shortcode-banner-content">
-                                        <a href="{!!asset('/getDescipcionAtraccion')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
+                                        <a href="{!!asset('/tokenDc$rip')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
                                         </div>
@@ -111,7 +111,7 @@
                                         <span class="portfolio-action">
                                             <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
                                                 <i class="fa fa-eye has-circle"></i></a>
-                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
+                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/tokenDc$rip')!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
                                         </span>
                                     </div>
                                     </article>
@@ -128,7 +128,7 @@
                                             <div class="shortcode-banner-inside" style=" width: 112%;">
                                             @endif
                                     <div class="shortcode-banner-content">
-                                        <a href="{!!asset('/getDescipcionAtraccion')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
+                                        <a href="{!!asset('/tokenDc$rip')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
                                         </div>
@@ -143,7 +143,7 @@
                                         <span class="portfolio-action">
                                             <a class="soap-mfp-popup" href="{{ asset('images/fullsize/'.$region->filename)}}">
                                                 <i class="fa fa-eye has-circle"></i></a>
-                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$region->id_geo!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
+                                            <a onclick="$('.iso-container').LoadingOverlay('show');window.location.href = '{!!asset('/tokenDc$rip')!!}/{!!$region->id!!}'" style="cursor:pointer"><i class="fa fa-chain has-circle"></i></a>
                                         </span>
                                     </div>
                                     </article>

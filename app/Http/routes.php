@@ -240,7 +240,11 @@ Route::get('/getTopPlaces', ['as' => 'topPlaces', 'uses' => 'HomePublicControlle
 Route::get('/getEventscloseToMe', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getcloseToMe']);
 
 
-Route::get('/getDescipcionAtraccion/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getAtraccionDescripcion']);
+Route::get('/tokenDc$rip/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getAtraccionDescripcion']);
+
+Route::get('/tokenDc$ripT/{id_catalogo}/{id_provincia}/{id_canton}/{id_parroquia}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getCatalogoDescripcion']);
+
+
 
 Route::get('/getCercanosIntern/{id_atraccion}/{id_provincia}/{id_canton}/{id_parroquia}', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getCercanosIntern']);
  /*  Fin de las rutas del sistema publico*/
