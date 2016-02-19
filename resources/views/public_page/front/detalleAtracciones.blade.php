@@ -168,20 +168,18 @@
                                 </div>
                             </div>
                             
+                            
+                            
                             <div class="woocommerce-tabs tab-container vertical-tab clearfix box">
                                 <ul class="tabs">
                                     <li ><a href="#tab3-1" data-toggle="tab">{{ trans('publico/labels.label41')}}</a></li>
                                     <li class="active"><a href="#tab3-2" data-toggle="tab">{{ trans('publico/labels.label36')}}</a></li>
-                                    <li ><a href="#tab3-3" data-toggle="tab">{{ trans('publico/labels.label24')}}</a></li>
-                                    
-                                    
+                                    <li ><a href="#tab3-3" data-toggle="tab">Reviews</a></li>
                                     <li ><a href="#tab3-4" data-toggle="tab">{{ trans('publico/labels.label43')}}</a></li>
-                                    
-                                    
                                     @if(count($itinerarios)>0)
                                     <li ><a href="#tab3-5" data-toggle="tab">{{ trans('publico/labels.label46')}}</a></li>
                                     @endif
-                                   
+                                   <li ><a href="#tab3-6" data-toggle="tab">{{ trans('publico/labels.label24')}}</a></li>
                                 </ul>
                                 
                                 <!-Info->
@@ -221,7 +219,7 @@
                                 
                                 
                                 <!-Eventos->
-                                <div id="tab3-3" class="tab-content panel entry-content ">
+                                <div id="tab3-6" class="tab-content panel entry-content ">
                                     <div class="tab-pane">
                                         <div id="comments">
                                             <h3>{{ trans('publico/labels.label24')}}</h3>
@@ -392,6 +390,84 @@
                                     </div>
                                 </div>
                                     @endif
+                                    
+                                    <div id="tab3-3" class="tab-content panel entry-content">
+                                    <div class="tab-pane">
+                                        <div id="comments" class="var_comment" style="display: block;">
+                                            
+                                            <a href="#" class="btn btn-sm style1 btn-write-review"><i class="fa fa-pencil"></i>Write Review</a>
+                                            <h3>2 Reviews on Geo Dream Dress</h3>
+                                            <ol class="commentlist">
+                                                <li class="comment">
+                                                    <div class="author-img">
+                                                        <span><img src="http://placehold.it/100x100" alt=""></span>
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <h5 class="comment-author-name"><a href="#">Anna Brown</a></h5>
+                                                        <span data-toggle="tooltip" title="4" class="star-rating">
+                                                            <span data-stars="4"></span>
+                                                        </span>
+                                                        <span class="comment-date">12 Nov, 2013</span>
+                                                        <div class="description">
+                                                            <p>Nulla mattis rsitmet dolor sollicitudi aliquamquae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Lorem ipsum dolor sit amet gravida sagittis lacus. Morbi sit amet mauris mi.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="comment">
+                                                    <div class="author-img">
+                                                        <span><img src="http://placehold.it/100x100" alt=""></span>
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <h5 class="comment-author-name"><a href="#">Jessica Marvin</a></h5>
+                                                        <span data-toggle="tooltip" title="4" class="star-rating">
+                                                            <span data-stars="4"></span>
+                                                        </span>
+                                                        <span class="comment-date">12 Nov, 2013</span>
+                                                        <div class="description">
+                                                            <p>Nulla mattis rsitmet dolor sollicitudi aliquamquae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Lorem ipsum dolor sit amet gravida sagittis lacus. Morbi sit amet mauris mi.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                        <div id="review_form">
+                                            <form>
+                                                <a href="#" class="btn btn-sm style4 btn-back-reviews"><i class="fa fa-long-arrow-left"></i>Back To Reviews</a>
+                                                <h3>Be the first to review “Geo Dream Dress”</h3>
+                                                <div class="row">
+                                                    <div class="col-lg-10">
+                                                        <div class="form-group">
+                                                            <label>Name</label>
+                                                            <input type="text" class="input-text full-width">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Email</label>
+                                                            <input type="text" class="input-text full-width">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Rating</label>
+                                                            <input type="hidden" id="review_score" value="">
+                                                            <span class="input-star-rating">
+                                                                <input type="radio" value="5" name="review_score">
+                                                                <input type="radio" value="4" name="review_score">
+                                                                <input type="radio" value="3" name="review_score">
+                                                                <input type="radio" value="2" name="review_score">
+                                                                <input type="radio" value="1" name="review_score">
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Your review</label>
+                                                            <textarea class="input-text full-width" rows="5"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button class="btn style1" type="submit">Submit Review</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                               
                             </div>
 
@@ -580,9 +656,7 @@
     <!-- Magnific Popup core JS file -->
     <script type="text/javascript" src="{{ asset('public_components/components/magnific-popup/jquery.magnific-popup.min.js')}}"></script> 
 
-     <!-- Google Map Api -->
-    <script type='text/javascript' src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
-    <script type="text/javascript" src="{{ asset('public_components/js/gmap3.js')}}"></script>
+     
     <!-- parallax -->
     <script type="text/javascript" src="{{ asset('public_components/js/jquery.stellar.min.js')}}"></script>
 
@@ -596,7 +670,9 @@
     <script type="text/javascript" src="{{ asset('public_components/js/jquery.plugins.js')}}"></script>
 
 
-
+<!-- Google Map Api -->
+    <script type='text/javascript' src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
+    <script type="text/javascript" src="{{ asset('public_components/js/gmap3.js')}}"></script>
     <script>
                                 sjq(document).ready(function ($) {
                                     // Configure/customize these variables.
@@ -841,7 +917,22 @@
     <!-- load page Javascript -->
     <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
 
+    <script>
+                                        
 
+$('.btn-write-review').on('click', function() {
+  $('.var_comment').css( "display","none");
+});
+
+ $( ".btn-back-reviews" ).click(function() {
+    $('.var_comment').css( "display","block" );
+
+});
+
+
+                                            
+
+    </script>
 
 
 </body>

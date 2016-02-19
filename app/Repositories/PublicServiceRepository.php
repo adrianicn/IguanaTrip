@@ -1300,6 +1300,22 @@ class PublicServiceRepository extends BaseRepository {
         
     }
     
+    
+           //Entrega el detalle de los servicios
+    public function getReviews($id_atraccion) {
+
+        $reviews = DB::table('reviews_usuario_servicio')
+                ->where('reviews_usuario_servicio.id_usuario_servicio', '=', $id_atraccion)
+                ->where('reviews_usuario_servicio.estado_review', '=', "1")
+                
+                ->select('reviews_usuario_servicio.*')
+                ->get();
+        
+        return $reviews;
+        
+    }
+    
+    
   
     
     

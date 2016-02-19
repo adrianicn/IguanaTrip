@@ -275,6 +275,7 @@ class HomePublicController extends Controller {
         $itinerarios = $gestion->getItinerAtraccion($id_atraccion);
         $related = $gestion->getHijosAtraccion($id_atraccion);
         $servicios = $gestion->getServicios($atraccion->id_provincia);
+        $reviews = $gestion->getReviews($atraccion->id);
    
         
         if ($atraccion->id_provincia != 0)
@@ -317,6 +318,7 @@ class HomePublicController extends Controller {
                         ->with('provincia', $provincia)
                         ->with('parroquia', $parroquia)
                 ->with('servicios', $servicios)
+                ->with('reviews', $reviews)
         ;
     }
     
