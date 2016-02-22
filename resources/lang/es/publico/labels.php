@@ -52,6 +52,16 @@ return [
     'label48' => 'Eventos cercanos',
     'label49' => 'Promociones cerca',
     'label50' => 'Ver más',
-	'message' => 'Your message',
+    'label51' => 'Filtros',
+    'label52' => 'Ubicación',
+'label53' => 'Cerca de',	
+    'label54' => 'Más',	
+    'label55' => 'Filtro por actividades',	
+    'label56' => 'Provincia',	
+    'label57' => 'Ciudad',	
+    'label58' => 'Parroquia',	
+    'label59' => 'precio desde',	
+
+    'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

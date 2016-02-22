@@ -72,6 +72,8 @@ class HomePublicController extends Controller {
             //return  Response::json($sections['contentPanel']); 
         }
     }
+    
+ 
 
     //Obtiene los top places paginados
     public function getCercanosIntern(Request $request, PublicServiceRepository $gestion, $id_atraccion, $id_provincia, $id_canton, $id_parroquia) {
@@ -345,8 +347,27 @@ class HomePublicController extends Controller {
 }
                                :*/
     
+    
+       
+      //Obtiene los servicios por catalogo cercanos a la atraccion paginados
+    public function getCatalosoServicios(Request $request, PublicServiceRepository $gestion, $id_atraccion, $id_catalogo) {
+        //
+        $catalogo1= $gestion->getCatalogoDetails($id_atraccion,$id_catalogo);
+        $catalogo=$gestion->getDetailsServiciosAtraccion($catalogo1);
+
+        $view = View::make('public_page.partials.listServicesCategoria', array('catalogo' => $catalogo));
+
+        if ($request->ajax()) {
+            //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
+            $sections = $view->rendersections();
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        }
+    }
+    
+    
     //Obtiene las descripcion de la atraccion elegida
-    public function getCatalogoDescripcion(PublicServiceRepository $gestion,$id_catalogo,$id_provincia,$id_canton,$id_parroquia) {
+    public function getCatalogoDescripcion(PublicServiceRepository $gestion,$id_atraccion,$id_catalogo) {
         $agent = new Agent();
 
         $desk = $device = $agent->isMobile();
@@ -357,10 +378,33 @@ class HomePublicController extends Controller {
         }
         Session::put('device', $desk);
         
-        $catalogo= $gestion->getCatalogoDetails($id_atraccion);
+        $catalogo1= $gestion->getCatalogoDetails($id_atraccion,$id_catalogo);
+        $ServicioPrevio= $gestion->getAtraccionDetails($id_atraccion);
+        $servicios = $gestion->getServicios($ServicioPrevio->id_provincia);
+        //$likes=$gestion->getlikes($ServicioPrevio->id);
+                
+        
+        $provincia = null;
+        $canton = null;
+        $parroquia = null;
+        
+          if ($ServicioPrevio->id_provincia != 0)
+            $provincia = $gestion->getUbicacionAtraccion($ServicioPrevio->id_provincia);
+
+        if ($ServicioPrevio->id_canton != 0)
+            $canton = $gestion->getUbicacionAtraccion($ServicioPrevio->id_canton);
+
+        if ($ServicioPrevio->id_parroquia != 0)
+            $parroqia = $gestion->getUbicacionAtraccion($ServicioPrevio->id_parroquia);
         
 
-        return view('public_page.front.listServices');
+        return view('public_page.front.listServices')
+                ->with('ServicioPrevio', $ServicioPrevio)
+            ->with('canton', $canton)
+                        ->with('provincia', $provincia)
+                        ->with('parroquia', $parroquia)
+            ->with('servicios', $servicios)
+            ->with('id_catalogo', $id_catalogo);
     }
     
     

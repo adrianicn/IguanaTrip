@@ -242,8 +242,8 @@ Route::get('/getEventscloseToMe', ['as' => 'topPlaces', 'uses' => 'HomePublicCon
 
 Route::get('/tokenDc$rip/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getAtraccionDescripcion']);
 
-Route::get('/tokenDc$ripT/{id_catalogo}/{id_provincia}/{id_canton}/{id_parroquia}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getCatalogoDescripcion']);
-
+Route::get('/tokenDc$ripT/{id_atraccion}/{id_catalogo}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getCatalogoDescripcion']);
+Route::get('/getCatalogosServicios/{id_atraccion}/{id_catalogo}', ['as' => 'catalogoServicios', 'uses' => 'HomePublicController@getCatalosoServicios']);
 
 
 Route::get('/getCercanosIntern/{id_atraccion}/{id_provincia}/{id_canton}/{id_parroquia}', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getCercanosIntern']);

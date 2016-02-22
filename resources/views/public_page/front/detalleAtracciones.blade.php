@@ -134,7 +134,7 @@
                                         <label>{{ trans('publico/labels.label29')}}</label>
                                         <div class="social-icons">
                                             @foreach ($explore as $explor)
-                                            <a href="#" class="social-icon" title="{!!$explor->nombre_servicio_est!!}"><i title="{!!$explor->nombre_servicio_est!!}" class="fa  has-circle" data-toggle="tooltip" data-placement="top" ><img style=" max-width: 60%;" class='activities' src="{{ asset('img/'.$explor->url_image)}}" alt="{!!$explor->nombre_servicio_est!!}"></i></a>
+                                            <a href="#" class="social-icon" title="{!!$explor->nombre_servicio_est!!}"><i title="{!!$explor->nombre_servicio_est!!}" class="fa  has-circle" data-toggle="tooltip" data-placement="top" ><img style=" max-width: 60%;" class='activities' src="{{ asset('img/iconos/'.$explor->url_image)}}" alt="{!!$explor->nombre_servicio_est!!}"></i></a>
                                             @endforeach
                                         </div>
                                     </div>
@@ -163,7 +163,11 @@
                                             </div>
                                         </div>
                               
-                                
+                                  <div class="product-action"  style=" margin-left: 50%;">
+                                        <a class="btn btn-compare" title="+1">
+                                            <i class="fa fa-heart"></i>27 Turistas satisfechos</a>
+                                        
+                                    </div>
                                        
                                 </div>
                             </div>
@@ -588,10 +592,7 @@
                                 </a>
                               
                             </div>
-                            <div class="banner-text">
-                                <h2 class="banner-title" style="text-transform: initial;">iWaNaTrip.com</h2>
-                                
-                            </div>
+                        
                         </div>
                            
                         <div class="box">

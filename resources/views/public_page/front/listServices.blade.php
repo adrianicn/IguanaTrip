@@ -90,78 +90,74 @@
                 <div class="row">
                     <div class="sidebar col-sm-4 col-md-3">
                         <div class="widget box">
-                            <h4>Categories</h4>
+                            <h4>{{ trans('publico/labels.label18')}}</h4>
                             <ul class="filter-categories panel-group">
+                                
+                                @if($provincia!=null)
                                 <li class="category-has-children">
-                                    <a href="#cat-sweaters-jackets" data-toggle="collapse">Sweaters &amp; Jackets</a>
+                                    <a href="#cat-sweaters-jackets" data-toggle="collapse">{{ trans('publico/labels.label56')}}</a>
                                     <ul id="cat-sweaters-jackets" class="collapse">
-                                        <li><a href="#">Mini Dresses</a></li>
+                                        <li><a href="#">{!!$provincia->nombre!!}</a></li>
+                                        
                                     </ul>
                                 </li>
+                                @endif
+                                @if($canton!=null)
                                 <li class="category-has-children">
-                                    <a href="#cat-all-dresses" class="active" data-toggle="collapse">All Dresses</a>
-                                    <ul id="cat-all-dresses" class="collapse in">
-                                        <li><a href="#">Mini Dresses</a></li>
-                                        <li><a href="#">Evening Dresses</a></li>
-                                        <li><a href="#">Causual Dresses</a></li>
-                                        <li><a href="#">Party Dresses</a></li>
+                                    <a href="#cat-sweaters-jacketscanton" data-toggle="collapse">{{ trans('publico/labels.label57')}}</a>
+                                    <ul id="cat-sweaters-jacketscanton" class="collapse">
+                                        <li><a href="#">{!!$canton->nombre!!}</a></li>
+                                        
                                     </ul>
                                 </li>
-                                <li><a href="#">Pants & Jeans</a></li>
-                                <li><a href="#">Winter Skirts</a></li>
-                                <li><a href="#">Shirts & Blouses</a></li>
+                                @endif
+                                @if($parroquia!=null)
+                                <li class="category-has-children">
+                                    <a href="#cat-sweaters-jacketsparroquia" data-toggle="collapse">{{ trans('publico/labels.label58')}}</a>
+                                    <ul id="cat-sweaters-jacketsparroquia" class="collapse">
+                                        <li><a href="#">{!!$parroquia->nombre!!}</a></li>
+                                        
+                                    </ul>
+                                </li>
+                                @endif
+                                <li class="category-has-children">
+                                    <a href="#cat-all-dresses" class="active" data-toggle="collapse">{{ trans('publico/labels.label53')}}</a>
+                                    <ul id="cat-all-dresses" class="collapse in">
+                                        <li><a href="#">{!!$ServicioPrevio->nombre_servicio!!}</a>
+                                        
+                                        </li>
+                                        
+                                    </ul>
+                                </li>
+                                 <li class="category-has-children">
+                                    <a href="#cat-sweaters-jacketsserv" data-toggle="collapse">{{ trans('publico/labels.label54')}}</a>
+                                    <ul id="cat-sweaters-jacketsserv" class="collapse">
+                                        
+                                            @foreach ($servicios as $serv)
+                                               @if(session('locale') == 'es' )
+                                                <li><a href="#">{!!$serv->nombre_servicio!!}</a></li>
+                                            @else
+                                            <li><a href="#">{!!$serv->nombre_servicio_eng!!}</a></li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
 
-                        <div class="widget box">
-                            <h4>Filter By Price</h4>
-                            <div class="price-filter-box clearfix">
-                                <span class="min-price-label"></span>
-                                <div class="price-range">
-                                    <div id="price-range-bar"></div>
-                                </div>
-                                <span class="max-price-label"></span>
-                            </div>
-                        </div>
-
-                        <div class="widget box">
-                            <h4>Filter By Color</h4>
-                            <ul class="filter-by-color">
-                                <li class="color1"><a href="#"></a></li>
-                                <li class="chosen color2"><a href="#"></a></li>
-                                <li class="color3"><a href="#"></a></li>
-                                <li class="color4"><a href="#"></a></li>
-                                <li class="color5"><a href="#"></a></li>
-                                <li class="color6"><a href="#"></a></li>
-                                <li class="color7"><a href="#"></a></li>
-                            </ul>
-                        </div>
-
-                        <div class="widget box">
-                            <h4>Filter By Size</h4>
-                            <ul class="filter-by-size">
-                                <li><a href="#">S</a></li>
-                                <li class="chosen"><a href="#">M</a></li>
-                                <li><a href="#">L</a></li>
-                                <li><a href="#">XL</a></li>
-                                <li><a href="#">XS</a></li>
-                            </ul>
-                        </div>
-
+                         @if(session('device')!='mobile')
                         <div class="widget banner-slider box">
                             <div class="owl-carousel" data-itemsPerDisplayWidth="[[0, 1], [480, 2], [768, 1], [992, 1], [1200, 1]]" data-items="1">
                                 <a href="#">
-                                    <img src="http://placehold.it/324x444" alt="">
+                                    <img src="{{ asset('img/rsz_00kwwk8s.jpg')}}" alt="">
                                 </a>
-                                <a href="#">
-                                    <img src="http://placehold.it/324x444" alt="">
-                                </a>
+                              
                             </div>
-                            <div class="banner-text">
-                                <h2 class="banner-title">What’s New</h2>
-                                <span class="banner-content">2014 First Arrivals</span>
-                            </div>
+                        
                         </div>
+                           
+                   
+                        @endif
 
                         <div class="widget box">
                             <h4>Best Sellers</h4>
@@ -214,12 +210,12 @@
                     <div id="main" class="col-sm-8 col-md-9">
                         <div class="image-banner box">
                             <div class="image-container">
-                                <img src="http://placehold.it/870x344" alt="">
+                                <img src="{{ asset('img/eat.jpg')}}" alt="">
                             </div>
                             <div class="caption-wrapper position-left">
                                 <div class="captions">
-                                    <h2>womens fashion</h2>
-                                    <a href="#" class="action">view collections</a>
+                                    <h2>Alimentación y bebidas</h2>
+                                    <a href="#" class="action">view all</a>
                                 </div>
                             </div>
                         </div>
@@ -234,9 +230,11 @@
                             </select>
                         </form>
                         <ul class="products row add-clearfix catagorias">
-                              @section('catagorias')
+                               <ul class="products row add-clearfix categorias">
+                                  
+                            @section('categorias')
                                 @show
-                        </ul>
+                        </ul>  
                         <div class="post-pagination">
                             <div class="text-center">
                                 <a  class="btn style4 hover-blue load-more moreImg">{{ trans('publico/labels.label31')}}</a>
@@ -501,7 +499,19 @@
     </style>
     @endif
     
+<script>
+$(document).ready(function () {
+                
+                GetDataAjaxCatogories("{!!asset('/getCatalogosServicios')!!}/{!!$ServicioPrevio->id!!}/{!!$id_catalogo!!}?page=1");
+                
 
+            });
+            
+            $(".moreImg").click(function () {
+                GetDataAjaxCatogories("{!!asset('/getCatalogosServicios')!!}/{!!$ServicioPrevio->id!!}/{!!$id_catalogo!!}");
+            });
+</script>
+    
     <!-- load page Javascript -->
     <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
 

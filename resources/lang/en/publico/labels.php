@@ -54,7 +54,15 @@ return [
     'label48' => 'Events close to you',
     'label49' => 'Promotions close to you',
     'label50' => 'Read more',
-    
-	'message' => 'Your message',
+    'label51' => 'Filters',
+    'label52' => 'Ubication',
+    'label53' => 'Close to',
+    'label54' => 'More',	
+    'label55' => 'Filter by activities',	
+    'label56' => 'Province',	
+    'label57' => 'City',	
+    'label58' => 'Town',	
+	'label59' => 'price from',	
+    'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

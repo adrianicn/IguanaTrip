@@ -24,6 +24,7 @@ return array(
     'CreatePromocionUsuarioServicioTable' => $baseDir . '/database/migrations/2015_11_14_060651_create_promocion_usuario_servicio_table.php',
     'CreateReviewsUsuarioServiciosTable' => $baseDir . '/database/migrations/2016_02_19_004936_create_reviews_usuario_servicios_table.php',
     'CreateRolesTable' => $baseDir . '/database/migrations/2014_10_21_105844_create_roles_table.php',
+    'CreateSatisfechosUsuarioServicioTable' => $baseDir . '/database/migrations/2016_02_20_222407_create_satisfechos_usuario_servicio_table.php',
     'CreateSearchengineTable' => $baseDir . '/database/migrations/2015_12_20_131021_create_searchengine_table.php',
     'CreateServicioEstablecimientoUsuarioTable' => $baseDir . '/database/migrations/2015_11_09_104907_create_servicio_establecimiento_usuario_table.php',
     'CreateTagsTable' => $baseDir . '/database/migrations/2014_10_26_172631_create_tags_table.php',
