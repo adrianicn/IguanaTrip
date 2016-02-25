@@ -555,7 +555,8 @@
                                 
                                 <li>
                                     <div class="product-image">
-                                        <a href="#">
+                                        <a href="{!!asset('/tokenDc$ripT')!!}/{!!$atraccion->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">
+                                            
                                             <img src="{{ asset('img/register/')}}/{!!$serv->id_catalogo_servicios!!}.jpg" alt="">
                                         </a>
                                     </div>
@@ -564,10 +565,10 @@
                                     <div class="product-content">
                                     
                                            @if(session('locale') == 'es' )
-                                    <h6 class="product-title"><a href="#">{!!$serv->nombre_servicio!!}</a></h6>
+                                    <h6 class="product-title"><a href="{!!asset('/tokenDc$ripT')!!}/{!!$atraccion->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$serv->nombre_servicio!!}</a></h6>
                                     
                                     @else
-                                    <h6 class="product-title"><a href="#">{!!$serv->nombre_servicio_eng!!}</a></h6>
+                                    <h6 class="product-title"><a href="{!!asset('/tokenDc$ripT')!!}/{!!$atraccion->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$serv->nombre_servicio_eng!!}</a></h6>
 
                                     @endif
                                         

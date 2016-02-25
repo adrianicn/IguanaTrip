@@ -304,7 +304,7 @@ class HomePublicController extends Controller {
 
 
         if (isset($atraccion->id_provincia))
-            $explore = $gestion->getExplorer($atraccion->id_provincia);
+            $explore = $gestion->getExplorer($atraccion->id);
 
 
         return view('public_page.front.detalleAtracciones')->with('atraccion', $atraccion)
@@ -352,9 +352,26 @@ class HomePublicController extends Controller {
       //Obtiene los servicios por catalogo cercanos a la atraccion paginados
     public function getCatalosoServicios(Request $request, PublicServiceRepository $gestion, $id_atraccion, $id_catalogo) {
         //
+ 
+        $atraccion=$gestion->getAtraccionDetails($id_atraccion);
         $catalogo1= $gestion->getCatalogoDetails($id_atraccion,$id_catalogo);
-        $catalogo=$gestion->getDetailsServiciosAtraccion($catalogo1);
+        $catalogo=$gestion->getDetailsServiciosAtraccion($catalogo1,null,null,1);
+ 
+        
+        
+ if ($atraccion->id_provincia != 0) {
 
+        
+        if (Input::get('page') > $catalogo->currentPage()) {
+            
+         $catalogo2= $gestion->getCatalogoDetailsProvincia($atraccion,$id_catalogo,$catalogo1);
+        $catalogo=$gestion->getDetailsServiciosAtraccion($catalogo2, Input::get('page'), $catalogo->currentPage(), 1);
+            
+        }
+
+ }
+
+        
         $view = View::make('public_page.partials.listServicesCategoria', array('catalogo' => $catalogo));
 
         if ($request->ajax()) {
@@ -378,7 +395,7 @@ class HomePublicController extends Controller {
         }
         Session::put('device', $desk);
         
-        $catalogo1= $gestion->getCatalogoDetails($id_atraccion,$id_catalogo);
+        $catalogo= $gestion->getCatalogoDetail($id_catalogo);
         $ServicioPrevio= $gestion->getAtraccionDetails($id_atraccion);
         $servicios = $gestion->getServicios($ServicioPrevio->id_provincia);
         //$likes=$gestion->getlikes($ServicioPrevio->id);
@@ -404,7 +421,8 @@ class HomePublicController extends Controller {
                         ->with('provincia', $provincia)
                         ->with('parroquia', $parroquia)
             ->with('servicios', $servicios)
-            ->with('id_catalogo', $id_catalogo);
+            ->with('id_catalogo', $id_catalogo)
+            ->with('catalogo', $catalogo);;
     }
     
     

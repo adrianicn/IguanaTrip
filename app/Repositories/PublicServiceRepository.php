@@ -1319,11 +1319,27 @@ class PublicServiceRepository extends BaseRepository {
                 ->first();
         return $atraccion;
     }
+    
+    //Entrega el detalle de la provincia
+    public function getCatalogoDetail($id_catalogo) {
+
+
+        $catalogo = DB::table('catalogo_servicios')
+                ->where('id_catalogo_servicios', '=', $id_catalogo)
+                ->select('catalogo_servicios.*')
+                ->first();
+        return $catalogo;
+    }
+    
+    
 
 //Entrega el arreglo de los servicios con imagenes
-    public function getDetailsServiciosAtraccion($catalogo_servicios) {
+    public function getDetailsServiciosAtraccion($catalogo_servicios, $page_now, $page_stoped,  $pagination) {
 
+$orderkey="prioridad";
+$ordervalue="desc";
 
+        
         $catalogo = null;
         if ($catalogo_servicios != null) {
             $array = array();
@@ -1347,6 +1363,15 @@ class PublicServiceRepository extends BaseRepository {
                     }
                 }
             }
+            if($page_now!=null){
+            
+                $currentPage = ($page_now - $page_stoped);
+            // You can set this to any page you want to paginate to
+            // Make sure that you call the static method currentPageResolver()
+            // before querying users
+            Paginator::currentPageResolver(function () use ($currentPage) {
+                return $currentPage;
+            });}
 
             $imagenesF = DB::table('images')
                     ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
@@ -1354,11 +1379,11 @@ class PublicServiceRepository extends BaseRepository {
                     ->whereIn('images.id', $array)
                     ->where('estado_fotografia', '=', '1')
                     ->where('usuario_servicios.id_catalogo_servicio', '=', $catalogo)
-                    ->select(array('satisfechos_usuario_servicio.id_usuario_servicio', 'usuario_servicios.*', 'images.*', DB::raw('COUNT(satisfechos_usuario_servicio.id_usuario_servicio) as satisfechos')))
+                    ->select(array('usuario_servicios.id as id_usr_serv','satisfechos_usuario_servicio.id_usuario_servicio', 'usuario_servicios.*', 'images.*', DB::raw('COUNT(satisfechos_usuario_servicio.id_usuario_servicio) as satisfechos')))
                     ->groupby('usuario_servicios.id')
-                    ->orderBy('num_visitas', 'desc')
-                    ->orderBy('prioridad', 'desc')
-                    ->paginate(1);
+                    ->orderBy($orderkey, $ordervalue)
+                    
+                    ->paginate($pagination);
             
         } else {
             $imagenesF = DB::table('images')
@@ -1366,16 +1391,53 @@ class PublicServiceRepository extends BaseRepository {
                             ->leftJoin('satisfechos_usuario_servicio', 'usuario_servicios.id', '=', 'satisfechos_usuario_servicio.id_usuario_servicio')
                             ->where('estado_fotografia', '=', '1')
                             ->where('usuario_servicios.id_catalogo_servicio', '=', $catalogo)
-                            ->select(array('satisfechos_usuario_servicio.id_usuario_servicio', 'usuario_servicios.*', 'images.*', DB::raw('COUNT(satisfechos_usuario_servicio.id_usuario_servicio) as satisfechos')))
+                            ->select(array('usuario_servicios.id as id_usr_serv','satisfechos_usuario_servicio.id_usuario_servicio', 'usuario_servicios.*', 'images.*', DB::raw('COUNT(satisfechos_usuario_servicio.id_usuario_servicio) as satisfechos')))
                             ->groupby('usuario_servicios.id')
-                            ->orderBy('num_visitas', 'desc')
-                    ->orderBy('prioridad', 'desc')
-                            ->paginate(1);
+                            ->orderBy($orderkey, $ordervalue)
+                            
+                            ->paginate($pagination);
         }
 
         return $imagenesF;
     }
 
+    //Entrega el detalle del catalogo por provincia
+    public function getCatalogoDetailsProvincia($catalogo,$id_catalogo,$anterior) {
+
+
+      
+  $array = array();
+       
+                if ($anterior != null) {
+
+                    foreach ($anterior as $ant) {
+
+                        $array[] = $ant->id;
+                }}
+        if ($catalogo != null) {
+
+            
+             
+
+                $servicioCatalogo = DB::table('usuario_servicios')
+                        ->where('id_catalogo_servicio', '=', $id_catalogo)
+                        ->whereNotIn('usuario_servicios.id',$array)
+                        ->where('estado_servicio', '=', '1')
+                        ->where('usuario_servicios.id_provincia', '=', $catalogo->id_provincia)
+                        ->select('usuario_servicios.*')
+                        ->orderBy('usuario_servicios.prioridad')
+                        ->orderBy('usuario_servicios.num_visitas')
+                        ->get();
+            
+        } else {
+            $servicioCatalogo =null;
+        }
+
+
+        return $servicioCatalogo;
+    }
+    
+    
     //Entrega el detalle del catalogo
     public function getCatalogoDetails($id_atraccion, $id_catalogo) {
 
@@ -1481,8 +1543,8 @@ class PublicServiceRepository extends BaseRepository {
                 ->join('servicio_establecimiento_usuario', 'id_usuario_servicio', '=', 'usuario_servicios.id')
                 ->join('catalogo_servicio_establecimiento', 'servicio_establecimiento_usuario.id_servicio_est', '=', 'catalogo_servicio_establecimiento.id')
                 ->distinct()->select('catalogo_servicio_establecimiento.nombre_servicio_est', 'catalogo_servicio_establecimiento.url_image')
-                ->where('catalogo_especifico', '=', 0)
-                ->where('id_provincia', '=', $id_provincia)
+                
+                ->where('servicio_establecimiento_usuario.id_usuario_servicio', '=', $id_provincia)
                 ->where('estado_servicio', '=', 1)
                 ->where('estado_servicio_usuario', '=', 1)
                 ->where('estado_servicio_est', '=', 1)

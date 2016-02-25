@@ -135,9 +135,11 @@
                                         
                                             @foreach ($servicios as $serv)
                                                @if(session('locale') == 'es' )
-                                                <li><a href="#">{!!$serv->nombre_servicio!!}</a></li>
+                                                <li><a href="{!!asset('/tokenDc$ripT')!!}/{!!$ServicioPrevio->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$serv->nombre_servicio!!}</a></li>
+                                                
+                                                
                                             @else
-                                            <li><a href="#">{!!$serv->nombre_servicio_eng!!}</a></li>
+                                            <li><a href="{!!asset('/tokenDc$ripT')!!}/{!!$ServicioPrevio->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$serv->nombre_servicio_eng!!}</a></li>
                                             @endif
                                         @endforeach
                                     </ul>
@@ -210,25 +212,31 @@
                     <div id="main" class="col-sm-8 col-md-9">
                         <div class="image-banner box">
                             <div class="image-container">
-                                <img src="{{ asset('img/eat.jpg')}}" alt="">
+                                <img src="{{ asset('img/serr/eat.jpg')}}" alt="">
                             </div>
                             <div class="caption-wrapper position-left">
                                 <div class="captions">
-                                    <h2>Alimentación y bebidas</h2>
+                                       @if(session('locale') == 'es' )
+                                          <h2>{!!$catalogo->nombre_servicio!!}</h2>
+                                            @else
+                                           <h2>{!!$catalogo->nombre_servicio_eng!!}</h2>
+                                            @endif
+                                       
+                                            
                                     <a href="#" class="action">view all</a>
                                 </div>
                             </div>
                         </div>
                         
-                        <form method="get" class="woocommerce-ordering box">
-                            <select class="orderby selector" name="orderby">
-                                <option value="popularity">Sort by popularity</option>
+                      <!--  <form method="get" class="woocommerce-ordering box">
+                            <select class="orderby selector" name="orderby" id="orderby">
+                                <option value="satisfaction">Sort by satsifaction</option>
                                 <option value="rating">Sort by average rating</option>
-                                <option selected="selected" value="date">Sort by newness</option>
+                                <option selected="selected" value="popularity">Sort by popularity</option>
                                 <option value="price">Sort by price: low to high</option>
                                 <option value="price-desc">Sort by price: high to low</option>
                             </select>
-                        </form>
+                        </form>-->
                         <ul class="products row add-clearfix catagorias">
                                <ul class="products row add-clearfix categorias">
                                   
@@ -501,15 +509,16 @@
     
 <script>
 $(document).ready(function () {
-                
-                GetDataAjaxCatogories("{!!asset('/getCatalogosServicios')!!}/{!!$ServicioPrevio->id!!}/{!!$id_catalogo!!}?page=1");
-                
+          
+                GetDataAjaxCatogories("{!!asset('/getCatalogosServicios')!!}/{!!$ServicioPrevio->id!!}/{!!$id_catalogo!!}");
 
             });
             
             $(".moreImg").click(function () {
                 GetDataAjaxCatogories("{!!asset('/getCatalogosServicios')!!}/{!!$ServicioPrevio->id!!}/{!!$id_catalogo!!}");
             });
+            
+            
 </script>
     
     <!-- load page Javascript -->
