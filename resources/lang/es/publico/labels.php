@@ -61,7 +61,12 @@ return [
     'label57' => 'Ciudad',	
     'label58' => 'Parroquia',	
     'label59' => 'precio desde',	
-
+    'label60' => 'Anónimo',	
+    'label61' => 'Descubre',	
+    'label62' => 'que hacer',	
+    'label63' => 'cerca de',	
+    'label64' => 'Escribe una ciudad',	
+'label65' => 'Lugares',	
     'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

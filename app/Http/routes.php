@@ -71,6 +71,8 @@ Route::controllers([
 Route::get('/image', ['as' => 'upload', 'uses' => 'ImageController@getUpload']);
 Route::post('upload', ['as' => 'upload-post', 'uses' =>'ImageController@postUpload']);
 Route::post('upload/delete', ['as' => 'upload-remove', 'uses' =>'ImageController@deleteUpload']);
+
+
 Route::get('userservice',
     ['uses'=>'UsuarioServiciosController@getServiciosOperador','as'=>'userservice'
     ,'middleware' => 'notAuth']);
@@ -230,6 +232,7 @@ Route::get('registerMobile', ['as' => 'registerMobile', 'uses' => 'ServicioContr
 
 
 /*Rutas para la parte publica del sistema*/
+Route::post('likesSat/{id_atraccion}', ['as' => 'likesS', 'uses' =>'HomePublicController@postLikesS']);
 
 Route::get('/publico', ['as' => 'publico', 'uses' => 'HomePublicController@getHome']);
 Route::get('/getRegiones', ['as' => 'regiones', 'uses' => 'HomePublicController@getRegiones']);
@@ -237,14 +240,23 @@ Route::get('/getProvinciaDescipcion/{id_provincia}/{id_image}', ['as' => 'provin
 Route::get('/getRegionDescipcion/{id_region}', ['as' => 'regiondescr', 'uses' => 'HomePublicController@getRegionsId']);
 
 Route::get('/getTopPlaces', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getTopPlaces']);
-Route::get('/getEventscloseToMe', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getcloseToMe']);
+Route::get('/getEventscloseToMe/{city}', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getcloseToMe']);
+Route::get('/getEventscity/{city}', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getbyCity']);
 
 
 Route::get('/tokenDc$rip/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getAtraccionDescripcion']);
 
+
 Route::get('/tokenDc$ripT/{id_atraccion}/{id_catalogo}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getCatalogoDescripcion']);
 Route::get('/getCatalogosServicios/{id_atraccion}/{id_catalogo}', ['as' => 'catalogoServicios', 'uses' => 'HomePublicController@getCatalosoServicios']);
-
+Route::get('/tokenDc$ripPromo/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getPromocionesAtraccion']);
+Route::get('/tokenDc$ripEvent/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getEventosAtraccion']);
 
 Route::get('/getCercanosIntern/{id_atraccion}/{id_provincia}/{id_canton}/{id_parroquia}', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getCercanosIntern']);
+Route::get('/getLikesA/{id_atraccion}', ['as' => 'getLikes', 'uses' => 'HomePublicController@getLikesSatisf']);
+Route::get('/getReviews/{id_atraccion}', ['as' => 'getReviews', 'uses' => 'HomePublicController@getReviews']);
+
+
+    
+
  /*  Fin de las rutas del sistema publico*/

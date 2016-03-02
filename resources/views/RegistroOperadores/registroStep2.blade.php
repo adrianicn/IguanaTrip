@@ -148,7 +148,10 @@ $email_contacto_operador = $operadorData->email_contacto_operador;
 
     <div class="iconoInvitacion">    
                  <a onclick="RenderPartialGeneric('reusable.invitar_amigo')" href="#"><img src="{{ asset('img/amigo-1.png')}}"></a> 
-    </div>         
+    </div>        
+    <a onclick="ajaxajax()" class="btn btn-compare" title="+1">
+                                            
+                                            <i class="fa fa-star"></i>fdsfds Turistas satisfechos</a>
                 
 </div>
 

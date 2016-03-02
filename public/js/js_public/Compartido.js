@@ -87,7 +87,58 @@ function GetDataAjaxTopPlaces(url) {
 
 
 
+//Javascript para cargar las imagenes via ajax
+function GetDataAjaxEventsIndbyCity(url) {
+    $(".eventsPromo").html("");
+    $(".eventsPromo").LoadingOverlay("show");
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
 
+            
+            $(".eventsPromo").LoadingOverlay("hide", true);
+            var imgs = [];
+            
+            $(data.eventsPromo).each(function () {
+                var its = $(this).html();
+                    imgs.push(its);
+            });
+            itemsHTML = $.map(imgs, function (src) {
+                return src;
+            });
+            var items = $(itemsHTML.join(''));
+            $(function () {
+                var container = $('.eventsPromo');
+                sjq(container).imagesLoaded(function () {
+                    // init isotope
+                    sjq(container).isotope({
+                        masonry: {
+                            columnWidth: '.eventInd'
+                        }
+                    });
+                    // append other items when they are loaded
+                    sjq(items).imagesLoaded(function () {
+                        sjq(container).append(items)
+                                .isotope('appended', items)
+                        .isotope('layout');;
+                    });
+                });
+            });
+        },
+        error: function (data) {
+            alert("No results");
+            $(".eventsPromo").LoadingOverlay("hide", true);
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
 
 //Javascript para cargar las imagenes via ajax
 function GetDataAjaxEventsInd(url) {
@@ -128,6 +179,7 @@ function GetDataAjaxEventsInd(url) {
             });
         },
         error: function (data) {
+           alert("No results");
             var errors = data.responseJSON;
             if (errors) {
                 $.each(errors, function (i) {
@@ -215,6 +267,7 @@ function GetDataAjaxEventsHome(url) {
             window.current_page_e=current_page_e+1;
             $(".eventsPromo").LoadingOverlay("hide", true);
             var imgs = [];
+
             $(data.eventsPromo).each(function () {
                 var its = $(this).html();
                     imgs.push(its);
@@ -241,6 +294,7 @@ function GetDataAjaxEventsHome(url) {
             });
         },
         error: function (data) {
+            
             var errors = data.responseJSON;
             if (errors) {
                 $.each(errors, function (i) {
@@ -265,6 +319,56 @@ function GetDataAjaxregiones(url) {
             
             $(".regiones").LoadingOverlay("hide", true);
             $(".regiones").html(data.regiones);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
+
+function GetDataAjaxPromociones(url) {
+    $(".promocionesAtraccion").LoadingOverlay("show");
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            
+            $(".promocionesAtraccion").LoadingOverlay("hide", true);
+            $(".promocionesAtraccion").html(data.promocionesAtraccion);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+function GetDataAjaxEventos(url) {
+    $(".eventosAtraccion").LoadingOverlay("show");
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            
+            $(".eventosAtraccion").LoadingOverlay("hide", true);
+            $(".eventosAtraccion").html(data.eventosAtraccion);
 
 
         },
@@ -339,6 +443,164 @@ function GetDataAjaxCatogories(url) {
 }
 
 
+function GetLikes(url) {
+    
+    $(".likes").LoadingOverlay("show");
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            
+            $(".likes").LoadingOverlay("hide", true);
+            $(".likes").html(data.likes);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
+
+window.current_pageReview=0;
+
+function GetReview(url) {
+    $(".review").LoadingOverlay("show");
+    $.ajax({
+        type: 'GET',
+        url: url,
+            data:{
+            'page': window.current_pageReview + 1 // you might need to init that var on top of page (= 0)
+            },
+        dataType: 'json',
+        success: function (data) {
+            window.current_pageReview=current_pageReview+1;
+            $(".review").LoadingOverlay("hide", true);
+            $(".review").append(data.review);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
+
+
+function AjaxContainerRegistro($formulario) {
+    $(".btn-compare").LoadingOverlay("show");
+    var $form = $('#' + $formulario),
+            data = $form.serialize(),
+            url = $form.attr("action");
+    
+    var posting = $.post(url, {formData: data});
+    
+    posting.done(function (data) {
+        if (data.fail) {
+            
+            alert("fail");
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+
+            $("#target").LoadingOverlay("hide", true);
+            //$('.rowerror').html(errorString);
+            $('.rowerror').html(errorString);
+
+        }
+        if (data.success) {
+            alert("la concha");
+            $("#loadingScreen").LoadingOverlay("hide", true);
+            window.location.href = data.redirectto;
+
+            //  $('#containerbase').empty();
+            // $('#containerbase').html(data.html);
+
+        } //success
+
+
+
+    });
+}
+
+function ajaxajax()
+{
+    
+   
+var data = { key: $('#search-query').val() };
+
+$.ajax({
+     type: 'POST',
+     url: "likesS",
+     data: JSON.stringify(data),
+     dataType: 'json',
+     contentType: 'application/json; charset=utf-8',
+     success: function (data) {
+          if (data.redirect) {
+              window.location.href = data.redirect;
+          }
+          $('.builder').empty();
+          alert("Key Passed Successfully!!!");
+     }
+});
+    
+}
+
+
+
+
+//retorna un mensaje despues de ejecutar la logica del controller
+function AjaxContainerRetrunBurnURL($urlS,$formulario, $id, $load) {
+    
+    $(".".$load).LoadingOverlay("show");
+
+
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize() + '&ids=' + $id;
+    
+    var url =$urlS + $id;
+    var posting = $.post(url, {formData: data});
+    alert(url);
+    posting.done(function (data) {
+        
+        if (data.fail) {
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#" + $formulario).LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+        
+
+        }
+        if (data.success) {
+            $(".".$load).LoadingOverlay("hide", true);
+        
+
+
+        } //success
+    }); //done
+
+}
 
 
 

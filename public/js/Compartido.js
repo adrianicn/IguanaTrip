@@ -5,6 +5,29 @@ $.ajaxSetup({
 });
 
 
+function ajaxajax()
+{
+    
+   
+var data = { key: $('#search-query').val() };
+
+$.ajax({
+     type: 'POST',
+     url: "http://localhost:8080/IguanaTrip/public/likesS",
+     data: JSON.stringify(data),
+     dataType: 'json',
+     contentType: 'application/json; charset=utf-8',
+     success: function (data) {
+          if (data.redirect) {
+              window.location.href = data.redirect;
+          }
+          $('.builder').empty();
+          alert("Key Passed Successfully!!!");
+     }
+});
+    
+}
+
 //hace la logica del controller, recibe los datos del formulario y hace un redirect a la pagina enviada desde
 //el controller
 function AjaxContainerRegistro($formulario) {
@@ -658,7 +681,7 @@ function AjaxContainerRetrunBurnURL($urlS,$formulario, $id, $load) {
     
     $("#".$load).LoadingOverlay("show");
 
-
+    
 
     var $form = $('#' + $formulario),
             data = $form.serialize() + '&ids=' + $id;

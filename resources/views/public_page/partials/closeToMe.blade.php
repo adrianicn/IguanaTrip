@@ -1,9 +1,39 @@
 @section('eventsPromo')	
 
 <div id="x2">
+    
+    
+    
+    @if($AtraccionesClose!=null)
+    @foreach ($AtraccionesClose as $atracc)
+    <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item eventInd filter-atracciones filter-alls" >
+        <article class="post">
+            <figure ><img src="{{ asset('images/icon/'.$atracc->filename)}}" alt=""></figure>
+            @if(session('device')!='mobile')
+            <div class="shortcode-banner-inside" style=" width: 108%;">
+                @else
+                <div class="shortcode-banner-inside" style=" width: 112%;">
+                    @endif
+                    <div class="shortcode-banner-content">
+                     
+
+                        <a  href="{!!asset('/tokenDc$rip')!!}/{!!$atracc->id_usuario_serviciox!!}"  onclick="$('#x2').LoadingOverlay('show')"><h3 class="banner-title">{!!$atracc->nombre_servicio!!}</h3>
+                            
+                        </a>
+                        <div class="details">
+                            <p>{!!$atracc->detalle_servicio!!}</p>
+                        </div>
+                    </div>
+                </div>
+
+        </article>
+    </div>
+    @endforeach
+    @endif
+
+    
+    @if($eventosClose!=null)
     @foreach ($eventosClose as $event)
-
-
     <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item eventInd filter-eventos filter-alls" >
         <article class="post">
             <figure ><img src="{{ asset('images/icon/'.$event->filename)}}" alt=""></figure>
@@ -17,7 +47,7 @@
                         $date = date_create($event->fecha_ingreso);
                         ?>
 
-                        <a href="#"><h3 class="banner-title">{!!$event->nombre_servicio!!}</h3><h3 style="color: red">{!!date_format($date, 'j F ')!!}</h3></a>
+                        <a href="{!!asset('/tokenDc$rip')!!}/{!!$event->id_usuario_serviciox!!}"  onclick="$('.container').LoadingOverlay('show')"><h3 class="banner-title">{!!$event->nombre_servicio!!}</h3><h3 style="color: red">{!!date_format($date, 'j F ')!!}</h3></a>
                         <div class="details">
                             <p>{!!$event->detalle_servicio!!}</p>
                         </div>
@@ -27,28 +57,9 @@
         </article>
     </div>
     @endforeach
+    @endif
 
-<!--
-@if(!$eventosClose->hasMorePages() && $eventosClose->currentPage()==$eventosClose->lastPage() && $eventosCloseProv==null)
-    <div class="shortcode-banner style-animated iso-item eventInd filter-eventos filter-alls" >
-        <article class="post">
-            <figure ><img src="{{ asset('img/rsz_addevent.png')}}" alt=""></figure>
-            @if(session('device')!='mobile')
-            <div class="shortcode-banner-inside" style=" width: 108%;">
-                @else
-                <div class="shortcode-banner-inside" style=" width: 112%;">
-                    @endif
-                    <div class="shortcode-banner-content">
-                        <a href="#"><h3 class="banner-title">Agregar evento</h3></a>
-                        <div class="details">
-                            <p>Haz click aquí si deseas agregar un evento</p>
-                        </div>
-                    </div>
-                </div>
 
-        </article>
-    </div>
-            @endif-->
 
     @if($eventosCloseProv!=null)
     @foreach ($eventosCloseProv as $event)
@@ -81,6 +92,7 @@
     
     
       @if($eventosDepCloseProv!=null)
+      
     @foreach ($eventosDepCloseProv as $event)
 
 
@@ -109,8 +121,8 @@
     @endforeach
     @endif
     
-    
-    @if(count($eventosDepClose)!=null)
+    @if($eventosDepClose!=null)
+    @if(count($eventosDepClose)>0)
      @foreach ($eventosDepClose as $event)
 
 
@@ -138,8 +150,10 @@
     </div>
     @endforeach
     @endif
+    @endif
     
-    @if(count($PromoDepClose!=null))
+    @if($PromoDepClose!=null)
+    @if(count($PromoDepClose)>0)
      @foreach ($PromoDepClose as $promo)
 
 
@@ -162,6 +176,7 @@
         </article>
     </div>
     @endforeach
+    @endif
     @endif
     
     

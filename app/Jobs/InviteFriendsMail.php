@@ -34,7 +34,7 @@ class InviteFriendsMail extends Job implements SelfHandling
     public function handle(Mailer $mailer)
     {
         $data = [
-            'title'  => "Invitación IguanaTrip.com",
+            'title'  => "Invitación iWaNaTrip.com",
             'nombrede'  => $this->invitacion->invitacion_de,
             'nombrepara'   => $this->invitacion->invitacion_para,
             
@@ -42,7 +42,7 @@ class InviteFriendsMail extends Job implements SelfHandling
         
         $mailer->send('emails.auth.inviteFriend', $data, function($message) {
             $message->to( $this->invitacion->correo, $this->invitacion->invitacion_para)
-                    ->subject("Invitación IguanaTrip.com");
+                    ->subject("Invitación iWaNaTrip.com");
         });
     }
     

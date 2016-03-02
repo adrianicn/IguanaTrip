@@ -48,40 +48,25 @@ class HomePublicController extends Controller {
         }
 
         Session::put('device', $desk);
-        //$visitados = $gestion->getUsuario_serv($location);
-        //  $regiones = $gestion->getRegiones();
-
         $topPlacesEcuador = $gestion->getTopPlaces(3);
-
-
         return view('public_page.front.homePage')->with('location', $location)->with('topPlacesEcuador', $topPlacesEcuador);
-        //->with('visitados',$visitados)
     }
 
     //Obtiene los top places paginados
     public function getTopPlaces(Request $request, PublicServiceRepository $gestion) {
-        //
         $topPlacesEcuador = $gestion->getTopPlaces(100);
-
         $view = View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador));
-
         if ($request->ajax()) {
-            //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
             $sections = $view->rendersections();
             return Response::json($sections);
-            //return  Response::json($sections['contentPanel']); 
         }
     }
-    
- 
 
     //Obtiene los top places paginados
     public function getCercanosIntern(Request $request, PublicServiceRepository $gestion, $id_atraccion, $id_provincia, $id_canton, $id_parroquia) {
         //
         //saber cuales son los hijos de la atraccion principal si lo tiene
         //$related = $gestion->getHijosAtraccion($id_atraccion);
-
-
         $provincias = null;
         $canton = null;
         $parroquia = null;
@@ -91,11 +76,8 @@ class HomePublicController extends Controller {
         $prmoCanton = null;
         $evntProvincia = null;
         $prmoProvincia = null;
-
-
         if ($id_parroquia != 0) {
             $parroquia = $gestion->getParroquiaIntern($id_parroquia, $id_atraccion);
-
             if ($parroquia != null) {
                 $evntParroquia = $gestion->getEventIntern($parroquia);
                 $prmoParroquia = $gestion->getPromoIntern($parroquia);
@@ -109,41 +91,31 @@ class HomePublicController extends Controller {
             } else {
                 $canton = $gestion->getCantonIntern($id_canton, $id_atraccion, $id_parroquia, null, null);
             }
-              if ($canton != null) {
-                    $evntCanton = $gestion->getEventIntern($canton);
-                    $prmoCanton = $gestion->getPromoIntern($canton);
-                }
+            if ($canton != null) {
+                $evntCanton = $gestion->getEventIntern($canton);
+                $prmoCanton = $gestion->getPromoIntern($canton);
+            }
         }
-
         if ($id_provincia != 0) {
-            
-             if ($canton != null) {
-                 if($parroquia!=null)
-                 
-                 {$page=$canton->currentPage()+$parroquia->currentPage();
-                 $stop=$parroquia->currentPage();
-                 }
-                 
-                 else
-                 {$page=$canton->currentPage();
-                 $stop=$canton->currentPage();
-                 }
-                 
+            if ($canton != null) {
+                if ($parroquia != null) {
+                    $page = $canton->currentPage() + $parroquia->currentPage();
+                    $stop = $parroquia->currentPage();
+                } else {
+                    $page = $canton->currentPage();
+                    $stop = $canton->currentPage();
+                }
                 if (Input::get('page') > ($page)) {
-                    $provincias = $gestion->getProvinciaIntern($id_provincia, $id_atraccion,$id_canton, $id_parroquia, Input::get('page'), $stop);
+                    $provincias = $gestion->getProvinciaIntern($id_provincia, $id_atraccion, $id_canton, $id_parroquia, Input::get('page'), $stop);
                 }
             } else {
-                $provincias = $gestion->getProvinciaIntern($id_provincia, $id_atraccion,$id_canton, $id_parroquia,null, null);
+                $provincias = $gestion->getProvinciaIntern($id_provincia, $id_atraccion, $id_canton, $id_parroquia, null, null);
             }
-            
-             if ($provincias != null) {
-                    $evntProvincia = $gestion->getEventIntern($provincias);
-                    
-                    $prmoProvincia = $gestion->getPromoIntern($provincias);
-                }
-            
+            if ($provincias != null) {
+                $evntProvincia = $gestion->getEventIntern($provincias);
+                $prmoProvincia = $gestion->getPromoIntern($provincias);
+            }
         }
-
         $view = View::make('public_page.partials.cercanosIntern', array('parroquia' => $parroquia,
                     'evntParroquia' => $evntParroquia,
                     'prmoParroquia' => $prmoParroquia,
@@ -154,6 +126,31 @@ class HomePublicController extends Controller {
                     'evntProvincia' => $evntProvincia,
                     'prmoProvincia' => $prmoProvincia,
         ));
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+            return Response::json($sections);
+        }
+    }
+
+    //Obtiene los top places paginados
+    public function getbyCity(Request $request, PublicServiceRepository $gestion, $city) {
+        //
+
+
+
+        $eventosCloseProv = null;
+        $eventosDepCloseProv = null;
+        $eventosClose = $gestion->getEventsIndepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $eventosDepClose = $gestion->getEventsDepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $PromoDepClose = $gestion->getPromoDepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+
+
+
+        $view = View::make('public_page.partials.closeToMe', array('eventosClose' => $eventosClose,
+                    'eventosCloseProv' => $eventosCloseProv,
+                    'eventosDepClose' => $eventosDepClose,
+                    'eventosDepCloseProv' => $eventosDepCloseProv,
+                    'PromoDepClose' => $PromoDepClose));
 
         if ($request->ajax()) {
             //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
@@ -166,43 +163,51 @@ class HomePublicController extends Controller {
         }
     }
 
-    //Obtiene los top places paginados
-    public function getcloseToMe(Request $request, PublicServiceRepository $gestion) {
-        //
-
-        try {
-            $ipUser = $this->getIp();
-            $location = json_decode(file_get_contents("http://ipinfo.io/186.47.241.78"));
-        } catch (Exception $e) {
-            $location = "";
-        }
+    //Obtiene los lugares cercanos acorde a una ubicacion paginados
+    public function getcloseToMe(Request $request, PublicServiceRepository $gestion, $city) {
 
 
         $eventosCloseProv = null;
         $eventosDepCloseProv = null;
-        $eventosClose = $gestion->getEventsIndepCity($location, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
-        $eventosDepClose = $gestion->getEventsDepCity($location, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
-        $PromoDepClose = $gestion->getPromoDepCity($location, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        //Existe una categoria que es independiente para crear eventos
+        $eventosClose = $gestion->getEventsIndepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        //esos son eventos y promociones de los establecimientos
+        $eventosDepClose = $gestion->getEventsDepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $PromoDepClose = $gestion->getPromoDepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
 
 
-        if (Input::get('page') > $eventosClose->currentPage()) {
-            $eventosCloseProv = $gestion->getEventsIndepProvince($location, Input::get('page'), $eventosClose->currentPage(), 100, 1);
+        $AtraccionesClose = $gestion->getAtraccionesByCity($city, 100, 1);
+
+
+
+        if ($eventosClose != null) {
+
+            if (Input::get('page') > $eventosClose->currentPage()) {
+                $eventosCloseProv = $gestion->getEventsIndepProvince($city, Input::get('page'), $eventosClose->currentPage(), 100, 1);
+            }
+            if ($eventosDepClose != null) {
+                if (Input::get('page') > $eventosDepClose->currentPage()) {
+                    $eventosDepCloseProv = $gestion->getEventsDepProvince($city, Input::get('page'), $eventosDepClose->currentPage(), 100, 1);
+                }
+            }
+        } else {
+
+            $eventosCloseProv = $gestion->getEventsIndepProvince($city, null, null, 100, 1);
         }
 
-        if (Input::get('page') > $eventosDepClose->currentPage()) {
-            $eventosDepCloseProv = $gestion->getEventsDepProvince($location, Input::get('page'), $eventosDepClose->currentPage(), 100, 1);
-        }
-
-        $view = View::make('public_page.partials.closeToMe', array('eventosClose' => $eventosClose, 'eventosCloseProv' => $eventosCloseProv, 'eventosDepClose' => $eventosDepClose, 'eventosDepCloseProv' => $eventosDepCloseProv, 'PromoDepClose' => $PromoDepClose));
+        $view = View::make('public_page.partials.closeToMe', array('eventosClose' => $eventosClose,
+                    'eventosCloseProv' => $eventosCloseProv,
+                    'eventosDepClose' => $eventosDepClose,
+                    'eventosDepCloseProv' => $eventosDepCloseProv,
+                    'PromoDepClose' => $PromoDepClose,
+                    'AtraccionesClose' => $AtraccionesClose,
+                        )
+                )
+        ;
 
         if ($request->ajax()) {
-            //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
-
-
             $sections = $view->rendersections();
             return Response::json($sections);
-
-            //return  Response::json($sections['contentPanel']); 
         }
     }
 
@@ -248,6 +253,60 @@ class HomePublicController extends Controller {
         return view('public_page.front.detalleProvincia')->with('provincias', $provincias)->with('imagenes', $imagenes)->with('ciudades', $ciudades)->with('explore', $explore)->with('visitados', $visitados);
     }
 
+    //Obtiene las promociones de cada evento 
+    public function getPromocionesAtraccion(Request $request, $id_atraccion, PublicServiceRepository $gestion) {
+        //
+
+
+
+
+        $ImgPromociones = null;
+        $promociones = $gestion->getPromoAtraccion($id_atraccion);
+        if ($promociones != null)
+            $ImgPromociones = $gestion->getPromotionsImagenAtraccion($promociones);
+
+
+
+        $view = View::make('public_page.partials.promocionesAtraccion', array('promociones' => $promociones, 'ImgPromociones' => $ImgPromociones));
+
+        if ($request->ajax()) {
+            //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
+
+
+            $sections = $view->rendersections();
+            return Response::json($sections);
+
+            //return  Response::json($sections['contentPanel']); 
+        }
+    }
+
+    //Obtiene los eventos de cada atraccion  de cada evento 
+    public function getEventosAtraccion(Request $request, $id_atraccion, PublicServiceRepository $gestion) {
+        //
+
+
+
+
+        $Imgeventos = null;
+        $eventos = $gestion->getEventosAtraccion($id_atraccion);
+        if ($eventos != null)
+            $Imgeventos = $gestion->getEventosImagenAtraccion($eventos);
+
+
+
+        $view = View::make('public_page.partials.eventosAtraccion', array('eventos' => $eventos, 'Imgeventos' => $Imgeventos));
+
+        if ($request->ajax()) {
+            //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
+
+
+            $sections = $view->rendersections();
+            return Response::json($sections);
+
+            //return  Response::json($sections['contentPanel']); 
+        }
+    }
+
     //Obtiene las descripcion de la atraccion elegida
     public function getAtraccionDescripcion($id_atraccion, PublicServiceRepository $gestion) {
         $agent = new Agent();
@@ -260,8 +319,8 @@ class HomePublicController extends Controller {
         }
 
         Session::put('device', $desk);
-        $Imgeventos = null;
-        $ImgPromociones = null;
+
+
         $ImgItiner = null;
         $explore = null;
         $visitados = null;
@@ -270,16 +329,15 @@ class HomePublicController extends Controller {
         $canton = null;
         $parroquia = null;
 
+
         $atraccion = $gestion->getAtraccionDetails($id_atraccion);
         $imagenes = $gestion->getAtraccionImages($id_atraccion);
-        $eventos = $gestion->getEventosAtraccion($id_atraccion);
-        $promociones = $gestion->getPromoAtraccion($id_atraccion);
+
+
         $itinerarios = $gestion->getItinerAtraccion($id_atraccion);
         $related = $gestion->getHijosAtraccion($id_atraccion);
         $servicios = $gestion->getServicios($atraccion->id_provincia);
-        $reviews = $gestion->getReviews($atraccion->id);
-   
-        
+
         if ($atraccion->id_provincia != 0)
             $provincia = $gestion->getUbicacionAtraccion($atraccion->id_provincia);
 
@@ -292,11 +350,7 @@ class HomePublicController extends Controller {
         if ($related == null)
             $visitados = $gestion->getVisitadosProvincia($atraccion->id_provincia);
 
-        if ($eventos != null)
-            $Imgeventos = $gestion->getEventosImagenAtraccion($eventos);
 
-        if ($promociones != null)
-            $ImgPromociones = $gestion->getPromotionsImagenAtraccion($promociones);
 
 
         if ($itinerarios != null)
@@ -309,9 +363,6 @@ class HomePublicController extends Controller {
 
         return view('public_page.front.detalleAtracciones')->with('atraccion', $atraccion)
                         ->with('imagenes', $imagenes)->with('explore', $explore)
-                        ->with('eventos', $eventos)->with('Imgeventos', $Imgeventos)
-                        ->with('promociones', $promociones)
-                        ->with('ImgPromociones', $ImgPromociones)
                         ->with('itinerarios', $itinerarios)
                         ->with('ImgItiner', $ImgItiner)
                         ->with('related', $related)
@@ -319,59 +370,53 @@ class HomePublicController extends Controller {
                         ->with('canton', $canton)
                         ->with('provincia', $provincia)
                         ->with('parroquia', $parroquia)
-                ->with('servicios', $servicios)
-                ->with('reviews', $reviews)
+                        ->with('servicios', $servicios)
         ;
     }
-    
-    
-    /*::           where: 'M' is statute miles (default)                         :*/
-/*::                  'K' is kilometers                                      :*/
-/*::                  'N' is nautical miles   
-    public function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 
-  $theta = $lon1 - $lon2;
-  $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-  $dist = acos($dist);
-  $dist = rad2deg($dist);
-  $miles = $dist * 60 * 1.1515;
-  $unit = strtoupper($unit);
+    /* ::           where: 'M' is statute miles (default)                         : */
+    /* ::                  'K' is kilometers                                      : */
+    /* ::                  'N' is nautical miles   
+      public function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 
-  if ($unit == "K") {
-    return ($miles * 1.609344);
-  } else if ($unit == "N") {
+      $theta = $lon1 - $lon2;
+      $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+      $dist = acos($dist);
+      $dist = rad2deg($dist);
+      $miles = $dist * 60 * 1.1515;
+      $unit = strtoupper($unit);
+
+      if ($unit == "K") {
+      return ($miles * 1.609344);
+      } else if ($unit == "N") {
       return ($miles * 0.8684);
-    } else {
-        return $miles;
+      } else {
+      return $miles;
       }
-}
-                               :*/
-    
-    
-       
-      //Obtiene los servicios por catalogo cercanos a la atraccion paginados
+      }
+      : */
+
+    //Obtiene los servicios por catalogo cercanos a la atraccion paginados
     public function getCatalosoServicios(Request $request, PublicServiceRepository $gestion, $id_atraccion, $id_catalogo) {
         //
- 
-        $atraccion=$gestion->getAtraccionDetails($id_atraccion);
-        $catalogo1= $gestion->getCatalogoDetails($id_atraccion,$id_catalogo);
-        $catalogo=$gestion->getDetailsServiciosAtraccion($catalogo1,null,null,1);
- 
-        
-        
- if ($atraccion->id_provincia != 0) {
 
-        
-        if (Input::get('page') > $catalogo->currentPage()) {
-            
-         $catalogo2= $gestion->getCatalogoDetailsProvincia($atraccion,$id_catalogo,$catalogo1);
-        $catalogo=$gestion->getDetailsServiciosAtraccion($catalogo2, Input::get('page'), $catalogo->currentPage(), 1);
-            
+        $atraccion = $gestion->getAtraccionDetails($id_atraccion);
+        $catalogo1 = $gestion->getCatalogoDetails($id_atraccion, $id_catalogo);
+        $catalogo = $gestion->getDetailsServiciosAtraccion($catalogo1, null, null, 1);
+
+
+
+        if ($atraccion->id_provincia != 0) {
+
+
+            if (Input::get('page') > $catalogo->currentPage()) {
+
+                $catalogo2 = $gestion->getCatalogoDetailsProvincia($atraccion, $id_catalogo, $catalogo1);
+                $catalogo = $gestion->getDetailsServiciosAtraccion($catalogo2, Input::get('page'), $catalogo->currentPage(), 1);
+            }
         }
 
- }
 
-        
         $view = View::make('public_page.partials.listServicesCategoria', array('catalogo' => $catalogo));
 
         if ($request->ajax()) {
@@ -381,10 +426,9 @@ class HomePublicController extends Controller {
             //return  Response::json($sections['contentPanel']); 
         }
     }
-    
-    
+
     //Obtiene las descripcion de la atraccion elegida
-    public function getCatalogoDescripcion(PublicServiceRepository $gestion,$id_atraccion,$id_catalogo) {
+    public function getCatalogoDescripcion(PublicServiceRepository $gestion, $id_atraccion, $id_catalogo) {
         $agent = new Agent();
 
         $desk = $device = $agent->isMobile();
@@ -394,18 +438,18 @@ class HomePublicController extends Controller {
             $desk = "desk";
         }
         Session::put('device', $desk);
-        
-        $catalogo= $gestion->getCatalogoDetail($id_catalogo);
-        $ServicioPrevio= $gestion->getAtraccionDetails($id_atraccion);
+
+        $catalogo = $gestion->getCatalogoDetail($id_catalogo);
+        $ServicioPrevio = $gestion->getAtraccionDetails($id_atraccion);
         $servicios = $gestion->getServicios($ServicioPrevio->id_provincia);
         //$likes=$gestion->getlikes($ServicioPrevio->id);
-                
-        
+
+
         $provincia = null;
         $canton = null;
         $parroquia = null;
-        
-          if ($ServicioPrevio->id_provincia != 0)
+
+        if ($ServicioPrevio->id_provincia != 0)
             $provincia = $gestion->getUbicacionAtraccion($ServicioPrevio->id_provincia);
 
         if ($ServicioPrevio->id_canton != 0)
@@ -413,19 +457,18 @@ class HomePublicController extends Controller {
 
         if ($ServicioPrevio->id_parroquia != 0)
             $parroqia = $gestion->getUbicacionAtraccion($ServicioPrevio->id_parroquia);
-        
+
 
         return view('public_page.front.listServices')
-                ->with('ServicioPrevio', $ServicioPrevio)
-            ->with('canton', $canton)
+                        ->with('ServicioPrevio', $ServicioPrevio)
+                        ->with('canton', $canton)
                         ->with('provincia', $provincia)
                         ->with('parroquia', $parroquia)
-            ->with('servicios', $servicios)
-            ->with('id_catalogo', $id_catalogo)
-            ->with('catalogo', $catalogo);;
+                        ->with('servicios', $servicios)
+                        ->with('id_catalogo', $id_catalogo)
+                        ->with('catalogo', $catalogo);
+        ;
     }
-    
-    
 
     //Obtiene todas las provincias de la region
     public function getRegionsId($id_region, PublicServiceRepository $gestion) {
@@ -445,6 +488,59 @@ class HomePublicController extends Controller {
 
 
         return view('public_page.front.allRegions')->with('provincias', $provincias)->with('imagenes', $imagenes)->with('region', $id_region);
+    }
+
+    public function getReviews(Request $request, PublicServiceRepository $gestion, $id_atraccion) {
+        //
+
+
+        $reviews = $gestion->getReviews($id_atraccion);
+
+
+        $view = View::make('public_page.partials.reviews', array('reviews' => $reviews));
+
+        if ($request->ajax()) {
+            //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
+            $sections = $view->rendersections();
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        }
+    }
+
+    public function getLikesSatisf(Request $request, PublicServiceRepository $gestion, $id_atraccion) {
+        //
+
+        $likes = $gestion->getlikes($id_atraccion);
+
+
+        $view = View::make('public_page.partials.btnLike', array('likes' => $likes,'atraccion' => $id_atraccion));
+
+        if ($request->ajax()) {
+            //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
+            $sections = $view->rendersections();
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        }
+    }
+
+    public function postLikesS(Request $request, PublicServiceRepository $gestion) {
+
+        
+          $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        
+        $ip=$this->getIp();
+        $likesIP = $gestion->getlikesIp($formFields['ids'],$ip);
+        
+        if(count($likesIP)==0 || $likesIP==null)
+        {
+            $gestion->storeLikes($formFields['ids'],$ip);
+        }
+        
+        
+        //obtengo los servicios ya almacenados de la bdd
+        
+        return response()->json(array('success' => true));
     }
 
 }

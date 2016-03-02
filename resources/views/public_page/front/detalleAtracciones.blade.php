@@ -10,6 +10,7 @@
 
         <!-- Meta Tags -->
         <meta charset="utf-8">
+        <meta name="_token" content="{!! csrf_token() !!}"/>
         <meta name="description" content="iWanaTrip.com">
         <meta name="author" content="iWanaTrip team">
 
@@ -79,7 +80,9 @@
 
             <ul class="breadcrumbs">
                 <li><a href="{!!asset('/publico')!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
-                <li class="active">{!!$atraccion->nombre_servicio!!}</li>
+                <li class="active">{!!$atraccion->nombre_servicio!!}
+                 
+                </li>
             </ul>
         </div>
         <section id="content">
@@ -147,8 +150,18 @@
                                             <span data-stars="4"></span>
                                         </span>
                                     </div>
+                                    
                                     @if($provincia!=null)
                                     <span class="product-price box">{!!$provincia->nombre!!}</span>
+                                    @endif
+                                    @if($atraccion->id_catalogo_servicio==1)
+                                    <img src="{{ asset('img/ic_serv/comida_bebida.png')}}" title="Alimentación y bebidas" alt="alimentacion">
+                                    @elseif($atraccion->id_catalogo_servicio==2)
+                                    <img src="{{ asset('img/ic_serv/hospedaje.png')}}" title="Sleep" alt="hospedaje">
+                                    @elseif($atraccion->id_catalogo_servicio==3)
+                                    <img src="{{ asset('img/ic_serv/icon_viajes.png')}}" title="Tours" alt="viajes">
+                                    @elseif($atraccion->id_catalogo_servicio==4)
+                                    <img src="{{ asset('img/ic_serv/centro_turistico.png')}}" title="Turismo" alt="turismo">
                                     @endif
                                     <p class="mores">{!!$atraccion->detalle_servicio!!}</p>
                                     <div class="clearfix box" style=" width: 90%;  margin-left: 10%;">
@@ -163,11 +176,12 @@
                                             </div>
                                         </div>
                               
-                                  <div class="product-action"  style=" margin-left: 50%;">
-                                        <a class="btn btn-compare" title="+1">
-                                            <i class="fa fa-heart"></i>27 Turistas satisfechos</a>
-                                        
-                                    </div>
+                             
+                                <div class="likes" id="likes">
+                                    
+                                    @section('likes')
+                                @show
+                                </div>
                                        
                                 </div>
                             </div>
@@ -178,12 +192,12 @@
                                 <ul class="tabs">
                                     <li ><a href="#tab3-1" data-toggle="tab">{{ trans('publico/labels.label41')}}</a></li>
                                     <li class="active"><a href="#tab3-2" data-toggle="tab">{{ trans('publico/labels.label36')}}</a></li>
-                                    <li ><a href="#tab3-3" data-toggle="tab">Reviews</a></li>
-                                    <li ><a href="#tab3-4" data-toggle="tab">{{ trans('publico/labels.label43')}}</a></li>
+                                    <li  ><a href="#tab3-3" data-toggle="tab">Reviews</a></li>
+                                    
                                     @if(count($itinerarios)>0)
                                     <li ><a href="#tab3-5" data-toggle="tab">{{ trans('publico/labels.label46')}}</a></li>
                                     @endif
-                                   <li ><a href="#tab3-6" data-toggle="tab">{{ trans('publico/labels.label24')}}</a></li>
+                                   
                                 </ul>
                                 
                                 <!-Info->
@@ -222,126 +236,8 @@
                                 </div>
                                 
                                 
-                                <!-Eventos->
-                                <div id="tab3-6" class="tab-content panel entry-content ">
-                                    <div class="tab-pane">
-                                        <div id="comments">
-                                            <h3>{{ trans('publico/labels.label24')}}</h3>
-                                            <ol class="commentlist">
-
-                                                @if(count($eventos)>0)
-                                                @foreach ($eventos as $evento)
-                                                <li class="comment">
-
-                                                    <div class="author-img">
-                                                        @if($Imgeventos!=null)
-                                                        @foreach ($Imgeventos as $img)
-                                                        @if($img->id_auxiliar==$evento->id)
-                                                        <span><img src="{{ asset('images/icon/'.$img->filename)}}" alt=""></span>
-                                                        @endif
-                                                        @endforeach
-                                                        @else
-                                                        <span><img src="http://placehold.it/100x100" alt=""></span>
-                                                        @endif
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        <h5 class="comment-author-name"><a href="#">{!!$evento->nombre_evento!!}</a></h5>
-                                                        <span data-toggle="tooltip" title="4" class="star-rating">
-                                                            <span data-stars="4"></span>
-                                                        </span>
-                                                        <?php
-                                                            $date = date_create($evento->fecha_desde);
-                                                            $date2 = date_create($evento->fecha_hasta);
-                                                             ?>
-
-                        
-                                                        <span class="comment-date">{!!date_format($date, 'j F ')!!}-{!!date_format($date2, 'j F ')!!}</span>
-                                                        <div class="description">
-                                                            <p>{!!$evento->descripcion_evento!!}</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                @endforeach
-                                                @else
-                                                  <li class="comment">
-                                                    <div class="author-img">
-                                                        <span><img src="http://placehold.it/100x100" alt=""></span>
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        <h5 class="comment-author-name"><a href="#">{{ trans('publico/labels.label44')}}</a></h5>
-                                                        <div class="description">
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                @endif
-                                            </ol>
-                                        </div>
-
-                                    </div>
-                                </div>
                                 
                                 
-                                <!-Promociones->
-                                <div id="tab3-4" class="tab-content panel entry-content ">
-                                    <div class="tab-pane">
-                                        <div id="comments">
-                                            <h3>{{ trans('publico/labels.label43')}}</h3>
-                                            <ol class="commentlist">
-
-                                                @if(count($promociones)>0)
-                                                
-                                                @foreach ($promociones as $promo)
-                                                <li class="comment">
-
-                                                    <div class="author-img">
-                                                        @if($ImgPromociones!=null)
-                                                        @foreach ($ImgPromociones as $img)
-                                                        @if($img->id_auxiliar==$promo->id)
-                                                        <span><img src="{{ asset('images/icon/'.$img->filename)}}" alt=""></span>
-                                                        @endif
-                                                        @endforeach
-                                                        @else
-                                                        <span><img src="http://placehold.it/100x100" alt=""></span>
-                                                        @endif
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        <h5 class="comment-author-name"><a href="#">{!!$promo->nombre_promocion!!}</a></h5>
-                                                        <span data-toggle="tooltip" title="4" class="star-rating">
-                                                            <span data-stars="4"></span>
-                                                        </span>
-                                                        <?php
-                                                            $date = date_create($promo->fecha_desde);
-                                                            $date2 = date_create($promo->fecha_hasta);
-                                                             ?>
-
-                        
-                                                        <span class="comment-date">{!!date_format($date, 'j F ')!!}-{!!date_format($date2, 'j F ')!!}</span>
-                                                        <div class="description">
-                                                            <p>{!!$promo->descripcion_promocion!!}</p>
-                                                            <p>{!!$promo->observaciones_promocion!!}</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                @endforeach
-                                                 @else
-                                                  <li class="comment">
-                                                    <div class="author-img">
-                                                        <span><img src="http://placehold.it/100x100" alt=""></span>
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        <h5 class="comment-author-name"><a href="#">{{ trans('publico/labels.label45')}}</a></h5>
-                                                        <div class="description">
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                @endif
-                                            </ol>
-                                        </div>
-
-                                    </div>
-                                </div>
                                 
                                 
                                 <!-Itinerarios->
@@ -395,44 +291,19 @@
                                 </div>
                                     @endif
                                     
-                                    <div id="tab3-3" class="tab-content panel entry-content">
+                                    <div id="tab3-3" class="tab-content panel entry-content ">
                                     <div class="tab-pane">
-                                        <div id="comments" class="var_comment" style="display: block;">
+                                        
+                                            
+                                                <div id="comments" class="var_comment" style="display: block;">
                                             
                                             <a href="#" class="btn btn-sm style1 btn-write-review"><i class="fa fa-pencil"></i>Write Review</a>
                                             <h3>2 Reviews on Geo Dream Dress</h3>
-                                            <ol class="commentlist">
-                                                <li class="comment">
-                                                    <div class="author-img">
-                                                        <span><img src="http://placehold.it/100x100" alt=""></span>
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        <h5 class="comment-author-name"><a href="#">Anna Brown</a></h5>
-                                                        <span data-toggle="tooltip" title="4" class="star-rating">
-                                                            <span data-stars="4"></span>
-                                                        </span>
-                                                        <span class="comment-date">12 Nov, 2013</span>
-                                                        <div class="description">
-                                                            <p>Nulla mattis rsitmet dolor sollicitudi aliquamquae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Lorem ipsum dolor sit amet gravida sagittis lacus. Morbi sit amet mauris mi.</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="comment">
-                                                    <div class="author-img">
-                                                        <span><img src="http://placehold.it/100x100" alt=""></span>
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        <h5 class="comment-author-name"><a href="#">Jessica Marvin</a></h5>
-                                                        <span data-toggle="tooltip" title="4" class="star-rating">
-                                                            <span data-stars="4"></span>
-                                                        </span>
-                                                        <span class="comment-date">12 Nov, 2013</span>
-                                                        <div class="description">
-                                                            <p>Nulla mattis rsitmet dolor sollicitudi aliquamquae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Lorem ipsum dolor sit amet gravida sagittis lacus. Morbi sit amet mauris mi.</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ol>
+                                            <ol class="commentlist review">
+                                        
+                                        @section('review')
+                                @show
+                                   </ol>
                                         </div>
                                         <div id="review_form">
                                             <form>
@@ -470,8 +341,16 @@
                                                 </div>
                                             </form>
                                         </div>
+                                    
+                                
+                                        
+                                        <div class="text-center">
+                                <a  class="btn style4 hover-blue load-more moreReviews">{{ trans('publico/labels.label31')}}</a>
+                            </div>    
+                                        
                                     </div>
                                 </div>
+                                    
                               
                             </div>
 
@@ -585,7 +464,21 @@
                         </div>
                       
                         
-                         @if(session('device')!='mobile')
+                        <div class="promocionesAtraccion">
+                              @section('promocionesAtraccion')
+                                @show
+                            
+                        </div>
+
+                        
+                        <div class="eventosAtraccion">
+                              @section('eventosAtraccion')
+                                @show
+                            
+                        </div>
+                        
+                        
+                        @if(session('device')!='mobile')
                         <div class="widget banner-slider box">
                             <div class="owl-carousel" data-itemsPerDisplayWidth="[[0, 1], [480, 2], [768, 1], [992, 1], [1200, 1]]" data-items="1">
                                 <a href="#">
@@ -645,6 +538,7 @@
     {!! HTML::script('js/jquery.js') !!}
     {!!HTML::script('js/js_public/Compartido.js') !!}
     {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
+    {!!HTML::script('js/Compartido.js') !!}
 
     <script type="text/javascript" src="{{ asset('public_components/js/jquery-2.1.3.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('public_components/js/jquery.noconflict.js')}}"></script>
@@ -877,6 +771,10 @@
         .jssora12r.jssora12rdn { background-position: -315px -37px; }
     </style>
     @endif
+    
+    
+
+
     <script type="text/javascript">
         sjq(".soap-google-map").gmap3({
             map: {
@@ -908,33 +806,35 @@
             }
         });
     </script>
+
     
     <script>
+        $(document).ready(function () {
+          
+                GetDataAjaxPromociones("{!!asset('/tokenDc$ripPromo')!!}/{!!$atraccion->id!!}");
+                GetDataAjaxEventos("{!!asset('/tokenDc$ripEvent')!!}/{!!$atraccion->id!!}");    
+                GetLikes("{!!asset('/getLikesA')!!}/{!!$atraccion->id!!}");    
+                GetReview("{!!asset('/getReviews')!!}/{!!$atraccion->id!!}?page=1");    
+                
+
+            });
+        
       $(".moreImg").click(function () {
                 GetDataAjaxCloseIntern("{!!asset('/getCercanosIntern')!!}/{!!$atraccion->id!!}/{!!$atraccion->id_provincia!!}/{!!$atraccion->id_canton!!}/{!!$atraccion->id_parroquia!!}");
                 
             });
+            $(".moreReviews").click(function () {
+                GetReview("{!!asset('/getReviews')!!}/{!!$atraccion->id!!}?page=1");    
+                
+            });
+            
+            
     </script>
-
+<script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
     <!-- load page Javascript -->
-    <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
+    
 
-    <script>
-                                        
-
-$('.btn-write-review').on('click', function() {
-  $('.var_comment').css( "display","none");
-});
-
- $( ".btn-back-reviews" ).click(function() {
-    $('.var_comment').css( "display","block" );
-
-});
-
-
-                                            
-
-    </script>
+   
 
 
 </body>

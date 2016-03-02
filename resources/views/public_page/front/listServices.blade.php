@@ -79,6 +79,9 @@
       @include('public_page.reusable.banner', ['titulo' =>'servicio'])  
 <ul class="breadcrumbs">
                 <li><a href="{!!asset('/publico')!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
+              
+                <li><a href="{!!asset('/tokenDc$rip')!!}/{!!$ServicioPrevio->id!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{!!$ServicioPrevio->nombre_servicio!!}</a>
+             
                 <li class="active">Servicio</li>
             </ul>
         </div>
@@ -123,7 +126,7 @@
                                 <li class="category-has-children">
                                     <a href="#cat-all-dresses" class="active" data-toggle="collapse">{{ trans('publico/labels.label53')}}</a>
                                     <ul id="cat-all-dresses" class="collapse in">
-                                        <li><a href="#">{!!$ServicioPrevio->nombre_servicio!!}</a>
+                                        <li><a href="{!!asset('/tokenDc$rip')!!}/{!!$ServicioPrevio->id!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{!!$ServicioPrevio->nombre_servicio!!}</a>
                                         
                                         </li>
                                         
@@ -136,8 +139,6 @@
                                             @foreach ($servicios as $serv)
                                                @if(session('locale') == 'es' )
                                                 <li><a href="{!!asset('/tokenDc$ripT')!!}/{!!$ServicioPrevio->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$serv->nombre_servicio!!}</a></li>
-                                                
-                                                
                                             @else
                                             <li><a href="{!!asset('/tokenDc$ripT')!!}/{!!$ServicioPrevio->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$serv->nombre_servicio_eng!!}</a></li>
                                             @endif
@@ -212,7 +213,19 @@
                     <div id="main" class="col-sm-8 col-md-9">
                         <div class="image-banner box">
                             <div class="image-container">
-                                <img src="{{ asset('img/serr/eat.jpg')}}" alt="">
+                                @if($catalogo->id_catalogo_servicios==1)
+                                <img src="{{ asset('img/serr/eat.jpg')}}" alt="eat_iWaNaTrip">
+                                @elseif($catalogo->id_catalogo_servicios==2)
+                                <img src="{{ asset('img/serr/sleep.jpg')}}" alt="sleep_iWaNaTrip">
+                                @elseif($catalogo->id_catalogo_servicios==3)
+                                <img src="{{ asset('img/serr/trip.jpg')}}" alt="trip_iWaNaTrip">
+                                @elseif($catalogo->id_catalogo_servicios==4)
+                                <img src="{{ asset('img/serr/tour.jpg')}}" alt="tour_iWaNaTrip">
+                                @elseif($catalogo->id_catalogo_servicios==5)
+                                <img src="{{ asset('img/serr/night.jpg')}}" alt="night_iWaNaTrip">
+                                @elseif($catalogo->id_catalogo_servicios==8)
+                                <img src="{{ asset('img/serr/culture.jpg')}}" alt="culture_iWaNaTrip">
+                                @endif
                             </div>
                             <div class="caption-wrapper position-left">
                                 <div class="captions">

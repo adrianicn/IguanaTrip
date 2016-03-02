@@ -10,32 +10,34 @@
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/createNewItinerario.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/modify_dificultades.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/cercanosIntern.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/reusable/bannerAtracciones.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/database/migrations/2016_02_20_222407_create_satisfechos_usuario_servicio_table.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/public/js/js_public/Compartido.js</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/detalleAtracciones.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/reusable/banner.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/AllTopPlaces.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/en/publico/labels.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/closeToMe.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/PublicServiceRepository.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/js/gmap3.js</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/es/publico/labels.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/RegistroOperadores/registroStep4.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/es/publico/labels.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/css/style.css</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/maps.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/woocommerce-product-sidebar.html</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/modifyEventos_Promociones.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/homePage.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/allRegions.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/UsuarioServiciosController.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/detalleProvincia.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/HomePublicController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/OperadorRepository.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Admin/parroquia.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/pages-contact1.html</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Registro/editEvento.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/database/migrations/2016_02_19_004936_create_reviews_usuario_servicios_table.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Admin/descripcionProvincia.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/listServices.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/routes.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/ServiciosOperadorRepository.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/ServicioController.php</file>
         </group>
     </open-files>
 </project-private>

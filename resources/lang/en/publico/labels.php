@@ -63,6 +63,12 @@ return [
     'label57' => 'City',	
     'label58' => 'Town',	
 	'label59' => 'price from',	
+    'label60' => 'Anonimus',	
+    'label61' => 'Discover',	
+    'label62' => 'what to do',	
+    'label63' => 'close to',	
+    'label64' => 'Write a city',	
+    'label65' => 'Places',	
     'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];
