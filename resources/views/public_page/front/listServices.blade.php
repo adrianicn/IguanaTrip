@@ -75,14 +75,21 @@
             <header id="header"  class="header-color-white" >
                 @include('public_page.reusable.header')
             </header>
+            
+  @if(session('locale') == 'es' )
+                                          <?php $titlUp=$catalogo->nombre_servicio?>
+                                            @else
+                                           
+                                           <?php $titlUp=$catalogo->nombre_servicio_eng?>
+                                            @endif
 
-      @include('public_page.reusable.banner', ['titulo' =>'servicio'])  
+      @include('public_page.reusable.banner', ['titulo' =>$titlUp])  
 <ul class="breadcrumbs">
                 <li><a href="{!!asset('/publico')!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
               
                 <li><a href="{!!asset('/tokenDc$rip')!!}/{!!$ServicioPrevio->id!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{!!$ServicioPrevio->nombre_servicio!!}</a>
              
-                <li class="active">Servicio</li>
+                <li class="active">{!!$titlUp!!}</li>
             </ul>
         </div>
         
@@ -211,6 +218,8 @@
                         </div>
                     </div>
                     <div id="main" class="col-sm-8 col-md-9">
+                        
+                        @if(session('device')!='mobile')
                         <div class="image-banner box">
                             <div class="image-container">
                                 @if($catalogo->id_catalogo_servicios==1)
@@ -240,7 +249,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        @endif
                       <!--  <form method="get" class="woocommerce-ordering box">
                             <select class="orderby selector" name="orderby" id="orderby">
                                 <option value="satisfaction">Sort by satsifaction</option>
@@ -299,10 +308,7 @@
 
     <!-- Magnific Popup core JS file -->
     <script type="text/javascript" src="{{ asset('public_components/components/magnific-popup/jquery.magnific-popup.min.js')}}"></script> 
-
-     <!-- Google Map Api -->
-    <script type='text/javascript' src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
-    <script type="text/javascript" src="{{ asset('public_components/js/gmap3.js')}}"></script>
+     
     <!-- parallax -->
     <script type="text/javascript" src="{{ asset('public_components/js/jquery.stellar.min.js')}}"></script>
 
@@ -518,6 +524,29 @@
         .jssora12l.jssora12ldn { background-position: -256px -37px; }
         .jssora12r.jssora12rdn { background-position: -315px -37px; }
     </style>
+    @else
+  <script>
+
+
+jQuery(document).ready(function ($) {
+   
+     @if($catalogo->id_catalogo_servicios==1)
+                                $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/eat.jpg")!!})');
+                                @elseif($catalogo->id_catalogo_servicios==2)
+                                    $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/sleep.jpg")!!})');
+                                @elseif($catalogo->id_catalogo_servicios==3)
+                                   $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/trip.jpg")!!})');
+                                @elseif($catalogo->id_catalogo_servicios==4)
+                                  $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/tour.jpg")!!})');
+                                @elseif($catalogo->id_catalogo_servicios==5)
+                                   $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/night.jpg")!!})');
+                                @elseif($catalogo->id_catalogo_servicios==8)
+                                            $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/culture.jpg")!!})');
+                                @endif    
+});
+  
+
+</script>
     @endif
     
 <script>

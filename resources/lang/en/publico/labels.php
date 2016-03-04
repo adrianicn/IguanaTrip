@@ -69,6 +69,12 @@ return [
     'label63' => 'close to',	
     'label64' => 'Write a city',	
     'label65' => 'Places',	
+    'label66' => 'Where?',	
+    'label67' => 'Apply filter',	
+    'label68' => 'Filter by facilities',
+    'label69' => 'Filter By Price',
+    
     'message' => 'Your message',
+    
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

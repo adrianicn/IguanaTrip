@@ -67,6 +67,10 @@ return [
     'label63' => 'cerca de',	
     'label64' => 'Escribe una ciudad',	
 'label65' => 'Lugares',	
+    'label66' => 'Donde?',	
+    'label67' => 'Aplicar filtro',	
+    'label68' => 'Filtrar por instalaciones',	
+    'label69' => 'Filtrar por precio',
     'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

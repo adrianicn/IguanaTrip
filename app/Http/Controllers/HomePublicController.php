@@ -320,7 +320,7 @@ class HomePublicController extends Controller {
 
         Session::put('device', $desk);
 
-
+$gestion->saveVisita($id_atraccion);
         $ImgItiner = null;
         $explore = null;
         $visitados = null;
@@ -395,7 +395,42 @@ class HomePublicController extends Controller {
       }
       }
       : */
+    
+    
 
+    //Obtiene los servicios por catalogo cercanos a la atraccion paginados
+    public function getCatalosoServiciosSearch(Request $request, PublicServiceRepository $gestion, $id_catalogo,$ciudad ) {
+        //
+
+        $busquedaInicial = $gestion->getBusquedaInicialCatalogo($id_catalogo,$ciudad,null,null,1,100);
+        
+       
+
+/*
+
+        if ($atraccion->id_provincia != 0) {
+
+
+            if (Input::get('page') > $catalogo->currentPage()) {
+
+                $catalogo2 = $gestion->getCatalogoDetailsProvincia($atraccion, $id_catalogo, $catalogo1);
+                $catalogo = $gestion->getDetailsServiciosAtraccion($catalogo2, Input::get('page'), $catalogo->currentPage(), 1);
+            }
+        }
+*/
+
+        $view = View::make('public_page.partials.searchcategory', array('catalogo' => $busquedaInicial));
+
+        if ($request->ajax()) {
+            //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
+            $sections = $view->rendersections();
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        }
+    }
+    
+    
+    
     //Obtiene los servicios por catalogo cercanos a la atraccion paginados
     public function getCatalosoServicios(Request $request, PublicServiceRepository $gestion, $id_atraccion, $id_catalogo) {
         //
@@ -427,6 +462,39 @@ class HomePublicController extends Controller {
         }
     }
 
+    
+    
+    //Obtiene las descripcion de la atraccion elegida
+    public function getSearchHomeCatalogo(PublicServiceRepository $gestion,$id_catalogo) {
+        
+        $agent = new Agent();
+
+        $desk = $device = $agent->isMobile();
+        if ($desk == 1)
+            $desk = "mobile";
+        else {
+            $desk = "desk";
+        }
+        Session::put('device', $desk);
+        
+
+        $catalogo = $gestion->getCatalogoDetail($id_catalogo);
+        $actividades = $gestion->getExplorerbyCatalogo($id_catalogo);
+        $servicios = $gestion->getServiciosAll();
+        $precio_minimo=$gestion->getMinPrice($id_catalogo);
+        
+        $precio_max=$gestion->getMaxPrice($id_catalogo);
+
+        return view('public_page.front.searchByHome')
+        ->with('actividades', $actividades)
+                ->with('servicios', $servicios)
+                ->with('precio_minimo', $precio_minimo)
+                ->with('precio_max', $precio_max)
+                ->with('catalogo', $catalogo);
+        
+    }
+    
+    
     //Obtiene las descripcion de la atraccion elegida
     public function getCatalogoDescripcion(PublicServiceRepository $gestion, $id_atraccion, $id_catalogo) {
         $agent = new Agent();
@@ -467,7 +535,6 @@ class HomePublicController extends Controller {
                         ->with('servicios', $servicios)
                         ->with('id_catalogo', $id_catalogo)
                         ->with('catalogo', $catalogo);
-        ;
     }
 
     //Obtiene todas las provincias de la region
@@ -522,7 +589,22 @@ class HomePublicController extends Controller {
             //return  Response::json($sections['contentPanel']); 
         }
     }
+    
+    
 
+      public function postFiltersCategoria(Request $request, PublicServiceRepository $gestion) {
+
+        
+          $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        
+      return $formFields;
+        
+        //obtengo los servicios ya almacenados de la bdd
+        
+        return response()->json(array('success' => true));
+    }
+    
     public function postLikesS(Request $request, PublicServiceRepository $gestion) {
 
         

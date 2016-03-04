@@ -236,7 +236,9 @@ switch ($servicio->id_catalogo_servicio) {
                                 Restaurante, pizzeria, kioscos de comida, comida rápida, etc
                                 </div>
                                 </td>
-                            <td><input class="demo labelauty" name="id_catalogo_servicio1" id="checkbox-1" value="1" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio"{!!$servicio_1!!}/></td>
+                            <td>
+                                <input class="demo labelauty" name="id_catalogo_servicio1" id="checkbox-1" value="1" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio"{!!$servicio_1!!}/>
+                            </td>
                         </tr>
                         <tr class="alt">  <td> 
                                 <div id="star2" class="dialog-open">

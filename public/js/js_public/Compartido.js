@@ -410,6 +410,39 @@ function GetDataAjaxCloseIntern(url) {
             }
         }
     });
+
+
+}
+
+
+
+window.current_pageSeCat=0;
+
+function GetDataAjaxSearchCatogories(url) {
+    $(".Searchcategorias").LoadingOverlay("show");
+    $.ajax({
+        type: 'GET',
+        url: url,
+            data:{
+            'page': window.current_pageSeCat + 1 // you might need to init that var on top of page (= 0)
+            },
+        dataType: 'json',
+        success: function (data) {
+            window.current_pageCat=current_pageSeCat+1;
+            $(".Searchcategorias").LoadingOverlay("hide", true);
+            $(".Searchcategorias").append(data.Searchcategorias);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
 }
 
 

@@ -59,7 +59,7 @@
         <![endif]-->
 
         <style>
-
+            
             a.morelink {
                 text-decoration:none;
                 outline: none;
@@ -142,6 +142,8 @@
                                         </div>
                                     </div>
                                     @endif
+                                    
+                                    
                                 </div>
                                 <div class="summary entry-summary col-sm-7 box-lg">
                                     <div class="clearfix">
@@ -229,7 +231,10 @@
                                         <p>{!!$atraccion->como_llegar2!!}</p>
                                         <p>{!!$atraccion->como_llegar2_2!!}</p>
                                         
-                                          <div class="soap-google-map">
+                                        
+                                        <div class="soap-google-map maps">
+                                        
+      
                 
             </div>
                                     </div>
@@ -511,6 +516,47 @@
                                 @endif
                             </div>
                         </div>
+                        
+                        
+                        <div class="widget box">
+                            <h4>Join the commuinity</h4>
+                            <ul class="product-list-widget">
+                                
+                                
+                                <li>
+                                  
+                                    
+                                    
+                                    <div class="product-content">
+                                    
+                                           
+                                    
+                                    
+                                        
+                                        <span>
+                                             
+                        <div class="text-box newsletter-box">
+                            <form>
+                                <h1></h1>
+                                
+                                <p class="skin-color">Enter your details to get started</p>
+                                <div class="form-group">
+                                    <input type="text" class="input-text full-width" placeholder="Email address">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-medium style1">Sign Up Now</button>
+                                </div>
+                            </form>
+                        </div>
+                    
+                                        </span>
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                      
+                   
                         @endif
                     </div>
                 </div>
@@ -570,6 +616,8 @@
     <script type='text/javascript' src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
     <script type="text/javascript" src="{{ asset('public_components/js/gmap3.js')}}"></script>
     <script>
+        
+        
                                 sjq(document).ready(function ($) {
                                     // Configure/customize these variables.
                                     var showChar = 100; // How many characters are shown by default
@@ -779,6 +827,8 @@
         sjq(".soap-google-map").gmap3({
             map: {
                 options: {
+                     scrollwheel: false,
+
                     center: [{!!$atraccion->latitud_servicio!!},{!!$atraccion->longitud_servicio!!}],
                     zoom: 15,
 					mapTypeControlOptions: {
@@ -798,11 +848,15 @@
                     
 
                 ]
-                //,
-                //options: {
-                  //  draggable: false,
+                ,
+                options: {
+              
+                 
+    //draggable: false,
+
+
                     //icon: "{!!asset("img/CollageIsmage_opt.png")!!}",
-                //},
+                },
             }
         });
     </script>
@@ -829,6 +883,8 @@
             });
             
             
+
+
     </script>
 <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
     <!-- load page Javascript -->

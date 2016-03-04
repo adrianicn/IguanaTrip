@@ -7,51 +7,6 @@
                         </div>
                         <nav id="nav">
                             <ul class="header-top-nav">
-                                <!-- <li class="mini-cart menu-item-has-children">
-                                     <a href="#"><i class="fa fa-shopping-cart has-circle"></i></a>
-                                     <div class="sub-nav cart-content">
-                                         <ul class="product-list">
-                                             <li class="empty">No products in the cart.</li>
-                                         </ul>
-                                         <hr>
-                                         <div class="st-table">
-                                             <div class="cart-action">
-                                                 <a href="woocommerce-shopping-cart.html" class="btn-view-cart btn btn-sm style4"><i class="fa fa-shopping-cart"></i>View Cart</a>
-                                             </div>
-                                             <div class="cart-price">Total: <span class="total-price">$00.0</span></div>
-                                         </div>
-                                     </div>
-                                     <div class="sub-nav cart-content">
-                                         <ul class="product-list product-list-widget">
-                                             <li>
-                                                 <div class="product-image">
-                                                     <a href="#"><img alt="" src="http://placehold.it/58x63"></a>
-                                                 </div>
-                                                 <div class="product-content">
-                                                     <a href="#" class="product-title">Everyday Scoop Neck Cami</a>
-                                                     <span class="product-price">$18.99</span>
-                                                 </div>
-                                             </li>
-                                             <li>
-                                                 <div class="product-image">
-                                                     <a href="#"><img alt="" src="http://placehold.it/58x63"></a>
-                                                 </div>
-                                                 <div class="product-content">
-                                                     <a href="#" class="product-title">Easy Draped Cardigan</a>
-                                                     <span class="product-price">$23.58</span>
-                                                 </div>
-                                             </li>
-                                         </ul>
-                                         <hr>
-                                         <div class="st-table">
-                                             <div class="cart-action">
-                                                 <a href="woocommerce-shopping-cart.html" class="btn-view-cart btn btn-sm style4"><i class="fa fa-shopping-cart"></i>View Cart</a>
-                                             </div>
-                                             <div class="cart-price">Total: <span class="total-price">$42.57</span></div>
-                                         </div>
-                                     </div>
-                                 </li>-->
-
                                 <li class="mini-cart">
                                     <div id="lang">
 

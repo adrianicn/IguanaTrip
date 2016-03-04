@@ -252,14 +252,13 @@ class OperadorRepository extends BaseRepository
                                                                             'id_canton'=>$inputs['id_canton'],
                                                                             'como_llegar1'=>$inputs['como_llegar1'],
                                                                             'como_llegar2'=>$inputs['como_llegar2'],
-                                                                            
                                                                             'fecha_ingreso' => $inputs['fecha_ingreso'],
                                                                              'fecha_fin' => $inputs['fecha_fin'],
                                                                             'id_parroquia'=>$inputs['id_parroquia']                                                                            
 									]);
 	}
 	
-	public function storageUsuarioServiciosMini(  $inputs )
+	public function storageUsuarioServiciosMini($inputs)
 	{
 		$usuarioServicio = new $this->usuarioServicio;
 				

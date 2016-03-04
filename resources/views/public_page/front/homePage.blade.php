@@ -196,8 +196,8 @@
                             <h2 class="box-title color-white">{{ trans('publico/labels.label30')}}</h2>
                         </div>
                         <div class="features-icon-slider owl-carousel box-lg" data-items="6">
-                            <a href="#" class="feature-icon"><i class="fa fa-cutlery"></i><div style="alignment-baseline: central">Alimentación y bebidas</div></a>
-                            <a href="#" class="feature-icon"><i class="fa fa-bed"></i><div style="alignment-baseline: central">Hospedaje</div></a>
+                            <a href="{!!asset('/tokenDz$rip')!!}/1"  onclick="$('.parallax').LoadingOverlay('show')" class="feature-icon"><i class="fa fa-cutlery"></i><div style="alignment-baseline: central">Alimentación y bebidas</div></a>
+                            <a href="{!!asset('/tokenDz$rip')!!}/2"  onclick="$('.parallax').LoadingOverlay('show')" class="feature-icon"><i class="fa fa-bed"></i><div style="alignment-baseline: central">Hospedaje</div></a>
                             <a href="#" class="feature-icon"><i class="fa fa-suitcase"></i><div style="alignment-baseline: central">Agencia de viajes</div></a>
                             <a href="#" class="feature-icon"><i class="fa fa-beer"></i><div style="alignment-baseline: central">Entretenimiento</div></a>
                             <a href="#" class="feature-icon"><i class="fa fa-bus"></i><div style="alignment-baseline: central">Transporte</div></a>

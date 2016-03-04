@@ -233,6 +233,7 @@ Route::get('registerMobile', ['as' => 'registerMobile', 'uses' => 'ServicioContr
 
 /*Rutas para la parte publica del sistema*/
 Route::post('likesSat/{id_atraccion}', ['as' => 'likesS', 'uses' =>'HomePublicController@postLikesS']);
+Route::post('filterParameters', ['as' => 'filtersCategoria', 'uses' =>'HomePublicController@postFiltersCategoria']);
 
 Route::get('/publico', ['as' => 'publico', 'uses' => 'HomePublicController@getHome']);
 Route::get('/getRegiones', ['as' => 'regiones', 'uses' => 'HomePublicController@getRegiones']);
@@ -249,8 +250,13 @@ Route::get('/tokenDc$rip/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => '
 
 Route::get('/tokenDc$ripT/{id_atraccion}/{id_catalogo}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getCatalogoDescripcion']);
 Route::get('/getCatalogosServicios/{id_atraccion}/{id_catalogo}', ['as' => 'catalogoServicios', 'uses' => 'HomePublicController@getCatalosoServicios']);
+Route::get('/getSearchCatalogosServicios/{id_catalogo}/{ciudad}', ['as' => 'SearchcatalogoServicios', 'uses' => 'HomePublicController@getCatalosoServiciosSearch']);
+
+
 Route::get('/tokenDc$ripPromo/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getPromocionesAtraccion']);
 Route::get('/tokenDc$ripEvent/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getEventosAtraccion']);
+
+Route::get('/tokenDz$rip/{id_catalogo}', ['as' => 'searchCat', 'uses' => 'HomePublicController@getSearchHomeCatalogo']);
 
 Route::get('/getCercanosIntern/{id_atraccion}/{id_provincia}/{id_canton}/{id_parroquia}', ['as' => 'topPlaces', 'uses' => 'HomePublicController@getCercanosIntern']);
 Route::get('/getLikesA/{id_atraccion}', ['as' => 'getLikes', 'uses' => 'HomePublicController@getLikesSatisf']);
