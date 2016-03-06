@@ -431,9 +431,145 @@ class PublicServiceRepository extends BaseRepository {
     
     
     
+    //Entrega el arreglo de los catalogos según la localización padre
+    public function getBusquedaInicialCatalogoPadre($catalogo, $ubicacion, $page_now, $page_stoped, $take, $pagination) {
+
+        /* Se despliegan los eventos, promociones e itinerarios de los alrededores de la ubicación establecida
+
+         * Eventos o Actividades: son los eventos macro independientes de la tabla usuario_servicio catalogo 5
+         * Eventos dependientes: son los eventos dependientes de un usuario_ servicio tabla eventos
+         * Promociones: promociones dependientes del usuario_ servicio
+         * Itinerarios: Igual
+         *          */
+
+
+        if ($ubicacion != "") {
+
+
+
+          $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.nombre', '=', $ubicacion)
+                            ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion)
+                            ->orWhere('ubicacion_geografica.nombre', 'like', $ubicacion . "%")
+                            ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion . "%")
+                            ->select('ubicacion_geografica.*')->first();
+        }
+        ///Si la $ubicacion es null
+        else {
+            $ubicGeo = null;
+        }
+        
+        if ($ubicGeo == null) {
+            $eventos = DB::table('usuario_servicios')
+                            ->where('usuario_servicios.estado_servicio', '=', '1')
+                    ->where('usuario_servicios.id_catalogo_servicio', '=', $catalogo)
+                            
+                            ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                            ->select('usuario_servicios.id')
+                            ->orderBy('usuario_servicios.num_visitas', 'desc')
+                            ->take($take)->get();
+        } else {
+
+
+            $eventos = DB::table('usuario_servicios')
+                            
+                               ->where(function($query)  use ($ubicGeo) {
+                                $query->orWhere('usuario_servicios.id_parroquia', '=', $ubicGeo->idUbicacionGeograficaPadre)
+                                ->orWhere('usuario_servicios.id_provincia', '=', $ubicGeo->idUbicacionGeograficaPadre)
+                                 ->orWhere('usuario_servicios.id_canton', '=', $ubicGeo->idUbicacionGeograficaPadre);
+                            })
+                            ->where('usuario_servicios.estado_servicio', '=', '1')
+                            ->where('usuario_servicios.id_catalogo_servicio', '=', $catalogo)
+                            ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                            ->select('usuario_servicios.id')
+                            ->orderBy('usuario_servicios.num_visitas', 'desc')
+                            ->take($take)->get();
+                            
+                             $eventosP = DB::table('usuario_servicios')
+                            
+                               ->where(function($query)  use ($ubicGeo) {
+                                $query->orWhere('usuario_servicios.id_parroquia', '=', $ubicGeo->id)
+                                ->orWhere('usuario_servicios.id_provincia', '=', $ubicGeo->id)
+                                 ->orWhere('usuario_servicios.id_canton', '=', $ubicGeo->id);
+                            })
+                            ->where('usuario_servicios.estado_servicio', '=', '1')
+                            ->where('usuario_servicios.id_catalogo_servicio', '=', $catalogo)
+                            ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                            ->select('usuario_servicios.id')
+                            ->orderBy('usuario_servicios.num_visitas', 'desc')
+                            ->take($take)->get();
+        }
+
+
+        if ($eventos != null) {
+            $array = array();
+            $array1 = array();
+
+            foreach ($eventos as $to) {
+                $imagenes = DB::table('images')
+                        ->where('images.id_auxiliar', '=', $to->id)
+                        ->where('estado_fotografia', '=', '1')
+                        ->where('id_catalogo_fotografia', '=', '1')
+                        ->select('images.id')
+                        ->first();
+
+                if ($imagenes != null)
+                    $array[] = $imagenes->id;
+            }
+            
+              foreach ($eventosP as $toK) {
+                $imagenesx = DB::table('images')
+                        ->where('images.id_auxiliar', '=', $toK->id)
+                        ->where('estado_fotografia', '=', '1')
+                        ->where('id_catalogo_fotografia', '=', '1')
+                        ->select('images.id')
+                        ->first();
+
+                if ($imagenesx != null)
+                    $array1[] = $imagenesx->id;
+            }
+
+            //$allCity = $this->getEventsDepCityAll($ubicacion, $take);
+            if($page_now!=null){
+            $currentPage = ($page_now - $page_stoped);
+            // You can set this to any page you want to paginate to
+            // Make sure that you call the static method currentPageResolver()
+            // before querying users
+            Paginator::currentPageResolver(function () use ($currentPage) {
+                return $currentPage;
+            });}
+
+            
+            
+            
+            
+       
+            $imagenes = DB::table('images')
+                    ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                    ->leftJoin('satisfechos_usuario_servicio', 'usuario_servicios.id', '=', 'satisfechos_usuario_servicio.id_usuario_servicio')
+                    ->where('estado_fotografia', '=', '1')
+                    ->whereIn('images.id', $array)
+                    ->whereNotIn('images.id', $array1)
+                    ->where('usuario_servicios.id_catalogo_servicio', '=', $catalogo)
+                    ->select(array('usuario_servicios.id as id_usr_serv', 'satisfechos_usuario_servicio.id_usuario_servicio', 'usuario_servicios.*', 'images.*', DB::raw('COUNT(satisfechos_usuario_servicio.id_usuario_servicio) as satisfechos')))
+                    ->groupby('usuario_servicios.id')
+                      ->orderBy('usuario_servicios.prioridad', 'desc')
+                    ->orderBy('usuario_servicios.num_visitas', 'desc')
+                    ->paginate($pagination);
+       
+
+            
+            
+
+            return $imagenes;
+        }
+        return null;
+    }
+    
+    
 
     
-    //Entrega el arreglo de los eventos según la localización
+    //Entrega el arreglo de los catalogos según la localización
     public function getBusquedaInicialCatalogo($catalogo, $ubicacion, $page_now, $page_stoped, $take, $pagination) {
 
         /* Se despliegan los eventos, promociones e itinerarios de los alrededores de la ubicación establecida
@@ -770,6 +906,8 @@ class PublicServiceRepository extends BaseRepository {
         else {
             return null;
         }
+        
+        
         if ($ubicGeo != null) {
             $eventos = DB::table('usuario_servicios')
                             ->join('promocion_usuario_servicio', 'usuario_servicios.id', '=', 'promocion_usuario_servicio.id_usuario_servicio')
@@ -847,7 +985,20 @@ class PublicServiceRepository extends BaseRepository {
         else {
             return null;
         }
-        if ($ubicGeo != null) {
+           if ($ubicGeo->id==1) {
+              $eventos = DB::table('usuario_servicios')
+                            ->join('eventos_usuario_servicios', 'usuario_servicios.id', '=', 'eventos_usuario_servicios.id_usuario_servicio')
+                               
+                            ->where('usuario_servicios.estado_servicio', '=', '1')
+                            ->where('eventos_usuario_servicios.estado_evento', '=', '1')
+                            ->where('fecha_hasta', '>=', "'" . Carbon::now() . "'")
+                            ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                            ->select('eventos_usuario_servicios.id')
+                            ->orderBy('usuario_servicios.num_visitas', 'desc')
+                            ->take($take)->get();
+        }
+        
+        if ($ubicGeo != null && $ubicGeo->id!=1) {
             $eventos = DB::table('usuario_servicios')
                             ->join('eventos_usuario_servicios', 'usuario_servicios.id', '=', 'eventos_usuario_servicios.id_usuario_servicio')
                                ->where(function($query)  use ($ubicGeo) {
@@ -928,9 +1079,20 @@ class PublicServiceRepository extends BaseRepository {
             return null;
         }
 
+        
 
+        
+        if ($ubicGeo->id==1) {
+            $eventos = DB::table('usuario_servicios')
+                            ->where('usuario_servicios.estado_servicio', '=', '1')
+                            ->whereIn('usuario_servicios.id_catalogo_servicio', [4])
+                            ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                            ->select('usuario_servicios.id')
+                            ->orderBy('num_visitas', 'desc')
+                            ->take($take)->get();
+        }
 
-        if ($ubicGeo != null) {
+        if ($ubicGeo != null && $ubicGeo->id!=1) {
             $eventos = DB::table('usuario_servicios')
                             ->where('usuario_servicios.estado_servicio', '=', '1')
                             ->whereIn('usuario_servicios.id_catalogo_servicio', [4])
@@ -1011,8 +1173,19 @@ class PublicServiceRepository extends BaseRepository {
         }
 
 
+           if ($ubicGeo->id==1) {
+            $eventos = DB::table('usuario_servicios')
+                            ->where('usuario_servicios.estado_servicio', '=', '1')
+                            ->whereIn('usuario_servicios.id_catalogo_servicio', [8])
+                            ->where('fecha_fin', '>=', "'" . Carbon::now() . "'")
+                            ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                   
+                            ->select('usuario_servicios.id')
+                            ->orderBy('num_visitas', 'desc')
+                            ->take($take)->get();
+        }
 
-        if ($ubicGeo != null) {
+        if ($ubicGeo != null && $ubicGeo->id!=1) {
             $eventos = DB::table('usuario_servicios')
                             ->where('usuario_servicios.estado_servicio', '=', '1')
                             ->whereIn('usuario_servicios.id_catalogo_servicio', [8])

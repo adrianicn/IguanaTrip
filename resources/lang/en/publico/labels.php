@@ -73,6 +73,8 @@ return [
     'label67' => 'Apply filter',	
     'label68' => 'Filter by facilities',
     'label69' => 'Filter By Price',
+    'label70' => 'Recommend +1',
+    
     
     'message' => 'Your message',
     

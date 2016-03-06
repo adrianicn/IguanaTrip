@@ -1903,6 +1903,15 @@ ul.filter-categories > li li:last-child {
   line-height: normal;
   padding-right: 20px;
 }
+
+.main-mini-search-form span {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    margin-top: -17px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
 .main-mini-search-form button {
   background: none;
   border: none;

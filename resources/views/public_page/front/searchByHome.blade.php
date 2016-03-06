@@ -126,7 +126,7 @@
                             
                                 <div class="search-box">
                                     <input type="text" placeholder="Search" name="searchCity" value="{!!$location->city!!}" class="searchCity">
-                                    <button type="submit" ><i class="fa fa-search"></i></button>
+                                    <span><i class="fa fa-search"></i></span>
                                 </div>
                             
                         </div>
@@ -602,11 +602,13 @@ jQuery(document).ready(function ($) {
             
               
             $(".fa-search").click(function () {
+                window.current_pageSeCat=0;
                 var valor=$(".searchCity ").val();
                 GetDataAjaxSearchCatogories("{!!asset('/getSearchCatalogosServicios')!!}/{!!$catalogo->id_catalogo_servicios!!}/"+valor);
             });
             
                     $( ".searchCity" ).change(function() {
+                        window.current_pageSeCat=0;
                 var valor=$(".searchCity ").val();
                 GetDataAjaxSearchCatogories("{!!asset('/getSearchCatalogosServicios')!!}/{!!$catalogo->id_catalogo_servicios!!}/"+valor);
 
@@ -616,13 +618,17 @@ $('.searchCity').keypress(function (e) {
  var key = e.which;
  if(key == 13)  // the enter key code
   {
+      window.current_pageSeCat=0;
       var valor=$(".searchCity ").val();
                 GetDataAjaxSearchCatogories("{!!asset('/getSearchCatalogosServicios')!!}/{!!$catalogo->id_catalogo_servicios!!}/"+valor);
   }
 }); 
             </script>
 <script>
- 
+   $(".moreImg").click(function () {
+                var valor=$(".searchCity ").val();
+                GetDataAjaxSearchCatogoriesApp("{!!asset('/getSearchCatalogosServicios')!!}/{!!$catalogo->id_catalogo_servicios!!}/"+valor);
+            });
 
           
 

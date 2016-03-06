@@ -402,24 +402,22 @@ $gestion->saveVisita($id_atraccion);
     public function getCatalosoServiciosSearch(Request $request, PublicServiceRepository $gestion, $id_catalogo,$ciudad ) {
         //
 
-        $busquedaInicial = $gestion->getBusquedaInicialCatalogo($id_catalogo,$ciudad,null,null,1,100);
+        $busquedaInicial = $gestion->getBusquedaInicialCatalogo($id_catalogo,$ciudad,null,null,100,1);
         
-       
+        
+       $busquedaInicialP=null;
 
-/*
+        if($busquedaInicial!=null)
+        {
+            if (Input::get('page') > $busquedaInicial->currentPage()) {
 
-        if ($atraccion->id_provincia != 0) {
-
-
-            if (Input::get('page') > $catalogo->currentPage()) {
-
-                $catalogo2 = $gestion->getCatalogoDetailsProvincia($atraccion, $id_catalogo, $catalogo1);
-                $catalogo = $gestion->getDetailsServiciosAtraccion($catalogo2, Input::get('page'), $catalogo->currentPage(), 1);
+                $busquedaInicialP = $gestion->getBusquedaInicialCatalogoPadre($id_catalogo,$ciudad, Input::get('page'), $busquedaInicial->currentPage(), 100,1);                
+                
             }
-        }
-*/
+        }       
 
-        $view = View::make('public_page.partials.searchcategory', array('catalogo' => $busquedaInicial));
+
+        $view = View::make('public_page.partials.searchcategory', array('catalogo' => $busquedaInicial,'catalogo2' => $busquedaInicialP));
 
         if ($request->ajax()) {
             //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
@@ -598,7 +596,7 @@ $gestion->saveVisita($id_atraccion);
           $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
         
-      return $formFields;
+      
         
         //obtengo los servicios ya almacenados de la bdd
         

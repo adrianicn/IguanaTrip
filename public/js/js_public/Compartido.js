@@ -416,6 +416,35 @@ function GetDataAjaxCloseIntern(url) {
 
 
 
+window.current_pageSeCatApp=1;
+
+function GetDataAjaxSearchCatogoriesApp(url) {
+    $(".Searchcategorias").LoadingOverlay("show");
+    $.ajax({
+        type: 'GET',
+        url: url,
+            data:{
+            'page': window.current_pageSeCatApp + 1 // you might need to init that var on top of page (= 0)
+            },
+        dataType: 'json',
+        success: function (data) {
+            window.current_pageSeCatApp=current_pageSeCatApp+1;
+            $(".Searchcategorias").LoadingOverlay("hide", true);
+            $(".Searchcategorias").append(data.Searchcategorias);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
 window.current_pageSeCat=0;
 
 function GetDataAjaxSearchCatogories(url) {
@@ -428,9 +457,9 @@ function GetDataAjaxSearchCatogories(url) {
             },
         dataType: 'json',
         success: function (data) {
-            window.current_pageCat=current_pageSeCat+1;
+            window.current_pageSeCat=current_pageSeCat+1;
             $(".Searchcategorias").LoadingOverlay("hide", true);
-            $(".Searchcategorias").append(data.Searchcategorias);
+            $(".Searchcategorias").html(data.Searchcategorias);
 
 
         },
@@ -600,6 +629,44 @@ $.ajax({
 
 
 //retorna un mensaje despues de ejecutar la logica del controller
+function AjaxContainerRetrunBurnURLikes($urlS,$formulario, $id, $load) {
+    
+    $(".".$load).LoadingOverlay("show");
+
+
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize() + '&ids=' + $id;
+    
+    var url =$urlS + $id;
+    var posting = $.post(url, {formData: data});
+    
+    posting.done(function (data) {
+        
+        if (data.fail) {
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#" + $formulario).LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+        
+
+        }
+        if (data.success) {
+            $(".".$load).LoadingOverlay("hide", true);
+            GetLikes("/IguanaTrip/public/getLikesA/"+$formulario);
+        
+
+
+        } //success
+    }); //done
+
+}
+
+
+//retorna un mensaje despues de ejecutar la logica del controller
 function AjaxContainerRetrunBurnURL($urlS,$formulario, $id, $load) {
     
     $(".".$load).LoadingOverlay("show");
@@ -611,7 +678,7 @@ function AjaxContainerRetrunBurnURL($urlS,$formulario, $id, $load) {
     
     var url =$urlS + $id;
     var posting = $.post(url, {formData: data});
-    alert(url);
+    
     posting.done(function (data) {
         
         if (data.fail) {
