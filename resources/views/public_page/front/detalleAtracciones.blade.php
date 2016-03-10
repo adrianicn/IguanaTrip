@@ -121,14 +121,21 @@
                                             @endforeach
                                      
                                     </div>
-                                    
+                               <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
                                       <div class="social-wrap">
                                         <label>Share with friends</label>
                                         <div class="social-icons">
-                                            <a href="#" class="social-icon"><i class="fa fa-twitter has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
+                                            <!--<a href="#" class="social-icon"><i class="fa fa-twitter has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
                                             <a href="#" class="social-icon"><i class="fa fa-facebook has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                            <a href="#" class="social-icon"><i class="fa fa-google-plus has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                            
+                                            <a href="#" class="social-icon"><i class="fa fa-google-plus has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>-->
+                                            <div class="fb-share-button" data-href="http://iguanatrip.com" data-layout="button_count"></div>
                                         </div>
                                     </div>
                                     
@@ -153,9 +160,27 @@
                                         </span>
                                     </div>
                                     
-                                    @if($provincia!=null)
-                                    <span class="product-price box">{!!$provincia->nombre!!}</span>
+                                    @if($provincia!=null )
+                                     @if($canton!=null)
+                                     @if($parroquia!=null)
+                                
+                                       <span class="product-price box">{!!$provincia->nombre!!}-{!!$canton->nombre!!}-{!!$parroquia->nombre!!}</span>
+                                    
+                                       
+                                       @else
+                                       <span class="product-price box">{!!$provincia->nombre!!}-{!!$canton->nombre!!}</span>
+                                            @endif
+                                     @else
+                                      <span class="product-price box">{!!$provincia->nombre!!}</span>
+                                
+                                  
+                                @endif
+                                    
                                     @endif
+                                    
+                                     
+                             
+                                
                                     @if($atraccion->id_catalogo_servicio==1)
                                     <img src="{{ asset('img/ic_serv/comida_bebida.png')}}" title="Alimentación y bebidas" alt="alimentacion">
                                     @elseif($atraccion->id_catalogo_servicio==2)
@@ -519,13 +544,20 @@
                         
                         
                         <div class="widget box">
-                            <h4>Join the commuinity</h4>
+                            <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
                             <ul class="product-list-widget">
                                 
                                 
                                 <li>
                                   
-                                    
+                                    <div class="fb-page" data-href="https://www.facebook.com/IWanaTrip-1631331070450595/?fref=ts&amp;ref=br_tf" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"></div>
                                     
                                     <div class="product-content">
                                     
@@ -535,19 +567,7 @@
                                         
                                         <span>
                                              
-                        <div class="text-box newsletter-box">
-                            <form>
-                                <h1></h1>
-                                
-                                <p class="skin-color">Enter your details to get started</p>
-                                <div class="form-group">
-                                    <input type="text" class="input-text full-width" placeholder="Email address">
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-medium style1">Sign Up Now</button>
-                                </div>
-                            </form>
-                        </div>
+                       
                     
                                         </span>
                                     </div>

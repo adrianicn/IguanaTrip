@@ -475,6 +475,51 @@ function GetDataAjaxSearchCatogories(url) {
 }
 
 
+//Hace la logica y envia el div que se quiere queaparezca el loading page
+//funciona para parciales pequeños
+function AjaxContainerRegistroWithLoadFilter($formulario, $loadScreen) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+    });
+    $("."+$loadScreen).LoadingOverlay("show");
+
+    //event.preventDefault();
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize(),
+            url = $form.attr("action");
+    var posting = $.post(url, {formData: data});
+    posting.done(function (data) {
+        
+        if (data.fail) {
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+
+            $("."+$loadScreen).LoadingOverlay("hide", true);
+            //$('.rowerror').html(errorString);
+            $('.rowerrorM').html(errorString);
+
+        }
+        if (data.success) {
+            $("."+$loadScreen).LoadingOverlay("hide", true);
+            
+            $(".Searchcategorias").html(data.sections.Searchcategorias);
+
+            //  $('#containerbase').empty();
+            // $('#containerbase').html(data.html);
+
+        } //success
+
+
+
+    });
+}
+
+
 window.current_pageCat=0;
 
 function GetDataAjaxCatogories(url) {

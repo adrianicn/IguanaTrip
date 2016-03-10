@@ -594,7 +594,41 @@ $gestion->saveVisita($id_atraccion);
 
         
           $inputData = Input::get('formData');
-        parse_str($inputData, $formFields);
+          parse_str($inputData, $formFields);
+         $arrayFiltro = array();
+        //obtengo los servicios ya almacenados de la bdd
+        
+        
+        foreach ($formFields as $key => $value) {
+            //verifica si el arreglo de parametros es un catalogo
+            if (strpos($key, 'act_') !== False) {
+                $arrayFiltro[] = str_replace("act_","",$key);
+                
+                
+            }
+        }
+
+        
+        $busquedaInicial = $gestion->getBusquedaInicialCatalogoFiltros($formFields['catalogo'],$formFields['searchCity'],$arrayFiltro,$formFields['min_price_i'],$formFields['max_price_i'],null,null,100,1);
+        
+        
+       $busquedaInicialP=null;
+
+         
+
+
+        $view = View::make('public_page.partials.searchcategory', array('catalogo' => $busquedaInicial,'catalogo2' => $busquedaInicialP));
+
+        if ($request->ajax()) {
+            //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
+            $sections = $view->rendersections();
+            
+            return response()->json(array('success' => true, 'sections' => $sections));
+            //return  Response::json($sections['contentPanel']); 
+        }
+      
+
+        
         
       
         

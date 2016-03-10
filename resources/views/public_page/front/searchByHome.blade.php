@@ -121,6 +121,7 @@
                     <div class="sidebar col-sm-4 col-md-3">
                         <div class="widget box">
                             <h4>{{ trans('publico/labels.label66')}}</h4>
+                            <input type="hidden"  class="id_usuario_servicio" name="catalogo" value="{!!$catalogo->id_catalogo_servicios!!}">
                              
                         <div class="main-mini-search-form full-width box">
                             
@@ -186,7 +187,7 @@
                         </div>
                         <div class="post-pagination">
                             <div class="text-center">
-                                <a  class="btn style4 hover-blue load-more filter" onclick="AjaxContainerRegistroWithLoad('filter_Category','content')">{{ trans('publico/labels.label67')}}</a>
+                                <a  class="btn style4 hover-blue load-more filter" onclick="AjaxContainerRegistroWithLoadFilter('filter_Category','Searchcategorias')">{{ trans('publico/labels.label67')}}</a>
                                 
                             </div>
                         </div>
@@ -2171,8 +2172,8 @@ $('.searchCity').keypress(function (e) {
             slide: function( event, ui ) {
                 sjq(".min-price-label").html( "$" + ui.values[ 0 ]);
                 sjq(".max-price-label").html( "$" + ui.values[ 1 ]);
-                sjq(".min_price_i").val( "$" + ui.values[ 0 ]);
-                sjq(".max_price_i").val( "$" + ui.values[ 1 ]);
+                sjq(".min_price_i").val(  ui.values[ 0 ]);
+                sjq(".max_price_i").val(  ui.values[ 1 ]);
             }
         });
         sjq(".min-price-label").html( "$" + sjq("#price-range-bar").slider( "values", 0 ));
