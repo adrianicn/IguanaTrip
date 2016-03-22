@@ -3549,8 +3549,7 @@ ul.filter-categories > li li:last-child {
   }
   #header.header-sticky .logo{
     background-image: url("../../img/index-logo.png");
-    width: 200px;
-    alignment-adjust: middle;
+    width: 300px;
 }
 
 }
@@ -3670,7 +3669,7 @@ ul.filter-categories > li li:last-child {
 
 /* 3.3. Page Title Container ~~~~~~~~~~~~~~~~~~~~~~~ */
 .page-title-container {
-  background: url(../images/inner/style1-pattern.png) repeat;
+  background-color:white;
   position: relative;
   overflow: visible;
 }

@@ -607,7 +607,35 @@ function GetReview(url) {
 }
 
 
+function AjaxContainerRegistroLoadF($formulario,$load) {
+    $("."+$load).LoadingOverlay("show");
+    var $form = $('#' + $formulario),
+            data = $form.serialize(),
+            url = $form.attr("action");
+    
+    var posting = $.post(url, {formData: data});
+    
+    posting.done(function (data) {
+        if (data.fail) {
+            
+            $.each(data.errors, function (key, value) {
+                alert(value);
+            });
+            
+            $("."+$load).LoadingOverlay("hide", true);
 
+        }
+        if (data.success) {
+            alert("Gracias por tu review, se ha enviado un correo electrónico a tu email para verificación ");
+            $("."+$load).LoadingOverlay("hide", true);
+              $('.var_comment').css( "display","block" );
+            
+        } //success
+
+
+
+    });
+}
 
 function AjaxContainerRegistro($formulario) {
     $(".btn-compare").LoadingOverlay("show");

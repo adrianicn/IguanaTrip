@@ -287,6 +287,7 @@ class ServicioController extends Controller {
                     'como_llegar2_2' => $formFields['como_llegar2_2'],
                     'como_llegar2' => $formFields['como_llegar2'],
                     'fecha_ingreso' => $formFields['fecha_ingreso'],
+            'horario' => $formFields['horario'],
                     'fecha_fin' => $formFields['fecha_fin']
                 
         );

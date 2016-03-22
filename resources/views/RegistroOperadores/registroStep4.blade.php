@@ -41,6 +41,7 @@ $usuarioServicio->id_canton = '';
 $usuarioServicio->id_parroquia = '';
 $usuarioServicio->como_llegar1 = '';
 $usuarioServicio->como_llegar2 = '';
+$usuarioServicio->horario = '';
 
 $usuarioServicio->id_usuario_operador = '';
 $usuarioServicio->id_padre = '';
@@ -76,6 +77,7 @@ $usuarioServicio->id_parroquia = $detalles->id_parroquia;
 $usuarioServicio->como_llegar1 = $detalles->como_llegar1;
 $usuarioServicio->como_llegar2 = $detalles->como_llegar2;
 $usuarioServicio->id_usuario_operador = $detalles->id_usuario_operador;
+$usuarioServicio->id_usuario_operador = $detalles->horario;
 
 
 $usuarioServicio->como_llegar1_1 = $detalles->como_llegar1_1;
@@ -178,10 +180,16 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::label('direccion_servicio_1', 'Direccion Servicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
                     {!!Form::text('direccion_servicio', $usuarioServicio->direccion_servicio, array('class'=>'inputtext chng','placeholder'=>'Direccion del Servicio'))!!}
                 </div>
+                <div class="form-group-1">
+                    {!!Form::label('horarios', 'Horario atención', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
+                    {!!Form::text('horario', $usuarioServicio->horario, array("title"=>"Horario de atención",'class'=>'inputtext chng','placeholder'=>'Lunes a Viernes de 7AM a 8PM'))!!}
+                </div>
+                
                 <div id='provincias'>
                     @section('provincias')
                     @show
                 </div>
+                
                 <div class="form-group-1">
                     @include('reusable.maps', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
                 </div>   

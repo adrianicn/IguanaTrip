@@ -74,6 +74,12 @@ return [
     'label68' => 'Filter by facilities',
     'label69' => 'Filter By Price',
     'label70' => 'Recommend +1',
+    'label71' => 'Leave a review',
+    'label72' => 'More reviews',
+    
+    'label73' => 'Price from: ',
+    'label74' => 'Price to: ',
+    'label75' => 'Schedule: ',
     
     
     'message' => 'Your message',

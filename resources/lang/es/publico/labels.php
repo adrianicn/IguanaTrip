@@ -72,6 +72,8 @@ return [
     'label68' => 'Filtrar por instalaciones',	
     'label69' => 'Filtrar por precio',
     'label70' => 'Recomendar +1',
+    'label71' => 'Deja un review',
+    'label72' => 'Más reviews',
     'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

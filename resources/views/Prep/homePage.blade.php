@@ -15,33 +15,33 @@
         <meta name="author" content="iWanaTrip team">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Theme Styles -->
-        <link rel="stylesheet" href="{{ asset('public_components/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('public_components/css/font-awesome.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('public_components/search_inbox/css/default.css')}}">
-        <link rel="stylesheet" href="{{ asset('public_components/search_inbox/css/component.css')}}">
-     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('public/public_components/search_inbox/css/default.css')}}">
+        <link rel="stylesheet" href="{{ asset('public/public_components/search_inbox/css/component.css')}}">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,400italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Dosis:400,300,500,600,700' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="{{ asset('public_components/css/animate.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.carousel.css')}}" media="screen" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.transitions.css')}}" media="screen" />
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/animate.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/public_components/components/owl-carousel/owl.carousel.css')}}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/public_components/components/owl-carousel/owl.transitions.css')}}" media="screen" />
         <!-- Magnific Popup core CSS file -->
-        <link rel="stylesheet" href="{{ asset('public_components/components/magnific-popup/magnific-popup.css')}}"> 
-        <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/revolution_slider/css/settings.css')}}" media="screen" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/revolution_slider/css/style.css')}}" media="screen" />
+        <link rel="stylesheet" href="{{ asset('public/public_components/components/magnific-popup/magnific-popup.css')}}"> 
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/public_components/components/revolution_slider/css/settings.css')}}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/public_components/components/revolution_slider/css/style.css')}}" media="screen" />
 
         <!-- Main Style -->
-        <link id="main-style" rel="stylesheet" href="{{ asset('public_components/css/style.css')}}">
+        <link id="main-style" rel="stylesheet" href="{{ asset('public/public_components/css/style.css')}}">
 
         <!-- Updated Styles -->
-        <link rel="stylesheet" href="{{ asset('public_components/css/updates.css')}}">
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/updates.css')}}">
 
         <!-- Custom Styles -->
-        <link rel="stylesheet" href="{{ asset('public_components/css/custom.css')}}">
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/custom.css')}}">
 
         <!-- Responsive Styles -->
-        <link rel="stylesheet" href="{{ asset('public_components/css/responsive.css')}}">
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/responsive.css')}}">
 
         <!-- CSS for IE -->
         <!--[if lte IE 9]>
@@ -77,13 +77,13 @@
                             <div  data-bgfit="cover" style="width:100%;height:100%;" class="slotholder">
                                 <div style="background-color: transparent; 
                                      background-repeat: no-repeat; 
-                                     background-image: url('{{ asset('img/index-fondo.jpg')}}'); 
+                                     background-image: url('{{ asset('public/img/index-fondo.jpg')}}'); 
                                      background-size: cover; 
                                      background-position: center center;
                                      width: 100%; height: 100%; opacity: 1; 
                                      visibility: inherit;" 
-                                     data-src="{{ asset('images/backgrounds/gradient.png')}}"
-                                     src="{{ asset('img/index-rodelas.png')}}" 
+                                     data-src="{{ asset('public/images/backgrounds/gradient.png')}}"
+                                     src="{{ asset('public/img/index-rodelas.png')}}" 
                                      data-bgrepeat="no-repeat" 
                                      data-bgposition="center center" data-bgfit="cover" 
                                      class="tp-bgimg defaultimg">
@@ -126,7 +126,7 @@
                                  data-splitin="none" data-easing="Power3.easeInOut"
                                  data-start="1000" data-speed="300" data-voffset="-79" 
                                  data-y="35" data-x="-280" class="tp-caption sfl fadeout start">
-                                <img alt="" src="{{ asset('img/index-logo.png')}}" >
+                                <img alt="" src="{{ asset('public/img/index-logo.png')}}" >
                             </div>
 
                             @endif
@@ -142,7 +142,6 @@
                                     <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" type="text" value="" name="search" id="search">
                                     @else
                                     <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" style="font-size: 12px;" type="text" value="" name="search" id="search">
-                                    
                                     @endif
 
                                     <input class="sb-search-submit" type="submit" value="">
@@ -164,10 +163,9 @@
                 <div class="container">
                     <div class="heading-box col-md-10 col-lg-8">
                         <h2 class="box-title">{{ trans('publico/labels.label61')}} <em class="skin-color">{{ trans('publico/labels.label62')}} </em> {{ trans('publico/labels.label63')}}
-                        </h2>
-                        <br>                        
-                        
-                     <h2>
+                            
+                    
+                              <h2>
                            <div >
                             
                                 <div class="search-box">
@@ -176,9 +174,8 @@
                                 </div>
                             
                         </div>
-                          </h2>   
+                          </h2>  
                     </div>
-                     
                     <div id="main">
                         <div class="post-wrapper">
                            <div class="post-filters">
@@ -248,7 +245,7 @@
                         <div class="iso-container iso-col-4 style-fancy">
                                <div class="shortcode-banner style-animated iso-item  filter-all " >
                                     <article class="post">
-                                   <figure ><img src="{{ asset('img/ocio.jpg')}}" alt=""></figure>
+                                   <figure ><img src="{{ asset('public/img/ocio.jpg')}}" alt=""></figure>
                                      @if(session('device')!='mobile')
                                         <div class="shortcode-banner-inside" style=" width: 108%;">
                                             @else
@@ -266,7 +263,7 @@
                                 </div>
                                         <div class="shortcode-banner style-animated iso-item  filter-all " >
                                     <article class="post">
-                                   <figure ><img src="{{ asset('img/adventure.jpg')}}" alt=""></figure>
+                                   <figure ><img src="{{ asset('public/img/adventure.jpg')}}" alt=""></figure>
                                      @if(session('device')!='mobile')
                                         <div class="shortcode-banner-inside" style=" width: 108%;">
                                             @else
@@ -284,7 +281,7 @@
                                 </div>
                                         <div class="shortcode-banner style-animated iso-item  filter-all " >
                                     <article class="post">
-                                   <figure ><img src="{{ asset('img/rsz_quito.jpg')}}" alt=""></figure>
+                                   <figure ><img src="{{ asset('public/img/rsz_quito.jpg')}}" alt=""></figure>
                                      @if(session('device')!='mobile')
                                         <div class="shortcode-banner-inside" style=" width: 108%;">
                                             @else
@@ -302,7 +299,7 @@
                                 </div>
                                         <div class="shortcode-banner style-animated iso-item  filter-all " >
                                     <article class="post">
-                                   <figure ><img src="{{ asset('img/tour.jpg')}}" alt=""></figure>
+                                   <figure ><img src="{{ asset('public/img/tour.jpg')}}" alt=""></figure>
                                      @if(session('device')!='mobile')
                                         <div class="shortcode-banner-inside" style=" width: 108%;">
                                             @else
@@ -359,45 +356,45 @@
         </div>
 
         <!-- Javascript -->
-        {!! HTML::script('js/jquery.js') !!}
-        {!!HTML::script('js/js_public/Compartido.js') !!}
-        {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
-        {!!HTML::script('js/jquery.autocomplet.js') !!}
+        {!! HTML::script('public/js/jquery.js') !!}
+        {!!HTML::script('public/js/js_public/Compartido.js') !!}
+        {!!HTML::script('public/js/loadingScreen/loadingoverlay.min.js') !!}
+        {!!HTML::script('public/js/jquery.autocomplet.js') !!}
 
   
 
 
-        <script type="text/javascript" src="{{ asset('public_components/js/jquery-2.1.3.min.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('public_components/js/jquery.noconflict.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('public_components/js/modernizr.2.8.3.min.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('public_components/js/jquery-migrate-1.2.1.min.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('public_components/js/jquery-ui.1.11.2.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/js/jquery-2.1.3.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/js/jquery.noconflict.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/js/modernizr.2.8.3.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/js/jquery-migrate-1.2.1.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/js/jquery-ui.1.11.2.min.js')}}"></script>
 
         <!-- Twitter Bootstrap -->
-        <script type="text/javascript" src="{{ asset('public_components/js/bootstrap.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/js/bootstrap.min.js')}}"></script>
 
         <!-- Magnific Popup core JS file -->
-        <script type="text/javascript" src="{{ asset('public_components/components/magnific-popup/jquery.magnific-popup.min.js')}}"></script> 
+        <script type="text/javascript" src="{{ asset('public/public_components/components/magnific-popup/jquery.magnific-popup.min.js')}}"></script> 
 
         <!-- parallax -->
-        <script type="text/javascript" src="{{ asset('public_components/js/jquery.stellar.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/js/jquery.stellar.min.js')}}"></script>
 
         <!-- waypoint -->
-        <script type="text/javascript" src="{{ asset('public_components/js/waypoints.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/js/waypoints.min.js')}}"></script>
 
         <!-- Owl Carousel -->
-        <script type="text/javascript" src="{{ asset('public_components/components/owl-carousel/owl.carousel.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/components/owl-carousel/owl.carousel.min.js')}}"></script>
 
         <!-- load revolution slider scripts -->
-        <script type="text/javascript" src="{{ asset('public_components/components/revolution_slider/js/jquery.themepunch.tools.min.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('public_components/components/revolution_slider/js/jquery.themepunch.revolution.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/components/revolution_slider/js/jquery.themepunch.tools.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/components/revolution_slider/js/jquery.themepunch.revolution.min.js')}}"></script>
 
         <!-- plugins -->
-        <script type="text/javascript" src="{{ asset('public_components/js/jquery.plugins.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/js/jquery.plugins.js')}}"></script>
 
         <!-- load page Javascript -->
-        <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('public_components/js/revolution-slider.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/js/main.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('public/public_components/js/revolution-slider.js')}}"></script>
 
         <script>
             $(document).ready(function () {
@@ -415,9 +412,7 @@
             });
 
             
-   
-
-  $(".search-city").click(function () {
+            $(".search-city").click(function () {
             var valor=$("#ciudad").val();
                 window.current_page_e=1;
                 GetDataAjaxEventsIndbyCity("{!!asset('/getEventscloseToMe')!!}/"+valor+"?page=1");

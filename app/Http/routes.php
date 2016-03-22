@@ -234,6 +234,7 @@ Route::get('registerMobile', ['as' => 'registerMobile', 'uses' => 'ServicioContr
 /*Rutas para la parte publica del sistema*/
 Route::post('likesSat/{id_atraccion}', ['as' => 'likesS', 'uses' =>'HomePublicController@postLikesS']);
 Route::post('filterParameters', ['as' => 'filtersCategoria', 'uses' =>'HomePublicController@postFiltersCategoria']);
+Route::post('postReviews', ['as' => 'postReviews', 'uses' =>'HomePublicController@postReviews']);
 
 Route::get('/publico', ['as' => 'publico', 'uses' => 'HomePublicController@getHome']);
 Route::get('/getRegiones', ['as' => 'regiones', 'uses' => 'HomePublicController@getRegiones']);

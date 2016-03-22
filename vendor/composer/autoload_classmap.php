@@ -28,6 +28,7 @@ return array(
     'CreateSearchengineTable' => $baseDir . '/database/migrations/2015_12_20_131021_create_searchengine_table.php',
     'CreateServicioEstablecimientoUsuarioTable' => $baseDir . '/database/migrations/2015_11_09_104907_create_servicio_establecimiento_usuario_table.php',
     'CreateTagsTable' => $baseDir . '/database/migrations/2014_10_26_172631_create_tags_table.php',
+    'CreateTipoReviewsTable' => $baseDir . '/database/migrations/2016_03_10_004247_create_tipo_reviews_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'CreateUsuarioOperadoresTable' => $baseDir . '/database/migrations/2015_10_05_075711_create_usuario_operadores_table.php',
     'CreateUsuarioServiciosTable' => $baseDir . '/database/migrations/2015_11_01_122221_create_usuario_servicios_table.php',

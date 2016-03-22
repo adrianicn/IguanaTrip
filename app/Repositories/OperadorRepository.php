@@ -242,7 +242,7 @@ class OperadorRepository extends BaseRepository
 											'pagina_web'=>$inputs['pagina_web'],
 //											'nombre_comercial'=>$inputs['nombre_comercial'],
 											'tags'=>$inputs['tags'],
-//											'descuento_clientes'=>$inputs['descuento_clientes'],
+											'horario'=>$inputs['horario'],
 //											'tags_servicio'=>$inputs['tags_servicio'],
 //											'observaciones'=>$inputs['observaciones'],
 											'telefono'=>$inputs['telefono'],

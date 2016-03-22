@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
 use App\Repositories\PublicServiceRepository;
 use Input;
+use Validator;
 use Jenssegers\Agent\Agent;
 use Illuminate\Support\Facades\Session;
+use App\Models\Review_Usuario_Servicio;
 
 class HomePublicController extends Controller {
 
@@ -320,7 +322,7 @@ class HomePublicController extends Controller {
 
         Session::put('device', $desk);
 
-$gestion->saveVisita($id_atraccion);
+        $gestion->saveVisita($id_atraccion);
         $ImgItiner = null;
         $explore = null;
         $visitados = null;
@@ -329,7 +331,7 @@ $gestion->saveVisita($id_atraccion);
         $canton = null;
         $parroquia = null;
 
-
+        $tipoReviews = $gestion->getTiporeviews($id_atraccion);
         $atraccion = $gestion->getAtraccionDetails($id_atraccion);
         $imagenes = $gestion->getAtraccionImages($id_atraccion);
 
@@ -371,6 +373,8 @@ $gestion->saveVisita($id_atraccion);
                         ->with('provincia', $provincia)
                         ->with('parroquia', $parroquia)
                         ->with('servicios', $servicios)
+                        ->with('tipoReviews', $tipoReviews)
+
         ;
     }
 
@@ -395,29 +399,25 @@ $gestion->saveVisita($id_atraccion);
       }
       }
       : */
-    
-    
 
     //Obtiene los servicios por catalogo cercanos a la atraccion paginados
-    public function getCatalosoServiciosSearch(Request $request, PublicServiceRepository $gestion, $id_catalogo,$ciudad ) {
+    public function getCatalosoServiciosSearch(Request $request, PublicServiceRepository $gestion, $id_catalogo, $ciudad) {
         //
 
-        $busquedaInicial = $gestion->getBusquedaInicialCatalogo($id_catalogo,$ciudad,null,null,100,1);
-        
-        
-       $busquedaInicialP=null;
+        $busquedaInicial = $gestion->getBusquedaInicialCatalogo($id_catalogo, $ciudad, null, null, 100, 1);
 
-        if($busquedaInicial!=null)
-        {
+
+        $busquedaInicialP = null;
+
+        if ($busquedaInicial != null) {
             if (Input::get('page') > $busquedaInicial->currentPage()) {
 
-                $busquedaInicialP = $gestion->getBusquedaInicialCatalogoPadre($id_catalogo,$ciudad, Input::get('page'), $busquedaInicial->currentPage(), 100,1);                
-                
+                $busquedaInicialP = $gestion->getBusquedaInicialCatalogoPadre($id_catalogo, $ciudad, Input::get('page'), $busquedaInicial->currentPage(), 100, 1);
             }
-        }       
+        }
 
 
-        $view = View::make('public_page.partials.searchcategory', array('catalogo' => $busquedaInicial,'catalogo2' => $busquedaInicialP));
+        $view = View::make('public_page.partials.searchcategory', array('catalogo' => $busquedaInicial, 'catalogo2' => $busquedaInicialP));
 
         if ($request->ajax()) {
             //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
@@ -426,9 +426,7 @@ $gestion->saveVisita($id_atraccion);
             //return  Response::json($sections['contentPanel']); 
         }
     }
-    
-    
-    
+
     //Obtiene los servicios por catalogo cercanos a la atraccion paginados
     public function getCatalosoServicios(Request $request, PublicServiceRepository $gestion, $id_atraccion, $id_catalogo) {
         //
@@ -460,11 +458,9 @@ $gestion->saveVisita($id_atraccion);
         }
     }
 
-    
-    
     //Obtiene las descripcion de la atraccion elegida
-    public function getSearchHomeCatalogo(PublicServiceRepository $gestion,$id_catalogo) {
-        
+    public function getSearchHomeCatalogo(PublicServiceRepository $gestion, $id_catalogo) {
+
         $agent = new Agent();
 
         $desk = $device = $agent->isMobile();
@@ -474,25 +470,23 @@ $gestion->saveVisita($id_atraccion);
             $desk = "desk";
         }
         Session::put('device', $desk);
-        
+
 
         $catalogo = $gestion->getCatalogoDetail($id_catalogo);
         $actividades = $gestion->getExplorerbyCatalogo($id_catalogo);
         $servicios = $gestion->getServiciosAll();
-        $precio_minimo=$gestion->getMinPrice($id_catalogo);
-        
-        $precio_max=$gestion->getMaxPrice($id_catalogo);
+        $precio_minimo = $gestion->getMinPrice($id_catalogo);
+
+        $precio_max = $gestion->getMaxPrice($id_catalogo);
 
         return view('public_page.front.searchByHome')
-        ->with('actividades', $actividades)
-                ->with('servicios', $servicios)
-                ->with('precio_minimo', $precio_minimo)
-                ->with('precio_max', $precio_max)
-                ->with('catalogo', $catalogo);
-        
+                        ->with('actividades', $actividades)
+                        ->with('servicios', $servicios)
+                        ->with('precio_minimo', $precio_minimo)
+                        ->with('precio_max', $precio_max)
+                        ->with('catalogo', $catalogo);
     }
-    
-    
+
     //Obtiene las descripcion de la atraccion elegida
     public function getCatalogoDescripcion(PublicServiceRepository $gestion, $id_atraccion, $id_catalogo) {
         $agent = new Agent();
@@ -578,7 +572,7 @@ $gestion->saveVisita($id_atraccion);
         $likes = $gestion->getlikes($id_atraccion);
 
 
-        $view = View::make('public_page.partials.btnLike', array('likes' => $likes,'atraccion' => $id_atraccion));
+        $view = View::make('public_page.partials.btnLike', array('likes' => $likes, 'atraccion' => $id_atraccion));
 
         if ($request->ajax()) {
             //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
@@ -587,73 +581,119 @@ $gestion->saveVisita($id_atraccion);
             //return  Response::json($sections['contentPanel']); 
         }
     }
-    
-    
 
-      public function postFiltersCategoria(Request $request, PublicServiceRepository $gestion) {
+    public function postReviews(Request $request, PublicServiceRepository $gestion) {
+
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
 
         
-          $inputData = Input::get('formData');
-          parse_str($inputData, $formFields);
-         $arrayFiltro = array();
+        $validator = Validator::make($formFields, Review_Usuario_Servicio::$rules);
+        if ($validator->fails()) {
+            return response()->json(array(
+                        'fail' => true,
+                          'message' => $validator->messages()->first(),
+                        'errors' => $validator->getMessageBag()->toArray()
+            ));
+        } else {
+            
+            $verifyIp = $gestion->getReviewsIpEmail($formFields['id_atraccion'], $formFields['email_reviewer']);
+            
+            if($verifyIp==null){
+            $root_array = array();
+            //Arreglo de servicios prestados que vienen del formulario
+            foreach ($formFields as $key => $value) {
+                //verifica si el arreglo de parametros es un catalogo
+                if (strpos($key, 'review_score') !== false) {
+                    $root_array[$key] = $value;
+                }
+            }
+            
+            $save_array = array();
+            $codigo=str_random(30);
+              foreach ($root_array as $key1 => $value1) {
+                
+                $save_array['calificacion'] = $value1;
+                $save_array['nombre_reviewer'] = $formFields['nombre_reviewer'];
+                $save_array['email_reviewer'] = $formFields['email_reviewer'];
+                $save_array['id_usuario_servicio'] = $formFields['id_atraccion'];
+                $save_array['id_tipo_review'] = $formFields['id_tipo_review_'.substr($key1,13)];
+                $save_array['confirmation_rev_code'] = $codigo;
+                
+                $save_array['ip_reviewer']=$this->getIp();
+                
+              $gestion->storeNew($save_array);
+                
+            }
+            }
+
+return response()->json(array('success' => true));
+       
+        }
+    }
+
+    public function postFiltersCategoria(Request $request, PublicServiceRepository $gestion) {
+
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        $arrayFiltro = array();
         //obtengo los servicios ya almacenados de la bdd
-        
-        
+
+
         foreach ($formFields as $key => $value) {
             //verifica si el arreglo de parametros es un catalogo
             if (strpos($key, 'act_') !== False) {
-                $arrayFiltro[] = str_replace("act_","",$key);
-                
-                
+                $arrayFiltro[] = str_replace("act_", "", $key);
             }
         }
 
-        
-        $busquedaInicial = $gestion->getBusquedaInicialCatalogoFiltros($formFields['catalogo'],$formFields['searchCity'],$arrayFiltro,$formFields['min_price_i'],$formFields['max_price_i'],null,null,100,1);
-        
-        
-       $busquedaInicialP=null;
 
-         
+        $busquedaInicial = $gestion->getBusquedaInicialCatalogoFiltros($formFields['catalogo'], $formFields['searchCity'], $arrayFiltro, $formFields['min_price_i'], $formFields['max_price_i'], null, null, 100, 1);
 
 
-        $view = View::make('public_page.partials.searchcategory', array('catalogo' => $busquedaInicial,'catalogo2' => $busquedaInicialP));
+        $busquedaInicialP = null;
+
+
+
+
+        $view = View::make('public_page.partials.searchcategory', array('catalogo' => $busquedaInicial, 'catalogo2' => $busquedaInicialP));
 
         if ($request->ajax()) {
             //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
             $sections = $view->rendersections();
-            
+
             return response()->json(array('success' => true, 'sections' => $sections));
             //return  Response::json($sections['contentPanel']); 
         }
-      
 
-        
-        
-      
-        
+
+
+
+
+
         //obtengo los servicios ya almacenados de la bdd
-        
+
         return response()->json(array('success' => true));
     }
-    
+
     public function postLikesS(Request $request, PublicServiceRepository $gestion) {
 
-        
-          $inputData = Input::get('formData');
+
+        $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-        
-        $ip=$this->getIp();
-        $likesIP = $gestion->getlikesIp($formFields['ids'],$ip);
-        
-        if(count($likesIP)==0 || $likesIP==null)
-        {
-            $gestion->storeLikes($formFields['ids'],$ip);
+
+        $ip = $this->getIp();
+        $likesIP = $gestion->getlikesIp($formFields['ids'], $ip);
+
+        if (count($likesIP) == 0 || $likesIP == null) {
+            $gestion->storeLikes($formFields['ids'], $ip);
         }
-        
-        
+
+
         //obtengo los servicios ya almacenados de la bdd
-        
+
         return response()->json(array('success' => true));
     }
 

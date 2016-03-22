@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use App\Models\Satisfechos_Usuario_Servicio;
+use App\Models\Review_Usuario_Servicio;
 use App\Models\Usuario_Servicio;
 use Carbon\Carbon;
 
@@ -24,9 +25,11 @@ class PublicServiceRepository extends BaseRepository {
      */
     protected $satisfechos;
     protected $usuario_servicio;
+    protected $review;
     public function __construct() {
         $this->satisfechos = new Satisfechos_Usuario_Servicio();
         $this->usuario_servicio = new Usuario_Servicio();
+        $this->review = new Review_Usuario_Servicio();
         
     }
 
@@ -94,6 +97,20 @@ class PublicServiceRepository extends BaseRepository {
         }
 
         return $imagenesF;
+    }
+    
+       public function storeNew($inputs) {
+        $review = new $this->review;
+        $review->calificacion = trim($inputs['calificacion']);
+        $review->nombre_reviewer = trim($inputs['nombre_reviewer']);
+        $review->email_reviewer = trim($inputs['email_reviewer']);
+        $review->ip_reviewer = trim($inputs['ip_reviewer']);
+        $review->estado_review = '0';
+        $review->id_usuario_servicio = trim($inputs['id_usuario_servicio']);
+        $review->id_tipo_review = trim($inputs['id_tipo_review']);
+        $review->confirmation_rev_code = $inputs['confirmation_rev_code'];
+        $this->save($review);
+        return $review;
     }
 
     //Entrega el arreglo de los servicios más visitados por provincia
@@ -1250,6 +1267,7 @@ class PublicServiceRepository extends BaseRepository {
                     ->whereIn('images.id', $array)
                     ->where('estado_fotografia', '=', '1')
                     ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre','usuario_servicios.id as id_usuario_serviciox')
+                    ->orderBy('usuario_servicios.id_padre', 'desc')
                     ->orderBy('usuario_servicios.prioridad', 'desc')
                     ->orderBy('usuario_servicios.num_visitas', 'desc')
                     ->paginate($pagination);
@@ -1878,6 +1896,20 @@ class PublicServiceRepository extends BaseRepository {
         return $likes;
     }
 
+    
+       //Entrega el detalle de los likes por ip y por id
+    public function getReviewsIpEmail($id_atraccion, $email) {
+
+        $review = DB::table('reviews_usuario_servicio')
+                ->where('id_usuario_servicio', '=', $id_atraccion)
+                ->where('email_reviewer', '=', $email)
+                ->where('estado_review', '=', "1")
+                ->where('review_verificado', '=', "1")
+                
+                ->first();
+        return $review;
+    }
+
     //Actualiza el estado de la promocion
     public function storeUpdateLikes($inputs, $Promocion) {
 
@@ -1962,6 +1994,70 @@ class PublicServiceRepository extends BaseRepository {
 
         return $servicios;
     }
+    
+    /**
+	 * Create a new review instance.
+	 *
+	 * @param  array  $inputs
+	 * @param  int    $confirmation_code
+	 * @return App\Models\Review 
+	 */
+	public function store($inputs, $confirmation_code = null)
+	{
+		$rev = new $this->review;
+
+		if($confirmation_code) {
+			$rev->confirmation_rev_code = $confirmation_code;
+		} else {
+			$rev->review_verificado = 1;
+		}
+
+		$this->save($rev, $inputs);
+
+		return $user;
+	}
+        
+        /**
+	 * Save the User.
+	 *
+	 * @param  App\Models\User $user
+	 * @param  Array  $inputs
+	 * @return void
+	 */
+  	private function saveRev($rev, $inputs)
+	{		
+		if(isset($inputs['seen'])) 
+		{
+			$user->seen = $inputs['seen'] == 'true';		
+		} else {
+
+			$user->username = $inputs['username'];
+			$user->email = $inputs['email'];
+
+			if(isset($inputs['role'])) {
+				$user->role_id = $inputs['role'];	
+			} else {
+				$role_user = $this->role->where('slug', 'user')->first();
+				$user->role_id = $role_user->id;
+			}
+		}
+
+		$user->save();
+	}
+
+    
+    //Despliea todos lis tipos de revies para calificar
+    public function getTiporeviews($id_atraccion) {
+
+        $reviews = DB::table('tipo_reviews')
+                ->join('usuario_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'tipo_reviews.catalogo_servicio')
+                ->where('usuario_servicios.id', '=', $id_atraccion)
+                ->where('tipo_estado', '=', "1")
+                ->select('tipo_reviews.*')
+                ->get();
+
+        return $reviews;
+    }
 
     //Entrega el detalle de los servicios
     public function getReviews($id_atraccion) {
@@ -1969,6 +2065,7 @@ class PublicServiceRepository extends BaseRepository {
         $reviews = DB::table('reviews_usuario_servicio')
                 ->where('reviews_usuario_servicio.id_usuario_servicio', '=', $id_atraccion)
                 ->where('reviews_usuario_servicio.estado_review', '=', "1")
+                ->where('reviews_usuario_servicio.review_verificado', '=', "1")
                 ->select('reviews_usuario_servicio.*')
                 ->orderBy('created_at', 'desc')
                 ->paginate(1);

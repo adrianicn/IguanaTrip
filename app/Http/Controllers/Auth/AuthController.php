@@ -111,7 +111,7 @@ class AuthController extends Controller {
 
 
             //return redirect('/servicios')->with('user', $user->id)->withCookie($name)->withCookie($iden)->withCookie($email);
-            return redirect('/servicios')->with('user', $user->id);
+            return redirect('/myProfileOp')->with('user', $user->id);
         }
 
 

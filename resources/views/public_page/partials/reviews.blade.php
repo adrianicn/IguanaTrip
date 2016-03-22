@@ -1,17 +1,22 @@
 @section('review')
 
                 <link rel="stylesheet" href="{{ asset('public_components/css/animate.min.css')}}">
+@if(count($reviews)==0)
+<script>
+     
+    $('.moreReviews').css( "display","none" );
 
+
+    </script>
+@endif
 
                                                 @foreach ($reviews as $rev)
                                                 
                                                 <li class="comment">
                                                     <div class="author-img">
-                                                        @if($rev->tipo_review==1)
+                                                        
                                                         <span><img src="{{ asset('img/positivo.jpg')}}" alt=""></span>
-                                                        @else
-                                                        <span><img src="{{ asset('img/negativo.jpg')}}" alt=""></span>
-                                                        @endif
+                                                        
                                                     </div>
                                                     <div class="comment-content">
                                                         @if($rev->nombre_reviewer!="")
@@ -56,8 +61,6 @@ $('.btn-write-review').on('click', function() {
     </script>
     
     
-
-
 
 
     @endsection
