@@ -2089,6 +2089,15 @@ class PublicServiceRepository extends BaseRepository {
     //Entrega el detalle de los servicios
     public function getReviews($id_atraccion) {
 
+        $chuncks= DB::table('tipo_reviews')
+                ->join('usuario_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'tipo_reviews.catalogo_servicio')
+                ->where('usuario_servicios.id', '=', $id_atraccion)
+                ->where('tipo_reviews.tipo_estado', '=', "1")
+                ->select(array(DB::raw('COUNT(tipo_reviews.id) as cantidad')))
+                ->first();
+        
+        
+        
         $reviews = DB::table('reviews_usuario_servicio')
                 ->join('tipo_reviews', 'reviews_usuario_servicio.id_tipo_review', '=', 'tipo_reviews.id')
                 ->where('reviews_usuario_servicio.id_usuario_servicio', '=', $id_atraccion)
@@ -2097,7 +2106,7 @@ class PublicServiceRepository extends BaseRepository {
                 ->select('reviews_usuario_servicio.*','tipo_reviews.peso_review','tipo_reviews.tipo_review')
                 //->groupBy('nombre_reviewer')
                 ->orderBy('created_at', 'desc')
-                ->paginate(5);
+                ->paginate($chuncks->cantidad*2);
         
         
         return $reviews;

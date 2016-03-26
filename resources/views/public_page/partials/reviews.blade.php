@@ -19,7 +19,7 @@ $array[$x] = $reviews[$x]->confirmation_rev_code;
 @endfor
 
 <?php $totalCodigos = (array_unique($array)); 
-$y=0;
+
 ?>
 
 
