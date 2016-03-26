@@ -98,20 +98,6 @@ class PublicServiceRepository extends BaseRepository {
 
         return $imagenesF;
     }
-    
-       public function storeNew($inputs) {
-        $review = new $this->review;
-        $review->calificacion = trim($inputs['calificacion']);
-        $review->nombre_reviewer = trim($inputs['nombre_reviewer']);
-        $review->email_reviewer = trim($inputs['email_reviewer']);
-        $review->ip_reviewer = trim($inputs['ip_reviewer']);
-        $review->estado_review = '0';
-        $review->id_usuario_servicio = trim($inputs['id_usuario_servicio']);
-        $review->id_tipo_review = trim($inputs['id_tipo_review']);
-        $review->confirmation_rev_code = $inputs['confirmation_rev_code'];
-        $this->save($review);
-        return $review;
-    }
 
     //Entrega el arreglo de los servicios más visitados por provincia
     public function getVisitadosProvincia($id_provincia) {
@@ -1678,33 +1664,6 @@ class PublicServiceRepository extends BaseRepository {
         return $imagenes;
     }
 
-    
-      public function updateCodeReview($code) {
-        $review = new $this->review;
-        $review1 = $review::where('confirmation_rev_code', $code);
-                $review1->update(['review_verificado' =>'1']);
-        
-                $review1->update(['seen' =>'1']);
-                $review1->update(['estado_review' =>'1']);
-                $review1->update(['updated_at' =>\Carbon\Carbon::now()->toDateTimeString()]);
-        
-        
-        
-       
-    }
-    
-    
-        public function getRevCode($code) {
-        $review = new $this->review;
-        $review1 = $review::where('confirmation_rev_code', $code)
-                ->select('id_usuario_servicio')
-                ->first();
-                
-        return $review1;
-        
-        
-       
-    }
     //Obtiene las top n places de cada provincia
     public function getTopPlaces($n) {
 
@@ -1923,20 +1882,6 @@ class PublicServiceRepository extends BaseRepository {
         return $likes;
     }
 
-    
-       //Entrega el detalle de los likes por ip y por id
-    public function getReviewsIpEmail($id_atraccion, $email) {
-
-        $review = DB::table('reviews_usuario_servicio')
-                ->where('id_usuario_servicio', '=', $id_atraccion)
-                ->where('email_reviewer', '=', $email)
-                ->where('estado_review', '=', "1")
-                ->where('review_verificado', '=', "1")
-                
-                ->first();
-        return $review;
-    }
-
     //Actualiza el estado de la promocion
     public function storeUpdateLikes($inputs, $Promocion) {
 
@@ -2074,13 +2019,10 @@ class PublicServiceRepository extends BaseRepository {
 
     
     //Despliea todos lis tipos de revies para calificar
-    public function getTiporeviews($id_atraccion) {
+    public function getTiporeviews() {
 
         $reviews = DB::table('tipo_reviews')
-                ->join('usuario_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'tipo_reviews.catalogo_servicio')
-                ->where('usuario_servicios.id', '=', $id_atraccion)
                 ->where('tipo_estado', '=', "1")
-                ->select('tipo_reviews.*')
                 ->get();
 
         return $reviews;
@@ -2090,16 +2032,13 @@ class PublicServiceRepository extends BaseRepository {
     public function getReviews($id_atraccion) {
 
         $reviews = DB::table('reviews_usuario_servicio')
-                ->join('tipo_reviews', 'reviews_usuario_servicio.id_tipo_review', '=', 'tipo_reviews.id')
                 ->where('reviews_usuario_servicio.id_usuario_servicio', '=', $id_atraccion)
                 ->where('reviews_usuario_servicio.estado_review', '=', "1")
                 ->where('reviews_usuario_servicio.review_verificado', '=', "1")
-                ->select('reviews_usuario_servicio.*','tipo_reviews.peso_review','tipo_reviews.tipo_review')
-                //->groupBy('nombre_reviewer')
+                ->select('reviews_usuario_servicio.*')
                 ->orderBy('created_at', 'desc')
-                ->paginate(5);
-        
-        
+                ->paginate(1);
+
         return $reviews;
     }
 

@@ -5,24 +5,24 @@ namespace App\Jobs;
 use App\Jobs\Job;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Models\Review_Usuario_Servicio;
 use Illuminate\Contracts\Bus\SelfHandling;
-use App\Models\Invitaciones_Amigos;
 use Illuminate\Contracts\Mail\Mailer;
 
-class InviteFriendsMail extends Job implements SelfHandling
+class VerifyReview extends Job implements SelfHandling
 
 {
-    protected $invitacion;
+    protected $reviewU;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Invitaciones_Amigos $invitacion)
+    public function __construct(Review_Usuario_Servicio $reviewU)
     {
         //
-          $this->invitacion = $invitacion;
+          $this->reviewU = $reviewU;
     }
 
     /**
@@ -34,15 +34,15 @@ class InviteFriendsMail extends Job implements SelfHandling
     public function handle(Mailer $mailer)
     {
         $data = [
-            'title'  => "Invitación iWaNaTrip.com",
-            'nombrede'  => $this->invitacion->invitacion_de,
-            'nombrepara'   => $this->invitacion->invitacion_para,
-            
+            'title'  => trans('front/verify.ReviewEmail'),
+            'intro'  => trans('front/verify.email-intro'),
+            'link'   => trans('front/verify.email-link'),
+            'confirmation_code' => $this->reviewU->confirmation_rev_code
         ];
         
-        $mailer->send('emails.auth.inviteFriend', $data, function($message) {
-            $message->to( $this->invitacion->correo, $this->invitacion->invitacion_para)
-                    ->subject("Invitación iWaNaTrip.com");
+        $mailer->send('emails.auth.VerifyReview', $data, function($message) {
+            $message->to( $this->reviewU->email_reviewer, $this->reviewU->nombre_reviewer)
+                    ->subject("Review Verify iWaNaTrip.com");
         });
     }
     

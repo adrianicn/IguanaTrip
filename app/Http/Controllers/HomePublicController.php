@@ -11,6 +11,7 @@ use App\Repositories\PublicServiceRepository;
 use Input;
 use Validator;
 use Jenssegers\Agent\Agent;
+use App\Jobs\VerifyReview;
 use Illuminate\Support\Facades\Session;
 use App\Models\Review_Usuario_Servicio;
 
@@ -62,6 +63,16 @@ class HomePublicController extends Controller {
             $sections = $view->rendersections();
             return Response::json($sections);
         }
+    }
+    
+    
+    //Obtiene los top places paginados
+    public function getConfirmReview($codigo, PublicServiceRepository $gestion) {
+        $checkcode = $gestion->updateCodeReview($codigo);
+        $rev_code = $gestion->getRevCode($codigo);
+        
+        return redirect('/tokenDc$rip/'.$rev_code->id_usuario_servicio);
+        
     }
 
     //Obtiene los top places paginados
@@ -555,6 +566,7 @@ class HomePublicController extends Controller {
 
         $reviews = $gestion->getReviews($id_atraccion);
 
+        
 
         $view = View::make('public_page.partials.reviews', array('reviews' => $reviews));
 
@@ -620,15 +632,28 @@ class HomePublicController extends Controller {
                 $save_array['id_usuario_servicio'] = $formFields['id_atraccion'];
                 $save_array['id_tipo_review'] = $formFields['id_tipo_review_'.substr($key1,13)];
                 $save_array['confirmation_rev_code'] = $codigo;
-                
                 $save_array['ip_reviewer']=$this->getIp();
-                
-              $gestion->storeNew($save_array);
+               $review= $gestion->storeNew($save_array);
                 
             }
+              
+            $this->dispatch(new VerifyReview($review));
+            }
+            else
+            {
+                   return response()->json(array(
+                        'fail' => true,
+                          'message' => "Usted ya ha dejado un review anteriormente",
+                        'errors' => $validator->getMessageBag()->toArray()
+            ));
+                
             }
 
-return response()->json(array('success' => true));
+             return response()->json(array(
+                        'success' => true,
+                          'message' => "Gracias por tu review, se ha enviado un correo electrónico a tu email para verificación"
+                        
+            ));
        
         }
     }

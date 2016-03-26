@@ -43,7 +43,7 @@ function GetDataAjaxTopPlaces(url) {
         success: function (data) {
 
 
-            $(".topPlaces").LoadingOverlay("hide", true);
+            
             
                 
             var imgs = [];
@@ -69,9 +69,11 @@ function GetDataAjaxTopPlaces(url) {
                         sjq(container).append(items)
                                 .isotope('appended', items)
                                   .isotope('layout');
+                          $(".topPlaces").LoadingOverlay("hide", true);
                     });
                 });
             });
+            
             
         },
         error: function (data) {
@@ -98,7 +100,7 @@ function GetDataAjaxEventsIndbyCity(url) {
         success: function (data) {
 
             
-            $(".eventsPromo").LoadingOverlay("hide", true);
+            
             var imgs = [];
             
             $(data.eventsPromo).each(function () {
@@ -126,6 +128,7 @@ function GetDataAjaxEventsIndbyCity(url) {
                     });
                 });
             });
+            $(".eventsPromo").LoadingOverlay("hide", true);
         },
         error: function (data) {
             alert("No results");
@@ -150,7 +153,7 @@ function GetDataAjaxEventsInd(url) {
         success: function (data) {
 
             
-            $(".eventsPromo").LoadingOverlay("hide", true);
+            
             var imgs = [];
             $(data.eventsPromo).each(function () {
                 var its = $(this).html();
@@ -177,6 +180,7 @@ function GetDataAjaxEventsInd(url) {
                     });
                 });
             });
+            $(".eventsPromo").LoadingOverlay("hide", true);
         },
         error: function (data) {
            alert("No results");
@@ -207,7 +211,7 @@ function GetDataAjaxTopPlacesHome(url) {
             success: function (data) {
             
             window.current_page=current_page+1;
-            $(".topPlaces").LoadingOverlay("hide", true);
+            
             var imgs = [];
             $(data.topPlaces).each(function () {
                 var its = $(this).html();
@@ -234,6 +238,7 @@ function GetDataAjaxTopPlacesHome(url) {
                     });
                 });
             });
+            $(".topPlaces").LoadingOverlay("hide", true);
         },
         error: function (data) {
             var errors = data.responseJSON;
@@ -265,7 +270,7 @@ function GetDataAjaxEventsHome(url) {
             success: function (data) {
             
             window.current_page_e=current_page_e+1;
-            $(".eventsPromo").LoadingOverlay("hide", true);
+            
             var imgs = [];
 
             $(data.eventsPromo).each(function () {
@@ -289,9 +294,11 @@ function GetDataAjaxEventsHome(url) {
                     sjq(items).imagesLoaded(function () {
                         sjq(container).append(items)
                                 .isotope('appended', items).isotope('layout');
+                        $(".eventsPromo").LoadingOverlay("hide", true);
                     });
                 });
             });
+            
         },
         error: function (data) {
             
@@ -343,9 +350,9 @@ function GetDataAjaxPromociones(url) {
         dataType: 'json',
         success: function (data) {
             
-            $(".promocionesAtraccion").LoadingOverlay("hide", true);
+            
             $(".promocionesAtraccion").html(data.promocionesAtraccion);
-
+$(".promocionesAtraccion").LoadingOverlay("hide", true);
 
         },
         error: function (data) {
@@ -367,8 +374,9 @@ function GetDataAjaxEventos(url) {
         dataType: 'json',
         success: function (data) {
             
-            $(".eventosAtraccion").LoadingOverlay("hide", true);
+            
             $(".eventosAtraccion").html(data.eventosAtraccion);
+            $(".eventosAtraccion").LoadingOverlay("hide", true);
 
 
         },
@@ -396,9 +404,9 @@ function GetDataAjaxCloseIntern(url) {
         dataType: 'json',
         success: function (data) {
             window.current_pageIntern=current_pageIntern+1;
-            $(".cercanos").LoadingOverlay("hide", true);
+            
             $(".cercanos").append(data.cercanos);
-
+        $(".cercanos").LoadingOverlay("hide", true);
 
         },
         error: function (data) {
@@ -429,8 +437,9 @@ function GetDataAjaxSearchCatogoriesApp(url) {
         dataType: 'json',
         success: function (data) {
             window.current_pageSeCatApp=current_pageSeCatApp+1;
-            $(".Searchcategorias").LoadingOverlay("hide", true);
+            
             $(".Searchcategorias").append(data.Searchcategorias);
+            $(".Searchcategorias").LoadingOverlay("hide", true);
 
 
         },
@@ -458,8 +467,9 @@ function GetDataAjaxSearchCatogories(url) {
         dataType: 'json',
         success: function (data) {
             window.current_pageSeCat=current_pageSeCat+1;
-            $(".Searchcategorias").LoadingOverlay("hide", true);
+            
             $(".Searchcategorias").html(data.Searchcategorias);
+            $(".Searchcategorias").LoadingOverlay("hide", true);
 
 
         },
@@ -505,9 +515,10 @@ function AjaxContainerRegistroWithLoadFilter($formulario, $loadScreen) {
 
         }
         if (data.success) {
-            $("."+$loadScreen).LoadingOverlay("hide", true);
+
             
             $(".Searchcategorias").html(data.sections.Searchcategorias);
+                        $("."+$loadScreen).LoadingOverlay("hide", true);
 
             //  $('#containerbase').empty();
             // $('#containerbase').html(data.html);
@@ -533,8 +544,9 @@ function GetDataAjaxCatogories(url) {
         dataType: 'json',
         success: function (data) {
             window.current_pageCat=current_pageCat+1;
-            $(".categorias").LoadingOverlay("hide", true);
+            
             $(".categorias").append(data.categorias);
+            $(".categorias").LoadingOverlay("hide", true);
 
 
         },
@@ -559,8 +571,10 @@ function GetLikes(url) {
         dataType: 'json',
         success: function (data) {
             
-            $(".likes").LoadingOverlay("hide", true);
+            
+
             $(".likes").html(data.likes);
+            $(".likes").LoadingOverlay("hide", true);
 
 
         },
@@ -590,8 +604,9 @@ function GetReview(url) {
         dataType: 'json',
         success: function (data) {
             window.current_pageReview=current_pageReview+1;
-            $(".review").LoadingOverlay("hide", true);
+            
             $(".review").append(data.review);
+            $(".review").LoadingOverlay("hide", true);
 
 
         },
@@ -607,35 +622,7 @@ function GetReview(url) {
 }
 
 
-function AjaxContainerRegistroLoadF($formulario,$load) {
-    $("."+$load).LoadingOverlay("show");
-    var $form = $('#' + $formulario),
-            data = $form.serialize(),
-            url = $form.attr("action");
-    
-    var posting = $.post(url, {formData: data});
-    
-    posting.done(function (data) {
-        if (data.fail) {
-            
-            $.each(data.errors, function (key, value) {
-                
-            });
-            alert(data.message);
-            $("."+$load).LoadingOverlay("hide", true);
 
-        }
-        if (data.success) {
-            alert(data.message);
-            $("."+$load).LoadingOverlay("hide", true);
-              
-            
-        } //success
-
-
-
-    });
-}
 
 function AjaxContainerRegistro($formulario) {
     $(".btn-compare").LoadingOverlay("show");
@@ -661,7 +648,7 @@ function AjaxContainerRegistro($formulario) {
 
         }
         if (data.success) {
-            alert("la concha");
+            
             $("#loadingScreen").LoadingOverlay("hide", true);
             window.location.href = data.redirectto;
 
@@ -729,7 +716,7 @@ function AjaxContainerRetrunBurnURLikes($urlS,$formulario, $id, $load) {
         }
         if (data.success) {
             $(".".$load).LoadingOverlay("hide", true);
-            GetLikes("/IguanaTrip/public/getLikesA/"+$formulario);
+            GetLikes("/getLikesA/"+$formulario);
         
 
 

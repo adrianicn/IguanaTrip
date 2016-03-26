@@ -1,66 +1,121 @@
 @section('review')
 
-                <link rel="stylesheet" href="{{ asset('public_components/css/animate.min.css')}}">
+<link rel="stylesheet" href="{{ asset('public_components/css/animate.min.css')}}">
 @if(count($reviews)==0)
 <script>
-     
-    $('.moreReviews').css( "display","none" );
+
+    $('.moreReviews').css("display", "none");
 
 
-    </script>
+</script>
 @endif
 
-                                                @foreach ($reviews as $rev)
-                                                
-                                                <li class="comment">
-                                                    <div class="author-img">
-                                                        
-                                                        <span><img src="{{ asset('img/positivo.jpg')}}" alt=""></span>
-                                                        
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        @if($rev->nombre_reviewer!="")
-                                                        
-                                                        <h5 class="comment-author-name"><a href="#">{!!$rev->nombre_reviewer!!}</a></h5>
-                                                        @elseif($rev->email_reviewer)
-                                                        <h5 class="comment-author-name"><a href="#">{!!$rev->email_reviewer!!}</a></h5>
-                                                        @else
-                                                        <h5 class="comment-author-name"><a href="#">{{ trans('publico/labels.label60')}}</a></h5>
-                                                        @endif
-                                                        <span data-toggle="tooltip" title="{!!$rev->calificacion!!}" class="star-rating">
-                                                            <span data-stars="{!!$rev->calificacion!!}"></span>
-                                                        </span>
-                                                        <?php $date = date_create($rev->created_at);
-                                    
-                                                             ?>
-                                                        <span class="comment-date">{!!date_format($date, 'j F ')!!}</span>
-                                                        <div class="description">
-                                                            <p>{!!$rev->text_review!!}</p>
-                                                        </div>
-                                                    </div>
-                                                
-                                                </li>
-                                                @endforeach
+<?php $array = array(); ?>
+@for ($x = 0; $x < count($reviews); $x++)
+<?php
+$array[$x] = $reviews[$x]->confirmation_rev_code;
+?>
 
-                                         
- <script>
-                                        
+@endfor
 
-$('.btn-write-review').on('click', function() {
-  $('.var_comment').css( "display","none");
-});
-
- $( ".btn-back-reviews" ).click(function() {
-    $('.var_comment').css( "display","block" );
-
-});
+<?php $totalCodigos = (array_unique($array)); 
+$y=0;
+?>
 
 
-                                            
-
-    </script>
-    
-    
+@foreach($totalCodigos as $codigos)
 
 
-    @endsection
+<?php
+
+$calificacion = array(); 
+$tipoRev = array(); 
+$nombre="";
+$email="";
+
+?>
+
+@foreach ($reviews as $rev)
+
+@if($rev->confirmation_rev_code==$codigos)
+
+<?php $calificacion[] = ($rev->calificacion*$rev->peso_review); 
+        $tipoRev[]=$rev->tipo_review .": ". $rev->calificacion;
+        $nombre=$rev->nombre_reviewer;
+        $email=$rev->email_reviewer;
+        ?>
+
+@endif  
+
+
+@endforeach
+
+
+
+<li class="comment">
+    <div class="author-img">
+        <span><img src="{{ asset('img/positivo.png')}}" alt=""></span>
+    </div>
+    <div class="comment-content">
+        @if($nombre!="")
+        <h5 class="comment-author-name"><a href="#">{!!$nombre!!}</a></h5>
+        @elseif($email)
+        <h5 class="comment-author-name"><a href="#">{!!$email!!}</a></h5>
+        @endif
+        <?php $Totalcalificacion = 0;
+        ?>
+        @foreach ($calificacion as $calif)
+        <?php  $Totalcalificacion= $Totalcalificacion+$calif;
+        ?>
+        
+        @endforeach
+        
+          <?php $Resumencalificacion = "";
+        ?>
+        @foreach ($tipoRev as $tip)
+        <?php  $Resumencalificacion= $Resumencalificacion.$tip." ";
+        ?>
+        
+        @endforeach
+        
+        <?php  $Resumencalificacion= $Resumencalificacion." =".$Totalcalificacion; ?>
+        <span data-toggle="tooltip" title="{!!$Resumencalificacion!!}" class="star-rating">
+            <span data-stars="{!!$Totalcalificacion!!}"></span>
+        </span>
+        <?php $date = date_create($rev->created_at); ?>
+        <span class="comment-date">{!!date_format($date, 'j F ')!!}</span>
+        <div class="description">
+            <p>{!!$rev->text_review!!}</p>
+        </div>
+    </div>
+</li>
+
+
+@endforeach
+
+
+
+
+
+
+
+<script>
+
+    $('.btn-write-review').on('click', function () {
+        $('.var_comment').css("display", "none");
+    });
+
+    $(".btn-back-reviews").click(function () {
+        $('.var_comment').css("display", "block");
+
+    });
+    // star rating
+    $(".star-rating").each(function () {
+        var stars = $(this).children("span").data("stars");
+        if (stars) {
+            $(this).children("span").css("width", stars * 2 * 10 + "%");
+        }
+    });
+
+</script>
+@endsection

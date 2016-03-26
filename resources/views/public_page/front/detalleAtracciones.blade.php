@@ -21,11 +21,11 @@
         <link rel="stylesheet" href="{{ asset('public_components/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{ asset('public_components/css/font-awesome.min.css')}}">
 
-     <!--   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,400italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Dosis:400,300,500,600,700' rel='stylesheet' type='text/css'>
--->
+
         <link rel="stylesheet" href="{{ asset('public_components/css/animate.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.carousel.css')}}" media="screen" />
         <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.transitions.css')}}" media="screen" />
@@ -627,9 +627,9 @@
     <script type="text/javascript" src="{{ asset('public_components/js/jquery.plugins.js')}}"></script>
 
 
-<!-- Google Map Api 
+ Google Map Api 
     <script type='text/javascript' src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
-    <script type="text/javascript" src="{{ asset('public_components/js/gmap3.js')}}"></script>-->
+    <script type="text/javascript" src="{{ asset('public_components/js/gmap3.js')}}"></script>
     <script>
         
         
@@ -848,7 +848,6 @@ jQuery(document).ready(function ($) {
     
 
     
-<!--
 
     <script type="text/javascript">
         sjq(".soap-google-map").gmap3({
@@ -887,7 +886,7 @@ jQuery(document).ready(function ($) {
             }
         });
     </script>
--->
+
     
     <script>
         $(document).ready(function () {
@@ -909,13 +908,10 @@ jQuery(document).ready(function ($) {
                 
             });
             
-            
-
-
     </script>
-<script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
+
     <!-- load page Javascript -->
-    
+    <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
 
    
 

@@ -247,6 +247,7 @@ Route::get('/getEventscity/{city}', ['as' => 'topPlaces', 'uses' => 'HomePublicC
 
 
 Route::get('/tokenDc$rip/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getAtraccionDescripcion']);
+Route::get('/getConfirmReview/{codigo}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getConfirmReview']);
 
 
 Route::get('/tokenDc$ripT/{id_atraccion}/{id_catalogo}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getCatalogoDescripcion']);

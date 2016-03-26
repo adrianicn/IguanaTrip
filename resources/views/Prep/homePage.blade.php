@@ -163,10 +163,10 @@
                 <div class="container">
                     <div class="heading-box col-md-10 col-lg-8">
                         <h2 class="box-title">{{ trans('publico/labels.label61')}} <em class="skin-color">{{ trans('publico/labels.label62')}} </em> {{ trans('publico/labels.label63')}}
-                            
+                             </h2>
                     
                               <h2>
-                           <div >
+                           <div>
                             
                                 <div class="search-box">
                                         <input type="text" value="{!!$titulo!!}"  placeholder="{{ trans('publico/labels.label64')}}" name="ciudad" id="ciudad">
