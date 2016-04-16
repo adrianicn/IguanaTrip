@@ -51,14 +51,25 @@ class HomePublicController extends Controller {
         }
 
         Session::put('device', $desk);
-        $topPlacesEcuador = $gestion->getTopPlaces(3);
-        return view('public_page.front.homePage')->with('location', $location)->with('topPlacesEcuador', $topPlacesEcuador);
+        return view('public_page.front.homePage')->with('location', $location)
+        ;
     }
 
     //Obtiene los top places paginados
     public function getTopPlaces(Request $request, PublicServiceRepository $gestion) {
-        $topPlacesEcuador = $gestion->getTopPlaces(100);
-        $view = View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador));
+         $topPlacesCosta = $gestion->getTopPlaces(100,1);
+        $topPlacesSierra = $gestion->getTopPlaces(100,2);
+        $topPlacesOriente = $gestion->getTopPlaces(100,3);
+        $topPlacesGalapagos = $gestion->getTopPlaces(100,4);
+        
+        $view = View::make('public_page.partials.AllTopPlaces', array(
+            'topPlacesCosta' => $topPlacesCosta,
+                'topPlacesSierra' => $topPlacesSierra,
+            'topPlacesOriente' => $topPlacesOriente,
+            'topPlacesGalapagos' => $topPlacesGalapagos
+                
+                
+                ));
         if ($request->ajax()) {
             $sections = $view->rendersections();
             return Response::json($sections);
@@ -484,6 +495,8 @@ class HomePublicController extends Controller {
 
 
         $catalogo = $gestion->getCatalogoDetail($id_catalogo);
+        if($catalogo!=null)
+        {
         $actividades = $gestion->getExplorerbyCatalogo($id_catalogo);
         $servicios = $gestion->getServiciosAll();
         $precio_minimo = $gestion->getMinPrice($id_catalogo);
@@ -495,7 +508,13 @@ class HomePublicController extends Controller {
                         ->with('servicios', $servicios)
                         ->with('precio_minimo', $precio_minimo)
                         ->with('precio_max', $precio_max)
-                        ->with('catalogo', $catalogo);
+        ->with('catalogo', $catalogo);}
+        
+        else
+        {
+            return $this->getHome($gestion);
+            
+        }
     }
 
     //Obtiene las descripcion de la atraccion elegida

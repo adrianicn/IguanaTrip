@@ -43,7 +43,6 @@ function GetDataAjaxTopPlaces(url) {
         success: function (data) {
 
 
-            $(".topPlaces").LoadingOverlay("hide", true);
             
                 
             var imgs = [];
@@ -69,6 +68,7 @@ function GetDataAjaxTopPlaces(url) {
                         sjq(container).append(items)
                                 .isotope('appended', items)
                                   .isotope('layout');
+                          $(".topPlaces").LoadingOverlay("hide", true);
                     });
                 });
             });
@@ -98,7 +98,7 @@ function GetDataAjaxEventsIndbyCity(url) {
         success: function (data) {
 
             
-            $(".eventsPromo").LoadingOverlay("hide", true);
+            
             var imgs = [];
             
             $(data.eventsPromo).each(function () {
@@ -126,6 +126,7 @@ function GetDataAjaxEventsIndbyCity(url) {
                     });
                 });
             });
+            $(".eventsPromo").LoadingOverlay("hide", true);
         },
         error: function (data) {
             alert("No results");
@@ -150,7 +151,7 @@ function GetDataAjaxEventsInd(url) {
         success: function (data) {
 
             
-            $(".eventsPromo").LoadingOverlay("hide", true);
+            
             var imgs = [];
             $(data.eventsPromo).each(function () {
                 var its = $(this).html();
@@ -177,6 +178,7 @@ function GetDataAjaxEventsInd(url) {
                     });
                 });
             });
+            $(".eventsPromo").LoadingOverlay("hide", true);
         },
         error: function (data) {
            alert("No results");
@@ -207,7 +209,7 @@ function GetDataAjaxTopPlacesHome(url) {
             success: function (data) {
             
             window.current_page=current_page+1;
-            $(".topPlaces").LoadingOverlay("hide", true);
+            
             var imgs = [];
             $(data.topPlaces).each(function () {
                 var its = $(this).html();
@@ -234,6 +236,7 @@ function GetDataAjaxTopPlacesHome(url) {
                     });
                 });
             });
+            $(".topPlaces").LoadingOverlay("hide", true);
         },
         error: function (data) {
             var errors = data.responseJSON;
@@ -265,7 +268,7 @@ function GetDataAjaxEventsHome(url) {
             success: function (data) {
             
             window.current_page_e=current_page_e+1;
-            $(".eventsPromo").LoadingOverlay("hide", true);
+            
             var imgs = [];
 
             $(data.eventsPromo).each(function () {
@@ -289,6 +292,7 @@ function GetDataAjaxEventsHome(url) {
                     sjq(items).imagesLoaded(function () {
                         sjq(container).append(items)
                                 .isotope('appended', items).isotope('layout');
+                        $(".eventsPromo").LoadingOverlay("hide", true);
                     });
                 });
             });
@@ -343,9 +347,9 @@ function GetDataAjaxPromociones(url) {
         dataType: 'json',
         success: function (data) {
             
-            $(".promocionesAtraccion").LoadingOverlay("hide", true);
+            
             $(".promocionesAtraccion").html(data.promocionesAtraccion);
-
+            $(".promocionesAtraccion").LoadingOverlay("hide", true);
 
         },
         error: function (data) {
@@ -367,8 +371,9 @@ function GetDataAjaxEventos(url) {
         dataType: 'json',
         success: function (data) {
             
-            $(".eventosAtraccion").LoadingOverlay("hide", true);
+            
             $(".eventosAtraccion").html(data.eventosAtraccion);
+            $(".eventosAtraccion").LoadingOverlay("hide", true);
 
 
         },
@@ -396,9 +401,9 @@ function GetDataAjaxCloseIntern(url) {
         dataType: 'json',
         success: function (data) {
             window.current_pageIntern=current_pageIntern+1;
-            $(".cercanos").LoadingOverlay("hide", true);
+            
             $(".cercanos").append(data.cercanos);
-
+            $(".cercanos").LoadingOverlay("hide", true);
 
         },
         error: function (data) {
@@ -429,8 +434,9 @@ function GetDataAjaxSearchCatogoriesApp(url) {
         dataType: 'json',
         success: function (data) {
             window.current_pageSeCatApp=current_pageSeCatApp+1;
-            $(".Searchcategorias").LoadingOverlay("hide", true);
+            
             $(".Searchcategorias").append(data.Searchcategorias);
+            $(".Searchcategorias").LoadingOverlay("hide", true);
 
 
         },
@@ -445,6 +451,39 @@ function GetDataAjaxSearchCatogoriesApp(url) {
     });
 }
 
+
+window.current_pageSet=0;
+
+function GetDataAjaxSearchTotal(url) {
+    
+    $(".SearchTotalPartial").LoadingOverlay("show");
+    $.ajax({
+        type: 'GET',
+        url: url,
+            data:{
+            'page': window.current_pageSet + 1 // you might need to init that var on top of page (= 0)
+            },
+        dataType: 'json',
+        success: function (data) {
+            window.current_pageSet=current_pageSet+1;
+            
+            $(".SearchTotalPartial").html(data.SearchTotalPartial);
+            $(".SearchTotalPartial").LoadingOverlay("hide", true);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
 window.current_pageSeCat=0;
 
 function GetDataAjaxSearchCatogories(url) {
@@ -458,8 +497,9 @@ function GetDataAjaxSearchCatogories(url) {
         dataType: 'json',
         success: function (data) {
             window.current_pageSeCat=current_pageSeCat+1;
-            $(".Searchcategorias").LoadingOverlay("hide", true);
+            
             $(".Searchcategorias").html(data.Searchcategorias);
+            $(".Searchcategorias").LoadingOverlay("hide", true);
 
 
         },
@@ -505,9 +545,10 @@ function AjaxContainerRegistroWithLoadFilter($formulario, $loadScreen) {
 
         }
         if (data.success) {
-            $("."+$loadScreen).LoadingOverlay("hide", true);
+            
             
             $(".Searchcategorias").html(data.sections.Searchcategorias);
+                        $("."+$loadScreen).LoadingOverlay("hide", true);
 
             //  $('#containerbase').empty();
             // $('#containerbase').html(data.html);
@@ -533,8 +574,9 @@ function GetDataAjaxCatogories(url) {
         dataType: 'json',
         success: function (data) {
             window.current_pageCat=current_pageCat+1;
-            $(".categorias").LoadingOverlay("hide", true);
+            
             $(".categorias").append(data.categorias);
+            $(".categorias").LoadingOverlay("hide", true);
 
 
         },
@@ -559,8 +601,10 @@ function GetLikes(url) {
         dataType: 'json',
         success: function (data) {
             
-            $(".likes").LoadingOverlay("hide", true);
+            
+
             $(".likes").html(data.likes);
+            $(".likes").LoadingOverlay("hide", true);
 
 
         },
@@ -590,8 +634,9 @@ function GetReview(url) {
         dataType: 'json',
         success: function (data) {
             window.current_pageReview=current_pageReview+1;
-            $(".review").LoadingOverlay("hide", true);
+            
             $(".review").append(data.review);
+            $(".review").LoadingOverlay("hide", true);
 
 
         },

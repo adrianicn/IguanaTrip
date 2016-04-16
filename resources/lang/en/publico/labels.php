@@ -79,7 +79,9 @@ return [
     
     'label73' => 'Price from: ',
     'label74' => 'Price to: ',
-    'label75' => 'Schedule: ',
+    'label75' => 'Schedules: ',
+    'label76' => 'More filters ',
+    'label77' => 'Share with friends',
     
     
     'message' => 'Your message',

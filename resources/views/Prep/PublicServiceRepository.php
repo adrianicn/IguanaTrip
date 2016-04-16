@@ -98,6 +98,20 @@ class PublicServiceRepository extends BaseRepository {
 
         return $imagenesF;
     }
+    
+       public function storeNew($inputs) {
+        $review = new $this->review;
+        $review->calificacion = trim($inputs['calificacion']);
+        $review->nombre_reviewer = trim($inputs['nombre_reviewer']);
+        $review->email_reviewer = trim($inputs['email_reviewer']);
+        $review->ip_reviewer = trim($inputs['ip_reviewer']);
+        $review->estado_review = '0';
+        $review->id_usuario_servicio = trim($inputs['id_usuario_servicio']);
+        $review->id_tipo_review = trim($inputs['id_tipo_review']);
+        $review->confirmation_rev_code = $inputs['confirmation_rev_code'];
+        $this->save($review);
+        return $review;
+    }
 
     //Entrega el arreglo de los servicios más visitados por provincia
     public function getVisitadosProvincia($id_provincia) {
@@ -1253,7 +1267,7 @@ class PublicServiceRepository extends BaseRepository {
                     ->whereIn('images.id', $array)
                     ->where('estado_fotografia', '=', '1')
                     ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre','usuario_servicios.id as id_usuario_serviciox')
-                    ->orderBy('usuario_servicios.id_padre', 'desc')
+                    ->orderBy('usuario_servicios.id_padre', 'asc')
                     ->orderBy('usuario_servicios.prioridad', 'desc')
                     ->orderBy('usuario_servicios.num_visitas', 'desc')
                     ->paginate($pagination);
@@ -1664,8 +1678,36 @@ class PublicServiceRepository extends BaseRepository {
         return $imagenes;
     }
 
+    
+      public function updateCodeReview($code) {
+        $review = new $this->review;
+        $review1 = $review::where('confirmation_rev_code', $code);
+                $review1->update(['review_verificado' =>'1']);
+        
+                $review1->update(['seen' =>'1']);
+                $review1->update(['estado_review' =>'1']);
+                $review1->update(['updated_at' =>\Carbon\Carbon::now()->toDateTimeString()]);
+        
+        
+        
+       
+    }
+    
+    
+        public function getRevCode($code) {
+        $review = new $this->review;
+        $review1 = $review::where('confirmation_rev_code', $code)
+                ->select('id_usuario_servicio')
+                ->first();
+                
+        return $review1;
+        
+        
+       
+    }
+    
     //Obtiene las top n places de cada provincia
-    public function getTopPlaces($n) {
+    public function getTopPlaces($n,$region) {
 
 //array de las regiones del ecuador
 //1: Costa
@@ -1673,7 +1715,7 @@ class PublicServiceRepository extends BaseRepository {
 //3:Oriente
 //4:Galapagos
 
-        $array = array(1, 2, 3, 4);
+        $array = array($region);
 
         $final_top = array();
 
@@ -1716,7 +1758,7 @@ class PublicServiceRepository extends BaseRepository {
                 ->select('images.*', 'usuario_servicios.*', 'ubicacion_geografica.nombre', 'ubicacion_geografica.id as id_geo', 'ubicacion_geografica.id_region')
                 ->orderBy('usuario_servicios.prioridad', 'desc')
                 ->orderBy('usuario_servicios.num_visitas', 'desc')
-                ->paginate(8);
+                ->paginate(2);
 
         return $imagenesF;
     }
@@ -1882,6 +1924,20 @@ class PublicServiceRepository extends BaseRepository {
         return $likes;
     }
 
+    
+       //Entrega el detalle de los likes por ip y por id
+    public function getReviewsIpEmail($id_atraccion, $email) {
+
+        $review = DB::table('reviews_usuario_servicio')
+                ->where('id_usuario_servicio', '=', $id_atraccion)
+                ->where('email_reviewer', '=', $email)
+                ->where('estado_review', '=', "1")
+                ->where('review_verificado', '=', "1")
+                
+                ->first();
+        return $review;
+    }
+
     //Actualiza el estado de la promocion
     public function storeUpdateLikes($inputs, $Promocion) {
 
@@ -2019,10 +2075,13 @@ class PublicServiceRepository extends BaseRepository {
 
     
     //Despliea todos lis tipos de revies para calificar
-    public function getTiporeviews() {
+    public function getTiporeviews($id_atraccion) {
 
         $reviews = DB::table('tipo_reviews')
+                ->join('usuario_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'tipo_reviews.catalogo_servicio')
+                ->where('usuario_servicios.id', '=', $id_atraccion)
                 ->where('tipo_estado', '=', "1")
+                ->select('tipo_reviews.*')
                 ->get();
 
         return $reviews;
@@ -2031,14 +2090,31 @@ class PublicServiceRepository extends BaseRepository {
     //Entrega el detalle de los servicios
     public function getReviews($id_atraccion) {
 
+        $chuncks= DB::table('tipo_reviews')
+                ->join('usuario_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'tipo_reviews.catalogo_servicio')
+                ->where('usuario_servicios.id', '=', $id_atraccion)
+                ->where('tipo_reviews.tipo_estado', '=', "1")
+                ->select(array(DB::raw('COUNT(tipo_reviews.id) as cantidad')))
+                ->first();
+        
+        
+        
+        if($chuncks==null)
+        $division=1;
+        else
+            $division=$chuncks->cantidad*2;
+        
         $reviews = DB::table('reviews_usuario_servicio')
+                ->join('tipo_reviews', 'reviews_usuario_servicio.id_tipo_review', '=', 'tipo_reviews.id')
                 ->where('reviews_usuario_servicio.id_usuario_servicio', '=', $id_atraccion)
                 ->where('reviews_usuario_servicio.estado_review', '=', "1")
                 ->where('reviews_usuario_servicio.review_verificado', '=', "1")
-                ->select('reviews_usuario_servicio.*')
+                ->select('reviews_usuario_servicio.*','tipo_reviews.peso_review','tipo_reviews.tipo_review','tipo_reviews.tipo_review_eng')
+                //->groupBy('nombre_reviewer')
                 ->orderBy('created_at', 'desc')
-                ->paginate(1);
-
+                ->paginate($division);
+        
+        
         return $reviews;
     }
 

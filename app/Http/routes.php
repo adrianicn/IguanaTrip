@@ -255,6 +255,8 @@ Route::get('/getCatalogosServicios/{id_atraccion}/{id_catalogo}', ['as' => 'cata
 Route::get('/getSearchCatalogosServicios/{id_catalogo}/{ciudad}', ['as' => 'SearchcatalogoServicios', 'uses' => 'HomePublicController@getCatalosoServiciosSearch']);
 
 
+
+
 Route::get('/tokenDc$ripPromo/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getPromocionesAtraccion']);
 Route::get('/tokenDc$ripEvent/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getEventosAtraccion']);
 
@@ -264,7 +266,10 @@ Route::get('/getCercanosIntern/{id_atraccion}/{id_provincia}/{id_canton}/{id_par
 Route::get('/getLikesA/{id_atraccion}', ['as' => 'getLikes', 'uses' => 'HomePublicController@getLikesSatisf']);
 Route::get('/getReviews/{id_atraccion}', ['as' => 'getReviews', 'uses' => 'HomePublicController@getReviews']);
 
+Route::get('/getSearchTotal/{term}', ['as' => 'SearchTotal', 'uses' => 'SearchController@getSearchTotal']);
+Route::get('/getSearchTotalPartial/{term}', ['as' => 'SearchTotalPartial', 'uses' => 'SearchController@getTotalSearchInside']);
 
-    
+Route::get('/getTermsConditions', ['as' => 'SearchTotalPartial', 'uses' => 'SearchController@getTermsConditions']);
+        
 
  /*  Fin de las rutas del sistema publico*/

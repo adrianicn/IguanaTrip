@@ -57,11 +57,15 @@
   -moz-box-sizing: border-box;
   /* Firefox */
   margin: 0;
-  padding: 0;
+  padding: 0;   
   -webkit-tap-highlight-color: transparent;
   zoom: 1;
 }
 
+.logss{
+    
+    padding: 0 65px;   
+}
 html {
   font-size: 16px;
   min-height: 100%;

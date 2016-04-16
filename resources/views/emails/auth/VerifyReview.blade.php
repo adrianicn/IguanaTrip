@@ -931,7 +931,7 @@ tr.border td {
             <table align="left" style="border-collapse: collapse;border-spacing: 0;">
               <tbody><tr>
                 <td style="padding: 0;vertical-align: top;mso-line-height-rule: at-least;width: 280px;padding-top: 13px;padding-bottom: 4px;" class="logo emb-logo-padding-box">
-                  <div align="left" id="emb-email-header" style="font-weight: 700;font-family: Avenir,sans-serif;color: #555;font-size: 0px !important;line-height: 0 !important;" class="logo-left"><a href="http://igt.createsend1.com/t/i-l-ijfjkl-l-r/" style="text-decoration: none;transition: opacity 0.2s ease-in;color: #555;" target="_blank"><img width="107" height="102" alt="IguanaTrip" src="{!! asset('public/img/registro-logo.png')!!}" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 107px;"></a></div>
+                  <div align="left" id="emb-email-header" style="font-weight: 700;font-family: Avenir,sans-serif;color: #555;font-size: 0px !important;line-height: 0 !important;" class="logo-left"><a href="http://igt.createsend1.com/t/i-l-ijfjkl-l-r/" style="text-decoration: none;transition: opacity 0.2s ease-in;color: #555;" target="_blank"><img width="107" height="102" alt="iWaNaTrip" src="{!! asset('public/img/index-logo.png')!!}" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 107px;"></a></div>
                 </td>
               </tr>
             </tbody></table>
@@ -962,7 +962,7 @@ tr.border td {
                         </tbody></table>
                       
             <div align="center" style="font-size: 12px;mso-line-height-rule: at-least;font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 0;font-family: &quot;Open Sans&quot;,sans-serif;color: #60666d;" class="image">
-              <a href="http://igt.createsend1.com/t/i-l-ijfjkl-l-y/" style="transition: opacity 0.2s ease-in;color: #5c91ad;" target="_blank"><img width="600" height="293" alt="IguanaTrip" src="{!! asset('public/img/extra-pag-1b.png')!!}" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 900px;"></a>
+              <a href="http://igt.createsend1.com/t/i-l-ijfjkl-l-y/" style="transition: opacity 0.2s ease-in;color: #5c91ad;" target="_blank"><img width="600" height="293" alt="iWaNaTrip" src="{!! asset('public/img/extra-pag-1b.png')!!}" style="border: 0;-ms-interpolation-mode: bicubic;display: block;max-width: 900px;"></a>
             </div>
           
                         <table style="border-collapse: collapse;border-spacing: 0;table-layout: fixed;width: 100%;" class="contents">
@@ -1030,7 +1030,7 @@ tr.border td {
                           <tbody><tr>
                             <td style="padding: 0;vertical-align: top;padding-left: 16px;padding-right: 32px;word-break: break-word;word-wrap: break-word;" class="padded">
                               
-            <h2 style="font-style: normal;font-weight: 700;Margin-bottom: 0;Margin-top: 0;font-size: 24px;line-height: 32px;font-family: &quot;Open Sans&quot;,sans-serif;color: #44a8c7;">Misión Primero Ecuador</h2><p style="font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 16px;font-size: 15px;line-height: 24px;font-family: &quot;Open Sans&quot;,sans-serif;color: #60666d;">Conectar al turista directamente con el proveedor de servicios turísticos: IguanaTrip pretende ser un puente ser un puente dinámico y efectivo que permita la comunicación directa entre  turistas, nacionales e internacionales, y los proveedores locales de servicios turísticos en el Ecuador. Con este fin, IguanaTrip permitirá que los proveedores locales de servicios turísticos se den a conocer a través de su página web y redes sociales, brindando información práctica y actual sobre destinos y servicios turísticos disponibles en el Ecuador.Con el mismo nivel de compromiso, queremos brindar a nuestros usuarios turistas la mejor experiencia posible durante sus viajes en el Ecuador. Nos comprometemos a ser una herramienta tecnológica que ayude a descubrir cada parte de nuestro país de forma práctica y segura.</p>
+            <h2 style="font-style: normal;font-weight: 700;Margin-bottom: 0;Margin-top: 0;font-size: 24px;line-height: 32px;font-family: &quot;Open Sans&quot;,sans-serif;color: #44a8c7;">Misión Primero Ecuador</h2><p style="font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 16px;font-size: 15px;line-height: 24px;font-family: &quot;Open Sans&quot;,sans-serif;color: #60666d;">Conectar al turista directamente con el proveedor de servicios turísticos: iWaNaTrip pretende ser un puente ser un puente dinámico y efectivo que permita la comunicación directa entre  turistas, nacionales e internacionales, y los proveedores locales de servicios turísticos en el Ecuador. Con este fin, iWaNaTrip permitirá que los proveedores locales de servicios turísticos se den a conocer a través de su página web y redes sociales, brindando información práctica y actual sobre destinos y servicios turísticos disponibles en el Ecuador.Con el mismo nivel de compromiso, queremos brindar a nuestros usuarios turistas la mejor experiencia posible durante sus viajes en el Ecuador. Nos comprometemos a ser una herramienta tecnológica que ayude a descubrir cada parte de nuestro país de forma práctica y segura.</p>
           
                             </td>
                           </tr>
@@ -1074,7 +1074,7 @@ tr.border td {
                           <tbody><tr>
                             <td style="padding: 0;vertical-align: top;padding-left: 16px;padding-right: 32px;word-break: break-word;word-wrap: break-word;" class="padded">
                               
-            <h2 style="font-style: normal;font-weight: 700;Margin-bottom: 0;Margin-top: 0;font-size: 24px;line-height: 32px;font-family: &quot;Open Sans&quot;,sans-serif;color: #44a8c7;">Valores: Responsabilidad social y ambiental</h2><p style="font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 16px;font-size: 15px;line-height: 24px;font-family: &quot;Open Sans&quot;,sans-serif;color: #60666d;">En IguanaTrip estamos firmemente comprometidos con el desarrollo socio-económico local y la conservación del patrimonio turístico nacional. IguanaTrip brindará las facilidades para que tanto quienes brindan los servicios turísticos, cuanto quienes los usan, sean actores activamente responsables del desarrollo y cuidado de los recursos ambientales y socio-culturales involucrados en el turismo.</p>
+            <h2 style="font-style: normal;font-weight: 700;Margin-bottom: 0;Margin-top: 0;font-size: 24px;line-height: 32px;font-family: &quot;Open Sans&quot;,sans-serif;color: #44a8c7;">Valores: Responsabilidad social y ambiental</h2><p style="font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 16px;font-size: 15px;line-height: 24px;font-family: &quot;Open Sans&quot;,sans-serif;color: #60666d;">En iWaNaTrip estamos firmemente comprometidos con el desarrollo socio-económico local y la conservación del patrimonio turístico nacional. iWaNaTrip brindará las facilidades para que tanto quienes brindan los servicios turísticos, cuanto quienes los usan, sean actores activamente responsables del desarrollo y cuidado de los recursos ambientales y socio-culturales involucrados en el turismo.</p>
           
                             </td>
                           </tr>
@@ -1127,7 +1127,7 @@ tr.border td {
                           <tbody><tr>
                             <td style="padding: 0;vertical-align: top;padding-left: 16px;padding-right: 32px;word-break: break-word;word-wrap: break-word;" class="padded">
                               
-            <h2 style="font-style: normal;font-weight: 700;Margin-bottom: 0;Margin-top: 0;font-size: 24px;line-height: 32px;font-family: &quot;Open Sans&quot;,sans-serif;color: #44a8c7;">Visión Ecuador como potencia turística</h2><p style="font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 16px;font-size: 15px;line-height: 24px;font-family: &quot;Open Sans&quot;,sans-serif;color: #60666d;">Debido a la gran belleza natural y multiculturalidad del Ecuador, este ostenta un increíble atractivo turístico. IguanaTrip busca desarrollar este potencial dando a conocer los encantos naturales y la riqueza socio-cultural del Ecuador, interna e internacionalmente. Nuestro equipo de trabajo y aliados estratégicos trabajan para posicionar al Ecuador como un destino encantador, amigable y accesible.</p>
+            <h2 style="font-style: normal;font-weight: 700;Margin-bottom: 0;Margin-top: 0;font-size: 24px;line-height: 32px;font-family: &quot;Open Sans&quot;,sans-serif;color: #44a8c7;">Visión Ecuador como potencia turística</h2><p style="font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 16px;font-size: 15px;line-height: 24px;font-family: &quot;Open Sans&quot;,sans-serif;color: #60666d;">Debido a la gran belleza natural y multiculturalidad del Ecuador, este ostenta un increíble atractivo turístico. iWaNaTrip busca desarrollar este potencial dando a conocer los encantos naturales y la riqueza socio-cultural del Ecuador, interna e internacionalmente. Nuestro equipo de trabajo y aliados estratégicos trabajan para posicionar al Ecuador como un destino encantador, amigable y accesible.</p>
           
                             </td>
                           </tr>
@@ -1181,10 +1181,10 @@ tr.border td {
                     
                   </div>
                   <div style="font-family: &quot;Open Sans&quot;,sans-serif;Margin-bottom: 18px;" class="address">
-                    <div>IguanaTrip.com</div>
+                    <div>iWaNaTrip.com</div>
                   </div>
                   <div style="font-family: &quot;Open Sans&quot;,sans-serif;" class="permission">
-                    <div>Usted ha recibido este correo electrónico porque su email ha sido registrado para formar parte del equipo de IguanaTrip.com</div>
+                    <div>Usted ha recibido este correo electrónico porque su email ha sido registrado para formar parte del equipo de iWaNaTrip.com</div>
                   </div>
                   <div style="font-family: &quot;Open Sans&quot;,sans-serif;Margin-bottom: 18px;" class="campaign">
                     <span>

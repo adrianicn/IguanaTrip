@@ -1205,7 +1205,7 @@
                                                                                                                                                                                                         !important}.title,.webversion,.fblike,.tweet,.linkedinshare,.forwardtoafriend,.link,.address,.permission,.campaign{}.title,.webversion,.fblike,.tweet,.linkedinshare,.forwardtoafriend,.link,.address,.permission,.campaign{font-family:Cabin,Avenir,sans-serif}.mso .title,.mso .webversion,.mso .fblike,.mso .tweet,.mso .linkedinshare,.mso .forwardtoafriend,.mso .link,.mso .address,.mso .permission,.mso .campaign{font-family:sans-serif !important}body,.wrapper,.emb-editor-canvas{background-color:#1e1e1e}.mso body{background-color:#fff !important}.mso .header,.mso .footer,.mso .one-col-bg,.mso .two-col-bg,.mso .three-col-bg,.mso .one-col-feature-bg{background-color:#1e1e1e}.hr hr{color:#fff;background-color:#fff}.border{background-color:#161616}.wrapper h1{color:#d49344}.wrapper h2{color:#d49344}.wrapper h3{color:#707f8f}.wrapper p,.wrapper ol,.wrapper ul{color:#fff}.wrapper 
             .image{color:#fff}.wrapper a{color:#3dbafd}.wrapper a:hover{color:#0ba8fc !important}.wrapper .btn a{background-color:#4c5b6b;color:#fff}.wrapper .btn a:hover{color:#fff !important}.preheader{background-color:#161616}.title,.webversion,.footer .inner td{color:#e6e6e6}.wrapper .title a,.wrapper .webversion a,.wrapper .footer a{font-weight:bold;color:#e6e6e6}.wrapper .title a:hover,.wrapper .webversion a:hover,.wrapper .footer a:hover{color:#fff !important}.logo div{color:#e6e6e6}.logo div a{color:#e6e6e6}.logo div a:hover{color:#e6e6e6 !important}.column-bg{background-color:#212a32}.extra-wide .big-feature{background-color:#212a32}.emb-editor-canvas{background-color:#161616}.emb-editor-canvas .wrapper{background-color:#1e1e1e}.fblike,.tweet,.linkedinshare,.forwardtoafriend{background-color:#0f0f0f}
         </style><meta name="robots" content="noindex,nofollow" />
-        <meta property="og:title" content="IguanaTrip" />
+        <meta property="og:title" content="iWaNaTrip" />
     </head>
     <!--[if mso]>
       <body class="mso">
@@ -1250,9 +1250,9 @@
                                                             </h3>
                                                             
                                                             <h1 style="font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 12px;font-size: 30px;line-height: 40px;font-family: Cabin,Avenir,sans-serif;color: #d49344;text-align: center;">
-                                                                Invitaci&#243;n IguanaTrip.com</h1>
+                                                                Invitaci&#243;n iWaNaTrip.com</h1>
                                                             <p style="font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 16px;font-size: 14px;line-height: 22px;font-family: Cabin,Avenir,sans-serif;color: #fff;">
-                                                                IguanaTrip es la propuesta tur&#237;stica con base local&nbsp;m&#225;s grande del Ecuador. Tenemos como objetivo dar a conocer el potencial tur&#237;stico de nuestro pa&#237;s a nivel mundial. Podr&#225;s registrar tus servicios 
+                                                                iWaNaTrip es la propuesta tur&#237;stica con base local&nbsp;m&#225;s grande del Ecuador. Tenemos como objetivo dar a conocer el potencial tur&#237;stico de nuestro pa&#237;s a nivel mundial. Podr&#225;s registrar tus servicios 
                                                                 de forma gratuita y obtener beneficios como:</p>
                                                             <ul style="font-style: normal;font-weight: 400;padding-left: 0;Margin-bottom: 32px;Margin-top: 32px;font-size: 14px;line-height: 22px;font-family: Cabin,Avenir,sans-serif;color: #fff;Margin-left: 48px;">
                                                                 
@@ -1313,7 +1313,7 @@
                                         <td style="padding: 0;vertical-align: top;color: #e6e6e6;font-size: 12px;line-height: 22px;text-align: left;width: 400px;">
 
                                             <div class="address" style="font-family: Cabin,Avenir,sans-serif;Margin-bottom: 18px;">
-                                                <div>IguanaTrip.com</div>
+                                                <div>iWaNaTrip.com</div>
                                             </div>
                                             <div class="permission" style="font-family: Cabin,Avenir,sans-serif;">
                                                 <div>Has sido invitado para formar parte de nuestro equipo</div>

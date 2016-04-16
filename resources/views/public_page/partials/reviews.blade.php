@@ -18,8 +18,7 @@ $array[$x] = $reviews[$x]->confirmation_rev_code;
 
 @endfor
 
-<?php $totalCodigos = (array_unique($array)); 
-
+<?php $totalCodigos = (array_unique($array));
 ?>
 
 
@@ -27,23 +26,29 @@ $array[$x] = $reviews[$x]->confirmation_rev_code;
 
 
 <?php
-
-$calificacion = array(); 
-$tipoRev = array(); 
-$nombre="";
-$email="";
-
+$calificacion = array();
+$tipoRev = array();
+$nombre = "";
+$email = "";
 ?>
 
 @foreach ($reviews as $rev)
 
 @if($rev->confirmation_rev_code==$codigos)
 
-<?php $calificacion[] = ($rev->calificacion*$rev->peso_review); 
-        $tipoRev[]=$rev->tipo_review .": ". $rev->calificacion;
-        $nombre=$rev->nombre_reviewer;
-        $email=$rev->email_reviewer;
-        ?>
+<?php
+$calificacion[] = ($rev->calificacion * $rev->peso_review);
+if (session('locale') == 'es') {
+    $tipoRev[] = $rev->tipo_review . ": " . $rev->calificacion;
+} else {
+    $tipoRev[] = $rev->tipo_review_eng . ": " . $rev->calificacion;
+}
+
+
+
+$nombre = $rev->nombre_reviewer;
+$email = $rev->email_reviewer;
+?>
 
 @endif  
 
@@ -58,31 +63,31 @@ $email="";
     </div>
     <div class="comment-content">
         @if($nombre!="")
-        <h5 class="comment-author-name"><a href="#">{!!$nombre!!}</a></h5>
+        <h5 class="comment-author-name"><a style="cursor: pointer">{!!$nombre!!}</a></h5>
         @elseif($email)
-        <h5 class="comment-author-name"><a href="#">{!!$email!!}</a></h5>
+        <h5 class="comment-author-name"><a style="cursor: pointer">{!!$email!!}</a></h5>
         @endif
-        <?php $Totalcalificacion = 0;
-        ?>
+<?php $Totalcalificacion = 0;
+?>
         @foreach ($calificacion as $calif)
-        <?php  $Totalcalificacion= $Totalcalificacion+$calif;
+        <?php $Totalcalificacion = $Totalcalificacion + $calif;
         ?>
-        
+
         @endforeach
-        
-          <?php $Resumencalificacion = "";
-        ?>
+
+<?php $Resumencalificacion = "";
+?>
         @foreach ($tipoRev as $tip)
-        <?php  $Resumencalificacion= $Resumencalificacion.$tip." ";
+        <?php $Resumencalificacion = $Resumencalificacion . $tip . " ";
         ?>
-        
+
         @endforeach
-        
-        <?php  $Resumencalificacion= $Resumencalificacion." =".$Totalcalificacion; ?>
-        <span data-toggle="tooltip" title="{!!$Resumencalificacion!!}" class="star-rating">
+
+<?php $Resumencalificacion = $Resumencalificacion . " =" . $Totalcalificacion; ?>
+        <span style="cursor: pointer" data-toggle="tooltip" title="{!!$Resumencalificacion!!}" class="star-rating">
             <span data-stars="{!!$Totalcalificacion!!}"></span>
         </span>
-        <?php $date = date_create($rev->created_at); ?>
+<?php $date = date_create($rev->created_at); ?>
         <span class="comment-date">{!!date_format($date, 'j F ')!!}</span>
         <div class="description">
             <p>{!!$rev->text_review!!}</p>

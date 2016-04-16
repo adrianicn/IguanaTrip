@@ -97,7 +97,7 @@
                                             @foreach ($imagenes as $imagen)
                                             <?php $header= asset('public/images/fullsize/'.$imagen->filename)?>
                                             <a href="{{ asset('public/images/fullsize/'.$imagen->filename)}}" class="soap-mfp-popup">
-                                                <img src="{{ asset('public/images/fullsize/'.$imagen->filename)}}" alt="">
+                                                <img src="{{ asset('public/images/icon/'.$imagen->filename)}}" alt="{!!$atraccion->nombre_servicio!!}">
                                                 
                                                 @if($imagen->descripcion_fotografia!="")
                                                 <div class="slide-text caption-animated" data-animation-type="slideInLeft" data-animation-duration="2">
@@ -122,23 +122,7 @@
                                             @endforeach
                                      
                                     </div>
-                               <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-                                      <div class="social-wrap">
-                                        <label>Share with friends</label>
-                                        <div class="social-icons">
-                                            <!--<a href="#" class="social-icon"><i class="fa fa-twitter has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                            <a href="#" class="social-icon"><i class="fa fa-facebook has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                            <a href="#" class="social-icon"><i class="fa fa-google-plus has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>-->
-                                            <div class="fb-share-button" data-href="{!!asset('/tokenDc$rip')!!}/{!!$atraccion->id!!}" data-layout="button_count"></div>
-                                        </div>
-                                    </div>
+                            
                                     
                                            @if(isset($explore) && count($explore)>0)
                                     <div class="social-wrap ">
@@ -151,6 +135,23 @@
                                     </div>
                                     @endif
                                     
+                                       <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+                                      <div class="social-wrap">
+                                        <label>{{ trans('publico/labels.label77')}}</label>
+                                        <div class="social-icons">
+                                            <!--<a href="#" class="social-icon"><i class="fa fa-twitter has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
+                                            <a href="#" class="social-icon"><i class="fa fa-facebook has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
+                                            <a href="#" class="social-icon"><i class="fa fa-google-plus has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>-->
+                                            <div class="fb-share-button" data-href="{!!asset('/tokenDc$rip')!!}/{!!$atraccion->id!!}" data-layout="button_count"></div>
+                                        </div>
+                                    </div>
                                     
                                 </div>
                                 <div class="summary entry-summary col-sm-7 box-lg">
@@ -230,8 +231,22 @@
                                 
                                 <!-Info->
                                 <div id="tab3-1" class="tab-content panel entry-content">
-                                    <div class="tab-pane">
+                                      <div class="tab-pane">
+                                        
+                                        @if($atraccion->direccion_servicio!="")
                                         <p>{{ trans('publico/labels.label35')}}: {!!$atraccion->direccion_servicio!!}</p>
+                                        @endif
+                                        
+                                        @if($atraccion->horario!="")
+                                        <p>{{ trans('publico/labels.label75')}}: {!!$atraccion->horario!!}</p>
+                                        @endif
+                                                            @if($atraccion->precio_desde!="")
+                                        <p>{{ trans('publico/labels.label73')}}: {!!$atraccion->precio_desde!!}</p>
+                                        @endif
+                                                            @if($atraccion->precio_hasta!="")
+                                        <p>{{ trans('publico/labels.label74')}}: {!!$atraccion->precio_hasta!!}</p>
+                                        @endif
+                                        
                                         @if($atraccion->telefono!="")
                                         <p>{{ trans('publico/labels.label38')}}: {!!$atraccion->telefono!!}</p>
                                         @endif
@@ -337,9 +352,10 @@
                                    </ol>
                                         </div>
                                         <div id="review_form">
-                                            {!! Form::open(['url' => route('filtersCategoria'),  'id'=>'filter_Category']) !!}
+                                            {!! Form::open(['url' => route('postReviews'),  'id'=>'preview']) !!}
                                                 <a href="#" class="btn btn-sm style4 btn-back-reviews"><i class="fa fa-long-arrow-left"></i>Back To Reviews</a>
                                                 <h3>Review “{!!$atraccion->nombre_servicio!!}”</h3>
+                                                <input type="hidden" name="id_atraccion" id="review_score" value="{!!$atraccion->id!!}">
                                                 <div class="row">
                                                     <div class="col-lg-10">
                                                         <div class="form-group">
@@ -351,9 +367,18 @@
                                                             <input type="text"  name="email_reviewer" class="input-text full-width">
                                                         </div>
                                                          @foreach ($tipoReviews as $rev)
+                                                         <input type="hidden" name="id_tipo_review_{!!$rev->id!!}" id="review_score" value="{!!$rev->id!!}">
                                                         <div class="form-group">
-                                                            <label>{!!$rev->tipo_review!!}</label>
-                                                            <input type="hidden" id="review_score" value="">
+                                                            
+                                                              @if(session('locale') == 'es' )
+                                    <label>{!!$rev->tipo_review!!}</label>
+                                    
+                                    @else
+                                    <label>{!!$rev->tipo_review_eng!!}</label>
+
+                                    @endif
+                        
+                                                            
                                                             <span class="input-star-rating">
                                                                 <input type="radio" value="5" name="review_score_{!!$rev->id!!}">
                                                                 <input type="radio" value="4" name="review_score_{!!$rev->id!!}">
@@ -368,7 +393,9 @@
                                                             <textarea class="input-text full-width" rows="5"></textarea>
                                                         </div>-->
                                                         <div class="form-group">
-                                                            <button class="btn style1" type="submit">Submit Review</button>
+                                                            
+                                                            
+                                                            <a onclick="AjaxContainerRegistroLoadF('preview','tab-pane')" class="btn style1">Submit</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -892,6 +919,31 @@ jQuery(document).ready(function ($) {
 <script type="text/javascript" src="{{ asset('public/public_components/js/main.js')}}"></script>
     <!-- load page Javascript -->
     
+     <script>
+     @if(session('device')!='mobile')
+      $(".maps").dblclick(function () {
+          window.open('https://maps.google.com.ec/maps?saddr=My Location&daddr='  + {!!$atraccion->latitud_servicio!!} + ',' + {!!$atraccion->longitud_servicio!!},"_blank");
+          
+                
+            });
+    
+    @else
+   $(".maps").dblclick(function () {
+    
+    myNavFunc();
+ });
+ 
+ function myNavFunc(){
+    // If it's an iPhone..
+    
+         window.open("maps://maps.google.com/maps?daddr={!!$atraccion->latitud_servicio!!},{!!$atraccion->longitud_servicio!!}");
+    
+}
+ 
+
+
+    @endif
+    </script>
 
    
 

@@ -98,7 +98,7 @@
                                           
                                             <?php $header= asset('images/fullsize/'.$imagen->filename)?>
                                             <a href="{{ asset('images/fullsize/'.$imagen->filename)}}" class="soap-mfp-popup">
-                                                <img src="{{ asset('images/fullsize/'.$imagen->filename)}}" alt="">
+                                                <img src="{{ asset('images/icon/'.$imagen->filename)}}" alt="{!!$atraccion->nombre_servicio!!}">
                                                 
                                                 @if($imagen->descripcion_fotografia!="")
                                                 <div class="slide-text caption-animated" data-animation-type="slideInLeft" data-animation-duration="2">
@@ -123,24 +123,7 @@
                                             @endforeach
                                      
                                     </div>
-                               <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-                                      <div class="social-wrap">
-                                        <label>Share with friends</label>
-                                        <div class="social-icons">
-                                            <!--<a href="#" class="social-icon"><i class="fa fa-twitter has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                            <a href="#" class="social-icon"><i class="fa fa-facebook has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
-                                            <a href="#" class="social-icon"><i class="fa fa-google-plus has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>-->
-                                            <div class="fb-share-button" data-href="http://iguanatrip.com" data-layout="button_count"></div>
-                                        </div>
-                                    </div>
-                                    
+                              
                                            @if(isset($explore) && count($explore)>0)
                                     <div class="social-wrap ">
                                         <label>{{ trans('publico/labels.label29')}}</label>
@@ -151,6 +134,24 @@
                                         </div>
                                     </div>
                                     @endif
+                                     <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+                                      <div class="social-wrap">
+                                        <label>{{ trans('publico/labels.label77')}}</label>
+                                        <div class="social-icons">
+                                            <!--<a href="#" class="social-icon"><i class="fa fa-twitter has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
+                                            <a href="#" class="social-icon"><i class="fa fa-facebook has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
+                                            <a href="#" class="social-icon"><i class="fa fa-google-plus has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>-->
+                                            <div class="fb-share-button" data-href="http://iguanatrip.com" data-layout="button_count"></div>
+                                        </div>
+                                    </div>
+                                    
                                     
                                     
                                 </div>
@@ -913,6 +914,25 @@ jQuery(document).ready(function ($) {
     <!-- load page Javascript -->
     <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
 
+    <script>
+      $(".maps").click(function () {
+                   var daddr = window.location.search.slice(1);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(data){
+        if (data.coords) {
+            //saddr=startadress
+            //daddr=destinationaddress
+          window.open('https://maps.google.com.ec/maps?saddr=My Location&daddr='  + {!!$atraccion->latitud_servicio!!} + ',' + {!!$atraccion->longitud_servicio!!},"_blank");
+        }
+      });
+    }
+    
+                
+            });
+    
+    
+   
+    </script>
    
 
 

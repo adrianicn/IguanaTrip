@@ -3,65 +3,104 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/woocommerce-homepage5.html</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/password.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/listServicesCategoria.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Jobs/Job.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/createNewItinerario.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/modify_dificultades.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/cercanosIntern.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/detalleAtracciones.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/woocommerce-category-list.html</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/createNewItinerario.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/reusable/header.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/mail.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/closeToMe.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/reusable/banner.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Prep/header.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/css/style.css</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Tag.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/shortcode-interactive-banners.html</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Review_Usuario_Servicio.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Prep/reviews.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/modifyEventos_Promociones.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Jobs/InviteFriendsMail.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/homePage.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/searchByHome.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/UsuarioServiciosController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/emails/auth/password.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/emails/auth/VerifyReview.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/reviews.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/server.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/searchcategory.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/portfolio-masonry3.html</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/.env</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Invitaciones_Amigos.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Prep/HomePublicController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Prep/mail_.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/RegistroOperadores/registroStep2.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/woocommerce-category-grid.html</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/en/front/verify.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/config/app.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/eventosAtraccion.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Jobs/VerifyReview.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/AllTopPlaces.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/en/publico/labels.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/PublicServiceRepository.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/RegistroOperadores/registroStep4.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/es/publico/labels.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/listaItinerarios.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/HomeController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Prep/style.css</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Servicio_Establecimiento_Usuario.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Prep/homePage.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Usuario_Operador.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/UbicacionGeografica.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Prep/searchByHome.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/OperadorRepository.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/pages-contact1.html</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/btnLike.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Registro/editEvento.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/listServices.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/ServicioController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/woocommerce-homepage5.html</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/es/front/verify.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Image.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/User.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/cercanosIntern.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Jobs/ChangeLocale.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/detalleAtracciones.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/woocommerce-category-list.html</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Prep/AllTopPlaces.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/closeToMe.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/PostTag.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Jobs/InviteFriendsMail.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/homePage.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/allRegions.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/HomePublicController.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/invitar_amigo.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Prep/custom.css</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Post.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Admin/descripcionProvincia.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Itinerario_Usuario_Servicio.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/ServiciosOperadorRepository.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/reviews.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Prep/mail.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/createNewServicio.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Prep/detalleAtracciones.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/public/js/Compartido.js</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/woocommerce-category-banner.html</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/server.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/portfolio-masonry3.html</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/.env</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/RegistroOperadores/registroStep2.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/woocommerce-category-grid.html</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/config/app.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/public/js/js_public/Compartido.js</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/eventosAtraccion.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/AllTopPlaces.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/en/publico/labels.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/ImageController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/emails/auth/verify.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/js/main.js</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/vendor/laravel/framework/src/Illuminate/Foundation/Bus/DispatchesJobs.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Role.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Promocion_Usuario_Servicio.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Jobs/SendMail.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/public/public_components/js/gmap3.js</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/PublicServiceRepository.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/config/mail.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/lang/es/publico/labels.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/RegistroOperadores/registroStep4.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/front/masterPageServicios.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/listaItinerarios.blade.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/config/mail.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/Auth/AuthController.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Prep/PublicServiceRepository.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/reusable/maps.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Satisfechos_Usuario_Servicio.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/UbicacionGeografica.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/emails/auth/inviteFriend.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/Usuario_Servicio.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/OperadorRepository.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Admin/parroquia.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Models/SearchEngine.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/html/pages-contact1.html</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Registro/listaServiciosUsuario.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Registro/editEvento.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/partials/btnLike.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/listServices.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/routes.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/ServicioController.php</file>
         </group>
     </open-files>
 </project-private>

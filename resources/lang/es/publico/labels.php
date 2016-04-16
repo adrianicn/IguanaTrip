@@ -74,6 +74,54 @@ return [
     'label70' => 'Recomendar +1',
     'label71' => 'Deja un review',
     'label72' => 'Más reviews',
+    'label73' => 'Precio desde: ',
+    'label74' => 'Precio hasta: ',
+    'label75' => 'Horarios: ',
+    'label76' => 'Más filtros',
+    'label77' => 'Comparte con amigos',
+    
+    'label78' => 'Quienes somos',
+    'label79' => 'Nuestra misión',
+    'label80' => 'Términos y condiciones',
+    
+    'label81' => 'Descubre Ecuador',
+    'label82' => 'Interés',
+    
+    'label83' => 'Ocio',
+    'label84' => 'Aventura',
+    'label85' => 'Cultura',
+    'label86' => 'Tours',
+    
+    'label87' => 'Buscar',
+    'label88' => 'Sitios',
+    'label89' => 'Alimentación',
+    'label90' => 'Alojamiento',
+    
+        
+    'label91' => 'Cerca de tí',
+    'label92' => 'Eventos',
+    'label93' => 'Promociones',
+    'label94' => 'Itinerarios',
+    
+    'label95' => 'Operador turístico',
+    'label96' => 'Registra tu servicio',
+    'label97' => 'Servicios',
+    'label98' => 'Beneficios',
+    
+    'label99' => 'Ecuador',
+    'label100' => 'Galápagos',
+    'label101' => 'Australia',
+    
+    'label102' => 'Alemania',
+    'label103' => 'Quito',
+    'label104' => 'Brisbane',
+    'label105' => 'Melbourne',
+    'label106' => 'Berlín',
+    
+    
+    
+    
+    
     'message' => 'Your message',
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];
