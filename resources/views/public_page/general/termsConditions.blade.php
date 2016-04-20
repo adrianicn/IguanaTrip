@@ -6,7 +6,7 @@
         <!-- Page Title -->
         <title>iWanaTrip | Vive la experiencia Ecuador</title>
 
-        <link rel="shortcut icon" href="{{ asset('images/favicon.png')}}" />
+        <link rel="shortcut icon" href="{{ asset('public/images/favicon.png')}}" />
 
         <!-- Meta Tags -->
         <meta charset="utf-8">
@@ -18,32 +18,32 @@
 
         <!-- Theme Styles -->
 
-        <link rel="stylesheet" href="{{ asset('public_components/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('public_components/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/font-awesome.min.css')}}">
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,400italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Dosis:400,300,500,600,700' rel='stylesheet' type='text/css'>
-{!! HTML::style('css/jquery-labelauty.css') !!} 
-        <link rel="stylesheet" href="{{ asset('public_components/css/animate.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.carousel.css')}}" media="screen" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.transitions.css')}}" media="screen" />
+{!! HTML::style('public/css/jquery-labelauty.css') !!} 
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/animate.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/public_components/components/owl-carousel/owl.carousel.css')}}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/public_components/components/owl-carousel/owl.transitions.css')}}" media="screen" />
         <!-- Magnific Popup core CSS file -->
-        <link rel="stylesheet" href="{{ asset('public_components/components/magnific-popup/magnific-popup.css')}}"> 
-        {!!HTML::script('js/sliderTop/jssor.slider.mini.js') !!}
+        <link rel="stylesheet" href="{{ asset('public/public_components/components/magnific-popup/magnific-popup.css')}}"> 
+        {!!HTML::script('public/js/sliderTop/jssor.slider.mini.js') !!}
 
         <!-- Main Style -->
-        <link id="main-style" rel="stylesheet" href="{{ asset('public_components/css/style.css')}}">
+        <link id="main-style" rel="stylesheet" href="{{ asset('public/public_components/css/style.css')}}">
 
         <!-- Updated Styles -->
-        <link rel="stylesheet" href="{{ asset('public_components/css/updates.css')}}">
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/updates.css')}}">
 
         <!-- Custom Styles -->
-        <link rel="stylesheet" href="{{ asset('public_components/css/custom.css')}}">
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/custom.css')}}">
 
         <!-- Responsive Styles -->
-        <link rel="stylesheet" href="{{ asset('public_components/css/responsive.css')}}">
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/responsive.css')}}">
 
 
         <!-- CSS for IE -->
@@ -164,15 +164,13 @@ Donec tempor nibh eget dignissim pulvinar diam tellus malesuada risusu interdum 
         </section>
 
           <footer id="footer" class="style4">
-            <div class="callout-box style2">
+        <div class="callout-box style2">
                 <div class="container">
                     <div class="callout-content">
                         <div class="callout-text">
-                            <h4>{{ trans('publico/labels.label26')}}</h4>
+                            <h4>{{ trans('publico/labels.label119')}}</h4>
                         </div>
-                        <div class="callout-action">
-                            <a onclick="$('.woocommerce').LoadingOverlay('show');" class="btn style4">{{ trans('publico/labels.label27')}}</a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -182,35 +180,37 @@ Donec tempor nibh eget dignissim pulvinar diam tellus malesuada risusu interdum 
 
     <!-- Javascript -->
     
-    {!! HTML::script('js/jquery.js') !!}
-    {!!HTML::script('js/js_public/Compartido.js') !!}
-    {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
-        {!!HTML::script('js/jquery.autocomplet.js') !!}
-        {!!HTML::script('js/Compartido.js') !!}
+{!! HTML::script('public/js/jquery.js') !!}
+    {!!HTML::script('public/js/js_public/Compartido.js') !!}
+    {!!HTML::script('public/js/loadingScreen/loadingoverlay.min.js') !!}
+        {!!HTML::script('public/js/jquery.autocomplet.js') !!}
+        {!!HTML::script('public/js/Compartido.js') !!}
 
-    <script type="text/javascript" src="{{ asset('public_components/js/jquery-2.1.3.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('public_components/js/jquery.noconflict.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('public_components/js/modernizr.2.8.3.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('public_components/js/jquery-migrate-1.2.1.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('public_components/js/jquery-ui.1.11.2.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/public_components/js/jquery-2.1.3.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/public_components/js/jquery.noconflict.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/public_components/js/modernizr.2.8.3.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/public_components/js/jquery-migrate-1.2.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/public_components/js/jquery-ui.1.11.2.min.js')}}"></script>
 
     <!-- Twitter Bootstrap -->
-    <script type="text/javascript" src="{{ asset('public_components/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/public_components/js/bootstrap.min.js')}}"></script>
 
     <!-- Magnific Popup core JS file -->
-    <script type="text/javascript" src="{{ asset('public_components/components/magnific-popup/jquery.magnific-popup.min.js')}}"></script> 
+    <script type="text/javascript" src="{{ asset('public/public_components/components/magnific-popup/jquery.magnific-popup.min.js')}}"></script> 
 
     <!-- parallax -->
-    <script type="text/javascript" src="{{ asset('public_components/js/jquery.stellar.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/public_components/js/jquery.stellar.min.js')}}"></script>
 
     <!-- waypoint -->
-    <script type="text/javascript" src="{{ asset('public_components/js/waypoints.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/public_components/js/waypoints.min.js')}}"></script>
 
     <!-- Owl Carousel -->
-    <script type="text/javascript" src="{{ asset('public_components/components/owl-carousel/owl.carousel.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/public_components/components/owl-carousel/owl.carousel.min.js')}}"></script>
 
     <!-- plugins -->
-    <script type="text/javascript" src="{{ asset('public_components/js/jquery.plugins.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/public_components/js/jquery.plugins.js')}}"></script>
+
+
 
 
 
@@ -388,17 +388,6 @@ Donec tempor nibh eget dignissim pulvinar diam tellus malesuada risusu interdum 
         .jssora12l.jssora12ldn { background-position: -256px -37px; }
         .jssora12r.jssora12rdn { background-position: -315px -37px; }
     </style>
-@else
-  <script>
-
-
-jQuery(document).ready(function ($) {
-   $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/eat.jpg")!!})');
-   
-});
-  
-
-</script>
     @endif
     
     
@@ -408,7 +397,7 @@ jQuery(document).ready(function ($) {
     
     
     <!-- load page Javascript -->
-    <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/public_components/js/main.js')}}"></script>
 
 
 </body>

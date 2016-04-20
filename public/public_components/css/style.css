@@ -3454,7 +3454,7 @@ ul.filter-categories > li li:last-child {
 
 .post-slider.style4 .caption, .parallax .caption {
   line-height: 1em;
-  text-transform: uppercase;
+  
   -webkit-border-radius: 1.25em 1.25em 1.25em 1.25em;
   -moz-border-radius: 1.25em 1.25em 1.25em 1.25em;
   -ms-border-radius: 1.25em 1.25em 1.25em 1.25em;
@@ -9219,7 +9219,7 @@ ul.filter-options li:hover a, ul.filter-options li.active a {
 }
 
 .parallax-image2 {
-  background-image: url("http://placehold.it/1920x1280");
+  background-image: url("../../img/chimborz.jpg");
   height: 488px;
 }
 

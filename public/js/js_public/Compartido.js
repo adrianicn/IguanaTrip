@@ -420,7 +420,7 @@ function GetDataAjaxCloseIntern(url) {
 }
 
 
-
+//se utiliza esta funcion para hacer un append del contenido que llega
 window.current_pageSeCatApp=1;
 
 function GetDataAjaxSearchCatogoriesApp(url) {
@@ -450,6 +450,40 @@ function GetDataAjaxSearchCatogoriesApp(url) {
         }
     });
 }
+
+
+//se utiliza esta funcion para hacer un append del contenido que llega
+window.current_pageSet=1;
+
+function GetDataAjaxSearchTotApp(url) {
+    $(".SearchTotalPartial").LoadingOverlay("show");
+    $.ajax({
+        type: 'GET',
+        url: url,
+            data:{
+            'page': window.current_pageSet + 1 // you might need to init that var on top of page (= 0)
+            },
+        dataType: 'json',
+        success: function (data) {
+            window.current_pageSet=current_pageSet+1;
+            
+            $(".SearchTotalPartial").append(data.SearchTotalPartial);
+            $(".SearchTotalPartial").LoadingOverlay("hide", true);
+
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
 
 
 window.current_pageSet=0;

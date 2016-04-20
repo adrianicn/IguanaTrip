@@ -93,7 +93,7 @@
                                 </ul>
                             </nav>
                             <div class="copyright">
-                                &copy; 2015 IguanaTrip <em>by</em> <a href="http://www.iguanatrip.com"> IguanaTrip Group</a>
+                                &copy; 2015 iWaNaTrip <em>by</em> <a href="http://www.iwanatrip.com"> iWaNaTrip Group</a>
                             </div>
                         </div>
                     </div>

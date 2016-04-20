@@ -23,12 +23,13 @@
                                 <li class="mini-search">
                                     <a href="#"><i class="fa fa-search has-circle"></i></a>
                                     <div class="main-nav-search-form">
-                                        <form method="get" role="search">
+                                        
+                                        {!! Form::open(['url' => route('min-search'),  'method' => 'get', 'id'=>'min-search']) !!}
                                             <div class="search-box">
                                                 <input type="text" id="s" name="s" value="">
                                                 <button type="submit"><i class="fa fa-search"></i></button>
                                             </div>
-                                        </form>
+                                        {!! Form::close() !!}
                                     </div>
                                 </li>
 
@@ -40,9 +41,9 @@
                                 <li class="menu-item-has-children">
                                     <a>{{ trans('publico/labels.label1')}}</a>
                                     <ul class="sub-nav">
-                                        <li><a href="index.html">{{ trans('publico/labels.label78')}}</a></li>
-                                        <li><a href="index.html">{{ trans('publico/labels.label79')}}</a></li>
-                                        <li><a href="{!!asset('/getTermsConditions')!!}" >{{ trans('publico/labels.label80')}}</a></li>
+                                        <li><a href="{!!asset('/AboutUs')!!}">{{ trans('publico/labels.label78')}}</a></li>
+                                        <li><a href="{!!asset('/Mision')!!}">{{ trans('publico/labels.label79')}}</a></li>
+                                        <li><a href="{!!asset('/TermsConditions')!!}" >{{ trans('publico/labels.label80')}}</a></li>
                                         
                                     </ul>
                                 </li>

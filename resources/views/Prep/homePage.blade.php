@@ -137,16 +137,16 @@
                                  data-start="1500" data-speed="600" data-y="630" data-x="center"
                                  class="tp-caption sfr str start">
 
-                                <form>
+                                {!! Form::open(['url' => route('min-search'),  'method' => 'get', 'id'=>'min-search']) !!}
                                     @if(session('device')!='mobile')
-                                    <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" type="text" value="" name="search" id="search">
+                                    <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" type="text" value="" name="s" id="s">
                                     @else
-                                    <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" style="font-size: 12px;" type="text" value="" name="search" id="search">
+                                    <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" style="font-size: 12px;" type="text" value="" name="s" id="s">
                                     @endif
 
                                     <input class="sb-search-submit" type="submit" value="">
                                     <span class="sb-icon-search"></span>
-                                </form>
+                                {!! Form::close() !!}
                             </div>
                         </li>
                     </ul>

@@ -1706,6 +1706,85 @@ class PublicServiceRepository extends BaseRepository {
        
     }
     
+     //Motor de busqueda
+    public function getSearchTotal($term) {
+
+
+
+        $query = DB::table('searchengine')
+                ->whereRaw("match(search) against ('" . $term . "')")
+                ->orWhere('searchengine.search', 'like', "%" . $term)
+                ->orWhere('searchengine.search', 'like', $term . "%")
+                ->orWhere('searchengine.search', 'like', "%" . $term . "%")
+                ->select('searchengine.id_usuario_servicio','searchengine.tipo_busqueda')
+                ->get();
+
+
+        return $query;
+    }
+    
+    
+        public function getDespliegueBusqueda($codigos, $pagination,$tipoBusqueda) {
+
+        /* Se despliegan las imagenes de los codigos encontrados en las busquedas
+         *          */
+        
+             $array1 = array();
+
+            foreach ($codigos as $to) {
+          
+                if($to->tipo_busqueda==$tipoBusqueda)
+                    $array[] = $to->id_usuario_servicio;
+            }
+
+        
+            $servicio = DB::table('usuario_servicios')
+                            ->where('usuario_servicios.estado_servicio', '=', '1')
+                            ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                    ->whereIn('usuario_servicios.id', $array)
+                            ->select('usuario_servicios.id')
+                            ->orderBy('usuario_servicios.num_visitas', 'desc')
+                            ->get();
+        
+        if ($servicio != null) {
+            $array = array();
+            $array1 = array();
+
+            foreach ($servicio as $to) {
+                $imagenes = DB::table('images')
+                        ->where('images.id_auxiliar', '=', $to->id)
+                        ->where('estado_fotografia', '=', '1')
+                        ->where('id_catalogo_fotografia', '=', '1')
+                        ->select('images.id')
+                        ->first();
+
+                if ($imagenes != null)
+                    $array1[] = $imagenes->id;
+            }
+
+      
+            $imagenes = DB::table('images')
+                    ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                    ->leftJoin('satisfechos_usuario_servicio', 'usuario_servicios.id', '=', 'satisfechos_usuario_servicio.id_usuario_servicio')
+                    ->where('estado_fotografia', '=', '1')
+                    
+                    ->whereIn('images.id', $array1)
+                    
+                    ->select(array('usuario_servicios.id as id_usr_serv', 'satisfechos_usuario_servicio.id_usuario_servicio', 'usuario_servicios.*', 'images.*', DB::raw('COUNT(satisfechos_usuario_servicio.id_usuario_servicio) as satisfechos')))
+                    ->groupby('usuario_servicios.id')
+                    ->orderBy('usuario_servicios.prioridad', 'desc')
+                    ->orderBy('usuario_servicios.num_visitas', 'desc')
+                    ->paginate($pagination);
+
+
+
+
+
+            return $imagenes;
+        }
+        return null;
+    }
+    
     //Obtiene las top n places de cada provincia
     public function getTopPlaces($n,$region) {
 

@@ -45,16 +45,21 @@ class SearchController extends Controller {
     
     //Obtiene los terminos y condiciones
     public function getTermsConditions() {
-         
-       
-        
         $view = View::make('public_page.general.termsConditions');
-        
-            
         return $view;
+    }
+
         
+    public function getAboutUs() {
+        $view = View::make('public_page.general.aboutUs');
+        return $view;
     }
     
+      public function getMision() {
+        $view = View::make('public_page.general.misionVision');
+        return $view;
+    }
+
     public function getTotalSearchInside(Request $request, PublicServiceRepository $gestion, $term) {
         //
 
@@ -64,7 +69,7 @@ class SearchController extends Controller {
          if($busquedaTotal!=null)
          {
              
-             $despliegue = $gestion->getDespliegueBusqueda($busquedaTotal,10,4);
+             $despliegue = $gestion->getDespliegueBusqueda($busquedaTotal,1,4);
          }
         
         
@@ -83,23 +88,9 @@ class SearchController extends Controller {
     
     
 
-    public function postLikesS(Request $request, PublicServiceRepository $gestion) {
+    public function postSearch(Request $request, PublicServiceRepository $gestion) {
 
 
-        $inputData = Input::get('formData');
-        parse_str($inputData, $formFields);
-
-        $ip = $this->getIp();
-        $likesIP = $gestion->getlikesIp($formFields['ids'], $ip);
-
-        if (count($likesIP) == 0 || $likesIP == null) {
-            $gestion->storeLikes($formFields['ids'], $ip);
-        }
-
-
-        //obtengo los servicios ya almacenados de la bdd
-
-        return response()->json(array('success' => true));
-    }
+    $this->getSearchTotal($request, $gestion);}
 
 }

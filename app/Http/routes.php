@@ -269,7 +269,10 @@ Route::get('/getReviews/{id_atraccion}', ['as' => 'getReviews', 'uses' => 'HomeP
 Route::get('/getSearchTotal/{term}', ['as' => 'SearchTotal', 'uses' => 'SearchController@getSearchTotal']);
 Route::get('/getSearchTotalPartial/{term}', ['as' => 'SearchTotalPartial', 'uses' => 'SearchController@getTotalSearchInside']);
 
-Route::get('/getTermsConditions', ['as' => 'SearchTotalPartial', 'uses' => 'SearchController@getTermsConditions']);
+Route::get('/TermsConditions', ['as' => 'SearchTotalPartial', 'uses' => 'SearchController@getTermsConditions']);
+Route::get('/AboutUs', ['as' => 'SearchTotalPartial', 'uses' => 'SearchController@getAboutUs']);
+Route::get('/Mision', ['as' => 'SearchTotalPartial', 'uses' => 'SearchController@getMision']);
         
+Route::get('Search', ['as' => 'min-search', 'uses' =>'SearchController@getSearchTotal']);
 
  /*  Fin de las rutas del sistema publico*/

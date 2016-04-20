@@ -54,8 +54,7 @@ class HomePublicController extends Controller {
 
         Session::put('device', $desk);
         
-        return view('public_page.front.homePage')->with('location', $location)
-        ;
+        return view('public_page.front.homePage')->with('location', $location);
     
     }
 
@@ -258,6 +257,7 @@ class HomePublicController extends Controller {
         else {
             $desk = "desk";
         }
+        $id_provincia=2;
 
         Session::put('device', $desk);
         $provincias = $gestion->getProvinciaDetails($id_provincia);

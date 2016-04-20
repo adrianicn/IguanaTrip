@@ -103,16 +103,16 @@
         <section id="content">
             <div class="container">
                 <div class="row">
-                    {!! Form::open(['url' => route('filtersCategoria'),  'id'=>'filter_Category']) !!}
+                    
                     <div class="sidebar col-sm-4 col-md-3">
                         <div class="widget box">
-                            <h4>{{ trans('publico/labels.label66')}}</h4>
+                            <h4>{{ trans('publico/labels.label120')}}</h4>
                              
                         <div class="main-mini-search-form full-width box">
                             
                                 <div class="search-box">
-                                    <input type="text" placeholder="Search" name="searchCity" value="Quito" class="searchCity">
-                                    <span><i class="fa fa-map-marker" title="Search location" style="cursor: pointer"></i></span>
+                                    <input type="text" placeholder="Search" name="searchTot" value="" class="searchTot">
+                                    <span><i class="fa fa-search" title="Search" style="cursor: pointer"></i></span>
                                 </div>
                             
                         </div>
@@ -140,18 +140,7 @@
                             </ul>
                             @endif
                         </div>
-                        
-                     
-                        
-                        
-                 
-                        
-                        <div class="post-pagination">
-                            <div class="text-center">
-                                <a  class="btn style4 hover-blue load-more filter" onclick="AjaxContainerRegistroWithLoadFilter('filter_Category','Searchcategorias')">{{ trans('publico/labels.label67')}}</a>
-                                
-                            </div>
-                        </div>
+                   
                             
 
                          @if(session('device')!='mobile')
@@ -169,7 +158,7 @@
                       
 
                         <div class="widget box">
-                            <h4>Best Sellers</h4>
+                            <h4>{{ trans('publico/labels.label121')}}</h4>
                             <ul class="product-list-widget">
                                 <li>
                                     <div class="product-image">
@@ -217,7 +206,7 @@
                         </div>
                            @endif
                     </div>
-                    {!! Form::close() !!}
+                    
                     <div id="main" class="col-sm-8 col-md-9">
                         @if(session('device')!='mobile')
                         <div class="image-banner box">
@@ -506,17 +495,6 @@
         .jssora12l.jssora12ldn { background-position: -256px -37px; }
         .jssora12r.jssora12rdn { background-position: -315px -37px; }
     </style>
-@else
-  <script>
-
-
-jQuery(document).ready(function ($) {
-   $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/eat.jpg")!!})');
-   
-});
-  
-
-</script>
     @endif
     
     
@@ -534,8 +512,9 @@ jQuery(document).ready(function ($) {
 }
             $(document).ready(function () {
                 
-                  var valor=$.urlParam('s');
                 
+                  var valor=$.urlParam('s');
+                $(".searchTot ").val(valor);
                 
                 GetDataAjaxSearchTotal("{!!asset('/getSearchTotalPartial')!!}/"+valor);
                
@@ -543,28 +522,27 @@ jQuery(document).ready(function ($) {
             
               
             $(".fa-search").click(function () {
-                window.current_pageSeCat=0;
-                var valor=$(".searchCity ").val();
+                window.current_pageSet=0;
+                var valor=$(".searchTot ").val();
+                GetDataAjaxSearchTotal("{!!asset('/getSearchTotalPartial')!!}/"+valor);
             });
             
-                    $( ".searchCity" ).change(function() {
-                        window.current_pageSeCat=0;
-                var valor=$(".searchCity ").val();
-          
-});
 
-$('.searchCity').keypress(function (e) {
+
+$('.searchTot').keypress(function (e) {
  var key = e.which;
  if(key == 13)  // the enter key code
   {
-      window.current_pageSeCat=0;
-      var valor=$(".searchCity ").val();
+      window.current_pageSet=0;
+                var valor=$(".searchTot ").val();
+                GetDataAjaxSearchTotal("{!!asset('/getSearchTotalPartial')!!}/"+valor);
          }
 }); 
             </script>
 <script>
    $(".moreImg").click(function () {
-                var valor=$(".searchCity ").val();
+                   var valor=$(".searchTot ").val();
+                GetDataAjaxSearchTotApp("{!!asset('/getSearchTotalPartial')!!}/"+valor);
             });
 
           

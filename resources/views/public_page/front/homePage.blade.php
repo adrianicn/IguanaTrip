@@ -99,7 +99,7 @@
                                 class="tp-caption lft fadeout tp-resizeme start">
                                 @if(session('device')!='mobile')
                                 <h2 class="caption-xl" >
-                                    Embarcate en una aventura en Ecuador y acompañanos a descubrirlo.
+                                  Transforma cada instante de la vida en una aventura.
                                 </h2>
                                 @else
                                 <h2 class="caption-xl" style="font-size: 40px;">
@@ -138,23 +138,27 @@
                                  data-start="1500" data-speed="600" data-y="630" data-x="center"
                                  class="tp-caption sfr str start">
 
-                                <form>
+                                
+                                  
+                                            
+                                        
+                                {!! Form::open(['url' => route('min-search'),  'method' => 'get', 'id'=>'min-search']) !!}
                                     @if(session('device')!='mobile')
-                                    <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" type="text" value="" name="search" id="search">
+                                    <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" type="text" value="" name="s" id="s">
                                     @else
-                                    <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" style="font-size: 12px;" type="text" value="" name="search" id="search">
+                                    <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" style="font-size: 12px;" type="text" value="" name="s" id="s">
                                     
                                     @endif
 
                                     <input class="sb-search-submit" type="submit" value="">
-                                    <span class="sb-icon-search"></span>
-                                </form>
+                                    <button type="submit"><span class="sb-icon-search"></span></button>
+                                {!! Form::close() !!}
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-              @if($location->city!="")
+              @if($location->city!=""&& $location->country=="EC")
             <?php
             $titulo = $location->city;
             ?>

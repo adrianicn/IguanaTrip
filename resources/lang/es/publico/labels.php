@@ -118,6 +118,29 @@ return [
     'label105' => 'Melbourne',
     'label106' => 'Berlín',
     
+    'label107' => 'LO QUE QUIERA QUE HAGAS... DA LO MEJOR!',
+    'label108' => 'Bienvenido a iWaNaTrip',
+    
+    
+    'label109' => 'Usuarios activos',
+    'label110' => 'Tazas de café',
+    'label111' => 'Operadores turísticos satisfechos',
+    'label112' => 'Líneas de código',
+    
+    'label113' => 'Viajero',
+    'label114' => 'Búsqueda iWanaTrip',
+    'label115' => 'Contacto directo con el operador',
+    'label116' => 'Sin intermediarios',
+    
+    'label117' => 'Nuestra Misión',
+    'label118' => 'Nuestra Visión',
+    'label119' => 'Vive la experiencia de viajar en Ecuador con iWaNaTrip',
+    
+    'label120' => 'Búsqueda',
+    
+    'label121' => 'Más visitados',
+    
+    
     
     
     
