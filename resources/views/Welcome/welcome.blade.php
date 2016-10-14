@@ -107,28 +107,12 @@
 
         <!-- Background Slides -->
         <div id="maximage">
-            <div>
-                <img src="{!! ('img/index-fondo.jpg')!!}" alt="" />
-
-                <img class="gradient" src="{!! ('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
-            </div>
-            <div>
-                <img src="{!! ('img/cotopaxi.jpg')!!}" alt="" />
-                <img class="gradient" src="{!! ('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
-            </div>
-
+          
             <div>
                 <img src="{!! ('img/galapagos2.jpg')!!}" alt="" />
                 <img class="gradient" src="{!! ('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
             </div>
-            <div>
-                <img src="{!! ('img/quito.jpg')!!}" alt="" />
-                <img class="gradient" src="{!! ('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
-            </div>
-            <div>
-                <img src="{!! ('img/ecuador2.jpg')!!}" alt="" />
-                <img class="gradient" src="{!! ('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
-            </div>
+           
         </div>
 
         {!!HTML::script('js/jquery.js') !!}

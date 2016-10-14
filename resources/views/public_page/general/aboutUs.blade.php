@@ -120,9 +120,9 @@
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-4">
-                            <h3>iWanaTrip</h3>
-                            <p>Vivamus non mollis quam, eget ultricies neque. Praesent nec risus pellentesque, pharetra lorem eget, sodales tellus. Fusce et luctus tellus, vel ornare justo. Praesent luctus turpis eget tincidunt pulvinar. Ut ut elementum velit. Nam vel magna quis tellus varius dignissim feugiat non risus. Mauris vitae blandit libero, a porta sapien.</p>
-                            <p>Aliquam hendrerit a augue in suscipi pellentesqu id erat quis sapien dignissim sollicitudin. Nulla mattis tortor sit amet dolor sollicitudin aliquam. Integer viverra odio lectus sedisro mattis placerat. Vivamus sed risus et erat placerat auctor. Nulla facilisi. Integer eleifend pharetra purus.</p>
+                            <h3>iWaNaTrip</h3>
+                            <p>iWaNaTrip es el primer motor de búsqueda dedicado exclusivamente a servicios turísticos. A través de iWaNaTrip el turista encontrará información detallada de su próximo destino y a la vez podrá conectarse directamente con los operadores turísticos locales. Nuestro motor de búsqueda permitirá encontrar todas las respuestas que un turista necesita saber de una forma transparente y confiable.</p>
+                            
                             
                         </div>
                     </div>

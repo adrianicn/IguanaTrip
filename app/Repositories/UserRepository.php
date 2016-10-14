@@ -45,6 +45,7 @@ class UserRepository extends BaseRepository
 
 			$user->username = $inputs['username'];
 			$user->email = $inputs['email'];
+                        
 
 			if(isset($inputs['role'])) {
 				$user->role_id = $inputs['role'];	
@@ -135,6 +136,7 @@ class UserRepository extends BaseRepository
 		$user = new $this->model;
 
 		$user->password = bcrypt($inputs['password']);
+                $user->valid = true;
 
 		if($confirmation_code) {
 			$user->confirmation_code = $confirmation_code;

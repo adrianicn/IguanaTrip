@@ -15,7 +15,7 @@
         <link rel="shortcut icon" href="favicon.ico" />
         <link rel="apple-touch-icon" href="{{ asset('images/favicon.png')}}" />        
 
-       
+       <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
             
     </head>
      {!! HTML::style('css/demo.css') !!} 
@@ -89,16 +89,14 @@
                 <div id="menu">
                     <div id="menu-ul">
                         <ul id="seleccionitem">
-                            <li><a href="{!!asset('/')!!}">{{ trans('welcome/index.home') }}</a></li>
-                            <li><a href="#" onclick="window.location.href = '{!!asset('/terminos')!!}'">{{ trans('welcome/index.labelTerminos') }}</a></li>
-                            <li><a href="#" onclick="window.location.href = '{!!asset('/acerca')!!}'">{{ trans('welcome/index.labelAcercaDe') }}</a></li>
+                            <li><a href="{!!asset('/myProfileOp')!!}">{{ trans('welcome/index.home') }}</a></li>
                             <li><a href="#" onclick="window.location.href = '{!!asset('/myProfileOp')!!}'">Mi perfil</a></li>
-                            <li><a href="#" onclick="window.location.href = '{!!asset('/contactAdmin')!!}'">Contacto</a></li>                            
                             @if(session('statut')=='admin')
-                            
+                            <!-- Bullet Navigator 
                             <li><a href="#" onclick="window.location.href = '{!!asset('/getProvinciasDescipcion')!!}'">Descr. Provincias</a></li>
                             <li><a href="#" onclick="window.location.href = '{!!asset('/getCantonesDescipcion')!!}'">Cantones</a></li>
-                            <li><a href="#" onclick="window.location.href = '{!!asset('/getParroquiaDescipcion')!!}'">Parroquia</a></li>
+                            <li><a href="#" onclick="window.location.href = '{!!asset('/getParroquiaDescipcion')!!}'">Parroquia</a></li>-->
+                            
                             <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
                             
                             @endif
@@ -118,15 +116,18 @@
             <div class="auspciantes" >
                 
 <img data-u="image" src="{{ asset('img/internas/logos-base-blanco.png')}}" />
+
             </div>
 
             <div id="footers">
                 <div id="menu-ul">
                     <ul id="seleccionitem">
-                            <li><a href="{!!asset('/')!!}">Home</a></li>
-                            <li><a href="#" onclick="window.location.href = '{!!asset('/terminos')!!}'">{{ trans('welcome/index.labelTerminos') }}</a></li>
-                            <li><a href="#" onclick="window.location.href = '{!!asset('/acerca')!!}'">{{ trans('welcome/index.labelAcercaDe') }}</a></li>
-<li><a href="#" onclick="window.location.href = '{!!asset('/contactAdmin')!!}'">Contacto</a></li>                            
+                            <li><a href="{!!asset('/myProfileOp')!!}">Home</a></li>
+                            <li><a href="#" onclick="window.location.href = '{!!asset('/TermsConditions')!!}'">{{ trans('welcome/index.labelTerminos') }}</a></li>
+                            <li><a href="#" onclick="window.location.href = '{!!asset('/AboutUs')!!}'">{{ trans('welcome/index.labelAcercaDe') }}</a></li>
+                           <li><a href="#" onclick="window.location.href = '{!!asset('/contactAdmin')!!}'">Contacto</a></li>                            
+                            
+                            
                             <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
 
                     </ul>
@@ -135,8 +136,9 @@
             
                <div class="copyr" >
                 
-                  <span id="uxp_ftr_link_trademark">                  © 2015 IguanaTrip Group All rights reserved                </span>
+                  <span id="siteseal"><script type="text/javascript" src="https://seal.starfieldtech.com/getSeal?sealID=bd5KnY2paK8E4hs3jWowi27DXIZfIrdDodFWtM9AqFpjC6kYEYo4NK4wSjVC"></script></span> <span id="uxp_ftr_link_trademark">                  © 2016 iWanaTrip.com Group All rights reserved                </span> 
             </div>
+                
 
 
 
@@ -191,6 +193,29 @@
             //responsive code end
         });
     </script>
+    
+     <script type="text/javascript">
+  tinymce.init({
+      
+    selector: '#detalle_servicio',
+      setup : function(ed) {
+          ed.onChange.add(function() {
+        $('#changed').val(1);
+    });
+   },
+     menubar:false,
+    statusbar: false,
+    width: 390,
+    height: 150,
+    plugins: [
+      'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+      'save table contextmenu directionality emoticons template paste textcolor'
+    ],
+    content_css: 'css/content.css',
+    toolbar: 'styleselect | bold italic | alignleft aligncenter alignright alignjustify '
+  });
+  </script>
     
     <style>
         

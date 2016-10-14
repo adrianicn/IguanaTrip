@@ -204,6 +204,7 @@ class OperadorRepository extends BaseRepository
 	{
 		$usuarioServicio->nombre_servicio = $inputs['nombre_servicio'];
 		$usuarioServicio->detalle_servicio = $inputs['detalle_servicio'];
+                $usuarioServicio->detalle_servicio_eng = $inputs['detalle_servicio_eng'];
  		$usuarioServicio->estado_servicio_usuario = 1;
  		$usuarioServicio->estado_servicio = 1;
  		$usuarioServicio->id_catalogo_servicio = $inputs['id_catalogo_servicio'];
@@ -232,6 +233,7 @@ class OperadorRepository extends BaseRepository
 		return  $usuarioServicio::where('id',$inputs['id_usuario_servicio'])
 									->update(['nombre_servicio'=>$inputs['nombre_servicio'],
 											'detalle_servicio'=>$inputs['detalle_servicio'],
+                                                                            'detalle_servicio_eng'=>$inputs['detalle_servicio_eng'],
 											'precio_desde'=>$inputs['precio_desde'],
 											'precio_hasta'=>$inputs['precio_hasta'],
 //											'precio_anterior'=>$inputs['precio_anterior'],

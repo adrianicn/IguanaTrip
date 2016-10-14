@@ -192,7 +192,15 @@
                                     @elseif($atraccion->id_catalogo_servicio==4)
                                     <img src="{{ asset('public/img/ic_serv/centro_turistico.png')}}" title="Turismo" alt="turismo">
                                     @endif
-                                    <p class="mores">{!!$atraccion->detalle_servicio!!}</p>
+                                       @if(session('locale') == 'es' )
+                                        <p class="mores">{!!$atraccion->detalle_servicio!!}</p>
+                                        @elseif(session('locale') == 'en' && $atraccion->detalle_servicio_eng!='') 
+                                        <p class="mores">{!!$atraccion->detalle_servicio_eng!!}</p>
+                                        @else
+                                        <p class="mores">{!!$atraccion->detalle_servicio!!}</p>
+
+                                        @endif
+                                    
                                     <div class="clearfix box" style=" width: 90%;  margin-left: 10%;">
                                             <div class="col-xs-12 col-lg-6">
                                                 

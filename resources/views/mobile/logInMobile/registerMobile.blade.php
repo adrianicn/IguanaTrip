@@ -23,7 +23,7 @@
 
             <!-- Header -->
             <header id="header" class="alt">
-                <h1><a href="index.html">IguanaTrip</a></h1>
+                <h1><a href="index.html">iWaNaTrip</a></h1>
 
             </header>
           

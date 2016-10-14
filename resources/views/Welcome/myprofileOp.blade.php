@@ -90,8 +90,8 @@ $operadorid3=$operadores->id_usuario_op;?>
                 <p>
                     Para crear tu perfil haz click aquí e ingresa los servicios turisticos que ofreces completamente gratis.</p>
                 <div class="box-content-button">
-                    <a class="button" onclick="window.location.href = '{!!asset('/')!!}'" href="#">Crear perfil</a>
-                </div>
+                          <a class="button" onclick="$('#tipo_operador').val(3);$('#operador_id').val({!!$operadorid3!!});AjaxContainerRegistro('registro_step1')" href="#">{{$label_tipo_operador_persona}}</a>
+            </div>
             </div>
         </div>
         @endif

@@ -75,6 +75,12 @@ class ServicioController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Guard $auth, OperadorRepository $operador_gestion) {
+        
+        if ($this->auth->guest())
+        {
+            
+            
+        }
         if ($auth->check()) {
 
             $listOperadores = $operador_gestion->getOperador($auth->user()->id);
@@ -97,17 +103,27 @@ class ServicioController extends Controller {
     
     public function getMyProfileOp(Guard $auth, OperadorRepository $operador_gestion) {
         //
+       
         if ($auth->check()) {
-            
-
+          
             $listOperadores = $operador_gestion->getOperador($auth->user()->id);
-            $view = view('Welcome.myprofileOp', compact('listOperadores')); // revisar debe redirecccionar a otro lado
+            if($listOperadores)
+                
+            {$view = view('Welcome.myprofileOp', compact('listOperadores')); }
+            else
+            {
+             $view = view('userservice');    
+                
+            }
+            
         } else {
             $view = view('auth.completeRegister');
         }
         return $view;
     }
 
+    
+    
     
 
     public function step2(Guard $auth, OperadorRepository $operador_gestion) {
@@ -215,7 +231,7 @@ class ServicioController extends Controller {
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
     
-    public function postTipoOperadoresProfile(Request $request, OperadorRepository $operador_gestion) {
+    public function postTipoOperadoresProfile(Guard $auth,Request $request, OperadorRepository $operador_gestion) {
 
         Session::forget('operador_id');
         $inputData = Input::get('formData');
@@ -223,9 +239,22 @@ class ServicioController extends Controller {
         $request->session()->put('tip_oper', $formFields['tipo_operador']);
         $request->session()->put('operador_id', $formFields['operador_id']);
       
-        $returnHTML = ('detalleServicios');
         
-        return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+        
+        $listOperadores = $operador_gestion->getOperador($auth->user()->id);
+            if($listOperadores)
+                
+            {  
+                $returnHTML = ('userservice');
+                }
+            else
+            {
+    
+                $returnHTML = ('detalleServicios');
+            }
+
+        return response()->json(array('success' => true, 'redirectto' => $returnHTML)); 
+
     }
 
     private function getIp() {
@@ -262,6 +291,7 @@ class ServicioController extends Controller {
         $usuarioServicioData = array(
                 'nombre_servicio' => $formFields['nombre_servicio'],
                 'detalle_servicio' => $formFields['detalle_servicio'],
+            'detalle_servicio_eng' => $formFields['detalle_servicio_eng'],
                 'precio_desde' => $formFields['precio_desde'],
                 'precio_hasta' => $formFields['precio_hasta'],
     //    			'precio_anterior' => $formFields['precio_anterior'],

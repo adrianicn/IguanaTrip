@@ -6,6 +6,7 @@
 <div style='display:none'>
     <img src="{!! asset('img/x.png')!!}" alt='' />
 </div>
+
 <style>
     #simplemodal-container a.modalCloseImg {
         background:url("{!! asset('img/x.png')!!}") no-repeat;
@@ -21,6 +22,8 @@ $operadorName = "";
 $usuarioServicio->id = 0;
 $usuarioServicio->nombre_servicio = '';
 $usuarioServicio->detalle_servicio = '';
+$usuarioServicio->detalle_servicio_eng = '';
+
 $usuarioServicio->precio_desde = '';
 $usuarioServicio->tags = '';
 $usuarioServicio->precio_hasta = '';
@@ -58,6 +61,7 @@ $usuarioServicio->longitud_servicio = -78.46783820000002;
 $usuarioServicio->id = $detalles->id;
 $usuarioServicio->nombre_servicio = trim($detalles->nombre_servicio);
 $usuarioServicio->detalle_servicio = trim($detalles->detalle_servicio);
+$usuarioServicio->detalle_servicio_eng = trim($detalles->detalle_servicio_eng);
 $usuarioServicio->precio_desde = trim($detalles->precio_desde);
 $usuarioServicio->precio_hasta = trim($detalles->precio_hasta);
 $usuarioServicio->precio_anterior = trim($detalles->precio_anterior);
@@ -125,27 +129,25 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
     <div id="title-box-header-navigation">
 
         <h2 class="head-title-navigation">
-            <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios')!!}'"> 
-                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
             <a class="button-step4" onclick="window.location.href = '{!!asset('/operador')!!}'"> 
-                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 2 </strong></a>
+                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Mi info </strong></a>
             <a class="button-step4" onclick="window.location.href = '{!!asset('/userservice')!!}'"> 
-                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 3 </strong></a>
+                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Agregar servicio </strong></a>
             <a class="button-step4" onclick="window.location.href = '{!!asset('/detalleServicios')!!}'"> 
-                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 4 </strong></a>
+                <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Mis servicios </strong></a>
             <a class="button-step4 "> 
                 <div style="color:#F26803; display: block;
                      font-size: 0.9em;
                      font-weight: normal;
                      line-height: 31px;
-                     text-indent: 31px;"> Paso 5 </div></a>
+                     text-indent: 31px;"> Detalle {!!$Servicio->nombre_servicio!!}</div></a>
         </h2>
     </div>
     
     <div id="space"></div>
 
     <div class="wrapper uwa-font-aa">
-        {!!$Servicio->nombre_servicio!!}
+        
         {!! Form::open(['url' => route('upload-postusuarioservicios'), 'method' => 'post', 'role' => 'form', 'id'=>'registro_step1'] ) !!}
         <input type="hidden" value="{!!$usuarioServicio->id!!}" name="id" id="id">
         <input type="hidden" value="{!!$id_catalogo!!}" name="id_catalogo" id="id_catalogo">
@@ -219,6 +221,14 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 <div class="form-group-2">
                     {!!Form::label('detalle_servicio_1', 'Detalle Servicio', array("title"=>"Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.",'class'=>'control-label-1'))!!}
                     <textarea id="detalle_servicio" name="detalle_servicio" class="ptm chng" placeholder="Detalle Servicio" title="Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.">{!!trim($usuarioServicio->detalle_servicio)!!}</textarea>
+                    
+                    
+                </div>
+                <div class="form-group-2">
+                    {!!Form::label('detalle_servicio_1', 'Detalle Servicio Inglés', array("title"=>"Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.",'class'=>'control-label-1'))!!}
+                    <textarea id="detalle_servicio_eng" name="detalle_servicio_eng" class="ptm chng" placeholder="Detalle Servicio" title="Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.">{!!trim($usuarioServicio->detalle_servicio_eng)!!}</textarea>
+                    
+                    
                 </div>
                 
                 <div class="form-group-2">
@@ -228,7 +238,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 </div>
                 
                 <div class="form-group-2">
-                    {!!Form::label('como_llegar2', 'Como llegar desde', array('class'=>'control-label-2'))!!}
+                    {!!Form::label('como_llegar2', 'Como llegar Inglés', array('class'=>'control-label-2'))!!}
                     {!!Form::text('como_llegar2_2', $usuarioServicio->como_llegar2_2, array("title"=>"Como llegar",'class'=>'form-control-1 chng','placeholder'=>'Cuenca, Manta, Parque central ,etc'))!!}
                     <textarea style="height: 100px;" id="como_llegar2" name="como_llegar2" class="ptm chng" placeholder="Detalle de como llegar a tu servicio" >{!!trim($usuarioServicio->como_llegar2)!!}</textarea>
                 </div>
@@ -306,7 +316,11 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             <div class="box-content-button-1">
                 <a class="button-1" title="Antes de finalizar recuerda que puedes ingresar fotografías de tu servicio en la parte inferior." onclick="AjaxContainerRetrunMessage('registro_step1', 'optional'); window.location.href = '/IguanaTrip/public/thankyou'" href="#">Guardar y Finalizar</a>
             </div>              
+            <div class="box-content-button-1">
+                <a class="button-1" title="Vista previa" onclick="window.location.href ='/iwanatrip/tokenDc$rip/{!!$usuarioServicio->id!!}'" href="#">Vista Previa</a>
+            </div>              
         </div>
+         
         {!! Form::close() !!}
 
         <div id="renderPartialImagenes">
@@ -345,6 +359,10 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
     });
     
     
+    
+    $("#tinymce").change(function() {
+    AjaxContainerRetrunMessage('registro_step1', 'optional')
+            });
     $(".chng").change(function() {
     AjaxContainerRetrunMessage('registro_step1', 'optional')
             });
@@ -372,6 +390,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 
 @section('scripts')
 {!! HTML::script('/js/jsModal/jquery.simplemodal.js') !!}
+
 {!! HTML::script('/js/jsModal/basic.js') !!}
 
 <script>
@@ -396,6 +415,10 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 </script>
 <script>
     $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
+    
+    
+
+
     </script>
     
 

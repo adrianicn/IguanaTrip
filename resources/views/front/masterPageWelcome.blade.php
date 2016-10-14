@@ -14,7 +14,7 @@
         <meta name="_token" content="{!! csrf_token() !!}"/>
         <meta name="description" content="Registra tus servicios turisticos. Nosotros haremos que lo conozcan a nivel internacional y turistas de todo el mundo vengan a visitarte. Iguana Trip surge como una alternativa turística comunitaria para defender y revalorizar los recursos culturales y naturales. Planea tu viaje y aprende sobre la historia y la cultura del país mientras te involucras en la realidad del mismo. Iguana Trip te brindara información práctica de acuerdo a tus intereses sobre el lugar específico que decidas visitar. Encuentra hoteles, day trips, museos, playas, sitios turísticos, restaurantes, bares, todo tipo de atracciones desde la más pequeña a la más grande. Y lo más importante si lo deseas, IgunaTrip te guiará en tu recorrido para que ayudes a generar ingresos complementarios a comunidades locales en busca de desarrollo. Nos encontraos en la etapa de registro de operadores turísticos">
         <meta name="keywords" content="HTML,CSS,XML,JavaScript">
-        <meta name="author" content="IguanaTrip group">
+        <meta name="author" content="iWaNaTrip group">
         <title>{{ trans('welcome/index.labelComming') }}</title>	
 
         <link rel="shortcut icon" href="favicon.ico" />
@@ -68,7 +68,7 @@
             <nav class="main-nav">
                 <ul>
 
-                    <li><a onclick="window.location.href = '{!!asset('/terminos')!!}'"> {{ trans('welcome/index.labelRegister') }}</a></li>
+                    <li><a onclick="window.location.href = '{!!asset('/TermsConditions')!!}'"> {{ trans('welcome/index.labelRegister') }}</a></li>
                     <li><a href="#about">{{ trans('welcome/index.labelAbout') }}</a></li>
                     <li><a href="#contact">{{ trans('welcome/index.labelContact') }}</a></li>
                     
@@ -111,29 +111,12 @@
             </section>        
             <!-- Background Slides -->
             <div id="maximage">
+          
                 <div>
-                    <img src="{!! asset('img/index-fondo.jpg')!!}" alt="" />
-
-                    <img class="gradient" src="{!! asset('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
-                </div>
-                
-                <div>
-				<img src="{!! asset('img/viajeros-1.png')!!}" alt="" />
+				<img src="{!! asset('img/galapagos2.jpg')!!}" alt="" />
 				<img class="gradient" src="{!! asset('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
 			</div>
-                <div>
-				<img src="{!! asset('img/cotopaxi.jpg')!!}" alt="" />
-				<img class="gradient" src="{!! asset('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
-			</div>
-                <div>
-				<img src="{!! asset('img/extra-pag-1b.png')!!}" alt="" />
-				<img class="gradient" src="{!! asset('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
-			</div>
-                
-                <div>
-				<img src="{!! asset('img/esperanza-1.png')!!}" alt="" />
-				<img class="gradient" src="{!! asset('images/backgrounds/gradient.png')!!}" alt="Galapagos" />
-			</div>
+          
 
             </div>
 
@@ -151,6 +134,15 @@
             @yield('scripts')
             
             <script type="text/javascript" charset="utf-8">
+                $('.logininput').keypress(function (e) {
+ var key = e.which;
+ if(key == 13)  // the enter key code
+  {
+      
+            $('.logininput').closest('form').submit();
+  }
+}); 
+
                 $(function () {
                     $('#maximage').maximage({
                         cycleOptions: {

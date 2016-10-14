@@ -4,7 +4,7 @@
 <!--[if gt IE 9]><!-->  <html> <!--<![endif]-->
     <head>
         <!-- Page Title -->
-        <title>iWanaTrip | Vive la experiencia Ecuador</title>
+        <title>iWaNaTrip | {!!$atraccion->nombre_servicio!!}</title>
 
         <link rel="shortcut icon" href="{{ asset('images/favicon.png')}}" />
 
@@ -12,10 +12,15 @@
         <meta charset="utf-8">
         <meta name="_token" content="{!! csrf_token() !!}"/>
         <meta name="description" content="iWanaTrip.com">
-        <meta name="author" content="iWanaTrip team">
+        <meta name="author" content="iWaNaTrip team">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        
+<meta property="og:title" content="{!!$atraccion->nombre_servicio!!}" /> 
+<meta property="og:description" content="iWaNaTrip | {!!$atraccion->nombre_servicio!!}" />
+<meta property="og:image" content="{{ asset('images/icon/')}}/{{$imagenes[0]->filename}}" />
+     
+<link rel="apple-touch-icon" href="{{ asset('images/favicon.png')}}" />        
         <!-- Theme Styles -->
 
         <link rel="stylesheet" href="{{ asset('public_components/css/bootstrap.min.css')}}">
@@ -67,6 +72,30 @@
             .morecontent span {
                 display: none;
             }
+            
+                .mores {
+    background-color: white;
+    border-radius: 4px;
+    color: #939faa;
+    display: block;
+    font-size: 12px;
+    line-height: 1.42857;
+    margin: 0 0 10px;
+    padding: 9.5px;
+    text-align: justify;
+    
+    word-break: inherit;
+    word-wrap: inherit;
+    font-family: arial;
+     border: 0 solid;
+     white-space: pre-line;       /* CSS 3 */
+        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+        white-space: -pre-line;      /* Opera 4-6 */
+        white-space: -o-pre-line;    /* Opera 7 */
+        word-wrap: inherit;       /* Internet Explorer 5.5+ */
+
+
+}
 
         </style>
     </head>
@@ -79,7 +108,7 @@
             @include('public_page.reusable.banner', ['titulo' =>$atraccion->nombre_servicio])  
 
             <ul class="breadcrumbs">
-                <li><a href="{!!asset('/publico')!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
+                <li><a href="{!!asset('/')!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
                 <li class="active">{!!$atraccion->nombre_servicio!!}
                  
                 </li>
@@ -95,7 +124,6 @@
                                     <div id="sync1" class="owl-carousel images">
                                         <div class="post-slider style3 owl-carousel box">
                                             @foreach ($imagenes as $imagen)
-                                          
                                             <?php $header= asset('images/fullsize/'.$imagen->filename)?>
                                             <a href="{{ asset('images/fullsize/'.$imagen->filename)}}" class="soap-mfp-popup">
                                                 <img src="{{ asset('images/icon/'.$imagen->filename)}}" alt="{!!$atraccion->nombre_servicio!!}">
@@ -117,13 +145,16 @@
                                            
                                          
                                           <div class="item">
-                                            <a href="#"><img src="{{ asset('images/icon/'.$imagen->filename)}}" alt=""></a>
+                                            <a href="#"><img src="{{ asset('images/icon/'.$imagen->filename)}}" alt="{!!$atraccion->nombre_servicio!!}"></a>
+                                            
+                                            
                                         </div>
                                        
                                             @endforeach
                                      
                                     </div>
-                              
+                            
+                                    
                                            @if(isset($explore) && count($explore)>0)
                                     <div class="social-wrap ">
                                         <label>{{ trans('publico/labels.label29')}}</label>
@@ -134,7 +165,8 @@
                                         </div>
                                     </div>
                                     @endif
-                                     <div id="fb-root"></div>
+                                    
+                                       <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -145,14 +177,17 @@
                                       <div class="social-wrap">
                                         <label>{{ trans('publico/labels.label77')}}</label>
                                         <div class="social-icons">
+                                                <?php
+                        $nombre = str_replace(' ', '-', $atraccion->nombre_servicio);
+                        $nombre = str_replace('/', '-', $nombre);
+                        ?>
                                             <!--<a href="#" class="social-icon"><i class="fa fa-twitter has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
                                             <a href="#" class="social-icon"><i class="fa fa-facebook has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
                                             <a href="#" class="social-icon"><i class="fa fa-google-plus has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>-->
-                                            <div class="fb-share-button" data-href="http://iguanatrip.com" data-layout="button_count"></div>
+                                            <div class="fb-share-button" data-href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$atraccion->id!!}" data-layout="button_count"></div>
                                         </div>
+                                        
                                     </div>
-                                    
-                                    
                                     
                                 </div>
                                 <div class="summary entry-summary col-sm-7 box-lg">
@@ -193,7 +228,15 @@
                                     @elseif($atraccion->id_catalogo_servicio==4)
                                     <img src="{{ asset('img/ic_serv/centro_turistico.png')}}" title="Turismo" alt="turismo">
                                     @endif
-                                    <p class="mores">{!!$atraccion->detalle_servicio!!}</p>
+                                       @if(session('locale') == 'es' )
+                                        <pre class="mores">{!!$atraccion->detalle_servicio!!}</pre>
+                                        @elseif(session('locale') == 'en' && $atraccion->detalle_servicio_eng!='') 
+                                        <pre class="mores">{!!$atraccion->detalle_servicio_eng!!}</pre>
+                                        @else
+                                        <pre class="mores">{!!$atraccion->detalle_servicio!!}</pre>
+
+                                        @endif
+                                    
                                     <div class="clearfix box" style=" width: 90%;  margin-left: 10%;">
                                             <div class="col-xs-12 col-lg-6">
                                                 
@@ -232,30 +275,30 @@
                                 
                                 <!-Info->
                                 <div id="tab3-1" class="tab-content panel entry-content">
-                                    <div class="tab-pane">
+                                      <div class="tab-pane">
                                         
                                         @if($atraccion->direccion_servicio!="")
-                                        <p>{{ trans('publico/labels.label35')}}: {!!$atraccion->direccion_servicio!!}</p>
+                                        <pre class="mores">{{ trans('publico/labels.label35')}}: {!!$atraccion->direccion_servicio!!}</pre>
                                         @endif
                                         
                                         @if($atraccion->horario!="")
-                                        <p>{{ trans('publico/labels.label75')}}: {!!$atraccion->horario!!}</p>
+                                        <pre class="mores">{{ trans('publico/labels.label75')}}: {!!$atraccion->horario!!}</pre>
                                         @endif
                                                             @if($atraccion->precio_desde!="")
-                                        <p>{{ trans('publico/labels.label73')}}: {!!$atraccion->precio_desde!!}</p>
+                                        <pre class="mores">{{ trans('publico/labels.label73')}}: {!!$atraccion->precio_desde!!}</pre>
                                         @endif
                                                             @if($atraccion->precio_hasta!="")
-                                        <p>{{ trans('publico/labels.label74')}}: {!!$atraccion->precio_hasta!!}</p>
+                                        <pre class="mores">{{ trans('publico/labels.label74')}}: {!!$atraccion->precio_hasta!!}</pre>
                                         @endif
                                         
                                         @if($atraccion->telefono!="")
-                                        <p>{{ trans('publico/labels.label38')}}: {!!$atraccion->telefono!!}</p>
+                                        <pre class="mores">{{ trans('publico/labels.label38')}}: {!!$atraccion->telefono!!}</pre>
                                         @endif
                                         @if($atraccion->correo_contacto!="")
-                                        <p>{{ trans('publico/labels.label39')}}: {!!$atraccion->correo_contacto!!}</p>
+                                        <pre class="mores">{{ trans('publico/labels.label39')}}: {!!$atraccion->correo_contacto!!}</pre>
                                         @endif
                                         @if($atraccion->pagina_web!="")
-                                        <p>{{ trans('publico/labels.label40')}}: {!!$atraccion->pagina_web!!}</p>
+                                        <pre class="mores">{{ trans('publico/labels.label40')}}: {!!$atraccion->pagina_web!!}</pre>
                                         @endif
                                     </div>
                                 </div>
@@ -264,18 +307,25 @@
                                 <!-Como llegar->
                                 <div id="tab3-2" class="tab-content panel entry-content in active">
                                     <div class="tab-pane">
+                                          @if(session('locale') == 'es' )
+                                        <pre class="mores">{!!$atraccion->como_llegar1!!}</pre>
+                                        <pre class="mores">{!!$atraccion->como_llegar1_1!!}</pre>
                                         
-                                        <p>{!!$atraccion->como_llegar1!!}</p>
-                                        <p>{!!$atraccion->como_llegar1_1!!}</p>
-                                        <p> </p>
-                                        
-                                        
-                                        <p>{!!$atraccion->como_llegar2!!}</p>
-                                        <p>{!!$atraccion->como_llegar2_2!!}</p>
+                                        @elseif(session('locale') == 'en' && $atraccion->como_llegar2!='') 
+                                        <pre class="mores">{!!$atraccion->como_llegar2!!}</pre>
+                                        <pre class="mores">{!!$atraccion->como_llegar2_2!!}</pre>
+                                        @else
+                                        <pre class="mores">{!!$atraccion->como_llegar1!!}</pre>
+                                        <pre class="mores">{!!$atraccion->como_llegar1_1!!}</pre>
+
+                                        @endif
                                         
                                         
                                         <div class="soap-google-map maps">
-                                </div>
+                                        
+      
+                
+            </div>
                                     </div>
                                 </div>
                                 
@@ -424,7 +474,12 @@
                                 @for ($x = 0; $x < count($related); $x++)
                                     @if($flag==0)
                                          <li class="product col-sms-6 col-sm-6 col-md-4 box">
-                                             <a class="product-image" href="{!!asset('/tokenDc$rip')!!}/{!!$related[$x]->id_usuario_servicio!!}"  onclick="$('.container').LoadingOverlay('show')">
+                                              <?php
+                        $nombre = str_replace(' ', '-', $related[$x]->nombre_servicio);
+                        $nombre = str_replace('/', '-', $nombre);
+                        ?>
+                        
+                                             <a class="product-image" href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$related[$x]->id_usuario_servicio!!}"  onclick="$('.container').LoadingOverlay('show')">
                                                   <div class="first-img">
                                                         <img alt="" src="{{ asset('images/icon/'.$related[$x]->filename)}}">
                                                   </div>
@@ -436,7 +491,12 @@
                                         @endif
                                               </a>
                                     <div class="product-content">
-                                        <h5 class="product-title"><a  href="{!!asset('/tokenDc$rip')!!}/{!!$related[$x]->id_usuario_servicio!!}"  onclick="$('.container').LoadingOverlay('show')">{!!$related[$x]->nombre_servicio!!}</a></h5>
+                                        <?php
+                        $nombre = str_replace(' ', '-', $related[$x]->nombre_servicio);
+                        $nombre = str_replace('/', '-', $nombre);
+                        ?>
+                        
+                                        <h5 class="product-title"><a  href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$related[$x]->id_usuario_servicio!!}"  onclick="$('.container').LoadingOverlay('show')">{!!$related[$x]->nombre_servicio!!}</a></h5>
                                         <span class="product-price"><span class="currency-symbol"></span>{!!$related[$x]->catalogo_nombre!!}</span>
                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
                                             <span data-stars="4"></span>
@@ -459,7 +519,9 @@
                         </div>
                         @endif
                         
-                        <div class="product type-product">
+                      
+                        
+                         <div class="product type-product">
                             <h4>{{ trans('publico/labels.label28')}}</h4>
                             <ul class="related products row add-clearfix cercanos">
                                 @section('cercanos')
@@ -467,19 +529,19 @@
                             </ul>
                         </div>
                           <div class="text-center">
-                                <a  class="btn style4 hover-blue load-more moreImg">{{ trans('publico/labels.label31')}}</a>
+                                           <a  class="btn style4 hover-blue load-more moreImg">{{ trans('publico/labels.label31')}}</a>
                             </div>
                     </div>
                     <div class="sidebar col-sm-4 col-md-3" >
 
                         @if(session('device')!='mobile')
                         <div class="main-mini-search-form full-width box">
-                            <form method="get" role="search">
-                                <div class="search-box">
-                                    <input type="text" placeholder="Search" name="s" value="">
-                                    <button type="submit"><i class="fa fa-search"></i></button>
-                                </div>
-                            </form>
+                            {!! Form::open(['url' => route('min-search'),  'method' => 'get', 'id'=>'min-search']) !!}
+                                            <div class="search-box">
+                                                <input type="text" id="s"  placeholder="Search" name="s" value="">
+                                                <button type="submit"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        {!! Form::close() !!}
                         </div>
                         @endif
                         <div class="widget box">
@@ -570,7 +632,8 @@
                             </div>
                         </div>
                         
-                  
+                        
+                        
                       
                    
                         @endif
@@ -597,11 +660,11 @@
     </div>
 
     <!-- Javascript -->
-    {!! HTML::script('js/jquery.js') !!}
+{!! HTML::script('js/jquery.js') !!}
     {!!HTML::script('js/js_public/Compartido.js') !!}
     {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
-    {!!HTML::script('js/Compartido.js') !!}
-
+        {!!HTML::script('js/jquery.autocomplet.js') !!}
+        {!!HTML::script('js/Compartido.js') !!}
     <script type="text/javascript" src="{{ asset('public_components/js/jquery-2.1.3.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('public_components/js/jquery.noconflict.js')}}"></script>
     <script type="text/javascript" src="{{ asset('public_components/js/modernizr.2.8.3.min.js')}}"></script>
@@ -628,7 +691,7 @@
     <script type="text/javascript" src="{{ asset('public_components/js/jquery.plugins.js')}}"></script>
 
 
- Google Map Api 
+<!-- Google Map Api -->
     <script type='text/javascript' src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
     <script type="text/javascript" src="{{ asset('public_components/js/gmap3.js')}}"></script>
     <script>
@@ -847,8 +910,8 @@ jQuery(document).ready(function ($) {
 </script>
     @endif
     
-
     
+
 
     <script type="text/javascript">
         sjq(".soap-google-map").gmap3({
@@ -896,7 +959,7 @@ jQuery(document).ready(function ($) {
                 GetDataAjaxEventos("{!!asset('/tokenDc$ripEvent')!!}/{!!$atraccion->id!!}");    
                 GetLikes("{!!asset('/getLikesA')!!}/{!!$atraccion->id!!}");    
                 GetReview("{!!asset('/getReviews')!!}/{!!$atraccion->id!!}?page=1");    
-                
+                GetDataAjaxCloseIntern("{!!asset('/getCercanosIntern')!!}/{!!$atraccion->id!!}/{!!$atraccion->id_provincia!!}/{!!$atraccion->id_canton!!}/{!!$atraccion->id_parroquia!!}");
 
             });
         
@@ -909,30 +972,39 @@ jQuery(document).ready(function ($) {
                 
             });
             
+            
+
+
     </script>
-
+<script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
     <!-- load page Javascript -->
-    <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
-
-    <script>
-      $(".maps").click(function () {
-                   var daddr = window.location.search.slice(1);
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(data){
-        if (data.coords) {
-            //saddr=startadress
-            //daddr=destinationaddress
-          window.open('https://maps.google.com.ec/maps?saddr=My Location&daddr='  + {!!$atraccion->latitud_servicio!!} + ',' + {!!$atraccion->longitud_servicio!!},"_blank");
-        }
-      });
-    }
     
+     <script>
+     @if(session('device')!='mobile')
+      $(".maps").dblclick(function () {
+          window.open('https://maps.google.com.ec/maps?saddr=My Location&daddr='  + {!!$atraccion->latitud_servicio!!} + ',' + {!!$atraccion->longitud_servicio!!},"_blank");
+          
                 
             });
     
+    @else
+   $(".maps").dblclick(function () {
     
-   
+    myNavFunc();
+ });
+ 
+ function myNavFunc(){
+    // If it's an iPhone..
+    
+         window.open("maps://maps.google.com/maps?daddr={!!$atraccion->latitud_servicio!!},{!!$atraccion->longitud_servicio!!}");
+    
+}
+ 
+
+
+    @endif
     </script>
+
    
 
 

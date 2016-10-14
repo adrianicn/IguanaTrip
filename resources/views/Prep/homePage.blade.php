@@ -98,11 +98,11 @@
                                 class="tp-caption lft fadeout tp-resizeme start">
                                 @if(session('device')!='mobile')
                                 <h2 class="caption-xl" >
-                                    Embarcate en una aventura en Ecuador y acompañanos a descubrirlo.
+                                    {{ trans('publico/labels.label122')}}
                                 </h2>
                                 @else
                                 <h2 class="caption-xl" style="font-size: 40px;">
-                                    Embarcate en una aventura en Ecuador y acompañanos a descubrirlo.
+                                    {{ trans('publico/labels.label122')}}
                                 </h2>
                                 @endif
                             </div>
@@ -115,7 +115,7 @@
                                 data-start="700" data-speed="600" data-y="540" 
                                 data-hoffset="0" data-x="center" 
                                 class="tp-caption lfl fadeout tp-resizeme start">
-                                <h2 class="caption-md skin-color" > Deja de ser turista, conviertete en viajero.</h2>
+                                <h2 class="caption-md skin-color" >{{ trans('publico/labels.label123')}}</h2>
                             </div>
 
                             @if(session('device')!='mobile')
@@ -145,7 +145,7 @@
                                     @endif
 
                                     <input class="sb-search-submit" type="submit" value="">
-                                    <span class="sb-icon-search"></span>
+                                    <span class="sb-icon-search "></span>
                                 {!! Form::close() !!}
                             </div>
                         </li>
@@ -229,18 +229,18 @@
                            
 
                         </div>
-                        <h3 class="skin-color">Fully Adaptive to All Screen Sizes</h3>
-                        <p>iWanaTrip is designed in a way that it automatically adjusts to any screen which makes it a true responsive design.<br>
-                            Each and every design element was created in a way that it will not look lame when seen on smaller screen size.</p>
+                        <h3 class="skin-color">{{ trans('publico/labels.label124')}}</h3>
+                        <p>{{ trans('publico/labels.label125')}}</p>
                     </div>
                 </div>
             </div>
 
           
-
+@if(session('device')!='mobile')
             <section id="content" class="no-padding">
                 <div class="section no-padding">
-                    <h2 class="section-title">Discover Ecuador</h2>
+                    <h2 class="section-title">{{ trans('publico/labels.label126')}}</h2>
+                    
                     <div class="post-wrapper">
                         <div class="iso-container iso-col-4 style-fancy">
                                <div class="shortcode-banner style-animated iso-item  filter-all " >
@@ -317,8 +317,9 @@
                                 </div>
                         </div>
                     </div>
+                                     
             </section>
-            
+            @endif
             <section id="content">
                 <div class="container">
                     <div class="heading-box col-md-10 col-lg-8">
@@ -417,6 +418,10 @@
                 window.current_page_e=1;
                 GetDataAjaxEventsIndbyCity("{!!asset('/getEventscloseToMe')!!}/"+valor+"?page=1");
             });
+            
+              $( ".sb-icon-search" ).click(function() {
+  $( "#min-search" ).submit();
+});
 
 
 $('#ciudad').keypress(function (e) {

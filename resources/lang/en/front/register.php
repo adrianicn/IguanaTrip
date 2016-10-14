@@ -2,12 +2,12 @@
 
 return [
 	'title' => 'Inscription',
-    'register' => 'Registration',
+        'register' => 'Registration',
 	'infos' => "It's completely free",
 	'email' => 'Email',
-	'pseudo' => 'Name',
+	'pseudo' => 'Name & LastName',
 	'password' => 'Password',
-	'confirm-password' => 'Confirm your password',
+	'confirm-email' => 'Confirm your email',
 	'warning' => 'Attention',
 	'warning-name' => '30 characters maximum',
 	'warning-password' => 'At least 8 characters',

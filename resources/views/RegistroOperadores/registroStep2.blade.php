@@ -72,34 +72,33 @@ $email_contacto_operador = $operadorData->email_contacto_operador;
      <div id="title-box-header-navigation">
         
            <h2 class="head-title-navigation">
-   <a class="button-step4" onclick="window.location.href = '{!!asset('/servicios')!!}'"> 
-       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Paso 1 </strong></a>
+   
                         <a class="button-step4 "> 
                    <div style="color:#F26803; display: block;
     font-size: 0.9em;
     font-weight: normal;
     line-height: 31px;
-    text-indent: 31px;"> Paso 2 </div></a>
+    text-indent: 31px;"> Mi info </div></a>
                <a class="button-step4 "> 
                    <div style="color:#999; display: block;
     font-size: 0.9em;
     font-weight: normal;
     line-height: 31px;
-    text-indent: 31px;"> Paso 3 </div></a>
+    text-indent: 31px;"> Agregar servicios </div></a>
     
     <a class="button-step4 "> 
                    <div style="color:#999; display: block;
     font-size: 0.9em;
     font-weight: normal;
     line-height: 31px;
-    text-indent: 31px;"> Paso 4 </div></a>
+    text-indent: 31px;"> Mis servicios </div></a>
     
     <a class="button-step4 "> 
                    <div style="color:#999; display: block;
     font-size: 0.9em;
     font-weight: normal;
     line-height: 31px;
-    text-indent: 31px;"> Paso 5</div></a>
+    text-indent: 31px;"> Detalle</div></a>
     
     
                

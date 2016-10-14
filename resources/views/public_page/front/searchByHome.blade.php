@@ -6,7 +6,7 @@
         <!-- Page Title -->
         <title>iWanaTrip | Vive la experiencia Ecuador</title>
 
-        <link rel="shortcut icon" href="{{ asset('images/favicon.png')}}" />
+        <link rel="shortcut icon" href="{{ asset('public/images/favicon.png')}}" />
 
         <!-- Meta Tags -->
         <meta charset="utf-8">
@@ -25,7 +25,7 @@
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,400italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Dosis:400,300,500,600,700' rel='stylesheet' type='text/css'>
-{!! HTML::style('css/jquery-labelauty.css') !!} 
+{!! HTML::style('public/css/jquery-labelauty.css') !!} 
         <link rel="stylesheet" href="{{ asset('public_components/css/animate.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.carousel.css')}}" media="screen" />
         <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.transitions.css')}}" media="screen" />
@@ -48,7 +48,7 @@
 
         <!-- CSS for IE -->
         <!--[if lte IE 9]>
-            <link rel="stylesheet" type="text/css" href="{{ asset('public_components/css/ie.css')}}" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('public/public_components/css/ie.css')}}" />
         <![endif]-->
 
 
@@ -92,7 +92,7 @@
 
       @include('public_page.reusable.banner', ['titulo' =>$titlUp])  
 <ul class="breadcrumbs">
-                <li><a href="{!!asset('/publico')!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
+                <li><a href="{!!asset('/')!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
               
                 
              
@@ -108,7 +108,8 @@
         
           try {
             $ipUser = $_SERVER['REMOTE_ADDR'];
-            $location = json_decode(file_get_contents("http://ipinfo.io/200.125.245.238"));
+            
+            $location = json_decode(file_get_contents("http://ipinfo.io/186.47.240.232"));
         } catch (Exception $e) {
             $location = "";
         }
@@ -127,11 +128,12 @@
                             
                                 <div class="search-box">
                                     <input type="text" placeholder="Search" name="searchCity" value="{!!$location->city!!}" class="searchCity">
-                                    <span><i class="fa fa-map-marker" title="Search location" style="cursor: pointer"></i></span>
+                                                                        <span><i class="fa fa-map-marker" onclick="AjaxContainerRegistroWithLoadFilter('filter_Category','Searchcategorias')" title="Search location" style="cursor: pointer"></i></span>
                                 </div>
                             
                         </div>
-                            @if(count($servicios>0))
+                            
+                            @if(count($servicios>1))
                             <ul class="filter-categories panel-group">
                                 
                               
@@ -169,9 +171,7 @@
                             </div>
                         </div>
                         
-                        
-                 
-                        <div class="widget box">
+                         <div class="widget box">
                             
                             <h4>{{ trans('publico/labels.label76')}}</h4>
                             
@@ -212,7 +212,7 @@
                         <div class="widget banner-slider box">
                             <div class="owl-carousel" data-itemsPerDisplayWidth="[[0, 1], [480, 2], [768, 1], [992, 1], [1200, 1]]" data-items="1">
                                 <a href="#">
-                                    <img src="{{ asset('img/rsz_00kwwk8s.jpg')}}" alt="">
+                                    <img src="{{ asset('public/img/rsz_00kwwk8s.jpg')}}" alt="">
                                 </a>
                               
                             </div>
@@ -221,47 +221,50 @@
                            
                    
                       
-
                         <div class="widget box">
-                            <h4>Best Sellers</h4>
+                            <h4>{{ trans('publico/labels.label121')}}</h4>
                             <ul class="product-list-widget">
                                 <li>
                                     <div class="product-image">
-                                        <a href="#">
-                                            <img src="http://placehold.it/58x63" alt="">
+                                        <a href="{!!asset('/detalle')!!}/ESTACION-CHARLES-DARWIN/228">
+                                            <img src="{{ asset('public/images/icon/228estacion6.jpg')}}" alt="Charles Darwin">
                                         </a>
                                     </div>
                                     <div class="product-content">
-                                        <h6 class="product-title"><a href="#">Everyday Scoop Neck Cami</a></h6>
-                                        <span class="product-price">$18.99</span>
+                                        <h6 class="product-title"><a href="{!!asset('/detalle')!!}/ESTACION-CHARLES-DARWIN/228">Estación Charles Darwin</a></h6>
+                                        <span class="product-price">{{ trans('publico/labels.label128')}}</span>
                                         <span class="star-rating" title="4" data-toggle="tooltip">
                                             <span data-stars="4"></span>
                                         </span>
                                     </div>
                                 </li>
                                 <li>
+                                    
                                     <div class="product-image">
-                                        <a href="#">
-                                            <img src="http://placehold.it/58x63" alt="">
+                                        <a href="{!!asset('/detalle')!!}/Centro-Histórico-de-Quito/127">
+                                            <img src="{{ asset('public/images/icon/127centrohistoricociclovia.jpg')}}" alt="">
                                         </a>
                                     </div>
                                     <div class="product-content">
-                                        <h6 class="product-title"><a href="#">Easy Draped Cardigan</a></h6>
-                                        <span class="product-price">$23.58</span>
+                                        <h6 class="product-title"><a href="{!!asset('/detalle')!!}/Centro-Histórico-de-Quito/127">Centro Histórico de Quito</a></h6>
+                                        <span class="product-price">{{ trans('publico/labels.label128')}}</span>
                                         <span class="star-rating" title="4" data-toggle="tooltip">
                                             <span data-stars="4"></span>
                                         </span>
                                     </div>
                                 </li>
+                                
                                 <li>
+                                    
+                                    
                                     <div class="product-image">
-                                        <a href="#">
-                                            <img src="http://placehold.it/58x63" alt="">
+                                        <a href="{!!asset('/detalle')!!}/Montañita/148">
+                                            <img src="{{ asset('public/images/icon/148103677257361922164010645062755965301191111n.jpg')}}" alt="Montañita">
                                         </a>
                                     </div>
                                     <div class="product-content">
-                                        <h6 class="product-title"><a href="#">Mesh-Trimmed Dress</a></h6>
-                                        <span class="product-price">$76.00</span>
+                                        <h6 class="product-title"><a href="{!!asset('/detalle')!!}/Montañita/148">Montañita</a></h6>
+                                        <span class="product-price">{{ trans('publico/labels.label128')}}</span>
                                         <span class="star-rating" title="4" data-toggle="tooltip">
                                             <span data-stars="4"></span>
                                         </span>
@@ -277,17 +280,19 @@
                         <div class="image-banner box">
                             <div class="image-container">
                                 @if($catalogo->id_catalogo_servicios==1)
-                                <img src="{{ asset('img/serr/eat.jpg')}}" alt="eat_iWaNaTrip">
+                                <img src="{{ asset('public/img/serr/eat.jpg')}}" alt="eat_iWaNaTrip">
                                 @elseif($catalogo->id_catalogo_servicios==2)
-                                <img src="{{ asset('img/serr/sleep.jpg')}}" alt="sleep_iWaNaTrip">
+                                <img src="{{ asset('public/img/serr/sleep.jpg')}}" alt="sleep_iWaNaTrip">
                                 @elseif($catalogo->id_catalogo_servicios==3)
-                                <img src="{{ asset('img/serr/trip.jpg')}}" alt="trip_iWaNaTrip">
+                                <img src="{{ asset('public/img/serr/trip.jpg')}}" alt="trip_iWaNaTrip">
                                 @elseif($catalogo->id_catalogo_servicios==4)
-                                <img src="{{ asset('img/serr/tour.jpg')}}" alt="tour_iWaNaTrip">
+                                <img src="{{ asset('public/img/serr/tour.jpg')}}" alt="tour_iWaNaTrip">
                                 @elseif($catalogo->id_catalogo_servicios==5)
-                                <img src="{{ asset('img/serr/night.jpg')}}" alt="night_iWaNaTrip">
+                                <img src="{{ asset('public/img/serr/night.jpg')}}" alt="night_iWaNaTrip">
                                 @elseif($catalogo->id_catalogo_servicios==8)
-                                <img src="{{ asset('img/serr/culture.jpg')}}" alt="culture_iWaNaTrip">
+                                <img src="{{ asset('public/img/serr/culture.jpg')}}" alt="culture_iWaNaTrip">
+                                @elseif($catalogo->id_catalogo_servicios==6)
+                                <img src="{{ asset('public/img/serr/night.jpg')}}" alt="activities_iWaNaTrip">
                                 @endif
                             </div>
                             <div class="caption-wrapper position-left">
@@ -548,7 +553,7 @@
             /* size of bullet elment */
             width: 16px;
             height: 16px;
-            background:url ("{!!asset("img/internas/b05.png")!!}") no-repeat;
+            background:url ("{!!asset("public/img/internas/b05.png")!!}") no-repeat;
             overflow: hidden;
             cursor: pointer;
         }
@@ -573,7 +578,7 @@
             width: 30px;
             height: 46px;
             cursor: pointer;
-            background:url("{!!asset("img/internas/a12.png")!!}") no-repeat;
+            background:url("{!!asset("public/img/internas/a12.png")!!}") no-repeat;
             overflow: hidden;
         }
         .jssora12l { background-position: -16px -37px; }
@@ -588,19 +593,19 @@
 
 
 jQuery(document).ready(function ($) {
-   $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/eat.jpg")!!})');
+   $(".page-title-container.style3").css('backgroundImage','url({!!asset("public/img/serr/eat.jpg")!!})');
      @if($catalogo->id_catalogo_servicios==1)
                                 
                                 @elseif($catalogo->id_catalogo_servicios==2)
-                                    $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/sleep.jpg")!!})');
+                                    $(".page-title-container.style3").css('backgroundImage','url({!!asset("public/img/serr/sleep.jpg")!!})');
                                 @elseif($catalogo->id_catalogo_servicios==3)
-                                   $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/trip.jpg")!!})');
+                                   $(".page-title-container.style3").css('backgroundImage','url({!!asset("public/img/serr/trip.jpg")!!})');
                                 @elseif($catalogo->id_catalogo_servicios==4)
-                                  $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/tour.jpg")!!})');
+                                  $(".page-title-container.style3").css('backgroundImage','url({!!asset("public/img/serr/tour.jpg")!!})');
                                 @elseif($catalogo->id_catalogo_servicios==5)
-                                   $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/night.jpg")!!})');
+                                   $(".page-title-container.style3").css('backgroundImage','url({!!asset("public/img/serr/night.jpg")!!})');
                                 @elseif($catalogo->id_catalogo_servicios==8)
-                                            $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/culture.jpg")!!})');
+                                            $(".page-title-container.style3").css('backgroundImage','url({!!asset("public/img/serr/culture.jpg")!!})');
                                 @endif    
 });
   
@@ -639,6 +644,11 @@ $('.searchCity').keypress(function (e) {
                 GetDataAjaxSearchCatogories("{!!asset('/getSearchCatalogosServicios')!!}/{!!$catalogo->id_catalogo_servicios!!}/"+valor);
   }
 }); 
+
+
+     $(document).on("keypress", "form", function(event) { 
+    return event.keyCode != 13;
+});
             </script>
 <script>
    $(".moreImg").click(function () {
@@ -653,6 +663,7 @@ $('.searchCity').keypress(function (e) {
               $(function() {
 
     var availableTags = [
+        
           'ECUADOR',
 '10 DE AGOSTO',
 '10 NOVIEMBRE',
@@ -1840,7 +1851,6 @@ $('.searchCity').keypress(function (e) {
 'ZUNAC',
 'ZURMI',
 
-      
     ];
 
     $( ".searchCity" ).autocomplete({
@@ -1875,7 +1885,7 @@ $('.searchCity').keypress(function (e) {
     
     
     <!-- load page Javascript -->
-    <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/public_components/js/main.js')}}"></script>
 
 
 </body>

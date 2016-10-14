@@ -62,7 +62,7 @@ class HomePublicController extends Controller {
         $topPlacesOriente = $gestion->getTopPlaces(100,3);
         $topPlacesGalapagos = $gestion->getTopPlaces(100,4);
         
-        $view = View::make('public_page.partials.AllTopPlaces', array(
+        $view = View::make('public_page.front.AllTopPlaces', array(
             'topPlacesCosta' => $topPlacesCosta,
                 'topPlacesSierra' => $topPlacesSierra,
             'topPlacesOriente' => $topPlacesOriente,
@@ -240,7 +240,7 @@ class HomePublicController extends Controller {
         //
         //Al momento son quemadas 4 provincias
         //$listProvincias = $gestion->getProvincias();
-        // $location=file_get_contents('http://freegeoip.net/json/200.125.245.238');
+         $location=file_get_contents('http://freegeoip.net/json/200.125.245.238');
 
         $view = View::make('public_page.partials.regiones')->with('location', $location);
 
@@ -332,7 +332,7 @@ class HomePublicController extends Controller {
     }
 
     //Obtiene las descripcion de la atraccion elegida
-    public function getAtraccionDescripcion($id_atraccion, PublicServiceRepository $gestion) {
+    public function getAtraccionDescripcion($nombre_atraccion,$id_atraccion, PublicServiceRepository $gestion) {
         $agent = new Agent();
 
         $desk = $device = $agent->isMobile();
@@ -344,7 +344,7 @@ class HomePublicController extends Controller {
 
         Session::put('device', $desk);
 
-        $gestion->saveVisita($id_atraccion);
+        $gestion->saveVisita(null,$id_atraccion);
         $ImgItiner = null;
         $explore = null;
         $visitados = null;
@@ -426,7 +426,7 @@ class HomePublicController extends Controller {
     public function getCatalosoServiciosSearch(Request $request, PublicServiceRepository $gestion, $id_catalogo, $ciudad) {
         //
 
-        $busquedaInicial = $gestion->getBusquedaInicialCatalogo($id_catalogo, $ciudad, null, null, 100, 1);
+        $busquedaInicial = $gestion->getBusquedaInicialCatalogo($id_catalogo, $ciudad, null, null, 100, 5);
 
 
         $busquedaInicialP = null;
@@ -455,7 +455,7 @@ class HomePublicController extends Controller {
 
         $atraccion = $gestion->getAtraccionDetails($id_atraccion);
         $catalogo1 = $gestion->getCatalogoDetails($id_atraccion, $id_catalogo);
-        $catalogo = $gestion->getDetailsServiciosAtraccion($catalogo1, null, null, 1);
+        $catalogo = $gestion->getDetailsServiciosAtraccion($catalogo1, null, null, 5);
 
 
 
@@ -495,10 +495,14 @@ class HomePublicController extends Controller {
 
 
         $catalogo = $gestion->getCatalogoDetail($id_catalogo);
+        
+        
         if($catalogo!=null)
         {
         $actividades = $gestion->getExplorerbyCatalogo($id_catalogo);
+        
         $servicios = $gestion->getServiciosAll();
+        
         $precio_minimo = $gestion->getMinPrice($id_catalogo);
 
         $precio_max = $gestion->getMaxPrice($id_catalogo);
@@ -572,6 +576,7 @@ class HomePublicController extends Controller {
 
         Session::put('device', $desk);
         $provincias = $gestion->getRegionDetails($id_region);
+        
         $imagenes = $gestion->getImageporRegion($id_region);
 
 

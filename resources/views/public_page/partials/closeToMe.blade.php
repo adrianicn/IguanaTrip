@@ -16,8 +16,10 @@
                     @endif
                     <div class="shortcode-banner-content">
                      
-
-                        <a  href="{!!asset('/tokenDc$rip')!!}/{!!$atracc->id_usuario_serviciox!!}"  onclick="$('#x2').LoadingOverlay('show')"><h3 class="banner-title">{!!$atracc->nombre_servicio!!}</h3>
+                        <?php
+                        $nombre = str_replace(' ', '-', $atracc->nombre_servicio);
+                        ?>
+                        <a  href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$atracc->id_usuario_serviciox!!}"  onclick="$('#x2').LoadingOverlay('show')"><h3 class="banner-title">{!!$atracc->nombre_servicio!!}</h3>
                             
                         </a>
                         <div class="details">
@@ -45,9 +47,10 @@
                     <div class="shortcode-banner-content">
                         <?php
                         $date = date_create($event->fecha_ingreso);
+                        $nombre = str_replace(' ', '-', $atracc->nombre_servicio);
                         ?>
 
-                        <a href="{!!asset('/tokenDc$rip')!!}/{!!$event->id_usuario_serviciox!!}"  onclick="$('.container').LoadingOverlay('show')"><h3 class="banner-title">{!!$event->nombre_servicio!!}</h3><h3 style="color: red">{!!date_format($date, 'j F ')!!}</h3></a>
+                        <a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$event->id_usuario_serviciox!!}"  onclick="$('.container').LoadingOverlay('show')"><h3 class="banner-title">{!!$event->nombre_servicio!!}</h3><h3 style="color: red">{!!date_format($date, 'j F ')!!}</h3></a>
                         <div class="details">
                             <p>{!!$event->detalle_servicio!!}</p>
                         </div>

@@ -456,6 +456,18 @@ Actualizar tabla de busqueda
                         ->where('estado_servicio', '=', 1)->get();
     }
 
+    
+    //Entrega el arreglo de Servicios por operador
+    public function getServiciosidUsuario($id_usuario) {
+        
+         return DB::table('usuario_servicios')
+                ->join('usuario_operadores', 'usuario_servicios.id_usuario_operador', '=', 'usuario_operadores.id_usuario_op')
+                ->join('users', 'usuario_operadores.id_usuario', '=', 'users.id')
+                ->where('users.id', $id_usuario)
+                ->where('estado_servicio', '=', 1)
+                ->get();
+
+    }
     //Entrega el arreglo de Servicios por operador
     public function getProvincias() {
         $ubicacion = new $this->ubicacion_geografica;

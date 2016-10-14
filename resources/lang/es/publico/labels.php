@@ -139,6 +139,12 @@ return [
     'label120' => 'Búsqueda',
     
     'label121' => 'Más visitados',
+    'label122' => 'Transforma cada instante de la vida en una aventura.',
+    'label123' => 'Deja de ser un turista, conviertete en viajero.',
+    'label124' => 'iWanaTrip vive tu aventura.',
+    'label125' => 'Se siente bien perderse en la dirección correcta',
+    'label126' => 'Descubre Ecuador',
+    
     
     
     

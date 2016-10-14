@@ -83,8 +83,75 @@ return [
     'label76' => 'More filters ',
     'label77' => 'Share with friends',
     
+    'label78' => 'About Us',
+    'label79' => 'Our mision',
+    'label80' => 'Terms & Conditions',
+    
+    'label81' => 'Discover Ecuador',
+    'label82' => 'Interests',
+    
+    'label83' => 'Leisure',
+    'label84' => 'Adventure',
+    'label85' => 'Culture',
+    'label86' => 'Tours',
+    
+    'label87' => 'Search',
+    'label88' => 'Places',
+    'label89' => 'Eat',
+    'label90' => 'Sleep',
+    
+        
+    'label91' => 'Close to you',
+    'label92' => 'Events',
+    'label93' => 'Promotions',
+    'label94' => 'Trips',
+    
+    'label95' => 'Tour operator',
+    'label96' => 'Register your service',
+    'label97' => 'Services',
+    'label98' => 'Benefits',
+    
+    'label99' => 'Ecuador',
+    'label100' => 'Galapagos',
+    'label101' => 'Australia',
+    
+    'label102' => 'Germany',
+    'label103' => 'Quito',
+    'label104' => 'Brisbane',
+    'label105' => 'Melbourne',
+    'label106' => 'Berlin',
+    
+    'label107' => 'WHATEVER YOU DO..DO YOUR BEST!',
+    'label108' => 'Welcome to iWaNaTrip',
+    
+    
+    'label109' => 'Active users',
+    'label110' => 'Coffe coups',
+    'label111' => 'Happy tour operators',
+    'label112' => 'Lines of code',
+    
+    'label113' => 'Traveler',
+    'label114' => 'Search iWanaTrip',
+    'label115' => 'Direct contact ',
+    'label116' => 'No intermediary',
+    
+    'label117' => 'Our Mision',
+    'label118' => 'Our Vision',
+    'label119' => 'Live the experience to travel around Ecuador with iWaNaTrip',
+    
+    'label120' => 'Search',
+    
+    'label121' => 'Most visited',
+    'label122' => 'Transform every moment of life in an adventure.',
+    'label123' => 'Stop to be a tourist, become a traveler.',
+    'label124' => 'Keep your adventure alive.',
+    'label125' => 'It feels good to be lost in the right direction',
+    'label126' => 'Discover Ecuador',
+    
+    
     
     'message' => 'Your message',
+    
     
 	'ok' => 'Your message has been recorded, we will respond as soon as possible.'
 ];

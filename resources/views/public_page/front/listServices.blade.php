@@ -86,8 +86,13 @@
       @include('public_page.reusable.banner', ['titulo' =>$titlUp])  
 <ul class="breadcrumbs">
                 <li><a href="{!!asset('/publico')!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
-              
-                <li><a href="{!!asset('/tokenDc$rip')!!}/{!!$ServicioPrevio->id!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{!!$ServicioPrevio->nombre_servicio!!}</a>
+                                                      <?php
+                        $nombre = str_replace(' ', '-', $ServicioPrevio->nombre_servicio);
+                        $nombre = str_replace('/', '-', $nombre);
+                        ?>
+
+                
+                <li><a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$ServicioPrevio->id!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{!!$ServicioPrevio->nombre_servicio!!}</a>
              
                 <li class="active">{!!$titlUp!!}</li>
             </ul>
@@ -133,7 +138,12 @@
                                 <li class="category-has-children">
                                     <a href="#cat-all-dresses" class="active" data-toggle="collapse">{{ trans('publico/labels.label53')}}</a>
                                     <ul id="cat-all-dresses" class="collapse in">
-                                        <li><a href="{!!asset('/tokenDc$rip')!!}/{!!$ServicioPrevio->id!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{!!$ServicioPrevio->nombre_servicio!!}</a>
+                                                                      <?php
+                        $nombre = str_replace(' ', '-', $ServicioPrevio->nombre_servicio);
+                        $nombre = str_replace('/', '-', $nombre);
+                        ?>
+
+                                        <li><a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$ServicioPrevio->id!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{!!$ServicioPrevio->nombre_servicio!!}</a>
                                         
                                         </li>
                                         
@@ -542,6 +552,8 @@ jQuery(document).ready(function ($) {
                                    $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/night.jpg")!!})');
                                 @elseif($catalogo->id_catalogo_servicios==8)
                                             $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/culture.jpg")!!})');
+                                            @elseif($catalogo->id_catalogo_servicios==6)
+                                   $(".page-title-container.style3").css('backgroundImage','url({!!asset("img/serr/night.jpg")!!})');
                                 @endif    
 });
   

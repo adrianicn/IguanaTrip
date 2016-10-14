@@ -43,6 +43,7 @@ class ReturnIfnotAuth
             if (!$this->auth->check())
 		{
                      
+                
 			return new RedirectResponse(url('/'));
 		}
                 /*$operador = new $this->model;

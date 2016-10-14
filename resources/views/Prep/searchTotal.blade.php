@@ -6,7 +6,7 @@
         <!-- Page Title -->
         <title>iWanaTrip | Vive la experiencia Ecuador</title>
 
-        <link rel="shortcut icon" href="{{ asset('images/favicon.png')}}" />
+        <link rel="shortcut icon" href="{{ asset('public/images/favicon.png')}}" />
 
         <!-- Meta Tags -->
         <meta charset="utf-8">
@@ -84,7 +84,7 @@
                 @include('public_page.reusable.header')
             </header>
                                        @if(session('locale') == 'es' )
-                                          <?php $titlUp="Busqueda"?>
+                                          <?php $titlUp="Búsqueda"?>
                                             @else
                                            
                                            <?php $titlUp="Search"?>  @endif
@@ -147,7 +147,7 @@
                         <div class="widget banner-slider box">
                             <div class="owl-carousel" data-itemsPerDisplayWidth="[[0, 1], [480, 2], [768, 1], [992, 1], [1200, 1]]" data-items="1">
                                 <a href="#">
-                                    <img src="{{ asset('img/rsz_00kwwk8s.jpg')}}" alt="">
+                                    <img src="{{ asset('public/img/rsz_00kwwk8s.jpg')}}" alt="">
                                 </a>
                               
                             </div>

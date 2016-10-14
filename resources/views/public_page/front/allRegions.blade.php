@@ -30,7 +30,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.transitions.css')}}" media="screen" />
         <!-- Magnific Popup core CSS file -->
         <link rel="stylesheet" href="{{ asset('public_components/components/magnific-popup/magnific-popup.css')}}"> 
-        {!!HTML::script('js/sliderTop/jssor.slider.mini.js') !!}
+        {!!HTML::script('public/js/sliderTop/jssor.slider.mini.js') !!}
 
   <!-- Main Style -->
         <link id="main-style" rel="stylesheet" href="{{ asset('public_components/css/style.css')}}">
@@ -148,18 +148,18 @@
                                         <img alt="" src="{{ asset('images/fullsize/'.$imagen->filename)}}">
                                         <div class="image-extras">
                                             
-                                            <a style="cursor:pointer" onclick="$('.woocommerce').LoadingOverlay('show'); window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$imagen->id_geo!!}/{!!$region!!}'" class="post-gallery"></a>
+                                                                    <?php
+                        $nombre = str_replace(' ', '-', $imagen->nombre);
+                        $nombre = str_replace('/', '-', $nombre);
+                        ?>
+                                            <a style="cursor:pointer" onclick="$('.woocommerce').LoadingOverlay('show'); window.location.href = '{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$imagen->id_geo!!}'" class="post-gallery"></a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="post-content">
                                    
-                                    <div class="post-meta">
-                                        <span class="entry-author fn">By <a href="#">Admin</a></span>
-                                        <span class="entry-time"><span class="updated no-display">2014-09-09T15:57:08+00:00</span><span class="published">12 Nov, 2014</span></span>
-                                        <span class="post-category">in <a href="#">Web Design</a></span>
-                                    </div>
-                                    <h3 class="entry-title"><a href="#">{!!$imagen->nombre!!}</a></h3>
+                                    
+                                    <h3 class="entry-title"><a href="#" onclick="$('.woocommerce').LoadingOverlay('show'); window.location.href = '{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$imagen->id_geo!!}'">{!!$imagen->nombre!!}</a></h3>
                                     @if(session('locale') == 'es' )
                                         <p class="more">{!!$imagen->descripcion_esp!!}</p>
                                         @elseif(session('locale') == 'en' && $imagen->descripcion_eng!='') 
@@ -170,11 +170,12 @@
                                         @endif
                                 </div>
                                 <div class="post-action">
-                                    <a class="btn btn-sm style3 post-comment" href="#"><i class="fa fa-comment"></i>25</a>
-                                    <a class="btn btn-sm style3 post-like" href="#"><i class="fa fa-heart"></i>480</a>
-                                    <a class="btn btn-sm style3 post-share" href="#"><i class="fa fa-share"></i>Share</a>
-                                    <a style="cursor:pointer" onclick="$('.woocommerce').LoadingOverlay('show'); window.location.href = '{!!asset('/getProvinciaDescipcion')!!}/{!!$imagen->id_geo!!}/{!!$region!!}'" class="btn btn-sm style3 post-read-more">More</a>
+                                    
+                                    <a style="cursor:pointer" onclick="$('.woocommerce').LoadingOverlay('show'); window.location.href = '{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$imagen->id_geo!!}'" class="btn btn-sm style3 post-read-more">More</a>
                                 </div>
+                                
+                                   
+                                   
                             </article>
                         </div>
                         

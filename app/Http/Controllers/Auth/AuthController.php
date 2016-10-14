@@ -6,11 +6,13 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use App\Repositories\OperadorRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Repositories\UserRepository;
 use App\Jobs\SendMail;
+use App\Repositories\ServiciosOperadorRepository;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
@@ -20,8 +22,8 @@ class AuthController extends Controller {
 
     protected $validationRules = [
         'username' => 'required|max:30|unique:users',
-        'email' => 'required|email|max:255|unique:users',
-        'password' => 'required|confirmed|min:5',
+        'email' => 'required|email|confirmed|max:255|unique:users',
+        'password' => 'required|min:5',
     ];
 
     use AuthenticatesAndRegistersUsers,
@@ -45,7 +47,7 @@ class AuthController extends Controller {
      * @return Response
      */
     public function postLogin(
-    LoginRequest $request, Guard $auth) {
+    LoginRequest $request, Guard $auth, ServiciosOperadorRepository $gestion) {
 
 
         $logValue = $request->input('log');
@@ -57,7 +59,7 @@ class AuthController extends Controller {
         );
 
         if ($throttles && $this->hasTooManyLoginAttempts($request)) {
-            return redirect('/')
+            return redirect('/login')
                             ->with('error', trans('front/login.maxattempt'))
                             ->withInput($request->only('log'));
         }
@@ -71,20 +73,16 @@ class AuthController extends Controller {
             if ($throttles) {
                 $this->incrementLoginAttempts($request);
             }
-            if (session('device') == 'desk') {
-                return redirect('/')
+            
+                return redirect('/login')
                                 ->with('error', trans('front/login.credentials'))
                                 ->withInput($request->only('log'));
-            } else {
-                return redirect('/loginmobile')
-                                ->with('error', trans('front/login.credentials'))
-                                ->withInput($request->only('log'));
-            }
+             
         }
 
         $user = $auth->getLastAttempted();
 
-        if ($user->confirmed) {
+        if (($user->confirmed) || ($user->valid)) {
             if ($throttles) {
                 $this->clearLoginAttempts($request);
             }
@@ -95,31 +93,41 @@ class AuthController extends Controller {
                 $request->session()->forget('user_id');
             }
 
-            // $name = Cookie::forget('name');
-            //$iden = Cookie::forget('iden');
-            //$email = Cookie::forget('email');
-            //$name = Cookie::make('name', $user->username,1000);
-            //$iden = Cookie::make('iden', $user->id,1000);
-            //$email = Cookie::make('email', $user->email,1000);
-            //$request->session()->put('user_id', $user->id);
-
+           
             $request->session()->put('user_name', $user->username);
-            //$request->session()->put('user_email', $user->email);
-
+           
             $email = $auth->user()->email;
             $nombre = $auth->user()->user_name;
 
 
-            //return redirect('/servicios')->with('user', $user->id)->withCookie($name)->withCookie($iden)->withCookie($email);
-            return redirect('/myProfileOp')->with('user', $user->id);
-        }
+            /* Busca si ya tiene servicios activos o no */
+
+            //logica que comprueba si el usuario tiene servicios para ser modificados
+            //caso contrario ingresa nuevos serviciosS
+            $listServicios = $gestion->getServiciosidUsuario($user->id);
+            if ($listServicios) {
+                $data['id_usuario_op'] = $listServicios[0]->id_usuario_op;
+                $request->session()->put('operador_id', $data['id_usuario_op']);
+                //        $view = view('Registro.catalogoServicio', compact('data', 'listServicios'));
+                $request->session()->put('tip_oper', $listServicios[0]->id_tipo_operador);
 
 
-        if (session('device') != 'mobile') {
-            return redirect('/')->with('error', trans('front/verify.again'));
+                return redirect('/detalleServicios')->with('user', $user->id);
+                // return ($view);
+            } else {
+
+                return redirect('/myProfileOp')->with('user', $user->id);
+            }
         } else {
-            return redirect('/loginmobile')->with('error', trans('front/verify.again'));
+
+            /* --------------------------------- */
+            return redirect('/login')
+                                ->with('error', trans('front/verify.again'))
+                                ->withInput($request->only('log'));
         }
+
+
+        
     }
 
     /**
@@ -129,8 +137,7 @@ class AuthController extends Controller {
      * @param  App\Repositories\UserRepository $user_gestion
      * @return Response
      */
-    public function postRegister(Request $request, UserRepository $user_gestion) {
-
+    public function postRegister(Guard $auth, Request $request, UserRepository $user_gestion, OperadorRepository $operador_gestion, ServiciosOperadorRepository $gestion) {
 
 
         $inputData = Input::get('formData');
@@ -141,7 +148,7 @@ class AuthController extends Controller {
                 'username' => $formFields['username'],
                 'email' => $formFields['email'],
                 'password' => $formFields['password'],
-                'password_confirmation' => $formFields['password_confirmation'],
+                'email_confirmation' => $formFields['email_confirmation'],
             );
         } else {
 
@@ -149,51 +156,95 @@ class AuthController extends Controller {
                 'username' => $request->input('username'),
                 'email' => $request->input('email'),
                 'password' => $request->input('password'),
-                'password_confirmation' => $request->input('password_confirmation'),
+                'email_confirmation' => $request->input('email_confirmation'),
             );
         }
 
+
+        //Valida que los campos sean unicos y cumplan con los requerimientos
         $validator = Validator::make($userData, $this->validationRules);
 
 
 
-
+        //Si el validador falla se ejecutan las acciones
         if ($validator->fails()) {
-
-            if (session('device') == 'mobile') {
-
-
-                return view('mobile.logInMobile.registerMobile')->with('errorsMob', $validator->getMessageBag()->toArray());
-            } else {
-
-                return response()->json(array(
+    
+            return response()->json(array(
                             'fail' => true,
                             'errors' => $validator->getMessageBag()->toArray()
                 ));
             }
-        } else {
+         else {
             $user = $user_gestion->store(
                     $userData, $confirmation_code = str_random(30)
             );
-
-
-
-            $this->dispatch(new SendMail($user));
-            //    return redirect('/')->with('ok', trans('front/verify.message'));
-            //return redirect('/auth/confirmation/'.$confirmation_code);*/
-
-
-            if (session('device') == 'mobile') {
-               
                 
-                return view('mobile.logInMobile.registerMobile')->with('successMob', "El registro se ha realizado con éxito. Se ha enviado un email su correo electrónico");
+         
+            
+            //Se almacenan los datos por default del contacto, se pueden modificar cuando ya ingrese
+            $operadorData = array(
+                'nombre_contacto_operador_1' => $formFields['username'],
+                'telf_contacto_operador_1' => "",
+                'ip_registro_operador' => $this->getIp(),
+                'email_contacto_operador' => $formFields['email'],
+                'direccion_empresa_operador' => "",
+                'id_usuario' => $user->id,
+                'id_tipo_operador' => 3,
+                'estado_contacto_operador' => 1,
+                'id_usuario_op' => 0
+            );
+
+            
+            //Almacena el operador y almacena en sesion su identificacion
+            $operador = $operador_gestion->store($operadorData);
+            $request->session()->put('operador_id', $operador->id);
+
+
+
+            if ($request->session()->has('user_id')) {
+                $request->session()->forget('user_id');
             }
-            return response()->json(array(
-                        'success' => true,
-                        'message' => trans('front/verify.message')
-            ));
-            //}
+
+            //Se realiza el login y redireccion
+            $request->session()->put('user_name', $user->email);
+            $auth->login($user);
+              
+            $email = $auth->user()->email;
+            $nombre = $auth->user()->email;
+            try{
+                $this->dispatch(new SendMail($user));}
+                catch( Exception $e)
+                {
+                    
+                }
+            /* Busca si ya tiene servicios activos o no */
+
+            //logica que comprueba si el usuario tiene servicios para ser modificados
+            //caso contrario ingresa nuevos serviciosS
+            $listServicios = $gestion->getServiciosidUsuario($user->id);
+            if ($listServicios) {
+
+                $data['id_usuario_op'] = $listServicios[0]->id_usuario_op;
+                $request->session()->put('operador_id', $data['id_usuario_op']);
+                $request->session()->put('tip_oper', $listServicios[0]->id_tipo_operador);
+                return redirect('/detalleServicios')->with('user', $user->id);
+
+            } else {
+
+                            $returnHTML = ('/IguanaTrip/public/myProfileOp');//->with('user', $user->id);
+              return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+          
+            }
+
         }
+    }
+
+    private function getIp() {
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))
+            return $_SERVER['HTTP_CLIENT_IP'];
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+            return $_SERVER['HTTP_X_FORWARDED_FOR'];
+        return $_SERVER['REMOTE_ADDR'];
     }
 
     /**
@@ -204,10 +255,11 @@ class AuthController extends Controller {
      * @return Response
      */
     public function getConfirm(
+            
     UserRepository $user_gestion, $confirmation_code) {
         $user = $user_gestion->confirm($confirmation_code);
 
-        return redirect('/')->with('ok', trans('front/verify.success'));
+        return redirect('/login')->with('ok', trans('front/verify.success'));
     }
 
     /**
@@ -224,10 +276,10 @@ class AuthController extends Controller {
 
             $this->dispatch(new SendMail($user));
 
-            return redirect('/')->with('ok', trans('front/verify.resend'));
+            return redirect('/login')->with('ok', trans('front/verify.resend'));
         }
 
-        return redirect('/');
+        return redirect('/login');
     }
 
 }

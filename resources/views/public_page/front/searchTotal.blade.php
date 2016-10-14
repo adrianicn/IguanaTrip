@@ -155,48 +155,51 @@
                         </div>
                            
                    
-                      
 
                         <div class="widget box">
                             <h4>{{ trans('publico/labels.label121')}}</h4>
                             <ul class="product-list-widget">
                                 <li>
                                     <div class="product-image">
-                                        <a href="#">
-                                            <img src="http://placehold.it/58x63" alt="">
+                                        <a href="{!!asset('/detalle')!!}/ESTACION-CHARLES-DARWIN/228">
+                                            <img src="{{ asset('public/images/icon/228estacion6.jpg')}}" alt="Charles Darwin">
                                         </a>
                                     </div>
                                     <div class="product-content">
-                                        <h6 class="product-title"><a href="#">Everyday Scoop Neck Cami</a></h6>
-                                        <span class="product-price">$18.99</span>
+                                        <h6 class="product-title"><a href="{!!asset('/detalle')!!}/ESTACION-CHARLES-DARWIN/228">Estación Charles Darwin</a></h6>
+                                        <span class="product-price">{{ trans('publico/labels.label128')}}</span>
                                         <span class="star-rating" title="4" data-toggle="tooltip">
                                             <span data-stars="4"></span>
                                         </span>
                                     </div>
                                 </li>
                                 <li>
+                                    
                                     <div class="product-image">
-                                        <a href="#">
-                                            <img src="http://placehold.it/58x63" alt="">
+                                        <a href="{!!asset('/detalle')!!}/Centro-Histórico-de-Quito/127">
+                                            <img src="{{ asset('public/images/icon/127centrohistoricociclovia.jpg')}}" alt="">
                                         </a>
                                     </div>
                                     <div class="product-content">
-                                        <h6 class="product-title"><a href="#">Easy Draped Cardigan</a></h6>
-                                        <span class="product-price">$23.58</span>
+                                        <h6 class="product-title"><a href="{!!asset('/detalle')!!}/Centro-Histórico-de-Quito/127">Centro Histórico de Quito</a></h6>
+                                        <span class="product-price">{{ trans('publico/labels.label128')}}</span>
                                         <span class="star-rating" title="4" data-toggle="tooltip">
                                             <span data-stars="4"></span>
                                         </span>
                                     </div>
                                 </li>
+                                
                                 <li>
+                                    
+                                    
                                     <div class="product-image">
-                                        <a href="#">
-                                            <img src="http://placehold.it/58x63" alt="">
+                                        <a href="{!!asset('/detalle')!!}/Montañita/148">
+                                            <img src="{{ asset('public/images/icon/148103677257361922164010645062755965301191111n.jpg')}}" alt="Montañita">
                                         </a>
                                     </div>
                                     <div class="product-content">
-                                        <h6 class="product-title"><a href="#">Mesh-Trimmed Dress</a></h6>
-                                        <span class="product-price">$76.00</span>
+                                        <h6 class="product-title"><a href="{!!asset('/detalle')!!}/Montañita/148">Montañita</a></h6>
+                                        <span class="product-price">{{ trans('publico/labels.label128')}}</span>
                                         <span class="star-rating" title="4" data-toggle="tooltip">
                                             <span data-stars="4"></span>
                                         </span>

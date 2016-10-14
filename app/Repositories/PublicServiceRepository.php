@@ -1873,15 +1873,23 @@ class PublicServiceRepository extends BaseRepository {
         $id_imagenes = array();
         $final_imagen = array();
 
+        
+        
         $provincias = DB::table('ubicacion_geografica')
+                ->join('usuario_servicios','usuario_servicios.id_provincia', '=', 'ubicacion_geografica.id')
                 ->where('id_region', '=', $id_region)
-                ->select('ubicacion_geografica.id')
+                ->select('usuario_servicios.id')
+                ->take(100)
                 ->get();
+        
+        
+        
 
 
         foreach ($provincias as $provincia) {
             $id_imagenes = DB::table('images')
                             ->where('id_auxiliar', '=', $provincia->id)
+                    ->where('id_catalogo_fotografia', '=', 1)
                             ->where('estado_fotografia', '=', '1')
                             ->select('images.id')->take(1)->get();
 
@@ -1894,10 +1902,10 @@ class PublicServiceRepository extends BaseRepository {
         }
 
         $imagenes = DB::table('images')
-                ->join('ubicacion_geografica', 'ubicacion_geografica.id', '=', 'images.id_auxiliar')
+                ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_auxiliar')
                 ->whereIn('images.id', $final_imagen)
                 ->where('estado_fotografia', '=', '1')
-                ->select('images.*', 'ubicacion_geografica.nombre', 'ubicacion_geografica.id as id_geo', 'ubicacion_geografica.id_region', 'ubicacion_geografica.descripcion_esp', 'ubicacion_geografica.descripcion_eng')
+                ->select('images.*', 'usuario_servicios.nombre_servicio as nombre', 'usuario_servicios.id as id_geo', 'usuario_servicios.id as id_region', 'usuario_servicios.detalle_servicio as descripcion_esp', 'usuario_servicios.detalle_servicio as descripcion_eng')
                 ->get();
 
 
@@ -1920,7 +1928,7 @@ class PublicServiceRepository extends BaseRepository {
     }
 
     //Actualiza el numero de visitas
-    public function saveVisita($atraccion) {
+    public function saveVisita($nombre,$atraccion) {
 
         //Transformo el arreglo en un solo objeto
 
@@ -2000,6 +2008,8 @@ class PublicServiceRepository extends BaseRepository {
         $servicios = DB::table('catalogo_servicios')
                         ->join('usuario_servicios', 'id_catalogo_servicios', '=', 'usuario_servicios.id_catalogo_servicio')
                         ->where('usuario_servicios.id_provincia', '=', $id_provincia)
+                        ->where('usuario_servicios.estado_servicio_usuario', '=',1)
+                ->where('usuario_servicios.estado_servicio', '=',1)
                         ->select('catalogo_servicios.nombre_servicio', 'catalogo_servicios.id_catalogo_servicios', 'catalogo_servicios.nombre_servicio_eng')
                         ->distinct()->get();
 
@@ -2358,6 +2368,7 @@ class PublicServiceRepository extends BaseRepository {
     public function getRegionDetails($id_region) {
 
         $provincias = DB::table('ubicacion_geografica')
+                ->join('usuario_servicios','usuario_servicios.id_provincia', '=', 'ubicacion_geografica.id')
                 ->where('id_region', '=', $id_region)
                 ->select('ubicacion_geografica.*')
                 ->get();

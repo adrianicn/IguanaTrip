@@ -12,7 +12,11 @@
                                             <div class="shortcode-banner-inside" style=" width: 112%;">
                                             @endif
                                     <div class="shortcode-banner-content">
-                                        <a href="{!!asset('/tokenDc$rip')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
+                                        <?php
+                        $nombre = str_replace(' ', '-', $region->nombre_servicio);
+                        ?>
+                                        
+                                        <a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
                                         
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
@@ -36,8 +40,10 @@
                                             <div class="shortcode-banner-inside" style=" width: 112%;">
                                             @endif
                                     <div class="shortcode-banner-content">
-                                        
-                                        <a href="{!!asset('/tokenDc$rip')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
+                                        <?php
+                        $nombre = str_replace(' ', '-', $region->nombre_servicio);
+                        ?>
+                                        <a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
                                         </div>
@@ -59,7 +65,10 @@
                                             <div class="shortcode-banner-inside" style=" width: 112%;">
                                             @endif
                                     <div class="shortcode-banner-content">
-                                        <a href="{!!asset('/tokenDc$rip')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
+                                        <?php
+                        $nombre = str_replace(' ', '-', $region->nombre_servicio);
+                        ?>
+                                        <a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
                                         </div>
@@ -82,7 +91,10 @@
                                             <div class="shortcode-banner-inside" style=" width: 112%;">
                                             @endif
                                     <div class="shortcode-banner-content">
-                                        <a href="{!!asset('/tokenDc$rip')!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
+                                        <?php
+                        $nombre = str_replace(' ', '-', $region->nombre_servicio);
+                        ?>
+                                        <a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$region->id!!}" onclick="$('.iso-container').LoadingOverlay('show');"><h3 class="banner-title">{!!$region->nombre_servicio!!}</h3></a>
                                         <div class="details">
                                             <p>{!!$region->detalle_servicio!!}</p>
                                         </div>

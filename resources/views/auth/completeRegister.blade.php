@@ -103,20 +103,21 @@
 
     <input type="text" id="email" name="email" placeholder="Email">
 
+    <label id="icon" for="email_confirmation"><i class="icon-envelope "></i></label>
+
+    <input type="text" id="email" name="email_confirmation" placeholder="{{trans('front/register.confirm-email')}}">
+
     <label id="icon" for="password"><i class="icon-shield"></i></label>
 
     <input type="password" id="password" name="password" placeholder="{{trans('front/register.password')}}">
 
-    <label id="icon" for="password_confirmation"><i class="icon-shield"></i></label>
-
-    <input type="password" id="password" required="required" name="password_confirmation" placeholder="{{trans('front/register.confirm-password')}}">
 
 
 
     <p>By clicking Register, you agree on our <a href="#">terms and condition</a>.</p>
 
     <a href="#" class="button" onclick="$(this).closest('form').submit()">{!! (trans('front/form.send')) !!}</a>
-</form>{!! Form::close() !!}
+{!! Form::close() !!}
 </div>
 
 
@@ -160,8 +161,8 @@
                  $(".testbox").LoadingOverlay("hide", true);
                 $('.register').fadeOut(); //hiding Reg form
                 var successContent = '' + data.message + '';
-                $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + successContent + "'])");
-
+                $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'Success'])");
+                window.location.href = data.redirectto;
 
 
 
@@ -177,6 +178,18 @@
         $('.badge').popover();
     });
 
+
+$('.logininput').keypress(function (e) {
+ var key = e.which;
+ if(key == 13)  // the enter key code
+  {
+      alert("ptm");
+            $('.logininput').closest('form').submit();
+  }
+}); 
+
+
+                 
 
 </script>
 

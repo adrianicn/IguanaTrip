@@ -6,18 +6,15 @@
                             <div class="branding">
                             @endif
                             <h1 class="logo">
-                                <a href="#" onclick="window.location.href = '{!!asset('/')!!}'"><img src="" alt=""><span></span></a>
+                                <a href="{!!asset('/')!!}" onclick="window.location.href = '{!!asset('/')!!}'"><img src="" alt=""><span></span></a>
                             </h1>
                         </div>
                         <nav id="nav">
                             <ul class="header-top-nav">
                                 <li class="mini-cart">
                                     <div id="lang">
-
-
                                         <a href="{!! url('language') !!}"><img width="32" height="32" alt="en" src="{!! asset('public/img/' . (session('locale') == 'es' ? 'english' : 'espanol') . '-flag.png') !!}"></a>
                                     </div>
-
 
                                 </li>
                                 <li class="mini-search">
@@ -39,7 +36,7 @@
                             </ul>
                             <ul id="main-nav" class="hidden-mobile">
                                 <li class="menu-item-has-children">
-                                    <a>{{ trans('publico/labels.label1')}}</a>
+                                    <a href="{!!asset('/')!!}">{{ trans('publico/labels.label1')}}</a>
                                     <ul class="sub-nav">
                                         <li><a href="{!!asset('/AboutUs')!!}">{{ trans('publico/labels.label78')}}</a></li>
                                         <li><a href="{!!asset('/Mision')!!}">{{ trans('publico/labels.label79')}}</a></li>
@@ -143,7 +140,20 @@
                                 
                                
                                 <li class="menu-item-has-children">
-                                    <a href="#">{{ trans('publico/labels.label6')}}</a>
+                                    
+                                    @if(session('statut')!='visitor')
+                            <a href="#">{!!session('user_name')!!}</a>
+                           
+                           <ul class="sub-nav">
+                               <li> {!! link_to('auth/logout', trans('front/site.logout')) !!}
+                                   </li>             
+                                                
+                                            </ul>
+                            @else
+                                    <a href="#" onclick="window.location.href = '{!!asset('/login')!!}'">{{ trans('publico/labels.label6')}}</a>
+                                    @endif
+                            
+                                    
                                     
                                 </li>
                                 
@@ -161,11 +171,14 @@
                             <span class="open-subnav"></span>
                             <a>{{ trans('publico/labels.label1')}}</a>
                             <ul class="sub-nav">
-                                <li><a href="index.html">{{ trans('publico/labels.label78')}}</a></li>
-                                        <li><a href="index.html">{{ trans('publico/labels.label79')}}</a></li>
-                                        <li><a href="index.html">{{ trans('publico/labels.label80')}}</a></li>
+                                        <li><a href="{!!asset('/AboutUs')!!}">{{ trans('publico/labels.label78')}}</a></li>
+                                        <li><a href="{!!asset('/Mision')!!}">{{ trans('publico/labels.label79')}}</a></li>
+                                        <li><a href="{!!asset('/TermsConditions')!!}" >{{ trans('publico/labels.label80')}}</a></li>
+
                                       
                             </ul>
+                            
+
                         </li>
                         <li class="menu-item-has-children">
                             <span class="open-subnav"></span>
