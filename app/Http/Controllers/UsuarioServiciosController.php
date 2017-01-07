@@ -855,6 +855,79 @@ class UsuarioServiciosController extends Controller {
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
 
+	//**************************************************************************************************//
+	//      FUNCION PARA GUARDAR Y ACTUALIZAR UNA ESPECIALIDAD					    //
+	//**************************************************************************************************//
+
+	public function postEspecialidad(Guard $auth,ServiciosOperadorRepository $gestion) {
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        $permiso = $gestion->getPermiso($formFields['id_usuario_servicio']);
+        
+        //obtengo las especialidades por id
+        if (isset($formFields['id'])) {
+            $Especialidad = $gestion->getEspecialidad($formFields['id']);
+        }
+
+        //return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+        
+        if (isset($Especialidad)) {
+            //logica update
+
+            $gestion->storeUpdateEspecialidad($formFields, $Especialidad);
+            
+            //Gestion de actualizacion de busqueda    
+            //$search=$formFields['nombre_itinerario']." ".$formFields['descripcion_itinerario']." ".$formFields['observaciones_itinerario']." ".$formFields['tags'];            
+            //$gestion->storeUpdateSerchEngine( $Itinerario,3,$formFields['id'],$search);
+        
+            $returnHTML = ('/especialidad/' . $formFields['id']);
+            
+        } else { //logica de insert
+            
+            //Arreglo de inputs prestados que vienen del formulario
+            $object = $gestion->storeNewEspecialidad($formFields);    
+            
+            //Gestion de nueva de busqueda    
+            //$search=$formFields['nombre_itinerario']." ".$formFields['descripcion_itinerario'];            
+            //$gestion->storeSearchEngine($formFields['id_usuario_servicio'], $search,3,$object->id);
+          
+            $returnHTML = '/especialidad/'.$object->id;
+            
+        }
+
+
+
+
+        return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+    }
+
+    //******************************************************************************//
+    //                 ACTUALIZA EL ESTADO DE LA ESPEECIALIDAD                      //
+    //******************************************************************************//
+    public function postEstadoEspecialidad($id, ServiciosOperadorRepository $gestion) {
+
+        $serviciosBase = array();
+        //obtengo los servicios ya almacenados de la bdd
+        $ServiciosOperador = $gestion->getEstadoEspecialidad($id);
+
+        foreach ($ServiciosOperador as $servicioBase) {
+
+
+            if ($servicioBase->activo == 1){ 
+                $serviciosBase['activo'] = 0;
+            }else{
+                $serviciosBase['activo'] = 1;
+            }
+
+            $serviciosBase['id'] = $servicioBase->id;
+        }
+
+
+        $gestion->storeUpdateEstadoEspecialidadPrincipal($serviciosBase, $ServiciosOperador);
+        return response()->json(array('success' => true));
+    }
+
     public function postPuntoItinerario(ServiciosOperadorRepository $gestion) {
 
         $inputData = Input::get('formData');
