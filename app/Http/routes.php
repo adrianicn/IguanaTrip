@@ -106,6 +106,7 @@ Route::post('maps',function()
     
     return Input::all();
 });
+
 Route::post('promocion', ['as' => 'postPromocion', 'uses' =>'UsuarioServiciosController@postPromocion','middleware' => 'notAuth']);
 Route::post('itinerario', ['as' => 'postItinerario', 'uses' =>'UsuarioServiciosController@postItinerario','middleware' => 'notAuth']);
 Route::post('evento', ['as' => 'postEvento', 'uses' =>'UsuarioServiciosController@postEvento','middleware' => 'notAuth']);
@@ -283,3 +284,24 @@ Route::get('/Mision', ['as' => 'SearchTotalPartial', 'uses' => 'SearchController
 Route::get('Search', ['as' => 'min-search', 'uses' =>'SearchController@getSearchTotal']);
 
  /*  Fin de las rutas del sistema publico*/
+
+
+//***************************************************************************************************************************//
+//                                               RUTAS BOOKING FABIO                                                         //
+//***************************************************************************************************************************//
+
+Route::post('especialidad', 
+            ['as' => 'postEspecialidad', 'uses' =>'UsuarioServiciosController@postEspecialidad',
+            'middleware' => 'notAuth']);
+
+Route::get('especialidad/{id}',
+            ['uses'=>'UsuarioServiciosController@getEspecialidad','as'=>'getEspecialidad'
+            ,'middleware' => 'notAuth']);
+
+
+Route::resource('/api/detallesEspecialidad','DetalleEspecialidadController');
+
+Route::get('/api/detallesEspecialidadID/{id}','DetalleEspecialidadController@buscar');
+
+Route::post('estadoEspecialidadPrincipal/{id}', ['uses' =>'UsuarioServiciosController@postEstadoEspecialidad',
+            'middleware' => 'notAuth']);
