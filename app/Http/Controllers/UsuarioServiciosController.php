@@ -752,16 +752,27 @@ class UsuarioServiciosController extends Controller {
     //Eventos
     //Promocioes
     //Itinerarios por usuario
+    //Especilaidades por Usuario Servicio
     public function getAllServicios($id_usuario_servicio, Request $request, ServiciosOperadorRepository $gestion) {
 
         $itinerarios = $gestion->getItinerariosporUsuario($id_usuario_servicio);
         $promociones = $gestion->getPromocionesUsuarioServicio($id_usuario_servicio);
         $eventos = $gestion->getEventosUsuarioServicio($id_usuario_servicio);
         
+        //*******************************************************************************//
+        //              OBTENGO LAS ESPECIALIDADES POR USUARIO SERVICIO                  //
+        //*******************************************************************************//
+        $especialidad = $gestion->getEspecialidadporUsuario($id_usuario_servicio);
+        
         $hijos = $gestion->getHijosUsuarioServicio($id_usuario_servicio);
 
 
-        $view = View::make('reusable.modifyEventos_Promociones')->with('itinerarios', $itinerarios)->with('promociones', $promociones)->with('eventos', $eventos)->with('hijos', $hijos);
+        $view = View::make('reusable.modifyEventos_Promociones')
+                ->with('itinerarios', $itinerarios)
+                ->with('promociones', $promociones)
+                ->with('eventos', $eventos)
+                ->with('especialidad', $especialidad)
+                ->with('hijos', $hijos);
         if ($request->ajax()) {
             $sections = $view->rendersections();
 
