@@ -199,8 +199,10 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 <div id="promocion"><a class="button-step4" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." onclick="RenderPartialGeneric('reusable.promocion', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar promocion</a></div>
                 <div id="evento"><a class="button-step4" title="Puedes crear varios eventos para tu servicio. Ejemplo si tu servicio es una discoteca puedes agregar Jueves laydies night como evento o si eres un restaurante puedes agregar eventos como inauguraciones, etc." onclick="RenderPartialGeneric('reusable.createNewEvent', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar evento</a></div>
                 <div id="evento"><a class="button-step4" title="Esta opción es orientada a servicios turísticos de viajes y transporte. Por ejemplo tu servicio es una agencia de viajes y tienes varios itinerarios Trip Cotopaxi, Trip Amazonía o si eres un transporte podrás especificar la ruta de tu servicio." onclick="RenderPartialGeneric('reusable.createNewItinerario', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar tour o itinerario</a></div>
+                
                 <div id="promocion"><a onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 1, {!!$usuarioServicio->id!!}, {!!$usuarioServicio->id!!})" href="#"><img src="{{ asset('img/fotograf.png')}}" style="width:111px"></a> </div>
                 <div id="promocion"><a onclick="RenderPartialGeneric('reusable.invitar_amigo')" href="#"><img src="{{ asset('img/amigo-1.png')}}" style="width:111px"></a> </div>
+                <div id="evento"><a class="button-step4" title="Prueba Especialidad Booking" onclick="RenderPartialGeneric('reusable.createNewEspecialidad', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Especialidad</a></div>
                 
                 @if($id_catalogo==4 && $usuarioServicio->id_padre==0)
                 
@@ -332,7 +334,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
         <div id="renderPartialListaServicios">
             @section('contentPanelServicios')
             @show
-        </div>    
+        </div>
     </div>
 </div>
 
