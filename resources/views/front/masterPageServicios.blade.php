@@ -19,15 +19,19 @@
         
         
        <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+
             
     </head>
      {!! HTML::style('css/demo.css') !!} 
      {!! HTML::style('css/masterPagesRegistro.css') !!}
-        {!! HTML::style('css/base/layoutBase.css') !!} 
-        {!! HTML::style('css/popupModal/basic.css') !!} 
-        {!! HTML::style('css/calendar/ui-jquery.css') !!}
-        {!!HTML::script('js/sliderTop/jquery-1.9.1.min.js') !!}
-        {!!HTML::script('js/sliderTop/jssor.slider.mini.js') !!}
+     {!! HTML::style('css/base/layoutBase.css') !!} 
+     {!! HTML::style('css/popupModal/basic.css') !!} 
+     {!! HTML::style('css/calendar/ui-jquery.css') !!}
+     {!!HTML::script('js/sliderTop/jquery-1.9.1.min.js') !!}
+     {!!HTML::script('js/sliderTop/jssor.slider.mini.js') !!}
+     {!!HTML::script('js/angular/angular.min.js') !!}
+     {!!HTML::script('js/angular/detalleEspecialidadController.js') !!}
+     {!!HTML::script('js/Tinymce/tinymce.min.js') !!}
         
    
         <body class="full-padding" style="margin: 0;padding: 0;min-width: 100%;">
@@ -167,6 +171,10 @@
             {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
             
             
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 7970f1a488b48e98cafc1bdd2a4577d215871071
             <script>
         jQuery(document).ready(function ($) {
             
@@ -211,28 +219,7 @@
         });
     </script>
     
-     <script type="text/javascript">
-  tinymce.init({
-      
-    selector: '#detalle_servicio',
-      setup : function(ed) {
-          ed.onChange.add(function() {
-        $('#changed').val(1);
-    });
-   },
-     menubar:false,
-    statusbar: false,
-    width: 390,
-    height: 150,
-    plugins: [
-      'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
-      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
-      'save table contextmenu directionality emoticons template paste textcolor'
-    ],
-    content_css: 'css/content.css',
-    toolbar: 'styleselect | bold italic | alignleft aligncenter alignright alignjustify '
-  });
-  </script>
+
     
     <style>
         

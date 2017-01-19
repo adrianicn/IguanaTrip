@@ -43,6 +43,56 @@
 </table>
     </div>
     @endif
+    
+   <!-- ************************************************************************--> 
+   <!--        INICIO LISTA DE ESPECIALIDAD PARA EL USURARIO SERVICIO           --> 
+   <!-- ************************************************************************-->
+    @if(isset($especialidad) && count($especialidad)>0)
+    <div id='itinerarios-1'>
+        <h1>Especialidad</h1>
+        
+   
+        <table width="400" >
+            <tr>
+                <td>Nombre</td><td>Activo</td>
+            </tr>
+        @foreach ($especialidad as $especialida)
+        
+        <tr><td width="35%">
+                <a class="button-1 white" onclick="redirect('{!!asset('/especialidad')!!}/'+{!!$especialida->id!!})" href="#">{!!$especialida->nombre_especialidad!!}</a></td>
+            <td>
+            @if($especialida->activo==1)
+                  <label class="switch switch-green">
+                            
+                        <input type="checkbox" id='activo_{!!$especialida->id!!}' checked name ='activo_{!!$especialida->id!!}' class="switch-input" 
+                               onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoEspecialidadPrincipal')!!}/',{!!$especialida->id!!},{!!$especialida->id!!},'especialidad')">
+                        <span class="switch-label" data-on="Si" data-off="No"></span>
+                        <span class="switch-handle"></span>
+                        
+                    </label>
+                @else
+                
+                 <label class="switch switch-green">
+                            
+                        <input type="checkbox" id='activo_{!!$especialida->id!!}'  name ='activo_{!!$especialida->id!!}' class="switch-input" 
+                               onchange="AjaxContainerRetrunBurnURL('{!!asset('/estadoEspecialidadPrincipal')!!}/',{!!$especialida->id!!},{!!$especialida->id!!},'especialidad')">
+                        <span class="switch-label" data-on="Si" data-off="No"></span>
+                        <span class="switch-handle"></span>
+                        
+                    </label>
+                @endif
+
+            
+         </td>    
+        </tr>
+        
+        @endforeach
+</table>
+    </div>
+    @endif
+    <!-- ************************************************************************-->
+    <!-- ************************************************************************-->
+    
     @if(isset($eventos) && count($eventos)>0)
     <div id='eventos-1'>
         <h1>Eventos</h1>

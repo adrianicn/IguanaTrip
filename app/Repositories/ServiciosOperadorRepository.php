@@ -14,6 +14,7 @@ use App\Models\UbicacionGeografica;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 use App\Models\SearchEngine;
+use App\Models\Booking\Especialidad;
 
 class ServiciosOperadorRepository extends BaseRepository {
 
@@ -39,6 +40,7 @@ class ServiciosOperadorRepository extends BaseRepository {
     protected $invitar_amigo;
     protected $ubicacion_geografica;
     protected $search_engine;
+    protected $especialidad_u;
     
 
     /**
@@ -54,6 +56,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->image = new Image();
         $this->catalogo_dificultad = new Catalogo_Dificultad();
         $this->itinerarios_u = new Itinerario_Usuario_Servicio();
+        $this->especialidad_u = new Especialidad();
         $this->detalle_itinerarios_u = new Detalle_Itinerario();
         $this->eventos = new Eventos_usuario_Servicio();
         $this->operador = new Usuario_Operador();
@@ -150,6 +153,25 @@ class ServiciosOperadorRepository extends BaseRepository {
 
         $this->save($ItinerarioU);
         return $ItinerarioU;
+    }
+    
+    
+    //**********************************************************************************//
+    //              CODIGO PARA GUARADAR LAS NUEVAS ESPECIALIDADES                      //
+    //**********************************************************************************//
+        public function storeNewEspecialidad($inputs) {
+            
+        $EspecilaidadU = new $this->especialidad_u;
+        $EspecilaidadU->id_usuario_servicio = trim($inputs['id_usuario_servicio']);
+        $EspecilaidadU->id_catalogo_especialidad = trim($inputs['id_catalogo_especialidad']);
+        $EspecilaidadU->nombre_especialidad = trim($inputs['nombre_especialidad']);
+        $EspecilaidadU->descripcion_especialidad = trim($inputs['descripcion_especialidad']);
+        $EspecilaidadU->activo = trim($inputs['activo']);
+        $EspecilaidadU->created_at = \Carbon\Carbon::now()->toDateTimeString();
+        $EspecilaidadU->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+        $this->save($EspecilaidadU);
+        return $EspecilaidadU;
     }
 
     public function storeNewEvento($inputs) {
@@ -250,6 +272,18 @@ class ServiciosOperadorRepository extends BaseRepository {
 
         return true;
     }
+    
+    //***************************************************************************//
+    //          ACTUALIZAR EL ESTADO DE LA ESPECIALIDAD                          // 
+    //***************************************************************************//
+    public function storeUpdateEstadoEspecialidadPrincipal($inputs, $Especialidad) {
+        //Transformo el arreglo en un solo objeto
+        foreach ($Especialidad as $servicioBase) {
+            $inputs['id'] = $servicioBase->id;
+            $this->updateServEspe($inputs, 'activo');
+        }
+        return true;
+    }
 
     //Actualiza el estado del evento
     public function storeUpdateEstadoEvento($inputs, $Evento) {
@@ -322,6 +356,24 @@ class ServiciosOperadorRepository extends BaseRepository {
             //Transformo el arreglo en un solo objeto
             $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
             $inputs['id_catalogo_dificultad'] = $inputs['id_dificultad'];
+
+            $pro->fill($inputs)->save();
+        }
+
+        return true;
+    }
+    
+    //************************************************************************//
+    //                  ACTUALIZAR LA ESPECIALIDAD                            //
+    //************************************************************************//
+    public function storeUpdateEspecialidad($inputs, $itiner) {
+
+        foreach ($itiner as $servicioBase) {
+            $pro = $this->especialidad_u->find($servicioBase->id);
+
+            //Transformo el arreglo en un solo objeto
+            $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+            //$inputs['id_catalogo_dificultad'] = $inputs['id_dificultad'];
 
             $pro->fill($inputs)->save();
         }
@@ -422,6 +474,15 @@ Actualizar tabla de busqueda
     }
 
     //Realiza la logica del update
+    public function updateServEspe($input, $campo) {
+        $operador = new $this->especialidad_u;
+        $operadorData = $operador::where('id', $input['id'])
+                ->update([$campo => $input[$campo]]);
+    }
+    
+    //************************************************************************//
+    // REALIZA LA LOGICA DEL UPDATE DEL ESTADO DE 
+    //************************************************************************//
     public function updateServItiner($input, $campo) {
         $operador = new $this->itinerarios_u;
         $operadorData = $operador::where('id', $input['id'])
@@ -495,6 +556,14 @@ Actualizar tabla de busqueda
         $itiner = new $this->itinerarios_u;
         return $itiner::where('id', $id_Itinerario)->get();
     }
+    
+    //****************************************************//
+    //           DETALLE ESPECIALIDAD                     //
+    //****************************************************//
+    public function getEstadoEspecialidad($id_Especialidad) {
+        $itiner = new $this->especialidad_u;
+        return $itiner::where('id', $id_Especialidad)->get();
+    }
 
     //detalle estado promocion
     public function getEstadoPromocion($id_promocion) {
@@ -553,6 +622,23 @@ Actualizar tabla de busqueda
         $itiner = new $this->itinerarios_u;
         return $itiner::where('id', $id_itinerario)->get();
     }
+    
+    //**************************************************************************//
+    //           ENTREGA EL ARREGLO DE LA ESPECIALIDAD DEL OPERADOR             //
+    //**************************************************************************//
+    public function getEspecialidadUsuario($id_especialidad) {
+        $especialidad = new $this->especialidad_u;
+        return $especialidad::where('id', $id_especialidad)->get();
+    }
+    
+    //**************************************************************************//
+    //           ENTREGA EL ARREGLO DE LA ESPECIALIDAD por Usuario Servicio    //
+    //**************************************************************************//
+    public function getEspecialidadporUsuario($id_usuario_servicio) {
+        $especialidad = new $this->especialidad_u;
+        return $especialidad::where('id_usuario_servicio', $id_usuario_servicio)->get();
+    }
+
 
     //Entrega el arreglo de itinerarios por operador
     public function getUsuario_serv($id) {
@@ -610,6 +696,12 @@ Actualizar tabla de busqueda
 
         return DB::table('itinerarios_usuario_servicios')
                         ->where('id', '=', $id_itinerario)->get();
+    }
+    
+      //Entrega el arreglo de Especiliadad por operador
+    public function getEspecialidad($id_especialidad) {
+        return DB::table('especialidads')
+                        ->where('id', '=', $id_especialidad)->get();
     }
 
     //Entrega el arreglo de Itinerarios por operador

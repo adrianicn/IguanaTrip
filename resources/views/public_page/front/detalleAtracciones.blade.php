@@ -118,8 +118,10 @@
             <div class="container">
                 <div class="row">
                     <div id="main" class="col-sm-8 col-md-9">
+                        
+                        
                         <div class="product type-product">
-                            <div class="row single-product-details ">
+                            <div class="row single-product-details " style="margin-bottom: 30%;">
                                 <div class="product-images col-sm-5 box-lg  ">
                                     <div id="sync1" class="owl-carousel images">
                                         <div class="post-slider style3 owl-carousel box">
@@ -258,7 +260,87 @@
                                        
                                 </div>
                             </div>
+                     
                             
+                            
+                            <div style="position: absolute; top: 26%;">
+<div class="sidebar col-sm-4 col-md-12">
+
+                                                
+                                                <div class="widget box">
+                            <h4>Qué hacer?</h4>
+                            <ul class="product-list-widget">
+                                
+                                                                
+                                                                
+                                <li>
+                                    <div class="product-image">
+                                        <a href="http://localhost:8080/IguanaTrip/public/tokenDc$ripT/107/1" onclick="$('.container').LoadingOverlay('show');">
+                                            
+                                            <img src="http://localhost:8080/IguanaTrip/public/img/register/1.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    
+                                    
+                                    <div class="product-content">
+                                    
+                                                                               <h6 class="product-title"><a href="http://localhost:8080/IguanaTrip/public/tokenDc$ripT/107/1" onclick="$('.container').LoadingOverlay('show');">Alimentación y bebidas</a></h6>
+                                    
+                                                                            
+                                        <span class="product-price">Ver más</span>
+                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
+                                            <span data-stars="4" style="width: 80%;"></span>
+                                        </span>
+                                    </div>
+                                </li>
+                                                                
+                                <li>
+                                    <div class="product-image">
+                                        <a href="http://localhost:8080/IguanaTrip/public/tokenDc$ripT/107/4" onclick="$('.container').LoadingOverlay('show');">
+                                            
+                                            <img src="http://localhost:8080/IguanaTrip/public/img/register/4.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    
+                                    
+                                    <div class="product-content">
+                                    
+                                                                               <h6 class="product-title"><a href="http://localhost:8080/IguanaTrip/public/tokenDc$ripT/107/4" onclick="$('.container').LoadingOverlay('show');">Centros turísticos</a></h6>
+                                    
+                                                                            
+                                        <span class="product-price">Ver más</span>
+                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
+                                            <span data-stars="4" style="width: 80%;"></span>
+                                        </span>
+                                    </div>
+                                </li>
+                                                                
+                                <li>
+                                    <div class="product-image">
+                                        <a href="http://localhost:8080/IguanaTrip/public/tokenDc$ripT/107/8" onclick="$('.container').LoadingOverlay('show');">
+                                            
+                                            <img src="http://localhost:8080/IguanaTrip/public/img/register/8.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    
+                                    
+                                    <div class="product-content">
+                                    
+                                                                               <h6 class="product-title"><a href="http://localhost:8080/IguanaTrip/public/tokenDc$ripT/107/8" onclick="$('.container').LoadingOverlay('show');">Eventos</a></h6>
+                                    
+                                                                            
+                                        <span class="product-price">Ver más</span>
+                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
+                                            <span data-stars="4" style="width: 80%;"></span>
+                                        </span>
+                                    </div>
+                                </li>
+                                                                                                
+                            </ul>
+                        </div>
+                
+                                            </div>
+  </div>
                             
                             
                             <div class="woocommerce-tabs tab-container vertical-tab clearfix box">
