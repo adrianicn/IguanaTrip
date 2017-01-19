@@ -468,6 +468,14 @@ class PublicServiceRepository extends BaseRepository {
                             ->orWhere('ubicacion_geografica.nombre', 'like', $ubicacion . "%")
                             ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion . "%")
                             ->select('ubicacion_geografica.*')->first();
+            
+              if( is_null($ubicGeo))
+            {
+            $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.id', '=', '207')
+                            ->select('ubicacion_geografica.*')->first();    
+                
+            }
         }
         ///Si la $ubicacion es null
         else {
@@ -679,6 +687,14 @@ class PublicServiceRepository extends BaseRepository {
                             ->orWhere('ubicacion_geografica.nombre', 'like', $ubicacion . "%")
                             ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion . "%")
                             ->select('ubicacion_geografica.*')->first();
+            
+              if( is_null($ubicGeo))
+            {
+            $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.id', '=', '207')
+                            ->select('ubicacion_geografica.*')->first();    
+                
+            }
         }
         ///Si la $ubicacion es null
         else {
@@ -785,6 +801,14 @@ class PublicServiceRepository extends BaseRepository {
                             ->orWhere('ubicacion_geografica.nombre', 'like', $ubicacion . "%")
                             ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion . "%")
                             ->select('ubicacion_geografica.*')->first();
+            
+              if( is_null($ubicGeo))
+            {
+            $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.id', '=', '207')
+                            ->select('ubicacion_geografica.*')->first();    
+                
+            }
         }
         ///Si la $ubicacion es null
         else {
@@ -899,6 +923,14 @@ class PublicServiceRepository extends BaseRepository {
                             ->orWhere('ubicacion_geografica.nombre', 'like', $ubicacion . "%")
                             ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion . "%")
                             ->select('ubicacion_geografica.*')->first();
+            
+              if( is_null($ubicGeo))
+            {
+            $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.id', '=', '207')
+                            ->select('ubicacion_geografica.*')->first();    
+                
+            }
         }
         ///Si la $ubicacion es null
         else {
@@ -1002,6 +1034,14 @@ class PublicServiceRepository extends BaseRepository {
                             ->orWhere('ubicacion_geografica.nombre', 'like', $ubicacion . "%")
                             ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion . "%")
                             ->select('ubicacion_geografica.*')->first();
+            
+              if( is_null($ubicGeo))
+            {
+            $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.id', '=', '207')
+                            ->select('ubicacion_geografica.*')->first();    
+                
+            }
         }
         ///Si la $ubicacion es null
         else {
@@ -1102,6 +1142,14 @@ class PublicServiceRepository extends BaseRepository {
                             ->orWhere('ubicacion_geografica.nombre', 'like', $ubicacion . "%")
                             ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion . "%")
                             ->select('ubicacion_geografica.*')->first();
+            
+              if( is_null($ubicGeo))
+            {
+            $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.id', '=', '207')
+                            ->select('ubicacion_geografica.*')->first();    
+                
+            }
         }
         ///Si la $ubicacion es null
         else {
@@ -1181,6 +1229,14 @@ class PublicServiceRepository extends BaseRepository {
                             ->orWhere('ubicacion_geografica.nombre', 'like', $ubicacion . "%")
                             ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion . "%")
                             ->select('ubicacion_geografica.*')->first();
+            
+              if( is_null($ubicGeo))
+            {
+            $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.id', '=', '207')
+                            ->select('ubicacion_geografica.*')->first();    
+                
+            }
         }
         ///Si la $ubicacion es null
         else {
@@ -1249,6 +1305,80 @@ class PublicServiceRepository extends BaseRepository {
         }
         return null;
     }
+    
+    
+    
+    
+    //Obtiene las fotografias de inspiracion
+    public function getInspiration($take, $pagination) {
+
+        
+
+
+
+        $inspiration=null;
+        if(session('locale') == 'es' ){
+            $inspiration = DB::table('usuario_servicios')
+                    ->join('servicio_establecimiento_usuario', 'usuario_servicios.id', '=', 'servicio_establecimiento_usuario.id_usuario_servicio')
+                            ->where('usuario_servicios.estado_servicio', '=', '1')
+                            ->whereIn('usuario_servicios.id_catalogo_servicio', [10])
+                            ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                            ->where('servicio_establecimiento_usuario.id_servicio_est', '=', '50')//español
+                            ->select('usuario_servicios.id')
+                            ->orderBy('created_at', 'desc')
+                            ->take($take)->get();
+        }
+        else
+        {
+            $inspiration = DB::table('usuario_servicios')
+                    ->join('servicio_establecimiento_usuario', 'usuario_servicios.id', '=', 'servicio_establecimiento_usuario.id_usuario_servicio')
+                            ->where('usuario_servicios.estado_servicio', '=', '1')
+                            ->whereIn('usuario_servicios.id_catalogo_servicio', [10])
+                            ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
+                            ->where('servicio_establecimiento_usuario.id_servicio_est', '=', '49')//ingles
+                            ->select('usuario_servicios.id')
+                            ->orderBy('created_at', 'desc')
+                            ->take($take)->get();
+            
+        }
+
+
+        if (isset($inspiration) && $inspiration != null) {
+            $array = array();
+
+            foreach ($inspiration as $to) {
+                $imagenes = DB::table('images')
+                        ->where('images.id_auxiliar', '=', $to->id)
+                        ->where('estado_fotografia', '=', '1')
+                        ->where('id_catalogo_fotografia', '=', '1')
+                        ->select('images.id')
+                        ->first();
+
+                if ($imagenes != null){
+                $array[] = $imagenes->id;}
+            }
+
+
+
+
+
+            $imagenes = DB::table('images')
+                    ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                    ->join('catalogo_servicios', 'usuario_servicios.id_catalogo_servicio', '=', 'catalogo_servicios.id_catalogo_servicios')
+                    ->whereIn('images.id', $array)
+                    ->where('estado_fotografia', '=', '1')
+                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre', 'usuario_servicios.id as id_usuario_serviciox')
+                    ->orderBy('usuario_servicios.id_padre', 'asc')
+                    ->orderBy('usuario_servicios.prioridad', 'desc')
+                    ->orderBy('usuario_servicios.num_visitas', 'desc')
+                    ->paginate($pagination);
+
+            return $imagenes;
+        }
+        return null;
+    }
+    
+    
 
     //Entrega el arreglo de los eventos según la localización
     public function getAtraccionesByCity($ubicacion, $take, $pagination) {
@@ -1270,6 +1400,14 @@ class PublicServiceRepository extends BaseRepository {
                             ->orWhere('ubicacion_geografica.nombre', 'like', $ubicacion . "%")
                             ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion . "%")
                             ->select('ubicacion_geografica.*')->first();
+            
+              if( is_null($ubicGeo))
+            {
+            $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.id', '=', '207')
+                            ->select('ubicacion_geografica.*')->first();    
+                
+            }
         }
 
         ///Si la $ubicacion es null
@@ -1332,8 +1470,8 @@ class PublicServiceRepository extends BaseRepository {
                     ->where('estado_fotografia', '=', '1')
                     ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre', 'usuario_servicios.id as id_usuario_serviciox')
                     ->orderBy('usuario_servicios.id_padre', 'asc')
-                    ->orderBy('usuario_servicios.prioridad', 'desc')
-                    ->orderBy('usuario_servicios.num_visitas', 'desc')
+                    ->orderBy('usuario_servicios.prioridad', 'asc')
+                    ->orderBy('usuario_servicios.num_visitas', 'asc')
                     ->paginate($pagination);
 
             return $imagenes;
@@ -1361,6 +1499,14 @@ class PublicServiceRepository extends BaseRepository {
                             ->orWhere('ubicacion_geografica.nombre', 'like', $ubicacion . "%")
                             ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion . "%")
                             ->select('ubicacion_geografica.*')->first();
+            
+            if( is_null($ubicGeo))
+            {
+            $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.id', '=', '207')
+                            ->select('ubicacion_geografica.*')->first();    
+                
+            }
         }
 
         ///Si la $ubicacion es null
@@ -1551,6 +1697,14 @@ class PublicServiceRepository extends BaseRepository {
                             ->orWhere('ubicacion_geografica.nombre', 'like', $ubicacion . "%")
                             ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion . "%")
                             ->select('ubicacion_geografica.*')->first();
+            
+              if( is_null($ubicGeo))
+            {
+            $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.id', '=', '207')
+                            ->select('ubicacion_geografica.*')->first();    
+                
+            }
         }
         ///Si la $ubicacion es null
         else {
@@ -1617,6 +1771,14 @@ class PublicServiceRepository extends BaseRepository {
                             ->orWhere('ubicacion_geografica.nombre', 'like', $ubicacion . "%")
                             ->orWhere('ubicacion_geografica.nombre', 'like', "%" . $ubicacion . "%")
                             ->select('ubicacion_geografica.*')->first();
+            
+              if( is_null($ubicGeo))
+            {
+            $ubicGeo = DB::table('ubicacion_geografica')
+                            ->where('ubicacion_geografica.id', '=', '207')
+                            ->select('ubicacion_geografica.*')->first();    
+                
+            }
         }
         ///Si la $ubicacion es null
         else {

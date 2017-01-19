@@ -14,6 +14,8 @@ use Jenssegers\Agent\Agent;
 use App\Jobs\VerifyReview;
 use Illuminate\Support\Facades\Session;
 use App\Models\Review_Usuario_Servicio;
+use Cache;
+use Carbon\Carbon;
 
 class HomePublicController extends Controller {
 
@@ -194,13 +196,98 @@ class HomePublicController extends Controller {
         $eventosCloseProv = null;
         $eventosDepCloseProv = null;
         //Existe una categoria que es independiente para crear eventos
-        $eventosClose = $gestion->getEventsIndepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
-        //esos son eventos y promociones de los establecimientos
-        $eventosDepClose = $gestion->getEventsDepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
-        $PromoDepClose = $gestion->getPromoDepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $pagina=Input::get('page');
+ 
+        $eventosClose=null;
+        
+        if (!Cache::has('eventosClose_'+$pagina))
+            {
+            $eventosClose = $gestion->getEventsIndepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+            Cache::put('eventosClose_'+$pagina, $eventosClose, Carbon::now()->addMinutes(60));
+            }
+            else
+            {
+                
+                $eventosClose = Cache::get('eventosClose_'+$pagina);
+            }
+        
+        
+            
+            
+        
+            $eventosDepClose=null;
+        
+        if (!Cache::has('eventosDepClose_'+$pagina))
+            {
+            
+                //esos son eventos y promociones de los establecimientos
+            $eventosDepClose = $gestion->getEventsDepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+            if($eventosDepClose!=null)
+            Cache::put('eventosDepClose_'+$pagina, $eventosDepClose, Carbon::now()->addMinutes(60));
+            }
+            else
+            {
+                
+                $eventosDepClose = Cache::get('eventosDepClose_'+$pagina);
+                print_r($eventosDepClose);
+            }
+      
+            
+            
+            
+            
+            
+                  $PromoDepClose=null;
+        
+        if (!Cache::has('PromoDepClose_'+$pagina))
+            {
+                $PromoDepClose = $gestion->getPromoDepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+            Cache::put('PromoDepClose_'+$pagina, $PromoDepClose, Carbon::now()->addMinutes(60));
+            }
+            else
+            {
+                
+                $PromoDepClose = Cache::get('PromoDepClose_'+$pagina);
+            }
+            
+            
+            
+            
+            
+            $AtraccionesClose=null;
+        
+        if (!Cache::has('AtraccionesClose_'+$pagina))
+            {
+                $AtraccionesClose = $gestion->getAtraccionesByCity($city, 100, 1);
+            Cache::put('AtraccionesClose_'+$pagina, $AtraccionesClose, Carbon::now()->addMinutes(60));
+            }
+            else
+            {
+                
+                $AtraccionesClose = Cache::get('AtraccionesClose_'+$pagina);
+            }
+      
+            
+            
+        
+         
 
 
-        $AtraccionesClose = $gestion->getAtraccionesByCity($city, 100, 1);
+            $Inspiration=null;
+        
+        if (!Cache::has('Inspiration_'+$pagina))
+            {
+                $Inspiration = $gestion->getInspiration(100, 1);
+            Cache::put('Inspiration_'+$pagina, $Inspiration, Carbon::now()->addMinutes(60));
+            }
+            else
+            {
+                
+                $Inspiration = Cache::get('Inspiration_'+$pagina);
+            }
+        
+        
+        
 
 
 
@@ -223,6 +310,7 @@ class HomePublicController extends Controller {
                     'eventosCloseProv' => $eventosCloseProv,
                     'eventosDepClose' => $eventosDepClose,
                     'eventosDepCloseProv' => $eventosDepCloseProv,
+                    'Inspiration' => $Inspiration,
                     'PromoDepClose' => $PromoDepClose,
                     'AtraccionesClose' => $AtraccionesClose,
                         )

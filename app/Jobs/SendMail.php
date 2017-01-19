@@ -46,6 +46,7 @@ class SendMail extends Job implements SelfHandling
         
         $mailer->send('emails.auth.verify', $data, function($message) {
             $message->to($this->user->email, $this->user->username)
+                    ->getHeaders()->addTextHeader('x-mailgun-native-send', true)
                     ->subject(trans('front/verify.email-title'));
         });
     }

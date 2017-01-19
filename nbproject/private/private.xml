@@ -4,18 +4,19 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/Auth/AuthController.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/BaseRepository.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/front/masterPageWelcome.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/public/js/Compartido.js</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/vendor/laravel/framework/src/Illuminate/Foundation/Bus/DispatchesJobs.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/config/queue.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/public/css/base/layoutBase.css</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/public_page/front/homePage.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/local.env</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/Welcome/myprofileOp.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/OperadorRepository.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/public_images/images/homePage.blade.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/config/app.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/resources/public_images/images/AuthController.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/resources/views/auth/completeRegister.blade.php</file>
-            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Jobs/SendMail.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/UserRepository.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/routes.php</file>
+            <file>file:/C:/xampp/htdocs/IguanaTrip/app/Repositories/PublicServiceRepository.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/app/Http/Controllers/ServicioController.php</file>
             <file>file:/C:/xampp/htdocs/IguanaTrip/config/mail.php</file>
         </group>

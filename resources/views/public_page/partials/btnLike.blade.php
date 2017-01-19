@@ -11,7 +11,7 @@
                                             @if(isset($likes->satisfechos))
                                             {!!$likes->satisfechos!!} <i class="fa fa-star"></i> {{ trans('publico/labels.label70')}}</a>
                                             @else
-                                                <i class="fa fa-star"></i>{{ trans('publico/labels.label70')}}</a>
+                                                <i class="fa fa-thumbs-up"></i>{{ trans('publico/labels.label70')}}</a>
                                             @endif
                                     </div>
                                        

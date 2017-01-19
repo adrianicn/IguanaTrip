@@ -210,6 +210,10 @@ class OperadorRepository extends BaseRepository
  		$usuarioServicio->id_catalogo_servicio = $inputs['id_catalogo_servicio'];
 		$usuarioServicio->id_usuario_operador = $inputs['id_usuario_operador'];
 	
+                $usuarioServicio->created_at = \Carbon\Carbon::now()->toDateTimeString();
+                $usuarioServicio->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+                
 		$usuarioServicio->save();
 		return $usuarioServicio->id;
 	}
@@ -223,7 +227,10 @@ class OperadorRepository extends BaseRepository
  		$usuarioServicio->id_catalogo_servicio = $inputs['id_catalogo_servicio'];
 		$usuarioServicio->id_usuario_operador = $inputs['id_usuario_operador'];
                 $usuarioServicio->id_padre = $inputs['id_padre'];
-	
+                
+                $usuarioServicio->created_at = \Carbon\Carbon::now()->toDateTimeString();
+                $usuarioServicio->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
 		$usuarioServicio->save();
 		return $usuarioServicio->id;
 	}
@@ -256,7 +263,10 @@ class OperadorRepository extends BaseRepository
                                                                             'como_llegar2'=>$inputs['como_llegar2'],
                                                                             'fecha_ingreso' => $inputs['fecha_ingreso'],
                                                                              'fecha_fin' => $inputs['fecha_fin'],
-                                                                            'id_parroquia'=>$inputs['id_parroquia']                                                                            
+                                                                            'id_parroquia'=>$inputs['id_parroquia'],
+                                                                            
+                                                                                'updated_at'=>\Carbon\Carbon::now()->toDateTimeString()
+                                                                                
 									]);
 	}
 	

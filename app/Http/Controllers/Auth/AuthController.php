@@ -22,8 +22,8 @@ class AuthController extends Controller {
 
     protected $validationRules = [
         'username' => 'required|max:30|unique:users',
-        'email' => 'required|email|confirmed|max:255|unique:users',
-        'password' => 'required|min:5',
+        'email' => 'required|email|max:255|unique:users',
+        'password' => 'required|confirmed|min:5',
     ];
 
     use AuthenticatesAndRegistersUsers,
@@ -73,15 +73,18 @@ class AuthController extends Controller {
             if ($throttles) {
                 $this->incrementLoginAttempts($request);
             }
-            
-                return redirect('/login')
-                                ->with('error', trans('front/login.credentials'))
-                                ->withInput($request->only('log'));
-             
+
+            return redirect('/login')
+                            ->with('error', trans('front/login.credentials'))
+                            ->withInput($request->only('log'));
         }
 
         $user = $auth->getLastAttempted();
-
+        if ($user->confirmed) {
+            $request->session()->put('confirmado', 1);
+        } else {
+            $request->session()->put('confirmado', 0);
+        }
         if (($user->confirmed) || ($user->valid)) {
             if ($throttles) {
                 $this->clearLoginAttempts($request);
@@ -93,9 +96,9 @@ class AuthController extends Controller {
                 $request->session()->forget('user_id');
             }
 
-           
+
             $request->session()->put('user_name', $user->username);
-           
+
             $email = $auth->user()->email;
             $nombre = $auth->user()->user_name;
 
@@ -122,12 +125,9 @@ class AuthController extends Controller {
 
             /* --------------------------------- */
             return redirect('/login')
-                                ->with('error', trans('front/verify.again'))
-                                ->withInput($request->only('log'));
+                            ->with('error', trans('front/verify.again'))
+                            ->withInput($request->only('log'));
         }
-
-
-        
     }
 
     /**
@@ -168,19 +168,18 @@ class AuthController extends Controller {
 
         //Si el validador falla se ejecutan las acciones
         if ($validator->fails()) {
-    
+
             return response()->json(array(
-                            'fail' => true,
-                            'errors' => $validator->getMessageBag()->toArray()
-                ));
-            }
-         else {
+                        'fail' => true,
+                        'errors' => $validator->getMessageBag()->toArray()
+            ));
+        } else {
             $user = $user_gestion->store(
                     $userData, $confirmation_code = str_random(30)
             );
-                
-         
-            
+
+
+
             //Se almacenan los datos por default del contacto, se pueden modificar cuando ya ingrese
             $operadorData = array(
                 'nombre_contacto_operador_1' => $formFields['username'],
@@ -194,7 +193,7 @@ class AuthController extends Controller {
                 'id_usuario_op' => 0
             );
 
-            
+
             //Almacena el operador y almacena en sesion su identificacion
             $operador = $operador_gestion->store($operadorData);
             $request->session()->put('operador_id', $operador->id);
@@ -208,34 +207,36 @@ class AuthController extends Controller {
             //Se realiza el login y redireccion
             $request->session()->put('user_name', $user->email);
             $auth->login($user);
-              
+
             $email = $auth->user()->email;
             $nombre = $auth->user()->email;
-            try{
-                $this->dispatch(new SendMail($user));}
-                catch( Exception $e)
-                {
-                    
-                }
+            try {
+                $this->dispatch(new SendMail($user));
+            } catch (Exception $e) {
+                
+            }
             /* Busca si ya tiene servicios activos o no */
 
             //logica que comprueba si el usuario tiene servicios para ser modificados
             //caso contrario ingresa nuevos serviciosS
             $listServicios = $gestion->getServiciosidUsuario($user->id);
+
+            if (!$user->confirmed) {
+                $request->session()->put('confirmado', 0);
+            }
+
             if ($listServicios) {
 
                 $data['id_usuario_op'] = $listServicios[0]->id_usuario_op;
                 $request->session()->put('operador_id', $data['id_usuario_op']);
+
                 $request->session()->put('tip_oper', $listServicios[0]->id_tipo_operador);
                 return redirect('/detalleServicios')->with('user', $user->id);
-
             } else {
 
-                            $returnHTML = ('/IguanaTrip/public/myProfileOp');//->with('user', $user->id);
-              return response()->json(array('success' => true, 'redirectto' => $returnHTML));
-          
+                $returnHTML = ('/IguanaTrip/public/myProfileOp'); //->with('user', $user->id);
+                return response()->json(array('success' => true, 'redirectto' => $returnHTML));
             }
-
         }
     }
 
@@ -255,7 +256,6 @@ class AuthController extends Controller {
      * @return Response
      */
     public function getConfirm(
-            
     UserRepository $user_gestion, $confirmation_code) {
         $user = $user_gestion->confirm($confirmation_code);
 

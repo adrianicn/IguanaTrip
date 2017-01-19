@@ -34,6 +34,37 @@
     @endif
 
     
+    @if($Inspiration!=null)
+    @foreach ($Inspiration as $Inspir)
+    <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item eventInd filter-atracciones filter-alls" >
+        <article class="post">
+            <figure ><img src="{{ asset('images/icon/'.$Inspir->filename)}}" alt=""></figure>
+            @if(session('device')!='mobile')
+            <div class="shortcode-banner-inside" style=" width: 108%;">
+                @else
+                <div class="shortcode-banner-inside" style=" width: 112%;">
+                    @endif
+                    <div class="shortcode-banner-content">
+                     
+                        <?php
+                        $nombre = str_replace(' ', '-', $Inspir->nombre_servicio);
+                        ?>
+                        <a  href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$Inspir->id_usuario_serviciox!!}"  onclick="$('#x2').LoadingOverlay('show')"><h3 class="banner-title">{!!$Inspir->nombre_servicio!!}</h3>
+                            
+                        </a>
+                        <div class="details">
+                            <p>{!!$Inspir->detalle_servicio!!}</p>
+                        </div>
+                    </div>
+                </div>
+
+        </article>
+    </div>
+    @endforeach
+    @endif
+
+    
+    
     @if($eventosClose!=null)
     @foreach ($eventosClose as $event)
     <div style=" margin-bottom: 0;" class="shortcode-banner style-animated iso-item eventInd filter-eventos filter-alls" >

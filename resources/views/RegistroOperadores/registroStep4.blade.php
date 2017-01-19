@@ -157,7 +157,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     {!!Form::label('nombre_servicio_1', 'Nombre Servicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
                     {!!Form::text('nombre_servicio', $usuarioServicio->nombre_servicio, array('class'=>'inputtext chng','placeholder'=>'Nombre del Servicio'))!!}
                 </div>
-                @if($id_catalogo==8)
+                @if($id_catalogo==10)
                     <div class="form-group-1">
                     {!!Form::label('Fecha_inicio', 'Fecha inicio', array('class'=>'control-label','id'=>'iconFormulario-step4'))!!}
                    

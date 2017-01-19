@@ -56,9 +56,9 @@
         
            <h2 class="head-title-navigation">
                <a class="button-step4" onclick="window.location.href = '{!!asset('/operador')!!}'"> 
-       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Mi info </strong></a>
+       <strong><img src="{!! asset('public/img/flecha-1.png')!!}" height="15px" width="15px" /> Mi info </strong></a>
                <a class="button-step4" onclick="window.location.href = '{!!asset('/userservice')!!}'"> 
-       <strong><img src="{!! asset('img/flecha-1.png')!!}" height="15px" width="15px" /> Agregar servicio </strong></a>
+       <strong><img src="{!! asset('public/img/flecha-1.png')!!}" height="15px" width="15px" /> Agregar servicio </strong></a>
                               
          <a class="button-step4 "> 
                    <div style="color:#F26803; display: block;

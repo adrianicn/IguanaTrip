@@ -135,6 +135,7 @@
 
                             @endif
                             <!-- LAYER NR. 4 -->
+                            @if(session('device')!='mobile')
                             <div style='width: 80%'
                                  data-endspeed="300" data-endelementdelay="0.1" data-elementdelay="0.1" 
                                  data-splitout="none" data-splitin="none" data-easing="easeOutBack"
@@ -145,17 +146,19 @@
 
 
                                 {!! Form::open(['url' => route('min-search'),  'method' => 'get', 'id'=>'min-search']) !!}
-                                @if(session('device')!='mobile')
+                                
                                 <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" type="text" value="" name="s" id="s">
-                                @else
+                                 @else
                                 <input class="sb-search-input" placeholder="{{ trans('publico/labels.label10')}}" style="font-size: 12px;" type="text" value="" name="s" id="s">
-
-                                @endif
+                                        
+                                
 
                                 <input class="sb-search-submit" type="submit" value="">
                                 <span class="sb-icon-search "></span>
                                 {!! Form::close() !!}
+                                
                             </div>
+                            @endif
                         </li>
                     </ul>
                 </div>
@@ -191,9 +194,9 @@
                             <div class="post-filters">
                                 <a href="#" class="btn btn-sm style4 hover-blue active" data-filter="filter-alls">{{ trans('publico/labels.label12')}}</a>
                                 <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-atracciones">{{ trans('publico/labels.label65')}}</a>
-                                <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-eventos">{{ trans('publico/labels.label32')}}</a>
-                                <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-promo">{{ trans('publico/labels.label33')}}</a>
-
+                                <!--<a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-eventos">{{ trans('publico/labels.label32')}}</a>
+                                <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-promo">{{ trans('publico/labels.label33')}}</a>-->
+                                <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-inspire">{{ trans('publico/labels.label265')}}</a>
                             </div>
                             <div class="iso-container iso-col-4 style-masonry eventsPromo">
 

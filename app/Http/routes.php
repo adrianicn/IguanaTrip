@@ -239,6 +239,7 @@ Route::post('filterParameters', ['as' => 'filtersCategoria', 'uses' =>'HomePubli
 Route::post('postReviews', ['as' => 'postReviews', 'uses' =>'HomePublicController@postReviews']);
 
 Route::get('/', ['as' => 'publico', 'uses' => 'HomePublicController@getHome']);
+Route::get('/tokenDc', ['as' => 'publico', 'uses' => 'HomePublicController@getHome']);
 Route::get('/getRegiones', ['as' => 'regiones', 'uses' => 'HomePublicController@getRegiones']);
 Route::get('/getProvinciaDescipcion/{id_provincia}/{id_image}', ['as' => 'provinciasdescr', 'uses' => 'HomePublicController@getProvinciaDescripcion']);
 Route::get('/getRegionDescipcion/{id_region}', ['as' => 'regiondescr', 'uses' => 'HomePublicController@getRegionsId']);

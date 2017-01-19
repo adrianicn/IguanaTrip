@@ -31,7 +31,7 @@
                                 
                                 <div class="product-action">
                                       
-                                    @include('public_page.reusable.btnLikeReus', ['atraccion' =>$cat->id_usr_serv,'load'=>'btn-add-to-cart','cantidad'=>$cat->satisfechos])  
+                                    @include('public_page.reusable.btnLikeReus', ['nombre_atraccion'=>$cat->nombre_servicio,'atraccion' =>$cat->id_usr_serv,'load'=>'btn-add-to-cart','cantidad'=>$cat->satisfechos])  
                                     
                                     
                                 </div>
