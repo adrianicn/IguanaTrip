@@ -15,6 +15,7 @@ use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 use App\Models\SearchEngine;
 use App\Models\Booking\Especialidad;
+use App\Models\Booking\VerificacionBooking;
 
 class ServiciosOperadorRepository extends BaseRepository {
 
@@ -41,6 +42,7 @@ class ServiciosOperadorRepository extends BaseRepository {
     protected $ubicacion_geografica;
     protected $search_engine;
     protected $especialidad_u;
+    protected $booking_u;
     
 
     /**
@@ -57,6 +59,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->catalogo_dificultad = new Catalogo_Dificultad();
         $this->itinerarios_u = new Itinerario_Usuario_Servicio();
         $this->especialidad_u = new Especialidad();
+	$this->booking_u = new VerificacionBooking();
         $this->detalle_itinerarios_u = new Detalle_Itinerario();
         $this->eventos = new Eventos_usuario_Servicio();
         $this->operador = new Usuario_Operador();
