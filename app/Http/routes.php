@@ -305,3 +305,12 @@ Route::get('/api/detallesEspecialidadID/{id}','DetalleEspecialidadController@bus
 
 Route::post('estadoEspecialidadPrincipal/{id}', ['uses' =>'UsuarioServiciosController@postEstadoEspecialidad',
             'middleware' => 'notAuth']);
+
+Route::post('estadoBookingPrincipal/{id}', ['uses' =>'UsuarioServiciosController@postEstadoBooking',
+            'middleware' => 'notAuth']);
+
+//ruta para el controlador que redirige a booking
+Route::get('/booking/{id}', ['uses' =>'UsuarioServiciosController@booking','middleware' => 'notAuth']);
+//ruta para el controlador que redirige a booking para el setting del calendario
+Route::get('/bookingCalendario/{id}/{calendar_id}', ['uses' =>'UsuarioServiciosController@bookingCalendar','middleware' => 'notAuth']);
+
