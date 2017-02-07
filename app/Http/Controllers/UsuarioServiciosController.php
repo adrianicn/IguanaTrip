@@ -939,6 +939,168 @@ class UsuarioServiciosController extends Controller {
         return response()->json(array('success' => true));
     }
 
+//******************************************************************************//
+    //                 ACTUALIZA EL ESTADO DEL CALENDARIO DE BOOKING                //
+    //******************************************************************************//
+    public function postEstadoBooking($id, ServiciosOperadorRepository $gestion) {
+
+        $serviciosBase = array();
+        //obtengo los servicios ya almacenados de la bdd
+        $ServiciosOperador = $gestion->getEstadoBookingCalendar($id);
+
+        foreach ($ServiciosOperador as $servicioBase) {
+
+
+            if ($servicioBase->activo == 1){ 
+                $serviciosBase['activo'] = 0;
+            }else{
+                $serviciosBase['activo'] = 1;
+            }
+
+            $serviciosBase['id'] = $servicioBase->id;
+        }
+
+
+        $gestion->storeUpdateEstadoBookingCalendar($serviciosBase, $ServiciosOperador);
+        return response()->json(array('success' => true));
+    }
+    
+    
+    //******************************************************************************//
+    //                 CONTROLADOR PARA IR AL SITIO DE BOOKING                      //
+    //******************************************************************************//
+    public function booking($id,ServiciosOperadorRepository $gestion) {
+
+        $usuarioOperador = session('operador_id');
+        
+        //OBTENGO EL ID DEL USUARIO A PARTIR DEL USUARIO OPERADOR
+        $idUsuario = $gestion->getIDUsuario($usuarioOperador);
+        $idUser = $idUsuario[0];
+        $idUser = $idUser->id_usuario;
+        
+        //OBTENGO LA INFORMACION DEL USUARIO
+        $infoTablaUser = $gestion->getInfoUser($idUser);
+        $identificadorUser = $infoTablaUser[0]->id;
+        $emailUser = $infoTablaUser[0]->email;
+        $passwordUser = $infoTablaUser[0]->password;
+        $nombreUsuarioLarvel = $infoTablaUser[0]->username; 
+        
+        //VERIFICO SI EL USUARIO YA EXISTE EN LA TABLA BOOKING
+        $verificarUsuarioExiste = $gestion->getVerificarUsuario($identificadorUser,$emailUser);
+        
+        //GENERO LA FECHA Y EL IDENTIFICADOR
+        $fecha = \Carbon\Carbon::now()->toDateTimeString();
+        $uuid = $idUser."_".$fecha;
+        
+        /*if($verificarUsuarioExiste == 0){
+            //HAGO EL INSERT EN LA TABLA BOOKING_USER CON LA INFORMACION DEL USUARIO
+            $ingresarUsuario = $gestion->ingresarUsuario($identificadorUser,$emailUser,$passwordUser,$nombreUsuarioLarvel,$fecha);
+        }*/
+        
+        //ENCRIPTO EL IDENTIFICADOR
+        $encriptado =  \Crypt::encrypt($uuid);
+        //$desencriptado = \Crypt::decrypt($passwordUser);
+        
+        //GUARDA EN LA TABLA VERIFICAR BOOKING
+        $guardarBooking = $gestion->guardarVerificarBooking($idUser,$id,$encriptado);
+        $guardarBook = $guardarBooking->uuid;
+        
+        if($guardarBook === ""){
+            
+            //redirigir a la pagina de error
+            //return view('errors.404');
+            return response()->json(array('success' => false));
+            
+        }else{
+            
+        $returnHTML = ('http://localhost/Booking/index.php?controller=pjAdmin&action=pjActionLogin&verify='.$encriptado);
+        return response()->json(array('success' => true, 
+                                      'redirectto' => $returnHTML,
+                                      //'nuevo'=> $desencriptado
+                                      //'Id de usuario' => $idUser, 
+                                      //'Informacion Usuario' => $infoTablaUser,
+                                      //'email' => $emailUser,
+                                      //'password' => $passwordUser,
+                                      //'contador Existe' => $verificarUsuarioExiste,
+                                      //'Insert en la tabla' => $ingresarUsuario   
+                                      //'IDUsuario' => $idUser,
+                                      //'Consumido'=> $consumido,
+                                      //'UUID'=> $uuid,
+                                     //'encriptado'=>$encriptado,
+                                      ));
+            
+        }
+        
+        
+   
+    }
+    
+    //******************************************************************************//
+    //            CONTROLADOR PARA IR AL SETTING DEL CALENDARIO BOOKING             //
+    //******************************************************************************//
+    public function bookingCalendar($id,$id_calendar,ServiciosOperadorRepository $gestion) {
+
+        $usuarioOperador = session('operador_id');
+        
+        //OBTENGO EL ID DEL USUARIO A PARTIR DEL USUARIO OPERADOR
+        $idUsuario = $gestion->getIDUsuario($usuarioOperador);
+        $idUser = $idUsuario[0];
+        $idUser = $idUser->id_usuario;
+        
+        //OBTENGO LA INFORMACION DEL USUARIO
+        $infoTablaUser = $gestion->getInfoUser($idUser);
+        $identificadorUser = $infoTablaUser[0]->id;
+        $emailUser = $infoTablaUser[0]->email;
+        $passwordUser = $infoTablaUser[0]->password;
+        $nombreUsuarioLarvel = $infoTablaUser[0]->username; 
+        
+        //VERIFICO SI EL USUARIO YA EXISTE EN LA TABLA BOOKING
+        $verificarUsuarioExiste = $gestion->getVerificarUsuario($identificadorUser,$emailUser);
+        
+        //GENERO LA FECHA Y EL IDENTIFICADOR
+        $fecha = \Carbon\Carbon::now()->toDateTimeString();
+        $uuid = $idUser."_".$fecha;
+        
+        //ENCRIPTO EL IDENTIFICADOR
+        $encriptado =  \Crypt::encrypt($uuid);
+        //$desencriptado = \Crypt::decrypt($passwordUser);
+        
+        //GUARDA EN LA TABLA VERIFICAR BOOKING
+        $guardarBooking = $gestion->guardarVerificarBooking($idUser,$id,$encriptado);
+        $guardarBook = $guardarBooking->uuid;
+        
+        if($guardarBook === ""){
+            
+            //redirigir a la pagina de error
+            //return view('errors.404');
+            return response()->json(array('success' => false));
+            
+        }else{
+        
+            
+        $returnHTML = ('http://localhost/Booking/index.php?controller=pjAdmin&action=pjActionLogin&verifyCalendar='.$encriptado.'&calendar='.$id_calendar);    
+        //$returnHTML = ('http://localhost/Booking/index.php?controller=pjAdminCalendars&action=pjActionView&id='.$id_calendar);
+        return response()->json(array('success' => true, 
+                                      'redirectto' => $returnHTML,
+                                      //'nuevo'=> $desencriptado
+                                      //'Id de usuario' => $idUser, 
+                                      //'Informacion Usuario' => $infoTablaUser,
+                                      //'email' => $emailUser,
+                                      //'password' => $passwordUser,
+                                      //'contador Existe' => $verificarUsuarioExiste,
+                                      //'Insert en la tabla' => $ingresarUsuario   
+                                      //'IDUsuario' => $idUser,
+                                      //'Consumido'=> $consumido,
+                                      //'UUID'=> $uuid,
+                                     //'encriptado'=>$encriptado,
+                                      ));
+            
+        }
+        
+        
+   
+    }
+
     public function postPuntoItinerario(ServiciosOperadorRepository $gestion) {
 
         $inputData = Input::get('formData');
