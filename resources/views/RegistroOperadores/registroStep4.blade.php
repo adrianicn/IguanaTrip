@@ -11,7 +11,7 @@
     #simplemodal-container a.modalCloseImg {
         background:url("{!! asset('img/x.png')!!}") no-repeat;
         width:25px; height:29px; display:inline; z-index:1200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
-    </style>
+</style>
     <div id="basic-modal-content" class="cls loadModal"></div>
 
 <div class="rowerror">
@@ -335,15 +335,17 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
         </div>
         
        <div class="row calendarios">
-           <!--<textarea> <?php print_r($calendarios); ?> </textarea> -->
-     @if($calendarios != Array())      
+
+     @if($calendarios != Array())  
        @foreach ($calendarioConNombre as $calendar)
           
    <div style="width:30%; display: inline-table; margin-right: 2%;margin-bottom: 2%; text-align: center;">
        <a href="#" 
           onclick="RenderBookingCalendario({!!$usuarioServicio->id_usuario_operador!!}, {!!$usuarioServicio->id!!},{!!$calendar->id!!})" >
            <h3 style="color:white;font-weight: bold;font-size: 1vw !important;"> {!!$calendar->content!!} </h3>
+        
        </a>
+       
                     
                 @if($calendar->activo==1)
                   <label class="switch switch-green">
@@ -377,7 +379,6 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
     @if($calendarios != Array())      
     <div class="row reservaciones">
         @foreach ($reservacionesConNombre as $reservas)
-          <!--<textarea> <?php print_r($reservacionesConNombre); ?> </textarea> -->
           <div>
             <ul>
                 <li style="color:white;font-weight: bold;font-size: 1vw !important;"> 
@@ -388,6 +389,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
         @endforeach  
    </div>
     @endif   
+    
 
 
         <div id="renderPartialListaServicios">
@@ -473,6 +475,24 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
         }
     
 }, 100);
+</script>
+
+<script>
+
+var interval;
+$(document).on('ready',function(){
+    interval = setInterval(updateDiv,40);
+});
+
+  function updateDiv(){
+       var p = $("div.abLayout").find('p');
+    //alert(p.text());
+    if(p.text() == "Your reservation has been received."){
+        clearInterval(interval);
+        window.location = "http://localhost:8000/confirmacionEfectivo";
+       
+    }
+  }
 </script>
 <script>
     $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
