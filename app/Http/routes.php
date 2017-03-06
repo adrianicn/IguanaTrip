@@ -314,3 +314,14 @@ Route::get('/booking/{id}', ['uses' =>'UsuarioServiciosController@booking','midd
 //ruta para el controlador que redirige a booking para el setting del calendario
 Route::get('/bookingCalendario/{id}/{calendar_id}', ['uses' =>'UsuarioServiciosController@bookingCalendar','middleware' => 'notAuth']);
 
+Route::get('/confirmacion', ['as' => 'confirmacionpaypal', 'uses' => 'HomePublicController@getConfirmacionPaypal']);
+Route::get('/confirmacionAuthorize', ['as' => 'confirmacionauthorize', 'uses' => 'HomePublicController@getConfirmacionAuthorize']);
+Route::get('/verificarUsuario', ['as' => 'confirmacionauthorize', 'uses' => 'HomePublicController@verificarUsuario']);
+
+
+Route::get('/confirmacionPP/{id}', ['as' => 'confirmacionpaypal', 'uses' => 'HomePublicController@getConfirmacionPaypal1']);
+Route::get('/confirmacionTarjetaCredito/{id}', ['as' => 'confirmaciontarjetacredito', 'uses' => 'HomePublicController@getConfirmacionAuhtorize1']);
+//Route::get('/confirmacionEfectivo/{id}', ['as' => 'confirmaciontarjetacredito', 'uses' => 'HomePublicController@getConfirmacionCash']);
+Route::get('/confirmacionEfectivo', ['as' => 'confirmaciontarjetacredito', 'uses' => 'HomePublicController@getConfirmacionCash']);
+
+
