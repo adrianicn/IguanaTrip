@@ -746,4 +746,648 @@ class HomePublicController extends Controller {
         return response()->json(array('success' => true));
     }
 
+   public function getConfirmacionPaypal1($id, Guard $auth) {
+        
+            //ENVIO EL ID DE LA RESERVA
+            if (isset($id)){
+                
+                //VERIFICO QUE EL ID DE LA RESERVA ESTE EN LA TABLA PAGO PAYPAL
+                $verificoPagoConsumido = DB::table('pago_paypals')
+                         ->select(DB::raw('consumido'))
+                         ->where('id_reserva', '=', $id)
+                         ->get();
+                 
+                 if(empty($verificoPagoConsumido)){
+                     //SI NO EXISTE EN LA TABLA DE PAGO PAYPAL
+                     //ME REDIRIGE A LA TABLA DE ERROR DE PAYPAL
+                     return view('public_page.front.confirmacionError');
+                     
+                 }elseif($verificoPagoConsumido[0]->consumido == true){
+                     //SI EXISTE EN LA TABLA DE PAGO PAYPAL Y CONSUMIDO ES TRUE
+                     //ME REDIRIGE A LA TABLA DE ERROR DE PAYPAL
+                     return view('public_page.front.confirmacionError');
+                     
+                 }else{
+                    $estado = true;
+                    $updateReserva = DB::table('pago_paypals')
+                                     ->where('id_reserva',$id)
+                                    ->update(['consumido'=>$estado]);
+
+                    $infoPago = DB::table('pago_paypals')
+                             ->select(DB::raw('*'))
+                             ->where('id_reserva', '=', $id)
+                             ->get();
+
+                   $infoReservas = DB::table('booking_abcalendar_reservations')
+                             ->select(DB::raw('*'))
+                             ->where('id', '=', $id)
+                             ->get(); 
+                   
+                   $estadoReserva = $infoPago[0]->estadoPago;
+                   
+                   //$estadoReserva = "Fail";
+                   
+                   if($estadoReserva == "Completed"){
+                       
+                    //BUSCO EL ID DEL CALENDARIO
+                    $infoReserva = DB::table('booking_abcalendar_reservations')
+                                    ->select(DB::raw('calendar_id'))
+                                    ->where('id', '=', $id)
+                                    ->get();
+        
+                    $idCalendario = $infoReserva[0]->calendar_id;
+        
+                    //BUSCO EL ID DEL USUARIO SERVICIO
+                    $infoReserva1 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendario)
+                                 ->get();
+
+                    $idUsuarioServicio = $infoReserva1[0]->id_usuario_servicio;
+                    
+                    $user = $auth->user();
+                    
+                    if(empty($user)) {
+                        // EL VOLVER ES A LA PARTE PUBLICA                    
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "public";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                        ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario]);
+                        
+                        //BUSCO EL ID DEL USUARIO OPERADOR
+                        $infoUsuarioOperador = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_usuario_operador'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                 ->get();
+                        
+                        $idUsuarioPeradorPublica = $infoUsuarioOperador[0]->id_usuario_operador;
+                        
+                        //OBTENGO LA INFORMACION DEL USUARIO OPERADOR
+                        $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario_op', '=', $idUsuarioPeradorPublica)
+                                 ->get();
+                        
+                        return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','infoReserva2','idUsuarioServicio'));
+                        
+                    }else{
+
+                        // VOLVER A LA PARTE ADMIN
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "admin";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                         ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario]);
+
+                        //BUSCO EL ID DEL USUARIO OPERADOR
+                        $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario', '=', $user->id)
+                                 ->get();
+
+                        $idUsuarioOperador = $infoReserva2[0]->id_usuario_op;
+                        
+                    //SI EL USUARIO ESTA LOGUEADO PERO VIENE DE LA PARTE PUBLICA
+                    //COMPROBAR QUE EL USUARIO SERVICIO DEL CALENDARIO PERTENEZCA 
+                    // AL USUARIO SERVCIO DEL OPERADOR
+                    //BUSCO EL ID DEL Catalogo
+                        $infoReserva3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_catalogo_servicio'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                ->where('id_usuario_operador', '=', $idUsuarioOperador)
+                                 ->get();
+                        
+                    if (empty($infoReserva3)) {
+                        $partePublica = true;
+                        return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','infoReserva2','idUsuarioServicio'));
+                    }else{
+                       $idCatalogo = $infoReserva3[0]->id_catalogo_servicio;
+                       $partePublica = false;
+                       return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','idCatalogo','idUsuarioServicio','infoReserva2'));
+                    }
+                    
+
+                            
+                    }
+                       
+                   }else{
+                       
+                       //CUANDO EL PAGO CON PAYPAL NO SE COMPLETO
+                       //PARTE PUBLICA Y PRIVADA
+                         $user = $auth->user();
+                         
+                         $infoPago = DB::table('pago_paypals')
+                             ->select(DB::raw('*'))
+                             ->where('id_reserva', '=', $id)
+                             ->get();
+
+                       $infoReservas = DB::table('booking_abcalendar_reservations')
+                             ->select(DB::raw('*'))
+                             ->where('id', '=', $id)
+                             ->get(); 
+                       
+                          $idCalendario = $infoReservas[0]->calendar_id;
+        
+                    //BUSCO EL ID DEL USUARIO SERVICIO
+                    $infoReserva1 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendario)
+                                 ->get();
+
+                    $idUsuarioServicio = $infoReserva1[0]->id_usuario_servicio;
+                       
+                       $sql1 = DB::table('booking_abcalendar_reservations')
+                                 ->select(DB::raw('calendar_id'))
+                                 ->where('id', '=', $id)
+                                 ->get();
+                       $idCalendarioError = $sql1[0]->calendar_id;
+                       
+                       $sql2 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendarioError)
+                                 ->get();
+                       $idUsuarioServicioError = $sql2[0]->id_usuario_servicio;
+                       
+                       $sql3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_usuario_operador'))
+                                 ->where('id', '=', $idUsuarioServicioError)
+                                 ->get();
+                       $idUsuarioOperadorError = $sql3[0]->id_usuario_operador;
+                       
+                       $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario_op', '=', $idUsuarioOperadorError)
+                                 ->get();
+                       
+                        //$idUsuarioOperadorError = $infoReserva2[0]->id_usuario_op;
+                        $idUsuarioOperadorError = session('operador_id');
+
+                        //BUSCO EL ID DEL Catalogo
+                    $infoReserva3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_catalogo_servicio'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                ->where('id_usuario_operador', '=', $idUsuarioOperadorError)
+                                 ->get();
+                   
+                    if (empty($infoReserva3)) {
+                        $partePublica = true;
+                        return view('public_page.front.errorPaypal', compact('infoReservas','infoPago','user','partePublica','infoReserva2',"idUsuarioServicio",'idCatalogo'));    
+                        //return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','infoReserva2','idUsuarioServicio'));
+                    }else{
+                       $idCatalogo = $infoReserva3[0]->id_catalogo_servicio;
+                       $partePublica = false;
+                       return view('public_page.front.errorPaypal', compact('infoReservas','infoPago','user','infoReserva2','partePublica',"idUsuarioServicio",'idCatalogo'));    
+                       //return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','idCatalogo','idUsuarioServicio','infoReserva2'));
+                    }
+                       
+                       //return view('public_page.front.errorPaypal', compact('infoReservas','infoPago','user','infoReserva2',"idUsuarioServicio",'idCatalogo'));    
+                       
+                   }
+                   
+                   //return view('public_page.front.confirmacionPaypal', compact('$infoPago','$infoReserva'));
+                   
+                     
+                 }
+                
+
+                
+            }
+        
+    }
+    
+    public function getConfirmacionAuhtorize1($id, Guard $auth) {
+        
+            //ENVIO EL ID DE LA RESERVA
+            if (isset($id)){
+                
+                //VERIFICO QUE EL ID DE LA RESERVA ESTE EN LA TABLA PAGO PAYPAL
+                $verificoPagoConsumido = DB::table('pago_authorizes')
+                         ->select(DB::raw('consumido'))
+                         ->where('id_reserva', '=', $id)
+                         ->get();
+                 
+                 if(empty($verificoPagoConsumido)){
+                     //SI NO EXISTE EN LA TABLA DE PAGO PAYPAL
+                     //ME REDIRIGE A LA TABLA DE ERROR DE PAYPAL
+                     return view('public_page.front.confirmacionError');
+                     
+                 }elseif($verificoPagoConsumido[0]->consumido == true){
+                     //SI EXISTE EN LA TABLA DE PAGO PAYPAL Y CONSUMIDO ES TRUE
+                     //ME REDIRIGE A LA TABLA DE ERROR DE PAYPAL
+                     return view('public_page.front.confirmacionError');
+                     
+                 }else{
+                    $estado = true;
+                    $updateReserva = DB::table('pago_authorizes')
+                                     ->where('id_reserva',$id)
+                                    ->update(['consumido'=>$estado]);
+
+                    $infoPago = DB::table('pago_authorizes')
+                             ->select(DB::raw('*'))
+                             ->where('id_reserva', '=', $id)
+                             ->get();
+
+                   $infoReservas = DB::table('booking_abcalendar_reservations')
+                             ->select(DB::raw('*'))
+                             ->where('id', '=', $id)
+                             ->get(); 
+                   
+                   $estadoReserva = $infoPago[0]->estadoPago;
+                   
+                   //$estadoReserva = "Fail";
+                   
+                   if($estadoReserva == "This transaction has been approved."){
+                       
+                    //BUSCO EL ID DEL CALENDARIO
+                    $infoReserva = DB::table('booking_abcalendar_reservations')
+                                    ->select(DB::raw('calendar_id'))
+                                    ->where('id', '=', $id)
+                                    ->get();
+        
+                    $idCalendario = $infoReserva[0]->calendar_id;
+        
+                    //BUSCO EL ID DEL USUARIO SERVICIO
+                    $infoReserva1 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendario)
+                                 ->get();
+
+                    $idUsuarioServicio = $infoReserva1[0]->id_usuario_servicio;
+                    
+                    $user = $auth->user();
+                    
+                    if(empty($user)) {
+                        // EL VOLVER ES A LA PARTE PUBLICA                    
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "public";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                        ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario]);
+                        
+                        //BUSCO EL ID DEL USUARIO OPERADOR
+                        $infoUsuarioOperador = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_usuario_operador'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                 ->get();
+                        
+                        $idUsuarioPeradorPublica = $infoUsuarioOperador[0]->id_usuario_operador;
+                        
+                        //OBTENGO LA INFORMACION DEL USUARIO OPERADOR
+                        $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario_op', '=', $idUsuarioPeradorPublica)
+                                 ->get();
+                        
+                        return view('public_page.front.confirmacionAuhtorize', compact('infoPago','infoReservas','user','infoReserva2','idUsuarioServicio'));
+                        
+                    }else{
+
+                        // VOLVER A LA PARTE ADMIN
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "admin";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                         ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario]);
+
+                        //BUSCO EL ID DEL USUARIO OPERADOR
+                        $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario', '=', $user->id)
+                                 ->get();
+
+                        $idUsuarioOperador = $infoReserva2[0]->id_usuario_op;
+                        
+                    //SI EL USUARIO ESTA LOGUEADO PERO VIENE DE LA PARTE PUBLICA
+                    //COMPROBAR QUE EL USUARIO SERVICIO DEL CALENDARIO PERTENEZCA 
+                    // AL USUARIO SERVCIO DEL OPERADOR
+                    //BUSCO EL ID DEL Catalogo
+                        $infoReserva3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_catalogo_servicio'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                ->where('id_usuario_operador', '=', $idUsuarioOperador)
+                                 ->get();
+                        
+                    if (empty($infoReserva3)) {
+                        $partePublica = true;
+                        return view('public_page.front.confirmacionAuhtorize', compact('infoPago','infoReservas','user','partePublica','infoReserva2','idUsuarioServicio'));
+                    }else{
+                       $idCatalogo = $infoReserva3[0]->id_catalogo_servicio;
+                       $partePublica = false;
+                       return view('public_page.front.confirmacionAuhtorize', compact('infoPago','infoReservas','user','partePublica','idCatalogo','idUsuarioServicio','infoReserva2'));
+                    }
+                    
+
+                            
+                    }
+                       
+                   }else{
+                       
+                       //CUANDO EL PAGO CON PAYPAL NO SE COMPLETO
+                       //PARTE PUBLICA Y PRIVADA
+                         $user = $auth->user();
+                         
+                         $infoPago = DB::table('pago_authorizes')
+                             ->select(DB::raw('*'))
+                             ->where('id_reserva', '=', $id)
+                             ->get();
+
+                       $infoReservas = DB::table('booking_abcalendar_reservations')
+                             ->select(DB::raw('*'))
+                             ->where('id', '=', $id)
+                             ->get(); 
+                       
+                          $idCalendario = $infoReservas[0]->calendar_id;
+        
+                    //BUSCO EL ID DEL USUARIO SERVICIO
+                    $infoReserva1 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendario)
+                                 ->get();
+
+                    $idUsuarioServicio = $infoReserva1[0]->id_usuario_servicio;
+                       
+                       $sql1 = DB::table('booking_abcalendar_reservations')
+                                 ->select(DB::raw('calendar_id'))
+                                 ->where('id', '=', $id)
+                                 ->get();
+                       $idCalendarioError = $sql1[0]->calendar_id;
+                       
+                       $sql2 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendarioError)
+                                 ->get();
+                       $idUsuarioServicioError = $sql2[0]->id_usuario_servicio;
+                       
+                       $sql3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_usuario_operador'))
+                                 ->where('id', '=', $idUsuarioServicioError)
+                                 ->get();
+                       $idUsuarioOperadorError = $sql3[0]->id_usuario_operador;
+                       
+                       $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario_op', '=', $idUsuarioOperadorError)
+                                 ->get();
+                       
+                        //$idUsuarioOperadorError = $infoReserva2[0]->id_usuario_op;
+                        $idUsuarioOperadorError = session('operador_id');
+
+                        //BUSCO EL ID DEL Catalogo
+                    $infoReserva3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_catalogo_servicio'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                ->where('id_usuario_operador', '=', $idUsuarioOperadorError)
+                                 ->get();
+                   
+                    if (empty($infoReserva3)) {
+                        $partePublica = true;
+                        return view('public_page.front.errorAuthorize', compact('infoReservas','infoPago','user','partePublica','infoReserva2',"idUsuarioServicio",'idCatalogo'));    
+                        //return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','infoReserva2','idUsuarioServicio'));
+                    }else{
+                       $idCatalogo = $infoReserva3[0]->id_catalogo_servicio;
+                       $partePublica = false;
+                       return view('public_page.front.errorAuthorize', compact('infoReservas','infoPago','user','infoReserva2','partePublica',"idUsuarioServicio",'idCatalogo'));    
+                       //return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','idCatalogo','idUsuarioServicio','infoReserva2'));
+                    }
+                       
+                       //return view('public_page.front.errorPaypal', compact('infoReservas','infoPago','user','infoReserva2',"idUsuarioServicio",'idCatalogo'));    
+                       
+                   }
+                   
+                   //return view('public_page.front.confirmacionPaypal', compact('$infoPago','$infoReserva'));
+                   
+                     
+                 }
+                
+
+                
+            }
+        
+    }
+    
+    public function getConfirmacionCash(Guard $auth) {
+        
+           //BUSCO EL ULTIMO ID DE PAGO CON EFECTIVO QUE NO HAYA SIDO CONFIRMADO
+           $buscoIdPagoCash = DB::table('booking_abcalendar_reservations')
+                         ->select(DB::raw('MAX(id) as idReserva'))
+                         ->where('payment_method', '=', 'cash')
+                         ->where('status', '=', 'Pending')
+                         ->get();
+                 
+        if(!empty($buscoIdPagoCash)){
+                $id = $buscoIdPagoCash[0]->idReserva;
+                
+                //VERIFICO QUE EL ID DE LA RESERVA ESTE EN LA TABLA PAGO PAYPAL
+                $verificoPagoConsumido = DB::table('cashes')
+                         ->select(DB::raw('consumido'))
+                         ->where('id_reserva', '=', $id)
+                         ->get();
+                 
+                 if(empty($verificoPagoConsumido)){
+                     //SI NO EXISTE EN LA TABLA DE PAGO PAYPAL
+                     //ME REDIRIGE A LA TABLA DE ERROR DE PAYPAL
+                     return view('public_page.front.confirmacionErrorCash');
+                     
+                 }elseif($verificoPagoConsumido[0]->consumido == true){
+                     //SI EXISTE EN LA TABLA DE PAGO PAYPAL Y CONSUMIDO ES TRUE
+                     //ME REDIRIGE A LA TABLA DE ERROR DE PAYPAL
+                     return view('public_page.front.confirmacionErrorCash');
+                     
+                 }else{
+                    $estado = true;
+                    $updateReserva = DB::table('cashes')
+                                     ->where('id_reserva',$id)
+                                    ->update(['consumido'=>$estado]);
+
+                    $infoPago = DB::table('cashes')
+                             ->select(DB::raw('*'))
+                             ->where('id_reserva', '=', $id)
+                             ->get();
+
+                   $infoReservas = DB::table('booking_abcalendar_reservations')
+                             ->select(DB::raw('*'))
+                             ->where('id', '=', $id)
+                             ->get(); 
+                   
+                   $estadoReserva = $infoPago[0]->estadoPago;
+                   
+                   if($estadoReserva == "PorProcesar"){
+                       
+                    //BUSCO EL ID DEL CALENDARIO
+                    $infoReserva = DB::table('booking_abcalendar_reservations')
+                                    ->select(DB::raw('calendar_id'))
+                                    ->where('id', '=', $id)
+                                    ->get();
+                    
+                    $idCalendario = $infoReserva[0]->calendar_id;
+        
+                    //BUSCO EL ID DEL USUARIO SERVICIO
+                    $infoReserva1 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendario)
+                                 ->get();
+
+                    $idUsuarioServicio = $infoReserva1[0]->id_usuario_servicio;
+                    
+                    $user = $auth->user();
+                    
+                    if(empty($user)) {
+                        // EL VOLVER ES A LA PARTE PUBLICA                    
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "public";
+                        $estatusReserva = "Pending";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                        ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario,'status'=>$estatusReserva]);
+                        
+                        //BUSCO EL ID DEL USUARIO OPERADOR
+                        $infoUsuarioOperador = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_usuario_operador'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                 ->get();
+                        
+                        $idUsuarioPeradorPublica = $infoUsuarioOperador[0]->id_usuario_operador;
+                        
+                        //OBTENGO LA INFORMACION DEL USUARIO OPERADOR
+                        $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario_op', '=', $idUsuarioPeradorPublica)
+                                 ->get();
+                        
+                        return view('public_page.front.confirmacionCashPublica', compact('infoPago','infoReservas','user','infoReserva2','idUsuarioServicio'));
+                        
+                    }else{
+
+                        // VOLVER A LA PARTE ADMIN
+                        //BUSCO EL ID DEL USUARIO OPERADOR
+                        $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario', '=', $user->id)
+                                 ->get();
+
+                        $idUsuarioOperador = $infoReserva2[0]->id_usuario_op;
+                        
+                    //SI EL USUARIO ESTA LOGUEADO PERO VIENE DE LA PARTE PUBLICA
+                    //COMPROBAR QUE EL USUARIO SERVICIO DEL CALENDARIO PERTENEZCA 
+                    // AL USUARIO SERVCIO DEL OPERADOR
+                    //BUSCO EL ID DEL Catalogo
+                        $infoReserva3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_catalogo_servicio'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                ->where('id_usuario_operador', '=', $idUsuarioOperador)
+                                 ->get();
+                        
+                    if (empty($infoReserva3)) {
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "admin";
+                        $estatusReserva = "Pending";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                        ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario,'status'=>$estatusReserva]);
+                        $partePublica = true;
+                        return view('public_page.front.confirmacionCashPublica', compact('infoPago','infoReservas','user','partePublica','infoReserva2','idUsuarioServicio'));
+                    }else{
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "admin";
+                        $estatusReserva = "Confirmed";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                        ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario,'status'=>$estatusReserva]);
+                       $idCatalogo = $infoReserva3[0]->id_catalogo_servicio;
+                       $partePublica = false;
+                       return view('public_page.front.confirmacionCash', compact('infoPago','infoReservas','user','partePublica','idCatalogo','idUsuarioServicio','infoReserva2'));
+                    }
+                    
+
+                            
+                    }
+                       
+                   }else{
+                       
+                       //CUANDO EL PAGO CON PAYPAL NO SE COMPLETO
+                       //PARTE PUBLICA Y PRIVADA
+                         $user = $auth->user();
+                         
+                         $infoPago = DB::table('cashes')
+                             ->select(DB::raw('*'))
+                             ->where('id_reserva', '=', $id)
+                             ->get();
+
+                       $infoReservas = DB::table('booking_abcalendar_reservations')
+                             ->select(DB::raw('*'))
+                             ->where('id', '=', $id)
+                             ->get(); 
+                       
+                          $idCalendario = $infoReservas[0]->calendar_id;
+        
+                    //BUSCO EL ID DEL USUARIO SERVICIO
+                    $infoReserva1 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendario)
+                                 ->get();
+
+                    $idUsuarioServicio = $infoReserva1[0]->id_usuario_servicio;
+                       
+                       $sql1 = DB::table('booking_abcalendar_reservations')
+                                 ->select(DB::raw('calendar_id'))
+                                 ->where('id', '=', $id)
+                                 ->get();
+                       $idCalendarioError = $sql1[0]->calendar_id;
+                       
+                       $sql2 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendarioError)
+                                 ->get();
+                       $idUsuarioServicioError = $sql2[0]->id_usuario_servicio;
+                       
+                       $sql3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_usuario_operador'))
+                                 ->where('id', '=', $idUsuarioServicioError)
+                                 ->get();
+                       $idUsuarioOperadorError = $sql3[0]->id_usuario_operador;
+                       
+                       $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario_op', '=', $idUsuarioOperadorError)
+                                 ->get();
+                       
+                        //$idUsuarioOperadorError = $infoReserva2[0]->id_usuario_op;
+                        $idUsuarioOperadorError = session('operador_id');
+
+                        //BUSCO EL ID DEL Catalogo
+                    $infoReserva3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_catalogo_servicio'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                ->where('id_usuario_operador', '=', $idUsuarioOperadorError)
+                                 ->get();
+                    
+                    
+                    if (empty($infoReserva3)) {
+                        $partePublica = true;
+                        return view('public_page.front.errorCash', compact('infoReservas','infoPago','user','partePublica','infoReserva2',"idUsuarioServicio",'idCatalogo'));    
+                        //return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','infoReserva2','idUsuarioServicio'));
+                    }else{
+                       $idCatalogo = $infoReserva3[0]->id_catalogo_servicio;
+                       $partePublica = false;
+                       return view('public_page.front.errorCash', compact('infoReservas','infoPago','user','infoReserva2','partePublica',"idUsuarioServicio",'idCatalogo'));    
+                       //return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','idCatalogo','idUsuarioServicio','infoReserva2'));
+                    }
+                       
+                       //return view('public_page.front.errorPaypal', compact('infoReservas','infoPago','user','infoReserva2',"idUsuarioServicio",'idCatalogo'));    
+                       
+                   }
+                   
+                   //return view('public_page.front.confirmacionPaypal', compact('$infoPago','$infoReserva'));
+                   
+                     
+                 }
+                
+
+                
+            }
+            
+        
+    }
+
 }
