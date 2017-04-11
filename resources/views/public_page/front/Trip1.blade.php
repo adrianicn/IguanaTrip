@@ -138,8 +138,18 @@
                                 </div>
                                 <div class="post-content">
                                     <div class="post-action">
-                                        <a class="btn btn-sm" href="#"><i class="fa fa-heart"></i>480</a>
-                                        <a class="btn btn-sm" href="#"><i class="fa fa-share"></i>Share</a>
+                                        
+                                                                 <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+      <div class="fb-share-button" data-href="{!!asset('/trip')!!}/{!!$atraccion->nombre_servicio!!}/{!!$atraccion->id!!}" data-layout="button_count"></div>
+                                   
                                     </div>
                                     <h2 class="entry-title"><a href="#">La ruta Mochilera en Ecuador</a></h2>
                                     <div class="post-meta">
@@ -150,8 +160,7 @@
                                     <p>Tu mochila y un presupuesto de 20 dólares por día te llevarán a explorar los diferentes mundos que ofrece Ecuador sin viajar grandes distancias. Descubre los fríos paisajes de los Andes para luego adentrarte a la calurosa puerta de la Amazonía y terminar con una relajante surf y exquisita comida en la playa.</p>
                                     <br>
                                     <p>Normalmente los Hostel en Ecuador cuestan alrededor de $10, la comida $3 y el transporte $1 por hora de viaje. Sin embargo, puedes reducir considerablemente este costo a través de couchsurfing o camping. “Jalar dedo” es también una buena opción para hombres o parejas. Los ecuatorianos son muy amables y siempre te querrán ayudar. Y por supuesto la cerveza nacional cuesta algo menos de un dólar en cualquier supermercado.</p>
-                                    <a href="#" class="btn style4 read-more hover-blue">Read More</a>
-                                </div>
+                                    </div>
                             </article>
                             <article class="post post-classic">
                                 <div class="post-date">
@@ -164,10 +173,7 @@
                                     </div>
                                 </div>
                                 <div class="post-content">
-                                    <div class="post-action">
-                                        <a class="btn btn-sm" href="#"><i class="fa fa-heart"></i>480</a>
-                                        <a class="btn btn-sm" href="#"><i class="fa fa-share"></i>Share</a>
-                                    </div>
+                               
                                     <h2 class="entry-title"><a href="#">Quito</a></h2>
                                     <div class="post-meta">
                                         <span class="entry-author fn">by <a href="#">Admin</a></span>
@@ -175,8 +181,7 @@
                                         
                                     </div>
                                     <p>Empieza tu jornada en Quito, la capital Ecuatoriana donde por dos días explora la arquitectura colonial de su centro histórico. Desde Quito, realiza daytrips hacia Otavalo, Volcán Cotopaxi y una espectacular caminata alrededor de la Laguna del Quilotoa. </p>
-                                    <a href="#" class="btn style4 read-more hover-blue">Read More</a>
-                                </div>
+                                  </div>
                             </article>
                             <article class="post post-classic post-blockquote">
                                 <div class="post-date">
@@ -202,10 +207,7 @@
                                     </div>
                                 </div>
                                 <div class="post-content">
-                                    <div class="post-action">
-                                        <a class="btn btn-sm" href="#"><i class="fa fa-heart"></i>480</a>
-                                        <a class="btn btn-sm" href="#"><i class="fa fa-share"></i>Share</a>
-                                    </div>
+                                 
                                     <h2 class="entry-title"><a href="#">Baños</a></h2>
                                     <div class="post-meta">
                                         <span class="entry-author fn">by <a href="#">Admin</a></span>
@@ -213,8 +215,7 @@
                                         <span class="post-comment"><a href="#">1 Comment</a></span>
                                     </div>
                                     <p>En tu quinto día, viaja  3 1/2 horas hacia Sur-Este para encontrarte con la capital de la aventura y deportes extremos: Baños. Esta pequeña ciudad se encuentra en las faldas de un volcán. Gasta un par de días explorando los alrededores de Baños que están llenos de deportes extremos acompañados de grandiosos paisajes. </p>
-                                    <a href="#" class="btn style4 read-more hover-blue">Read More</a>
-                                </div>
+                                   </div>
                             </article>
                             
                             <article class="post post-classic">
@@ -229,10 +230,7 @@
                                     </div>
                                 </div>
                                 <div class="post-content">
-                                    <div class="post-action">
-                                        <a class="btn btn-sm" href="#"><i class="fa fa-heart"></i>480</a>
-                                        <a class="btn btn-sm" href="#"><i class="fa fa-share"></i>Share</a>
-                                    </div>
+                                
                                     <h2 class="entry-title"><a href="#">Surf</a></h2>
                                     <div class="post-meta">
                                         <span class="entry-author fn">by <a href="#">Admin</a></span>
@@ -240,8 +238,7 @@
                                         <span class="post-comment"><a href="#">1 Comment</a></span>
                                     </div>
                                     <p>Toma un bus nocturno hacia Montañita y relájate un par de días con surf, fiesta y un ambiente de viajeros. Piérdete un día  en la hermosa Playa de los Frailes ubicada a 30 min norte de Montañita. En tu camino de vuelta a Montañita para en la playa de tranquila y singular playa de Ayampe.  </p>
-                                    <a href="#" class="btn style4 read-more hover-blue">Read More</a>
-                                </div>
+                                     </div>
                             </article>
                             
                               <article class="post post-classic">
@@ -256,10 +253,7 @@
                                     </div>
                                 </div>
                                 <div class="post-content">
-                                    <div class="post-action">
-                                        <a class="btn btn-sm" href="#"><i class="fa fa-heart"></i>480</a>
-                                        <a class="btn btn-sm" href="#"><i class="fa fa-share"></i>Share</a>
-                                    </div>
+                                 
                                     <h2 class="entry-title"><a href="#">Al sur</a></h2>
                                     <div class="post-meta">
                                         <span class="entry-author fn">by <a href="#">Admin</a></span>
@@ -267,21 +261,12 @@
                                         <span class="post-comment"><a href="#">1 Comment</a></span>
                                     </div>
                                     <p>Continua via al sur hacia la  encantadora ciudad de Cuenca donde puedes hacer centro y visitar las ruinas arqueológicas Ingapirca o el Parque Nacional el Cajas. Finalmente si el tiempo te lo permite viaja al sur a la longeva ciudad de Vilcabamba para luego ir a la frontera sur hacia Perú ya sea por la espectacular ruta Zamba - La Balza o la regular autopista por Huaquillas.</p>
-                                    <a href="#" class="btn style4 read-more hover-blue">Read More</a>
-                                </div>
+                                 </div>
                             </article>
                          
                            
                         </div>
-                        <div class="post-pagination">
-                            <a href="#" class="nav-prev disabled" onclick="return false;"></a>
-                            <div class="page-links">
-                                <span class="active">1</span>
-                                <a href="#" data-page-num="2">2</a>
-                                <a href="#" data-page-num="3">3</a>
-                            </div>
-                            <a href="#" class="nav-next" data-page-num="2"></a>
-                        </div>
+                   
                     </div>
                     <div class="sidebar col-md-4">
                         <div class="main-mini-search-form full-width box">
