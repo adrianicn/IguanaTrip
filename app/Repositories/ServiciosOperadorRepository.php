@@ -15,6 +15,7 @@ use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 use App\Models\SearchEngine;
 use App\Models\Booking\Especialidad;
+use App\Models\Booking\VerificacionBooking;
 
 class ServiciosOperadorRepository extends BaseRepository {
 
@@ -41,6 +42,7 @@ class ServiciosOperadorRepository extends BaseRepository {
     protected $ubicacion_geografica;
     protected $search_engine;
     protected $especialidad_u;
+    protected $booking_u;
     
 
     /**
@@ -57,6 +59,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->catalogo_dificultad = new Catalogo_Dificultad();
         $this->itinerarios_u = new Itinerario_Usuario_Servicio();
         $this->especialidad_u = new Especialidad();
+	$this->booking_u = new VerificacionBooking();
         $this->detalle_itinerarios_u = new Detalle_Itinerario();
         $this->eventos = new Eventos_usuario_Servicio();
         $this->operador = new Usuario_Operador();
@@ -281,6 +284,18 @@ class ServiciosOperadorRepository extends BaseRepository {
         foreach ($Especialidad as $servicioBase) {
             $inputs['id'] = $servicioBase->id;
             $this->updateServEspe($inputs, 'activo');
+        }
+        return true;
+    }
+
+    //***************************************************************************//
+    //          ACTUALIZAR EL ESTADO DEL CALENDARIO BOOKING                      // 
+    //***************************************************************************//
+    public function storeUpdateEstadoBookingCalendar($inputs, $campoActivoCalendarBooking) {
+        //Transformo el arreglo en un solo objeto
+        foreach ($campoActivoCalendarBooking as $servicioBase) {
+            $inputs['id'] = $servicioBase->id;
+            $this->updateServBooking($inputs, 'activo');
         }
         return true;
     }
@@ -637,6 +652,69 @@ Actualizar tabla de busqueda
     public function getEspecialidadporUsuario($id_usuario_servicio) {
         $especialidad = new $this->especialidad_u;
         return $especialidad::where('id_usuario_servicio', $id_usuario_servicio)->get();
+    }
+
+    //**************************************************************************//
+    //           DEVUELVE EL ID DEL USUARIO DEL OPERADOR                        //
+    //**************************************************************************//
+    public function getIDUsuario($id) {
+        
+        return DB::table('usuario_operadores')
+                        ->select('id_usuario')
+                        ->where('id_usuario_op', $id)
+                        ->distinct()
+                        ->get();
+    }
+    
+        //**************************************************************************//
+    //           DEVUELVE EL ID DEL USUARIO DEL OPERADOR                        //
+    //**************************************************************************//
+    public function getInfoUser($id) {
+        
+        return DB::table('users')->select('id', 'email','password','username')->where('id', $id)->get();
+    }
+    
+    //**************************************************************************//
+    //     VERIFICAR SI EL USUARIO EXISTE EN LA TABLA USER BOOKING              //
+    //**************************************************************************//
+    public function getVerificarUsuario($id,$email) {
+        
+        return DB::table('booking_abcalendar_users')->where('email', $email)->count();
+    }
+    
+    //**************************************************************************//
+    //     INSERTAR EL USUARIO EN LA TABLA USER BOOKING                         //
+    //**************************************************************************//
+    public function ingresarUsuario($id,$email,$password,$username,$fecha) {
+    
+        return DB::table('booking_abcalendar_users')->insert(['id'=> $id, 'role_id' => '3', 'email' => $email, 
+                                                              'password' => '','name' => $username,
+                                                              'created' => $fecha, 'status' => 'T', 
+                                                              'is_active' => 'T','ip'=> '::1']);
+        
+    }
+    //**************************************************************************//
+    //           DEVUELVE EL ID DEL USUARIO DEL OPERADOR                        //
+    //**************************************************************************//
+    public function guardarVerificarBooking($idUser,$id,$encriptado) {
+
+        $bookingU = new $this->booking_u;
+        $bookingU->id_usuario = trim($idUser);
+        $bookingU->id_usuario_servicio = trim($id);
+        $bookingU->consumido = false;
+        $bookingU->uuid = trim($encriptado);
+
+        $this->save($bookingU);
+        return $bookingU;
+    }
+
+    //****************************************************//
+    //   OBTENGO EL ESTADO DEL CALENDARIO BOOKING         //
+    //****************************************************//
+    public function getEstadoBookingCalendar($id_booking_calendar) {
+        
+        return DB::table('booking_abcalendar_calendars')->where('id', $id_booking_calendar)->get();
+        
     }
 
 

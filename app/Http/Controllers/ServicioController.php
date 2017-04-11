@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Contracts\Auth\Guard;
 use App\Repositories\ServiciosOperadorRepository;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 //use App\Models\Catalogo_Servicio;
 
@@ -167,8 +168,66 @@ class ServicioController extends Controller {
         if (count($catalogoServicioEstablecimiento) == 0)
             $catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimiento($id_catalogo);
         $ImgPromociones = $gestion->getImageOperador($id, 1);
+        
+        $calendarios = DB::table('booking_abcalendar_calendars')->where('id_usuario_servicio', '=', $usuarioServicio[0]['id'] )->get();
+        
+        //$calendarios1 = DB::table('booking_abcalendar_calendars')->where('id_usuario_servicio', '=', '57' )->get();
+        
+        //$contadorCalendario = DB::select('SELECT COUNT(id_usuario_servicio) AS contador FROM booking_abcalendar_calendars WHERE id_usuario_servicio ='.$usuarioServicio[0]['id'])->get();
+        //$contadorCalendario = DB::table('booking_abcalendar_calendars')->where('id_usuario_servicio', '=', $usuarioServicio[0]['id'] )->count();
+        
+        if($calendarios != Array()){
+        //if($contadorCalendario[0]->contador != ""){ 
+            
+            $contadorCalendario = DB::table('booking_abcalendar_calendars')
+                     ->select(DB::raw('COUNT(id_usuario_servicio) AS contador'))
+                     ->where('id_usuario_servicio', '=', $usuarioServicio[0]['id'])
+                     ->groupBy('id_usuario_servicio')
+                     ->get();
+            
+            $arrayId = array();
 
-        return view('RegistroOperadores.registroStep4', compact('usuarioServicio', 'catalogoServicioEstablecimiento', 'id_catalogo', 'ImgPromociones', 'Servicio'));
+            for($i=0; $i < $contadorCalendario[0]->contador; $i++){
+                $arrayId[] .= $calendarios[$i]->id;
+            }
+
+            $arrayDeIds = implode(', ', $arrayId);
+
+            $calendarioConNombre = DB::table('booking_abcalendar_calendars')
+                         ->join('booking_abcalendar_multi_lang','booking_abcalendar_calendars.id','=','booking_abcalendar_multi_lang.foreign_id')  
+                         ->select(DB::raw('booking_abcalendar_calendars.* , booking_abcalendar_multi_lang.content'))
+                         ->where('booking_abcalendar_multi_lang.model', '=', 'pjCalendar')
+                         ->where('booking_abcalendar_multi_lang.field','=','name')
+                         ->whereNotNull('booking_abcalendar_multi_lang.content')
+                         //->where('booking_abcalendar_multi_lang.content IS NOT NULL')
+                         ->where('booking_abcalendar_calendars.id_usuario_servicio','=',$usuarioServicio[0]['id'])
+                         //->where('booking_abcalendar_calendars.id','=','booking_abcalendar_multi_lang.foreign_id')
+                         ->whereIn('booking_abcalendar_calendars.id',$arrayId)
+                         ->get();
+            
+               $reservacionesConNombre = DB::table('booking_abcalendar_reservations')
+                         ->join('booking_abcalendar_multi_lang','booking_abcalendar_reservations.calendar_id','=','booking_abcalendar_multi_lang.foreign_id')  
+                         ->select(DB::raw('count(booking_abcalendar_reservations.calendar_id) as reservas , booking_abcalendar_multi_lang.content'))
+                         ->where('booking_abcalendar_multi_lang.model', '=', 'pjCalendar')
+                         ->where('booking_abcalendar_multi_lang.field','=','name')
+                         ->whereNotNull('booking_abcalendar_multi_lang.content')
+                         ->whereIn('booking_abcalendar_reservations.calendar_id',$arrayId)
+                          ->groupBy('booking_abcalendar_multi_lang.content')
+                         ->get();
+               
+            return view('RegistroOperadores.registroStep4', compact('usuarioServicio', 'catalogoServicioEstablecimiento', 
+                        'id_catalogo', 'ImgPromociones', 'Servicio' ,'calendarios', 
+                        'contadorCalendario','arrayDeIds','calendarioConNombre','reservacionesConNombre'));
+            
+        }else{
+            return view('RegistroOperadores.registroStep4', compact('usuarioServicio', 'catalogoServicioEstablecimiento', 
+                        'id_catalogo', 'ImgPromociones', 'Servicio','calendarios'));
+            
+        }
+        
+       
+        /*return view('RegistroOperadores.registroStep4', compact('usuarioServicio', 'catalogoServicioEstablecimiento', 'id_catalogo', 'ImgPromociones', 'Servicio'
+                        ,'calendarios', 'contadorCalendario','arrayDeIds','calendarioConNombre'));*/
     }
 
     /**

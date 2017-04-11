@@ -330,3 +330,23 @@ Route::get('/api/detallesEspecialidadID/{id}','DetalleEspecialidadController@bus
 
 Route::post('estadoEspecialidadPrincipal/{id}', ['uses' =>'UsuarioServiciosController@postEstadoEspecialidad',
             'middleware' => 'notAuth']);
+
+Route::post('estadoBookingPrincipal/{id}', ['uses' =>'UsuarioServiciosController@postEstadoBooking',
+            'middleware' => 'notAuth']);
+
+//ruta para el controlador que redirige a booking
+Route::get('/booking/{id}', ['uses' =>'UsuarioServiciosController@booking','middleware' => 'notAuth']);
+//ruta para el controlador que redirige a booking para el setting del calendario
+Route::get('/bookingCalendario/{id}/{calendar_id}', ['uses' =>'UsuarioServiciosController@bookingCalendar','middleware' => 'notAuth']);
+
+Route::get('/confirmacion', ['as' => 'confirmacionpaypal', 'uses' => 'HomePublicController@getConfirmacionPaypal']);
+Route::get('/confirmacionAuthorize', ['as' => 'confirmacionauthorize', 'uses' => 'HomePublicController@getConfirmacionAuthorize']);
+Route::get('/verificarUsuario', ['as' => 'confirmacionauthorize', 'uses' => 'HomePublicController@verificarUsuario']);
+
+
+Route::get('/confirmacionPP/{id}', ['as' => 'confirmacionpaypal', 'uses' => 'HomePublicController@getConfirmacionPaypal1']);
+Route::get('/confirmacionTarjetaCredito/{id}', ['as' => 'confirmaciontarjetacredito', 'uses' => 'HomePublicController@getConfirmacionAuhtorize1']);
+//Route::get('/confirmacionEfectivo/{id}', ['as' => 'confirmaciontarjetacredito', 'uses' => 'HomePublicController@getConfirmacionCash']);
+Route::get('/confirmacionEfectivo', ['as' => 'confirmaciontarjetacredito', 'uses' => 'HomePublicController@getConfirmacionCash']);
+
+

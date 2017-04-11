@@ -252,6 +252,71 @@ callModal('cls');
     });
 }
 
+//************************************************************************//
+//               FUNCION PARA IR AL BOOKING EXTERNO                       //
+//************************************************************************//
+function RenderBooking($id_usuario_operador, $id_usuario_servicio) {
+
+console.log("Id Usuario Operador "+$id_usuario_operador);
+console.log("Id Usuario Servicio "+$id_usuario_servicio);
+var url = "/booking/"+$id_usuario_servicio;
+console.log(url);
+        $.ajax({
+        type: 'GET',
+        //url: '/booking/'+$id_usuario_servicio,
+        url: url,
+        data:"",
+        success: function (data) {
+            console.log(data);
+            //console.log(data.redirectto);
+            window.open(data.redirectto, '_blank');
+            //window.location.href = data.redirectto;
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
+//************************************************************************//
+//    FUNCION PARA IR AL SETTING DEL CALENDARIO EN EL BOOKING             //
+//************************************************************************//
+function RenderBookingCalendario($id_usuario_operador, $id_usuario_servicio, $calendar_id) {
+
+console.log("Id Usuario Operador "+$id_usuario_operador);
+console.log("Id Usuario Servicio "+$id_usuario_servicio);
+console.log("Id del Calendario "+$calendar_id);
+var url = "/bookingCalendario/"+$id_usuario_servicio+"/"+$calendar_id;
+console.log(url);
+        $.ajax({
+        type: 'GET',
+        //url: '/booking/'+$id_usuario_servicio,
+        url: url,
+        data:"",
+        success: function (data) {
+            console.log(data);
+            //console.log(data.redirectto);
+            window.open(data.redirectto, '_blank');
+            //window.location.href = data.redirectto;
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
 
 
 //
@@ -701,6 +766,43 @@ function AjaxContainerRetrunBurnURL($urlS,$formulario, $id, $load) {
             $("#" + $formulario).LoadingOverlay("hide", true);
             //$('#error').html(errorString);
             $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + errorString + "'])");
+
+        }
+        if (data.success) {
+            $("#".$load).LoadingOverlay("hide", true);
+        
+
+
+        } //success
+    }); //done
+
+}
+
+//retorna un mensaje despues de ejecutar la logica del controller
+function AjaxContainerRetrunBurnURLBooking($urlS,$formulario, $id, $load) {
+    $('.error').html('');
+
+    
+    $("#".$load).LoadingOverlay("show");
+    var $form = $('#' + $formulario),
+            data = $form.serialize() + '&ids=' + $id;
+    var url =$urlS + $id;
+    console.log(data);
+    var posting = $.post(url, {formData: data});
+    console.log(posting);
+    posting.done(function (data) {
+        if (data.fail) {
+
+            console.log(data.fail);
+
+            /*var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#" + $formulario).LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+            $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + errorString + "'])");*/
 
         }
         if (data.success) {
