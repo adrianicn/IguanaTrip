@@ -88,6 +88,13 @@ Route::post('estadoEvento/{id}', ['as' => 'postEstadoEvento', 'uses' =>'UsuarioS
 Route::post('invitacion', ['as' => 'postinvitaamigo', 'uses' =>'UsuarioServiciosController@postInvitarAmigo','middleware' => 'notAuth']);
 
 Route::get('/detalleServicios', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios','middleware' => 'notAuth']);
+
+Route::get('/detalleServicios', ['as' => 'detail', 'uses' => 'UsuarioServiciosController@tablaServicios','middleware' => 'notAuth']);
+
+
+
+
+
 Route::get('/render/{id_partial}', ['as' => 'render', 'uses' => 'UsuarioServiciosController@RenderPartial']);
 Route::get('/render/{id_partial}/{id_data}', ['as' => 'render', 'uses' => 'UsuarioServiciosController@RenderPartialWithData']);
 
@@ -226,6 +233,12 @@ Route::get('loginmobile',function()
     return view('mobile.logInMobile.LogInMobile');
 });
 
+
+
+
+
+
+    
 Route::get('registerMobile', ['as' => 'registerMobile', 'uses' => 'ServicioController@registerMobile'] );
 
 
@@ -253,6 +266,9 @@ Route::get('/getEventscity/{city}', ['as' => 'topPlaces', 'uses' => 'HomePublicC
 //ruta para el detalle de la atraccion
 Route::get('/detalle/{nombre_atraccion}/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getAtraccionDescripcion']);
 
+Route::get('/trip/{nombre_atraccion}/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getTripDescripcion']);
+
+
 //busqueda desde el home para los catalogos
 Route::get('/tokenDz$rip/{id_catalogo}', ['as' => 'searchCat', 'uses' => 'HomePublicController@getSearchHomeCatalogo']);
 
@@ -277,6 +293,14 @@ Route::get('/getReviews/{id_atraccion}', ['as' => 'getReviews', 'uses' => 'HomeP
 
 Route::get('/getSearchTotal/{term}', ['as' => 'SearchTotal', 'uses' => 'SearchController@getSearchTotal']);
 Route::get('/getSearchTotalPartial/{term}', ['as' => 'SearchTotalPartial', 'uses' => 'SearchController@getTotalSearchInside']);
+
+Route::get('/sitemap.xml', 'HomePublicController@sitemap');
+
+
+
+
+
+
 
 Route::get('/TermsConditions', ['as' => 'SearchTotalPartial', 'uses' => 'SearchController@getTermsConditions']);
 Route::get('/AboutUs', ['as' => 'SearchTotalPartial', 'uses' => 'SearchController@getAboutUs']);

@@ -228,12 +228,27 @@
                                 <option value="price-desc">Sort by price: high to low</option>
                             </select>
                         </form>-->
-                        <ul class="products row add-clearfix catagorias">
-                               <ul class="products row add-clearfix SearchTotalPartial">
-                                  
-                            @section('SearchTotalPartial')
+                      
+                      
+                      
+                                <div class="post-wrapper">
+                     <!--     <div class="post-filters">
+                            <a href="#" class="btn btn-sm style4 hover-blue active" data-filter="filter-all">All</a>
+                            <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-logo">Logo</a>
+                            <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-business">Business</a>
+                            <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-website">Website</a>
+                        </div> -->
+                        <div class="iso-container iso-col-3 style-masonry has-column-width SearchTotalPartial1 ">
+                            
+                            
+                              @section('SearchTotalPartial')
                                 @show
-                        </ul>  
+                                
+                        </div>
+                     
+                    </div>
+                      
+                      
                         <div class="post-pagination">
                             <div class="text-center">
                                 <a  class="btn style4 hover-blue load-more moreImg">{{ trans('publico/labels.label31')}}</a>
@@ -538,7 +553,7 @@ $('.searchTot').keypress(function (e) {
   {
       window.current_pageSet=0;
                 var valor=$(".searchTot ").val();
-                GetDataAjaxSearchTotal("{!!asset('/getSearchTotalPartial')!!}/"+valor);
+                GetDataAjaxSearchTotalClean("{!!asset('/getSearchTotalPartial')!!}/"+valor);
          }
 }); 
             </script>

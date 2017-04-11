@@ -378,6 +378,8 @@ class PublicServiceRepository extends BaseRepository {
     public function getParroquiaIntern($id_parroquia, $id_atraccion) {
 
         $arrayAtraccion = array();
+        
+        //Obtiene los hijos de esa atraccion
         $img_Atraccion = $this->getHijosAtraccion($id_atraccion);
         if ($img_Atraccion != null) {
             foreach ($arrayAtraccion as $imagen) {
@@ -389,8 +391,8 @@ class PublicServiceRepository extends BaseRepository {
                 ->where('usuario_servicios.estado_servicio', '=', '1')
                 ->where('usuario_servicios.estado_servicio_usuario', '=', '1')
                 ->where('usuario_servicios.id_parroquia', '=', $id_parroquia)
-                ->whereIn('id_catalogo_servicio', array(4, 8))
-                ->whereNotIn('usuario_servicios.id', array($id_atraccion))
+                ->whereIn('id_catalogo_servicio', array(4, 8)) //atracciones y eventos
+                ->whereNotIn('usuario_servicios.id', array($id_atraccion))//compara las imagenes para no tomar las imagenes de los hijos
                 ->select('usuario_servicios.id')
                 ->orderBy('num_visitas', 'desc')
                 ->orderBy('prioridad', 'desc')
@@ -628,12 +630,14 @@ class PublicServiceRepository extends BaseRepository {
       
             $imagenes = DB::table('images')
                     ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
-                    ->leftJoin('satisfechos_usuario_servicio', 'usuario_servicios.id', '=', 'satisfechos_usuario_servicio.id_usuario_servicio')
+                    //->leftJoin('satisfechos_usuario_servicio', 'usuario_servicios.id', '=', 'satisfechos_usuario_servicio.id_usuario_servicio')
+                    ->join('ubicacion_geografica', 'ubicacion_geografica.id', '=', 'usuario_servicios.id_canton')
                     ->where('estado_fotografia', '=', '1')
                     
                     ->whereIn('images.id', $array1)
                     
-                    ->select(array('usuario_servicios.id as id_usr_serv', 'satisfechos_usuario_servicio.id_usuario_servicio', 'usuario_servicios.*', 'images.*', DB::raw('COUNT(satisfechos_usuario_servicio.id_usuario_servicio) as satisfechos')))
+                    //->select(array('usuario_servicios.id as id_usr_serv', 'satisfechos_usuario_servicio.id_usuario_servicio', 'usuario_servicios.*', 'images.*', DB::raw('COUNT(satisfechos_usuario_servicio.id_usuario_servicio) as satisfechos')))
+                    ->select(array('usuario_servicios.id as id_usr_serv', 'usuario_servicios.*', 'images.*','ubicacion_geografica.nombre as nombreUbicacion' ))
                     ->groupby('usuario_servicios.id')
                     ->orderBy('usuario_servicios.prioridad', 'desc')
                     ->orderBy('usuario_servicios.num_visitas', 'desc')
@@ -1296,7 +1300,7 @@ class PublicServiceRepository extends BaseRepository {
                     ->join('eventos_usuario_servicios', 'usuario_servicios.id', '=', 'eventos_usuario_servicios.id_usuario_servicio')
                     ->whereIn('images.id', $array)
                     ->where('estado_fotografia', '=', '1')
-                    ->select('usuario_servicios.*', 'images.*', 'catalogo_servicios.nombre_servicio as catalogo_nombre', 'eventos_usuario_servicios.*')
+                    ->select('usuario_servicios.*', 'images.*', 'usuario_servicios.id as id_usuario_serviciox', 'catalogo_servicios.nombre_servicio as catalogo_nombre', 'eventos_usuario_servicios.*')
                     ->orderBy('usuario_servicios.prioridad', 'desc')
                     ->orderBy('usuario_servicios.num_visitas', 'desc')
                     ->paginate($pagination);
@@ -2389,21 +2393,23 @@ class PublicServiceRepository extends BaseRepository {
 
             $imagenesF = DB::table('images')
                     ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                    ->join('ubicacion_geografica', 'usuario_servicios.id_canton', '=', 'ubicacion_geografica.id')
                     ->leftJoin('satisfechos_usuario_servicio', 'usuario_servicios.id', '=', 'satisfechos_usuario_servicio.id_usuario_servicio')
                     ->whereIn('images.id', $array)
                     ->where('estado_fotografia', '=', '1')
                     ->where('usuario_servicios.id_catalogo_servicio', '=', $catalogo)
-                    ->select(array('usuario_servicios.id as id_usr_serv', 'satisfechos_usuario_servicio.id_usuario_servicio', 'usuario_servicios.*', 'images.*', DB::raw('COUNT(satisfechos_usuario_servicio.id_usuario_servicio) as satisfechos')))
+                    ->select(array('usuario_servicios.id as id_usr_serv', 'ubicacion_geografica.nombre as nombre_ubicacion','satisfechos_usuario_servicio.id_usuario_servicio', 'usuario_servicios.*', 'images.*', DB::raw('COUNT(satisfechos_usuario_servicio.id_usuario_servicio) as satisfechos')))
                     ->groupby('usuario_servicios.id')
                     ->orderBy($orderkey, $ordervalue)
                     ->paginate($pagination);
         } else {
             $imagenesF = DB::table('images')
                     ->join('usuario_servicios', 'usuario_servicios.id', '=', 'images.id_usuario_servicio')
+                    ->join('ubicacion_geografica', 'usuario_servicios.id_canton', '=', 'ubicacion_geografica.id')
                     ->leftJoin('satisfechos_usuario_servicio', 'usuario_servicios.id', '=', 'satisfechos_usuario_servicio.id_usuario_servicio')
                     ->where('estado_fotografia', '=', '1')
                     ->where('usuario_servicios.id_catalogo_servicio', '=', $catalogo)
-                    ->select(array('usuario_servicios.id as id_usr_serv', 'satisfechos_usuario_servicio.id_usuario_servicio', 'usuario_servicios.*', 'images.*', DB::raw('COUNT(satisfechos_usuario_servicio.id_usuario_servicio) as satisfechos')))
+                    ->select(array('usuario_servicios.id as id_usr_serv', 'ubicacion_geografica.nombre as nombre_ubicacion','satisfechos_usuario_servicio.id_usuario_servicio', 'usuario_servicios.*', 'images.*', DB::raw('COUNT(satisfechos_usuario_servicio.id_usuario_servicio) as satisfechos')))
                     ->groupby('usuario_servicios.id')
                     ->orderBy($orderkey, $ordervalue)
                     ->paginate($pagination);
@@ -2699,7 +2705,9 @@ class PublicServiceRepository extends BaseRepository {
         $events = DB::table('eventos_usuario_servicios')
                 ->where('id_usuario_servicio', '=', $id)
                 ->where('estado_evento', '=', '1')
-                ->where('fecha_hasta', '>=', "'" . Carbon::now() . "'")
+                ->where('fecha_hasta', '>=', "'" . Carbon::today()->toDateString() . "'")
+                
+
                 ->select('eventos_usuario_servicios.*')
                 ->get();
 

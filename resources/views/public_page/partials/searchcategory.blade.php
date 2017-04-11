@@ -1,7 +1,5 @@
 @section('Searchcategorias')	
-  <div class="iso-item">
-                               
-                            <article class="post post-masonry">
+  
 @if(count($catalogo)>0 || $catalogo!=null)
 
    @foreach ($catalogo as $cat)
@@ -12,48 +10,57 @@
                         ?>
                             
                             
-                          
-                                <div class="post-image">
-                                        <div class="product col-sms-6 col-sm-6 col-lg-4 box">
-                                <a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$cat->id_usr_serv!!}"  onclick="$('.container').LoadingOverlay('show');" class="product-image">
-                                    <div class="first-img">
+   <div class="TopPlace">
+      
+             <div class="iso-item filter-all filter-website ">
+                                <article class="post">
+                                    
+                                        <a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$cat->id_usr_serv!!}"  onclick="$('.Searchcategorias1').LoadingOverlay('show');" class="product-image">
                                         <img src="{{ asset('images/icon/'.$cat->filename)}}" alt="{!!$cat->nombre_servicio!!}">
+                                        <span class="image-extras"></span>
+                                    </a>
+                                    <div class="portfolio-content">
+
+                                        <h5 class="portfolio-title"><a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$cat->id_usr_serv!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$cat->nombre_servicio!!}</a></h3>
+                                        
+                                          @if($cat->precio_desde==0)
+                                    <span class="product-price" style=" color: #eb3b50;
+    float: left;
+    font-size: 1.3333em;
+    font-weight: 600;
+    margin-right: 8px;" ><span class="currency-symbol"></span>FREE</span>
+                                    @else
+                                    <span class="product-price "><span class="currency-symbol">{{ trans('publico/labels.label59')}} $</span>{!!$cat->precio_desde!!}</span>
+                                    @endif
+                                        
+                                    <br/>
+                                    <br/>
+                                            <div class="product-content">
+                                      <div class="product-action">
+                                    <a href="#" class="btn btn-add-to-cart"><i class="fa fa-star"></i>{!!$cat->satisfechos!!} Viajeros satisfechos</a>
+                                    
                                     </div>
-                                
-                                </a>
-                               <div class="product-content">
-                                    <h5 class="product-title"><a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$cat->id_usr_serv!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$cat->nombre_servicio!!}</a></h5>
+                                    </div>
                                     
-                                    <span class="product-price"><span class="currency-symbol">{{ trans('publico/labels.label59')}} $</span>{!!$cat->precio_desde!!}</span>
-                                    <span data-toggle="tooltip" title="4" class="star-rating">
-                                        <span data-stars="4"></span>
-                                    </span>
+                                     
                                 </div>
-                              
-                                
-                                <div class="product-action">
-                                      
-                                    @include('public_page.reusable.btnLikeReus', ['nombre_atraccion'=>$cat->nombre_servicio,'atraccion' =>$cat->id_usr_serv,'load'=>'btn-add-to-cart','cantidad'=>$cat->satisfechos])  
                                     
                                     
-                                </div>
-                                
+                                    
+                                  
+                            
+                                    
+                                    
+                                    
+                                </article>
                             </div>
-                                </div>
-                               
-                          
-                                   
-                                   
-                         
+   
                             
-                            
-                        
+   </div>
                             
                             @endforeach  
                             @endif
                             
-                           
-                                </article>
-                        </div>
+                      
                   
                                 @endsection

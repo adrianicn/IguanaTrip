@@ -3,46 +3,63 @@
    @foreach ($despliegue as $cat)
                        
                             
-                            <div class="iso-item">
-                               
-                            <article class="post post-masonry">
-                                <div class="post-image">
-                                        <li class="product col-sms-6 col-sm-6 col-lg-4 box">
-                                
-                                   <?php
+   
+          <?php
                         $nombre = str_replace(' ', '-', $cat->nombre_servicio);
                         $nombre = str_replace('/', '-', $nombre);
                         ?>
-                                <a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$cat->id_usr_serv!!}"  onclick="$('.container').LoadingOverlay('show');" class="product-image">
-                                    <div class="first-img">
+   
+   
+                    
+   <div class="TopPlace">
+      
+             <div class="iso-item filter-all filter-website ">
+                                <article class="post">
+                                    
+                                        <a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$cat->id_usr_serv!!}"  onclick="$('.SearchTotalPartial1').LoadingOverlay('show');" class="product-image">
+                                            
                                         <img src="{{ asset('images/icon/'.$cat->filename)}}" alt="{!!$cat->nombre_servicio!!}">
-                                    </div>
-                                
-                                </a>
-                               <div class="product-content">
-                                    <h5 class="product-title"><a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$cat->id_usr_serv!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$cat->nombre_servicio!!}</a></h5>
+                                        
+                                        <span class="image-extras"></span>
+                                    </a>
+                                    <div class="portfolio-content">
+
+                                        <h5 class="portfolio-title"><a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$cat->id_usr_serv!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$cat->nombre_servicio!!}</a></h3>
+                                        
+                                          @if($cat->precio_desde==0)
+                                    <span class="product-price" style=" color: #eb3b50;
+    float: left;
+    font-size: 1.3333em;
+    font-weight: 600;
+    margin-right: 8px;" ><span class="currency-symbol"></span>FREE</span>
+                                    @else
+                                    <span class="product-price "><span class="currency-symbol">{{ trans('publico/labels.label59')}} $</span>{!!$cat->precio_desde!!}</span>
+                                    @endif
+                                        
+                                    <br/>
+                                    <br/>
+                                            
                                     
-                                    <span class="product-price"><span class="currency-symbol">{{ trans('publico/labels.label59')}} $</span>{!!$cat->precio_desde!!}</span>
-                                    <span data-toggle="tooltip" title="4" class="star-rating">
-                                        <span data-stars="4"></span>
-                                    </span>
+                                    
+                                    <span class="product-price" ><span class="currency-symbol"></span>{!!$cat->nombreUbicacion!!}</span>
+                                    
+                                     
                                 </div>
-                              
-                                
-                                <div class="product-action">
-                                      
-                                    @include('public_page.reusable.btnLikeReus', ['nombre_atraccion'=>$cat->nombre_servicio,'atraccion' =>$cat->id_usr_serv,'load'=>'btn-add-to-cart','cantidad'=>$cat->satisfechos])  
                                     
                                     
-                                </div>
-                                
-                            </li>
-                                </div>
-                             
-                                   
-                                   
-                            </article>
-                        </div>
+                                    
+                                  
+                            
+                                    
+                                    
+                                    
+                                </article>
+                            </div>
+   
+                            
+   </div>
+   
+   
                             @endforeach  
                             @endif
                             
@@ -50,3 +67,11 @@
                             
                   
                                 @endsection
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                  

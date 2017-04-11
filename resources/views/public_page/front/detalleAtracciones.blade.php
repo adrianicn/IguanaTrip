@@ -73,7 +73,7 @@
                 display: none;
             }
             
-                .mores {
+                .more {
     background-color: white;
     border-radius: 4px;
     color: #939faa;
@@ -121,7 +121,7 @@
                         
                         
                         <div class="product type-product">
-                            <div class="row single-product-details " style="margin-bottom: 30%;">
+                            <div class="row single-product-details " >
                                 <div class="product-images col-sm-5 box-lg  ">
                                     <div id="sync1" class="owl-carousel images">
                                         <div class="post-slider style3 owl-carousel box">
@@ -231,11 +231,11 @@
                                     <img src="{{ asset('img/ic_serv/centro_turistico.png')}}" title="Turismo" alt="turismo">
                                     @endif
                                        @if(session('locale') == 'es' )
-                                        <pre class="mores">{!!$atraccion->detalle_servicio!!}</pre>
+                                        <pre class="more">{!!$atraccion->detalle_servicio!!}</pre>
                                         @elseif(session('locale') == 'en' && $atraccion->detalle_servicio_eng!='') 
-                                        <pre class="mores">{!!$atraccion->detalle_servicio_eng!!}</pre>
+                                        <pre class="more">{!!$atraccion->detalle_servicio_eng!!}</pre>
                                         @else
-                                        <pre class="mores">{!!$atraccion->detalle_servicio!!}</pre>
+                                        <pre class="more">{!!$atraccion->detalle_servicio!!}</pre>
 
                                         @endif
                                     
@@ -262,90 +262,69 @@
                             </div>
                      
                             
+                           @if(session('device')=='mobile')     
+         <div class="sidebar col-sm-4 col-md-4">
+                      
                             
-                            <div style="position: absolute; top: 26%;">
-<div class="sidebar col-sm-4 col-md-12">
 
-                                                
-                                                <div class="widget box">
-                            <h4>Qué hacer?</h4>
-                            <ul class="product-list-widget">
+                   
+     @if(isset($servicios))
                                 
-                                                                
-                                                                
+                             
+                                
+                        <div class="widget box">
+                            
+                            <h4>{{ trans('publico/labels.label18')}}</h4>
+                            <ul class="product-list-widget">
+                                @foreach ($servicios as $serv)
                                 <li>
                                     <div class="product-image">
-                                        <a href="http://localhost:8080/IguanaTrip/public/tokenDc$ripT/107/1" onclick="$('.container').LoadingOverlay('show');">
+                                        <a href="{!!asset('/tokenDc$ripT')!!}/{!!$atraccion->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">
                                             
-                                            <img src="http://localhost:8080/IguanaTrip/public/img/register/1.jpg" alt="">
+                                            <img src="{{ asset('img/register/')}}/{!!$serv->id_catalogo_servicios!!}.jpg" alt="">
                                         </a>
                                     </div>
+                                      <div class="product-content">
+                                          
+                                          
+                                        
+                                        
+                                           @if(session('locale') == 'es' )
+                                    <h6 class="product-title"><a href="{!!asset('/tokenDc$ripT')!!}/{!!$atraccion->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$serv->nombre_servicio!!}</a></h6>
                                     
-                                    
-                                    <div class="product-content">
-                                    
-                                                                               <h6 class="product-title"><a href="http://localhost:8080/IguanaTrip/public/tokenDc$ripT/107/1" onclick="$('.container').LoadingOverlay('show');">Alimentación y bebidas</a></h6>
-                                    
-                                                                            
-                                        <span class="product-price">Ver más</span>
-                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
-                                            <span data-stars="4" style="width: 80%;"></span>
+                                    @else
+                                    <h6 class="product-title"><a href="{!!asset('/tokenDc$ripT')!!}/{!!$atraccion->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$serv->nombre_servicio_eng!!}</a></h6>
+
+                                    @endif
+                                        
+                                        
+                                        <span class="product-price">{{ trans('publico/labels.label50')}}</span>
+                                        <span class="star-rating" title="4" data-toggle="tooltip">
+                                            <span data-stars="4"></span>
                                         </span>
                                     </div>
                                 </li>
-                                                                
-                                <li>
-                                    <div class="product-image">
-                                        <a href="http://localhost:8080/IguanaTrip/public/tokenDc$ripT/107/4" onclick="$('.container').LoadingOverlay('show');">
-                                            
-                                            <img src="http://localhost:8080/IguanaTrip/public/img/register/4.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    
-                                    
-                                    <div class="product-content">
-                                    
-                                                                               <h6 class="product-title"><a href="http://localhost:8080/IguanaTrip/public/tokenDc$ripT/107/4" onclick="$('.container').LoadingOverlay('show');">Centros turísticos</a></h6>
-                                    
-                                                                            
-                                        <span class="product-price">Ver más</span>
-                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
-                                            <span data-stars="4" style="width: 80%;"></span>
-                                        </span>
-                                    </div>
-                                </li>
-                                                                
-                                <li>
-                                    <div class="product-image">
-                                        <a href="http://localhost:8080/IguanaTrip/public/tokenDc$ripT/107/8" onclick="$('.container').LoadingOverlay('show');">
-                                            
-                                            <img src="http://localhost:8080/IguanaTrip/public/img/register/8.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    
-                                    
-                                    <div class="product-content">
-                                    
-                                                                               <h6 class="product-title"><a href="http://localhost:8080/IguanaTrip/public/tokenDc$ripT/107/8" onclick="$('.container').LoadingOverlay('show');">Eventos</a></h6>
-                                    
-                                                                            
-                                        <span class="product-price">Ver más</span>
-                                        <span class="star-rating" title="" data-toggle="tooltip" data-original-title="4">
-                                            <span data-stars="4" style="width: 80%;"></span>
-                                        </span>
-                                    </div>
-                                </li>
-                                                                                                
+                             @endforeach
+                                
+                              
                             </ul>
                         </div>
-                
-                                            </div>
-  </div>
+                        @endif
+                    </div>
+                            
+                        @endif    
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             
                             
                             <div class="woocommerce-tabs tab-container vertical-tab clearfix box">
                                 <ul class="tabs">
-                                    <li ><a href="#tab3-1" data-toggle="tab">{{ trans('publico/labels.label41')}}</a></li>
+                                   
                                     <li class="active"><a href="#tab3-2" data-toggle="tab">{{ trans('publico/labels.label36')}}</a></li>
                                     <li  ><a href="#tab3-3" data-toggle="tab">Reviews</a></li>
                                     
@@ -355,50 +334,46 @@
                                    
                                 </ul>
                                 
-                                <!-Info->
-                                <div id="tab3-1" class="tab-content panel entry-content">
-                                      <div class="tab-pane">
-                                        
-                                        @if($atraccion->direccion_servicio!="")
-                                        <pre class="mores">{{ trans('publico/labels.label35')}}: {!!$atraccion->direccion_servicio!!}</pre>
-                                        @endif
-                                        
-                                        @if($atraccion->horario!="")
-                                        <pre class="mores">{{ trans('publico/labels.label75')}}: {!!$atraccion->horario!!}</pre>
-                                        @endif
-                                                            @if($atraccion->precio_desde!="")
-                                        <pre class="mores">{{ trans('publico/labels.label73')}}: {!!$atraccion->precio_desde!!}</pre>
-                                        @endif
-                                                            @if($atraccion->precio_hasta!="")
-                                        <pre class="mores">{{ trans('publico/labels.label74')}}: {!!$atraccion->precio_hasta!!}</pre>
-                                        @endif
-                                        
-                                        @if($atraccion->telefono!="")
-                                        <pre class="mores">{{ trans('publico/labels.label38')}}: {!!$atraccion->telefono!!}</pre>
-                                        @endif
-                                        @if($atraccion->correo_contacto!="")
-                                        <pre class="mores">{{ trans('publico/labels.label39')}}: {!!$atraccion->correo_contacto!!}</pre>
-                                        @endif
-                                        @if($atraccion->pagina_web!="")
-                                        <pre class="mores">{{ trans('publico/labels.label40')}}: {!!$atraccion->pagina_web!!}</pre>
-                                        @endif
-                                    </div>
-                                </div>
+                                
 
                                 
                                 <!-Como llegar->
                                 <div id="tab3-2" class="tab-content panel entry-content in active">
                                     <div class="tab-pane">
+                                        
+                                        @if($atraccion->direccion_servicio!="")
+                                        <pre class="more">{{ trans('publico/labels.label35')}}: {!!$atraccion->direccion_servicio!!}</pre>
+                                        @endif
+                                        
+                                        @if($atraccion->horario!="")
+                                        <pre class="more">{{ trans('publico/labels.label75')}}: {!!$atraccion->horario!!}</pre>
+                                        @endif
+                                                            @if($atraccion->precio_desde!="")
+                                        <pre class="more">{{ trans('publico/labels.label73')}}: {!!$atraccion->precio_desde!!}</pre>
+                                        @endif
+                                                            @if($atraccion->precio_hasta!="")
+                                        <pre class="more">{{ trans('publico/labels.label74')}}: {!!$atraccion->precio_hasta!!}</pre>
+                                        @endif
+                                        
+                                        @if($atraccion->telefono!="")
+                                        <pre class="more">{{ trans('publico/labels.label38')}}: {!!$atraccion->telefono!!}</pre>
+                                        @endif
+                                        @if($atraccion->correo_contacto!="")
+                                        <pre class="more">{{ trans('publico/labels.label39')}}: {!!$atraccion->correo_contacto!!}</pre>
+                                        @endif
+                                        @if($atraccion->pagina_web!="")
+                                        <pre class="more">{{ trans('publico/labels.label40')}}: {!!$atraccion->pagina_web!!}</pre>
+                                        @endif
                                           @if(session('locale') == 'es' )
-                                        <pre class="mores">{!!$atraccion->como_llegar1!!}</pre>
-                                        <pre class="mores">{!!$atraccion->como_llegar1_1!!}</pre>
+                                        <pre class="more">{!!$atraccion->como_llegar1!!}</pre>
+                                        <pre class="more">{!!$atraccion->como_llegar1_1!!}</pre>
                                         
                                         @elseif(session('locale') == 'en' && $atraccion->como_llegar2!='') 
-                                        <pre class="mores">{!!$atraccion->como_llegar2!!}</pre>
-                                        <pre class="mores">{!!$atraccion->como_llegar2_2!!}</pre>
+                                        <pre class="more">{!!$atraccion->como_llegar2!!}</pre>
+                                        <pre class="more">{!!$atraccion->como_llegar2_2!!}</pre>
                                         @else
-                                        <pre class="mores">{!!$atraccion->como_llegar1!!}</pre>
-                                        <pre class="mores">{!!$atraccion->como_llegar1_1!!}</pre>
+                                        <pre class="more">{!!$atraccion->como_llegar1!!}</pre>
+                                        <pre class="more">{!!$atraccion->como_llegar1_1!!}</pre>
 
                                         @endif
                                         
@@ -545,6 +520,7 @@
                             </div>
 
                         </div>
+                        
                         @if(count($related)>0)
                       <div class="product type-product">
                             <h4>{{ trans('publico/labels.label47')}}</h4>
@@ -605,11 +581,33 @@
                         
                          <div class="product type-product">
                             <h4>{{ trans('publico/labels.label28')}}</h4>
-                            <ul class="related products row add-clearfix cercanos">
+                           
+                            
+                               
+                      <div class="post-wrapper">
+                     <!--     <div class="post-filters">
+                            <a href="#" class="btn btn-sm style4 hover-blue active" data-filter="filter-all">All</a>
+                            <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-logo">Logo</a>
+                            <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-business">Business</a>
+                            <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-website">Website</a>
+                        </div> -->
+                        <div class="iso-container iso-col-3 style-masonry has-column-width cercanos ">
+                            
+                            
+                              @section('cercanos')
+                                @show
+                                
+                        </div>
+                     
+                    </div>
+                            
+                            
+                            <!--<ul class="related products row add-clearfix cercanos">
                                 @section('cercanos')
                                 @show
-                            </ul>
+                            </ul>-->
                         </div>
+                        <br>
                           <div class="text-center">
                                            <a  class="btn style4 hover-blue load-more moreImg">{{ trans('publico/labels.label31')}}</a>
                             </div>

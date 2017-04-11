@@ -112,7 +112,8 @@
                         $date1 = date_create($event->fecha_ingreso);
                         ?>
 
-                        <a href="#"><h3 class="banner-title">{!!$event->nombre_servicio!!}</h3><h3 style="color: red">{!!date_format($date1, 'j F ')!!}</h3></a>
+                        
+                        <a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$event->id_usuario_serviciox!!}"  onclick="$('.container').LoadingOverlay('show')"><h3 class="banner-title">{!!$event->nombre_servicio!!}</h3><h3 style="color: red">{!!date_format($date, 'j F ')!!}</h3></a>
                         <div class="details">
                             <p>{!!$event->detalle_servicio!!}</p>
                         </div>
@@ -143,7 +144,8 @@
                         $date2 = date_create($event->fecha_desde);
                         ?>
 
-                        <a href="#"><h3 class="banner-title">{!!$event->nombre_evento!!}</h3><h3 style="color: red">{!!date_format($date2, 'j F ')!!}</h3></a>
+                        
+                        <a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$event->id_usuario_serviciox!!}"  onclick="$('.container').LoadingOverlay('show')"><h3 class="banner-title">{!!$event->nombre_servicio!!}</h3><h3 style="color: red">{!!date_format($date, 'j F ')!!}</h3></a>
                         <div class="details">
                             <p>{!!$event->nombre_servicio!!}</p><p>{!!$event->descripcion_evento!!}</p>
                         </div>
@@ -172,7 +174,8 @@
                          <?php
                         $date3 = date_create($event->fecha_desde);
                         ?>
-                        <a href="#"><h3 class="banner-title">{!!$event->nombre_evento!!}</h3><h3 style="color: red">{!!date_format($date3, 'j F ')!!}</h3></a>
+                        
+                        <a href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$event->id_usuario_serviciox!!}"  onclick="$('.container').LoadingOverlay('show')"><h3 class="banner-title">{!!$event->nombre_servicio!!}</h3><h3 style="color: red">{!!date_format($date, 'j F ')!!}</h3></a>
                         <div class="details">
                             <p>{{ trans('publico/labels.label34')}} {!!$event->nombre_servicio!!}</p>
                             <p>{!!$event->descripcion_evento!!}</p>

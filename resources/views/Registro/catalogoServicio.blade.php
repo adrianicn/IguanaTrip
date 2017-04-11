@@ -20,6 +20,7 @@ $servicio_6 = '';
 $servicio_7 = '';
 $servicio_8 = '';
 $servicio_10 = '';
+$servicio_11 = '';
 ?>
 @foreach ($listServicios as $servicio)
 <?php
@@ -374,6 +375,23 @@ switch ($servicio->id_catalogo_servicio) {
                                 
                                 </td>
                             <td><input class="demo labelauty" name="id_catalogo_servicio10" id="checkbox-10" value="10" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_10!!}/></td>
+                        </tr>
+                        
+                        <tr class="alt">  <td> 
+                                <div id="star2" class="dialog-open">
+                                    <img src="{!! asset('images/register/registro2.jpg')!!}" alt="" />
+                                </div>
+                                </td>
+                            <td>
+                                <div id="star2" class="dialog-open">
+                                <h2 class='titletable'>
+                                    Trips
+                                </h2>
+                                
+                                Trips
+                                </div>
+                                </td>
+                            <td><input class="demo labelauty" name="id_catalogo_servicio10" id="checkbox-11" value="11" type="checkbox" data-labelauty="No brindo este servicio|Si brindo este servicio" {!!$servicio_11!!}/></td>
                         </tr>
                         
                     </tbody>

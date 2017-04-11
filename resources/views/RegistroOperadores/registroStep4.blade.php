@@ -204,12 +204,12 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                 <div id="promocion"><a onclick="RenderPartialGeneric('reusable.invitar_amigo')" href="#"><img src="{{ asset('img/amigo-1.png')}}" style="width:111px"></a> </div>
                 <div id="evento"><a class="button-step4" title="Prueba Especialidad Booking" onclick="RenderPartialGeneric('reusable.createNewEspecialidad', {!!$usuarioServicio->id!!})" href="#"> <h1 class="h1-agregar">+</h1> Agregar Especialidad</a></div>
                 
-                @if($id_catalogo==4 && $usuarioServicio->id_padre==0)
+                <!--@if($id_catalogo==4 && $usuarioServicio->id_padre==0)-->
                 
                 <div id="promocion"><a class="button-step4" title="Si desea crear atracciones dependientes" onclick="RenderPartialPadre('reusable.createNewServicioHijo', 4, {!!$usuarioServicio->id_usuario_operador!!},{!!$usuarioServicio->id!!});" href="#"> <h1 class="h1-agregar">+</h1> Agregar Dependencia</a></div>
                 
                 
-                    @endif
+                    <!--@endif-->
                     
                       @if($id_catalogo==4 && $usuarioServicio->id_padre!=0)
                 

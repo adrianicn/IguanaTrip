@@ -35,6 +35,7 @@ class ServicioController extends Controller {
     ];
     protected $validationUsuarioServicios = [
         'nombre_servicio' => 'required|max:255|',
+        'id_provincia' => 'required'
             //'detalle_servicio' => 'required|max:255|',
             //'precio_desde' => 'required|max:255',
             //'precio_hasta' => 'required|max:255',
@@ -49,6 +50,9 @@ class ServicioController extends Controller {
 //			'descuento_clientes' => 'required|max:255',
 //			'tags_servicio' => 'required|max:255'
     ];
+    
+    
+    
 
     /**
      * Show the form for creating a new resource.
