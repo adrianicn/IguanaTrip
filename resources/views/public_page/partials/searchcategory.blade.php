@@ -35,12 +35,9 @@
                                         
                                     <br/>
                                     <br/>
-                                            <div class="product-content">
-                                      <div class="product-action">
-                                    <a href="#" class="btn btn-add-to-cart"><i class="fa fa-star"></i>{!!$cat->satisfechos!!} Viajeros satisfechos</a>
+                                          
                                     
-                                    </div>
-                                    </div>
+                                                        <span class="product-price" ><span class="currency-symbol"></span>{!!$cat->geografica!!}</span>
                                     
                                      
                                 </div>

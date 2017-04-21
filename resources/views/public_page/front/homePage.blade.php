@@ -111,6 +111,62 @@
     background: url("../public/img/top.png") no-repeat;
 }
 
+
+#search-box {
+position: relative;
+width: 100%;
+margin: 0;
+}
+
+
+.sear
+{
+height: 43px;
+border: 1px solid #999;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+background-color: #fff;
+overflow: hidden;
+}
+#search-text 
+{
+font-size: 14px;
+color: #ddd;
+border-width: 0;
+background: transparent;
+}
+#search-box input[type="text"]
+{
+width: 90%;
+padding: 11px 0 12px 1em;
+color: #333;
+outline: none;
+}
+
+#search-button {
+position: absolute;
+top: 0;
+right: 0;
+height: 42px;
+width: 80px;
+font-size: 14px;
+color: #fff;
+text-align: center;
+line-height: 42px;
+border-width: 0;
+background-color: #e67e22 ;
+-webkit-border-radius: 0px 5px 5px 0px;
+-moz-border-radius: 0px 5px 5px 0px;
+border-radius: 0px 5px 5px 0px;
+cursor: pointer;
+}
+
+
+
+
+
+
         </style>
         <div id="page-wrapper">
             <header id="header" class="header-color-white">
@@ -257,21 +313,39 @@
                 <div class="container">
                     @if(session('device')=='mobile')
                       
-                          
-                          <!-- Responsive Styles -->
-        <link rel="stylesheet" href="{{ asset('cssMobile/searchbar.css')}}">
-
-       
-           {!! Form::open(['url' => route('min-search'),'class'=>'form-wrapper cf',  'method' => 'get', 'id'=>'min-search']) !!}
-        <input type="text" class='sb-search-input' name="s" id="s" placeholder="Search here..." required>
-        <button type="submit">Search</button>
-   {!! Form::close() !!}
-
                         
+                          <!-- Responsive Styles -->
+                          <br>
+                          <br>
+                          <br>
+ 
+        <div id='search-box'>
+{!! Form::open(['url' => route('min-search'),'class'=>'sear form-wrapper cf',  'method' => 'get', 'id'=>'min-search']) !!}
+<input id='search-text' name='s' placeholder='Search' type='text'/>
+<button id='search-button' type='submit'>                     
+<span>Search</span>
+</button>
+  {!! Form::close() !!}
+</div>
+                    <br>
+                    <br>
+                    <br>
+ 
                     
                     
+                      <div class="heading-box col-md-10 col-lg-8">
+                    <h2 class="box-title">{{ trans('publico/labels.label150')}} <em class="skin-color">{!!$titulo!!}</em> </h2>
+                    <p><em class="skin-color">iWaNaTrip</em> {{ trans('publico/labels.label140AB')}}</p>
+                </div> 
+                   
+               @else
                     
-                    @endif
+                   <div class="heading-box col-md-10 col-lg-8">
+                    <h2 class="box-title">{{ trans('publico/labels.label138AB')}} <em class="skin-color">{!!$titulo!!}</em> {{ trans('publico/labels.label139AB')}}</h2>
+                    <p><em class="skin-color">iWaNaTrip</em> {{ trans('publico/labels.label140AB')}}</p>
+                </div>
+                     @endif
+
                     <!--<div class="heading-box col-md-10 col-lg-8">
                         <h2 class="box-title">{{ trans('publico/labels.label61')}} <em class="skin-color">{{ trans('publico/labels.label62')}} </em> {{ trans('publico/labels.label63')}}
                              </h2>
@@ -740,9 +814,6 @@ $('.scrollupWeb').click(function(){
     });
 
   });
-
-  
-
 
             
             

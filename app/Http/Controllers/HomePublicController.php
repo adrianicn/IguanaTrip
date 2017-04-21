@@ -506,9 +506,11 @@ $tipoReviews = $gestion->getTiporeviews($id_atraccion);
     
     //Obtiene los servicios por catalogo cercanos a la atraccion paginados
     public function getCatalosoServicios(Request $request, PublicServiceRepository $gestion, $id_atraccion, $id_catalogo) {
-        //
+        
 
+        //obtiene la información basica del lugar cercano
         $atraccion = $gestion->getAtraccionDetails($id_atraccion);
+        
         $catalogo1 = $gestion->getCatalogoDetails($id_atraccion, $id_catalogo);
         $catalogo = $gestion->getDetailsServiciosAtraccion($catalogo1, null, null, 4);
 
@@ -550,7 +552,7 @@ $tipoReviews = $gestion->getTiporeviews($id_atraccion);
         }
         Session::put('device', $desk);
         
-
+    //Obtiene el listado de los catalogos propios de ese servicio
         $catalogo = $gestion->getCatalogoDetail($id_catalogo);
            if($catalogo!=null)
         {

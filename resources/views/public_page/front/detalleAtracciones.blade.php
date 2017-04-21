@@ -187,8 +187,20 @@
                                             <a href="#" class="social-icon"><i class="fa fa-facebook has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
                                             <a href="#" class="social-icon"><i class="fa fa-google-plus has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>-->
                                             <div class="fb-share-button" data-href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$atraccion->id!!}" data-layout="button_count"></div>
+                                            <div class="" data-href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$atraccion->id!!}" data-layout="button_count"></div>
                                         </div>
-                                        
+                                       
+                                    </div>
+
+              <div class="social-wrap">
+                                        <label>Reportar error</label>
+                                        <div class="social-icons box size-sm style2">
+                                                
+                                            
+                     <a href="#" class="social-icon"><i class="fa fa-exclamation-triangle has-circle"data-toggle="tooltip" data-placement="top" title=""></i></a>                        
+                                            
+                                        </div>
+                                       
                                     </div>
                                     
                                 </div>
@@ -614,6 +626,22 @@
                     </div>
                     <div class="sidebar col-sm-4 col-md-3" >
 
+                        
+                        
+                        <div class="main-mini-search-form full-width box">
+                            <div class="search-box">
+                            <div class="social-wrap">
+                                        
+                                        <div class="social-icons box size-lg style3">
+                                                
+                                            
+                       <a href="#" class="social-icon"><label>Crea tu página gratis  </label> <i class="fa fa-plus has-circle"  data-toggle="tooltip" data-placement="top" title=""></i></a>                        
+                                            
+                                        </div>
+                                                    </div>
+                                       
+                                    </div>
+                        </div>  
                         @if(session('device')!='mobile')
                         <div class="main-mini-search-form full-width box">
                             {!! Form::open(['url' => route('min-search'),  'method' => 'get', 'id'=>'min-search']) !!}
@@ -661,6 +689,32 @@
                                 @endif
                                 
                             </ul>
+             
+                                <h4>Twitter Feeds</h4>
+                                <div class="twitter-holder">
+                                    <ul>
+                                        <li class="tweet">
+                                            <p class="tweet-text">
+                                                <a href="#">Miracle,</a> Etiam non mollis minaer roin or eme.
+                                            </p>
+                                            <a href="#" class="tweet-date">12 Nov, 2014</a>
+                                        </li>
+                                        <li class="tweet">
+                                            <p class="tweet-text">
+                                                <a href="#">Miracle,</a> Etiam non mollis minaer roin or eme.
+                                            </p>
+                                            <a href="#" class="tweet-date">12 Nov, 2014</a>
+                                        </li>
+                                        <li class="tweet">
+                                            <p class="tweet-text">
+                                                <a href="#">Miracle,</a> Etiam non mollis minaer roin or eme.
+                                            </p>
+                                            <a href="#" class="tweet-date">12 Nov, 2014</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                         
+                                 
                         </div>
                       
                         

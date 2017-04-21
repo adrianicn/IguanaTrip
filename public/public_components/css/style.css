@@ -3078,10 +3078,10 @@ ul.filter-categories > li li:last-child {
 .social-icons .social-icon i {
   font-size: 1.0833em;
   border-color: #d4dde5;
-  overflow: hidden;
+  //overflow: hidden;
   color: #d4dde5;
-  width: 2.2em;
-  height: 2.2em;
+  //width: 2.2em;
+  //height: 2.2em;
   line-height: 2.16em;
   -webkit-border-radius: 50% 50% 50% 50%;
   -moz-border-radius: 50% 50% 50% 50%;
@@ -3153,7 +3153,7 @@ ul.filter-categories > li li:last-child {
 .social-icons.style3 .social-icon i {
   color: #fff;
   border: none;
-  background: #1b4268;
+  background: #58a5a6;
 }
 .social-icons.style3 .social-icon:hover i {
   background: #22486d;
@@ -9592,8 +9592,8 @@ body.woocommerce select:not(.default-style) + .customSelect .customSelectInner:b
 .woocommerce .single-product-details .social-wrap {
   padding: 20px 0;
   border-top: 1px solid #edf6ff;
-  border-bottom: 1px solid #edf6ff;
-  margin-bottom: 30px;
+  //border-bottom: 1px solid #edf6ff;
+  //margin-bottom: 30px;
 }
 .woocommerce .single-product-details .social-wrap .social-icons {
   text-align: right;
