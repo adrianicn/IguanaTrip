@@ -795,6 +795,22 @@ class PublicServiceRepository extends BaseRepository {
         return null;
     }
 
+    
+    
+      //Obtiene los usuarios servicios para sitemap
+    public function getSitemapUsuariosServicio() {
+
+
+
+        $sitemapServicios = DB::table('usuario_servicios')
+                ->where('usuario_servicios.estado_servicio_usuario', '=',1)
+                ->where('usuario_servicios.estado_servicio', '=',1)
+                  ->select("usuario_servicios.*")
+                ->get();
+        return $sitemapServicios;
+    }
+    
+        
     //Entrega el arreglo de los catalogos segÃºn la localizaciÃ³n
     public function getBusquedaInicialCatalogoFiltros($catalogo, $ubicacion, $filtros, $precio_min, $precio_max, $page_now, $page_stoped, $take, $pagination) {
 

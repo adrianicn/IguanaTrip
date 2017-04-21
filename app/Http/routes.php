@@ -281,6 +281,10 @@ Route::get('/getCatalogosServicios/{id_atraccion}/{id_catalogo}', ['as' => 'cata
 Route::get('/getSearchCatalogosServicios/{id_catalogo}/{ciudad}', ['as' => 'SearchcatalogoServicios', 'uses' => 'HomePublicController@getCatalosoServiciosSearch']);
 
 
+Route::get("sitemap.xml", array(
+    "as"   => "sitemap",
+    "uses" => "HomePublicController@sitemap", // or any other controller you want to use
+));
 
 
 Route::get('/tokenDc$ripPromo/{id_atraccion}', ['as' => 'atracciondescr', 'uses' => 'HomePublicController@getPromocionesAtraccion']);
