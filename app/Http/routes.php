@@ -48,6 +48,10 @@ Route::put('uservalid/{id}', 'CommentController@valid');
 Route::resource('contact', 'ContactController', [
 	'except' => ['show', 'edit']
 ]);
+Route::get("sitemap.xml", array(
+    "as"   => "sitemap",
+    "uses" => "HomePublicController@sitemap", // or any other controller you want to use
+));
 
 
 // User
