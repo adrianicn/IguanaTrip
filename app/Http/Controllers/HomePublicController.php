@@ -1492,5 +1492,76 @@ $tipoReviews = $gestion->getTiporeviews($id_atraccion);
             
         
     }
+    
+    public function getAtraccionDescripcion1(PublicServiceRepository $gestion) {
+        $agent = new Agent();
+
+         $id_atraccion = session('usu_servicio');
+         $id_catalogo = session('id_catalogo');
+         
+        $desk = $device = $agent->isMobile();
+        if ($desk == 1)
+            $desk = "mobile";
+        else {
+            $desk = "desk";
+        }
+
+        Session::put('device', $desk);
+
+        $gestion->saveVisita(null,$id_atraccion);
+        $ImgItiner = null;
+        $explore = null;
+        $visitados = null;
+
+        $provincia = null;
+        $canton = null;
+        $parroquia = null;
+
+        $tipoReviews = $gestion->getTiporeviews($id_atraccion);
+        $atraccion = $gestion->getAtraccionDetails($id_atraccion);
+        $imagenes = $gestion->getAtraccionImages($id_atraccion);
+
+
+        $itinerarios = $gestion->getItinerAtraccion($id_atraccion);
+        $related = $gestion->getHijosAtraccion($id_atraccion);
+        $servicios = $gestion->getServicios($atraccion->id_provincia);
+
+        if ($atraccion->id_provincia != 0)
+            $provincia = $gestion->getUbicacionAtraccion($atraccion->id_provincia);
+
+        if ($atraccion->id_canton != 0)
+            $canton = $gestion->getUbicacionAtraccion($atraccion->id_canton);
+
+        if ($atraccion->id_parroquia != 0)
+            $parroqia = $gestion->getUbicacionAtraccion($atraccion->id_parroquia);
+
+        if ($related == null)
+            $visitados = $gestion->getVisitadosProvincia($atraccion->id_provincia);
+
+
+
+
+        if ($itinerarios != null)
+            $ImgItiner = $gestion->getItinerImagenAtraccion($itinerarios);
+
+
+        if (isset($atraccion->id_provincia))
+            $explore = $gestion->getExplorer($atraccion->id);
+
+
+        return view('responsive.detalleAtracciones')->with('atraccion', $atraccion)
+                        ->with('imagenes', $imagenes)
+                        ->with('explore', $explore)
+                        ->with('itinerarios', $itinerarios)
+                        ->with('related', $related)
+                        ->with('visitados', $visitados)
+                        ->with('canton', $canton)
+                        ->with('provincia', $provincia)
+                        ->with('parroquia', $parroquia)
+                        ->with('servicios', $servicios)
+                        ->with('tipoReviews', $tipoReviews)
+
+        ;
+    }    
 
 }
