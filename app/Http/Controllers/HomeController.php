@@ -52,6 +52,32 @@ class HomeController extends Controller {
 
         return redirect()->back();
     }
+    
+            public function indexres(Guard $auth) {
+        //	
+
+
+        $agent = new Agent();
+
+        $desk = $device = $agent->isMobile();
+        if ($desk == 1)
+            $desk = "mobile";
+        else {
+            $desk = "desk";
+        }
+
+        Session::put('device', $desk);
+
+        if ($auth->check()) {
+            $user = $auth->user();
+           // $view = view('RegistroOperadores.registroStep1'); // revisar debe redirecccionar a otro lado
+            return redirect('/serviciosres')->with('user', $user->id);
+        } else {
+
+            $view = view('responsive.completeRegister');
+        }
+        return $view;
+    }
 
    
 
