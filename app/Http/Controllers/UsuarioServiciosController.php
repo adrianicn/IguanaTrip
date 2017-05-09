@@ -1144,4 +1144,259 @@ class UsuarioServiciosController extends Controller {
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
 
+ public function getServiciosOperadorRes(ServiciosOperadorRepository $gestion) {
+        //
+
+        $data['id_usuario_op'] = session('operador_id');
+
+        //logica que comprueba si el usuario tiene servicios para ser modificados
+        //caso contrario ingresa nuevos serviciosS
+        $listServicios = $gestion->getServiciosOperador(session('operador_id'));
+
+        $view = view('responsive.dashboard', compact('data', 'listServicios'));
+        return ($view);
+    }
+    
+    public function tablaServiciosRes(Guard $auth,ServiciosOperadorRepository $gestion, OperadorRepository $operador_gestion) {
+        //
+        $operador = $operador_gestion->getOperadorTipo($auth->user()->id, session('tip_oper'));
+        $data['tipoOperador'] = session('tip_oper');    
+        $listServiciosUnicos = $gestion->getServiciosOperadorUnicos(session('operador_id'));
+        
+        $controlDashboard = $gestion->getControlDashboard(session('operador_id'));
+        $listServiciosAll = $gestion->getServiciosOperadorAll(session('operador_id'));
+        
+        return view('responsive.servicios', compact('listServiciosUnicos', 'listServiciosAll','data',"operador",'controlDashboard'));
+    }
+    
+    public function postPromocion1(Guard $auth,ServiciosOperadorRepository $gestion) {
+
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+
+        //usuario_servicio_id
+        $permiso = $gestion->getPermiso($formFields['id_usuario_servicio']);
+
+        if (!isset($permiso) || $permiso->id_usuario != $auth->user()->id) {
+            return view('errors.404');
+        }
+
+        $validator = Validator::make($formFields, Promocion_Usuario_Servicio::$rulesP);
+        if ($validator->fails()) {
+            return response()->json(array(
+                        'fail' => true,
+                        'errors' => $validator->getMessageBag()->toArray()
+            ));
+        }
+        
+        //obtengo llas promociones por id
+        if (isset($formFields['id'])) {
+            $Promocion = $gestion->getPromocion($formFields['id']);
+        }
+        //si ya existe el objeto se hace el update
+        if (isset($Promocion)) {
+            //logica update
+            $gestion->storeUpdatePromocion($formFields, $Promocion);
+            
+        //Gestion de actualizacion de busqueda    
+            $search=$formFields['nombre_promocion']." ".$formFields['descripcion_promocion']." ".$formFields['codigo_promocion']." ".$formFields['tags']." ".$formFields['observaciones_promocion'];            
+            $gestion->storeUpdateSerchEngine( $Promocion,1,$formFields['id'],$search);
+            //$returnHTML = ('/servicios/serviciooperador/'.$formFields['id_usuario_servicio'].'/'.$formFields['catalogo']);
+            $returnHTML = ('/edicionServicios');
+        } else { //logica de insert
+            //Arreglo de inputs prestados que vienen del formulario
+            $object = $gestion->storeNewPromocion($formFields);
+       
+            //Gestion de nueva de busqueda    
+             $search=$formFields['nombre_promocion']." ".$formFields['descripcion_promocion']." ".$formFields['codigo'];            
+            $gestion->storeSearchEngine($formFields['id_usuario_servicio'], $search,1,$object->id);
+
+            $returnHTML = ('/promocion1/' . $object->id);
+            
+        }
+
+        return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+    }
+    
+    public function postEvento1(Guard $auth,ServiciosOperadorRepository $gestion) {
+        
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        $permiso = $gestion->getPermiso($formFields['id_usuario_servicio']);
+
+        
+         
+        if (!isset($permiso) || $permiso->id_usuario != $auth->user()->id) {
+
+            return view('errors.404');
+        }
+        $validator = Validator::make($formFields, Eventos_usuario_Servicio::$rulesP);
+        if ($validator->fails()) {
+            return response()->json(array(
+                        'fail' => true,
+                        'errors' => $validator->getMessageBag()->toArray()
+            ));
+        }
+
+        //obtengo llas promociones por id
+        if (isset($formFields['id'])) {
+            $Evento = $gestion->getEvento($formFields['id']);
+        }
+        //si ya existe el objeto se hace el update
+        if (isset($Evento)) {
+            //logica update
+
+            $gestion->storeUpdateEvento($formFields, $Evento);
+
+            //Gestion de actualizacion de busqueda    
+            $search=$formFields['nombre_evento']." ".$formFields['descripcion_evento']." ".$formFields['tags'];            
+            
+            $gestion->storeUpdateSerchEngine( $Evento,2,$formFields['id'],$search);
+            //$returnHTML = ('/servicios/serviciooperador/'.$formFields['id_usuario_servicio'].'/'.$formFields['catalogo']);
+            $returnHTML = ('/edicionServicios');
+
+            
+        } else { //logica de insert
+            //Arreglo de inputs prestados que vienen del formulario
+            $object = $gestion->storeNewEvento($formFields);
+            //Gestion de nueva de busqueda    
+            $search=$formFields['nombre_evento']." ".$formFields['descripcion_evento'];            
+            $gestion->storeSearchEngine($formFields['id_usuario_servicio'], $search,2,$object->id);
+            $returnHTML = ('/eventos1/'.$object->id);
+        }
+
+        return response()->json(array('success' => true, 'redirectto' => $returnHTML));
+    }
+    
+    public function getPromociones1(Guard $auth,$id_promocion, ServiciosOperadorRepository $gestion) {
+        //
+        //usuario_servicio_id
+
+        $validacion = $gestion->getPermisoPromocion($id_promocion);
+        if (isset($validacion))
+        {$permiso = $gestion->getPermiso($validacion->id_usuario_servicio);}
+        else
+        {return view('errors.404');}
+
+        if (!isset($permiso) || $permiso->id_usuario != $auth->user()->id) {
+
+            return view('errors.404');
+        }
+
+        $data['id'] = $id_promocion;
+
+        //logica que comprueba si el usuario tiene promociones para ser modificados
+
+        $listPromociones = $gestion->getPromocionesOperador($id_promocion);
+        foreach ($listPromociones as $servicioBase) {
+
+            $servicio = $gestion->getUsuario_serv($servicioBase->id_usuario_servicio);
+        }
+
+        //imagenes de la promocion
+        $ImgPromociones = $gestion->getImagePromocionesOperador($id_promocion);
+
+        $view = view('responsive.editPromocion', compact('ImgPromociones', 'listPromociones', 'servicio'));
+        return ($view);
+    }
+    
+    public function getEventos1(Guard $auth,$id, ServiciosOperadorRepository $gestion) {
+        //
+
+        $validacion = $gestion->getPermisoEvento($id);
+        if (isset($validacion))
+        {
+        $permiso = $gestion->getPermiso($validacion->id_usuario_servicio);}
+        else{
+        return view('errors.404');}
+
+        if (!isset($permiso) || $permiso->id_usuario != $auth->user()->id) {
+
+
+            return view('errors.404');
+        }
+
+        $listEventos = $gestion->getEventosporId($id);
+        foreach ($listEventos as $servicioBase) {
+
+            $servicio = $gestion->getUsuario_serv($servicioBase->id_usuario_servicio);
+        }
+        
+
+        return view('responsive.editEvento', compact('listEventos', 'servicio'));
+    }
+    
+    public function getAllServicios1($id_usuario_servicio, Request $request, ServiciosOperadorRepository $gestion) {
+
+        $itinerarios = $gestion->getItinerariosporUsuario($id_usuario_servicio);
+        $promociones = $gestion->getPromocionesUsuarioServicio($id_usuario_servicio);
+        $eventos = $gestion->getEventosUsuarioServicio($id_usuario_servicio);
+        
+        //*******************************************************************************//
+        //              OBTENGO LAS ESPECIALIDADES POR USUARIO SERVICIO                  //
+        //*******************************************************************************//
+        $especialidad = $gestion->getEspecialidadporUsuario($id_usuario_servicio);
+        
+        $hijos = $gestion->getHijosUsuarioServicio($id_usuario_servicio);
+
+
+        $view = View::make('reusable.modifyEventos_Promociones1')
+                ->with('itinerarios', $itinerarios)
+                ->with('promociones', $promociones)
+                ->with('eventos', $eventos)
+                ->with('especialidad', $especialidad)
+                ->with('hijos', $hijos);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+        {
+        return $view;}
+    }     
+    
+    public function getImages1(Request $request,$tipo, $idtipo,ServiciosOperadorRepository $gestion) {
+        
+         $ImgPromociones = $gestion->getGenericImagePromocionesOperador($tipo,$idtipo);
+
+        $view = View::make('reusable.imageContainerAjax1')->with('ImgPromociones', $ImgPromociones);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+        {
+        return $view;}
+        
+        
+        
+    }
+    
+        
+    public function getImagesDescription1(Request $request,$tipo, $idtipo,ServiciosOperadorRepository $gestion) {
+        
+         $ImgPromociones = $gestion->getGenericImagePromocionesOperador($tipo,$idtipo);
+
+        $view = View::make('reusable.imageContainerDescriptionAjax1')->with('ImgPromociones', $ImgPromociones);
+        if ($request->ajax()) {
+            $sections = $view->rendersections();
+
+
+            return Response::json($sections);
+            //return  Response::json($sections['contentPanel']); 
+        } else
+        {
+        return $view;}
+        
+        
+        
+    }	
+	
+	
 }
