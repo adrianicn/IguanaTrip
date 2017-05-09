@@ -150,7 +150,8 @@ return [
 		App\Providers\RouteServiceProvider::class,
 		App\Services\Html\HtmlServiceProvider::class,
             
-		Bestmomo\Filemanager\FilemanagerServiceProvider::class
+		Bestmomo\Filemanager\FilemanagerServiceProvider::class,
+		Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
              
             
 
@@ -205,7 +206,8 @@ return [
 		'HTML'		=> Collective\Html\HtmlFacade::class,
              
             'Agent' => 'Jenssegers\Agent\Facades\Agent',
-            'Image'     => Intervention\Image\Facades\Image::class
+            'Image'     => Intervention\Image\Facades\Image::class,
+	   'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class 	
              
 
 	],
