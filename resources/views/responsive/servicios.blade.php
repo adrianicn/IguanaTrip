@@ -85,7 +85,7 @@ $("#dashboard4").hide();
                                        class="btn btn-sm style4"
                                        style="height:10%;font-weight: bold;padding: 1%;margin-right: 5%;margin-bottom: 5%;margin-top: -8%;">
                                      <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
-                                     <strong>Crear</strong>
+                                     <strong>{{trans('front/responsive.crear')}}</strong>
                                     </a>
                                     <br>
                                 </div>
@@ -114,7 +114,7 @@ $("#dashboard4").hide();
                                        class="btn btn-sm style4"
                                        style="height:10%;font-weight: bold;padding: 1%;margin-right: 5%;margin-bottom: 5%;margin-top: -8%;">
                                      <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
-                                     <strong>Crear</strong>
+                                     <strong>{{trans('front/responsive.crear')}}</strong>
                                     </a>
                                     <br>
                                 </div>
@@ -143,7 +143,7 @@ $("#dashboard4").hide();
                                        class="btn btn-sm style4"  
                                        style="height:10%;font-weight: bold;padding: 1%;margin-right: 5%;margin-bottom: 5%;margin-top: -8%;">
                                      <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
-                                     <strong>Crear</strong>
+                                     <strong>{{trans('front/responsive.crear')}}</strong>
                                     </a>
                                     <br>
                                 </div>
@@ -237,7 +237,7 @@ $("#dashboard4").hide();
                                                                    class="btn btn-sm style4"
                                                                    style="height:10%;font-weight: bold;padding: 1%;margin-right: 5%;margin-bottom: 5%;margin-top: -8%;">
                                                                  <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
-                                                                 <strong>Crear</strong>
+                                                                 <strong>{{trans('front/responsive.crear')}}</strong>
                                                                 </a>
                                                                 <br>
                                                             </div>
@@ -254,7 +254,7 @@ $("#dashboard4").hide();
                                       <?php $faltaHotel = $faltaHotel - 1; ?>
                                        @for($i = 0; $i <= $faltaHotel; $i ++ )
                                                 <!-- CREAR HOTEL -->             
-                                                <div class="col-md-6 box" style="height:150% !important;">
+                                                <div class="col-md-6 box" style="height:150% !important;margin-bottom: 5% !important;">
                                                     <div style="border: 2px solid #edf6ff;width: 100%;">
                                                       <div style="display:inline-table;margin-bottom: 4%;width: 100%;height: 20px;
                                                             background-color:#4da6ff;"> </div>
@@ -274,7 +274,7 @@ $("#dashboard4").hide();
                                                                    class="btn btn-sm style4"
                                                                    style="height:10%;font-weight: bold;padding: 1%;margin-right: 5%;margin-bottom: 5%;margin-top: -8%;">
                                                                  <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
-                                                                 <strong>Crear</strong>
+                                                                 <strong>{{trans('front/responsive.crear')}}</strong>
                                                                 </a>
                                                                 <br>
                                                             </div>
@@ -286,7 +286,7 @@ $("#dashboard4").hide();
                                       <?php $faltaHotel = $faltaHotel - 1; ?>                                     
                                      
                                        @if($hotel == $hotel)
-                                        <div class="col-md-6 box" style="height:150% !important;">
+                                        <div class="col-md-6 box" style="height:140% !important;">
                                             <div style="border: 2px solid #edf6ff;width: 100%;">
                                               <div style="display:inline-table;margin-bottom: 4%;width: 100%;height: 20px;
                                                     background-color:#4da6ff;"> </div>
@@ -308,14 +308,15 @@ $("#dashboard4").hide();
                                                            class="btn btn-sm style4" 
                                                            style="height:10%;font-weight: bold;padding: 1%;margin-right: 5%;margin-bottom: 5%;margin-top: -8%;">
                                                          <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
-                                                         <strong>Editar</strong>
+                                                         <strong>{{trans('front/responsive.editar')}}</strong>
                                                         </a>
                                                         <br>
                                                     </div>
 
                                                     </div>
                                             </div>
-                                        </div>                                        
+                                        </div>
+                                       <br>
                                        @endif
                                        
                                     @endif
@@ -323,7 +324,7 @@ $("#dashboard4").hide();
                                     @if(isset($faltaRest1))
                                     @for($i = 0; $i <= $faltaRest1; $i ++ )
                                         <!-- CREAR RESTAURANT -->
-                                        <div class="col-md-6 box" style="height:150% !important;">
+                                        <div class="col-md-6 box" style="height:150% !important;margin-bottom: 5% !important;">
                                             <div style="border: 2px solid #edf6ff;width: 100%;">
                                               <div style="display:inline-table;margin-bottom: 4%;width: 100%;height: 20px;
                                                     background-color:#ffff33;"> </div>
@@ -343,7 +344,7 @@ $("#dashboard4").hide();
                                                            class="btn btn-sm style4"
                                                            style="height:10%;font-weight: bold;padding: 1%;margin-right: 5%;margin-bottom: 5%;margin-top: -8%;">
                                                          <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
-                                                         <strong>Crear</strong>
+                                                         <strong>{{trans('front/responsive.crear')}}</strong>
                                                         </a>
                                                         <br>
                                                     </div>
@@ -351,6 +352,7 @@ $("#dashboard4").hide();
                                                     </div>
                                             </div>
                                         </div>
+
                                     @endfor
                                     <?php $faltaRest1 = $faltaRest1 - 1; ?>
                                     @endif                                    
@@ -360,7 +362,7 @@ $("#dashboard4").hide();
                                       <?php $faltaRest = $faltaRest - 1;  ?>
                                        @for($i = 0; $i <= $faltaRest; $i ++ )
                                                 <!-- CREAR RESTAURANT -->
-                                                <div class="col-md-6 box" style="height:150% !important;">
+                                                <div class="col-md-6 box" style="height:150% !important;margin-bottom: 5% !important;">
                                                     <div style="border: 2px solid #edf6ff;width: 100%;">
                                                       <div style="display:inline-table;margin-bottom: 4%;width: 100%;height: 20px;
                                                             background-color:#ffff33;"> </div>
@@ -380,7 +382,7 @@ $("#dashboard4").hide();
                                                                    class="btn btn-sm style4"
                                                                    style="height:10%;font-weight: bold;padding: 1%;margin-right: 5%;margin-bottom: 5%;margin-top: -8%;">
                                                                  <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
-                                                                 <strong>Crear</strong>
+                                                                 <strong>{{trans('front/responsive.crear')}}</strong>
                                                                 </a>
                                                                 <br>
                                                             </div>
@@ -392,7 +394,7 @@ $("#dashboard4").hide();
                                       <?php $faltaRest = $faltaRest - 1; ?> 
                                        
                                        @if($restaurant == $restaurant)
-                                        <div class="col-md-6 box" style="height:150% !important;">
+                                        <div class="col-md-6 box" style="height:150% !important;margin-bottom: 5% !important;">
                                             <div style="border: 2px solid #edf6ff;width: 100%;">
                                               <div style="display:inline-table;margin-bottom: 4%;width: 100%;height: 20px;
                                                     background-color:#ffff33;"> </div>
@@ -411,7 +413,7 @@ $("#dashboard4").hide();
                                                            class="btn btn-sm style4" 
                                                            style="height:10%;font-weight: bold;padding: 1%;margin-right: 5%;margin-bottom: 5%;margin-top: -8%;">
                                                          <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
-                                                         <strong>Editar</strong>
+                                                         <strong>{{trans('front/responsive.editar')}}</strong>
                                                         </a>
                                                         <br>
                                                     </div>
@@ -425,7 +427,7 @@ $("#dashboard4").hide();
                                     
                                     @if(isset($faltaTrip1))
                                     @for($i = 0; $i <= $faltaTrip1; $i ++ )
-                                          <div class="col-md-6 box" style="height:150% !important;">
+                                          <div class="col-md-6 box" style="height:150% !important;margin-bottom: 5% !important;">
                                                     <div style="border: 2px solid #edf6ff;width: 100%;">
                                                       <div style="display:inline-table;margin-bottom: 4%;width: 100%;height: 20px;
                                                             background-color:#f05a22;"> </div>
@@ -445,7 +447,7 @@ $("#dashboard4").hide();
                                                                    class="btn btn-sm style4"
                                                                    style="height:10%;font-weight: bold;padding: 1%;margin-right: 5%;margin-bottom: 5%;margin-top: -8%;">
                                                                  <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
-                                                                 <strong>Crear</strong>
+                                                                 <strong>{{trans('front/responsive.crear')}}</strong>
                                                                 </a>
                                                                 <br>
                                                             </div>
@@ -463,7 +465,7 @@ $("#dashboard4").hide();
                                        <?php $faltaTrip = $faltaTrip -1; ?>
                                        @for($i = 0; $i <= $faltaTrip; $i ++ )
                                           <!-- CREAR TRIP -->
-                                          <div class="col-md-6 box" style="height:150% !important;">
+                                          <div class="col-md-6 box" style="height:150% !important;margin-bottom: 5% !important;">
                                                     <div style="border: 2px solid #edf6ff;width: 100%;">
                                                       <div style="display:inline-table;margin-bottom: 4%;width: 100%;height: 20px;
                                                             background-color:#f05a22;"> </div>
@@ -483,7 +485,7 @@ $("#dashboard4").hide();
                                                                    class="btn btn-sm style4"
                                                                    style="height:10%;font-weight: bold;padding: 1%;margin-right: 5%;margin-bottom: 5%;margin-top: -8%;">
                                                                  <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
-                                                                 <strong>Crear</strong>
+                                                                 <strong>{{trans('front/responsive.crear')}}</strong>
                                                                 </a>
                                                                 <br>
                                                             </div>
@@ -498,7 +500,7 @@ $("#dashboard4").hide();
 
                                        
                                        @if($trip == $trip)
-                                            <div class="col-md-6 box" style="height:150% !important;">
+                                            <div class="col-md-6 box" style="height:150% !important;margin-bottom: 5% !important;">
                                                 <div style="border: 2px solid #edf6ff;width: 100%;">
                                                   <div style="display:inline-table;margin-bottom: 4%;width: 100%;height: 20px;
                                                         background-color:#f05a22;"> </div>
@@ -517,7 +519,7 @@ $("#dashboard4").hide();
                                                                class="btn btn-sm style4" 
                                                                style="height:10%;font-weight: bold;padding: 1%;margin-right: 5%;margin-bottom: 5%;margin-top: -8%;">
                                                              <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
-                                                             <strong>Editar</strong>
+                                                             <strong>{{trans('front/responsive.editar')}}</strong>
                                                             </a>
                                                             <br>
                                                         </div>

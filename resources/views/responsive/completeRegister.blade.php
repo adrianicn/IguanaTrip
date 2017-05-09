@@ -109,7 +109,7 @@
             <header id="header"  class="header-color-white" >
                 @include('public_page.reusable.header')
             </header>
-            @include('public_page.reusable.banner', ['titulo' =>''])  
+            @include('public_page.reusable.banner', ['titulo' =>'Inicio Sesion / Registro'])  
 
             <ul class="breadcrumbs">
                 <li class="active"><a href="{!!asset('/')!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
@@ -138,7 +138,7 @@
                                     <div class="form-group">
                                         {!! Form::check('memory', trans('front/loginres.remind'),array('class' => 'logininput')) !!}
                                         
-                                        {!! link_to('password/email', trans('front/login.forget'),array('class' => 'logininput')) !!}
+                                        {!! link_to('password/email', trans('front/loginresregister.forget'),array('class' => 'logininput')) !!}
                                     </div>
                                     <div class="form-group">
                                         <a href="#" class="btn style1" onclick="$(this).closest('form').submit()">{!! (trans('front/loginres.logbtn')) !!}</a>

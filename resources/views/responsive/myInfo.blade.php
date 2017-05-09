@@ -125,7 +125,7 @@ $email_contacto_operador = $operadorData->email_contacto_operador;
             <header id="header"  class="header-color-white" >
                 @include('public_page.reusable.header')
             </header>
-            @include('public_page.reusable.banner', ['titulo' =>''])  
+            @include('public_page.reusable.banner', ['titulo' =>'My Info'])  
 
             <ul class="breadcrumbs">
                 <li class="active"><a href="{!!asset('/')!!}"  onclick="$('.woocommerce').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
@@ -140,7 +140,7 @@ $email_contacto_operador = $operadorData->email_contacto_operador;
                             <div class="col-md-2 col-lg-2"></div>    
                             <div class="col-md-8 col-lg-8" id="target">
                                             
-                                            <h4>{{trans('front/bienvenido.tituloformulario')}}</h4>
+                                            <h4>{{trans('front/responsive.tituloformulario')}}</h4>
                                             <div class="rowerror" style="color: red;font-weight: bold;margin-bottom: 3%;"></div>
                                             
                                             {!! Form::open(['url' => route('upload-postoperador1'),  'id'=>'registro_step1']) !!}
@@ -163,7 +163,7 @@ $email_contacto_operador = $operadorData->email_contacto_operador;
                                                   {!!Form::text('email_contacto_operador', $email_contacto_operador, array("title"=>"Es el email del contacto del servicio, se puede tener varios servicios pero un solo representante al cual le haremos llegar noticias, mercadería, premios, etc.",'class'=>'input-text full-width','placeholder'=>'Ingrese email contacto'))!!}
                                                 </div>
                                                 <div class="form-group">
-                                                    <a class="btn btn-medium style1" onclick="AjaxContainerRegistro1('registro_step1')" href="#">Guardar</a>
+                                                    <a class="btn btn-medium style1" onclick="AjaxContainerRegistro1('registro_step1')" href="#">{{trans('front/responsive.guardar')}}</a>
                                                 </div>
                                             {!! Form::close() !!}
                                         </div>

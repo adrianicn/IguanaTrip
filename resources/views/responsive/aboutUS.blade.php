@@ -133,10 +133,10 @@ $operadorid3=$operadores->id_usuario_op;?>
             <header id="header"  class="header-color-white" >
                 @include('public_page.reusable.header')
             </header>
-            @include('public_page.reusable.banner', ['titulo' =>'Confirmacion PayPal'])  
+            @include('public_page.reusable.banner', ['titulo' =>'About Us'])  
 
             <ul class="breadcrumbs">
-                <li class="active">{{trans('front/bienvenido.breadcumbs')}}</li>
+                <li class="active">{{trans('front/responsive.breadcumbs1')}}</li>
             </ul>
         </div>    
         
@@ -151,14 +151,14 @@ $operadorid3=$operadores->id_usuario_op;?>
             <input type="hidden"  name="operador_id" id="operador_id">
         @if(isset($label_tipo_operador_agencia))
            <div class="section-info">
-                <h3 class="section-title">{{trans('front/bienvenido.bienvenido')}}</h3>
+                <h3 class="section-title">{{trans('front/responsive.bienvenido')}}</h3>
                 <div class="tab-container vertical-tab">
                   <div id="tab3-3" class="tab-content in active">
                         <div class="tab-pane">
                             <img src="http://placehold.it/270x237" alt="" class="pull-left">
                             <p>Nulla mattis rsitmet dolor sollicitudi aliquamquae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explica aborem ipsum dolor sit amet gravida sagittis lacus. Morbi sit amet mauris mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>
                             <p>Lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim.</p>
-                             <a class="btn style1"> onclick="$('#tipo_operador').val(1);$('#operador_id').val({!!$operadorid1!!});AjaxContainerRegistro1('operadorres')" href="#">{{trans('front/bienvenido.perfil')}}</a>
+                             <a class="btn style1"> onclick="$('#tipo_operador').val(1);$('#operador_id').val({!!$operadorid1!!});AjaxContainerRegistro1('operadorres')" href="#">{{trans('front/responsive.perfil')}}</a>
                         </div>
                     </div>
 
@@ -168,14 +168,14 @@ $operadorid3=$operadores->id_usuario_op;?>
         
         @if(isset($label_tipo_operador_empresa))
             <div class="section-info">
-                <h3 class="section-title">{{trans('front/bienvenido.bienvenido')}}</h3>
+                <h3 class="section-title">{{trans('front/responsive.bienvenido')}}</h3>
                 <div class="tab-container vertical-tab">
                   <div id="tab3-3" class="tab-content in active">
                         <div class="tab-pane">
                             <img src="http://placehold.it/270x237" alt="" class="pull-left">
                             <p>Nulla mattis rsitmet dolor sollicitudi aliquamquae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explica aborem ipsum dolor sit amet gravida sagittis lacus. Morbi sit amet mauris mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>
                             <p>Lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim.</p>
-                             <a class="btn style1" onclick="$('#tipo_operador').val(2);$('#operador_id').val({!!$operadorid2!!});AjaxContainerRegistro1('operadorres')" href="#">{{trans('front/bienvenido.perfil')}}</a>
+                             <a class="btn style1" onclick="$('#tipo_operador').val(2);$('#operador_id').val({!!$operadorid2!!});AjaxContainerRegistro1('operadorres')" href="#">{{trans('front/responsive.perfil')}}</a>
                         </div>
                     </div>
 
@@ -185,14 +185,14 @@ $operadorid3=$operadores->id_usuario_op;?>
         
         @if(isset($label_tipo_operador_persona))
             <div class="section-info">
-                <h3 class="section-title">{{trans('front/bienvenido.bienvenido')}}</h3>
+                <h3 class="section-title">{{trans('front/responsive.bienvenido')}}</h3>
                 <div class="tab-container vertical-tab">
                   <div id="tab3-3" class="tab-content in active">
                         <div class="tab-pane">
                             <img src="http://placehold.it/270x237" alt="" class="pull-left">
                             <p>Nulla mattis rsitmet dolor sollicitudi aliquamquae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explica aborem ipsum dolor sit amet gravida sagittis lacus. Morbi sit amet mauris mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>
                             <p>Lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim.</p>
-                            <a class="btn style1" onclick="$('#tipo_operador').val(3);$('#operador_id').val({!!$operadorid3!!});AjaxContainerRegistro1('operadorres')" href="#">{{trans('front/bienvenido.perfil')}}</a>
+                            <a class="btn style1" onclick="$('#tipo_operador').val(3);$('#operador_id').val({!!$operadorid3!!});AjaxContainerRegistro1('operadorres')" href="#">{{trans('front/responsive.perfil')}}</a>
                         </div>
                     </div>
 
@@ -203,14 +203,14 @@ $operadorid3=$operadores->id_usuario_op;?>
         @if(!isset($label_tipo_operador_persona)&& !isset($label_tipo_operador_empresa)&& !isset($label_tipo_operador_agencia))
         
                     <div class="section-info">
-                <h3 class="section-title">{{trans('front/bienvenido.bienvenido')}}</h3>
+                <h3 class="section-title">{{trans('front/responsive.bienvenido')}}</h3>
                 <div class="tab-container vertical-tab">
                   <div id="tab3-3" class="tab-content in active">
                         <div class="tab-pane">
                             <img src="http://placehold.it/270x237" alt="" class="pull-left">
                             <p>Nulla mattis rsitmet dolor sollicitudi aliquamquae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explica aborem ipsum dolor sit amet gravida sagittis lacus. Morbi sit amet mauris mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>
                             <p>Lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim.</p>
-                             <a class="btn style1" onclick="$('#tipo_operador').val(3);$('#operador_id').val({!!$operadorid3!!});AjaxContainerRegistro1('operadorres')" href="#">{{trans('front/bienvenido.perfil')}}</a>
+                             <a class="btn style1" onclick="$('#tipo_operador').val(3);$('#operador_id').val({!!$operadorid3!!});AjaxContainerRegistro1('operadorres')" href="#">{{trans('front/responsive.perfil')}}</a>
                         </div>
                     </div>
 
