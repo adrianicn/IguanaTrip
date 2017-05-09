@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\SearchEngine;
 use App\Models\Booking\Especialidad;
 use App\Models\Booking\VerificacionBooking;
+use App\Models\Control_dahsboard;
 
 class ServiciosOperadorRepository extends BaseRepository {
 
@@ -43,6 +44,8 @@ class ServiciosOperadorRepository extends BaseRepository {
     protected $search_engine;
     protected $especialidad_u;
     protected $booking_u;
+    protected $control_u;
+	
     
 
     /**
@@ -66,6 +69,7 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->invitar_amigo = new Invitaciones_Amigos();
         $this->ubicacion_geografica = new UbicacionGeografica();
         $this->search_engine = new SearchEngine();
+	$this->control_u = new Control_dahsboard();    
     }
 
     /**
@@ -892,5 +896,14 @@ Actualizar tabla de busqueda
                         ->select('itinerarios_usuario_servicios.id_usuario_servicio')
                         ->first();
     }
+	
+    public function getControlDashboard($id_usuario_operador) {
+        
+        return DB::table('control_dahsboards')
+                      ->select(DB::raw('id_usuario_operador,catalogo_servicio,cantidad'))  
+                      ->where('id_usuario_operador', $id_usuario_operador)
+                      ->where('estado', '=', 1)
+                      ->get();
+    }	
 
 }
