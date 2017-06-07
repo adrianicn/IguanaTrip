@@ -45,5 +45,19 @@ return [
         'editar' => "Editar",
     
     
+   'listareventos' => "Ver lista de Eventos ",
+        'nuevoevento' => " Agregar un Evento",
+        'listarpromociones' => "Ver llista de Promociones",
+        'nuevapromocion' => "Agregar una Promocion",
+        'activar' => "Servicio Activo",
+        'listapromo' => "Lista de Promociones",
+        'editpromo' => "Editar Promocion",
+        'listaevento' => "Lista de Eventos",
+        'editevento' => "Editar Eventos",
+        'promocioneseventos' => "Promociones y Eventos",
+        
+    
+    
 
 ];
+
