@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -15,11 +13,9 @@ use App\Repositories\ServiciosOperadorRepository;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\PublicServiceRepository;
-
 //use App\Models\Catalogo_Servicio;
 
 class ServicioController extends Controller {
-
     protected $validationRules = [
         //'nombre_empresa_operador' => 'required|max:255',
         'nombre_contacto_operador_1' => 'required|max:255',
@@ -55,7 +51,6 @@ class ServicioController extends Controller {
     
     
     
-
     /**
      * Show the form for creating a new resource.
      *
@@ -64,17 +59,13 @@ class ServicioController extends Controller {
     public function create() {
         
     }
-
     public function Auth(Guard $auth, $view) {
-
         if ($auth->check()) {
             $view = view('RegistroOperadores.registroStep1'); // revisar debe redirecccionar a otro lado
         } else {
-
             $view = view('auth.completeRegister');
         }
     }
-
     /**
      * Display a listing of the resource.
      * 	
@@ -88,7 +79,6 @@ class ServicioController extends Controller {
             
         }
         if ($auth->check()) {
-
             $listOperadores = $operador_gestion->getOperador($auth->user()->id);
             $view = view('RegistroOperadores.registroStep1', compact('listOperadores')); // revisar debe redirecccionar a otro lado
         } else {
@@ -127,11 +117,9 @@ class ServicioController extends Controller {
         }
         return $view;
     }
-
     
     
     
-
     public function step2(Guard $auth, OperadorRepository $operador_gestion) {
         if ($auth->check()) {
             $operador = $operador_gestion->getOperadorTipo($auth->user()->id, session('tip_oper'));
@@ -140,29 +128,20 @@ class ServicioController extends Controller {
         } else {
             $view = view('auth.completeRegister');
         }
-
-
         return $view;
     }
-
     
     public function step3() {
         return view('Registro.catalogoServicio');
     }
-
     public function step4(Guard $auth, $id, $id_catalogo, ServiciosOperadorRepository $gestion) {
         session()->forget('parroquia_admin');
         //permisssion
         $permiso = $gestion->getPermiso($id);
-
         if (!isset($permiso) || $permiso->id_usuario != $auth->user()->id) {
-
-
             return view('errors.404');
         }
-
         $operador_gestion = new OperadorRepository();
-
         $usuarioServicio = $operador_gestion->getUsuarioServicio($id);
         $Servicio = $operador_gestion->getServicio($id_catalogo);
         $catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimientoExistente($id_catalogo, $id);
@@ -187,13 +166,10 @@ class ServicioController extends Controller {
                      ->get();
             
             $arrayId = array();
-
             for($i=0; $i < $contadorCalendario[0]->contador; $i++){
                 $arrayId[] .= $calendarios[$i]->id;
             }
-
             $arrayDeIds = implode(', ', $arrayId);
-
             $calendarioConNombre = DB::table('booking_abcalendar_calendars')
                          ->join('booking_abcalendar_multi_lang','booking_abcalendar_calendars.id','=','booking_abcalendar_multi_lang.foreign_id')  
                          ->select(DB::raw('booking_abcalendar_calendars.* , booking_abcalendar_multi_lang.content'))
@@ -230,7 +206,6 @@ class ServicioController extends Controller {
         /*return view('RegistroOperadores.registroStep4', compact('usuarioServicio', 'catalogoServicioEstablecimiento', 'id_catalogo', 'ImgPromociones', 'Servicio'
                         ,'calendarios', 'contadorCalendario','arrayDeIds','calendarioConNombre'));*/
     }
-
     /**
      * Handle a registration request for the application.
      *
@@ -239,7 +214,6 @@ class ServicioController extends Controller {
      * @return Response
      */
     public function postOperadores(Guard $auth,Request $request, OperadorRepository $operador_gestion) {
-
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
         
@@ -262,11 +236,9 @@ class ServicioController extends Controller {
                         'errors' => $validator->getMessageBag()->toArray()
             ));
         } else {
-
             if ($formFields['id_usuario_op'] > 0) {
                 $id_usuario_op = $formFields['id_usuario_op'];
                 $request->session()->put('operador_id', $formFields['id_usuario_op']);
-
                 $operador = $operador_gestion->update($operadorData);
             }
             
@@ -282,9 +254,7 @@ class ServicioController extends Controller {
         $returnHTML = ('/IguanaTrip/public/userservice');
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
-
     public function postTipoOperadores(Request $request, OperadorRepository $operador_gestion) {
-
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
         $request->session()->put('tip_oper', $formFields['tipo_operador']);
@@ -296,7 +266,6 @@ class ServicioController extends Controller {
     }
     
     public function postTipoOperadoresProfile(Guard $auth,Request $request, OperadorRepository $operador_gestion) {
-
         Session::forget('operador_id');
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
@@ -316,11 +285,8 @@ class ServicioController extends Controller {
     
                 $returnHTML = ('detalleServicios');
             }
-
         return response()->json(array('success' => true, 'redirectto' => $returnHTML)); 
-
     }
-
     private function getIp() {
         if (!empty($_SERVER['HTTP_CLIENT_IP']))
             return $_SERVER['HTTP_CLIENT_IP'];
@@ -328,30 +294,25 @@ class ServicioController extends Controller {
             return $_SERVER['HTTP_X_FORWARDED_FOR'];
         return $_SERVER['REMOTE_ADDR'];
     }
-
     public function postUsuarioServicios(Request $request, OperadorRepository $usuarioSevicio_gestion , ServiciosOperadorRepository $gestion) {
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-
         if (isset($formFields['id_servicio_est'])) {
             foreach ($formFields['id_servicio_est'] as $catalogo)
                 $servicio_establecimiento_usuario[] = $catalogo;
         } else {
             $servicio_establecimiento_usuario[] = "";
         }
-
         if (!isset($formFields['fecha_ingreso']))
             $formFields['fecha_ingreso'] = '0000-00-00 00:00:00';
         if (!isset($formFields['fecha_fin']))
             $formFields['fecha_fin'] ='0000-00-00 00:00:00';
-
         if (!isset($formFields['id_provincia']))
             $formFields['id_provincia'] = 0;
         if (!isset($formFields['id_canton']))
             $formFields['id_canton'] = 0;
         if (!isset($formFields['id_parroquia']))
             $formFields['id_parroquia'] = 0;
-
         $usuarioServicioData = array(
                 'nombre_servicio' => $formFields['nombre_servicio'],
                 'detalle_servicio' => $formFields['detalle_servicio'],
@@ -392,7 +353,6 @@ class ServicioController extends Controller {
                         'errors' => $validator->getMessageBag()->toArray()
             ));
         } else {
-
             //return $servicio_establecimiento_usuario;
             $usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServicios($usuarioServicioData, $servicio_establecimiento_usuario, $formFields['id'], $formFields['id_catalogo']);
             
@@ -412,12 +372,9 @@ class ServicioController extends Controller {
         $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/' . $formFields['id'] . '/' . $formFields['id_catalogo']);
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
-
     public function postUsuarioServiciosMini(Request $request, OperadorRepository $usuarioSevicio_gestion, ServiciosOperadorRepository $gestion) {
-
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-
         $usuarioServicioData = array(
             'nombre_servicio' => $formFields['nombre_servicio'],
             'detalle_servicio' => $formFields['detalle_servicio'],
@@ -437,10 +394,8 @@ class ServicioController extends Controller {
     
     
     public function postUsuarioServiciosMiniPadre(Request $request, OperadorRepository $usuarioSevicio_gestion, ServiciosOperadorRepository $gestion) {
-
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-
         $usuarioServicioData = array(
             'nombre_servicio' => $formFields['nombre_servicio'],
             'detalle_servicio' => $formFields['detalle_servicio'],
@@ -458,7 +413,6 @@ class ServicioController extends Controller {
         $returnHTML = ('/IguanaTrip/public/servicios/serviciooperador/' . $usuarioServicio . '/' . $formFields['id_catalogo_servicio']);
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     }
-
 	
 public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
         //
@@ -481,7 +435,6 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
     }
     
    public function postTipoOperadoresProfileRes(Guard $auth,Request $request, OperadorRepository $operador_gestion) {
-
         Session::forget('operador_id');
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
@@ -499,9 +452,7 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
                 //$returnHTML = ('detalleServicios');
                 $returnHTML = ('myinfo');
         }
-
         return response()->json(array('success' => true, 'redirectto' => $returnHTML)); 
-
     }
     
     public function step2res(Guard $auth, OperadorRepository $operador_gestion) {
@@ -514,8 +465,6 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
         } else {
             $view = view('responsive.completeRegister');
         }
-
-
         return $view;
     }
     
@@ -530,8 +479,6 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
             //$view = view('responsive.operadorespru');
             $view = view('responsive.servicios'); 
         }
-
-
         return $view;
     }
     
@@ -545,13 +492,10 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
             //$view = view('responsive.operadorespru');
             $view = view('responsive.myInfoMenu', compact('data', 'operador')); 
         }
-
-
         return $view;
     }
     
     public function postOperadores1(Guard $auth,Request $request, OperadorRepository $operador_gestion) {
-
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
         
@@ -574,11 +518,9 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
                         'errors' => $validator->getMessageBag()->toArray()
             ));
         } else {
-
             if ($formFields['id_usuario_op'] > 0) {
                 $id_usuario_op = $formFields['id_usuario_op'];
                 $request->session()->put('operador_id', $formFields['id_usuario_op']);
-
                 $operador = $operador_gestion->update($operadorData);
             }
             
@@ -598,7 +540,6 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
     }
     
     public function UploadInfoOperado2(Guard $auth,Request $request,OperadorRepository $operador_gestion) {
-
                 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
@@ -624,11 +565,9 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
                         'errors' => $validator->getMessageBag()->toArray()
             ));
         } else {
-
             if ($formFields['id_usuario_op'] > 0) {
                 $id_usuario_op = $formFields['id_usuario_op'];
                 $request->session()->put('operador_id', $formFields['id_usuario_op']);
-
                 $operador = $operador_gestion->update($operadorData);
             }
             
@@ -666,15 +605,10 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
         session()->forget('parroquia_admin');
         //permisssion
         $permiso = $gestion->getPermiso($id);
-
         if (!isset($permiso) || $permiso->id_usuario != $auth->user()->id) {
-
-
             return view('errors.404');
         }
-
         $operador_gestion = new OperadorRepository();
-
         $usuarioServicio = $operador_gestion->getUsuarioServicio($id);
         $Servicio = $operador_gestion->getServicio($id_catalogo);
         $catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimientoExistente($id_catalogo, $id);
@@ -703,7 +637,6 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
             for($i=0; $i < $contadorCalendario[0]->contador; $i++){
                 $arrayId[] .= $calendarios[$i]->id;
             }
-
             $arrayDeIds = implode(', ', $arrayId);
             
             $calendarioConNombre = DB::table('booking_abcalendar_calendars')
@@ -745,17 +678,13 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
     }
     
     public function operadorpru() {
-
                 return view('responsive.operadorespru');
-
     }
     
     public function postUsuarioServiciosMini1(Request $request, OperadorRepository $usuarioSevicio_gestion, 
                                         ServiciosOperadorRepository $gestion) {
-
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-
         $usuarioServicioData = array(
             'nombre_servicio' => $formFields['nombre_servicio'],
             'detalle_servicio' => $formFields['detalle_servicio'],
@@ -804,15 +733,10 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
         session()->forget('parroquia_admin');
         //permisssion
         $permiso = $gestion->getPermiso($id);
-
         if (!isset($permiso) || $permiso->id_usuario != $auth->user()->id) {
-
-
             return view('errors.404');
         }
-
         $operador_gestion = new OperadorRepository();
-
         $usuarioServicio = $operador_gestion->getUsuarioServicio($id);
         $Servicio = $operador_gestion->getServicio($id_catalogo);
         $catalogoServicioEstablecimiento = $operador_gestion->getCatalogoServicioEstablecimientoExistente($id_catalogo, $id);
@@ -844,7 +768,6 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
             for($i=0; $i < $contadorCalendario[0]->contador; $i++){
                 $arrayId[] .= $calendarios[$i]->id;
             }
-
             $arrayDeIds = implode(', ', $arrayId);
             
             $calendarioConNombre = DB::table('booking_abcalendar_calendars')
@@ -894,7 +817,6 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
         
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-
         
         if (isset($formFields['id_servicio_est'])) {
             foreach ($formFields['id_servicio_est'] as $catalogo)
@@ -902,19 +824,16 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
         } else {
             $servicio_establecimiento_usuario[] = "";
         }
-
         if (!isset($formFields['fecha_ingreso']))
             $formFields['fecha_ingreso'] = '0000-00-00 00:00:00';
         if (!isset($formFields['fecha_fin']))
             $formFields['fecha_fin'] ='0000-00-00 00:00:00';
-
         if (!isset($formFields['id_provincia']))
             $formFields['id_provincia'] = 0;
         if (!isset($formFields['id_canton']))
             $formFields['id_canton'] = 0;
         if (!isset($formFields['id_parroquia']))
             $formFields['id_parroquia'] = 0;
-
         $usuarioServicioData = array(
                 'nombre_servicio' => $formFields['nombre_servicio'],
                 'detalle_servicio' => $formFields['detalle_servicio'],
@@ -957,7 +876,6 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
                         'errors' => $validator->getMessageBag()->toArray()
             ));
         } else {
-
             //return $servicio_establecimiento_usuario;
             $usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServicios($usuarioServicioData, $servicio_establecimiento_usuario, $formFields['id'], $formFields['id_catalogo']);
             
@@ -991,19 +909,16 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
         } else {
             $servicio_establecimiento_usuario[] = "";
         }
-
         if (!isset($formFields['fecha_ingreso']))
             $formFields['fecha_ingreso'] = '0000-00-00 00:00:00';
         if (!isset($formFields['fecha_fin']))
             $formFields['fecha_fin'] ='0000-00-00 00:00:00';
-
         if (!isset($formFields['id_provincia']))
             $formFields['id_provincia'] = 0;
         if (!isset($formFields['id_canton']))
             $formFields['id_canton'] = 0;
         if (!isset($formFields['id_parroquia']))
             $formFields['id_parroquia'] = 0;
-
         $usuarioServicioData = array(
                 'nombre_servicio' => $formFields['nombre_servicio'],
                 'detalle_servicio' => $formFields['detalle_servicio'],
@@ -1047,7 +962,6 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
                         'errors' => $validator->getMessageBag()->toArray()
             ));
         } else {
-
             //return $servicio_establecimiento_usuario;
             $usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServicios($usuarioServicioData, $servicio_establecimiento_usuario, $formFields['id'], $formFields['id_catalogo']);
             
@@ -1082,19 +996,16 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
         } else {
             $servicio_establecimiento_usuario[] = "";
         }
-
         if (!isset($formFields['fecha_ingreso']))
             $formFields['fecha_ingreso'] = '0000-00-00 00:00:00';
         if (!isset($formFields['fecha_fin']))
             $formFields['fecha_fin'] ='0000-00-00 00:00:00';
-
         if (!isset($formFields['id_provincia']))
             $formFields['id_provincia'] = 0;
         if (!isset($formFields['id_canton']))
             $formFields['id_canton'] = 0;
         if (!isset($formFields['id_parroquia']))
             $formFields['id_parroquia'] = 0;
-
         $usuarioServicioData = array(
                 'nombre_servicio' => $formFields['nombre_servicio'],
                 'detalle_servicio' => $formFields['detalle_servicio'],
@@ -1138,7 +1049,6 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
                         'errors' => $validator->getMessageBag()->toArray()
             ));
         } else {
-
             //return $servicio_establecimiento_usuario;
             $usuarioServicio = $usuarioSevicio_gestion->storageUsuarioServicios($usuarioServicioData, $servicio_establecimiento_usuario, $formFields['id'], $formFields['id_catalogo']);
             
@@ -1160,7 +1070,24 @@ public function getAboutUs(Guard $auth, OperadorRepository $operador_gestion) {
         $returnHTML = ('/serviciosres');
         return response()->json(array('success' => true, 'redirectto' => $returnHTML));
     } 
+    
+    public function uploadServiciosActivo($id_usuario_servicio, OperadorRepository $usuarioSevicio_gestion , ServiciosOperadorRepository $gestion) {
+        
+        
+        $usuarioServicio = $usuarioSevicio_gestion->getUsuarioServicio($id_usuario_servicio);
+        
+       
+        $estado_servicio = $usuarioServicio[0]->estado_servicio_usuario;
+        if($estado_servicio == 1){
+            $estado_servicio = 0;
+            $estado = $usuarioSevicio_gestion->updateEstadoUsuarioServicios($id_usuario_servicio,$estado_servicio);
+        }elseif($estado_servicio == 0){
+            $estado_servicio = 1;
+            $estado = $usuarioSevicio_gestion->updateEstadoUsuarioServicios($id_usuario_servicio,$estado_servicio);
+        }
+            
+        return response()->json(array('success' => true, 'redirectto' => $estado));
+    } 
    	
     
-
 }
