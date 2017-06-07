@@ -904,6 +904,88 @@ Actualizar tabla de busqueda
                       ->where('id_usuario_operador', $id_usuario_operador)
                       ->where('estado', '=', 1)
                       ->get();
-    }	
+    }
+	
+/Guarda las promociones por usuario_servicio
+    public function storeNewPromocion($inputs) {
+
+        $promocionU = new $this->promocion;
+        $promocionU->id_usuario_servicio = trim($inputs['id_usuario_servicio']);
+        $promocionU->id_catalogo_tipo_fotografia = 2;
+        //$promocionU->descripcion_promocion = trim($inputs['descripcion_promocion']);
+        $promocionU->nombre_promocion = trim($inputs['nombre_promocion']);
+        $promocionU->estado_promocion = 1;
+        $promocionU->fecha_desde = $inputs['fecha_inicio'];
+        $promocionU->fecha_hasta = $inputs['fecha_fin'];
+        //$promocionU->precio_normal = trim($inputs['precio_normal']);
+        //$promocionU->descuento = trim($inputs['descuento']);
+        //$promocionU->codigo_promocion = trim($inputs['codigo']);
+        $promocionU->permanente = 0;
+        $promocionU->created_at = \Carbon\Carbon::now()->toDateTimeString();
+        $promocionU->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+        $this->save($promocionU);
+        return $promocionU;
+    }
+
+    public function storeNewEvento($inputs) {
+
+        $evento = new $this->eventos;
+        $evento->id_usuario_servicio = $inputs['id_usuario_servicio'];
+        $evento->id_fotografia = 4;
+        $evento->descripcion_evento = trim($inputs['descripcion_evento']);
+        $evento->nombre_evento = trim($inputs['nombre_evento']);
+        $evento->fecha_desde = $inputs['fecha_desde'];
+        $evento->fecha_hasta = $inputs['fecha_hasta'];
+        $evento->estado_evento = 1;
+        $evento->permanente = 0;
+        $evento->created_at = \Carbon\Carbon::now()->toDateTimeString();
+        $evento->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+        $this->save($evento);
+        return $evento;
+    }
+
+    public function storeUpdatePermanentePromocion($permanente, $id) {
+
+        $operador = new $this->promocion;
+        $operadorData = $operador::where('id', $id)
+                ->update(['permanente' => $permanente]);                
+        
+        return $operadorData;
+
+
+    }
+    
+    public function storeUpdatePermanenteEvento($permanente, $id) {
+
+        $operador = new $this->eventos;
+        $operadorData = $operador::where('id', $id)
+                ->update(['permanente' => $permanente]);                
+        
+        return $operadorData;
+
+
+    }   
+
+    //Entrega el arreglo de promociones por usuario servicio
+    public function getPromocionesUsuarioServicio($id_usuario_servicio) {
+        $promociones = new $this->promocion;
+        return $promociones::where('id_usuario_servicio', '=', $id_usuario_servicio)->orderBy('updated_at', 'DESC')->get();
+
+
+        return $promociones::All();
+    }
+
+    //Entrega el arreglo de eventos por usuario servicio
+    public function getEventosUsuarioServicio($id_usuario_servicio) {
+        $eventos = new $this->eventos;
+        return $eventos::where('id_usuario_servicio', '=', $id_usuario_servicio)->orderBy('updated_at', 'DESC')->get();
+
+
+        return $eventos::All();
+    }  
+
+	
 
 }
