@@ -43,7 +43,21 @@ return [
         'tituloformulario' => "My Info",
         'crear' => "Create",
         'editar' => "Edit",
+    
+    
+        'listareventos' => "My Events",
+        'nuevoevento' => "New Event",
+        'listarpromociones' => "My Promotions",
+        'nuevopromocion' => "New Promotion",
+        'activar' => "Active Service",
+        'listapromo' => "List of Promotions",
+        'editpromo' => "Edit Promotion",
+        'listaevento' => "List of Events",
+        'editevento' => "Edit Event",
+        'promocioneseventos' => "Promotions and Events",
+    
         
     
 
 ];
+
