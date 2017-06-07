@@ -10,6 +10,7 @@ use App\Models\Usuario_Servicio;
 use App\Models\Servicio_Establecimiento_Usuario;
 use App\Models\Catalogo_Servicio;
 use App\Models\Control_dahsboard;
+use Illuminate\Support\Facades\DB;
 
 class OperadorRepository extends BaseRepository
 {
@@ -418,6 +419,16 @@ class OperadorRepository extends BaseRepository
                              ->get();
 		
                 return $verificar;
+		
+	}
+	
+	        public function updateEstadoUsuarioServicios($id_usuario_servicio, $estado_servicio)
+	{
+		$operador = new $this->usuarioServicio;
+                $operadorData = $operador::where('id', $id_usuario_servicio)
+                                ->update(['estado_servicio_usuario' => $estado_servicio]);                
+        
+        return $operadorData;
 		
 	}
         
