@@ -23,14 +23,13 @@
         <link rel="stylesheet" href="{{ asset('public_components/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{ asset('public_components/css/font-awesome.min.css')}}">
 
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,400italic' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Dosis:400,300,500,600,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{{ asset('public/public_components/css/letras.css')}}">
 
         <link rel="stylesheet" href="{{ asset('public_components/css/animate.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.carousel.css')}}" media="screen" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.transitions.css')}}" media="screen" />
+        
+        <!--<link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.transitions.css')}}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.carousel.css')}}" media="screen" /> -->
+        
         <!-- Magnific Popup core CSS file -->
         <link rel="stylesheet" href="{{ asset('public_components/components/magnific-popup/magnific-popup.css')}}"> 
         
@@ -107,7 +106,7 @@
             <header id="header"  class="header-color-white" >
             @include('public_page.reusable.header')
             </header>
-            @include('public_page.reusable.banner', ['titulo' =>''])  
+            @include('public_page.reusable.banner', ['titulo' =>'Dashboard'])  
 
             <!--<ul class="breadcrumbs">
                 <li class="active">{{trans('front/dashboard.breadcumbs')}}</li>
@@ -132,10 +131,39 @@
                 <li><a href="{!!asset('/serviciosres')!!}"  onclick="$('#target').LoadingOverlay('show')">{{trans('front/responsive.dashboard')}}</a></li>
                 <li class="active"> {{trans('front/responsive.informacion')}}</li>
            </ul>
+            <ul class="breadcrumbs" id="dashboard5" style="display:none;">
+                <li><a href="{!!asset('/')!!}"  onclick="$('#target').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
+                <li><a href="{!!asset('/serviciosres')!!}"  onclick="$('#target').LoadingOverlay('show')">{{trans('front/responsive.dashboard')}}</a></li>
+                <li><a href="{!!asset('/edicionServicios')!!}"  onclick="$('#target').LoadingOverlay('show')">{{trans('front/responsive.edicion')}}</a></li>
+                <li class="active"> {{trans('front/responsive.listapromo')}}</li>
+            </ul>
+            <ul class="breadcrumbs" id="dashboard6" style="display:none;">
+                <li><a href="{!!asset('/')!!}"  onclick="$('#target').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
+                <li><a href="{!!asset('/serviciosres')!!}"  onclick="$('#target').LoadingOverlay('show')">{{trans('front/responsive.dashboard')}}</a></li>
+                <li><a href="{!!asset('/edicionServicios')!!}"  onclick="$('#target').LoadingOverlay('show')">{{trans('front/responsive.edicion')}}</a></li>
+                <li><a href="#" id="listarpromo" onclick="$('#target').LoadingOverlay('show')">{{trans('front/responsive.listapromo')}}</a></li>
+                <li class="active"> {{trans('front/responsive.editpromo')}}</li>
+            </ul>
+            <ul class="breadcrumbs" id="dashboard7" style="display:none;">
+                <li><a href="{!!asset('/')!!}"  onclick="$('#target').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
+                <li><a href="{!!asset('/serviciosres')!!}"  onclick="$('#target').LoadingOverlay('show')">{{trans('front/responsive.dashboard')}}</a></li>
+                <li><a href="{!!asset('/edicionServicios')!!}"  onclick="$('#target').LoadingOverlay('show')">{{trans('front/responsive.edicion')}}</a></li>
+                <li class="active"> {{trans('front/responsive.listaevento')}}</li>
+            </ul> 
+            <ul class="breadcrumbs" id="dashboard8" style="display:none;">
+                <li><a href="{!!asset('/')!!}"  onclick="$('#target').LoadingOverlay('show')">{{ trans('publico/labels.label1')}}</a></li>
+                <li><a href="{!!asset('/serviciosres')!!}"  onclick="$('#target').LoadingOverlay('show')">{{trans('front/responsive.dashboard')}}</a></li>
+                <li><a href="{!!asset('/edicionServicios')!!}"  onclick="$('#target').LoadingOverlay('show')">{{trans('front/responsive.edicion')}}</a></li>
+                <li><a href="#" id="listarevento"  onclick="$('#target').LoadingOverlay('show')">{{trans('front/responsive.listaevento')}}</a></li>
+                <li class="active"> {{trans('front/responsive.editevento')}}</li>
+            </ul> 
+
+            
+                    
         </div>    
 
 
-   <section id="content">
+        <section id="content">
             <div class="container">
                 <div id="main">
                     <div class="woocommerce">
@@ -153,13 +181,13 @@
                                 <ul class="tabs arrow-circle size-medium box">
                                     <li><a style="border: 0px;margin-left:1%;text-align: left; padding-top: 4%;" class="btn btn-sm style4" onclick="window.location.href = '{!!asset('/serviciosres')!!}'" data-toggle="tab"> {{trans('front/dashboard.menu1')}} </a></li>
                                     <li><a style="border: 0px;margin-left:1%;text-align: left; padding-top: 4%;"class="btn btn-sm style4" onclick="window.location.href = '{!!asset('/myinfores')!!}'" data-toggle="tab"> {{trans('front/dashboard.menu2')}} </a></li>
-                                    <li><a style="border: 0px;margin-left:1%;text-align: left; padding-top: 4%;"class="btn btn-sm style4" data-toggle="tab">{{trans('front/dashboard.menu3')}}</a></li>
+                                    <!--<li><a style="border: 0px;margin-left:1%;text-align: left; padding-top: 4%;"class="btn btn-sm style4" data-toggle="tab">{{trans('front/dashboard.menu3')}}</a></li>
                                     <li><a style="border: 0px;margin-left:1%;text-align: left; padding-top: 4%;"class="btn btn-sm style4" data-toggle="tab">{{trans('front/dashboard.menu4')}}</a></li>
-                                    <li><a style="border: 0px;margin-left:1%;text-align: left; padding-top: 4%;"class="btn btn-sm style4" data-toggle="tab">My Product Reviews</a></li>
+                                    <li><a style="border: 0px;margin-left:1%;text-align: left; padding-top: 4%;"class="btn btn-sm style4" data-toggle="tab">My Product Reviews</a></li>-->
                                     
                                 </ul>
                             </div>
-                            <div class="col-sm-9 col-md-9" id="target">
+                            <div class="col-xs-12 col-sm-12 col-md-9" id="target">
                                 
                                     @yield('content')
                             </div>
@@ -199,7 +227,7 @@
     <!-- waypoint -->
     <script type="text/javascript" src="{{ asset('public_components/js/waypoints.min.js')}}"></script>
     <!-- Owl Carousel -->
-    <script type="text/javascript" src="{{ asset('public_components/components/owl-carousel/owl.carousel.min.js')}}"></script>
+    <!--<script type="text/javascript" src="{{ asset('public_components/components/owl-carousel/owl.carousel.min.js')}}"></script> -->
     <!-- plugins -->
     <script type="text/javascript" src="{{ asset('public_components/js/jquery.plugins.js')}}"></script>
     <!-- Google Map Api -->
@@ -242,82 +270,6 @@
                                 });
 
      </script>
-     
-    <script>
-        sjq(document).ready(function ($) {
-            var sync1 = $("#sync1");
-            var sync2 = $("#sync2");
-            sync1.owlCarousel({
-                singleItem: true,
-                slideSpeed: 1000,
-                navigation: false,
-                pagination: false,
-                afterAction: syncPosition,
-                responsiveRefreshRate: 200,
-            });
-            sync2.owlCarousel({
-                items: 3,
-                itemsDesktop: [1199, 2],
-                itemsDesktopSmall: [991, 1],
-                itemsTablet: [767, 2],
-                itemsMobile: [479, 2],
-                navigation: true,
-                navigationText: false,
-                pagination: false,
-                responsiveRefreshRate: 100,
-                afterInit: function (el) {
-                    el.find(".owl-item").eq(0).addClass("synced");
-                    el.find(".owl-wrapper").equalHeights();
-                },
-                afterUpdate: function (el) {
-                    el.find(".owl-wrapper").equalHeights();
-                }
-            });
-            function syncPosition(el) {
-                var current = this.currentItem;
-                $("#sync2")
-                        .find(".owl-item")
-                        .removeClass("synced")
-                        .eq(current)
-                        .addClass("synced")
-                if ($("#sync2").data("owlCarousel") !== undefined) {
-                    center(current)
-                }
-            }
-
-            $("#sync2").on("click", ".owl-item", function (e) {
-                e.preventDefault();
-                var number = $(this).data("owlItem");
-                sync1.trigger("owl.goTo", number);
-            });
-            function center(number) {
-                var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
-                var num = number;
-                var found = false;
-                for (var i in sync2visible) {
-                    if (num === sync2visible[i]) {
-                        var found = true;
-                    }
-                }
-
-                if (found === false) {
-                    if (num > sync2visible[sync2visible.length - 1]) {
-                        sync2.trigger("owl.goTo", num - sync2visible.length + 2)
-                    } else {
-                        if (num - 1 === -1) {
-                            num = 0;
-                        }
-                        sync2.trigger("owl.goTo", num);
-                    }
-                } else if (num === sync2visible[sync2visible.length - 1]) {
-                    sync2.trigger("owl.goTo", sync2visible[1])
-                } else if (num === sync2visible[0]) {
-                    sync2.trigger("owl.goTo", num - 1)
-                }
-            }
-            var $easyzoom = $('.product-images .easyzoom').easyZoom();
-            var $easyzoomApi = $easyzoom.data('easyZoom');
-        });</script>
 
     @if(session('device')!='mobile')
     <script>
@@ -415,7 +367,7 @@
     </style>
     
     @else
-    
+    <?php $header = "/img/portada_face_iwanatrip_04.jpg";?>
   <script>
 
 

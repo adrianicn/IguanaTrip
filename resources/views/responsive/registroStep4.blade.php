@@ -1,6 +1,6 @@
 @extends('responsive.dashboard')
 @section('content')
-{!! HTML::style('css/calendar/ui-jquery.css') !!} 
+
 
 {!! HTML::script('js/jquery.js') !!}
 <script>
@@ -49,13 +49,18 @@ $usuarioServicio->como_llegar1_1 = '';
 $usuarioServicio->como_llegar2_2 = '';
 $usuarioServicio->latitud_servicio = -0.1806532;
 $usuarioServicio->longitud_servicio = -78.46783820000002;
+
 ?>
+
 @foreach ($usuarioServicio as $detalles)
 <?php
 $usuarioServicio->id = $detalles->id;
 $usuarioServicio->nombre_servicio = trim($detalles->nombre_servicio);
 $usuarioServicio->detalle_servicio = trim($detalles->detalle_servicio);
 $usuarioServicio->detalle_servicio_eng = trim($detalles->detalle_servicio_eng);
+
+$usuarioServicio->estado_servicio_usuario = trim($detalles->estado_servicio_usuario);
+$usuarioServicio->id_catalogo_servicio = trim($detalles->id_catalogo_servicio);
 
 $usuarioServicio->precio_desde = trim($detalles->precio_desde);
 $usuarioServicio->precio_hasta = trim($detalles->precio_hasta);
@@ -93,18 +98,26 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 
 ?>
 @endforeach
+
+<?php $contadorPromo = count($promociones); $contadorEventos = count($eventos);   ?>
+
 <div id="basic-modal-content" class="cls loadModal"></div>
 <div class="rowerror"> </div>
 
- {!! Form::open(['url' => route('upload-serviciosres'), 'method' => 'post', 'role' => 'form', 'class'=>'form-bordered','id'=>'registro_step1'] ) !!}
+@if(session('device')!='mobile')
+{!! Form::open(['url' => route('upload-serviciosres'), 'method' => 'post', 'role' => 'form', 'class'=>'form-bordered','id'=>'registro_step1'] ) !!}
+@else
+{!! Form::open(['url' => route('upload-serviciosres'), 'method' => 'post', 'role' => 'form', 'class'=>'form-bordered','style' => 'padding: 0','id'=>'registro_step1'] ) !!}
+@endif
+  
  <input type="hidden" value="{!!$usuarioServicio->id!!}" name="id" id="id">
  <input type="hidden" value="{!!$id_catalogo!!}" name="id_catalogo" id="id_catalogo">
-    <div class="row">
+ <div class="row">
        
         <!-- PARTE IZQUIERDA DEL RESPONSIVE-->
-        <div class="col-sm-5 col-md-5" style="margin-bottom: 3%;">
-            <div class="col-sm-12 col-md-12" style="margin-bottom: 3%;margin-top: 2%;">
-                    <div class="col-md-12">
+        <div class="col-sm-12 col-md-5" style="margin-bottom: 3%;">
+            <div class="col-xs-12 col-md-12 res" style="margin-bottom: 3%;margin-top: 2%;">
+                    <div class="col-xs-12 col-md-12 res">
                         <h4 class="section-title">Agregar Fotos:</h4>
                         <div class="tab-container full-width style2" style="text-align:center;">
                              <div id="promocion">
@@ -115,19 +128,18 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                     </div>
             </div>
             <br>
-            <div class="col-sm-12 col-md-12" style="margin-bottom: 3%;margin-top: 2%;">
-                    <div class="col-md-12">
+            <div class="col-xs-12 col-md-12 res" style="margin-bottom: 3%;margin-top: 2%;">
+                    <div class="col-xs-12 col-md-12">
                         <div class="tab-container full-width style2">
-                                   <div id="renderPartialImagenes">
+                            <div id="renderPartialImagenes">
                                         @section('contentImagenes')
                                         @show
-                                    </div>         
-                            
+                            </div>         
                         </div>
                     </div>
             </div>
             <div class="col-sm-12 col-md-12" style="margin-bottom: 3%;margin-top: 2%;">
-                    <div class="col-md-12">
+                    <div class="col-xs-12 col-md-12 res">
                         <h4 class="section-title">El Hotel Incluye:</h4>
                             <div class="tab-container full-width style2">
                                     <ul style="list-style: none">
@@ -143,14 +155,68 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                             </div>
                     </div>
             </div>
+            
+            <div id="promos" style="display:none">
+                
+                <div class="col-xs-12 col-md-12 res" style="width: 100%;margin-top: 5%;">
+                <h4 class="section-title"> {{trans('front/responsive.promocioneseventos')}}</h4>
+                <div class="tab-container full-width style2" style="text-align:center;">
+                   <div class="form-group text-center">
+                       <center>
+                     <div id="secondary-data">
+                         <div id="evento" style="background-color: #ff6600;width: 30%;height: 50px; border-radius: 2px;color: white;display: inline-table; margin-right: 3%; margin-bottom: 4%;">
+                             <p style="padding:2%;"> </p>
+                             <a class="button-step4"  data-toggle="modal" data-target="#hotel" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." 
+                                href="#"> <i class="fa fa-plus" aria-hidden="true" style="font-size: 20px;color: white; display:block; padding: 5%;"></i> {{trans('front/responsive.nuevapromocion')}} </a>
+                                 <p style="padding:2%;"> </p>
+                         </div>
+                         
+                         @if($contadorPromo != 0)
+                         <div id="evento" style="background-color: #ff6600;width: 30%;height: 50px; border-radius: 2px;color: white;display: inline-table; margin-right: 3%; margin-bottom: 4%;">
+                             <p style="padding:2%;"> </p>
+                             <a class="button-step4" href="#" onclick="GetDataAjaxPromo('{!!asset('/listarPromociones')!!}/{!!$usuarioServicio->id!!}')" > 
+                                 <i class="fa fa-bars" aria-hidden="true" style="font-size: 20px;color: white; display:block; padding: 5%;"></i> {{trans('front/responsive.listarpromociones')}} </a>
+                                 <p style="padding:2%;"> </p>
+                         </div>
+                         @endif
+                         
+                        <div id="evento" style="background-color: #ff6600;width: 30%;height: 50px; border-radius: 2px;color: white;display: inline-table; margin-right: 3%;margin-bottom: 3%;">
+                             <p style="padding:2%;"> </p>
+                             <a class="button-step4" data-toggle="modal" data-target="#trip" title="Puedes crear varios eventos para tu servicio. Ejemplo si tu servicio es una discoteca puedes agregar Jueves laydies night como evento o si eres un restaurante puedes agregar eventos como inauguraciones, etc." 
+                                href="#"> <i class="fa fa-plus" aria-hidden="true" style="font-size: 20px;color: white; display:block; padding: 5%;"></i> {{trans('front/responsive.nuevoevento')}} </a>
+                                 <p style="padding:2%;"> </p>
+                         </div> 
+                         
+                        @if($contadorEventos != 0)
+                         <div id="evento" style="background-color: #ff6600;width: 30%;height: 50px; border-radius: 2px;color: white;display: inline-table; margin-right: 3%;margin-bottom: 3%;">
+                             <p style="padding:2%;"> </p>
+                             <a class="button-step4" href="#" onclick="GetDataAjaxPromo('{!!asset('/listarEventos')!!}/{!!$usuarioServicio->id!!}')" > 
+                                 <i class="fa fa-bars" aria-hidden="true" style="font-size: 20px;color: white; display:block; padding: 5%;"></i> {{trans('front/responsive.listareventos')}} </a>
+                                 <p style="padding:2%;"> </p>
+                         </div>
+                         @endif
+                     </div>    
+
+                       </center>    
+
+                    </div>
+                </div>
+            </div>
+
+                
+            </div>
+
+        
         </div>
         
         <!-- PARTE CENTRAL DEL RESPONSIVE-->
-        <div class="col-sm-7 col-md-7" style="margin-bottom: 3%;">
+        <div class="col-xs-12 col-md-7" style="margin-bottom: 3%;">
             <!-- NOMBRE SERVICIO-->
-            <div class="col-sm-12 col-md-12" style="margin-bottom: 3%;margin-top: 2%;">
+            <div class="col-xs-12 col-md-12 res" style="margin-bottom: 3%;margin-top: 5%;">
 
-                            <div class="col-md-12">
+                <!--<div class="col-xs-12 col-md-12 " style="border: 1px solid blue;width: 100%;"> -->
+                <div class="col-xs-12 col-md-12 res" style="width: 100%;">
+                
                                 <h4 class="section-title"> {{trans('front/responsive.nombreservicio')}} </h4>
                                 <div class="tab-container full-width style2">
                                    <div class="form-group">
@@ -158,12 +224,12 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                              style="width: 100%;" placeholder="Nombre del Servicio">
                                     </div>
                                 </div>
-                            </div>
+                </div>
             </div>
             <!-- PROVINCIA, CANTON Y PARROQUIA-->
-            <div class="col-sm-12 col-md-12" style="margin-bottom: 3%;margin-top: 2%;">
+            <div class="col-xs-12 col-md-12 res" style="margin-bottom: 3%;margin-top: 2%;">
 
-                            <div class="col-md-12">
+                            <div class="col-xs-12 col-md-12 res">
                                 <h4 class="section-title">{{trans('front/responsive.provincia')}}</h4>
                                 <div class="tab-container full-width style2">
                                      <div id='provincias'>
@@ -175,9 +241,9 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                             </div>
             </div>
             <!-- DETALLE SERVICIO Y COMO LLEGAR-->
-            <div class="col-sm-12 col-md-12" style="margin-bottom: 3%;margin-top: 2%;">
+            <div class="col-xs-12 col-md-12 res" style="margin-bottom: 3%;margin-top: 2%;">
 
-                            <div class="col-md-12">
+                            <div class="col-xs-12 col-md-12 res">
                                 <h4 class="section-title">{{trans('front/responsive.detallellegar')}}</h4>
                                 <div class="tab-container full-width style2 text-center">
                                     <ul class="tabs clearfix text-center" style="text-align: center;">
@@ -189,13 +255,13 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                                             
                                             <div class="form-group">
                                                 {!!Form::label('detalle_servicio_1', 'Detalle Servicio', array("title"=>"Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.",'class'=>'control-label-1'))!!}
-                                                <textarea id="detalle_servicio" name="detalle_servicio" class="input-text chng" placeholder="Detalle Servicio" title="Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas." style="resize:none;width: 100%;">{!!trim($usuarioServicio->detalle_servicio)!!}</textarea>
+                                                <textarea id="detalle_servicio" name="detalle_servicio" class="input-text chng" placeholder="Detalle Servicio" title="Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas." style="resize:none;width: 100%;height: 200px;">{!!trim($usuarioServicio->detalle_servicio)!!}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 {!!Form::label('como_llegar1', 'Como llegar desde', array('class'=>'control-label-2'))!!}
                                                 <input type="text" name="como_llegar1_1" value="{!!$usuarioServicio->como_llegar1_1!!}" class="input-text chng" style="width: 100%;"
                                                        title="Como llegar" placeholder="Quito, GYE, Parque central ,etc">
-                                                <textarea style="height: 100px;resize:none;margin-top: 1%;width: 100%" id="como_llegar1" name="como_llegar1" class="input-text chng" placeholder="Detalle de como llegar a tu servicio" title="Ingresa un detalle de como llegar a tu local o servicio desde algún lugar conocido.">{!!trim($usuarioServicio->como_llegar1)!!}</textarea>
+                                                <textarea style="height: 200px;resize:none;margin-top: 1%;width: 100%;height: 200px;" id="como_llegar1" name="como_llegar1" class="input-text chng" placeholder="Detalle de como llegar a tu servicio" title="Ingresa un detalle de como llegar a tu local o servicio desde algún lugar conocido.">{!!trim($usuarioServicio->como_llegar1)!!}</textarea>
                                             </div>
                                        </div>
                                     </div>
@@ -203,13 +269,13 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                                         <div class="tab-pane" style="margin:2%;">
                                             <div class="form-group">
                                                 {!!Form::label('detalle_servicio_1', 'Detalle Servicio Inglés', array("title"=>"Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas.",'class'=>'control-label-1'))!!}
-                                                <textarea style="height: 100px;resize:none;margin-top: 1%;width: 100%" id="detalle_servicio_eng" name="detalle_servicio_eng" class="input-text chng" placeholder="Detalle Servicio" title="Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas." style="resize:none;">{!!trim($usuarioServicio->detalle_servicio_eng)!!}</textarea>
+                                                <textarea style="height: 200px;resize:none;margin-top: 1%;width: 100%" id="detalle_servicio_eng" name="detalle_servicio_eng" class="input-text chng" placeholder="Detalle Servicio" title="Ingresa un detalle corto y preciso, no más de 4 líneas procura usar un todo cortéz para invitar a los turistas. Nosotros nos encargaremos de traducirlo a diferentes idiomas." style="resize:none;">{!!trim($usuarioServicio->detalle_servicio_eng)!!}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 {!!Form::label('como_llegar2', 'Como llegar Inglés', array('class'=>'control-label-2'))!!}
                                                 <input type="text" name="como_llegar2_2" value="{!!$usuarioServicio->como_llegar2_2!!}" class="input-text chng" style="width: 100%;"
                                                        title="Como llegar" placeholder="Cuenca, Manta, Parque central ,etc">
-                                                <textarea style="height: 100px;resize:none;margin-top: 1%;width: 100%;" name="como_llegar2" class="input-text chng" placeholder="Detalle de como llegar a tu servicio" >{!!trim($usuarioServicio->como_llegar2)!!}</textarea>
+                                                <textarea style="height: 200px;resize:none;margin-top: 1%;width: 100%;" name="como_llegar2" class="input-text chng" placeholder="Detalle de como llegar a tu servicio" >{!!trim($usuarioServicio->como_llegar2)!!}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -218,9 +284,9 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
                             </div>
             </div>
             <!-- iNFORMACION DEL SERVICIO-->
-            <div class="col-sm-12 col-md-12" style="margin-bottom: 3%;margin-top: 2%;">
+            <div class="col-xs-12 col-md-12 res" style="margin-bottom: 3%;margin-top: 2%;">
 
-                            <div class="col-md-12">
+                            <div class="col-xs-12 col-md-12 res">
                                 <h4 class="section-title">{{trans('front/responsive.infoservicio')}}</h4>
                                 <div class="tab-container full-width style2">
                                     <ul class="tabs clearfix text-center">
@@ -269,8 +335,8 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             </div>
             
             <!-- TAGS-->
-            <div class="col-sm-12 col-md-12" style="margin-bottom: 3%;margin-top: 2%;">
-                <div class="col-md-12">
+            <div class="col-xs-12 col-md-12 res" style="margin-bottom: 3%;margin-top: 2%;">
+                <div class="col-xs-12 col-md-12 res">
                     <h4 class="section-title">{{trans('front/responsive.tags')}}</h4>
                     <div class="tab-container full-width style2">
                         <input type="text" name="tags" value="{!!$usuarioServicio->tags!!}" title="Palabras clave o referencias separadas por comas" class="input-text chng" placeholder="#ruta del sol, #museos" style="width: 100% !important;">
@@ -279,20 +345,93 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             </div>
             
             <!-- UBICACION-->
-            <div class="col-sm-12 col-md-12" style="margin-bottom: 3%;margin-top: 2%;">
+            <div class="col-xs-12 col-md-12 res" style="margin-bottom: 3%;margin-top: 2%;">
 
-                            <div class="col-md-12">
+                            <div class="col-xs-12 col-md-12 res">
                                 <h4 class="section-title">{{trans('front/responsive.ubicacion')}}</h4>
                                 <div class="tab-container full-width style2">
                                      @include('reusable.maps1', ['longitud_servicio' => $usuarioServicio->longitud_servicio,'latitud_servicio'=>$usuarioServicio->latitud_servicio])  
                                 </div>
                             </div>
             </div>
+            
+            <!-- ACTIVAR Y DESACTIVAR -->
+            <div class="col-xs-12 col-md-12 res" style="margin-bottom: 3%;margin-top: 2%;">
+                <div class="col-xs-12 col-md-12 res">
+                    <h4 class="section-title">{{trans('front/responsive.activar')}}</h4>
+                    <div class="tab-container full-width style2">
+                @if($usuarioServicio->estado_servicio_usuario == 0)
+                <?php $check = ''; ?>
+                @endif
+                @if($usuarioServicio->estado_servicio_usuario == 1)
+                <?php $check = 'checked'; ?>
+                @endif
+
+                <div class="form-group text-center">
+                    
+                   <input type="checkbox" id='estado_servicio_usuario' 
+                                   name="estado_servicio_usuario" value="{!!$usuarioServicio->estado_servicio_usuario!!}"
+                                   onchange="UpdateServicioActivo('{!!asset('/updateServicioActivo')!!}/{!!$usuarioServicio->id!!}')">
+                </div>
+                
+                   
+                    </div>
+                </div>
+            </div>            
+            
+           <div id="promos1" style="display:none">
+
+                         <div class="col-xs-12 col-md-12 res" style="width: 100%;margin-top: 5%;">
+                <h4 class="section-title"> {{trans('front/responsive.promocioneseventos')}}</h4>
+                <div class="tab-container full-width style2" style="text-align:center;">
+                   <div class="form-group text-center">
+                       <center>
+                     <div id="secondary-data">
+                         <div id="evento" style="background-color: #ff6600;width: 30%;height: 50px; border-radius: 2px;color: white;display: inline-table; margin-right: 3%; margin-bottom: 4%;">
+                             <p style="padding:2%;"> </p>
+                             <a class="button-step4"  data-toggle="modal" data-target="#hotel" title="Si deseas agregar promociones de tu servicio puedes hacerlo aquí y nosotros nos encargaremos de darle la publicidad necesaria." 
+                                href="#"> <i class="fa fa-plus" aria-hidden="true" style="font-size: 20px;color: white; display:block; padding: 5%;"></i> {{trans('front/responsive.nuevapromocion')}} </a>
+                                 <p style="padding:2%;"> </p>
+                         </div>
+                         
+                         @if($contadorPromo != 0)
+                         <div id="evento" style="background-color: #ff6600;width: 30%;height: 50px; border-radius: 2px;color: white;display: inline-table; margin-right: 3%; margin-bottom: 4%;">
+                             <p style="padding:2%;"> </p>
+                             <a class="button-step4" href="#" onclick="GetDataAjaxPromo('{!!asset('/listarPromociones')!!}/{!!$usuarioServicio->id!!}')" > 
+                                 <i class="fa fa-bars" aria-hidden="true" style="font-size: 20px;color: white; display:block; padding: 5%;"></i> {{trans('front/responsive.listarpromociones')}} </a>
+                                 <p style="padding:2%;"> </p>
+                         </div>
+                         @endif
+                         
+                        <div id="evento" style="background-color: #ff6600;width: 30%;height: 50px; border-radius: 2px;color: white;display: inline-table; margin-right: 3%;margin-bottom: 3%;">
+                             <p style="padding:2%;"> </p>
+                             <a class="button-step4" data-toggle="modal" data-target="#trip" title="Puedes crear varios eventos para tu servicio. Ejemplo si tu servicio es una discoteca puedes agregar Jueves laydies night como evento o si eres un restaurante puedes agregar eventos como inauguraciones, etc." 
+                                href="#"> <i class="fa fa-plus" aria-hidden="true" style="font-size: 20px;color: white; display:block; padding: 5%;"></i> {{trans('front/responsive.nuevoevento')}} </a>
+                                 <p style="padding:2%;"> </p>
+                         </div> 
+                         
+                        @if($contadorEventos != 0)
+                         <div id="evento" style="background-color: #ff6600;width: 30%;height: 50px; border-radius: 2px;color: white;display: inline-table; margin-right: 3%;margin-bottom: 3%;">
+                             <p style="padding:2%;"> </p>
+                             <a class="button-step4" href="#" onclick="GetDataAjaxPromo('{!!asset('/listarEventos')!!}/{!!$usuarioServicio->id!!}')" > 
+                                 <i class="fa fa-bars" aria-hidden="true" style="font-size: 20px;color: white; display:block; padding: 5%;"></i> {{trans('front/responsive.listareventos')}} </a>
+                                 <p style="padding:2%;"> </p>
+                         </div>
+                         @endif
+                     </div>    
+
+                       </center>    
+
+                    </div>
+                </div>
+            </div>
+                
+            </div>
         </div>
         
         <!-- VISTA PREVIA Y GUARDAR-->
         <br>
-        <div class="col-sm-12 col-md-12 text-center">
+        <div class="col-xs-12 col-md-12 res text-center">
             <div class="form-group" style="display: inline-table; margin-left: 4%;">
                  <a class="btn btn-medium style1" title="Guardar" onclick="UpdateServicioInfo1('registro_step1', 'optional');" href="#">{{trans('front/responsive.guardar')}}</a>
                  
@@ -306,8 +445,7 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
         {!! Form::close() !!}    
 
     </div>
-<input type="hidden" value="1" id="flag_image">
-
+<input type="hidden" value="0" id="flag_image">
 
 
 @stop
@@ -324,24 +462,54 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
 
 {!! HTML::script('/js/jsModal/basic.js') !!}
 {!! HTML::script('js/calendar/calendar.js') !!}
+<script type="text/javascript" src="{{ asset('public_components/components/owl-carousel/owl.carousel.min.js')}}"></script>
 
 @if($usuarioServicio->id_provincia=='' )
 <script>
             $(document).ready(function () {
-            GetDataAjaxProvincias("{!!asset('/getProvincias')!!}/0/0/0");
+            GetDataAjaxProvincias1("{!!asset('/getProvincias1')!!}/0/0/0");
     });</script>
 @else
 <script>
             $(document).ready(function () {
-    GetDataAjaxProvincias("{!!asset('/getProvincias')!!}/{!!$usuarioServicio->id_provincia!!}/{!!$usuarioServicio->id_canton!!}/{!!$usuarioServicio->id_parroquia!!}");
+    GetDataAjaxProvincias1("{!!asset('/getProvincias1')!!}/{!!$usuarioServicio->id_provincia!!}/{!!$usuarioServicio->id_canton!!}/{!!$usuarioServicio->id_parroquia!!}");
     });</script>
 @endif
 
 <script>
     $(document).ready(function () {
+                GetDataAjaxImagenesRes("{!!asset('/imagenesAjaxDescription1')!!}/1/{!!$usuarioServicio->id!!}");
+                var check = $("#estado_servicio_usuario").val();
+                if(check == 1){
+                    $( "#estado_servicio_usuario" ).prop( "checked", true );
+                } 
+    });
+    
+     ///Script para actualizar el container una vez que se hayan subido las imagenes
+     setInterval( function() {
+        if ($('#flag_image').val() == 1) {
+            // Save the new value
+           GetDataAjaxImagenesRes("{!!asset('/imagenesAjaxDescription1')!!}/1/{!!$usuarioServicio->id!!}");
+           $("#flag_image").val('0');
+           
+            // TODO - Handle the changed value
+            
+        }
+        
+        if ($('#flag_image_preview').val() == 0) {
+            //alert("Entro aqui");
+            $("#mostrarJS").show();
+        }
+    
+}, 100);
+</script> 
+
+
+<script>
+    $(document).ready(function () {
 
                 GetDataAjaxSectionEventos("{!!asset('/getlistaServiciosComplete1')!!}/{!!$usuarioServicio->id!!}");
-               // GetDataAjaxImagenesRes("{!!asset('/imagenesAjax')!!}/1/{!!$usuarioServicio->id!!}");
+                //GetDataAjaxImagenesRes("{!!asset('/imagenesAjaxDescription1')!!}/1/{!!$usuarioServicio->id!!}");
     });
     
     
@@ -360,25 +528,6 @@ $usuarioServicio->longitud_servicio = ($detalles->longitud_servicio == '') ? -78
             });
         
     
-</script>
-
-<script>
-    $(document).ready(function () {
-                GetDataAjaxImagenesRes("{!!asset('/imagenesAjaxDescription1')!!}/1/{!!$usuarioServicio->id!!}");
-    });
-    
-     ///Script para actualizar el container una vez que se hayan subido las imagenes
-     setInterval( function() {
-    
-        if ($('#flag_image').val() == 1) {
-            // Save the new value
-           GetDataAjaxImagenesRes("{!!asset('/imagenesAjaxDescription1')!!}/1/{!!$usuarioServicio->id!!}");
-           $("#flag_image").val('0');
-
-            // TODO - Handle the changed value
-        }
-    
-}, 100);
 </script>
 
 <script>
@@ -433,81 +582,287 @@ $(document).on('ready',function(){
                                         return false;
                                     });
                                 });</script>
-    <script>
-        sjq(document).ready(function ($) {
-            var sync1 = $("#sync1");
-            var sync2 = $("#sync2");
-            sync1.owlCarousel({
-                singleItem: true,
-                slideSpeed: 1000,
-                navigation: false,
-                pagination: false,
-                afterAction: syncPosition,
-                responsiveRefreshRate: 200,
-            });
-            sync2.owlCarousel({
-                items: 3,
-                itemsDesktop: [1199, 2],
-                itemsDesktopSmall: [991, 1],
-                itemsTablet: [767, 2],
-                itemsMobile: [479, 2],
-                navigation: true,
-                navigationText: false,
-                pagination: false,
-                responsiveRefreshRate: 100,
-                afterInit: function (el) {
-                    el.find(".owl-item").eq(0).addClass("synced");
-                    el.find(".owl-wrapper").equalHeights();
-                },
-                afterUpdate: function (el) {
-                    el.find(".owl-wrapper").equalHeights();
-                }
-            });
-            function syncPosition(el) {
-                var current = this.currentItem;
-                $("#sync2")
-                        .find(".owl-item")
-                        .removeClass("synced")
-                        .eq(current)
-                        .addClass("synced")
-                if ($("#sync2").data("owlCarousel") !== undefined) {
-                    center(current)
-                }
-            }
+    
 
-            $("#sync2").on("click", ".owl-item", function (e) {
-                e.preventDefault();
-                var number = $(this).data("owlItem");
-                sync1.trigger("owl.goTo", number);
-            });
-            function center(number) {
-                var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
-                var num = number;
-                var found = false;
-                for (var i in sync2visible) {
-                    if (num === sync2visible[i]) {
-                        var found = true;
-                    }
-                }
+    
 
-                if (found === false) {
-                    if (num > sync2visible[sync2visible.length - 1]) {
-                        sync2.trigger("owl.goTo", num - sync2visible.length + 2)
-                    } else {
-                        if (num - 1 === -1) {
-                            num = 0;
-                        }
-                        sync2.trigger("owl.goTo", num);
-                    }
-                } else if (num === sync2visible[sync2visible.length - 1]) {
-                    sync2.trigger("owl.goTo", sync2visible[1])
-                } else if (num === sync2visible[0]) {
-                    sync2.trigger("owl.goTo", num - 1)
-                }
-            }
-            var $easyzoom = $('.product-images .easyzoom').easyZoom();
-            var $easyzoomApi = $easyzoom.data('easyZoom');
-        });</script>
+<!-- Modal PROMOCION-->
+<div class="modal fade" id="hotel" tabindex="-1" role="dialog">
+    
+  {!! Form::open(['url' => route('postPromocion1'),  'id'=>'promocion-popup']) !!}  
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div id="testboxForm" class="promocion">
+                  <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">{{trans('front/responsive.agregarpromocion')}}</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="{{trans('front/responsive.cerrar')}}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="rowerrorM"> </div>
+              <input type="hidden"  class="id_usuario_servicio" name="id_usuario_servicio" value="{!!$usuarioServicio->id!!}">
+          <div class="form-group">
+            {!!Form::label('nombre_1', 'Nombre', array('id'=>'iconFormulario-step2-popup'))!!}
+            <input type="text" name="nombre_promocion" id="nombrepromo" class="input-text full-width" placeholder="Jueves 2x1, Descuento del 10%, etc"/>
+          </div>
+          <div class="form-group">
+            {!!Form::label('inicio_1', 'Inicio', array('id'=>'iconFormulario-step2-popup'))!!}
+            <input type="text" name="fecha_inicio" id="fechainicio" class="input-text datepicker" placeholder="Fecha aaaa/mm/dd" style="width: 100%;" />
+          </div>
+          <div class="form-group">
+            {!!Form::label('fin_1', 'Fin', array('id'=>'iconFormulario-step2-popup'))!!}
+             <input type="text" name="fecha_fin" id="fechafin" class="input-text datepicker" placeholder="Fecha aaaa/mm/dd" style="width: 100%;"/>
+          </div>   
+         <!-- <div class="form-group">
+            {!!Form::label('precio_normal_1', 'Precio Normal', array('id'=>'iconFormulario-step2-popup'))!!}
+             <input type="text" name="precio_normal" id="precionormal" class="input-text full-width" placeholder="$"/>
+          </div>               
+          <div class="form-group">
+            {!!Form::label('descuento_1', 'Descuento', array('id'=>'iconFormulario-step2-popup'))!!}
+             <input type="text" name="descuento" id="descuento" class="input-text full-width" placeholder="%"/>
+          </div>                      
+          <div class="form-group">
+            {!!Form::label('codigo_1', 'Código', array('id'=>'iconFormulario-step2-popup'))!!}
+             <input type="text" name="codigo" id="codigo" class="input-text full-width" placeholder="Ej. IGTRCOD001"/>
+          </div>                                     
+          <div class="form-group">
+            {!!Form::label('detalle_1', 'Detalle', array('id'=>'iconFormulario-step2-popup'))!!}
+            <textarea class="input-text full-width" name="descripcion_promocion" id="descripcion" placeholder="descripcion" style="resize:none;"></textarea>
+          </div>        -->                                            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"> {{trans('front/responsive.cerrar')}} </button>
+        <button type="button" id="btnsubm" class="btn btn-medium style1"
+                onclick="AjaxContainerRegistroWithLoad2('promocion-popup','promocion')"> {{trans('front/responsive.siguiente')}} </button>
+        
+      </div>
+            
+        </div>  
+
+    </div>
+  </div>
+  {!! Form::close() !!}  
+  
+  <script>
+    $(document).ready(function() {
+    //$("#nombre, #fechainicio,#fechafin, #precionormal,#codigo,#descripcion").val("");  
+    $("#nombrepromo, #fechainicio,#fechafin").val("");  
+    /*var $submit = $("#btnsubm"),
+        //$inputs = $('#nombre, #fechainicio,#fechafin, #precionormal,#codigo,#descripcion');
+        $inputs = $('#nombrepromo, #fechainicio, #fechafin');
+        
+    function checkEmpty() {
+        return $inputs.filter(function() {
+            return !$.trim(this.value);
+        }).length == 0;
+    }
+
+    $inputs.on('blur', function() {
+        $submit.prop("disabled", !checkEmpty());
+    }).blur();*/
+});
+
+ $(document).ready(function () {
+ //$('.btn dropdown-toggle bs-placeholder btn-default').width('100%');
+ //$("#nombre, #fechainicio,#fechafin, #precionormal,#codigo,#descripcion").val("");
+    });
+
+</script>
+
+</div>
+
+<!-- Modal EVENTO-->
+<div class="modal fade" id="trip" tabindex="-1" role="dialog">
+    
+  {!! Form::open(['url' => route('postEvento1'),  'id'=>'evento-popup']) !!}  
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div id="testboxForm" class="evento">
+                  <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">{{trans('front/responsive.agregarevento')}}</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="{{trans('front/responsive.cerrar')}}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="rowerrorM"> </div>
+              <input type="hidden"  class="id_usuario_servicio" name="id_usuario_servicio" value="{!!$usuarioServicio->id!!}">
+          <div class="form-group">
+              {!!Form::label('nombre_1', trans('registro/labels.label3'), array('id'=>'iconFormulario-step2-popup'))!!}
+             <input type="text" name="nombre_evento" id="nombreevento" class="input-text full-width" placeholder="Nombre significativo"/>
+          </div>
+         <div class="form-group">
+                 {!!Form::label('Detalle_1', 'Detalle', array('id'=>'iconFormulario-step2-popup'))!!}
+                <textarea class="input-text full-width" name="descripcion_evento" id="descripcionevento" placeholder="Cena navideña, concierto, etc." style="resize:none;"></textarea>
+          </div> 
+          <div class="form-group">
+            {!!Form::label('fecha_desde', 'Fecha Inicio', array('id'=>'iconFormulario-step2-popup'))!!}
+            <input type="text" name="fecha_desde" id="fechainicioevento" class="input-text datepicker" placeholder="Fecha aaaa/mm/dd" style="width: 100%;" />
+          </div>
+          <div class="form-group">
+             {!!Form::label('fecha_hasta', 'Fecha Hasta', array('id'=>'iconFormulario-step2-popup'))!!}
+             <input type="text" name="fecha_hasta" id="fechafinevento" class="input-text datepicker" placeholder="Fecha aaaa/mm/dd" style="width: 100%;"/>
+          </div>   
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"> {{trans('front/responsive.cerrar')}} </button>
+        <button type="button" id="eventosbtn" class="btn btn-medium style1"
+                onclick="AjaxContainerRegistroWithLoad2('evento-popup','evento')"> {{trans('front/responsive.siguiente')}} </button>
+        
+      </div>
+            
+        </div>  
+
+    </div>
+  </div>
+  {!! Form::close() !!}  
+  
+  <script>
+  $(document).ready(function() {
+    $("#nombreevento,#descripcionevento,#fechainicioevento,#fechafinevento").val("");  
+    /*var $submitEventos = $("#eventosbtn"),
+        $inputsEventos = $('#nombreevento, #descripcionevento,#fechainicioevento,#fechafinevento');
+
+    function checkEmpty1() {
+        return $inputsEventos.filter(function() {
+            return !$.trim(this.value);
+        }).length === 0;
+    }
+
+    $inputsEventos.on('blur', function() {
+        $submitEventos.prop("disabled", !checkEmpty1());
+    }).blur();*/
+});
+
+</script>
+
+</div>
+<script>
+  $(function() {
+    
+      $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
+  });
+  </script>
+  
+  <!-- Modal FOTOGRAFIA-->
+<div class="modal fade" id="foto" tabindex="-1" role="dialog">
+    
+    
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div id="testboxForm" class="foto">
+                  <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">{{trans('front/responsive.agregarfoto')}}</h3>
+        <!--<button type="button" class="close" data-dismiss="modal" aria-label="{{trans('front/responsive.cerrar')}}">
+          <span aria-hidden="true">&times;</span>
+        </button>-->
+      </div>
+      <div class="modal-body">
+          <div class="rowerrorM"> </div>
+    {!! Form::open(['url' => route('upload-post'), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}      
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" id="id_catalogo_fotografia" name="id_catalogo_fotografia" value="1">
+          <input type="hidden" id="id_usuario_servicio" name="id_usuario_servicio" value="{!!$usuarioServicio->id!!}">
+          <input type="hidden" id="id_auxiliar" name="id_auxiliar" value="{!!$usuarioServicio->id!!}">
+          
+          <div class="form-group">
+               <div class="dz-message">
+
+                </div>
+
+                <div class="fallback">
+                    <input name="file" type="file" multiple />
+                </div>
+
+                <div class="dropzone-previews" id="dropzonePreview"></div>
+
+                <h4 style="text-align: center;color:#428bca;">Arrastra las imágenes aquí (Formato: jpg, tamaño max: 6Mb)  
+                    <span class="glyphicon glyphicon-hand-down"></span></h4>
+          </div>
+       
+      </div>
+      {!! Form::close() !!}       
+      <div class="modal-footer">
+          <button type="button" id="nextbtn" class="btn btn-secondary" data-dismiss="modal" >{{trans('front/responsive.finalizar')}}</button>
+          <!--<button type="button" id="nextbtn" class="btn btn-secondary" data-dismiss="modal"
+                  onclick="GetDataAjaxImagenesRes('{!!$usuarioServicio->id!!}');" >{{trans('front/responsive.finalizar')}}</button>-->
+         <!--<a class="btn btn-secondary" id="nextbtn"  href="#">Finalizar</a> -->
+      </div>
+            
+        </div>  
+
+    </div>
+  </div>
+</div>
+  
+  
+  <!-- Dropzone Preview Template -->
+<div id="preview-template" style="display: none;">
+
+    <div class="dz-preview dz-file-preview">
+        <div class="dz-image"><img data-dz-thumbnail=""></div>
+
+        <div class="dz-details">
+            <div class="dz-size"><span data-dz-size=""></span></div>
+            <div class="dz-filename"><span data-dz-name=""></span></div>
+        </div>
+        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+        <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
+
+        <div class="dz-success-mark">
+            <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+                <title>Check</title>
+                <desc>Created with Sketch.</desc>
+                <defs></defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                    <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+                </g>
+            </svg>
+        </div>
+
+        <div class="dz-error-mark">
+            <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+                <title>error</title>
+                <desc>Created with Sketch.</desc>
+                <defs></defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                    <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">
+                        <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+    </div>
+</div>  
+  
+<!--{!! HTML::style('/packages/bootstrap/css/bootstrap.min.css') !!}
+{!! HTML::style('/assets/css/style.css') !!}-->
+{!! HTML::style('/packages/dropzone/dropzone.css') !!}
+<!-- End Dropzone Preview Template -->
+{!! HTML::script('/packages/dropzone/dropzone.js') !!}
+{!! HTML::script('/assets/js/dropzone-config.js') !!}  
+  
+  
+<script>
+  $.ajaxSetup({
+  headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+  });
+            
+  $(document).ready(function(){
+          //$("#real-dropzone").dropzone();
+     
+    });    
+
+$("#nextbtn").click(function() {
+  $("#flag_image").val('1');
+  
+});
+</script>  
+    
 
     @if(session('device')!='mobile')
     <script>
@@ -604,299 +959,52 @@ $(document).on('ready',function(){
         .jssora12r.jssora12rdn { background-position: -315px -37px; }
     </style>
     
-    @else
-  <script>
+      <script>
 
+jQuery(document).ready(function ($) {
+   $("#promos").show();
+   //$("#promos").hide();
+   //$("#promos").show();
+   $('#promos').css('display', 'inline-block');
+});
+
+</script>
+    @else
+   <?php $header = "/img/portada_face_iwanatrip_04.jpg";?> 
+  <script>
 
 jQuery(document).ready(function ($) {
    $(".page-title-container.style3").css('backgroundImage','url({!!$header!!})');
+   $(".col-xs-12.col-md-12.res").css('padding','0');
+   $("#promos1").show();
+   
+   
 });
-  
 
 </script>
+
+
     @endif
     
+<script>
 
-<!-- Modal PROMOCION-->
-<div class="modal fade" id="hotel" tabindex="-1" role="dialog">
-    
-  {!! Form::open(['url' => route('postPromocion1'),  'id'=>'promocion-popup']) !!}  
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div id="testboxForm" class="promocion">
-                  <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">{{trans('front/responsive.agregarpromocion')}}</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="{{trans('front/responsive.cerrar')}}">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <div class="rowerrorM"> </div>
-              <input type="hidden"  class="id_usuario_servicio" name="id_usuario_servicio" value="{!!$usuarioServicio->id!!}">
-          <div class="form-group">
-            {!!Form::label('nombre_1', 'Nombre', array('id'=>'iconFormulario-step2-popup'))!!}
-            <input type="text" name="nombre_promocion" id="nombre" class="input-text full-width" placeholder="Jueves 2x1, Descuento del 10%, etc"/>
-          </div>
-          <div class="form-group">
-            {!!Form::label('inicio_1', 'Inicio', array('id'=>'iconFormulario-step2-popup'))!!}
-            <input type="text" name="fecha_inicio" id="fechainicio" class="input-text datepicker" placeholder="Fecha aaaa/mm/dd" style="width: 100%;" />
-          </div>
-          <div class="form-group">
-            {!!Form::label('fin_1', 'Fin', array('id'=>'iconFormulario-step2-popup'))!!}
-             <input type="text" name="fecha_fin" id="fechafin" class="input-text datepicker" placeholder="Fecha aaaa/mm/dd" style="width: 100%;"/>
-          </div>   
-          <div class="form-group">
-            {!!Form::label('precio_normal_1', 'Precio Normal', array('id'=>'iconFormulario-step2-popup'))!!}
-             <input type="text" name="precio_normal" id="precionormal" class="input-text full-width" placeholder="$"/>
-          </div>               
-          <div class="form-group">
-            {!!Form::label('descuento_1', 'Descuento', array('id'=>'iconFormulario-step2-popup'))!!}
-             <input type="text" name="descuento" id="descuento" class="input-text full-width" placeholder="%"/>
-          </div>                      
-          <div class="form-group">
-            {!!Form::label('codigo_1', 'Código', array('id'=>'iconFormulario-step2-popup'))!!}
-             <input type="text" name="codigo" id="codigo" class="input-text full-width" placeholder="Ej. IGTRCOD001"/>
-          </div>                                     
-          <div class="form-group">
-            {!!Form::label('detalle_1', 'Detalle', array('id'=>'iconFormulario-step2-popup'))!!}
-            <textarea class="input-text full-width" name="descripcion_promocion" id="descripcion" placeholder="descripcion" style="resize:none;"></textarea>
-          </div>                                                   
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"> {{trans('front/responsive.cerrar')}} </button>
-        <button type="button" id="btnsubm" class="btn btn-medium style1"
-                onclick="AjaxContainerRegistroWithLoad2('promocion-popup','promocion')"> {{trans('front/responsive.siguiente')}} </button>
-        
-      </div>
-            
-        </div>  
-
-    </div>
-  </div>
-  {!! Form::close() !!}  
-  
-  <script>
-  $(document).ready(function() {
-    $("#nombre, #fechainicio,#fechafin, #precionormal,#codigo,#descripcion").val("");  
-    var $submit = $("#btnsubm"),
-        $inputs = $('#nombre, #fechainicio,#fechafin, #precionormal,#codigo,#descripcion');
-
-    function checkEmpty() {
-        return $inputs.filter(function() {
-            return !$.trim(this.value);
-        }).length === 0;
+jQuery(document).ready(function ($) {
+   if( $('#promos').is(":visible") ){
+    //alert('Elemento visible');
+    //$("#promos").hide();
+    //$("#promos").show();
+    //$("#promos").hide();
+    //$("#promos").show();
+    }else{
+    //alert('Elemento oculto');
     }
-
-    $inputs.on('blur', function() {
-        $submit.prop("disabled", !checkEmpty());
-    }).blur();
-});
-
- $(document).ready(function () {
- //$('.btn dropdown-toggle bs-placeholder btn-default').width('100%');
- //$("#nombre, #fechainicio,#fechafin, #precionormal,#codigo,#descripcion").val("");
-    });
-
-</script>
-
-</div>
-
-<!-- Modal EVENTO-->
-<div class="modal fade" id="trip" tabindex="-1" role="dialog">
     
-  {!! Form::open(['url' => route('postEvento1'),  'id'=>'evento-popup']) !!}  
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div id="testboxForm" class="evento">
-                  <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">{{trans('front/responsive.agregarevento')}}</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="{{trans('front/responsive.cerrar')}}">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <div class="rowerrorM"> </div>
-              <input type="hidden"  class="id_usuario_servicio" name="id_usuario_servicio" value="{!!$usuarioServicio->id!!}">
-          <div class="form-group">
-              {!!Form::label('nombre_1', trans('registro/labels.label3'), array('id'=>'iconFormulario-step2-popup'))!!}
-             <input type="text" name="nombre_evento" id="nombree" class="input-text full-width" placeholder="Nombre significativo"/>
-          </div>
-         <div class="form-group">
-                 {!!Form::label('Detalle_1', 'Detalle', array('id'=>'iconFormulario-step2-popup'))!!}
-                <textarea class="input-text full-width" name="descripcion_evento" id="descripcione" placeholder="Cena navideña, concierto, etc." style="resize:none;"></textarea>
-          </div> 
-          <div class="form-group">
-            {!!Form::label('fecha_desde', 'Fecha Inicio', array('id'=>'iconFormulario-step2-popup'))!!}
-            <input type="text" name="fecha_desde" id="fechainicioe" class="input-text datepicker" placeholder="Fecha aaaa/mm/dd" style="width: 100%;" />
-          </div>
-          <div class="form-group">
-             {!!Form::label('fecha_hasta', 'Fecha Hasta', array('id'=>'iconFormulario-step2-popup'))!!}
-             <input type="text" name="fecha_hasta" id="fechafine" class="input-text datepicker" placeholder="Fecha aaaa/mm/dd" style="width: 100%;"/>
-          </div>   
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"> {{trans('front/responsive.cerrar')}} </button>
-        <button type="button" id="btnsubm1" class="btn btn-medium style1"
-                onclick="AjaxContainerRegistroWithLoad2('evento-popup','evento')"> {{trans('front/responsive.siguiente')}} </button>
-        
-      </div>
-            
-        </div>  
-
-    </div>
-  </div>
-  {!! Form::close() !!}  
-  
-  <script>
-  $(document).ready(function() {
-    $("#nombree,#descripcione,#fechainicioe,#fechafine").val("");  
-    var $submit = $("#btnsubm1"),
-        $inputs = $('#nombree, #descripcione,#fechainicioe,#fechafine');
-
-    function checkEmpty() {
-        return $inputs.filter(function() {
-            return !$.trim(this.value);
-        }).length === 0;
-    }
-
-    $inputs.on('blur', function() {
-        $submit.prop("disabled", !checkEmpty());
-    }).blur();
+    
 });
 
 </script>
-
-</div>
-<script>
-  $(function() {
-    
-      $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
-  });
-  </script>
-  
-  <!-- Modal FOTOGRAFIA-->
-<div class="modal fade" id="foto" tabindex="-1" role="dialog">
     
     
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div id="testboxForm" class="foto">
-                  <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">{{trans('front/responsive.agregarfoto')}}</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="{{trans('front/responsive.cerrar')}}">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <div class="rowerrorM"> </div>
-    {!! Form::open(['url' => route('upload-post'), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}      
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <input type="hidden" id="id_catalogo_fotografia" name="id_catalogo_fotografia" value="1">
-          <input type="hidden" id="id_usuario_servicio" name="id_usuario_servicio" value="{!!$usuarioServicio->id!!}">
-          <input type="hidden" id="id_auxiliar" name="id_auxiliar" value="{!!$usuarioServicio->id!!}">
-          
-          <div class="form-group">
-               <div class="dz-message">
-
-                </div>
-
-                <div class="fallback">
-                    <input name="file" type="file" multiple />
-                </div>
-
-                <div class="dropzone-previews" id="dropzonePreview"></div>
-
-                <h4 style="text-align: center;color:#428bca;">Arrastra las imágenes aquí (Formato: jpg, tamaño max: 6Mb)  
-                    <span class="glyphicon glyphicon-hand-down"></span></h4>
-          </div>
-       
-      </div>
-      {!! Form::close() !!}       
-      <div class="modal-footer">
-          <button type="button" id="nextbtn" class="btn btn-secondary" data-dismiss="modal"
-                  onclick="GetDataAjaxImagenesRes('{!!$usuarioServicio->id!!}')" >{{trans('front/responsive.finalizar')}}</button>
-         <!--<a class="btn btn-secondary" id="nextbtn"  href="#">Finalizar</a> -->
-      </div>
-            
-        </div>  
-
-    </div>
-  </div>
-</div>
-  
-  
-  <!-- Dropzone Preview Template -->
-<div id="preview-template" style="display: none;">
-
-    <div class="dz-preview dz-file-preview">
-        <div class="dz-image"><img data-dz-thumbnail=""></div>
-
-        <div class="dz-details">
-            <div class="dz-size"><span data-dz-size=""></span></div>
-            <div class="dz-filename"><span data-dz-name=""></span></div>
-        </div>
-        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-        <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
-
-        <div class="dz-success-mark">
-            <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
-                <title>Check</title>
-                <desc>Created with Sketch.</desc>
-                <defs></defs>
-                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-                    <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
-                </g>
-            </svg>
-        </div>
-
-        <div class="dz-error-mark">
-            <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
-                <title>error</title>
-                <desc>Created with Sketch.</desc>
-                <defs></defs>
-                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-                    <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">
-                        <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>
-                    </g>
-                </g>
-            </svg>
-        </div>
-
-    </div>
-</div>  
-  
-<!--{!! HTML::style('/packages/bootstrap/css/bootstrap.min.css') !!}
-{!! HTML::style('/assets/css/style.css') !!}-->
-{!! HTML::style('/packages/dropzone/dropzone.css') !!}
-<!-- End Dropzone Preview Template -->
-{!! HTML::script('/packages/dropzone/dropzone.js') !!}
-{!! HTML::script('/assets/js/dropzone-config.js') !!}  
-  
-  
-<script>
-  $.ajaxSetup({
-                    headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
-                });
-            
-    $(document).ready(function(){
-     
-          
-          $("#real-dropzone").dropzone();
-     
-});    
-
-$("#nextbtn").click(function() {
-
-  $("#flag_image").val('1');
-  
-});
-
-
-
-    </script>  
-     
 @stop
 
 

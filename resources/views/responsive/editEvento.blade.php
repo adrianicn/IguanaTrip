@@ -2,56 +2,98 @@
 @section('content')
 {!! HTML::style('css/calendar/ui-jquery.css') !!}
 
+{!! HTML::script('js/jquery.js') !!}
+<script>
+$("#dashboard1").hide();        
+$("#dashboard2").hide();    
+$("#dashboard3").hide();
+$("#dashboard4").hide();
+$("#dashboard5").hide();
+$("#dashboard6").hide();
+$("#dashboard7").hide();
+$("#dashboard8").show();
+</script>
+
 @foreach ($listEventos as $evento)
 
 <?php
 
 $usuarioServicio=$evento->id;
 ?>
-    
 
-            <div class="col-md-12 col-lg-12" id="target">
-                                      <br><br>
-                               <div class="description">
-                               <p>{{trans('front/responsive.descripcionevento')}}</p>
-                               </div>
-                               <br><br>       
-                
-         {!! Form::open(['url' => route('postEvento1'), 'method' => 'post', 'role' => 'form', 'id'=>'UpdateEvento']) !!}
+@if(session('device')!='mobile')
+{!! Form::open(['url' => route('postEvento1'), 'method' => 'post', 'role' => 'form', 'class'=>'form-bordered', 'id'=>'UpdateEvento']) !!}
+@else
+{!! Form::open(['url' => route('postEvento1'), 'method' => 'post', 'role' => 'form', 'class'=>'form-bordered', 'style' => 'padding: 0','id'=>'UpdateEvento']) !!}
+@endif
+
+
+<div class="row">
+    
+    <div class="col-sm-12 col-md-5" style="margin-bottom: 3%;">
+        <div class="col-xs-12 col-md-12 res" style="margin-bottom: 3%;margin-top: 2%;">
+                <div class="col-xs-12 col-md-12 res">
+                    <h4 class="section-title">Agregar Fotos:</h4>
+                    <div class="tab-container full-width style2" style="text-align:center;">
+                         <div id="promocion">
+
+                             <a data-toggle="modal" data-target="#foto" href="#"><img src="{{ asset('img/fotograf.png')}}" style="width:111px"></a> 
+                         </div>
+                        </div>
+                </div>
+        </div>
+        <br>
+        <div class="col-xs-12 col-md-12 res" style="margin-bottom: 3%;margin-top: 2%;">
+                <div class="col-xs-12 col-md-12">
+                    <div class="tab-container full-width style2">
+                        <div id="renderPartialImagenes">
+                                    @section('contentImagenes')
+                                    @show
+                        </div>         
+                    </div>
+                </div>
+        </div>
+        
+    </div>
+    
+    <div class="col-xs-12 col-md-7" style="margin-bottom: 3%;"> 
+        
                 <h4>{{trans('front/responsive.formularioevento')}}</h4>
               
                 <div class="rowerror" style="color: red;font-weight: bold;margin-bottom: 3%;"></div>
                 
                 <input type="hidden" name="id_usuario_servicio" value="{{ $evento->id_usuario_servicio }}">
                 <input type="hidden" name="id" value="{{ $evento->id }}">
+                    
                     <div class="form-group">
-                        {!!Form::label('nombre_evento', 'Nombre Evento', array('id'=>'iconFormulario-step2'))!!}
-                        <input type="text" name="nombre_evento" id="nombre" class="input-text" value="{!!trim($evento->nombre_evento)!!}" 
-                               placeholder="Nombre del evento" style="width: 100%"
-                               title="Es el nombre del evento. Recuerda ser creativo y diverido al escoger el nombre."/>
+                      {!!Form::label('nombre_evento', 'Nombre Evento', array('id'=>'iconFormulario-step2'))!!}
+                       <input type="text" name="nombre_evento" id="nombre_evento" class="input-text chng" placeholder='Nombre del evento'
+                              value="{!!$evento->nombre_evento!!}" title="Es el nombre del evento. Recuerda ser creativo y diverido al escoger el nombre."
+                               style="width: 100%" />
                     </div>
                     <div class="form-group">
                       {!!Form::label('Fecha_inicio', 'Fecha inicio', array('id'=>'iconFormulario-step2'))!!}
-                       <input type="text" name="fecha_desde" id="nombre" class="input-text datepicker" value="{!!$evento->fecha_desde!!}" 
+                       <input type="text" name="fecha_desde" id="fechainicio" class="input-text datepicker chng" value="{!!$evento->fecha_desde!!}" 
                                style="width: 100%" />
                     </div>
                     <div class="form-group">
                     {!!Form::label('Fecha_fin', 'Fecha fin', array('id'=>'iconFormulario-step2'))!!}
-                    <input type="text" name="fecha_hasta" id="nombre" class="input-text datepicker" value="{!!$evento->fecha_hasta!!}" 
+                    <input type="text" name="fecha_hasta" id="fechafin" class="input-text datepicker chng" value="{!!$evento->fecha_hasta!!}" 
                               style="width: 100%"/>
                     </div>
                     <div class="form-group">
                       {!!Form::label('detalle_promocion', 'Descripción evento', array('id'=>'iconFormulario-step2'))!!}
-                      <textarea style="height: 100px;resize:none;margin-top: 1%;width: 100%" name="descripcion_evento" class="input-text">{!!trim($evento->descripcion_evento)!!}</textarea>
+                      <textarea style="height: 100px;resize:none;margin-top: 1%;width: 100%" name="descripcion_evento" class="input-text chng">{!!trim($evento->descripcion_evento)!!}</textarea>
                     </div>
                     <div class="form-group">
                       {!!Form::label('tags', 'Tags', array('id'=>'iconFormulario-step2'))!!}
-                      <input type="text" name="tags" class="input-text" value="{!!trim($evento->tags)!!}" 
+                      <input type="text" name="tags" class="input-text chng" value="{!!trim($evento->tags)!!}" 
                                placeholder="Tags" style="width: 100%"
                                title="Para mejorar las búsquedas ingresa palabras clave separadas por comas que describan tu servicio. Ejemplo: mar, playa, ceviche, discoteca, etc."/>
                     </div>
                     <div class="form-group">
                         @if(isset($listEventos))
+                        <?php //print_r($listEventos); die(); ?>
                         @foreach ($listEventos as $itiner)
                         @if($itiner->longitud_evento!="")
                         @include('reusable.maps1', ['longitud_servicio' => $itiner->longitud_evento,'latitud_servicio'=>$itiner->latitud_evento])  
@@ -64,31 +106,32 @@ $usuarioServicio=$evento->id;
                         @endif
                     
                     </div>
-                    <div class="form-group text-center">
-                        <!--<a class="btn btn-medium style1" onclick="AjaxContainerEdicionServicios({!!$evento->id_usuario_servicio!!}, {!!$servicio->id_catalogo_servicio!!});" href="#">{{trans('front/responsive.finalizarguardar')}}</a> -->
-                        <!--<a class="btn btn-medium style1" onclick="AjaxContainerRetrunMessagePostParametro('UpdateEvento',{!!$servicio->id_catalogo_servicio!!})" href="#">Finalizar y regresar</a> -->
-                        <a class="btn btn-medium style1" onclick="AjaxContainerRetrunMessagePostParametro1('UpdateEvento',{!!$servicio->id_catalogo_servicio!!})" href="#">{{trans('front/responsive.finalizarguardar')}}</a>
+                    <div class="form-group">
+                    {!!Form::label('permanente', 'Evento Permanente', array('id'=>'iconFormulario-step2'))!!}
+                    <div class="text-center"> 
+                        <input type="checkbox"  id='permanente' name="permanente" value="{!!$evento->permanente!!}"
+                               onchange="UpdatePermanente('{!!asset('/updatePermanenteEvento')!!}/{!!$evento->id!!}/{!!$evento->id_usuario_servicio!!}')">
+                        
                     </div>
                     
-                    <div class="text-center" id="secondary-data">
-                        <br><br>
-                        <div id="promocion">
-                            <a data-toggle="modal" data-target="#foto" href="#"><img src="{{ asset('img/fotograf.png')}}" style="width:111px"></a>
-                            <!-- <a onclick="RenderPartialGenericFotografia('reusable.uploadImagePopUp', 4, {!!$evento->id_usuario_servicio!!}, {!!$evento->id!!})" href="#"><img src="{{ asset('img/fotograf.png')}}" style="width:111px"></a> -->
-                        </div>
                    </div>
-                {!! Form::close() !!}
-                   <div id="renderPartialImagenes">
-                    @section('contentImagenes')
-                    @show
-                </div>
-                <input type="hidden" value="0" id="flag_image">
-                @endforeach 
-
+                    
+    </div>
+            <!--  Y GUARDAR-->
+        <br>
+        <div class="col-xs-12 col-md-12 res text-center">
+            <div class="form-group">
+                <a class="btn btn-medium style1" onclick="GuardarPromo('UpdateEvento',{!!$servicio->id_catalogo_servicio!!})" href="#">{{trans('front/responsive.finalizarguardar')}}</a>
+            </div>
+        </div>
     
-            </div> 
+</div>
 
 
+
+@endforeach 
+<input type="hidden" value="0" id="flag_image">
+{!! Form::close() !!}
                
 @section('scripts')
 {!! HTML::script('js/jquery.js') !!}
@@ -103,24 +146,46 @@ $usuarioServicio=$evento->id;
 <!-- End Dropzone Preview Template -->
 {!! HTML::script('/packages/dropzone/dropzone.js') !!}
 {!! HTML::script('/assets/js/dropzone-config.js') !!}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDor7F0iN5YavbFiLRA7pY7L8-Rgl89GT8&signed_in=true&libraries=places&callback=initMap" async defer></script>
 
 <script>
             $('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});</script>
 
 <script>
             $(document).ready(function () {
-                GetDataAjaxImagenes1("{!!asset('/imagenesAjax1')!!}/4/{!!$usuarioServicio!!}");
+                GetDataAjaxImagenes2("{!!asset('/imagenesAjax1')!!}/4/{!!$usuarioServicio!!}");
+                $("#fechainicio").val(new Date().toISOString().substring(0, 10));
+                $("#fechafin").val(new Date().toISOString().substring(0, 10));
+                var check = $("#permanente").val();
+                if(check == 1){
+                    $( "#permanente" ).prop( "checked", true );
+                }
+                $("#listarevento").attr("href", "{!!asset('/listarEventos1')!!}/{!!$evento->id_usuario_servicio!!}");
             });
             
             ///Script para actualizar el container una vez que se hayan subido las imagenes
             setInterval(function() {
             if ($('#flag_image').val() == 1) {
             // Save the new value
-            GetDataAjaxImagenes1("{!!asset('/imagenesAjax1')!!}/4/{!!$usuarioServicio!!}");
+            GetDataAjaxImagenes2("{!!asset('/imagenesAjax1')!!}/4/{!!$usuarioServicio!!}");
                     $("#flag_image").val('0');
                     // TODO - Handle the changed value
             }
+            
             }, 100);
+            
+            $(document).ready(function () {
+                var check = $("#permanente").val();
+                if(check == 1){
+                    $( "#permanente" ).prop( "checked", true );
+                }
+                
+        }); 
+        
+        
+         $(".chng").change(function() {
+            //AjaxContainerRetrunMessagePostParametro2('UpdateEvento',{!!$servicio->id_catalogo_servicio!!}); 
+         });
 </script>
 
 
@@ -225,16 +290,9 @@ $usuarioServicio=$evento->id;
                     headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
                 });
             
-    $(document).ready(function(){
-     
-          
-          $("#real-dropzone").dropzone();
-     
-});    
 
 $("#nextbtn").click(function() {
 
-  $(".simplemodal-close").trigger("click");
     $("#flag_image").val('1');
 
 });
