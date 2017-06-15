@@ -474,3 +474,10 @@ Route::get('/updateServicioActivo/{id_usuario_servicio}', ['uses'=>'ServicioCont
 Route::get('/updateEstadoPromo/{id}/{id_usuario_servicio}', ['uses'=>'UsuarioServiciosController@updateEstadoPromocion','as'=>'getPromoUpdate','middleware' => 'notAuth']);
 Route::get('/updateEstadoEvento/{id}/{id_usuario_servicio}', ['uses'=>'UsuarioServiciosController@updateEstadoEvento','as'=>'getEventoUpdate','middleware' => 'notAuth']);
 
+//*******************************************************//
+//          NUEVAS RUTAS                                 //
+//*******************************************************//
+
+Route::get('/reportarErrores/{id_usuario_servicio}/{id_error}', ['as' => 'guardarerror', 'uses' => 'HomePublicController@guardarError']);
+Route::post('postErrores',  ['as' => 'post-errorescontacto', 'uses' =>'HomePublicController@postError']);
+Route::post('contactosNew', ['as' => 'postContactos', 'uses' =>'HomePublicController@postContactos']);
