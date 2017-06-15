@@ -1076,3 +1076,127 @@ function GetDataAjaxImagenes2(url) {
 
     });
 }
+
+//******************************************************//
+//                  NUEVAS FUNCIONES                    //
+//******************************************************//
+function ReportarErrores(url) {
+    
+    $("#modalerrores").LoadingOverlay("show");
+    //alert(url);
+   
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            //alert(data.guardar);
+            $("#modalerrores").LoadingOverlay("hide", true);
+            //$('#errores').modal('hide');
+            $("#errores .close").click();
+            swal(
+            'Muchas Gracias!',
+            'Atenderemos su Solicitud!',
+            'success'
+          )
+  
+                 
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+    
+    
+}
+
+
+function PostErrores($formulario, $id) {
+    
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+    });
+    
+    $("#modalerrores1").LoadingOverlay("show");
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize();
+    url = $form.attr("action");       
+   
+        var posting = $.post(url, {formData: data});
+        posting.done(function (data) {
+        if (data.fail) {
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#target").LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+            $('.rowerror').html(errorString);
+
+        }
+        if (data.success) {
+            //alert(data.guardar);
+            $("#modalerrores1").LoadingOverlay("hide", true);
+            $("#errorguardar .close").click();
+            swal(
+            'Muchas Gracias!',
+            'Nos Comunicaremos a la brevedad posible!',
+            'success'
+          )
+
+        } //success
+    }); //done
+}
+
+function PostContactosNuevo($formulario,$id) {
+    
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+    });
+    
+    $("#target").LoadingOverlay("show");
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize();
+    url = $form.attr("action");
+    
+    var posting = $.post(url, {formData: data});
+    posting.done(function (data) {
+        if (data.fail) {
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#target").LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+            $('.rowerror').html(errorString);
+
+        }
+        if (data.success) {
+            $("#nombre,#apellido,#correo,#web,#mensaje").val("");  
+            $("#target").LoadingOverlay("hide", true);
+            swal(
+            'Muchas Gracias!',
+            'Atenderemos su Solicitud!',
+            'success'
+          );
+          //window.location.href = "/";
+          
+         
+  
+        } //success
+    }); //done
+
+}
