@@ -2738,5 +2738,42 @@ class PublicServiceRepository extends BaseRepository {
 
         return $itiner;
     }
+    
+        //*************************************************************************//
+    //                          NUEVAS FUNCIONES                               //  
+    //*************************************************************************//
+    
+    public function getErrores() {
+
+        $errores = DB::table('errores')->get();
+        return $errores;
+    }
+    
+    public function guardarError($id_usuario_servicio, $id_error){
+        $fecha = date("Y-m-d h:i:s");
+        $nuevoReportado = DB::table('reportados')->insert(['id_usuario_servicio' => $id_usuario_servicio, 
+                                                            'tipo_error' => $id_error, 'estado' => 1,
+                                                            'created_at' => $fecha, 'updated_at' => $fecha ]);
+        return $nuevoReportado;
+    }
+
+    public function guardarErrorContacto($id_usuario_servicio, $id_error,$nombre, $email,$telefono){
+        $fecha = date("Y-m-d h:i:s");
+        $nuevoReportado1 = DB::table('reportados')->insert(['id_usuario_servicio' => $id_usuario_servicio, 
+                                                            'tipo_error' => $id_error, 'estado' => 1,
+                                                            'email' => $email, 'nombre' => $nombre,
+                                                            'telefono' => $telefono,
+                                                            'created_at' => $fecha, 'updated_at' => $fecha ]);
+        return $nuevoReportado1;
+    }
+    
+        public function guardarContactos($nombre, $apellido, $correo, $mensaje){
+        $fecha = date("Y-m-d h:i:s");
+        $nuevoContactanos = DB::table('contactanos')->insert(['correo_cliente' => $correo, 
+                                                            'estado_atendido' => 0, 'nombre_cliente' => $nombre,
+                                                            'apellido_cliente' => $apellido, 'mensaje' => $mensaje,
+                                                            'created_at' => $fecha, 'updated_at' => $fecha ]);
+        return $nuevoContactanos;
+    }
 
 }
