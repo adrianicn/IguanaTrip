@@ -6,7 +6,7 @@
         <!-- Page Title -->
         <title>iWanaTrip | Vive la experiencia Ecuador</title>
 
-        <link rel="shortcut icon" href="{{ asset('public/images/favicon.png')}}" />
+        <link rel="shortcut icon" href="{{ asset('images/favicon.png')}}" />
 
         <!-- Meta Tags -->
         <meta charset="utf-8">
@@ -18,33 +18,31 @@
 
         <!-- Theme Styles -->
 
-        <link rel="stylesheet" href="{{ asset('public/public_components/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('public/public_components/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('public_components/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('public_components/css/font-awesome.min.css')}}">
 
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,400italic' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Dosis:400,300,500,600,700' rel='stylesheet' type='text/css'>
-{!! HTML::style('public/css/jquery-labelauty.css') !!} 
-        <link rel="stylesheet" href="{{ asset('public/public_components/css/animate.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('public/public_components/components/owl-carousel/owl.carousel.css')}}" media="screen" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('public/public_components/components/owl-carousel/owl.transitions.css')}}" media="screen" />
+        <link rel="stylesheet" href="{{ asset('public_components/css/letras.css')}}">
+{!! HTML::style('css/jquery-labelauty.css') !!} 
+        <link rel="stylesheet" href="{{ asset('public_components/css/animate.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.carousel.css')}}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('public_components/components/owl-carousel/owl.transitions.css')}}" media="screen" />
         <!-- Magnific Popup core CSS file -->
-        <link rel="stylesheet" href="{{ asset('public/public_components/components/magnific-popup/magnific-popup.css')}}"> 
-        {!!HTML::script('public/js/sliderTop/jssor.slider.mini.js') !!}
+        <link rel="stylesheet" href="{{ asset('public_components/components/magnific-popup/magnific-popup.css')}}"> 
+        {!!HTML::script('js/sliderTop/jssor.slider.mini.js') !!}
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.3.8/sweetalert2.min.css">
         <!-- Main Style -->
-        <link id="main-style" rel="stylesheet" href="{{ asset('public/public_components/css/style.css')}}">
+        <link id="main-style" rel="stylesheet" href="{{ asset('public_components/css/style.css')}}">
 
         <!-- Updated Styles -->
-        <link rel="stylesheet" href="{{ asset('public/public_components/css/updates.css')}}">
+        <link rel="stylesheet" href="{{ asset('public_components/css/updates.css')}}">
 
         <!-- Custom Styles -->
-        <link rel="stylesheet" href="{{ asset('public/public_components/css/custom.css')}}">
+        <link rel="stylesheet" href="{{ asset('public_components/css/custom.css')}}">
 
         <!-- Responsive Styles -->
-        <link rel="stylesheet" href="{{ asset('public/public_components/css/responsive.css')}}">
-
+        <link rel="stylesheet" href="{{ asset('public_components/css/responsive.css')}}">
+        {!!HTML::script('js/sweetAlert/sweetalert2.min.js') !!}
 
         <!-- CSS for IE -->
         <!--[if lte IE 9]>
@@ -118,7 +116,7 @@
                         <div class="details">
                             <h5>Office Address</h5>
                             <p>
-                                info@iwanatrip.com
+                                info@iwannatrip.com
                                 <br>
                                 www.iwanatrip.com
                             </p>
@@ -126,36 +124,43 @@
                     </li>
                 </ul>
                 
-                <div class="col-md-8 center-block text-center block">
+                <div class="col-md-8 center-block text-center block" id="target">
                     <div class="heading-box">
                         <h2 class="box-title">Drop us a line</h2>
                         <p class="desc-lg">Feel free to write us a message</p>
                     </div>
-                    <form>
+                    {!! Form::open(['url' => route('postContactos'),  'id'=>'contactos1']) !!}  
                         <div class="row">
                             <div class="form-group col-sms-6 col-sm-6">
-                                <input type="text" class="input-text full-width" placeholder="First name">
+                                <input type="text" class="input-text full-width" name="fistname" id="nombre" placeholder="First name">
                             </div>
                             <div class="form-group col-sms-6 col-sm-6">
-                                <input type="text" class="input-text full-width" placeholder="Last name">
+                                <input type="text" class="input-text full-width" id="apellido" name="lastname" placeholder="Last name">
                             </div>
                             <div class="form-group col-sms-6 col-sm-6">
-                                <input type="text" class="input-text full-width" placeholder="Email address">
+                                <input type="text" class="input-text full-width" id="correo" name="email" placeholder="Email address"
+                                       onchange="validarCorreo(this);">
+                                <p id="aviso" style="color:red;font-weight: bold;display: none;"> No es un Correo Valido </p>
                             </div>
                             <div class="form-group col-sms-6 col-sm-6">
-                                <input type="text" class="input-text full-width" placeholder="Website">
+                                <input type="text" class="input-text full-width" id="web" name="web" placeholder="Website">
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea rows="10" class="input-text full-width" placeholder="Send Message"></textarea>
+                            <textarea rows="10" class="input-text full-width" id="mensaje" name="mensaje" style="resize: none;" placeholder="Send Message"></textarea>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-md style1">Write Message</button>
+                            <button type="button" class="btn btn-md style1" id="btnsubm" 
+                                    onclick="PostContactosNuevo('contactos1','contactos1')"
+                                    >Write Message</button>
                         </div>
-                    </form>
+                    {!! Form::close() !!}  
                 </div>
             </div>
         </section>
+            
+            
+            
 <footer id="footer" class="style4">
           <div class="callout-box style2">
                 <div class="container">
@@ -172,42 +177,95 @@
     </div>
 
     <!-- Javascript -->
-   {!! HTML::script('public/js/jquery.js') !!}
-    {!!HTML::script('public/js/js_public/Compartido.js') !!}
-    {!!HTML::script('public/js/loadingScreen/loadingoverlay.min.js') !!}
-        {!!HTML::script('public/js/jquery.autocomplet.js') !!}
-        {!!HTML::script('public/js/Compartido.js') !!}
+   {!! HTML::script('js/jquery.js') !!}
+    {!!HTML::script('js/js_Compartido.js') !!}
+    {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
+        {!!HTML::script('js/jquery.autocomplet.js') !!}
+        {!!HTML::script('js/Compartido.js') !!}
 
-    <script type="text/javascript" src="{{ asset('public/public_components/js/jquery-2.1.3.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('public/public_components/js/jquery.noconflict.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('public/public_components/js/modernizr.2.8.3.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('public/public_components/js/jquery-migrate-1.2.1.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('public/public_components/js/jquery-ui.1.11.2.min.js')}}"></script>
-
+    <script type="text/javascript" src="{{ asset('public_components/js/jquery-2.1.3.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public_components/js/jquery.noconflict.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public_components/js/modernizr.2.8.3.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public_components/js/jquery-migrate-1.2.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public_components/js/jquery-ui.1.11.2.min.js')}}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
     <!-- Twitter Bootstrap -->
-    <script type="text/javascript" src="{{ asset('public/public_components/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public_components/js/bootstrap.min.js')}}"></script>
 
     <!-- Magnific Popup core JS file -->
-    <script type="text/javascript" src="{{ asset('public/public_components/components/magnific-popup/jquery.magnific-popup.min.js')}}"></script> 
+    <script type="text/javascript" src="{{ asset('public_components/components/magnific-popup/jquery.magnific-popup.min.js')}}"></script> 
 
     <!-- parallax -->
-    <script type="text/javascript" src="{{ asset('public/public_components/js/jquery.stellar.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public_components/js/jquery.stellar.min.js')}}"></script>
 
     <!-- waypoint -->
-    <script type="text/javascript" src="{{ asset('public/public_components/js/waypoints.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public_components/js/waypoints.min.js')}}"></script>
 
     <!-- Owl Carousel -->
-    <script type="text/javascript" src="{{ asset('public/public_components/components/owl-carousel/owl.carousel.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public_components/components/owl-carousel/owl.carousel.min.js')}}"></script>
 
     <!-- plugins -->
-    <script type="text/javascript" src="{{ asset('public/public_components/js/jquery.plugins.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public_components/js/jquery.plugins.js')}}"></script>
 
-   <script type='text/javascript' src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
-    <script type="text/javascript" src="{{ asset('public/public_components/js/gmap3.js')}}"></script>
+   <script type='text/javascript' src="https://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
+    <script type="text/javascript" src="{{ asset('public_components/js/gmap3.js')}}"></script>
+    
+      <script>
+  $(document).ready(function() {
+    $("#nombre,#apellido,#correo,#web,#mensaje").val("");        
+    var $submit2 = $("#btnsubm"),
+        $inputs2 = $('#nombre,#apellido,#correo,#web,#mensaje');
+        
+    function checkEmpty2() {
+        return $inputs2.filter(function() {
+            return !$.trim(this.value);
+        }).length === 0;
+    }
+
+    $inputs2.on('blur', function() {
+        $submit2.prop("disabled", !checkEmpty2());
+    }).blur();
+});
+
+</script>  
+<script>
+    function validarCorreo(sel){
+        var value = sel.value; 
+        var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+        if (testEmail.test(value)){
+          $( "#aviso" ).hide();
+        }else{
+            $( "#aviso" ).show();
+        } 
+    }
+
+</script>  
+<script> 
+ $("form").validate({
+  rules: {
+   nombre: "required",
+   apellido: "required",
+   correo: {
+        required: true,
+        email: true
+      },	
+   web: "required",
+   mensaje: "required",
+  },
+  messages: {
+   nombre:  "Por favor ingrese un Nombre",
+   apellido: "Por favor ingrese un Apellido",
+   correo: "Por Favor ingrese una direccion de correo valida",
+   web: "Por favor ingrese una web",
+   mensaje: "Por favor ingrese un Mensaje",
+  }  
+ });
+
+</script>
  
     <!-- load page Javascript -->
     
-    <script type="text/javascript" src="{{ asset('public/public_components/js/main.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public_components/js/main.js')}}"></script>
 
     <script type="text/javascript">
         
@@ -232,7 +290,7 @@
     ],
     options:{
       draggable: false,
-      icon: "{!!asset("public/img/CollageIsmage_opt.png")!!}",
+      icon: "{!!asset("img/CollageIsmage_opt.png")!!}",
     }
   }
 });
