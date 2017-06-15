@@ -14,6 +14,11 @@ use Jenssegers\Agent\Agent;
 use Illuminate\Support\Facades\Session;
 use App\Models\Review_Usuario_Servicio;
 use App\Jobs\VerifyReview;
+use Illuminate\Support\Facades\DB;
+use App\Jobs\ReservacionMail;
+use App\Jobs\ContactosMail;
+use App\Models\Booking\Cash;
+use App\Repositories\ServiciosOperadorRepository;;
 
 class HomePublicController extends Controller {
 
@@ -445,6 +450,7 @@ $tipoReviews = $gestion->getTiporeviews($id_atraccion);
         $itinerarios = $gestion->getItinerAtraccion($id_atraccion);
         $related = $gestion->getHijosAtraccion($id_atraccion);
         $servicios = $gestion->getServicios($atraccion->id_provincia);
+        $errores = $gestion->getErrores();
 
         if ($atraccion->id_provincia != 0)
             $provincia = $gestion->getUbicacionAtraccion($atraccion->id_provincia);
@@ -479,6 +485,7 @@ $tipoReviews = $gestion->getTiporeviews($id_atraccion);
                         ->with('provincia', $provincia)
                         ->with('parroquia', $parroquia)
                         ->with('servicios', $servicios)
+                        ->with('errores', $errores)
                         ->with('tipoReviews', $tipoReviews)
                 
         ;
@@ -1562,6 +1569,59 @@ $tipoReviews = $gestion->getTiporeviews($id_atraccion);
                         ->with('tipoReviews', $tipoReviews)
 
         ;
-    }    
+    }
+    
+        //*************************************************************//
+    //              NUEAVS FUNCIONES                               //
+    //*************************************************************//    
+    
+    public function guardarError($id_usuario_servicio, $id_error, PublicServiceRepository $gestion) {
+        
+        
+        $guardarError = $gestion->guardarError($id_usuario_servicio,$id_error);
+        
+        return response()->json(array('success' => true, 'guardar' => $guardarError));         
+        
+        
+    }
+    
+    
+    public function postError(Request $request, PublicServiceRepository $gestion) {
+
+         $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        
+                                $results = print_r($formFields, true);
+		           $file = "/var/www/html/pruebaFacturas.txt";
+			$open = fopen($file,"a");
+			if ( $open ) {
+			    fwrite($open,$results);
+			    fclose($open);
+			}
+        
+        $nuevoErrorContacto = $gestion->guardarErrorContacto($formFields['id_usuario_servicio'],$formFields['id_error'],
+                        $formFields['nombres'],$formFields['email'],$formFields['telefono']);
+
+        
+        return response()->json(array('success' => true, 'redirectto' => $nuevoErrorContacto));
+        
+    }
+    
+    public function postContactos(Request $request,PublicServiceRepository $gestion) {
+
+
+        $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+      
+        $nuevoContactenos = $gestion->guardarContactos($formFields['fistname'],$formFields['lastname'],$formFields['email'],$formFields['mensaje']);
+        
+        if($nuevoContactenos == true){
+            $this->dispatch(new ContactosMail($formFields['fistname'],$formFields['lastname'],
+                                            $formFields['email'],$formFields['mensaje']));
+        }
+        
+      
+        return response()->json(array('success' => true, 'redirectto' => $nuevoContactenos));
+    }
 
 }
