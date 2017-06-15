@@ -9,6 +9,7 @@ return [
 	'label5' => 'Contacts',
 	'label6' => 'Login',
     
+    
 	'label9' => 'Service',
 	'label10' => 'Where do you want to go today?...',
 	'label11' => 'Direccion',
@@ -147,9 +148,29 @@ return [
     'label124' => 'Keep your adventure alive.',
     'label125' => 'It feels good to be lost in the right direction',
     'label126' => 'Discover Ecuador',
+    'label127' => 'What to do close to ',
+    'label128' => 'Discover Ecuador with ',
+    'label129' => 'Where´s your next adventure? ',
     
     
+    'label130' => 'What to see',
+    'label131' => 'Eat & Drink',
+    'label132' => 'Where to sleep',
     
+      'label133' => 'We help you find things to do and visit across ',
+    'label134' => 'and other destinations. Our content is carefully selected from a mix of the best places.',
+    
+    'label135' => 'Looking for a quick snack, a refreshing drink or a romantic dinner?',
+    'label136' => 'has all of that and more! just come and visit us.',
+    
+    'label137' => 'and surroundings offer a wide choice of accommodation, you just have to find out wheter you want to stay.',
+    
+                 'label138' => 'Travel around ',
+    'label139' => 'and discover how beautiful it is ',
+    'label140' => ' will show you all that you need for your trip around Ecuador.',
+
+    
+       
     'message' => 'Your message',
     
     

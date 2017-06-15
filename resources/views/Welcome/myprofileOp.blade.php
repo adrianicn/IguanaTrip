@@ -37,7 +37,7 @@ $operadorid3=$operadores->id_usuario_op;?>
     <input type="hidden"  name="tipo_operador" id="tipo_operador">
     
     <input type="hidden"  name="operador_id" id="operador_id">
-    <div class="wrapper uwa-font-aa">
+    <div class="wrapperb uwa-font-aa">
         @if(isset($label_tipo_operador_agencia))
         <div class="box-content box-content-team left">
             <h2 class="box-content-title">
@@ -67,12 +67,12 @@ $operadorid3=$operadores->id_usuario_op;?>
         @endif
         
         @if(isset($label_tipo_operador_persona))
-        <div class="box-content box-content-individual right">
+        <div class="box-content box-content-team right">
             <h2 class="box-content-title">
-                I'm just                <strong>Me</strong>
+                Bienvenido a                <strong>iWaNaTrip</strong>
             </h2>
             <div class="box-content-text">
-                <p>Soy una persona natural con deseos de organizar un paseo e invitar a todo el mundo a unirse a esta aventura nacionales e internacionales.</p>
+                <p>Realizamos una campaña de e.mailing masiva, publicamos tu marca en nuestras redes sociales y activamos campañas de marketing online. Gracias a esta exposición, MásYapas ayudará a que tu negocio sea conocido por todos nuestros usuarios que pronto podrían ser tus clientes.</p>
                 <div class="box-content-button">
                     <a class="button" onclick="$('#tipo_operador').val(3);$('#operador_id').val({!!$operadorid3!!});AjaxContainerRegistro('registro_step1')" href="#">{{$label_tipo_operador_persona}}</a>
                 </div>

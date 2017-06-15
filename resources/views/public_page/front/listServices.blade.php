@@ -260,6 +260,24 @@
                             </div>
                         </div>
                         @endif
+                        
+                        
+                        <div class="post-wrapper">
+                     <!--     <div class="post-filters">
+                            <a href="#" class="btn btn-sm style4 hover-blue active" data-filter="filter-all">All</a>
+                            <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-logo">Logo</a>
+                            <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-business">Business</a>
+                            <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-website">Website</a>
+                        </div> -->
+                        <div class="iso-container iso-col-3 style-masonry has-column-width categorias1 ">
+                            
+                            
+                              @section('categorias')
+                                @show
+                                
+                        </div>
+                     
+                    </div>
                       <!--  <form method="get" class="woocommerce-ordering box">
                             <select class="orderby selector" name="orderby" id="orderby">
                                 <option value="satisfaction">Sort by satsifaction</option>
@@ -268,20 +286,23 @@
                                 <option value="price">Sort by price: low to high</option>
                                 <option value="price-desc">Sort by price: high to low</option>
                             </select>
-                        </form>-->
+                        </form>
                         <ul class="products row add-clearfix catagorias">
                                <ul class="products row add-clearfix categorias">
                                   
                             @section('categorias')
                                 @show
-                        </ul>  
-                        <div class="post-pagination">
+                        </ul>  -->
+                          
+                    </div>
+                       <div class="post-pagination">
                             <div class="text-center">
                                 <a  class="btn style4 hover-blue load-more moreImg">{{ trans('publico/labels.label31')}}</a>
                             </div>
                         </div>
-                    </div>
+                   
                 </div>
+              
             </div>
         </section>
 
@@ -571,6 +592,8 @@ $(document).ready(function () {
             $(".moreImg").click(function () {
                 GetDataAjaxCatogories("{!!asset('/getCatalogosServicios')!!}/{!!$ServicioPrevio->id!!}/{!!$id_catalogo!!}");
             });
+            
+            
             
             
 </script>

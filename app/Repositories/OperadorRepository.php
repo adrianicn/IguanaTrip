@@ -9,6 +9,8 @@ use App\Models\Catalogo_Servicio_Establecimiento;
 use App\Models\Usuario_Servicio;
 use App\Models\Servicio_Establecimiento_Usuario;
 use App\Models\Catalogo_Servicio;
+use App\Models\Control_dahsboard;
+use Illuminate\Support\Facades\DB;
 
 class OperadorRepository extends BaseRepository
 {
@@ -22,6 +24,7 @@ class OperadorRepository extends BaseRepository
 	protected $ServicioEstablecimiento;
 	protected $UsuarioServicio;
         protected $Servicio;
+	protected $controlDashboard;
         
 	
 
@@ -39,6 +42,7 @@ class OperadorRepository extends BaseRepository
 		$this->usuarioServicio = new Usuario_Servicio();
 		$this->servicioEstablecimientoUsuario = new Servicio_Establecimiento_Usuario();
                 $this->Servicio = new Catalogo_Servicio();
+		$this->controlDashboard = new Control_dahsboard();
 	}
 
 	/**
@@ -210,6 +214,10 @@ class OperadorRepository extends BaseRepository
  		$usuarioServicio->id_catalogo_servicio = $inputs['id_catalogo_servicio'];
 		$usuarioServicio->id_usuario_operador = $inputs['id_usuario_operador'];
 	
+                $usuarioServicio->created_at = \Carbon\Carbon::now()->toDateTimeString();
+                $usuarioServicio->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+                
 		$usuarioServicio->save();
 		return $usuarioServicio->id;
 	}
@@ -223,7 +231,10 @@ class OperadorRepository extends BaseRepository
  		$usuarioServicio->id_catalogo_servicio = $inputs['id_catalogo_servicio'];
 		$usuarioServicio->id_usuario_operador = $inputs['id_usuario_operador'];
                 $usuarioServicio->id_padre = $inputs['id_padre'];
-	
+                
+                $usuarioServicio->created_at = \Carbon\Carbon::now()->toDateTimeString();
+                $usuarioServicio->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
 		$usuarioServicio->save();
 		return $usuarioServicio->id;
 	}
@@ -256,7 +267,10 @@ class OperadorRepository extends BaseRepository
                                                                             'como_llegar2'=>$inputs['como_llegar2'],
                                                                             'fecha_ingreso' => $inputs['fecha_ingreso'],
                                                                              'fecha_fin' => $inputs['fecha_fin'],
-                                                                            'id_parroquia'=>$inputs['id_parroquia']                                                                            
+                                                                            'id_parroquia'=>$inputs['id_parroquia'],
+                                                                            
+                                                                                'updated_at'=>\Carbon\Carbon::now()->toDateTimeString()
+                                                                                
 									]);
 	}
 	
@@ -372,6 +386,52 @@ class OperadorRepository extends BaseRepository
 		$Servicio = new Catalogo_Servicio();
 		return $Servicio::where('id_catalogo_servicios',$id)->FirstorFail();
 	}
+	
+	
+	 public function storageControlDashboardMini($inputs)
+	{
+		//$usuarioServicio = new $this->usuarioServicio;
+                $controlDashboard = new $this->controlDashboard;
+				
+		//return $this->saveUsuarioServicios($usuarioServicio, $inputs);
+                return $this->saveControlDashboard($controlDashboard, $inputs);
+		
+	}
+        
+        public function saveControlDashboard($controlDashboard, $inputs)
+	{
+            	$controlDashboard->id_usuario_operador = $inputs['id_usuario_operador'];
+                $controlDashboard->catalogo_servicio = $inputs['id_catalogo_servicio'];
+		$controlDashboard->cantidad = 1;
+                $controlDashboard->estado = 1;
+ 	
+		$controlDashboard->save();
+		return $controlDashboard->id;
+	}
+        
+        public function verificarSiExiste($id_catalogo, $id_usuario_operador)
+	{
+		$verificar =  DB::table('control_dahsboards')
+                             ->select(DB::raw('count(id) as contador'))  
+                             ->where('id_usuario_operador', $id_usuario_operador)
+                             ->where('catalogo_servicio', $id_catalogo)
+                             ->where('estado', '=', 1)
+                             ->get();
+		
+                return $verificar;
+		
+	}
+	
+	        public function updateEstadoUsuarioServicios($id_usuario_servicio, $estado_servicio)
+	{
+		$operador = new $this->usuarioServicio;
+                $operadorData = $operador::where('id', $id_usuario_servicio)
+                                ->update(['estado_servicio_usuario' => $estado_servicio]);                
+        
+        return $operadorData;
+		
+	}
+        
         
         
 }

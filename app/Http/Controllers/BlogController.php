@@ -194,6 +194,16 @@ class BlogController extends Controller {
 
 		return redirect('blog')->with('ok', trans('back/blog.updated'));		
 	}
+        
+        
+               //Obtiene los trips subidos
+    public function getTrips() {
+        
+        return("ptm");
+        return view('public_page.front.Trip1')->with('tags', 'cuenca');
+        
+    }
+        
 
 	/**
 	 * Update "vu" for the specified resource in storage.

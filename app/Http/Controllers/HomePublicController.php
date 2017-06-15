@@ -11,9 +11,14 @@ use App\Repositories\PublicServiceRepository;
 use Input;
 use Validator;
 use Jenssegers\Agent\Agent;
-use App\Jobs\VerifyReview;
 use Illuminate\Support\Facades\Session;
 use App\Models\Review_Usuario_Servicio;
+use App\Jobs\VerifyReview;
+use Illuminate\Support\Facades\DB;
+use App\Jobs\ReservacionMail;
+use App\Jobs\ContactosMail;
+use App\Models\Booking\Cash;
+use App\Repositories\ServiciosOperadorRepository;;
 
 class HomePublicController extends Controller {
 
@@ -34,9 +39,12 @@ class HomePublicController extends Controller {
         //
         try {
             $ipUser = $this->getIp();
-            $location = json_decode(file_get_contents("http://ipinfo.io/200.125.245.238"));
+            
+            //$location = json_decode(file_get_contents("http://ipinfo.io/".$ipUser));
+            $location = json_decode(file_get_contents("http://ipinfo.io/186.47.240.232"));
+
         } catch (Exception $e) {
-            $location = "";
+            $location = json_decode(file_get_contents("http://ipinfo.io/186.47.240.232"));
         }
 
 
@@ -51,18 +59,20 @@ class HomePublicController extends Controller {
         }
 
         Session::put('device', $desk);
-        return view('public_page.front.homePage')->with('location', $location)
-        ;
+        
+        
+        return view('public_page.front.homePage')->with('location', $location);
+    
     }
 
     //Obtiene los top places paginados
     public function getTopPlaces(Request $request, PublicServiceRepository $gestion) {
-         $topPlacesCosta = $gestion->getTopPlaces(100,1);
+                 $topPlacesCosta = $gestion->getTopPlaces(100,1);
         $topPlacesSierra = $gestion->getTopPlaces(100,2);
         $topPlacesOriente = $gestion->getTopPlaces(100,3);
         $topPlacesGalapagos = $gestion->getTopPlaces(100,4);
         
-        $view = View::make('public_page.front.AllTopPlaces', array(
+        $view = View::make('public_page.partials.AllTopPlaces', array(
             'topPlacesCosta' => $topPlacesCosta,
                 'topPlacesSierra' => $topPlacesSierra,
             'topPlacesOriente' => $topPlacesOriente,
@@ -74,16 +84,6 @@ class HomePublicController extends Controller {
             $sections = $view->rendersections();
             return Response::json($sections);
         }
-    }
-    
-    
-    //Obtiene los top places paginados
-    public function getConfirmReview($codigo, PublicServiceRepository $gestion) {
-        $checkcode = $gestion->updateCodeReview($codigo);
-        $rev_code = $gestion->getRevCode($codigo);
-        
-        return redirect('/tokenDc$rip/'.$rev_code->id_usuario_servicio);
-        
     }
 
     //Obtiene los top places paginados
@@ -164,9 +164,9 @@ class HomePublicController extends Controller {
 
         $eventosCloseProv = null;
         $eventosDepCloseProv = null;
-        $eventosClose = $gestion->getEventsIndepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
-        $eventosDepClose = $gestion->getEventsDepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
-        $PromoDepClose = $gestion->getPromoDepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $eventosClose = null;//$gestion->getEventsIndepCity($city, 100, 10); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $eventosDepClose = $gestion->getEventsDepCity($city, 100, 10); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $PromoDepClose = null;//$gestion->getPromoDepCity($city, 100, 10); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
 
 
 
@@ -192,38 +192,49 @@ class HomePublicController extends Controller {
 
 
         $eventosCloseProv = null;
-        $eventosDepCloseProv = null;
+        $eventosDepClose = null;
+        $eventosDepCloseProv=null;
+        $PromoDepClose=null;
+        $AtraccionesClose=null;
         //Existe una categoria que es independiente para crear eventos
-        $eventosClose = $gestion->getEventsIndepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $eventosClose = null;//$gestion->getEventsIndepCity($city, 100, 12); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
         //esos son eventos y promociones de los establecimientos
-        $eventosDepClose = $gestion->getEventsDepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
-        $PromoDepClose = $gestion->getPromoDepCity($city, 100, 1); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $eventosDepClose = $gestion->getEventsDepCity($city, 100, 12); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
+        $PromoDepClose = $gestion->getPromoDepCity($city, 100, 12); //$eventosClose = $gestion->getEventsIndepCity(ciudad,take,pagination);
 
 
-        $AtraccionesClose = $gestion->getAtraccionesByCity($city, 100, 1);
-
+        $AtraccionesClose = $gestion->getAtraccionesByCity($city, 100, 12);
+        
+        if($AtraccionesClose==null)
+        {
+            $AtraccionesClose = $gestion->getAtraccionesByCity("Ecuador", 100, 12);
+            
+        }
+        //$Inspiration = $gestion->getInspiration(100, 2);
+        $Inspiration = null;
 
 
         if ($eventosClose != null) {
 
             if (Input::get('page') > $eventosClose->currentPage()) {
-                $eventosCloseProv = $gestion->getEventsIndepProvince($city, Input::get('page'), $eventosClose->currentPage(), 100, 1);
+                $eventosCloseProv = $gestion->getEventsIndepProvince($city, Input::get('page'), $eventosClose->currentPage(), 100, 10);
             }
             if ($eventosDepClose != null) {
                 if (Input::get('page') > $eventosDepClose->currentPage()) {
-                    $eventosDepCloseProv = $gestion->getEventsDepProvince($city, Input::get('page'), $eventosDepClose->currentPage(), 100, 1);
+                    $eventosDepCloseProv = $gestion->getEventsDepProvince($city, Input::get('page'), $eventosDepClose->currentPage(), 100, 10);
                 }
             }
         } else {
 
-            $eventosCloseProv = $gestion->getEventsIndepProvince($city, null, null, 100, 1);
+            $eventosCloseProv = $gestion->getEventsIndepProvince($city, null, null, 100, 4);
         }
-
+ 
         $view = View::make('public_page.partials.closeToMe', array('eventosClose' => $eventosClose,
                     'eventosCloseProv' => $eventosCloseProv,
                     'eventosDepClose' => $eventosDepClose,
                     'eventosDepCloseProv' => $eventosDepCloseProv,
                     'PromoDepClose' => $PromoDepClose,
+                    'Inspiration' => $Inspiration,
                     'AtraccionesClose' => $AtraccionesClose,
                         )
                 )
@@ -240,7 +251,7 @@ class HomePublicController extends Controller {
         //
         //Al momento son quemadas 4 provincias
         //$listProvincias = $gestion->getProvincias();
-         $location=file_get_contents('http://freegeoip.net/json/200.125.245.238');
+        // $location=file_get_contents('http://freegeoip.net/json/200.125.245.238');
 
         $view = View::make('public_page.partials.regiones')->with('location', $location);
 
@@ -331,6 +342,84 @@ class HomePublicController extends Controller {
         }
     }
 
+    
+    
+    
+    //Obtiene las descripcion de la atraccion elegida
+    public function getTripDescripcion($nombre_atraccion,$id_atraccion, PublicServiceRepository $gestion) {
+        $agent = new Agent();
+
+        $desk = $device = $agent->isMobile();
+        if ($desk == 1)
+            $desk = "mobile";
+        else {
+            $desk = "desk";
+        }
+
+        Session::put('device', $desk);
+
+        $gestion->saveVisita(null,$id_atraccion);
+        
+        $provincia = null;
+        $canton = null;
+        $parroquia = null;
+
+        $atraccion = $gestion->getAtraccionDetails($id_atraccion);
+        $imagenes = $gestion->getAtraccionImages($id_atraccion);
+
+
+        
+        if ($atraccion->id_provincia != 0)
+            $provincia = $gestion->getUbicacionAtraccion($atraccion->id_provincia);
+
+
+
+
+
+        return view('public_page.front.Trip1')->with('atraccion', $atraccion)
+                        ->with('imagenes', $imagenes)
+    
+                        ->with('provincia', $provincia);
+    }
+
+    
+    
+    
+    public function sitemap(PublicServiceRepository $gestion)
+
+    {
+
+        
+
+        if (!\Cache::has('usuarioServicioCache')) {
+
+         $usuarioServicioCache=$gestion->getSitemapUsuariosServicio();
+
+          \Cache::put('usuarioServicioCache', $usuarioServicioCache, 4320);
+
+         
+
+        }
+
+        else
+
+        {
+
+            
+
+           $usuarioServicioCache= \Cache::get('usuarioServicioCache');
+
+        }
+
+               
+
+    $content = View::make('Admin/sitemap', ['usuarioServicioCache' => $usuarioServicioCache]);
+
+    return Response::make($content)->header('Content-Type', 'text/xml;charset=utf-8');
+
+}
+
+    
     //Obtiene las descripcion de la atraccion elegida
     public function getAtraccionDescripcion($nombre_atraccion,$id_atraccion, PublicServiceRepository $gestion) {
         $agent = new Agent();
@@ -344,7 +433,7 @@ class HomePublicController extends Controller {
 
         Session::put('device', $desk);
 
-        $gestion->saveVisita(null,$id_atraccion);
+$gestion->saveVisita(null,$id_atraccion);
         $ImgItiner = null;
         $explore = null;
         $visitados = null;
@@ -353,7 +442,7 @@ class HomePublicController extends Controller {
         $canton = null;
         $parroquia = null;
 
-        $tipoReviews = $gestion->getTiporeviews($id_atraccion);
+$tipoReviews = $gestion->getTiporeviews($id_atraccion);
         $atraccion = $gestion->getAtraccionDetails($id_atraccion);
         $imagenes = $gestion->getAtraccionImages($id_atraccion);
 
@@ -361,6 +450,7 @@ class HomePublicController extends Controller {
         $itinerarios = $gestion->getItinerAtraccion($id_atraccion);
         $related = $gestion->getHijosAtraccion($id_atraccion);
         $servicios = $gestion->getServicios($atraccion->id_provincia);
+        $errores = $gestion->getErrores();
 
         if ($atraccion->id_provincia != 0)
             $provincia = $gestion->getUbicacionAtraccion($atraccion->id_provincia);
@@ -395,8 +485,9 @@ class HomePublicController extends Controller {
                         ->with('provincia', $provincia)
                         ->with('parroquia', $parroquia)
                         ->with('servicios', $servicios)
+                        ->with('errores', $errores)
                         ->with('tipoReviews', $tipoReviews)
-
+                
         ;
     }
 
@@ -421,25 +512,29 @@ class HomePublicController extends Controller {
       }
       }
       : */
+    
+    
 
     //Obtiene los servicios por catalogo cercanos a la atraccion paginados
-    public function getCatalosoServiciosSearch(Request $request, PublicServiceRepository $gestion, $id_catalogo, $ciudad) {
+    public function getCatalosoServiciosSearch(Request $request, PublicServiceRepository $gestion, $id_catalogo,$ciudad ) {
         //
 
-        $busquedaInicial = $gestion->getBusquedaInicialCatalogo($id_catalogo, $ciudad, null, null, 100, 5);
+        $busquedaInicial = $gestion->getBusquedaInicialCatalogo($id_catalogo,$ciudad,null,null,500,4);
+        
+        
+       $busquedaInicialP=null;
 
-
-        $busquedaInicialP = null;
-
-        if ($busquedaInicial != null) {
+        if($busquedaInicial!=null)
+        {
             if (Input::get('page') > $busquedaInicial->currentPage()) {
 
-                $busquedaInicialP = $gestion->getBusquedaInicialCatalogoPadre($id_catalogo, $ciudad, Input::get('page'), $busquedaInicial->currentPage(), 100, 1);
+                $busquedaInicialP = $gestion->getBusquedaInicialCatalogoPadre($id_catalogo,$ciudad, Input::get('page'), $busquedaInicial->currentPage(), 100,3);                
+                
             }
-        }
+        }       
 
 
-        $view = View::make('public_page.partials.searchcategory', array('catalogo' => $busquedaInicial, 'catalogo2' => $busquedaInicialP));
+        $view = View::make('public_page.partials.searchcategory', array('catalogo' => $busquedaInicial,'catalogo2' => $busquedaInicialP));
 
         if ($request->ajax()) {
             //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
@@ -448,14 +543,18 @@ class HomePublicController extends Controller {
             //return  Response::json($sections['contentPanel']); 
         }
     }
-
+    
+    
+    
     //Obtiene los servicios por catalogo cercanos a la atraccion paginados
     public function getCatalosoServicios(Request $request, PublicServiceRepository $gestion, $id_atraccion, $id_catalogo) {
-        //
+        
 
+        //obtiene la información basica del lugar cercano
         $atraccion = $gestion->getAtraccionDetails($id_atraccion);
+        
         $catalogo1 = $gestion->getCatalogoDetails($id_atraccion, $id_catalogo);
-        $catalogo = $gestion->getDetailsServiciosAtraccion($catalogo1, null, null, 5);
+        $catalogo = $gestion->getDetailsServiciosAtraccion($catalogo1, null, null, 4);
 
 
 
@@ -465,7 +564,7 @@ class HomePublicController extends Controller {
             if (Input::get('page') > $catalogo->currentPage()) {
 
                 $catalogo2 = $gestion->getCatalogoDetailsProvincia($atraccion, $id_catalogo, $catalogo1);
-                $catalogo = $gestion->getDetailsServiciosAtraccion($catalogo2, Input::get('page'), $catalogo->currentPage(), 1);
+                $catalogo = $gestion->getDetailsServiciosAtraccion($catalogo2, Input::get('page'), $catalogo->currentPage(), 3);
             }
         }
 
@@ -480,9 +579,11 @@ class HomePublicController extends Controller {
         }
     }
 
+    
+    
     //Obtiene las descripcion de la atraccion elegida
-    public function getSearchHomeCatalogo(PublicServiceRepository $gestion, $id_catalogo) {
-
+    public function getSearchHomeCatalogo(PublicServiceRepository $gestion,$id_catalogo) {
+        
         $agent = new Agent();
 
         $desk = $device = $agent->isMobile();
@@ -492,35 +593,33 @@ class HomePublicController extends Controller {
             $desk = "desk";
         }
         Session::put('device', $desk);
-
-
+        
+    //Obtiene el listado de los catalogos propios de ese servicio
         $catalogo = $gestion->getCatalogoDetail($id_catalogo);
-        
-        
-        if($catalogo!=null)
+           if($catalogo!=null)
         {
         $actividades = $gestion->getExplorerbyCatalogo($id_catalogo);
-        
         $servicios = $gestion->getServiciosAll();
+        $precio_minimo=$gestion->getMinPrice($id_catalogo);
         
-        $precio_minimo = $gestion->getMinPrice($id_catalogo);
-
-        $precio_max = $gestion->getMaxPrice($id_catalogo);
+        $precio_max=$gestion->getMaxPrice($id_catalogo);
 
         return view('public_page.front.searchByHome')
-                        ->with('actividades', $actividades)
-                        ->with('servicios', $servicios)
-                        ->with('precio_minimo', $precio_minimo)
-                        ->with('precio_max', $precio_max)
-        ->with('catalogo', $catalogo);}
-        
-        else
+        ->with('actividades', $actividades)
+                ->with('servicios', $servicios)
+                ->with('precio_minimo', $precio_minimo)
+                ->with('precio_max', $precio_max)
+                ->with('catalogo', $catalogo);
+        }
+          else
         {
             return $this->getHome($gestion);
             
         }
+        
     }
-
+    
+    
     //Obtiene las descripcion de la atraccion elegida
     public function getCatalogoDescripcion(PublicServiceRepository $gestion, $id_atraccion, $id_catalogo) {
         $agent = new Agent();
@@ -576,7 +675,6 @@ class HomePublicController extends Controller {
 
         Session::put('device', $desk);
         $provincias = $gestion->getRegionDetails($id_region);
-        
         $imagenes = $gestion->getImageporRegion($id_region);
 
 
@@ -584,14 +682,19 @@ class HomePublicController extends Controller {
         return view('public_page.front.allRegions')->with('provincias', $provincias)->with('imagenes', $imagenes)->with('region', $id_region);
     }
 
-    public function getReviews(Request $request, PublicServiceRepository $gestion, $id_atraccion) {
+       //Obtiene los top places paginados
+    public function getConfirmReview($codigo, PublicServiceRepository $gestion) {
+        $checkcode = $gestion->updateCodeReview($codigo);
+        $rev_code = $gestion->getRevCode($codigo);
+        
+        return redirect('/tokenDc$rip/'.$rev_code->id_usuario_servicio);
+        
+    }
+
+     public function getReviews(Request $request, PublicServiceRepository $gestion, $id_atraccion) {
         //
 
-
         $reviews = $gestion->getReviews($id_atraccion);
-
-        
-
         $view = View::make('public_page.partials.reviews', array('reviews' => $reviews));
 
         if ($request->ajax()) {
@@ -608,7 +711,7 @@ class HomePublicController extends Controller {
         $likes = $gestion->getlikes($id_atraccion);
 
 
-        $view = View::make('public_page.partials.btnLike', array('likes' => $likes, 'atraccion' => $id_atraccion));
+        $view = View::make('public_page.partials.btnLike', array('likes' => $likes,'atraccion' => $id_atraccion));
 
         if ($request->ajax()) {
             //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
@@ -617,7 +720,9 @@ class HomePublicController extends Controller {
             //return  Response::json($sections['contentPanel']); 
         }
     }
-
+    
+    
+    
     public function postReviews(Request $request, PublicServiceRepository $gestion) {
 
 
@@ -675,75 +780,848 @@ class HomePublicController extends Controller {
 
              return response()->json(array(
                         'success' => true,
-                          'message' => "Gracias por tu review, se ha enviado un correo electrónico a tu email para verificación"
+                          'message' => "Gracias por tu review, se ha enviado un correo electrÃ³nico a tu email para verificaciÃ³n"
                         
             ));
        
         }
     }
+    
+    
 
-    public function postFiltersCategoria(Request $request, PublicServiceRepository $gestion) {
+      public function postFiltersCategoria(Request $request, PublicServiceRepository $gestion) {
 
-
-        $inputData = Input::get('formData');
-        parse_str($inputData, $formFields);
-        $arrayFiltro = array();
+        
+          $inputData = Input::get('formData');
+          parse_str($inputData, $formFields);
+         $arrayFiltro = array();
         //obtengo los servicios ya almacenados de la bdd
-
-
+        
+        
         foreach ($formFields as $key => $value) {
             //verifica si el arreglo de parametros es un catalogo
             if (strpos($key, 'act_') !== False) {
-                $arrayFiltro[] = str_replace("act_", "", $key);
+                $arrayFiltro[] = str_replace("act_","",$key);
+                
+                
             }
         }
 
+        
+        $busquedaInicial = $gestion->getBusquedaInicialCatalogoFiltros($formFields['catalogo'],$formFields['searchCity'],$arrayFiltro,$formFields['min_price_i'],$formFields['max_price_i'],null,null,100,1);
+        
+        
+       $busquedaInicialP=null;
 
-        $busquedaInicial = $gestion->getBusquedaInicialCatalogoFiltros($formFields['catalogo'], $formFields['searchCity'], $arrayFiltro, $formFields['min_price_i'], $formFields['max_price_i'], null, null, 100, 1);
+         
 
 
-        $busquedaInicialP = null;
-
-
-
-
-        $view = View::make('public_page.partials.searchcategory', array('catalogo' => $busquedaInicial, 'catalogo2' => $busquedaInicialP));
+        $view = View::make('public_page.partials.searchcategory', array('catalogo' => $busquedaInicial,'catalogo2' => $busquedaInicialP));
 
         if ($request->ajax()) {
             //return Response::json(View::make('public_page.partials.AllTopPlaces', array('topPlacesEcuador' => $topPlacesEcuador))->rendersections());
             $sections = $view->rendersections();
-
+            
             return response()->json(array('success' => true, 'sections' => $sections));
             //return  Response::json($sections['contentPanel']); 
         }
+      
 
-
-
-
-
-
+        
+        
+      
+        
         //obtengo los servicios ya almacenados de la bdd
+        
+        return response()->json(array('success' => true));
+    }
+    
+    public function postLikesS(Request $request, PublicServiceRepository $gestion) {
 
+        
+          $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        
+        $ip=$this->getIp();
+        $likesIP = $gestion->getlikesIp($formFields['ids'],$ip);
+        
+        if(count($likesIP)==0 || $likesIP==null)
+        {
+            $gestion->storeLikes($formFields['ids'],$ip);
+        }
+        
+        
+        //obtengo los servicios ya almacenados de la bdd
+        
         return response()->json(array('success' => true));
     }
 
-    public function postLikesS(Request $request, PublicServiceRepository $gestion) {
+   public function getConfirmacionPaypal1($id, Guard $auth) {
+        
+            //ENVIO EL ID DE LA RESERVA
+            if (isset($id)){
+                
+                //VERIFICO QUE EL ID DE LA RESERVA ESTE EN LA TABLA PAGO PAYPAL
+                $verificoPagoConsumido = DB::table('pago_paypals')
+                         ->select(DB::raw('consumido'))
+                         ->where('id_reserva', '=', $id)
+                         ->get();
+                 
+                 if(empty($verificoPagoConsumido)){
+                     //SI NO EXISTE EN LA TABLA DE PAGO PAYPAL
+                     //ME REDIRIGE A LA TABLA DE ERROR DE PAYPAL
+                     return view('public_page.front.confirmacionError');
+                     
+                 }elseif($verificoPagoConsumido[0]->consumido == true){
+                     //SI EXISTE EN LA TABLA DE PAGO PAYPAL Y CONSUMIDO ES TRUE
+                     //ME REDIRIGE A LA TABLA DE ERROR DE PAYPAL
+                     return view('public_page.front.confirmacionError');
+                     
+                 }else{
+                    $estado = true;
+                    $updateReserva = DB::table('pago_paypals')
+                                     ->where('id_reserva',$id)
+                                    ->update(['consumido'=>$estado]);
+
+                    $infoPago = DB::table('pago_paypals')
+                             ->select(DB::raw('*'))
+                             ->where('id_reserva', '=', $id)
+                             ->get();
+
+                   $infoReservas = DB::table('booking_abcalendar_reservations')
+                             ->select(DB::raw('*'))
+                             ->where('id', '=', $id)
+                             ->get(); 
+                   
+                   $estadoReserva = $infoPago[0]->estadoPago;
+                   
+                   //$estadoReserva = "Fail";
+                   
+                   if($estadoReserva == "Completed"){
+                       
+                    //BUSCO EL ID DEL CALENDARIO
+                    $infoReserva = DB::table('booking_abcalendar_reservations')
+                                    ->select(DB::raw('calendar_id'))
+                                    ->where('id', '=', $id)
+                                    ->get();
+        
+                    $idCalendario = $infoReserva[0]->calendar_id;
+        
+                    //BUSCO EL ID DEL USUARIO SERVICIO
+                    $infoReserva1 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendario)
+                                 ->get();
+
+                    $idUsuarioServicio = $infoReserva1[0]->id_usuario_servicio;
+                    
+                    $user = $auth->user();
+                    
+                    if(empty($user)) {
+                        // EL VOLVER ES A LA PARTE PUBLICA                    
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "public";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                        ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario]);
+                        
+                        //BUSCO EL ID DEL USUARIO OPERADOR
+                        $infoUsuarioOperador = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_usuario_operador'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                 ->get();
+                        
+                        $idUsuarioPeradorPublica = $infoUsuarioOperador[0]->id_usuario_operador;
+                        
+                        //OBTENGO LA INFORMACION DEL USUARIO OPERADOR
+                        $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario_op', '=', $idUsuarioPeradorPublica)
+                                 ->get();
+                        
+                        return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','infoReserva2','idUsuarioServicio'));
+                        
+                    }else{
+
+                        // VOLVER A LA PARTE ADMIN
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "admin";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                         ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario]);
+
+                        //BUSCO EL ID DEL USUARIO OPERADOR
+                        $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario', '=', $user->id)
+                                 ->get();
+
+                        $idUsuarioOperador = $infoReserva2[0]->id_usuario_op;
+                        
+                    //SI EL USUARIO ESTA LOGUEADO PERO VIENE DE LA PARTE PUBLICA
+                    //COMPROBAR QUE EL USUARIO SERVICIO DEL CALENDARIO PERTENEZCA 
+                    // AL USUARIO SERVCIO DEL OPERADOR
+                    //BUSCO EL ID DEL Catalogo
+                        $infoReserva3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_catalogo_servicio'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                ->where('id_usuario_operador', '=', $idUsuarioOperador)
+                                 ->get();
+                        
+                    if (empty($infoReserva3)) {
+                        $partePublica = true;
+                        return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','infoReserva2','idUsuarioServicio'));
+                    }else{
+                       $idCatalogo = $infoReserva3[0]->id_catalogo_servicio;
+                       $partePublica = false;
+                       return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','idCatalogo','idUsuarioServicio','infoReserva2'));
+                    }
+                    
+
+                            
+                    }
+                       
+                   }else{
+                       
+                       //CUANDO EL PAGO CON PAYPAL NO SE COMPLETO
+                       //PARTE PUBLICA Y PRIVADA
+                         $user = $auth->user();
+                         
+                         $infoPago = DB::table('pago_paypals')
+                             ->select(DB::raw('*'))
+                             ->where('id_reserva', '=', $id)
+                             ->get();
+
+                       $infoReservas = DB::table('booking_abcalendar_reservations')
+                             ->select(DB::raw('*'))
+                             ->where('id', '=', $id)
+                             ->get(); 
+                       
+                          $idCalendario = $infoReservas[0]->calendar_id;
+        
+                    //BUSCO EL ID DEL USUARIO SERVICIO
+                    $infoReserva1 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendario)
+                                 ->get();
+
+                    $idUsuarioServicio = $infoReserva1[0]->id_usuario_servicio;
+                       
+                       $sql1 = DB::table('booking_abcalendar_reservations')
+                                 ->select(DB::raw('calendar_id'))
+                                 ->where('id', '=', $id)
+                                 ->get();
+                       $idCalendarioError = $sql1[0]->calendar_id;
+                       
+                       $sql2 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendarioError)
+                                 ->get();
+                       $idUsuarioServicioError = $sql2[0]->id_usuario_servicio;
+                       
+                       $sql3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_usuario_operador'))
+                                 ->where('id', '=', $idUsuarioServicioError)
+                                 ->get();
+                       $idUsuarioOperadorError = $sql3[0]->id_usuario_operador;
+                       
+                       $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario_op', '=', $idUsuarioOperadorError)
+                                 ->get();
+                       
+                        //$idUsuarioOperadorError = $infoReserva2[0]->id_usuario_op;
+                        $idUsuarioOperadorError = session('operador_id');
+
+                        //BUSCO EL ID DEL Catalogo
+                    $infoReserva3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_catalogo_servicio'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                ->where('id_usuario_operador', '=', $idUsuarioOperadorError)
+                                 ->get();
+                   
+                    if (empty($infoReserva3)) {
+                        $partePublica = true;
+                        return view('public_page.front.errorPaypal', compact('infoReservas','infoPago','user','partePublica','infoReserva2',"idUsuarioServicio",'idCatalogo'));    
+                        //return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','infoReserva2','idUsuarioServicio'));
+                    }else{
+                       $idCatalogo = $infoReserva3[0]->id_catalogo_servicio;
+                       $partePublica = false;
+                       return view('public_page.front.errorPaypal', compact('infoReservas','infoPago','user','infoReserva2','partePublica',"idUsuarioServicio",'idCatalogo'));    
+                       //return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','idCatalogo','idUsuarioServicio','infoReserva2'));
+                    }
+                       
+                       //return view('public_page.front.errorPaypal', compact('infoReservas','infoPago','user','infoReserva2',"idUsuarioServicio",'idCatalogo'));    
+                       
+                   }
+                   
+                   //return view('public_page.front.confirmacionPaypal', compact('$infoPago','$infoReserva'));
+                   
+                     
+                 }
+                
+
+                
+            }
+        
+    }
+    
+    public function getConfirmacionAuhtorize1($id, Guard $auth) {
+        
+            //ENVIO EL ID DE LA RESERVA
+            if (isset($id)){
+                
+                //VERIFICO QUE EL ID DE LA RESERVA ESTE EN LA TABLA PAGO PAYPAL
+                $verificoPagoConsumido = DB::table('pago_authorizes')
+                         ->select(DB::raw('consumido'))
+                         ->where('id_reserva', '=', $id)
+                         ->get();
+                 
+                 if(empty($verificoPagoConsumido)){
+                     //SI NO EXISTE EN LA TABLA DE PAGO PAYPAL
+                     //ME REDIRIGE A LA TABLA DE ERROR DE PAYPAL
+                     return view('public_page.front.confirmacionError');
+                     
+                 }elseif($verificoPagoConsumido[0]->consumido == true){
+                     //SI EXISTE EN LA TABLA DE PAGO PAYPAL Y CONSUMIDO ES TRUE
+                     //ME REDIRIGE A LA TABLA DE ERROR DE PAYPAL
+                     return view('public_page.front.confirmacionError');
+                     
+                 }else{
+                    $estado = true;
+                    $updateReserva = DB::table('pago_authorizes')
+                                     ->where('id_reserva',$id)
+                                    ->update(['consumido'=>$estado]);
+
+                    $infoPago = DB::table('pago_authorizes')
+                             ->select(DB::raw('*'))
+                             ->where('id_reserva', '=', $id)
+                             ->get();
+
+                   $infoReservas = DB::table('booking_abcalendar_reservations')
+                             ->select(DB::raw('*'))
+                             ->where('id', '=', $id)
+                             ->get(); 
+                   
+                   $estadoReserva = $infoPago[0]->estadoPago;
+                   
+                   //$estadoReserva = "Fail";
+                   
+                   if($estadoReserva == "This transaction has been approved."){
+                       
+                    //BUSCO EL ID DEL CALENDARIO
+                    $infoReserva = DB::table('booking_abcalendar_reservations')
+                                    ->select(DB::raw('calendar_id'))
+                                    ->where('id', '=', $id)
+                                    ->get();
+        
+                    $idCalendario = $infoReserva[0]->calendar_id;
+        
+                    //BUSCO EL ID DEL USUARIO SERVICIO
+                    $infoReserva1 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendario)
+                                 ->get();
+
+                    $idUsuarioServicio = $infoReserva1[0]->id_usuario_servicio;
+                    
+                    $user = $auth->user();
+                    
+                    if(empty($user)) {
+                        // EL VOLVER ES A LA PARTE PUBLICA                    
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "public";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                        ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario]);
+                        
+                        //BUSCO EL ID DEL USUARIO OPERADOR
+                        $infoUsuarioOperador = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_usuario_operador'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                 ->get();
+                        
+                        $idUsuarioPeradorPublica = $infoUsuarioOperador[0]->id_usuario_operador;
+                        
+                        //OBTENGO LA INFORMACION DEL USUARIO OPERADOR
+                        $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario_op', '=', $idUsuarioPeradorPublica)
+                                 ->get();
+                        
+                        return view('public_page.front.confirmacionAuhtorize', compact('infoPago','infoReservas','user','infoReserva2','idUsuarioServicio'));
+                        
+                    }else{
+
+                        // VOLVER A LA PARTE ADMIN
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "admin";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                         ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario]);
+
+                        //BUSCO EL ID DEL USUARIO OPERADOR
+                        $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario', '=', $user->id)
+                                 ->get();
+
+                        $idUsuarioOperador = $infoReserva2[0]->id_usuario_op;
+                        
+                    //SI EL USUARIO ESTA LOGUEADO PERO VIENE DE LA PARTE PUBLICA
+                    //COMPROBAR QUE EL USUARIO SERVICIO DEL CALENDARIO PERTENEZCA 
+                    // AL USUARIO SERVCIO DEL OPERADOR
+                    //BUSCO EL ID DEL Catalogo
+                        $infoReserva3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_catalogo_servicio'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                ->where('id_usuario_operador', '=', $idUsuarioOperador)
+                                 ->get();
+                        
+                    if (empty($infoReserva3)) {
+                        $partePublica = true;
+                        return view('public_page.front.confirmacionAuhtorize', compact('infoPago','infoReservas','user','partePublica','infoReserva2','idUsuarioServicio'));
+                    }else{
+                       $idCatalogo = $infoReserva3[0]->id_catalogo_servicio;
+                       $partePublica = false;
+                       return view('public_page.front.confirmacionAuhtorize', compact('infoPago','infoReservas','user','partePublica','idCatalogo','idUsuarioServicio','infoReserva2'));
+                    }
+                    
+
+                            
+                    }
+                       
+                   }else{
+                       
+                       //CUANDO EL PAGO CON PAYPAL NO SE COMPLETO
+                       //PARTE PUBLICA Y PRIVADA
+                         $user = $auth->user();
+                         
+                         $infoPago = DB::table('pago_authorizes')
+                             ->select(DB::raw('*'))
+                             ->where('id_reserva', '=', $id)
+                             ->get();
+
+                       $infoReservas = DB::table('booking_abcalendar_reservations')
+                             ->select(DB::raw('*'))
+                             ->where('id', '=', $id)
+                             ->get(); 
+                       
+                          $idCalendario = $infoReservas[0]->calendar_id;
+        
+                    //BUSCO EL ID DEL USUARIO SERVICIO
+                    $infoReserva1 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendario)
+                                 ->get();
+
+                    $idUsuarioServicio = $infoReserva1[0]->id_usuario_servicio;
+                       
+                       $sql1 = DB::table('booking_abcalendar_reservations')
+                                 ->select(DB::raw('calendar_id'))
+                                 ->where('id', '=', $id)
+                                 ->get();
+                       $idCalendarioError = $sql1[0]->calendar_id;
+                       
+                       $sql2 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendarioError)
+                                 ->get();
+                       $idUsuarioServicioError = $sql2[0]->id_usuario_servicio;
+                       
+                       $sql3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_usuario_operador'))
+                                 ->where('id', '=', $idUsuarioServicioError)
+                                 ->get();
+                       $idUsuarioOperadorError = $sql3[0]->id_usuario_operador;
+                       
+                       $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario_op', '=', $idUsuarioOperadorError)
+                                 ->get();
+                       
+                        //$idUsuarioOperadorError = $infoReserva2[0]->id_usuario_op;
+                        $idUsuarioOperadorError = session('operador_id');
+
+                        //BUSCO EL ID DEL Catalogo
+                    $infoReserva3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_catalogo_servicio'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                ->where('id_usuario_operador', '=', $idUsuarioOperadorError)
+                                 ->get();
+                   
+                    if (empty($infoReserva3)) {
+                        $partePublica = true;
+                        return view('public_page.front.errorAuthorize', compact('infoReservas','infoPago','user','partePublica','infoReserva2',"idUsuarioServicio",'idCatalogo'));    
+                        //return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','infoReserva2','idUsuarioServicio'));
+                    }else{
+                       $idCatalogo = $infoReserva3[0]->id_catalogo_servicio;
+                       $partePublica = false;
+                       return view('public_page.front.errorAuthorize', compact('infoReservas','infoPago','user','infoReserva2','partePublica',"idUsuarioServicio",'idCatalogo'));    
+                       //return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','idCatalogo','idUsuarioServicio','infoReserva2'));
+                    }
+                       
+                       //return view('public_page.front.errorPaypal', compact('infoReservas','infoPago','user','infoReserva2',"idUsuarioServicio",'idCatalogo'));    
+                       
+                   }
+                   
+                   //return view('public_page.front.confirmacionPaypal', compact('$infoPago','$infoReserva'));
+                   
+                     
+                 }
+                
+
+                
+            }
+        
+    }
+    
+    public function getConfirmacionCash(Guard $auth) {
+        
+           //BUSCO EL ULTIMO ID DE PAGO CON EFECTIVO QUE NO HAYA SIDO CONFIRMADO
+           $buscoIdPagoCash = DB::table('booking_abcalendar_reservations')
+                         ->select(DB::raw('MAX(id) as idReserva'))
+                         ->where('payment_method', '=', 'cash')
+                         ->where('status', '=', 'Pending')
+                         ->get();
+                 
+        if(!empty($buscoIdPagoCash)){
+                $id = $buscoIdPagoCash[0]->idReserva;
+                
+                //VERIFICO QUE EL ID DE LA RESERVA ESTE EN LA TABLA PAGO PAYPAL
+                $verificoPagoConsumido = DB::table('cashes')
+                         ->select(DB::raw('consumido'))
+                         ->where('id_reserva', '=', $id)
+                         ->get();
+                 
+                 if(empty($verificoPagoConsumido)){
+                     //SI NO EXISTE EN LA TABLA DE PAGO PAYPAL
+                     //ME REDIRIGE A LA TABLA DE ERROR DE PAYPAL
+                     return view('public_page.front.confirmacionErrorCash');
+                     
+                 }elseif($verificoPagoConsumido[0]->consumido == true){
+                     //SI EXISTE EN LA TABLA DE PAGO PAYPAL Y CONSUMIDO ES TRUE
+                     //ME REDIRIGE A LA TABLA DE ERROR DE PAYPAL
+                     return view('public_page.front.confirmacionErrorCash');
+                     
+                 }else{
+                    $estado = true;
+                    $updateReserva = DB::table('cashes')
+                                     ->where('id_reserva',$id)
+                                    ->update(['consumido'=>$estado]);
+
+                    $infoPago = DB::table('cashes')
+                             ->select(DB::raw('*'))
+                             ->where('id_reserva', '=', $id)
+                             ->get();
+
+                   $infoReservas = DB::table('booking_abcalendar_reservations')
+                             ->select(DB::raw('*'))
+                             ->where('id', '=', $id)
+                             ->get(); 
+                   
+                   $estadoReserva = $infoPago[0]->estadoPago;
+                   
+                   if($estadoReserva == "PorProcesar"){
+                       
+                    //BUSCO EL ID DEL CALENDARIO
+                    $infoReserva = DB::table('booking_abcalendar_reservations')
+                                    ->select(DB::raw('calendar_id'))
+                                    ->where('id', '=', $id)
+                                    ->get();
+                    
+                    $idCalendario = $infoReserva[0]->calendar_id;
+        
+                    //BUSCO EL ID DEL USUARIO SERVICIO
+                    $infoReserva1 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendario)
+                                 ->get();
+
+                    $idUsuarioServicio = $infoReserva1[0]->id_usuario_servicio;
+                    
+                    $user = $auth->user();
+                    
+                    if(empty($user)) {
+                        // EL VOLVER ES A LA PARTE PUBLICA                    
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "public";
+                        $estatusReserva = "Pending";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                        ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario,'status'=>$estatusReserva]);
+                        
+                        //BUSCO EL ID DEL USUARIO OPERADOR
+                        $infoUsuarioOperador = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_usuario_operador'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                 ->get();
+                        
+                        $idUsuarioPeradorPublica = $infoUsuarioOperador[0]->id_usuario_operador;
+                        
+                        //OBTENGO LA INFORMACION DEL USUARIO OPERADOR
+                        $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario_op', '=', $idUsuarioPeradorPublica)
+                                 ->get();
+                        
+                        return view('public_page.front.confirmacionCashPublica', compact('infoPago','infoReservas','user','infoReserva2','idUsuarioServicio'));
+                        
+                    }else{
+
+                        // VOLVER A LA PARTE ADMIN
+                        //BUSCO EL ID DEL USUARIO OPERADOR
+                        $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario', '=', $user->id)
+                                 ->get();
+
+                        $idUsuarioOperador = $infoReserva2[0]->id_usuario_op;
+                        
+                    //SI EL USUARIO ESTA LOGUEADO PERO VIENE DE LA PARTE PUBLICA
+                    //COMPROBAR QUE EL USUARIO SERVICIO DEL CALENDARIO PERTENEZCA 
+                    // AL USUARIO SERVCIO DEL OPERADOR
+                    //BUSCO EL ID DEL Catalogo
+                        $infoReserva3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_catalogo_servicio'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                ->where('id_usuario_operador', '=', $idUsuarioOperador)
+                                 ->get();
+                        
+                    if (empty($infoReserva3)) {
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "admin";
+                        $estatusReserva = "Pending";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                        ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario,'status'=>$estatusReserva]);
+                        $partePublica = true;
+                        return view('public_page.front.confirmacionCashPublica', compact('infoPago','infoReservas','user','partePublica','infoReserva2','idUsuarioServicio'));
+                    }else{
+                        // ACTUALIZO EL ESTADO Y EL TIPO DE USUARIO DE LA RESERVA
+                        $tipoUsuario = "admin";
+                        $estatusReserva = "Confirmed";
+                        $updateReserva = DB::table('booking_abcalendar_reservations')
+                                        ->where('id',$id)
+                                        ->update(['tipo_usuario'=>$tipoUsuario,'status'=>$estatusReserva]);
+                       $idCatalogo = $infoReserva3[0]->id_catalogo_servicio;
+                       $partePublica = false;
+                       return view('public_page.front.confirmacionCash', compact('infoPago','infoReservas','user','partePublica','idCatalogo','idUsuarioServicio','infoReserva2'));
+                    }
+                    
+
+                            
+                    }
+                       
+                   }else{
+                       
+                       //CUANDO EL PAGO CON PAYPAL NO SE COMPLETO
+                       //PARTE PUBLICA Y PRIVADA
+                         $user = $auth->user();
+                         
+                         $infoPago = DB::table('cashes')
+                             ->select(DB::raw('*'))
+                             ->where('id_reserva', '=', $id)
+                             ->get();
+
+                       $infoReservas = DB::table('booking_abcalendar_reservations')
+                             ->select(DB::raw('*'))
+                             ->where('id', '=', $id)
+                             ->get(); 
+                       
+                          $idCalendario = $infoReservas[0]->calendar_id;
+        
+                    //BUSCO EL ID DEL USUARIO SERVICIO
+                    $infoReserva1 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendario)
+                                 ->get();
+
+                    $idUsuarioServicio = $infoReserva1[0]->id_usuario_servicio;
+                       
+                       $sql1 = DB::table('booking_abcalendar_reservations')
+                                 ->select(DB::raw('calendar_id'))
+                                 ->where('id', '=', $id)
+                                 ->get();
+                       $idCalendarioError = $sql1[0]->calendar_id;
+                       
+                       $sql2 = DB::table('booking_abcalendar_calendars')
+                                 ->select(DB::raw('id_usuario_servicio'))
+                                 ->where('id', '=', $idCalendarioError)
+                                 ->get();
+                       $idUsuarioServicioError = $sql2[0]->id_usuario_servicio;
+                       
+                       $sql3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_usuario_operador'))
+                                 ->where('id', '=', $idUsuarioServicioError)
+                                 ->get();
+                       $idUsuarioOperadorError = $sql3[0]->id_usuario_operador;
+                       
+                       $infoReserva2 = DB::table('usuario_operadores')
+                                 ->select(DB::raw('*'))
+                                 ->where('id_usuario_op', '=', $idUsuarioOperadorError)
+                                 ->get();
+                       
+                        //$idUsuarioOperadorError = $infoReserva2[0]->id_usuario_op;
+                        $idUsuarioOperadorError = session('operador_id');
+
+                        //BUSCO EL ID DEL Catalogo
+                    $infoReserva3 = DB::table('usuario_servicios')
+                                 ->select(DB::raw('id_catalogo_servicio'))
+                                 ->where('id', '=', $idUsuarioServicio)
+                                ->where('id_usuario_operador', '=', $idUsuarioOperadorError)
+                                 ->get();
+                    
+                    
+                    if (empty($infoReserva3)) {
+                        $partePublica = true;
+                        return view('public_page.front.errorCash', compact('infoReservas','infoPago','user','partePublica','infoReserva2',"idUsuarioServicio",'idCatalogo'));    
+                        //return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','infoReserva2','idUsuarioServicio'));
+                    }else{
+                       $idCatalogo = $infoReserva3[0]->id_catalogo_servicio;
+                       $partePublica = false;
+                       return view('public_page.front.errorCash', compact('infoReservas','infoPago','user','infoReserva2','partePublica',"idUsuarioServicio",'idCatalogo'));    
+                       //return view('public_page.front.confirmacionPaypal', compact('infoPago','infoReservas','user','partePublica','idCatalogo','idUsuarioServicio','infoReserva2'));
+                    }
+                       
+                       //return view('public_page.front.errorPaypal', compact('infoReservas','infoPago','user','infoReserva2',"idUsuarioServicio",'idCatalogo'));    
+                       
+                   }
+                   
+                   //return view('public_page.front.confirmacionPaypal', compact('$infoPago','$infoReserva'));
+                   
+                     
+                 }
+                
+
+                
+            }
+            
+        
+    }
+    
+    public function getAtraccionDescripcion1(PublicServiceRepository $gestion) {
+        $agent = new Agent();
+
+         $id_atraccion = session('usu_servicio');
+         $id_catalogo = session('id_catalogo');
+         
+        $desk = $device = $agent->isMobile();
+        if ($desk == 1)
+            $desk = "mobile";
+        else {
+            $desk = "desk";
+        }
+
+        Session::put('device', $desk);
+
+        $gestion->saveVisita(null,$id_atraccion);
+        $ImgItiner = null;
+        $explore = null;
+        $visitados = null;
+
+        $provincia = null;
+        $canton = null;
+        $parroquia = null;
+
+        $tipoReviews = $gestion->getTiporeviews($id_atraccion);
+        $atraccion = $gestion->getAtraccionDetails($id_atraccion);
+        $imagenes = $gestion->getAtraccionImages($id_atraccion);
+
+
+        $itinerarios = $gestion->getItinerAtraccion($id_atraccion);
+        $related = $gestion->getHijosAtraccion($id_atraccion);
+        $servicios = $gestion->getServicios($atraccion->id_provincia);
+
+        if ($atraccion->id_provincia != 0)
+            $provincia = $gestion->getUbicacionAtraccion($atraccion->id_provincia);
+
+        if ($atraccion->id_canton != 0)
+            $canton = $gestion->getUbicacionAtraccion($atraccion->id_canton);
+
+        if ($atraccion->id_parroquia != 0)
+            $parroqia = $gestion->getUbicacionAtraccion($atraccion->id_parroquia);
+
+        if ($related == null)
+            $visitados = $gestion->getVisitadosProvincia($atraccion->id_provincia);
+
+
+
+
+        if ($itinerarios != null)
+            $ImgItiner = $gestion->getItinerImagenAtraccion($itinerarios);
+
+
+        if (isset($atraccion->id_provincia))
+            $explore = $gestion->getExplorer($atraccion->id);
+
+
+        return view('responsive.detalleAtracciones')->with('atraccion', $atraccion)
+                        ->with('imagenes', $imagenes)
+                        ->with('explore', $explore)
+                        ->with('itinerarios', $itinerarios)
+                        ->with('related', $related)
+                        ->with('visitados', $visitados)
+                        ->with('canton', $canton)
+                        ->with('provincia', $provincia)
+                        ->with('parroquia', $parroquia)
+                        ->with('servicios', $servicios)
+                        ->with('tipoReviews', $tipoReviews)
+
+        ;
+    }
+    
+        //*************************************************************//
+    //              NUEAVS FUNCIONES                               //
+    //*************************************************************//    
+    
+    public function guardarError($id_usuario_servicio, $id_error, PublicServiceRepository $gestion) {
+        
+        
+        $guardarError = $gestion->guardarError($id_usuario_servicio,$id_error);
+        
+        return response()->json(array('success' => true, 'guardar' => $guardarError));         
+        
+        
+    }
+    
+    
+    public function postError(Request $request, PublicServiceRepository $gestion) {
+
+         $inputData = Input::get('formData');
+        parse_str($inputData, $formFields);
+        
+                                $results = print_r($formFields, true);
+		           $file = "/var/www/html/pruebaFacturas.txt";
+			$open = fopen($file,"a");
+			if ( $open ) {
+			    fwrite($open,$results);
+			    fclose($open);
+			}
+        
+        $nuevoErrorContacto = $gestion->guardarErrorContacto($formFields['id_usuario_servicio'],$formFields['id_error'],
+                        $formFields['nombres'],$formFields['email'],$formFields['telefono']);
+
+        
+        return response()->json(array('success' => true, 'redirectto' => $nuevoErrorContacto));
+        
+    }
+    
+    public function postContactos(Request $request,PublicServiceRepository $gestion) {
 
 
         $inputData = Input::get('formData');
         parse_str($inputData, $formFields);
-
-        $ip = $this->getIp();
-        $likesIP = $gestion->getlikesIp($formFields['ids'], $ip);
-
-        if (count($likesIP) == 0 || $likesIP == null) {
-            $gestion->storeLikes($formFields['ids'], $ip);
+      
+        $nuevoContactenos = $gestion->guardarContactos($formFields['fistname'],$formFields['lastname'],$formFields['email'],$formFields['mensaje']);
+        
+        if($nuevoContactenos == true){
+            $this->dispatch(new ContactosMail($formFields['fistname'],$formFields['lastname'],
+                                            $formFields['email'],$formFields['mensaje']));
         }
-
-
-        //obtengo los servicios ya almacenados de la bdd
-
-        return response()->json(array('success' => true));
+        
+      
+        return response()->json(array('success' => true, 'redirectto' => $nuevoContactenos));
     }
 
 }

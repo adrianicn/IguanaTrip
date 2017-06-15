@@ -73,7 +73,7 @@
                 display: none;
             }
             
-                .mores {
+                .more {
     background-color: white;
     border-radius: 4px;
     color: #939faa;
@@ -118,8 +118,10 @@
             <div class="container">
                 <div class="row">
                     <div id="main" class="col-sm-8 col-md-9">
+                        
+                        
                         <div class="product type-product">
-                            <div class="row single-product-details ">
+                            <div class="row single-product-details " >
                                 <div class="product-images col-sm-5 box-lg  ">
                                     <div id="sync1" class="owl-carousel images">
                                         <div class="post-slider style3 owl-carousel box">
@@ -185,8 +187,20 @@
                                             <a href="#" class="social-icon"><i class="fa fa-facebook has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>
                                             <a href="#" class="social-icon"><i class="fa fa-google-plus has-circle" data-toggle="tooltip" data-placement="top" title=""></i></a>-->
                                             <div class="fb-share-button" data-href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$atraccion->id!!}" data-layout="button_count"></div>
+                                            <div class="" data-href="{!!asset('/detalle')!!}/{!!$nombre!!}/{!!$atraccion->id!!}" data-layout="button_count"></div>
                                         </div>
-                                        
+                                       
+                                    </div>
+
+              <div class="social-wrap">
+                                        <label>Reportar error</label>
+                                        <div class="social-icons box size-sm style2">
+                                                
+                                            
+                     <a href="#" class="social-icon"><i class="fa fa-exclamation-triangle has-circle"data-toggle="tooltip" data-placement="top" title=""></i></a>                        
+                                            
+                                        </div>
+                                       
                                     </div>
                                     
                                 </div>
@@ -229,11 +243,11 @@
                                     <img src="{{ asset('img/ic_serv/centro_turistico.png')}}" title="Turismo" alt="turismo">
                                     @endif
                                        @if(session('locale') == 'es' )
-                                        <pre class="mores">{!!$atraccion->detalle_servicio!!}</pre>
+                                        <pre class="more">{!!$atraccion->detalle_servicio!!}</pre>
                                         @elseif(session('locale') == 'en' && $atraccion->detalle_servicio_eng!='') 
-                                        <pre class="mores">{!!$atraccion->detalle_servicio_eng!!}</pre>
+                                        <pre class="more">{!!$atraccion->detalle_servicio_eng!!}</pre>
                                         @else
-                                        <pre class="mores">{!!$atraccion->detalle_servicio!!}</pre>
+                                        <pre class="more">{!!$atraccion->detalle_servicio!!}</pre>
 
                                         @endif
                                     
@@ -258,12 +272,71 @@
                                        
                                 </div>
                             </div>
+                     
+                            
+                           @if(session('device')=='mobile')     
+         <div class="sidebar col-sm-4 col-md-4">
+                      
+                            
+
+                   
+     @if(isset($servicios))
+                                
+                             
+                                
+                        <div class="widget box">
+                            
+                            <h4>{{ trans('publico/labels.label18')}}</h4>
+                            <ul class="product-list-widget">
+                                @foreach ($servicios as $serv)
+                                <li>
+                                    <div class="product-image">
+                                        <a href="{!!asset('/tokenDc$ripT')!!}/{!!$atraccion->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">
+                                            
+                                            <img src="{{ asset('img/register/')}}/{!!$serv->id_catalogo_servicios!!}.jpg" alt="">
+                                        </a>
+                                    </div>
+                                      <div class="product-content">
+                                          
+                                          
+                                        
+                                        
+                                           @if(session('locale') == 'es' )
+                                    <h6 class="product-title"><a href="{!!asset('/tokenDc$ripT')!!}/{!!$atraccion->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$serv->nombre_servicio!!}</a></h6>
+                                    
+                                    @else
+                                    <h6 class="product-title"><a href="{!!asset('/tokenDc$ripT')!!}/{!!$atraccion->id!!}/{!!$serv->id_catalogo_servicios!!}"  onclick="$('.container').LoadingOverlay('show');">{!!$serv->nombre_servicio_eng!!}</a></h6>
+
+                                    @endif
+                                        
+                                        
+                                        <span class="product-price">{{ trans('publico/labels.label50')}}</span>
+                                        <span class="star-rating" title="4" data-toggle="tooltip">
+                                            <span data-stars="4"></span>
+                                        </span>
+                                    </div>
+                                </li>
+                             @endforeach
+                                
+                              
+                            </ul>
+                        </div>
+                        @endif
+                    </div>
+                            
+                        @endif    
+                            
+                            
+                            
+                            
+                            
+                            
                             
                             
                             
                             <div class="woocommerce-tabs tab-container vertical-tab clearfix box">
                                 <ul class="tabs">
-                                    <li ><a href="#tab3-1" data-toggle="tab">{{ trans('publico/labels.label41')}}</a></li>
+                                   
                                     <li class="active"><a href="#tab3-2" data-toggle="tab">{{ trans('publico/labels.label36')}}</a></li>
                                     <li  ><a href="#tab3-3" data-toggle="tab">Reviews</a></li>
                                     
@@ -273,50 +346,46 @@
                                    
                                 </ul>
                                 
-                                <!-Info->
-                                <div id="tab3-1" class="tab-content panel entry-content">
-                                      <div class="tab-pane">
-                                        
-                                        @if($atraccion->direccion_servicio!="")
-                                        <pre class="mores">{{ trans('publico/labels.label35')}}: {!!$atraccion->direccion_servicio!!}</pre>
-                                        @endif
-                                        
-                                        @if($atraccion->horario!="")
-                                        <pre class="mores">{{ trans('publico/labels.label75')}}: {!!$atraccion->horario!!}</pre>
-                                        @endif
-                                                            @if($atraccion->precio_desde!="")
-                                        <pre class="mores">{{ trans('publico/labels.label73')}}: {!!$atraccion->precio_desde!!}</pre>
-                                        @endif
-                                                            @if($atraccion->precio_hasta!="")
-                                        <pre class="mores">{{ trans('publico/labels.label74')}}: {!!$atraccion->precio_hasta!!}</pre>
-                                        @endif
-                                        
-                                        @if($atraccion->telefono!="")
-                                        <pre class="mores">{{ trans('publico/labels.label38')}}: {!!$atraccion->telefono!!}</pre>
-                                        @endif
-                                        @if($atraccion->correo_contacto!="")
-                                        <pre class="mores">{{ trans('publico/labels.label39')}}: {!!$atraccion->correo_contacto!!}</pre>
-                                        @endif
-                                        @if($atraccion->pagina_web!="")
-                                        <pre class="mores">{{ trans('publico/labels.label40')}}: {!!$atraccion->pagina_web!!}</pre>
-                                        @endif
-                                    </div>
-                                </div>
+                                
 
                                 
                                 <!-Como llegar->
                                 <div id="tab3-2" class="tab-content panel entry-content in active">
                                     <div class="tab-pane">
+                                        
+                                        @if($atraccion->direccion_servicio!="")
+                                        <pre class="more">{{ trans('publico/labels.label35')}}: {!!$atraccion->direccion_servicio!!}</pre>
+                                        @endif
+                                        
+                                        @if($atraccion->horario!="")
+                                        <pre class="more">{{ trans('publico/labels.label75')}}: {!!$atraccion->horario!!}</pre>
+                                        @endif
+                                                            @if($atraccion->precio_desde!="")
+                                        <pre class="more">{{ trans('publico/labels.label73')}}: {!!$atraccion->precio_desde!!}</pre>
+                                        @endif
+                                                            @if($atraccion->precio_hasta!="")
+                                        <pre class="more">{{ trans('publico/labels.label74')}}: {!!$atraccion->precio_hasta!!}</pre>
+                                        @endif
+                                        
+                                        @if($atraccion->telefono!="")
+                                        <pre class="more">{{ trans('publico/labels.label38')}}: {!!$atraccion->telefono!!}</pre>
+                                        @endif
+                                        @if($atraccion->correo_contacto!="")
+                                        <pre class="more">{{ trans('publico/labels.label39')}}: {!!$atraccion->correo_contacto!!}</pre>
+                                        @endif
+                                        @if($atraccion->pagina_web!="")
+                                        <pre class="more">{{ trans('publico/labels.label40')}}: {!!$atraccion->pagina_web!!}</pre>
+                                        @endif
                                           @if(session('locale') == 'es' )
-                                        <pre class="mores">{!!$atraccion->como_llegar1!!}</pre>
-                                        <pre class="mores">{!!$atraccion->como_llegar1_1!!}</pre>
+                                        <pre class="more">{!!$atraccion->como_llegar1!!}</pre>
+                                        <pre class="more">{!!$atraccion->como_llegar1_1!!}</pre>
                                         
                                         @elseif(session('locale') == 'en' && $atraccion->como_llegar2!='') 
-                                        <pre class="mores">{!!$atraccion->como_llegar2!!}</pre>
-                                        <pre class="mores">{!!$atraccion->como_llegar2_2!!}</pre>
+                                        <pre class="more">{!!$atraccion->como_llegar2!!}</pre>
+                                        <pre class="more">{!!$atraccion->como_llegar2_2!!}</pre>
                                         @else
-                                        <pre class="mores">{!!$atraccion->como_llegar1!!}</pre>
-                                        <pre class="mores">{!!$atraccion->como_llegar1_1!!}</pre>
+                                        <pre class="more">{!!$atraccion->como_llegar1!!}</pre>
+                                        <pre class="more">{!!$atraccion->como_llegar1_1!!}</pre>
 
                                         @endif
                                         
@@ -463,6 +532,7 @@
                             </div>
 
                         </div>
+                        
                         @if(count($related)>0)
                       <div class="product type-product">
                             <h4>{{ trans('publico/labels.label47')}}</h4>
@@ -523,17 +593,55 @@
                         
                          <div class="product type-product">
                             <h4>{{ trans('publico/labels.label28')}}</h4>
-                            <ul class="related products row add-clearfix cercanos">
+                           
+                            
+                               
+                      <div class="post-wrapper">
+                     <!--     <div class="post-filters">
+                            <a href="#" class="btn btn-sm style4 hover-blue active" data-filter="filter-all">All</a>
+                            <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-logo">Logo</a>
+                            <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-business">Business</a>
+                            <a href="#" class="btn btn-sm style4 hover-blue" data-filter="filter-website">Website</a>
+                        </div> -->
+                        <div class="iso-container iso-col-3 style-masonry has-column-width cercanos ">
+                            
+                            
+                              @section('cercanos')
+                                @show
+                                
+                        </div>
+                     
+                    </div>
+                            
+                            
+                            <!--<ul class="related products row add-clearfix cercanos">
                                 @section('cercanos')
                                 @show
-                            </ul>
+                            </ul>-->
                         </div>
+                        <br>
                           <div class="text-center">
                                            <a  class="btn style4 hover-blue load-more moreImg">{{ trans('publico/labels.label31')}}</a>
                             </div>
                     </div>
                     <div class="sidebar col-sm-4 col-md-3" >
 
+                        
+                        
+                        <div class="main-mini-search-form full-width box">
+                            <div class="search-box">
+                            <div class="social-wrap">
+                                        
+                                        <div class="social-icons box size-lg style3">
+                                                
+                                            
+                       <a href="#" class="social-icon"><label>Crea tu página gratis  </label> <i class="fa fa-plus has-circle"  data-toggle="tooltip" data-placement="top" title=""></i></a>                        
+                                            
+                                        </div>
+                                                    </div>
+                                       
+                                    </div>
+                        </div>  
                         @if(session('device')!='mobile')
                         <div class="main-mini-search-form full-width box">
                             {!! Form::open(['url' => route('min-search'),  'method' => 'get', 'id'=>'min-search']) !!}
@@ -581,6 +689,32 @@
                                 @endif
                                 
                             </ul>
+             
+                                <h4>Twitter Feeds</h4>
+                                <div class="twitter-holder">
+                                    <ul>
+                                        <li class="tweet">
+                                            <p class="tweet-text">
+                                                <a href="#">Miracle,</a> Etiam non mollis minaer roin or eme.
+                                            </p>
+                                            <a href="#" class="tweet-date">12 Nov, 2014</a>
+                                        </li>
+                                        <li class="tweet">
+                                            <p class="tweet-text">
+                                                <a href="#">Miracle,</a> Etiam non mollis minaer roin or eme.
+                                            </p>
+                                            <a href="#" class="tweet-date">12 Nov, 2014</a>
+                                        </li>
+                                        <li class="tweet">
+                                            <p class="tweet-text">
+                                                <a href="#">Miracle,</a> Etiam non mollis minaer roin or eme.
+                                            </p>
+                                            <a href="#" class="tweet-date">12 Nov, 2014</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                         
+                                 
                         </div>
                       
                         

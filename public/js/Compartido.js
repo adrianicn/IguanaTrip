@@ -252,6 +252,71 @@ callModal('cls');
     });
 }
 
+//************************************************************************//
+//               FUNCION PARA IR AL BOOKING EXTERNO                       //
+//************************************************************************//
+function RenderBooking($id_usuario_operador, $id_usuario_servicio) {
+
+console.log("Id Usuario Operador "+$id_usuario_operador);
+console.log("Id Usuario Servicio "+$id_usuario_servicio);
+var url = "/booking/"+$id_usuario_servicio;
+console.log(url);
+        $.ajax({
+        type: 'GET',
+        //url: '/booking/'+$id_usuario_servicio,
+        url: url,
+        data:"",
+        success: function (data) {
+            console.log(data);
+            //console.log(data.redirectto);
+            window.open(data.redirectto, '_blank');
+            //window.location.href = data.redirectto;
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
+//************************************************************************//
+//    FUNCION PARA IR AL SETTING DEL CALENDARIO EN EL BOOKING             //
+//************************************************************************//
+function RenderBookingCalendario($id_usuario_operador, $id_usuario_servicio, $calendar_id) {
+
+console.log("Id Usuario Operador "+$id_usuario_operador);
+console.log("Id Usuario Servicio "+$id_usuario_servicio);
+console.log("Id del Calendario "+$calendar_id);
+var url = "/bookingCalendario/"+$id_usuario_servicio+"/"+$calendar_id;
+console.log(url);
+        $.ajax({
+        type: 'GET',
+        //url: '/booking/'+$id_usuario_servicio,
+        url: url,
+        data:"",
+        success: function (data) {
+            console.log(data);
+            //console.log(data.redirectto);
+            window.open(data.redirectto, '_blank');
+            //window.location.href = data.redirectto;
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
 
 
 //
@@ -713,6 +778,43 @@ function AjaxContainerRetrunBurnURL($urlS,$formulario, $id, $load) {
 
 }
 
+//retorna un mensaje despues de ejecutar la logica del controller
+function AjaxContainerRetrunBurnURLBooking($urlS,$formulario, $id, $load) {
+    $('.error').html('');
+
+    
+    $("#".$load).LoadingOverlay("show");
+    var $form = $('#' + $formulario),
+            data = $form.serialize() + '&ids=' + $id;
+    var url =$urlS + $id;
+    console.log(data);
+    var posting = $.post(url, {formData: data});
+    console.log(posting);
+    posting.done(function (data) {
+        if (data.fail) {
+
+            console.log(data.fail);
+
+            /*var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#" + $formulario).LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+            $('.rowerror').html("@include('partials/error', ['type' => 'danger','message'=>'" + errorString + "'])");*/
+
+        }
+        if (data.success) {
+            $("#".$load).LoadingOverlay("hide", true);
+        
+
+
+        } //success
+    }); //done
+
+}
+
 
 
 //agrega un parametro a la lista de objetos enviados al controller
@@ -749,8 +851,352 @@ function AjaxContainerRegistroParametro($formulario, $parametro) {
             // $('#containerbase').html(data.html);
 
         } //success
+        
+        function GetDataAjaxPromo(url) {
+    
+    $("#target").LoadingOverlay("show");
+    
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            
+            $("#target").LoadingOverlay("hide", true);
+            window.location.href = data.redirectto;
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+    
+}
+
+
+
+
+function GetDataEditPromo(url) {
+    
+    $("#target").LoadingOverlay("show");
+    
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            
+            $("#target").LoadingOverlay("hide", true);
+            window.location.href = data.redirectto;
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
+function GuardarPromo($formulario, $id) {
+    
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+    });
+    
+    $('.error').html('');
+
+    $("#target").LoadingOverlay("show");
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize() + '&catalogo=' + $id;
+    url = $form.attr("action");
+    //alert(data);
+    //alert(url);
+    
+    var posting = $.post(url, {formData: data});
+    posting.done(function (data) {
+        if (data.fail) {
+
+
+
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#target").LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+            $('.rowerror').html(errorString);
+
+        }
+        if (data.success) {
+            $("#target").LoadingOverlay("hide", true);
+            //alert(data.redirectto);
+            /*if(data.redirectto == '/listarPromocion'){
+                
+            }else{
+                window.location.href = data.redirectto;
+            }*/
+            window.location.href = data.redirectto;
+
+
+
+
+        } //success
+    }); //done
+
+}
+
+function AjaxContainerEdicionServicios($id_usuario_servicio,$id_catalogo) {
+    
+    //$("#target").LoadingOverlay("show");
+
+    //event.preventDefault();
+    var url = "/servicios/serviciooperador1/"+$id_usuario_servicio+"/"+$id_catalogo;
+    var id = $id_usuario_servicio;
+    //alert(id);
+    //alert(url);      
+        $.ajax({
+        type: 'GET',
+        url: url,
+        data:"",
+        success: function (data) {
+            //alert(data.redirectto);
+            window.location.href = data.redirectto;
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+}
+
+
+function UpdatePermanente(url) {
+    
+    $("#target").LoadingOverlay("show");
+    //alert(url);
+   
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            //alert(data.redirectto);
+            //window.location.href = "/edicionServicios";
+            $("#target").LoadingOverlay("hide", true);
+                 
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+    
+}
+
+
+function UpdateServicioActivo(url) {
+    
+    $("#target").LoadingOverlay("show");
+    //alert(url);
+   
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            //alert(data.redirectto);
+            //window.location.href = "/edicionServicios";
+            $("#target").LoadingOverlay("hide", true);
+                 
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+    
+}
+
+function GetDataAjaxImagenes2(url) {
+    
+    $("#testboxForm").LoadingOverlay("show");
+    
+   $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            
+            
+            $("#renderPartialImagenes").html(data.contentImagenes);
+            //window.location.href = "/edicionServicios";
+                 
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+    
+}
 
 
 
     });
+}
+
+//******************************************************//
+//                  NUEVAS FUNCIONES                    //
+//******************************************************//
+function ReportarErrores(url) {
+    
+    $("#modalerrores").LoadingOverlay("show");
+    //alert(url);
+   
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            //alert(data.guardar);
+            $("#modalerrores").LoadingOverlay("hide", true);
+            //$('#errores').modal('hide');
+            $("#errores .close").click();
+            swal(
+            'Muchas Gracias!',
+            'Atenderemos su Solicitud!',
+            'success'
+          )
+  
+                 
+
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+                $.each(errors, function (i) {
+                    console.log(errors[i]);
+                });
+            }
+        }
+    });
+    
+    
+}
+
+
+function PostErrores($formulario, $id) {
+    
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+    });
+    
+    $("#modalerrores1").LoadingOverlay("show");
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize();
+    url = $form.attr("action");       
+   
+        var posting = $.post(url, {formData: data});
+        posting.done(function (data) {
+        if (data.fail) {
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#target").LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+            $('.rowerror').html(errorString);
+
+        }
+        if (data.success) {
+            //alert(data.guardar);
+            $("#modalerrores1").LoadingOverlay("hide", true);
+            $("#errorguardar .close").click();
+            swal(
+            'Muchas Gracias!',
+            'Nos Comunicaremos a la brevedad posible!',
+            'success'
+          )
+
+        } //success
+    }); //done
+}
+
+function PostContactosNuevo($formulario,$id) {
+    
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+    });
+    
+    $("#target").LoadingOverlay("show");
+
+    var $form = $('#' + $formulario),
+            data = $form.serialize();
+    url = $form.attr("action");
+    
+    var posting = $.post(url, {formData: data});
+    posting.done(function (data) {
+        if (data.fail) {
+            var errorString = '<ul>';
+            $.each(data.errors, function (key, value) {
+                errorString += '<li>' + value + '</li>';
+            });
+            errorString += '</ul>';
+            $("#target").LoadingOverlay("hide", true);
+            //$('#error').html(errorString);
+            $('.rowerror').html(errorString);
+
+        }
+        if (data.success) {
+            $("#nombre,#apellido,#correo,#web,#mensaje").val("");  
+            $("#target").LoadingOverlay("hide", true);
+            swal(
+            'Muchas Gracias!',
+            'Atenderemos su Solicitud!',
+            'success'
+          );
+          //window.location.href = "/";
+          
+         
+  
+        } //success
+    }); //done
+
 }

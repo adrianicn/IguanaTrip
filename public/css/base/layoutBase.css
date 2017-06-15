@@ -310,12 +310,23 @@ body {
    
 }
 
+.wrapperb {
+    clear: left;
+    margin: 0 auto;
+    position: relative;
+    //text-align: left;
+    text-align: center;
+    width: 100%;
+    
+}
+
 .wrapper {
     clear: left;
     margin: 0 auto;
     position: relative;
     text-align: left;
-    width: 960px;
+    
+    width: 100%;
     
 }
 
@@ -419,7 +430,7 @@ body {
     margin-top: -10px;
     position: relative;
     vertical-align: top;
-    width: 300px;
+    width: 50%;
 }
 .box-content.left, .box-content.middle {
     margin-right: 11px;

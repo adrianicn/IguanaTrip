@@ -14,6 +14,9 @@ use App\Models\UbicacionGeografica;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 use App\Models\SearchEngine;
+use App\Models\Booking\Especialidad;
+use App\Models\Booking\VerificacionBooking;
+use App\Models\Control_dahsboard;
 
 class ServiciosOperadorRepository extends BaseRepository {
 
@@ -39,6 +42,10 @@ class ServiciosOperadorRepository extends BaseRepository {
     protected $invitar_amigo;
     protected $ubicacion_geografica;
     protected $search_engine;
+    protected $especialidad_u;
+    protected $booking_u;
+    protected $control_u;
+	
     
 
     /**
@@ -54,12 +61,15 @@ class ServiciosOperadorRepository extends BaseRepository {
         $this->image = new Image();
         $this->catalogo_dificultad = new Catalogo_Dificultad();
         $this->itinerarios_u = new Itinerario_Usuario_Servicio();
+        $this->especialidad_u = new Especialidad();
+	$this->booking_u = new VerificacionBooking();
         $this->detalle_itinerarios_u = new Detalle_Itinerario();
         $this->eventos = new Eventos_usuario_Servicio();
         $this->operador = new Usuario_Operador();
         $this->invitar_amigo = new Invitaciones_Amigos();
         $this->ubicacion_geografica = new UbicacionGeografica();
         $this->search_engine = new SearchEngine();
+	$this->control_u = new Control_dahsboard();    
     }
 
     /**
@@ -150,6 +160,25 @@ class ServiciosOperadorRepository extends BaseRepository {
 
         $this->save($ItinerarioU);
         return $ItinerarioU;
+    }
+    
+    
+    //**********************************************************************************//
+    //              CODIGO PARA GUARADAR LAS NUEVAS ESPECIALIDADES                      //
+    //**********************************************************************************//
+        public function storeNewEspecialidad($inputs) {
+            
+        $EspecilaidadU = new $this->especialidad_u;
+        $EspecilaidadU->id_usuario_servicio = trim($inputs['id_usuario_servicio']);
+        $EspecilaidadU->id_catalogo_especialidad = trim($inputs['id_catalogo_especialidad']);
+        $EspecilaidadU->nombre_especialidad = trim($inputs['nombre_especialidad']);
+        $EspecilaidadU->descripcion_especialidad = trim($inputs['descripcion_especialidad']);
+        $EspecilaidadU->activo = trim($inputs['activo']);
+        $EspecilaidadU->created_at = \Carbon\Carbon::now()->toDateTimeString();
+        $EspecilaidadU->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+        $this->save($EspecilaidadU);
+        return $EspecilaidadU;
     }
 
     public function storeNewEvento($inputs) {
@@ -250,6 +279,30 @@ class ServiciosOperadorRepository extends BaseRepository {
 
         return true;
     }
+    
+    //***************************************************************************//
+    //          ACTUALIZAR EL ESTADO DE LA ESPECIALIDAD                          // 
+    //***************************************************************************//
+    public function storeUpdateEstadoEspecialidadPrincipal($inputs, $Especialidad) {
+        //Transformo el arreglo en un solo objeto
+        foreach ($Especialidad as $servicioBase) {
+            $inputs['id'] = $servicioBase->id;
+            $this->updateServEspe($inputs, 'activo');
+        }
+        return true;
+    }
+
+    //***************************************************************************//
+    //          ACTUALIZAR EL ESTADO DEL CALENDARIO BOOKING                      // 
+    //***************************************************************************//
+    public function storeUpdateEstadoBookingCalendar($inputs, $campoActivoCalendarBooking) {
+        //Transformo el arreglo en un solo objeto
+        foreach ($campoActivoCalendarBooking as $servicioBase) {
+            $inputs['id'] = $servicioBase->id;
+            $this->updateServBooking($inputs, 'activo');
+        }
+        return true;
+    }
 
     //Actualiza el estado del evento
     public function storeUpdateEstadoEvento($inputs, $Evento) {
@@ -322,6 +375,24 @@ class ServiciosOperadorRepository extends BaseRepository {
             //Transformo el arreglo en un solo objeto
             $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
             $inputs['id_catalogo_dificultad'] = $inputs['id_dificultad'];
+
+            $pro->fill($inputs)->save();
+        }
+
+        return true;
+    }
+    
+    //************************************************************************//
+    //                  ACTUALIZAR LA ESPECIALIDAD                            //
+    //************************************************************************//
+    public function storeUpdateEspecialidad($inputs, $itiner) {
+
+        foreach ($itiner as $servicioBase) {
+            $pro = $this->especialidad_u->find($servicioBase->id);
+
+            //Transformo el arreglo en un solo objeto
+            $inputs['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+            //$inputs['id_catalogo_dificultad'] = $inputs['id_dificultad'];
 
             $pro->fill($inputs)->save();
         }
@@ -422,6 +493,15 @@ Actualizar tabla de busqueda
     }
 
     //Realiza la logica del update
+    public function updateServEspe($input, $campo) {
+        $operador = new $this->especialidad_u;
+        $operadorData = $operador::where('id', $input['id'])
+                ->update([$campo => $input[$campo]]);
+    }
+    
+    //************************************************************************//
+    // REALIZA LA LOGICA DEL UPDATE DEL ESTADO DE 
+    //************************************************************************//
     public function updateServItiner($input, $campo) {
         $operador = new $this->itinerarios_u;
         $operadorData = $operador::where('id', $input['id'])
@@ -495,6 +575,14 @@ Actualizar tabla de busqueda
         $itiner = new $this->itinerarios_u;
         return $itiner::where('id', $id_Itinerario)->get();
     }
+    
+    //****************************************************//
+    //           DETALLE ESPECIALIDAD                     //
+    //****************************************************//
+    public function getEstadoEspecialidad($id_Especialidad) {
+        $itiner = new $this->especialidad_u;
+        return $itiner::where('id', $id_Especialidad)->get();
+    }
 
     //detalle estado promocion
     public function getEstadoPromocion($id_promocion) {
@@ -553,6 +641,86 @@ Actualizar tabla de busqueda
         $itiner = new $this->itinerarios_u;
         return $itiner::where('id', $id_itinerario)->get();
     }
+    
+    //**************************************************************************//
+    //           ENTREGA EL ARREGLO DE LA ESPECIALIDAD DEL OPERADOR             //
+    //**************************************************************************//
+    public function getEspecialidadUsuario($id_especialidad) {
+        $especialidad = new $this->especialidad_u;
+        return $especialidad::where('id', $id_especialidad)->get();
+    }
+    
+    //**************************************************************************//
+    //           ENTREGA EL ARREGLO DE LA ESPECIALIDAD por Usuario Servicio    //
+    //**************************************************************************//
+    public function getEspecialidadporUsuario($id_usuario_servicio) {
+        $especialidad = new $this->especialidad_u;
+        return $especialidad::where('id_usuario_servicio', $id_usuario_servicio)->get();
+    }
+
+    //**************************************************************************//
+    //           DEVUELVE EL ID DEL USUARIO DEL OPERADOR                        //
+    //**************************************************************************//
+    public function getIDUsuario($id) {
+        
+        return DB::table('usuario_operadores')
+                        ->select('id_usuario')
+                        ->where('id_usuario_op', $id)
+                        ->distinct()
+                        ->get();
+    }
+    
+        //**************************************************************************//
+    //           DEVUELVE EL ID DEL USUARIO DEL OPERADOR                        //
+    //**************************************************************************//
+    public function getInfoUser($id) {
+        
+        return DB::table('users')->select('id', 'email','password','username')->where('id', $id)->get();
+    }
+    
+    //**************************************************************************//
+    //     VERIFICAR SI EL USUARIO EXISTE EN LA TABLA USER BOOKING              //
+    //**************************************************************************//
+    public function getVerificarUsuario($id,$email) {
+        
+        return DB::table('booking_abcalendar_users')->where('email', $email)->count();
+    }
+    
+    //**************************************************************************//
+    //     INSERTAR EL USUARIO EN LA TABLA USER BOOKING                         //
+    //**************************************************************************//
+    public function ingresarUsuario($id,$email,$password,$username,$fecha) {
+    
+        return DB::table('booking_abcalendar_users')->insert(['id'=> $id, 'role_id' => '3', 'email' => $email, 
+                                                              'password' => '','name' => $username,
+                                                              'created' => $fecha, 'status' => 'T', 
+                                                              'is_active' => 'T','ip'=> '::1']);
+        
+    }
+    //**************************************************************************//
+    //           DEVUELVE EL ID DEL USUARIO DEL OPERADOR                        //
+    //**************************************************************************//
+    public function guardarVerificarBooking($idUser,$id,$encriptado) {
+
+        $bookingU = new $this->booking_u;
+        $bookingU->id_usuario = trim($idUser);
+        $bookingU->id_usuario_servicio = trim($id);
+        $bookingU->consumido = false;
+        $bookingU->uuid = trim($encriptado);
+
+        $this->save($bookingU);
+        return $bookingU;
+    }
+
+    //****************************************************//
+    //   OBTENGO EL ESTADO DEL CALENDARIO BOOKING         //
+    //****************************************************//
+    public function getEstadoBookingCalendar($id_booking_calendar) {
+        
+        return DB::table('booking_abcalendar_calendars')->where('id', $id_booking_calendar)->get();
+        
+    }
+
 
     //Entrega el arreglo de itinerarios por operador
     public function getUsuario_serv($id) {
@@ -610,6 +778,12 @@ Actualizar tabla de busqueda
 
         return DB::table('itinerarios_usuario_servicios')
                         ->where('id', '=', $id_itinerario)->get();
+    }
+    
+      //Entrega el arreglo de Especiliadad por operador
+    public function getEspecialidad($id_especialidad) {
+        return DB::table('especialidads')
+                        ->where('id', '=', $id_especialidad)->get();
     }
 
     //Entrega el arreglo de Itinerarios por operador
@@ -722,5 +896,96 @@ Actualizar tabla de busqueda
                         ->select('itinerarios_usuario_servicios.id_usuario_servicio')
                         ->first();
     }
+	
+    public function getControlDashboard($id_usuario_operador) {
+        
+        return DB::table('control_dahsboards')
+                      ->select(DB::raw('id_usuario_operador,catalogo_servicio,cantidad'))  
+                      ->where('id_usuario_operador', $id_usuario_operador)
+                      ->where('estado', '=', 1)
+                      ->get();
+    }
+	
+/Guarda las promociones por usuario_servicio
+    public function storeNewPromocion($inputs) {
+
+        $promocionU = new $this->promocion;
+        $promocionU->id_usuario_servicio = trim($inputs['id_usuario_servicio']);
+        $promocionU->id_catalogo_tipo_fotografia = 2;
+        //$promocionU->descripcion_promocion = trim($inputs['descripcion_promocion']);
+        $promocionU->nombre_promocion = trim($inputs['nombre_promocion']);
+        $promocionU->estado_promocion = 1;
+        $promocionU->fecha_desde = $inputs['fecha_inicio'];
+        $promocionU->fecha_hasta = $inputs['fecha_fin'];
+        //$promocionU->precio_normal = trim($inputs['precio_normal']);
+        //$promocionU->descuento = trim($inputs['descuento']);
+        //$promocionU->codigo_promocion = trim($inputs['codigo']);
+        $promocionU->permanente = 0;
+        $promocionU->created_at = \Carbon\Carbon::now()->toDateTimeString();
+        $promocionU->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+        $this->save($promocionU);
+        return $promocionU;
+    }
+
+    public function storeNewEvento($inputs) {
+
+        $evento = new $this->eventos;
+        $evento->id_usuario_servicio = $inputs['id_usuario_servicio'];
+        $evento->id_fotografia = 4;
+        $evento->descripcion_evento = trim($inputs['descripcion_evento']);
+        $evento->nombre_evento = trim($inputs['nombre_evento']);
+        $evento->fecha_desde = $inputs['fecha_desde'];
+        $evento->fecha_hasta = $inputs['fecha_hasta'];
+        $evento->estado_evento = 1;
+        $evento->permanente = 0;
+        $evento->created_at = \Carbon\Carbon::now()->toDateTimeString();
+        $evento->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+
+        $this->save($evento);
+        return $evento;
+    }
+
+    public function storeUpdatePermanentePromocion($permanente, $id) {
+
+        $operador = new $this->promocion;
+        $operadorData = $operador::where('id', $id)
+                ->update(['permanente' => $permanente]);                
+        
+        return $operadorData;
+
+
+    }
+    
+    public function storeUpdatePermanenteEvento($permanente, $id) {
+
+        $operador = new $this->eventos;
+        $operadorData = $operador::where('id', $id)
+                ->update(['permanente' => $permanente]);                
+        
+        return $operadorData;
+
+
+    }   
+
+    //Entrega el arreglo de promociones por usuario servicio
+    public function getPromocionesUsuarioServicio($id_usuario_servicio) {
+        $promociones = new $this->promocion;
+        return $promociones::where('id_usuario_servicio', '=', $id_usuario_servicio)->orderBy('updated_at', 'DESC')->get();
+
+
+        return $promociones::All();
+    }
+
+    //Entrega el arreglo de eventos por usuario servicio
+    public function getEventosUsuarioServicio($id_usuario_servicio) {
+        $eventos = new $this->eventos;
+        return $eventos::where('id_usuario_servicio', '=', $id_usuario_servicio)->orderBy('updated_at', 'DESC')->get();
+
+
+        return $eventos::All();
+    }  
+
+	
 
 }

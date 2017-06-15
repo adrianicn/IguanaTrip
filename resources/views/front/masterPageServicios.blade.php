@@ -5,26 +5,33 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 
     <head>
-        <title>IguanaTrip - Deja de ser turista conviertete en viajero</title>
+        <title>iWaNaTrip - Deja de ser turista conviertete en viajero</title>
         <meta charset='utf-8' />
         <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
         <meta name="_token" content="{!! csrf_token() !!}"/>
         <meta name="description" content="Registra tus servicios turísticos. Nosotros haremos que lo conozcan a nivel internacional y turistas de todo el mundo vengan a visitarte. IguanaTrip surge como una alternativa turística comunitaria para defender y revalorizar los recursos culturales y naturales. Planea tu viaje y aprende sobre la historia y la cultura del país mientras te involucras en la realidad del mismo. IguanaTrip te brindara información práctica de acuerdo a tus intereses sobre el lugar específico que decidas visitar. Encuentra hoteles, day trips, museos, playas, sitios turísticos, restaurantes, bares, todo tipo de atracciones desde la más pequeña a la más grande. Y lo más importante si lo deseas, IgunaTrip te guiará en tu recorrido para que ayudes a generar ingresos complementarios a comunidades locales en busca de desarrollo. Nos encontraos en la etapa de registro de operadores turísticos">
         <meta name="keywords" content="HTML,CSS,XML,JavaScript">
-        <meta name="author" content="IguanaTrip group">
+        <meta name="author" content="iWaNaTrip group">
         <link rel="shortcut icon" href="favicon.ico" />
         <link rel="apple-touch-icon" href="{{ asset('images/favicon.png')}}" />        
 
+        
+        
+        
        <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+
             
     </head>
      {!! HTML::style('css/demo.css') !!} 
      {!! HTML::style('css/masterPagesRegistro.css') !!}
-        {!! HTML::style('css/base/layoutBase.css') !!} 
-        {!! HTML::style('css/popupModal/basic.css') !!} 
-        {!! HTML::style('css/calendar/ui-jquery.css') !!}
-        {!!HTML::script('js/sliderTop/jquery-1.9.1.min.js') !!}
-        {!!HTML::script('js/sliderTop/jssor.slider.mini.js') !!}
+     {!! HTML::style('css/base/layoutBase.css') !!} 
+     {!! HTML::style('css/popupModal/basic.css') !!} 
+     {!! HTML::style('css/calendar/ui-jquery.css') !!}
+     {!!HTML::script('js/sliderTop/jquery-1.9.1.min.js') !!}
+     {!!HTML::script('js/sliderTop/jssor.slider.mini.js') !!}
+     {!!HTML::script('js/angular/angular.min.js') !!}
+     {!!HTML::script('js/angular/detalleEspecialidadController.js') !!}
+     {!!HTML::script('js/Tinymce/tinymce.min.js') !!}
         
    
         <body class="full-padding" style="margin: 0;padding: 0;min-width: 100%;">
@@ -91,19 +98,32 @@
                         <ul id="seleccionitem">
                             <li><a href="{!!asset('/myProfileOp')!!}">{{ trans('welcome/index.home') }}</a></li>
                             <li><a href="#" onclick="window.location.href = '{!!asset('/myProfileOp')!!}'">Mi perfil</a></li>
-                            @if(session('statut')=='admin')
-                            <!-- Bullet Navigator 
+                            <!--@if(session('statut')=='admin')
+                             Bullet Navigator 
                             <li><a href="#" onclick="window.location.href = '{!!asset('/getProvinciasDescipcion')!!}'">Descr. Provincias</a></li>
                             <li><a href="#" onclick="window.location.href = '{!!asset('/getCantonesDescipcion')!!}'">Cantones</a></li>
-                            <li><a href="#" onclick="window.location.href = '{!!asset('/getParroquiaDescipcion')!!}'">Parroquia</a></li>-->
+                            <li><a href="#" onclick="window.location.href = '{!!asset('/getParroquiaDescipcion')!!}'">Parroquia</a></li>
                             
-                            <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>
+                            @endif-->
                             
-                            @endif
+                            
+                        <li>{!! link_to('auth/logout', trans('front/site.logout')) !!}</li>                            
+                        
                             
                         </ul>
                     </div>
+                        
+                    
+                    
                     <div class="sessionName">Bienvenido {!!session('user_name')!!}</div>
+                    
+                    
+                    @if(session('confirmado')==0)
+                    <div class="sessionName1" style="width:617;color:white;padding:10px 132px 10px 10px;text-align:left;float:right"><b>Tu cuenta aún no ha sido verificada, el código ha sido enviado al mail de registro!!!</b></div>
+                            
+                            @endif
+                    
+                    
                 </div>
             </header>
             <div class="container" id="target">
@@ -150,6 +170,11 @@
             {!! HTML::script('js/calendar/calendar.js') !!}
             {!!HTML::script('js/loadingScreen/loadingoverlay.min.js') !!}
             
+            
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 7970f1a488b48e98cafc1bdd2a4577d215871071
             <script>
         jQuery(document).ready(function ($) {
             
@@ -194,28 +219,7 @@
         });
     </script>
     
-     <script type="text/javascript">
-  tinymce.init({
-      
-    selector: '#detalle_servicio',
-      setup : function(ed) {
-          ed.onChange.add(function() {
-        $('#changed').val(1);
-    });
-   },
-     menubar:false,
-    statusbar: false,
-    width: 390,
-    height: 150,
-    plugins: [
-      'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
-      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
-      'save table contextmenu directionality emoticons template paste textcolor'
-    ],
-    content_css: 'css/content.css',
-    toolbar: 'styleselect | bold italic | alignleft aligncenter alignright alignjustify '
-  });
-  </script>
+
     
     <style>
         
