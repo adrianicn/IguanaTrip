@@ -32,6 +32,20 @@ class PublicServiceRepository extends BaseRepository {
         $this->usuario_servicio = new Usuario_Servicio();
         $this->review = new Review_Usuario_Servicio();
     }
+    
+        //Obtiene los usuarios servicios para sitemap
+    public function getSitemapUsuariosServicio() {
+
+
+
+        $sitemapServicios = DB::table('usuario_servicios')
+                ->where('usuario_servicios.estado_servicio_usuario', '=',1)
+                ->where('usuario_servicios.estado_servicio', '=',1)
+                  ->select("usuario_servicios.*")
+                ->get();
+        return $sitemapServicios;
+    }
+    
 
 //Entrega el arreglo de los servicios mÃ¡s visitados por provincia
     public function getHijosAtraccion($id_atraccion) {
